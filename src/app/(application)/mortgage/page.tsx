@@ -24,8 +24,6 @@ const Page = () => {
         }
       }
     }
-
-    console.log(allData)
   }
 
   return (

@@ -27,6 +27,7 @@ interface Props {
   options: TOption[]
   description?: string
   placeholder?: string
+  disabled?: boolean
 }
 
 const SelectElement = ({
@@ -34,7 +35,8 @@ const SelectElement = ({
   label,
   description,
   options,
-  placeholder
+  placeholder,
+  disabled = false
 }: Props) => {
   const { control } = useFormContext()
   return (
@@ -44,7 +46,7 @@ const SelectElement = ({
       render={({ field }) => (
         <FormItem>
           <FormLabel>{label}</FormLabel>
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <Select onValueChange={field.onChange} defaultValue={field.value} disabled={disabled}>
             <FormControl>
               <SelectTrigger>
                 <SelectValue placeholder={placeholder} />

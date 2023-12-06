@@ -1,9 +1,7 @@
 "use client";
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { AmenitiesForm, BasicDetailsForm, LocationDetailsForm, ProjectStatusForm, PropertyDetailsForm } from './_form';
-// import PersonalDetailsForm from './_form/personal-details-form'
-// import IncomeDetailsForm from './_form/income-details-form'
 
 const Page = () => {
 
@@ -11,7 +9,7 @@ const Page = () => {
         localStorage.setItem(step.toLocaleString(), JSON.stringify(values))
     }
 
-    const createMortgage = () => {
+    const createAdvertisement = () => {
         let allData: any = {};
         if (localStorage.length > 0) {
             for (let i = 0; i < localStorage.length; i++) {
@@ -25,8 +23,8 @@ const Page = () => {
         <section className="flex p-10 items-start gap-10">
             <BasicDetailsForm onSave={storeValues} />
             <PropertyDetailsForm onSave={storeValues} />
-            <LocationDetailsForm />
-            <AmenitiesForm />
+            <LocationDetailsForm onSave={storeValues} />
+            <AmenitiesForm onSave={storeValues} />
             <ProjectStatusForm />
             {/* TODO DOCUMENTS FORM */}
         </section>

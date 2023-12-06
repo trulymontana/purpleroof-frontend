@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -47,6 +47,7 @@ const formSchema = z.object({
 })
 
 const PersonalDetailsForm = ({ onFormSubmit }: { onFormSubmit: (step: number, values: any) => void }) => {
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
@@ -55,8 +56,6 @@ const PersonalDetailsForm = ({ onFormSubmit }: { onFormSubmit: (step: number, va
     // console.log({ personalForm: values })
     onFormSubmit(1, values)
   }
-
-  // console.log(form.formState.errors)
 
   return (
     <Form {...form}>
