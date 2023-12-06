@@ -32,9 +32,9 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.',
     }),
-  description: z.string().min(10, {
-    message: 'Description must be at least 10 characters.',
-  }),
+  // description: z.string().min(10, {
+  //   message: 'Description must be at least 10 characters.',
+  // }),
   agree_to_privacy_policy: z.boolean().refine((data) => data === true, {
     message: 'You must agree to the privacy policy.',
   }),
@@ -46,16 +46,17 @@ const formSchema = z.object({
   }),
 })
 
-const PersonalDetailsForm = () => {
+const PersonalDetailsForm = ({ onFormSubmit }: { onFormSubmit: (step: number, values: any) => void }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    // console.log({ personalForm: values })
+    onFormSubmit(1, values)
   }
 
-  console.log(form.formState.errors)
+  // console.log(form.formState.errors)
 
   return (
     <Form {...form}>
@@ -90,7 +91,7 @@ const PersonalDetailsForm = () => {
         />
 
         <Button type="submit" className="w-full">
-          Submit
+          Save and Continue
         </Button>
       </form>
     </Form>

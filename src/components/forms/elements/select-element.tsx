@@ -34,7 +34,7 @@ const SelectElement = ({
   label,
   description,
   options,
-  placeholder,
+  placeholder
 }: Props) => {
   const { control } = useFormContext()
   return (
