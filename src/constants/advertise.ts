@@ -1,3 +1,14 @@
+export const TypesOfProperties = [
+  {
+    label: 'Residential',
+    value: 'Residential',
+  },
+  {
+    label: 'Commercial',
+    value: 'Commercial',
+  },
+]
+
 export const CommercialTypes = [
   {
     label: 'Bulk Unit',
@@ -658,460 +669,193 @@ export const Amenities = [
   {
     label: 'Property Type',
     value: 'Property Type',
-    checked: false,
   },
   {
     label: 'Completion status',
     value: 'Completion status',
-    checked: false,
   },
   {
     label: 'Balcony/ Terrace',
     value: 'Balcony/ Terrace',
-    checked: false,
   },
   {
     label: 'Double Glazed Windows',
     value: 'Double Glazed Windows',
-    checked: false,
   },
   {
     label: 'Centrally Air-Conditioned',
     value: 'Centrally Air-Conditioned',
-    checked: false,
   },
   {
     label: 'Central Heating',
     value: 'Central Heating',
-    checked: false,
   },
   {
     label: 'Electricity Backup',
     value: 'Electricity Backup',
-    checked: false,
   },
   {
     label: 'Storage Areas',
     value: 'Storage Areas',
-    checked: false,
   },
   {
     label: 'Study Room',
     value: 'Study Room',
-    checked: false,
   },
   {
     label: 'Maid Room',
     value: 'Maid Room',
-    checked: false,
   },
   {
     label: 'Driver Room',
     value: 'Driver Room',
-    checked: false,
   },
   {
     label: 'Laundry Room',
     value: 'Laundry Room',
-    checked: false,
   },
   {
     label: 'Private Swimming Pool',
     value: 'Private Swimming Pool',
-    checked: false,
   },
   {
     label: 'Number of Parking Spaces',
     value: 'Number of Parking Spaces',
-    checked: false,
   },
   {
     label: 'Recreation and Family',
     value: 'Recreation and Family',
-    checked: false,
   },
   {
     label: 'Barbeque Area',
     value: 'Barbeque Area',
-    checked: false,
   },
   {
     label: 'Day Care Center',
     value: 'Day Care Center',
-    checked: false,
   },
   {
     label: 'Kids Play Area',
     value: 'Kids Play Area',
-    checked: false,
   },
   {
     label: 'Lawn or Garden',
     value: 'Lawn or Garden',
-    checked: false,
   },
   {
     label: 'Cafeteria or Canteen',
     value: 'Cafeteria or Canteen',
-    checked: false,
   },
   {
     label: 'Laundry and Kitchen',
     value: 'Laundry and Kitchen',
-    checked: false,
   },
   {
     label: 'Laundry Facility',
     value: 'Laundry Facility',
-    checked: false,
   },
   {
     label: 'Shared Kitchen',
     value: 'Shared Kitchen',
-    checked: false,
   },
   {
     label: 'Lobby in Building',
     value: 'Lobby in Building',
-    checked: false,
   },
   {
     label: 'Elevators in Building',
     value: 'Elevators in Building',
-    checked: false,
   },
   {
     label: 'Service Elevators',
     value: 'Service Elevators',
-    checked: false,
   },
   {
     label: 'Prayer Room',
     value: 'Prayer Room',
-    checked: false,
   },
   {
     label: 'Reception/Waiting Room',
     value: 'Reception/Waiting Room',
-    checked: false,
   },
   {
     label: 'Health and Fitness',
     value: 'Health and Fitness',
-    checked: false,
   },
   {
     label: 'First Aid Medical Center',
     value: 'First Aid Medical Center',
-    checked: false,
   },
   {
     label: 'Jacuzzi',
     value: 'Jacuzzi',
-    checked: false,
   },
   {
     label: 'Sauna',
     value: 'Sauna',
-    checked: false,
   },
   {
     label: 'Steam Room',
     value: 'Steam Room',
-    checked: false,
   },
   {
     label: 'Swimming Pool',
     value: 'Swimming Pool',
-    checked: false,
   },
   {
     label: 'Facilities for Disabled',
     value: 'Facilities for Disabled',
-    checked: false,
   },
   {
     label: 'Security Staff',
     value: 'Security Staff',
-    checked: false,
   },
   {
     label: 'Business Center',
     value: 'Business Center',
-    checked: false,
   },
   {
     label: 'Pet Allowed',
     value: 'Pet Allowed',
-    checked: false,
   },
   {
     label: 'Cleaning and Maintenance',
     value: 'Cleaning and Maintenance',
-    checked: false,
   },
   {
     label: 'ATM Facility',
     value: 'ATM Facility',
-    checked: false,
   },
   {
     label: 'Nearby Schools',
     value: 'Nearby Schools',
-    checked: false,
   },
   {
     label: 'Nearby Hospitals',
     value: 'Nearby Hospitals',
-    checked: false,
   },
   {
     label: 'Nearby Mosque',
     value: 'Nearby Mosque',
-    checked: false,
   },
   {
     label: 'Nearby Shopping Malls',
     value: 'Nearby Shopping Malls',
-    checked: false,
   },
   {
     label: 'Distance from Airport',
     value: 'Distance from Airport',
-    checked: false,
   },
   {
     label: 'Nearby Metro Station',
     value: 'Nearby Metro Station',
-    checked: false,
   },
   {
     label: 'Other Nearby Places',
     value: 'Other Nearby Places',
-    checked: false,
   },
   {
     label: 'Other Main Features',
     value: 'Other Main Features',
-    checked: false,
   },
 ]
-// export const Amenities = [
-//   {
-//     label: 'Property Type',
-//     value: 'Property Type',
-//     checked: false,
-//   },
-//   {
-//     label: 'Completion status',
-//     value: 'Completion status',
-//     checked: false,
-//   },
-//   {
-//     label: 'Balcony/ Terrace',
-//     value: 'Balcony/ Terrace',
-//     checked: false,
-//   },
-//   {
-//     label: 'Double Glazed Windows',
-//     value: 'Double Glazed Windows',
-//     checked: false,
-//   },
-//   {
-//     label: 'Centrally Air-Conditioned',
-//     value: 'Centrally Air-Conditioned',
-//     checked: false,
-//   },
-//   {
-//     label: 'Central Heating',
-//     value: 'Central Heating',
-//     checked: false,
-//   },
-//   {
-//     label: 'Electricity Backup',
-//     value: 'Electricity Backup',
-//     checked: false,
-//   },
-//   {
-//     label: 'Storage Areas',
-//     value: 'Storage Areas',
-//     checked: false,
-//   },
-//   {
-//     label: 'Study Room',
-//     value: 'Study Room',
-//     checked: false,
-//   },
-//   {
-//     label: 'Maid Room',
-//     value: 'Maid Room',
-//     checked: false,
-//   },
-//   {
-//     label: 'Driver Room',
-//     value: 'Driver Room',
-//     checked: false,
-//   },
-//   {
-//     label: 'Laundry Room',
-//     value: 'Laundry Room',
-//     checked: false,
-//   },
-//   {
-//     label: 'Private Swimming Pool',
-//     value: 'Private Swimming Pool',
-//     checked: false,
-//   },
-//   {
-//     label: 'Number of Parking Spaces',
-//     value: 'Number of Parking Spaces',
-//     checked: false,
-//   },
-//   {
-//     label: 'Recreation and Family',
-//     value: 'Recreation and Family',
-//     checked: false,
-//   },
-//   {
-//     label: 'Barbeque Area',
-//     value: 'Barbeque Area',
-//     checked: false,
-//   },
-//   {
-//     label: 'Day Care Center',
-//     value: 'Day Care Center',
-//     checked: false,
-//   },
-//   {
-//     label: 'Kids Play Area',
-//     value: 'Kids Play Area',
-//     checked: false,
-//   },
-//   {
-//     label: 'Lawn or Garden',
-//     value: 'Lawn or Garden',
-//     checked: false,
-//   },
-//   {
-//     label: 'Cafeteria or Canteen',
-//     value: 'Cafeteria or Canteen',
-//     checked: false,
-//   },
-//   {
-//     label: 'Laundry and Kitchen',
-//     value: 'Laundry and Kitchen',
-//     checked: false,
-//   },
-//   {
-//     label: 'Laundry Facility',
-//     value: 'Laundry Facility',
-//     checked: false,
-//   },
-//   {
-//     label: 'Shared Kitchen',
-//     value: 'Shared Kitchen',
-//     checked: false,
-//   },
-//   {
-//     label: 'Lobby in Building',
-//     value: 'Lobby in Building',
-//     checked: false,
-//   },
-//   {
-//     label: 'Elevators in Building',
-//     value: 'Elevators in Building',
-//     checked: false,
-//   },
-//   {
-//     label: 'Service Elevators',
-//     value: 'Service Elevators',
-//   },
-//   {
-//     label: 'Prayer Room',
-//     value: 'Prayer Room',
-//   },
-//   {
-//     label: 'Reception/Waiting Room',
-//     value: 'Reception/Waiting Room',
-//   },
-//   {
-//     label: 'Health and Fitness',
-//     value: 'Health and Fitness',
-//   },
-//   {
-//     label: 'First Aid Medical Center',
-//     value: 'First Aid Medical Center',
-//   },
-//   {
-//     label: 'Jacuzzi',
-//     value: 'Jacuzzi',
-//   },
-//   {
-//     label: 'Sauna',
-//     value: 'Sauna',
-//   },
-//   {
-//     label: 'Steam Room',
-//     value: 'Steam Room',
-//   },
-//   {
-//     label: 'Swimming Pool',
-//     value: 'Swimming Pool',
-//   },
-//   {
-//     label: 'Facilities for Disabled',
-//     value: 'Facilities for Disabled',
-//   },
-//   {
-//     label: 'Security Staff',
-//     value: 'Security Staff',
-//   },
-//   {
-//     label: 'Business Center',
-//     value: 'Business Center',
-//   },
-//   {
-//     label: 'Pet Allowed',
-//     value: 'Pet Allowed',
-//   },
-//   {
-//     label: 'Cleaning and Maintenance',
-//     value: 'Cleaning and Maintenance',
-//   },
-//   {
-//     label: 'ATM Facility',
-//     value: 'ATM Facility',
-//   },
-//   {
-//     label: 'Nearby Schools',
-//     value: 'Nearby Schools',
-//   },
-//   {
-//     label: 'Nearby Hospitals',
-//     value: 'Nearby Hospitals',
-//   },
-//   {
-//     label: 'Nearby Mosque',
-//     value: 'Nearby Mosque',
-//   },
-//   {
-//     label: 'Nearby Shopping Malls',
-//     value: 'Nearby Shopping Malls',
-//   },
-//   {
-//     label: 'Distance from Airport',
-//     value: 'Distance from Airport',
-//   },
-//   {
-//     label: 'Nearby Metro Station',
-//     value: 'Nearby Metro Station',
-//   },
-//   {
-//     label: 'Other Nearby Places',
-//     value: 'Other Nearby Places',
-//   },
-//   {
-//     label: 'Other Main Features',
-//     value: 'Other Main Features',
-//   },
-// ]

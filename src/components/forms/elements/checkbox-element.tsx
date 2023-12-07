@@ -1,55 +1,91 @@
 import { Checkbox } from '@/components/ui/checkbox'
-import { FormField, FormItem } from '@/components/ui/form'
+import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 type TOption = {
     label: string
     value: string
-    checked: boolean
 }
 
 interface Props {
     name: string
     label?: string
     options: TOption[]
+    selectedAmenities: TOption[]
+    setSelectedAmenities: Dispatch<SetStateAction<TOption[]>>
 }
-const AmenitiesCheckbox = ({ name, options }: Props) => {
+const AmenitiesCheckbox = ({ name, options, selectedAmenities, setSelectedAmenities }: Props) => {
 
     const { control, setValue } = useFormContext();
 
-    const handleCheckboxChange = (event: any) => {
-        const updatedOptions = options.map(option => ({
-            ...option,
-            checked: option.value === event.target.value ? event.target.checked : option.checked
-        }))
+    const handleCheckboxChange = (checkedOption: TOption, checked: boolean) => {
+        // const updatedOptions = options.map(option => {
+        //     if (option.value === checkedOption.value) {
+        //         return { ...option, checked }
+        //     }
+        //     return option
+        // })
 
-        setValue(name, updatedOptions)
+        // setValue(name, updatedOptions)
+        // setSelectedAmenities(updatedOptions);
+        setSelectedAmenities([...selectedAmenities, checkedOption])
     }
 
     return (
-        <FormField
-            control={control}
-            name={name}
-            render={({ field }) => (
-                <FormItem className='grid grid-cols-2 gap-x-2 gap-y-5' >
-                    {
-                        options.map((option, i) => (
-                            <div key={i} className='flex items-center space-x-2'>
-                                <Checkbox name={option.value} id={option.value} onChange={handleCheckboxChange}
-                                    checked={option.checked} onClick={() => option.checked = true} />
-                                <label
-                                    htmlFor={option.value}
-                                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                                >
+        <FormField control={control} name='amenities' render={() => (
+            <FormItem className='grid grid-cols-2 space-y-0 gap-y-4'>
+                {options.map((option) => (
+                    <FormField key={option.value} control={control} name='amenities' render={({ field }) => {
+                        return (
+                            <FormItem key={option.value} className="flex flex-row items-start space-x-3 space-y-0">
+                                <FormControl>
+                                    <Checkbox
+                                        // @ts-ignore
+                                        checked={field.value?.some((item: { item: TOption }) => item.value === option.value)}
+                                        onCheckedChange={(checked) => {
+                                            handleCheckboxChange(option, Boolean(checked))
+                                        }}
+                                    />
+                                </FormControl>
+                                <FormLabel className="font-normal">
                                     {option.label}
-                                </label>
-                            </div>
-                        ))
-                    }
-                </FormItem>
-            )}
-        />
+                                </FormLabel>
+                            </FormItem>
+                        )
+                    }} />
+                ))}
+            </FormItem>
+        )} />
     )
 }
 
 export default AmenitiesCheckbox
+
+
+
+// {
+//     options.map((option, i) => (
+//         <FormField
+//             key={i}
+//             control={control}
+//             name={option.value}
+//             render={({ field }) => (
+//                 <FormItem key={i} className='grid grid-cols-2 gap-x-2 gap-y-5' >
+//                     <div key={i} className='flex items-center space-x-2' >
+//                         <FormControl>
+//                             <Checkbox name={option.value} id={option.value} onCheckedChange={handleCheckboxChange}
+//                             />
+//                             <label
+//                                 htmlFor={option.value}
+//                                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+//                             >
+//                                 {option.label}
+//                             </label>
+//                         </FormControl>
+//                     </div>
+//                 </FormItem>
+//             )}
+//         />
+//     ))
+// }

@@ -9,11 +9,14 @@ import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { Amenities, CommercialTypes, PropertyTypes, ResidentalTypes, Statuses } from '@/constants/advertise'
-import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import AmenitiesCheckbox from '@/components/forms/elements/checkbox-element'
+
+type TOption = {
+  label: string
+  value: string
+}
 
 const formSchema = z.object({
   property_type: z.string({
@@ -31,6 +34,7 @@ const formSchema = z.object({
 
 const AmenitiesForm = ({ onSave }: { onSave: (step: number, values: any) => void }) => {
 
+  const [selectedAmenities, setSelectedAmenities] = useState<TOption[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -41,8 +45,6 @@ const AmenitiesForm = ({ onSave }: { onSave: (step: number, values: any) => void
     console.log({ personalForm: values })
     onSave(1, values)
   }
-
-  console.log(form.getValues())
 
   return (
     <Form {...form}>
@@ -64,7 +66,8 @@ const AmenitiesForm = ({ onSave }: { onSave: (step: number, values: any) => void
 
         <InputElement name="parking_spaces" label={'Number of Parking Spaces'} />
 
-        <AmenitiesCheckbox name='amenities' options={Amenities} />
+        <AmenitiesCheckbox name='amenities' options={Amenities} selectedAmenities={selectedAmenities} setSelectedAmenities={setSelectedAmenities} />
+        {/* <CheckboxReactHookFormMultiple /> */}
 
         <InputElement name="airport_distance" label={'Distance from Airport (in km)'} />
 

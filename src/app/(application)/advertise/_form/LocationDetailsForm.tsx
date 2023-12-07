@@ -1,18 +1,15 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, useFormContext } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import SwitchElement from '@/components/forms/elements/switch-element'
-import SelectElement from '@/components/forms/elements/select-element'
-import { CommercialTypes, Emirates, EmiratesWithLocations, Locations, ResidentalTypes } from '@/constants/advertise'
-import RadioGroupElement from '@/components/forms/elements/radio-group-element'
+import { EmiratesWithLocations } from '@/constants/advertise'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 const formSchema = z.object({

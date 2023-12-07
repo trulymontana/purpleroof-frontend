@@ -6,7 +6,7 @@ import { AmenitiesForm, BasicDetailsForm, LocationDetailsForm, ProjectStatusForm
 const Page = () => {
 
     const storeValues = (step: number, values: any) => {
-        localStorage.setItem(step.toLocaleString(), JSON.stringify(values))
+        localStorage.setItem(`advertise-${step.toLocaleString()}`, JSON.stringify(values))
     }
 
     const createAdvertisement = () => {

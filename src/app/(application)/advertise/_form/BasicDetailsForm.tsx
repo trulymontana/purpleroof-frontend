@@ -11,14 +11,14 @@ import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { CommercialTypes, ResidentalTypes } from '@/constants/advertise'
+import { CommercialTypes, ResidentalTypes, TypesOfProperties } from '@/constants/advertise'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 
 const formSchema = z.object({
     advert_title: z.string({
         required_error: 'Title should not be empty!',
     }),
-    property_type: z.string({
+    type_of_property: z.string({
         required_error: "Please select a property type!"
     }),
     property_option: z.string({
@@ -36,7 +36,7 @@ const BasicDetailsForm = ({ onSave }: { onSave: (step: number, values: any) => v
 
     const handleChange = (value: string) => {
         setPropertyType(value)
-        form.setValue("property_type", value)
+        form.setValue("type_of_property", value)
     }
 
     function onSubmit(values: z.infer<typeof formSchema>) {
@@ -53,19 +53,10 @@ const BasicDetailsForm = ({ onSave }: { onSave: (step: number, values: any) => v
                 <InputElement name="advert_title" label={'Advert Title'} />
 
                 <RadioGroupElement
-                    name="property_type"
+                    name="type_of_property"
                     label={'Type of Property'}
                     handleChange={handleChange}
-                    options={[
-                        {
-                            label: 'Residential',
-                            value: 'Residential',
-                        },
-                        {
-                            label: 'Commercial',
-                            value: 'Commercial',
-                        }
-                    ]}
+                    options={TypesOfProperties}
                 />
                 <SelectElement
                     // name={propertyType === "Residential" ? "residential" : "commercial"}
