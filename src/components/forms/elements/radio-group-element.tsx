@@ -29,6 +29,7 @@ interface Props {
   description?: string
   placeholder?: string
   handleChange?: (e: any) => void
+  className?: string
 }
 
 const RadioGroupElement = ({
@@ -37,7 +38,8 @@ const RadioGroupElement = ({
   description,
   options,
   placeholder,
-  handleChange
+  handleChange,
+  className
 }: Props) => {
   const { control } = useFormContext()
   return (
@@ -54,7 +56,7 @@ const RadioGroupElement = ({
                 // onValueChange={field.onChange}
                 onValueChange={handleChange}
                 // onChange={handleChange}
-                className="flex items-center gap-10"
+                className={`flex ${className}`}
               >
                 {options.map((option) => (
                   <FormItem

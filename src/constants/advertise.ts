@@ -107,6 +107,21 @@ export const ResidentalTypes = [
   },
 ]
 
+export const PaymentIntervals = [
+  {
+    label: 'Weekly',
+    value: 'weekly',
+  },
+  {
+    label: 'Monthly',
+    value: 'monthly',
+  },
+  {
+    label: 'Yearly',
+    value: 'yearly',
+  },
+]
+
 export const BedRooms = [
   {
     label: 'Studio',
@@ -857,5 +872,36 @@ export const Amenities = [
   {
     label: 'Other Main Features',
     value: 'Other Main Features',
+  },
+]
+
+export const ProjectStatuses = [
+  {
+    label: 'Completed',
+    value: 'completed',
+  },
+  {
+    label: 'Off plan/Under construction',
+    value: 'off plan/under construction',
+  },
+  {
+    label: 'Shell & Core',
+    value: 'shell & core',
+  },
+]
+
+export const rentedOrVacantOptions = [
+  { label: 'Vacant', value: 'vacant' },
+  { label: 'Rented', value: 'rented' },
+]
+
+export const CallPreferences = [
+  {
+    label: "Ask Purple Roof's staff to handle and address the calls",
+    value: 'purpleroof',
+  },
+  {
+    label: 'Personally respond to the calls myself',
+    value: 'personally',
   },
 ]

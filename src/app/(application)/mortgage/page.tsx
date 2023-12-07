@@ -7,7 +7,7 @@ import IncomeDetailsForm from './_form/income-details-form'
 const Page = () => {
 
   const storeValues = (step: number, values: any) => {
-    localStorage.setItem(step.toLocaleString(), JSON.stringify(values))
+    localStorage.setItem(`mortgage-${step}`, JSON.stringify(values))
   }
 
   const createMortgage = () => {

@@ -20,10 +20,11 @@ interface Props {
   name: string
   label: string
   description?: string
+  disabled?: boolean
 }
 
-const DatePickerElement = ({ name, label, description }: Props) => {
-  const { control } = useFormContext()
+const DatePickerElement = ({ name, label, description, disabled = false }: Props) => {
+  const { control } = useFormContext();
 
   return (
     <FormField
@@ -48,17 +49,17 @@ const DatePickerElement = ({ name, label, description }: Props) => {
                     // format(field.value, 'PPP')
                     <span>Pick a date</span>
                   )}
-                  <CalenderIcon className="ml-auto h-4 w-4 opacity-50" />
+                  <CalenderIcon className="ml-auto h-4 w-4" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
+            <PopoverContent className="w-auto p-0 bg-slate-950 text-white/80" align="start">
               <Calendar
                 mode="single"
                 selected={field.value}
                 onSelect={field.onChange}
-                disabled={(date) =>
-                  date > new Date() || date < new Date('1900-01-01')
+                disabled={!disabled ? ((date) =>
+                  date > new Date() || date < new Date('1900-01-01')) : ((date) => date < new Date('1900-01-01'))
                 }
                 initialFocus
               />

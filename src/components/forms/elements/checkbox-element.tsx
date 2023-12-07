@@ -33,7 +33,7 @@ const AmenitiesCheckbox = ({ name, options, selectedAmenities, setSelectedAmenit
     }
 
     return (
-        <FormField control={control} name='amenities' render={() => (
+        <FormField control={control} name={name} render={() => (
             <FormItem className='grid grid-cols-2 space-y-0 gap-y-4'>
                 {options.map((option) => (
                     <FormField key={option.value} control={control} name='amenities' render={({ field }) => {

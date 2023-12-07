@@ -29,7 +29,7 @@ const formSchema = z.object({
   airport_distance: z.string().optional(),
   metro_station: z.string().optional(),
   nearby_places: z.string().optional(),
-  other_features: z.string().optional(),
+  other_features: z.string().optional()
 })
 
 const AmenitiesForm = ({ onSave }: { onSave: (step: number, values: any) => void }) => {
@@ -42,8 +42,11 @@ const AmenitiesForm = ({ onSave }: { onSave: (step: number, values: any) => void
 
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log({ personalForm: values })
-    onSave(1, values)
+
+    const data = values;
+    // @ts-ignore
+    data.amenities = selectedAmenities
+    onSave(4, data)
   }
 
   return (

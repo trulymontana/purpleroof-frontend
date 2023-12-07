@@ -32,9 +32,6 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.',
     }),
-  // description: z.string().min(10, {
-  //   message: 'Description must be at least 10 characters.',
-  // }),
   agree_to_privacy_policy: z.boolean().refine((data) => data === true, {
     message: 'You must agree to the privacy policy.',
   }),

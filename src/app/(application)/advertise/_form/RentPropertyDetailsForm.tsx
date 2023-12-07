@@ -12,7 +12,7 @@ import InputElement from '@/components/forms/elements/input-element'
 import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { incomeProfiles, residentialTypes } from '@/constants/financial'
-import { BathRooms, BedRooms } from '@/constants/advertise'
+import { BathRooms, BedRooms, PaymentIntervals } from '@/constants/advertise'
 
 const formSchema = z.object({
     phone: z
@@ -22,11 +22,17 @@ const formSchema = z.object({
         .min(10, {
             message: 'Phone number must be at least 10 characters.',
         }),
-    property_value: z.string({
-        required_error: "Please enter a property value"
+    rental_amount: z.string({
+        required_error: "Please enter a rental amount"
+    }),
+    payment_interval: z.string({
+        required_error: "Please select a payment interval"
     }),
     property_size: z.string({
-        required_error: "Please enter a property size"
+        required_error: "Please enter a property size!"
+    }),
+    minimum_contract: z.string({
+        required_error: "Please enter a minimum contract period!"
     }),
     bed_rooms: z.string({
         required_error: "Please enter number of bed rooms!"
@@ -37,7 +43,7 @@ const formSchema = z.object({
     deed_number: z.string().optional()
 })
 
-const PropertyDetailsForm = ({ onSave }: { onSave: (step: number, values: any) => void }) => {
+const RentPropertyDetailsForm = ({ onSave }: { onSave: (step: number, values: any) => void }) => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
     })
@@ -56,8 +62,11 @@ const PropertyDetailsForm = ({ onSave }: { onSave: (step: number, values: any) =
                 className="w-96 space-y-4 p-4 shadow-md"
             >
                 <InputElement name="phone" label={'Phone Number'} />
-                <InputElement name="property_value" label={'Property Value (AED)'} />
+                <InputElement name="rental_amount" label={'Rental Amount (AED)'} />
+                {/* <InputElement name="payment_interval" label={'Payment Interval'} /> */}
+                <SelectElement name='payment_interval' label='Payment Interval' options={PaymentIntervals} />
                 <InputElement name="property_size" label={'Property Size (Sqft)'} />
+                <InputElement name="minimum_contract" label={'Minimum Contract (in months)'} />
 
                 <SelectElement
                     name="bed_rooms"
@@ -81,4 +90,4 @@ const PropertyDetailsForm = ({ onSave }: { onSave: (step: number, values: any) =
     )
 }
 
-export default PropertyDetailsForm
+export default RentPropertyDetailsForm
