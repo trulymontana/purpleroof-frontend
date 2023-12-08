@@ -58,7 +58,7 @@ const LocationDetailsForm = ({ onSave }: { onSave: (step: number, values: any) =
 
   if (selectedEmirate) {
     // @ts-ignore
-    Locations = UpdatedLocations[selectedEmirate]
+    Locations = EmiratesWithLocations[selectedEmirate]
   }
 
 
