@@ -60,8 +60,8 @@ const ProjectStatusForm = ({ onSave }: { onSave: (step: number, values: any) => 
         onSave(5, values)
     }
 
-    const project_status = form.getValues("project_status")
-    const rented_or_vacant = form.getValues("rented_or_vacant")
+    const project_status = form.watch("project_status")
+    const rented_or_vacant = form.watch("rented_or_vacant")
 
     console.log({ project_status, rented_or_vacant })
 

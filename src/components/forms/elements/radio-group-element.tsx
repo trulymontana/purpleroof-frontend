@@ -39,7 +39,7 @@ const RadioGroupElement = ({
   options,
   placeholder,
   handleChange,
-  className
+  className,
 }: Props) => {
   const { control } = useFormContext()
   return (
@@ -53,8 +53,8 @@ const RadioGroupElement = ({
             <FormControl>
               <RadioGroup
                 defaultValue={field.value}
-                // onValueChange={field.onChange}
-                onValueChange={handleChange}
+                onValueChange={field.onChange}
+                // onValueChange={handleChange}
                 // onChange={handleChange}
                 className={`flex ${className}`}
               >

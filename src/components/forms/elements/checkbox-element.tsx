@@ -12,10 +12,11 @@ interface Props {
     name: string
     label?: string
     options: TOption[]
-    selectedAmenities: TOption[]
-    setSelectedAmenities: Dispatch<SetStateAction<TOption[]>>
+    selectedBoxes: TOption[]
+    setSelectedBoxes: Dispatch<SetStateAction<TOption[]>>
+    classNames?: string
 }
-const AmenitiesCheckbox = ({ name, options, selectedAmenities, setSelectedAmenities }: Props) => {
+const MultiSelectCheckbox = ({ name, options, selectedBoxes, setSelectedBoxes, classNames }: Props) => {
 
     const { control, setValue } = useFormContext();
 
@@ -29,12 +30,12 @@ const AmenitiesCheckbox = ({ name, options, selectedAmenities, setSelectedAmenit
 
         // setValue(name, updatedOptions)
         // setSelectedAmenities(updatedOptions);
-        setSelectedAmenities([...selectedAmenities, checkedOption])
+        setSelectedBoxes([...selectedBoxes, checkedOption])
     }
 
     return (
         <FormField control={control} name={name} render={() => (
-            <FormItem className='grid grid-cols-2 space-y-0 gap-y-4'>
+            <FormItem className={`grid ${classNames} space-y-0 gap-y-4`}>
                 {options.map((option) => (
                     <FormField key={option.value} control={control} name='amenities' render={({ field }) => {
                         return (
@@ -60,32 +61,4 @@ const AmenitiesCheckbox = ({ name, options, selectedAmenities, setSelectedAmenit
     )
 }
 
-export default AmenitiesCheckbox
-
-
-
-// {
-//     options.map((option, i) => (
-//         <FormField
-//             key={i}
-//             control={control}
-//             name={option.value}
-//             render={({ field }) => (
-//                 <FormItem key={i} className='grid grid-cols-2 gap-x-2 gap-y-5' >
-//                     <div key={i} className='flex items-center space-x-2' >
-//                         <FormControl>
-//                             <Checkbox name={option.value} id={option.value} onCheckedChange={handleCheckboxChange}
-//                             />
-//                             <label
-//                                 htmlFor={option.value}
-//                                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-//                             >
-//                                 {option.label}
-//                             </label>
-//                         </FormControl>
-//                     </div>
-//                 </FormItem>
-//             )}
-//         />
-//     ))
-// }
+export default MultiSelectCheckbox

@@ -11,6 +11,7 @@ import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import { EmiratesWithLocations } from '@/constants/advertise'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import SelectElement from '@/components/forms/elements/select-element'
 
 const formSchema = z.object({
   emirate: z.string({
@@ -38,16 +39,11 @@ const formSchema = z.object({
 
 const LocationDetailsForm = ({ onSave }: { onSave: (step: number, values: any) => void }) => {
 
-  const [emirate, setEmirate] = useState<string>("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
 
-  const handleEmirateChange = (value: string) => {
-    setEmirate(value)
-    form?.setValue("emirate", value)
-  }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log({ personalForm: values })
@@ -55,13 +51,14 @@ const LocationDetailsForm = ({ onSave }: { onSave: (step: number, values: any) =
   }
 
 
-  let locations: string[] = []
+  const Emirates = Object.keys(EmiratesWithLocations)
+  const selectedEmirate = form.watch("emirate")
 
-  if (emirate) {
-    const data = EmiratesWithLocations.find((item) => item.emirate === emirate);
-    if (data?.locations) {
-      locations = data?.locations
-    }
+  let Locations: { label: string, value: string }[] = [];
+
+  if (selectedEmirate) {
+    // @ts-ignore
+    Locations = UpdatedLocations[selectedEmirate]
   }
 
 
@@ -77,50 +74,26 @@ const LocationDetailsForm = ({ onSave }: { onSave: (step: number, values: any) =
           render={({ field }) => (
             <FormItem>
               <FormLabel>Emirate</FormLabel>
-              <Select onValueChange={handleEmirateChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {EmiratesWithLocations.map((option, i) => (
-                    <SelectItem key={i} value={option.emirate}>
-                      {option.emirate}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              {/* <FormDescription>{description}</FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          name={"location"}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Location</FormLabel>
-              <Select disabled={!form.getValues().emirate} onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder={!form.getValues().emirate ? "Please select emirate first" : "Please select a location"} />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent >
-                  {locations && locations.map((option, i) => (
+                  {Emirates.map((option, i) => (
                     <SelectItem key={i} value={option}>
                       {option}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
-              {/* <FormDescription>{description}</FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
         />
+
+        <SelectElement name='location' label='Location' options={Locations} placeholder={!selectedEmirate ? "Please select emirate first" : "Please select a location"} disabled={!selectedEmirate} />
 
         <InputElement name="building_name" label={'Building / Cluster Name'} />
         <InputElement name="floor" label={'Floor'} />

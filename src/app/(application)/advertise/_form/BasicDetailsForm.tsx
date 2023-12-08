@@ -11,10 +11,15 @@ import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { CommercialTypes, ResidentalTypes, TypesOfProperties } from '@/constants/advertise'
+import { Categories, CommercialTypes, ResidentalTypes, TypesOfProperties } from '@/constants/advertise'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
+import CategoryRadioGroup from '@/components/forms/elements/tab-radio-group'
+import TabRadioGroup from '@/components/forms/elements/tab-radio-group'
 
 const formSchema = z.object({
+    category: z.string({
+        required_error: "Please select a category"
+    }),
     advert_title: z.string({
         required_error: 'Title should not be empty!',
     }),
@@ -28,24 +33,22 @@ const formSchema = z.object({
 
 const BasicDetailsForm = ({ onSave }: { onSave: (step: number, values: any) => void }) => {
 
-    const [category, setCategory] = useState("sell");
-    const [propertyType, setPropertyType] = useState("Residential");
+    // const [propertyType, setPropertyType] = useState("Residential");
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
+        defaultValues: { "category": "sell", "type_of_property": "Residential" }
     })
 
     const handleChange = (value: string) => {
-        setPropertyType(value)
         form.setValue("type_of_property", value)
     }
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        const data = values;
-        // @ts-ignore
-        data.category = category
-        onSave(1, data)
+        onSave(1, values)
     }
+
+    const propertyType = form.watch("type_of_property")
 
     return (
         <Form {...form}>
@@ -53,17 +56,17 @@ const BasicDetailsForm = ({ onSave }: { onSave: (step: number, values: any) => v
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="w-[28rem] space-y-4 p-4 shadow-md"
             >
-                <div className='flex items-center gap-2'>
-                    <div onClick={() => setCategory("sell")} className={`cursor-pointer flex-1 ${category === 'sell' ? "bg-purple-600 text-white" : "text-black"} rounded-xl text-center py-2`}>I want to Sell</div>
-                    <div onClick={() => setCategory("rent")} className={`cursor-pointer flex-1 ${category === 'rent' ? "bg-purple-600 text-white" : "text-black"} text-center py-2 rounded-xl px-1`}>I want a rental tenant</div>
-                </div>
+                <TabRadioGroup
+                    name="category"
+                    options={Categories}
+                />
+
                 <InputElement name="advert_title" label={'Advert Title'} />
 
                 <RadioGroupElement
                     name="type_of_property"
                     label={'Type of Property'}
                     className='items-center gap-10'
-                    handleChange={handleChange}
                     options={TypesOfProperties}
                 />
 

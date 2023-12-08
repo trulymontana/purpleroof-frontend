@@ -11,7 +11,7 @@ import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { Amenities, CommercialTypes, PropertyTypes, ResidentalTypes, Statuses } from '@/constants/advertise'
-import AmenitiesCheckbox from '@/components/forms/elements/checkbox-element'
+import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 
 type TOption = {
   label: string
@@ -42,7 +42,6 @@ const AmenitiesForm = ({ onSave }: { onSave: (step: number, values: any) => void
 
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-
     const data = values;
     // @ts-ignore
     data.amenities = selectedAmenities
@@ -53,7 +52,7 @@ const AmenitiesForm = ({ onSave }: { onSave: (step: number, values: any) => void
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-96 space-y-4 p-4 shadow-md"
+        className="w-[28rem] space-y-4 p-4 shadow-md"
       >
         <SelectElement
           name='property_type'
@@ -69,8 +68,7 @@ const AmenitiesForm = ({ onSave }: { onSave: (step: number, values: any) => void
 
         <InputElement name="parking_spaces" label={'Number of Parking Spaces'} />
 
-        <AmenitiesCheckbox name='amenities' options={Amenities} selectedAmenities={selectedAmenities} setSelectedAmenities={setSelectedAmenities} />
-        {/* <CheckboxReactHookFormMultiple /> */}
+        <MultiSelectCheckbox name='amenities' classNames='grid-cols-2' options={Amenities} selectedBoxes={selectedAmenities} setSelectedBoxes={setSelectedAmenities} />
 
         <InputElement name="airport_distance" label={'Distance from Airport (in km)'} />
 

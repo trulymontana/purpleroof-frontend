@@ -8,7 +8,7 @@ export default function AdminLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="grid h-screen min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
+    <div className="grid  min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
       <SideNavBar />
       <div className="flex flex-col">{children}</div>
     </div>

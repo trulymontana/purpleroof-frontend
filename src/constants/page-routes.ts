@@ -4,6 +4,7 @@ export const PageRoutes = {
     PROPERTIES: '/admin/properties',
     AGENTS: '/admin/agents',
     USERS: '/admin/users',
+    REQUIREMENTS: '/admin/requirements',
   },
   HOME: '/',
   ABOUT: '/about',

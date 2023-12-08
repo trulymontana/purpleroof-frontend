@@ -1,3 +1,14 @@
+export const Categories = [
+  {
+    label: 'I want to Sell',
+    value: 'sell',
+  },
+  {
+    label: 'I want a rental tenant',
+    value: 'rent',
+  },
+]
+
 export const TypesOfProperties = [
   {
     label: 'Residential',
@@ -292,367 +303,1318 @@ export const BathRooms = [
   },
 ]
 
-export const EmiratesWithLocations = [
-  {
-    emirate: 'Dubai',
-    locations: [
-      'Al Barsha',
-      'Al Barsha 1',
-      'Al Furjan',
-      'Al Jaddaf',
-      'Al Mankhool',
-      'Al Nahda (Dubai)',
-      'Al Nahda 2',
-      'Al Quoz',
-      'Al Qusais',
-      'Al Wasl',
-      'Arabian Ranches 3',
-      'Arjan',
-      'Azizi Riviera',
-      'Bur Dubai',
-      'Business Bay',
-      'DAMAC Hills',
-      'DAMAC Hills 2 (Akoya by DAMAC)',
-      'Damac Lagoons',
-      'Deira',
-      'Downtown Dubai',
-      'Dubai Creek Harbour',
-      'Dubai Harbour',
-      'Dubai Hills Estate',
-      'Dubai Marina',
-      'Dubai Silicon Oasis',
-      'Dubai South',
-      'Dubai Sports City',
-      'Dubailand',
-      'Elan',
-      'Emaar Beachfront',
-      'International City',
-      'Jebel Ali',
-      'Jumeirah',
-      'Jumeirah Beach Residence (JBR)',
-      'Jumeirah Lake Towers (JLT)',
-      'Jumeirah Village Circle (JVC)',
-      'Jumeirah Village Triangle (JVT)',
-      'JVC District 10',
-      'JVC District 11',
-      'JVC District 12',
-      'JVC District 13',
-      'JVC District 14',
-      'JVC District 15',
-      'Meydan City',
-      'Meydan One',
-      'Mohammed Bin Rashid City',
-      'Palm Jumeirah',
-      'Sheikh Zayed Road',
-      'Sobha Hartland',
-      'Tilal Al Ghaf',
-    ],
-  },
-  {
-    emirate: 'Abu Dhabi',
-    locations: [
-      'Al Bateen',
-      'Al Ghadeer',
-      'Al Khalidiyah',
-      'Al Matar',
-      'Al Muneera',
-      'Al Muroor',
-      'Al Mushrif',
-      'Al Nahyan',
-      'Al Raha Beach',
-      'Al Raha Gardens',
-      'Al Reef',
-      'Al Reef Downtown',
-      'Al Reef Villas',
-      'Al Reem Island',
-      'Al Shamkha',
-      'Baniyas',
-      'Bloom Gardens',
-      'City of Lights',
-      'Corniche Area',
-      'Corniche Road',
-      'Electra Street',
-      'Hamdan Street',
-      'Khalifa City',
-      'Madinat Al Riyadh',
-      'Makers District',
-      'Marina Square',
-      'Masdar City',
-      'Mayan',
-      'Mohammed Bin Zayed City',
-      'Mussafah',
-      'Mussafah Community',
-      'Mussafah Industrial Area',
-      'Najmat Abu Dhabi',
-      'Noya',
-      'Pixel',
-      'Reem Hills',
-      'Saadiyat Beach',
-      'Saadiyat Cultural District',
-      'Saadiyat Island',
-      'Shakhbout City',
-      'Shams Abu Dhabi',
-      'Shams Gate District',
-      'Tamouh',
-      'The Bridges',
-      'The Gate Tower',
-      'Tourist Club Area (TCA)',
-      "Water's Edge",
-      'Yas Acres',
-      'Yas Island',
-      'Zone 18',
-    ],
-  },
-  {
-    emirate: 'Ras Al Khaimah',
-    locations: [
-      'Al Dhait',
-      'Al Dhait South',
-      'Al Hamra Village',
-      'Al Hamra Village Golf Apartments',
-      'Al Mairid',
-      'Al Mamourah',
-      'Al Marjan Island',
-      'Al Nakheel',
-      'Al Qurm',
-      'Al Qusaidat',
-      'Al Refaa',
-      'Al Seer',
-      'Al Uraibi',
-      'Aljazeera Al Hamra',
-      'Bab Al Bahr Residences',
-      'Bay Residences',
-      'Bayviews',
-      'Dafan Al Khor',
-      'Dafan Al Nakheel',
-      'Danah Bay',
-      'ENI Mangrove',
-      'Gateway II Residences',
-      'Julphar Towers',
-      'Kahraman Building',
-      'Khuzam',
-      'Marbella',
-      'Marjan Island Resort & Spa',
-      'Mina Al Arab',
-      'Mudfak',
-      'Oceano',
-      'Pacific',
-      'Pacific Bora Bora',
-      'Pacific Samoa',
-      'RAK Tower',
-      'Royal Breeze 1',
-      'Royal Breeze 2',
-      'Royal Breeze 3',
-      'Royal Breeze 4',
-      'Royal Breeze 5',
-      'Royal Breeze Apartment',
-      'Seih Al Burairat',
-      'Sidroh',
-      'Suhaim',
-      'The Cove Rotana',
-      'The Lagoons',
-      'Union Tower',
-      'Yakout Building',
-      'Yasmin Village',
-      'Yasmin Village',
-      'Yasmin Village Building 4',
-    ],
-  },
-  {
-    emirate: 'Sharjah',
-    locations: [
-      '5208 Muweilah Building',
-      'Abu Shagara',
-      'Ajmal Makan',
-      'Al Ghuwair',
-      'Al Khan',
-      'Al Mahatah',
-      'Al Majaz',
-      'Al Majaz 1',
-      'Al Majaz 2',
-      'Al Majaz 3',
-      'Al Mamsha',
-      'Al Mamzar',
-      'Al Nabba',
-      'Al Nahda (Sharjah)',
-      'Al Nahda Complex Towers',
-      'Al Nahda Towers',
-      'Al Nud',
-      'Al Qasimia',
-      'Al Rahmaniya',
-      'Al Sajaa',
-      'Al Sajaa Industrial',
-      'Al Suyoh',
-      'Al Taawun',
-      'Al Tai',
-      'Al Zahia',
-      'Aljada',
-      'Amber Tower',
-      'Barashi',
-      'Bu Tina',
-      'Hayyan',
-      'Hoshi',
-      'Industrial Area',
-      'Industrial Area 14',
-      'Industrial Area 6',
-      'Maryam Island',
-      'Masaar',
-      'Muwaileh',
-      'Muwaileh 3 Building',
-      'Muwaileh Building',
-      'Muwailih Commercial',
-      'Naseej District',
-      'Nasma Residence',
-      'Robinia',
-      'Rove Home Aljada',
-      'Sequoia',
-      'Sharjah Garden City',
-      'Sharjah Sustainable City',
-      'Sharjah Waterfront City',
-      'Shoumous Residential Complex',
-      'Tilal City',
-    ],
-  },
-  {
-    emirate: 'Fujairah',
-    locations: [
-      'Address Fujairah Beach Resort',
-      'Address Fujairah Beach Resort',
-      'Address Residences Fujairah Resort',
-      'Al Aqah',
-      'Al Bidya',
-      'Al Dana Island',
-      'Al Fanar 2',
-      'Al Fanar Towers',
-      'Al Faseel Area',
-      'Al Hayl',
-      'Al Jaber Tower',
-      'Al Taif Business Center',
-      'Corniche Al Fujairah',
-      'Dibba',
-      'Fujairah Freezone',
-      'Gurfah Area',
-      'Ishwais',
-      'Kalba',
-      'Mattar Complex',
-      'Mattar Residence',
-      'Mattar Residence 2',
-      'Mattar Residence 3',
-      'Mattar Residence 4',
-      'Mattar Residence 5',
-      'Mattar Residence Mirbah',
-      'Mattar Tower',
-      'Merashid Area',
-      'Mirbah',
-      'Naseem Al Bahr Villas',
-      'Platinum Time Residence',
-      'Qidfa',
-      'Sakamkam',
-      'Saniaya',
-      'Sharm',
-      'The White Village',
-      'Thoban',
-      'Town Centre',
-      'UNB Building Apartments',
-    ],
-  },
-  {
-    emirate: 'Ajman',
-    locations: [
-      'Ajman Corniche Residence',
-      'Ajman Downtown',
-      'Ajman Industrial',
-      'Ajman Industrial 2',
-      'Ajman One Towers',
-      'Ajman Pearl Towers',
-      'Al Alia',
-      'Al Amerah',
-      'Al Bustan',
-      'Al Hamidiya 1',
-      'Al Hamidiyah',
-      'Al Helio',
-      'Al Jurf',
-      'Al Jurf 2',
-      'Al Jurf Industrial 3',
-      'Al Jurf Industrial Area',
-      'Al Khor Towers',
-      'Al Mowaihat',
-      'Al Mowaihat 1',
-      'Al Mowaihat 2',
-      'Al Mowaihat 3',
-      'Al Nakhil',
-      'Al Nuaimiya',
-      'Al Nuaimiya 1',
-      'Al Nuaimiya 2',
-      'Al Nuaimiya 3',
-      'Al Nuaimiya Towers',
-      'Al Rashidiya',
-      'Al Rashidiya 1',
-      'Al Rashidiya 2',
-      'Al Rashidiya 3',
-      'Al Rawda',
-      'Al Rawda 1',
-      'Al Rawda 2',
-      'Al Rawda 3',
-      'Al Rumaila',
-      'Al Sawan',
-      'Al Yasmeen',
-      'Al Zahra',
-      'Al Zahya',
-      'Al Zorah',
-      'City Tower',
-      'Conqueror Tower',
-      'Corniche Ajman',
-      'Corniche Tower',
-      'Emirates City',
-      'Gulfa Towers',
-      'Horizon Tower',
-      'Paradise Lakes',
-      'Sheikh Maktoum Bin Rashid Street',
-    ],
-  },
-  {
-    emirate: 'Umm al Quwain',
-    locations: [
-      'ADIB Building',
-      'Al Aahad',
-      'Al Abraq 1',
-      'Al Butain',
-      'Al Dar Al Baida',
-      'Al Haditha',
-      'Al Hawiyah',
-      'Al Huboob 1',
-      'Al Huboob 2',
-      'Al Humrah',
-      'Al Khor',
-      'Al Maidan',
-      'Al Maqtaa',
-      'Al Ramlah',
-      'Al Rass',
-      'Al Raudah',
-      'Al Riqqah',
-      'Al Salam City',
-      'Al Salamah',
-      'Al Serra',
-      'Al Shareiah',
-      'Defence Camp',
-      'Emirates Modern Industrial Area',
-      'Falaj Al Mualla',
-      'Falaj Al Sheikh',
-      'Green Belt',
-      'Industrial Area',
-      'Kabir',
-      'Khalifah City',
-      'Khalifah City 1',
-      'Khalifah City 2',
-      'Mallah',
-      'Masjid Al Mazroui',
-      'Old Town Area',
-      'Umm Al Quwain Marina',
-      'Umm Dera',
-    ],
-  },
-]
+export const EmiratesWithLocations = {
+  'Dubai': [
+    {
+      label: 'Al Barsha',
+      value: 'Al Barsha',
+    },
+    {
+      label: 'Al Barsha 1',
+      value: 'Al Barsha 1',
+    },
+    {
+      label: 'Al Furjan',
+      value: 'Al Furjan',
+    },
+    {
+      label: 'Al Jaddaf',
+      value: 'Al Jaddaf',
+    },
+    {
+      label: 'Al Mankhool',
+      value: 'Al Mankhool',
+    },
+    {
+      label: 'Al Nahda (Dubai)',
+      value: 'Al Nahda (Dubai)',
+    },
+    {
+      label: 'Al Nahda 2',
+      value: 'Al Nahda 2',
+    },
+    {
+      label: 'Al Quoz',
+      value: 'Al Quoz',
+    },
+    {
+      label: 'Al Qusais',
+      value: 'Al Qusais',
+    },
+    {
+      label: 'Al Wasl',
+      value: 'Al Wasl',
+    },
+    {
+      label: 'Arabian Ranches 3',
+      value: 'Arabian Ranches 3',
+    },
+    {
+      label: 'Arjan',
+      value: 'Arjan',
+    },
+    {
+      label: 'Azizi Riviera',
+      value: 'Azizi Riviera',
+    },
+    {
+      label: 'Bur Dubai',
+      value: 'Bur Dubai',
+    },
+    {
+      label: 'Business Bay',
+      value: 'Business Bay',
+    },
+    {
+      label: 'DAMAC Hills',
+      value: 'DAMAC Hills',
+    },
+    {
+      label: 'DAMAC Hills 2 (Akoya by DAMAC)',
+      value: 'DAMAC Hills 2 (Akoya by DAMAC)',
+    },
+    {
+      label: 'Damac Lagoons',
+      value: 'Damac Lagoons',
+    },
+    {
+      label: 'Deira',
+      value: 'Deira',
+    },
+    {
+      label: 'Downtown Dubai',
+      value: 'Downtown Dubai',
+    },
+    {
+      label: 'Dubai Creek Harbour',
+      value: 'Dubai Creek Harbour',
+    },
+    {
+      label: 'Dubai Harbour',
+      value: 'Dubai Harbour',
+    },
+    {
+      label: 'Dubai Hills Estate',
+      value: 'Dubai Hills Estate',
+    },
+    {
+      label: 'Dubai Marina',
+      value: 'Dubai Marina',
+    },
+    {
+      label: 'Dubai Silicon Oasis',
+      value: 'Dubai Silicon Oasis',
+    },
+    {
+      label: 'Dubai South',
+      value: 'Dubai South',
+    },
+    {
+      label: 'Dubai Sports City',
+      value: 'Dubai Sports City',
+    },
+    {
+      label: 'Dubailand',
+      value: 'Dubailand',
+    },
+    {
+      label: 'Elan',
+      value: 'Elan',
+    },
+    {
+      label: 'Emaar Beachfront',
+      value: 'Emaar Beachfront',
+    },
+    {
+      label: 'International City',
+      value: 'International City',
+    },
+    {
+      label: 'Jebel Ali',
+      value: 'Jebel Ali',
+    },
+    {
+      label: 'Jumeirah',
+      value: 'Jumeirah',
+    },
+    {
+      label: 'Jumeirah Beach Residence (JBR)',
+      value: 'Jumeirah Beach Residence (JBR)',
+    },
+    {
+      label: 'Jumeirah Lake Towers (JLT)',
+      value: 'Jumeirah Lake Towers (JLT)',
+    },
+    {
+      label: 'Jumeirah Village Circle (JVC)',
+      value: 'Jumeirah Village Circle (JVC)',
+    },
+    {
+      label: 'Jumeirah Village Triangle (JVT)',
+      value: 'Jumeirah Village Triangle (JVT)',
+    },
+    {
+      label: 'JVC District 10',
+      value: 'JVC District 10',
+    },
+    {
+      label: 'JVC District 11',
+      value: 'JVC District 11',
+    },
+    {
+      label: 'JVC District 12',
+      value: 'JVC District 12',
+    },
+    {
+      label: 'JVC District 13',
+      value: 'JVC District 13',
+    },
+    {
+      label: 'JVC District 14',
+      value: 'JVC District 14',
+    },
+    {
+      label: 'JVC District 15',
+      value: 'JVC District 15',
+    },
+    {
+      label: 'Meydan City',
+      value: 'Meydan City',
+    },
+    {
+      label: 'Meydan One',
+      value: 'Meydan One',
+    },
+    {
+      label: 'Mohammed Bin Rashid City',
+      value: 'Mohammed Bin Rashid City',
+    },
+    {
+      label: 'Palm Jumeirah',
+      value: 'Palm Jumeirah',
+    },
+    {
+      label: 'Sheikh Zayed Road',
+      value: 'Sheikh Zayed Road',
+    },
+    {
+      label: 'Sobha Hartland',
+      value: 'Sobha Hartland',
+    },
+    {
+      label: 'Tilal Al Ghaf',
+      value: 'Tilal Al Ghaf',
+    },
+  ],
+  'Abu Dhabi': [
+    {
+      label: 'Al Bateen',
+      value: 'Al Bateen',
+    },
+    {
+      label: 'Al Ghadeer',
+      value: 'Al Ghadeer',
+    },
+    {
+      label: 'Al Khalidiyah',
+      value: 'Al Khalidiyah',
+    },
+    {
+      label: 'Al Matar',
+      value: 'Al Matar',
+    },
+    {
+      label: 'Al Muneera',
+      value: 'Al Muneera',
+    },
+    {
+      label: 'Al Muroor',
+      value: 'Al Muroor',
+    },
+    {
+      label: 'Al Mushrif',
+      value: 'Al Mushrif',
+    },
+    {
+      label: 'Al Nahyan',
+      value: 'Al Nahyan',
+    },
+    {
+      label: 'Al Raha Beach',
+      value: 'Al Raha Beach',
+    },
+    {
+      label: 'Al Raha Gardens',
+      value: 'Al Raha Gardens',
+    },
+    {
+      label: 'Al Reef',
+      value: 'Al Reef',
+    },
+    {
+      label: 'Al Reef Downtown',
+      value: 'Al Reef Downtown',
+    },
+    {
+      label: 'Al Reef Villas',
+      value: 'Al Reef Villas',
+    },
+    {
+      label: 'Al Reem Island',
+      value: 'Al Reem Island',
+    },
+    {
+      label: 'Al Shamkha',
+      value: 'Al Shamkha',
+    },
+    {
+      label: 'Baniyas',
+      value: 'Baniyas',
+    },
+    {
+      label: 'Bloom Gardens',
+      value: 'Bloom Gardens',
+    },
+    {
+      label: 'City of Lights',
+      value: 'City of Lights',
+    },
+    {
+      label: 'Corniche Area',
+      value: 'Corniche Area',
+    },
+    {
+      label: 'Corniche Road',
+      value: 'Corniche Road',
+    },
+    {
+      label: 'Electra Street',
+      value: 'Electra Street',
+    },
+    {
+      label: 'Hamdan Street',
+      value: 'Hamdan Street',
+    },
+    {
+      label: 'Khalifa City',
+      value: 'Khalifa City',
+    },
+    {
+      label: 'Madinat Al Riyadh',
+      value: 'Madinat Al Riyadh',
+    },
+    {
+      label: 'Makers District',
+      value: 'Makers District',
+    },
+    {
+      label: 'Marina Square',
+      value: 'Marina Square',
+    },
+    {
+      label: 'Masdar City',
+      value: 'Masdar City',
+    },
+    {
+      label: 'Mayan',
+      value: 'Mayan',
+    },
+    {
+      label: 'Mohammed Bin Zayed City',
+      value: 'Mohammed Bin Zayed City',
+    },
+    {
+      label: 'Mussafah',
+      value: 'Mussafah',
+    },
+    {
+      label: 'Mussafah Community',
+      value: 'Mussafah Community',
+    },
+    {
+      label: 'Mussafah Industrial Area',
+      value: 'Mussafah Industrial Area',
+    },
+    {
+      label: 'Najmat Abu Dhabi',
+      value: 'Najmat Abu Dhabi',
+    },
+    {
+      label: 'Noya',
+      value: 'Noya',
+    },
+    {
+      label: 'Pixel',
+      value: 'Pixel',
+    },
+    {
+      label: 'Reem Hills',
+      value: 'Reem Hills',
+    },
+    {
+      label: 'Saadiyat Beach',
+      value: 'Saadiyat Beach',
+    },
+    {
+      label: 'Saadiyat Cultural District',
+      value: 'Saadiyat Cultural District',
+    },
+    {
+      label: 'Saadiyat Island',
+      value: 'Saadiyat Island',
+    },
+    {
+      label: 'Shakhbout City',
+      value: 'Shakhbout City',
+    },
+    {
+      label: 'Shams Abu Dhabi',
+      value: 'Shams Abu Dhabi',
+    },
+    {
+      label: 'Shams Gate District',
+      value: 'Shams Gate District',
+    },
+    {
+      label: 'Tamouh',
+      value: 'Tamouh',
+    },
+    {
+      label: 'The Bridges',
+      value: 'The Bridges',
+    },
+    {
+      label: 'The Gate Tower',
+      value: 'The Gate Tower',
+    },
+    {
+      label: 'Tourist Club Area (TCA)',
+      value: 'Tourist Club Area (TCA)',
+    },
+    {
+      label: "Water's Edge",
+      value: "Water's Edge",
+    },
+    {
+      label: 'Yas Acres',
+      value: 'Yas Acres',
+    },
+    {
+      label: 'Yas Island',
+      value: 'Yas Island',
+    },
+    {
+      label: 'Zone 18',
+      value: 'Zone 18',
+    },
+  ],
+  'Ras Al Khaimah': [
+    {
+      label: 'Al Dhait',
+      value: 'Al Dhait',
+    },
+    {
+      label: 'Al Dhait South',
+      value: 'Al Dhait South',
+    },
+    {
+      label: 'Al Hamra Village',
+      value: 'Al Hamra Village',
+    },
+    {
+      label: 'Al Hamra Village Golf Apartments',
+      value: 'Al Hamra Village Golf Apartments',
+    },
+    {
+      label: 'Al Mairid',
+      value: 'Al Mairid',
+    },
+    {
+      label: 'Al Mamourah',
+      value: 'Al Mamourah',
+    },
+    {
+      label: 'Al Marjan Island',
+      value: 'Al Marjan Island',
+    },
+    {
+      label: 'Al Nakheel',
+      value: 'Al Nakheel',
+    },
+    {
+      label: 'Al Qurm',
+      value: 'Al Qurm',
+    },
+    {
+      label: 'Al Qusaidat',
+      value: 'Al Qusaidat',
+    },
+    {
+      label: 'Al Refaa',
+      value: 'Al Refaa',
+    },
+    {
+      label: 'Al Seer',
+      value: 'Al Seer',
+    },
+    {
+      label: 'Al Uraibi',
+      value: 'Al Uraibi',
+    },
+    {
+      label: 'Aljazeera Al Hamra',
+      value: 'Aljazeera Al Hamra',
+    },
+    {
+      label: 'Bab Al Bahr Residences',
+      value: 'Bab Al Bahr Residences',
+    },
+    {
+      label: 'Bay Residences',
+      value: 'Bay Residences',
+    },
+    {
+      label: 'Bayviews',
+      value: 'Bayviews',
+    },
+    {
+      label: 'Dafan Al Khor',
+      value: 'Dafan Al Khor',
+    },
+    {
+      label: 'Dafan Al Nakheel',
+      value: 'Dafan Al Nakheel',
+    },
+    {
+      label: 'Danah Bay',
+      value: 'Danah Bay',
+    },
+    {
+      label: 'ENI Mangrove',
+      value: 'ENI Mangrove',
+    },
+    {
+      label: 'Gateway II Residences',
+      value: 'Gateway II Residences',
+    },
+    {
+      label: 'Julphar Towers',
+      value: 'Julphar Towers',
+    },
+    {
+      label: 'Kahraman Building',
+      value: 'Kahraman Building',
+    },
+    {
+      label: 'Khuzam',
+      value: 'Khuzam',
+    },
+    {
+      label: 'Marbella',
+      value: 'Marbella',
+    },
+    {
+      label: 'Marjan Island Resort & Spa',
+      value: 'Marjan Island Resort & Spa',
+    },
+    {
+      label: 'Mina Al Arab',
+      value: 'Mina Al Arab',
+    },
+    {
+      label: 'Mudfak',
+      value: 'Mudfak',
+    },
+    {
+      label: 'Oceano',
+      value: 'Oceano',
+    },
+    {
+      label: 'Pacific',
+      value: 'Pacific',
+    },
+    {
+      label: 'Pacific Bora Bora',
+      value: 'Pacific Bora Bora',
+    },
+    {
+      label: 'Pacific Samoa',
+      value: 'Pacific Samoa',
+    },
+    {
+      label: 'RAK Tower',
+      value: 'RAK Tower',
+    },
+    {
+      label: 'Royal Breeze 1',
+      value: 'Royal Breeze 1',
+    },
+    {
+      label: 'Royal Breeze 2',
+      value: 'Royal Breeze 2',
+    },
+    {
+      label: 'Royal Breeze 3',
+      value: 'Royal Breeze 3',
+    },
+    {
+      label: 'Royal Breeze 4',
+      value: 'Royal Breeze 4',
+    },
+    {
+      label: 'Royal Breeze 5',
+      value: 'Royal Breeze 5',
+    },
+    {
+      label: 'Royal Breeze Apartment',
+      value: 'Royal Breeze Apartment',
+    },
+    {
+      label: 'Seih Al Burairat',
+      value: 'Seih Al Burairat',
+    },
+    {
+      label: 'Sidroh',
+      value: 'Sidroh',
+    },
+    {
+      label: 'Suhaim',
+      value: 'Suhaim',
+    },
+    {
+      label: 'The Cove Rotana',
+      value: 'The Cove Rotana',
+    },
+    {
+      label: 'The Lagoons',
+      value: 'The Lagoons',
+    },
+    {
+      label: 'Union Tower',
+      value: 'Union Tower',
+    },
+    {
+      label: 'Yakout Building',
+      value: 'Yakout Building',
+    },
+    {
+      label: 'Yasmin Village',
+      value: 'Yasmin Village',
+    },
+    {
+      label: 'Yasmin Village',
+      value: 'Yasmin Village',
+    },
+    {
+      label: 'Yasmin Village Building 4',
+      value: 'Yasmin Village Building 4',
+    },
+  ],
+  'Sharjah': [
+    {
+      label: '5208 Muweilah Building',
+      value: '5208 Muweilah Building',
+    },
+    {
+      label: 'Abu Shagara',
+      value: 'Abu Shagara',
+    },
+    {
+      label: 'Ajmal Makan',
+      value: 'Ajmal Makan',
+    },
+    {
+      label: 'Al Ghuwair',
+      value: 'Al Ghuwair',
+    },
+    {
+      label: 'Al Khan',
+      value: 'Al Khan',
+    },
+    {
+      label: 'Al Mahatah',
+      value: 'Al Mahatah',
+    },
+    {
+      label: 'Al Majaz',
+      value: 'Al Majaz',
+    },
+    {
+      label: 'Al Majaz 1',
+      value: 'Al Majaz 1',
+    },
+    {
+      label: 'Al Majaz 2',
+      value: 'Al Majaz 2',
+    },
+    {
+      label: 'Al Majaz 3',
+      value: 'Al Majaz 3',
+    },
+    {
+      label: 'Al Mamsha',
+      value: 'Al Mamsha',
+    },
+    {
+      label: 'Al Mamzar',
+      value: 'Al Mamzar',
+    },
+    {
+      label: 'Al Nabba',
+      value: 'Al Nabba',
+    },
+    {
+      label: 'Al Nahda (Sharjah)',
+      value: 'Al Nahda (Sharjah)',
+    },
+    {
+      label: 'Al Nahda Complex Towers',
+      value: 'Al Nahda Complex Towers',
+    },
+    {
+      label: 'Al Nahda Towers',
+      value: 'Al Nahda Towers',
+    },
+    {
+      label: 'Al Nud',
+      value: 'Al Nud',
+    },
+    {
+      label: 'Al Qasimia',
+      value: 'Al Qasimia',
+    },
+    {
+      label: 'Al Rahmaniya',
+      value: 'Al Rahmaniya',
+    },
+    {
+      label: 'Al Sajaa',
+      value: 'Al Sajaa',
+    },
+    {
+      label: 'Al Sajaa Industrial',
+      value: 'Al Sajaa Industrial',
+    },
+    {
+      label: 'Al Suyoh',
+      value: 'Al Suyoh',
+    },
+    {
+      label: 'Al Taawun',
+      value: 'Al Taawun',
+    },
+    {
+      label: 'Al Tai',
+      value: 'Al Tai',
+    },
+    {
+      label: 'Al Zahia',
+      value: 'Al Zahia',
+    },
+    {
+      label: 'Aljada',
+      value: 'Aljada',
+    },
+    {
+      label: 'Amber Tower',
+      value: 'Amber Tower',
+    },
+    {
+      label: 'Barashi',
+      value: 'Barashi',
+    },
+    {
+      label: 'Bu Tina',
+      value: 'Bu Tina',
+    },
+    {
+      label: 'Hayyan',
+      value: 'Hayyan',
+    },
+    {
+      label: 'Hoshi',
+      value: 'Hoshi',
+    },
+    {
+      label: 'Industrial Area',
+      value: 'Industrial Area',
+    },
+    {
+      label: 'Industrial Area 14',
+      value: 'Industrial Area 14',
+    },
+    {
+      label: 'Industrial Area 6',
+      value: 'Industrial Area 6',
+    },
+    {
+      label: 'Maryam Island',
+      value: 'Maryam Island',
+    },
+    {
+      label: 'Masaar',
+      value: 'Masaar',
+    },
+    {
+      label: 'Muwaileh',
+      value: 'Muwaileh',
+    },
+    {
+      label: 'Muwaileh 3 Building',
+      value: 'Muwaileh 3 Building',
+    },
+    {
+      label: 'Muwaileh Building',
+      value: 'Muwaileh Building',
+    },
+    {
+      label: 'Muwailih Commercial',
+      value: 'Muwailih Commercial',
+    },
+    {
+      label: 'Naseej District',
+      value: 'Naseej District',
+    },
+    {
+      label: 'Nasma Residence',
+      value: 'Nasma Residence',
+    },
+    {
+      label: 'Robinia',
+      value: 'Robinia',
+    },
+    {
+      label: 'Rove Home Aljada',
+      value: 'Rove Home Aljada',
+    },
+    {
+      label: 'Sequoia',
+      value: 'Sequoia',
+    },
+    {
+      label: 'Sharjah Garden City',
+      value: 'Sharjah Garden City',
+    },
+    {
+      label: 'Sharjah Sustainable City',
+      value: 'Sharjah Sustainable City',
+    },
+    {
+      label: 'Sharjah Waterfront City',
+      value: 'Sharjah Waterfront City',
+    },
+    {
+      label: 'Shoumous Residential Complex',
+      value: 'Shoumous Residential Complex',
+    },
+    {
+      label: 'Tilal City',
+      value: 'Tilal City',
+    },
+  ],
+  'Fujairah': [
+    {
+      label: 'Address Fujairah Beach Resort',
+      value: 'Address Fujairah Beach Resort',
+    },
+    {
+      label: 'Address Fujairah Beach Resort',
+      value: 'Address Fujairah Beach Resort',
+    },
+    {
+      label: 'Address Residences Fujairah Resort',
+      value: 'Address Residences Fujairah Resort',
+    },
+    {
+      label: 'Al Aqah',
+      value: 'Al Aqah',
+    },
+    {
+      label: 'Al Bidya',
+      value: 'Al Bidya',
+    },
+    {
+      label: 'Al Dana Island',
+      value: 'Al Dana Island',
+    },
+    {
+      label: 'Al Fanar 2',
+      value: 'Al Fanar 2',
+    },
+    {
+      label: 'Al Fanar Towers',
+      value: 'Al Fanar Towers',
+    },
+    {
+      label: 'Al Faseel Area',
+      value: 'Al Faseel Area',
+    },
+    {
+      label: 'Al Hayl',
+      value: 'Al Hayl',
+    },
+    {
+      label: 'Al Jaber Tower',
+      value: 'Al Jaber Tower',
+    },
+    {
+      label: 'Al Taif Business Center',
+      value: 'Al Taif Business Center',
+    },
+    {
+      label: 'Corniche Al Fujairah',
+      value: 'Corniche Al Fujairah',
+    },
+    {
+      label: 'Dibba',
+      value: 'Dibba',
+    },
+    {
+      label: 'Fujairah Freezone',
+      value: 'Fujairah Freezone',
+    },
+    {
+      label: 'Gurfah Area',
+      value: 'Gurfah Area',
+    },
+    {
+      label: 'Ishwais',
+      value: 'Ishwais',
+    },
+    {
+      label: 'Kalba',
+      value: 'Kalba',
+    },
+    {
+      label: 'Mattar Complex',
+      value: 'Mattar Complex',
+    },
+    {
+      label: 'Mattar Residence',
+      value: 'Mattar Residence',
+    },
+    {
+      label: 'Mattar Residence 2',
+      value: 'Mattar Residence 2',
+    },
+    {
+      label: 'Mattar Residence 3',
+      value: 'Mattar Residence 3',
+    },
+    {
+      label: 'Mattar Residence 4',
+      value: 'Mattar Residence 4',
+    },
+    {
+      label: 'Mattar Residence 5',
+      value: 'Mattar Residence 5',
+    },
+    {
+      label: 'Mattar Residence Mirbah',
+      value: 'Mattar Residence Mirbah',
+    },
+    {
+      label: 'Mattar Tower',
+      value: 'Mattar Tower',
+    },
+    {
+      label: 'Merashid Area',
+      value: 'Merashid Area',
+    },
+    {
+      label: 'Mirbah',
+      value: 'Mirbah',
+    },
+    {
+      label: 'Naseem Al Bahr Villas',
+      value: 'Naseem Al Bahr Villas',
+    },
+    {
+      label: 'Platinum Time Residence',
+      value: 'Platinum Time Residence',
+    },
+    {
+      label: 'Qidfa',
+      value: 'Qidfa',
+    },
+    {
+      label: 'Sakamkam',
+      value: 'Sakamkam',
+    },
+    {
+      label: 'Saniaya',
+      value: 'Saniaya',
+    },
+    {
+      label: 'Sharm',
+      value: 'Sharm',
+    },
+    {
+      label: 'The White Village',
+      value: 'The White Village',
+    },
+    {
+      label: 'Thoban',
+      value: 'Thoban',
+    },
+    {
+      label: 'Town Centre',
+      value: 'Town Centre',
+    },
+    {
+      label: 'UNB Building Apartments',
+      value: 'UNB Building Apartments',
+    },
+  ],
+  'Ajman': [
+    {
+      label: 'Ajman Corniche Residence',
+      value: 'Ajman Corniche Residence',
+    },
+    {
+      label: 'Ajman Downtown',
+      value: 'Ajman Downtown',
+    },
+    {
+      label: 'Ajman Industrial',
+      value: 'Ajman Industrial',
+    },
+    {
+      label: 'Ajman Industrial 2',
+      value: 'Ajman Industrial 2',
+    },
+    {
+      label: 'Ajman One Towers',
+      value: 'Ajman One Towers',
+    },
+    {
+      label: 'Ajman Pearl Towers',
+      value: 'Ajman Pearl Towers',
+    },
+    {
+      label: 'Al Alia',
+      value: 'Al Alia',
+    },
+    {
+      label: 'Al Amerah',
+      value: 'Al Amerah',
+    },
+    {
+      label: 'Al Bustan',
+      value: 'Al Bustan',
+    },
+    {
+      label: 'Al Hamidiya 1',
+      value: 'Al Hamidiya 1',
+    },
+    {
+      label: 'Al Hamidiyah',
+      value: 'Al Hamidiyah',
+    },
+    {
+      label: 'Al Helio',
+      value: 'Al Helio',
+    },
+    {
+      label: 'Al Jurf',
+      value: 'Al Jurf',
+    },
+    {
+      label: 'Al Jurf 2',
+      value: 'Al Jurf 2',
+    },
+    {
+      label: 'Al Jurf Industrial 3',
+      value: 'Al Jurf Industrial 3',
+    },
+    {
+      label: 'Al Jurf Industrial Area',
+      value: 'Al Jurf Industrial Area',
+    },
+    {
+      label: 'Al Khor Towers',
+      value: 'Al Khor Towers',
+    },
+    {
+      label: 'Al Mowaihat',
+      value: 'Al Mowaihat',
+    },
+    {
+      label: 'Al Mowaihat 1',
+      value: 'Al Mowaihat 1',
+    },
+    {
+      label: 'Al Mowaihat 2',
+      value: 'Al Mowaihat 2',
+    },
+    {
+      label: 'Al Mowaihat 3',
+      value: 'Al Mowaihat 3',
+    },
+    {
+      label: 'Al Nakhil',
+      value: 'Al Nakhil',
+    },
+    {
+      label: 'Al Nuaimiya',
+      value: 'Al Nuaimiya',
+    },
+    {
+      label: 'Al Nuaimiya 1',
+      value: 'Al Nuaimiya 1',
+    },
+    {
+      label: 'Al Nuaimiya 2',
+      value: 'Al Nuaimiya 2',
+    },
+    {
+      label: 'Al Nuaimiya 3',
+      value: 'Al Nuaimiya 3',
+    },
+    {
+      label: 'Al Nuaimiya Towers',
+      value: 'Al Nuaimiya Towers',
+    },
+    {
+      label: 'Al Rashidiya',
+      value: 'Al Rashidiya',
+    },
+    {
+      label: 'Al Rashidiya 1',
+      value: 'Al Rashidiya 1',
+    },
+    {
+      label: 'Al Rashidiya 2',
+      value: 'Al Rashidiya 2',
+    },
+    {
+      label: 'Al Rashidiya 3',
+      value: 'Al Rashidiya 3',
+    },
+    {
+      label: 'Al Rawda',
+      value: 'Al Rawda',
+    },
+    {
+      label: 'Al Rawda 1',
+      value: 'Al Rawda 1',
+    },
+    {
+      label: 'Al Rawda 2',
+      value: 'Al Rawda 2',
+    },
+    {
+      label: 'Al Rawda 3',
+      value: 'Al Rawda 3',
+    },
+    {
+      label: 'Al Rumaila',
+      value: 'Al Rumaila',
+    },
+    {
+      label: 'Al Sawan',
+      value: 'Al Sawan',
+    },
+    {
+      label: 'Al Yasmeen',
+      value: 'Al Yasmeen',
+    },
+    {
+      label: 'Al Zahra',
+      value: 'Al Zahra',
+    },
+    {
+      label: 'Al Zahya',
+      value: 'Al Zahya',
+    },
+    {
+      label: 'Al Zorah',
+      value: 'Al Zorah',
+    },
+    {
+      label: 'City Tower',
+      value: 'City Tower',
+    },
+    {
+      label: 'Conqueror Tower',
+      value: 'Conqueror Tower',
+    },
+    {
+      label: 'Corniche Ajman',
+      value: 'Corniche Ajman',
+    },
+    {
+      label: 'Corniche Tower',
+      value: 'Corniche Tower',
+    },
+    {
+      label: 'Emirates City',
+      value: 'Emirates City',
+    },
+    {
+      label: 'Gulfa Towers',
+      value: 'Gulfa Towers',
+    },
+    {
+      label: 'Horizon Tower',
+      value: 'Horizon Tower',
+    },
+    {
+      label: 'Paradise Lakes',
+      value: 'Paradise Lakes',
+    },
+    {
+      label: 'Sheikh Maktoum Bin Rashid Street',
+      value: 'Sheikh Maktoum Bin Rashid Street',
+    },
+  ],
+  'Umm al Quwain': [
+    {
+      label: 'ADIB Building',
+      value: 'ADIB Building',
+    },
+    {
+      label: 'Al Aahad',
+      value: 'Al Aahad',
+    },
+    {
+      label: 'Al Abraq 1',
+      value: 'Al Abraq 1',
+    },
+    {
+      label: 'Al Butain',
+      value: 'Al Butain',
+    },
+    {
+      label: 'Al Dar Al Baida',
+      value: 'Al Dar Al Baida',
+    },
+    {
+      label: 'Al Haditha',
+      value: 'Al Haditha',
+    },
+    {
+      label: 'Al Hawiyah',
+      value: 'Al Hawiyah',
+    },
+    {
+      label: 'Al Huboob 1',
+      value: 'Al Huboob 1',
+    },
+    {
+      label: 'Al Huboob 2',
+      value: 'Al Huboob 2',
+    },
+    {
+      label: 'Al Humrah',
+      value: 'Al Humrah',
+    },
+    {
+      label: 'Al Khor',
+      value: 'Al Khor',
+    },
+    {
+      label: 'Al Maidan',
+      value: 'Al Maidan',
+    },
+    {
+      label: 'Al Maqtaa',
+      value: 'Al Maqtaa',
+    },
+    {
+      label: 'Al Ramlah',
+      value: 'Al Ramlah',
+    },
+    {
+      label: 'Al Rass',
+      value: 'Al Rass',
+    },
+    {
+      label: 'Al Raudah',
+      value: 'Al Raudah',
+    },
+    {
+      label: 'Al Riqqah',
+      value: 'Al Riqqah',
+    },
+    {
+      label: 'Al Salam City',
+      value: 'Al Salam City',
+    },
+    {
+      label: 'Al Salamah',
+      value: 'Al Salamah',
+    },
+    {
+      label: 'Al Serra',
+      value: 'Al Serra',
+    },
+    {
+      label: 'Al Shareiah',
+      value: 'Al Shareiah',
+    },
+    {
+      label: 'Defence Camp',
+      value: 'Defence Camp',
+    },
+    {
+      label: 'Emirates Modern Industrial Area',
+      value: 'Emirates Modern Industrial Area',
+    },
+    {
+      label: 'Falaj Al Mualla',
+      value: 'Falaj Al Mualla',
+    },
+    {
+      label: 'Falaj Al Sheikh',
+      value: 'Falaj Al Sheikh',
+    },
+    {
+      label: 'Green Belt',
+      value: 'Green Belt',
+    },
+    {
+      label: 'Industrial Area',
+      value: 'Industrial Area',
+    },
+    {
+      label: 'Kabir',
+      value: 'Kabir',
+    },
+    {
+      label: 'Khalifah City',
+      value: 'Khalifah City',
+    },
+    {
+      label: 'Khalifah City 1',
+      value: 'Khalifah City 1',
+    },
+    {
+      label: 'Khalifah City 2',
+      value: 'Khalifah City 2',
+    },
+    {
+      label: 'Mallah',
+      value: 'Mallah',
+    },
+    {
+      label: 'Masjid Al Mazroui',
+      value: 'Masjid Al Mazroui',
+    },
+    {
+      label: 'Old Town Area',
+      value: 'Old Town Area',
+    },
+    {
+      label: 'Umm Al Quwain Marina',
+      value: 'Umm Al Quwain Marina',
+    },
+    {
+      label: 'Umm Dera',
+      value: 'Umm Dera',
+    },
+  ],
+}
 
 export const PropertyTypes = [
   {
