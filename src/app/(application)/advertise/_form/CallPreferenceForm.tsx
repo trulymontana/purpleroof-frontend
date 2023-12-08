@@ -20,7 +20,13 @@ const formSchema = z.object({
     })
 })
 
-const CallPreferenceForm = ({ onSave }: { onSave: (step: number, values: any) => void }) => {
+interface Props {
+    onSave: (step: string, values: any) => void
+    onNext?: () => void
+    onPrevious?: () => void
+}
+
+const CallPreferenceForm = ({ onSave }: Props) => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -31,7 +37,7 @@ const CallPreferenceForm = ({ onSave }: { onSave: (step: number, values: any) =>
     }
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        onSave(7, values)
+        onSave("call-preference", values)
     }
 
     return (

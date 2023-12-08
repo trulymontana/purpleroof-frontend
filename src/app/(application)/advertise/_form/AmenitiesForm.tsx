@@ -32,7 +32,13 @@ const formSchema = z.object({
   other_features: z.string().optional()
 })
 
-const AmenitiesForm = ({ onSave }: { onSave: (step: number, values: any) => void }) => {
+interface Props {
+  onSave: (step: string, values: any) => void
+  onNext?: () => void
+  onPrevious?: () => void
+}
+
+const AmenitiesForm = ({ onSave }: Props) => {
 
   const [selectedAmenities, setSelectedAmenities] = useState<TOption[]>([]);
 
@@ -45,7 +51,7 @@ const AmenitiesForm = ({ onSave }: { onSave: (step: number, values: any) => void
     const data = values;
     // @ts-ignore
     data.amenities = selectedAmenities
-    onSave(4, data)
+    onSave("amenities", data)
   }
 
   return (

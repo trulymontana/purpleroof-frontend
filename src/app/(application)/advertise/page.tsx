@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { AmenitiesForm, BasicDetailsForm, CallPreferenceForm, LocationDetailsForm, ProjectStatusForm, PropertyDetailsForm, RentPropertyDetailsForm } from './_form';
 
 const Page = () => {
 
-    const storeValues = (step: number, values: any) => {
-        localStorage.setItem(`advertise-${step}`, JSON.stringify(values))
+    const storeValues = (step: string, values: any) => {
+        localStorage.setItem(`advertise/${step}`, JSON.stringify(values))
     }
 
     const createAdvertisement = () => {

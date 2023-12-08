@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -9,12 +9,11 @@ import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { Categories, CommercialTypes, ResidentalTypes, TypesOfProperties } from '@/constants/advertise'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
-import CategoryRadioGroup from '@/components/forms/elements/tab-radio-group'
 import TabRadioGroup from '@/components/forms/elements/tab-radio-group'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
     category: z.string({
@@ -31,7 +30,15 @@ const formSchema = z.object({
     })
 })
 
-const BasicDetailsForm = ({ onSave }: { onSave: (step: number, values: any) => void }) => {
+interface Props {
+    onSave: (step: string, values: any) => void
+    onNext?: () => void
+    onPrevious?: () => void
+}
+
+const BasicDetailsForm = ({ onSave, onNext, onPrevious }: Props) => {
+
+    const router = useRouter();
 
     // const [propertyType, setPropertyType] = useState("Residential");
 
@@ -40,12 +47,9 @@ const BasicDetailsForm = ({ onSave }: { onSave: (step: number, values: any) => v
         defaultValues: { "category": "sell", "type_of_property": "Residential" }
     })
 
-    const handleChange = (value: string) => {
-        form.setValue("type_of_property", value)
-    }
-
     function onSubmit(values: z.infer<typeof formSchema>) {
-        onSave(1, values)
+        onSave("basic-details", values)
+        router.push(`/advertise/property-details?categoryType=${form.getValues("category")}`)
     }
 
     const propertyType = form.watch("type_of_property")
@@ -75,12 +79,11 @@ const BasicDetailsForm = ({ onSave }: { onSave: (step: number, values: any) => v
                     label={propertyType}
                     options={propertyType === "Residential" ? ResidentalTypes : CommercialTypes}
                 />
-
-                <Button type="submit" className="w-full">
+                <Button type='submit' className='w-full'>
                     Save and Continue
                 </Button>
             </form>
-        </Form>
+        </Form >
     )
 }
 

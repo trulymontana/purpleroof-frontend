@@ -12,6 +12,8 @@ import InputElement from '@/components/forms/elements/input-element'
 import { EmiratesWithLocations } from '@/constants/advertise'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import SelectElement from '@/components/forms/elements/select-element'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   emirate: z.string({
@@ -37,8 +39,15 @@ const formSchema = z.object({
   }),
 })
 
-const LocationDetailsForm = ({ onSave }: { onSave: (step: number, values: any) => void }) => {
+interface Props {
+  onSave: (step: string, values: any) => void
+  onNext?: () => void
+  onPrevious?: () => void
+}
 
+const LocationDetailsForm = ({ onSave }: Props) => {
+
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -46,10 +55,9 @@ const LocationDetailsForm = ({ onSave }: { onSave: (step: number, values: any) =
 
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log({ personalForm: values })
-    onSave(3, values)
+    onSave("location-details", values)
+    router.push(`/advertise/amenities`)
   }
-
 
   const Emirates = Object.keys(EmiratesWithLocations)
   const selectedEmirate = form.watch("emirate")
@@ -104,6 +112,9 @@ const LocationDetailsForm = ({ onSave }: { onSave: (step: number, values: any) =
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
+        <Link href={`/advertise/property-details`} className="w-full">
+          Go Back
+        </Link>
       </form>
     </Form>
   )

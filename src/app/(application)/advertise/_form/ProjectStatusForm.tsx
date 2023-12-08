@@ -16,6 +16,8 @@ import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import DatePickerElement from '@/components/forms/elements/date-picker-element'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import CustomSelectElement from '@/components/forms/elements/custom-select-element'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
     project_status: z.string(),
@@ -35,29 +37,23 @@ const statusOptions = [
     { label: 'Shell & Core', value: 'shellCore' },
 ];
 
+interface Props {
+    onSave: (step: string, values: any) => void
+    onNext?: () => void
+    onPrevious?: () => void
+}
 
+const ProjectStatusForm = ({ onSave }: Props) => {
 
-const ProjectStatusForm = ({ onSave }: { onSave: (step: number, values: any) => void }) => {
+    const router = useRouter();
 
     const form = useForm<TProjectStatus>({
         resolver: zodResolver(formSchema),
     })
 
-    // const [values, setValues] = useState(form.getValues());
-
-    // const handleStatusChange = (value: string) => {
-    //     setValues({ ...values, project_status: value });
-    //     form?.setValue("project_status", value)
-    // }
-
-    // const handleRentChange = (value: string) => {
-    //     setValues({ ...values, rented_or_vacant: value });
-    //     form?.setValue("rented_or_vacant", value)
-    // }
-
     function onSubmit(values: TProjectStatus) {
-        console.log({ ProjectStatusForm: values })
-        onSave(5, values)
+        onSave("project-status", values)
+        router.push(`/advertise/call-preference`)
     }
 
     const project_status = form.watch("project_status")
@@ -72,13 +68,10 @@ const ProjectStatusForm = ({ onSave }: { onSave: (step: number, values: any) => 
                 className="w-96 space-y-4 p-4 shadow-md"
             >
 
-                {/* <CustomSelectElement name='project_status' label='Project Status' options={ProjectStatuses}  /> */}
-
                 <SelectElement name='project_status' label='Project Status' options={ProjectStatuses} />
 
                 {project_status === 'completed' && (
                     <>
-                        {/* <CustomSelectElement name='rented_or_vacant' label='Rented or Vacant' options={rentedOrVacantOptions} onChangeHandler={handleRentChange} /> */}
                         <SelectElement name='rented_or_vacant' label='Rented or Vacant' options={rentedOrVacantOptions} />
                         {rented_or_vacant === 'rented' && (
                             <>
@@ -99,6 +92,9 @@ const ProjectStatusForm = ({ onSave }: { onSave: (step: number, values: any) => 
                 <Button type="submit" className="w-full">
                     Save and Continue
                 </Button>
+                <Link href={`/advertise/property-details`} className="w-full">
+                    Go Back
+                </Link>
             </form>
         </Form>
     )

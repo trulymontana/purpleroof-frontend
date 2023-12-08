@@ -13,6 +13,8 @@ import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { incomeProfiles, residentialTypes } from '@/constants/financial'
 import { BathRooms, BedRooms } from '@/constants/advertise'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
     phone: z
@@ -37,14 +39,23 @@ const formSchema = z.object({
     deed_number: z.string().optional()
 })
 
-const PropertyDetailsForm = ({ onSave }: { onSave: (step: number, values: any) => void }) => {
+interface Props {
+    onSave: (step: string, values: any) => void
+    onNext?: () => void
+    onPrevious?: () => void
+}
+
+const PropertyDetailsForm = ({ onSave }: Props) => {
+
+    const router = useRouter();
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log({ PropertyDetailsForm: values })
-        onSave(2, values)
+        onSave("property-details", values)
+        router.push(`/advertise/location-details`)
     }
 
     // console.log(form.formState.errors)
@@ -76,6 +87,9 @@ const PropertyDetailsForm = ({ onSave }: { onSave: (step: number, values: any) =
                 <Button type="submit" className="w-full">
                     Save and Continue
                 </Button>
+                <Link href={`/advertise/property-details`} className="w-full">
+                    Go Back
+                </Link>
             </form>
         </Form>
     )
