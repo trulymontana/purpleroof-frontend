@@ -12,6 +12,7 @@ import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { Amenities, CommercialTypes, PropertyTypes, ResidentalTypes, Statuses } from '@/constants/advertise'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
+import { useRouter } from 'next/navigation'
 
 type TOption = {
   label: string
@@ -40,6 +41,8 @@ interface Props {
 
 const AmenitiesForm = ({ onSave }: Props) => {
 
+  const router = useRouter();
+
   const [selectedAmenities, setSelectedAmenities] = useState<TOption[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,6 +55,7 @@ const AmenitiesForm = ({ onSave }: Props) => {
     // @ts-ignore
     data.amenities = selectedAmenities
     onSave("amenities", data)
+    router.push(`/advertise/project-status`)
   }
 
   return (
@@ -86,6 +90,9 @@ const AmenitiesForm = ({ onSave }: Props) => {
 
         <Button type="submit" className="w-full">
           Save and Continue
+        </Button>
+        <Button type='button' onClick={() => router.push(`/advertise/location-details`)} className="w-full">
+          Go Back
         </Button>
       </form>
     </Form>

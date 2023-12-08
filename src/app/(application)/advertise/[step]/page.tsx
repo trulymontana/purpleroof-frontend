@@ -12,7 +12,7 @@ const Page = ({ params: { step } }: { params: { step: string } }) => {
     const categoryType = searchParams.get("categoryType")
 
     const storeValues = (step: string, values: any) => {
-        localStorage.setItem(`advertise${step}`, JSON.stringify(values))
+        localStorage.setItem(`advertise/${step}`, JSON.stringify(values))
     }
 
     const subComponents: { [key: string]: React.ReactElement } = {
@@ -23,7 +23,7 @@ const Page = ({ params: { step } }: { params: { step: string } }) => {
             <PropertyDetailsForm onSave={storeValues} />
         ) : <div>Invalid Category</div>,
         "location-details": <LocationDetailsForm onSave={storeValues} />,
-        "amenities": <AmenitiesForm onSave={storeValues} />,
+        "amenities-details": <AmenitiesForm onSave={storeValues} />,
         "project-status": <ProjectStatusForm onSave={storeValues} />,
         "call-preference": <CallPreferenceForm onSave={storeValues} />
     };

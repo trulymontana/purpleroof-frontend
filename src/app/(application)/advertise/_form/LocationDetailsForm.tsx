@@ -56,7 +56,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave("location-details", values)
-    router.push(`/advertise/amenities`)
+    router.push(`/advertise/amenities-details`)
   }
 
   const Emirates = Object.keys(EmiratesWithLocations)
@@ -69,6 +69,8 @@ const LocationDetailsForm = ({ onSave }: Props) => {
     Locations = EmiratesWithLocations[selectedEmirate]
   }
 
+  // @ts-ignore
+  const basicDetails = JSON.parse(localStorage.getItem("advertise/basic-details"))
 
   return (
     <Form {...form}>
@@ -112,9 +114,9 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
-        <Link href={`/advertise/property-details`} className="w-full">
+        <Button type='button' onClick={() => router.push(`/advertise/property-details?categoryType=${basicDetails.category}`)} className="w-full">
           Go Back
-        </Link>
+        </Button>
       </form>
     </Form>
   )

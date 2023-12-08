@@ -13,6 +13,8 @@ import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { CallPreferences, CommercialTypes, ResidentalTypes, TypesOfProperties } from '@/constants/advertise'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
     call_preference: z.string({
@@ -27,6 +29,8 @@ interface Props {
 }
 
 const CallPreferenceForm = ({ onSave }: Props) => {
+
+    const router = useRouter()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -57,6 +61,9 @@ const CallPreferenceForm = ({ onSave }: Props) => {
 
                 <Button type="submit" className="w-full">
                     Save and Continue
+                </Button>
+                <Button type='button' onClick={() => router.push(`/advertise/project-status`)} className="w-full">
+                    Go Back
                 </Button>
             </form>
         </Form>

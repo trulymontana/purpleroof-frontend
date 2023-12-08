@@ -61,6 +61,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         onSave("property-details", values)
+        router.push(`/advertise/location-details`)
     }
 
     return (
@@ -93,9 +94,9 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
                 <Button type="submit" className="w-full">
                     Save and Continue
                 </Button>
-                <Link href={`/advertise/basic-details`} className="w-full">
+                <Button type='button' onClick={() => router.push(`/advertise/basic-details`)} className="w-full">
                     Go Back
-                </Link>
+                </Button>
             </form>
         </Form>
     )

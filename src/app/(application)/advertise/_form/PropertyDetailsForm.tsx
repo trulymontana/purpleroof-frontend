@@ -87,9 +87,9 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
                 <Button type="submit" className="w-full">
                     Save and Continue
                 </Button>
-                <Link href={`/advertise/property-details`} className="w-full">
+                <Button type='button' onClick={() => router.push(`/advertise/property-details`)} className="w-full">
                     Go Back
-                </Link>
+                </Button>
             </form>
         </Form>
     )
