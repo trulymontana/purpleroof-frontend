@@ -26,29 +26,33 @@ const formSchema = z.object({
     number_of_cheques: z.string().optional(),
     notice_period_rent: z.string().optional(),
     notice_period_property: z.string().optional(),
-    completion_date: z.string().optional(),
+    completion_date: z.date().optional(),
 });
 
 type TProjectStatus = z.infer<typeof formSchema>;
 
-const statusOptions = [
-    { label: 'Completed', value: 'completed' },
-    { label: 'Under Construction', value: 'underConstruction' },
-    { label: 'Shell & Core', value: 'shellCore' },
-];
-
 interface Props {
     onSave: (step: string, values: any) => void
-    onNext?: () => void
-    onPrevious?: () => void
 }
 
 const ProjectStatusForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
+    // @ts-ignore
+    const project_status_data: z.infer<typeof formSchema> = JSON.parse(localStorage.getItem("advertise/project-status"))
+
     const form = useForm<TProjectStatus>({
         resolver: zodResolver(formSchema),
+        defaultValues: {
+            project_status: project_status_data?.project_status ?? "",
+            notice_period_property: project_status_data?.notice_period_property ?? "",
+            notice_period_rent: project_status_data?.notice_period_rent ?? "",
+            rented_or_vacant: project_status_data?.rented_or_vacant ?? "",
+            rental_amount: project_status_data?.rental_amount ?? "",
+            // completion_date: project_status_data?.completion_date ?? new Date(),
+            number_of_cheques: project_status_data?.number_of_cheques ?? ""
+        }
     })
 
     function onSubmit(values: TProjectStatus) {
@@ -58,8 +62,6 @@ const ProjectStatusForm = ({ onSave }: Props) => {
 
     const project_status = form.watch("project_status")
     const rented_or_vacant = form.watch("rented_or_vacant")
-
-    console.log({ project_status, rented_or_vacant })
 
     return (
         <Form {...form}>

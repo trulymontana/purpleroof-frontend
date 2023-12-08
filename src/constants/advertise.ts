@@ -12,11 +12,11 @@ export const Categories = [
 export const TypesOfProperties = [
   {
     label: 'Residential',
-    value: 'Residential',
+    value: 'residential',
   },
   {
     label: 'Commercial',
-    value: 'Commercial',
+    value: 'commercial',
   },
 ]
 
@@ -304,7 +304,7 @@ export const BathRooms = [
 ]
 
 export const EmiratesWithLocations = {
-  'Dubai': [
+  Dubai: [
     {
       label: 'Al Barsha',
       value: 'Al Barsha',
@@ -910,7 +910,7 @@ export const EmiratesWithLocations = {
       value: 'Yasmin Village Building 4',
     },
   ],
-  'Sharjah': [
+  Sharjah: [
     {
       label: '5208 Muweilah Building',
       value: '5208 Muweilah Building',
@@ -1112,7 +1112,7 @@ export const EmiratesWithLocations = {
       value: 'Tilal City',
     },
   ],
-  'Fujairah': [
+  Fujairah: [
     {
       label: 'Address Fujairah Beach Resort',
       value: 'Address Fujairah Beach Resort',
@@ -1266,7 +1266,7 @@ export const EmiratesWithLocations = {
       value: 'UNB Building Apartments',
     },
   ],
-  'Ajman': [
+  Ajman: [
     {
       label: 'Ajman Corniche Residence',
       value: 'Ajman Corniche Residence',

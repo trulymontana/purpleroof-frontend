@@ -47,16 +47,27 @@ const formSchema = z.object({
 
 interface Props {
     onSave: (step: string, values: any) => void
-    onNext?: () => void
-    onPrevious?: () => void
 }
 
 const RentPropertyDetailsForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
+    // @ts-ignore
+    const property_details: z.infer<typeof formSchema> = JSON.parse(localStorage.getItem("advertise/property-details"))
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
+        defaultValues: {
+            phone: property_details?.phone ?? "",
+            rental_amount: property_details?.rental_amount ?? 0,
+            payment_interval: property_details?.payment_interval ?? 0,
+            property_size: property_details?.property_size ?? 0,
+            minimum_contract: property_details?.minimum_contract ?? 0,
+            bed_rooms: property_details?.bed_rooms ?? 0,
+            bath_rooms: property_details?.bath_rooms ?? 0,
+            deed_number: property_details?.deed_number ?? "",
+        }
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
@@ -70,9 +81,8 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="w-96 space-y-4 p-4 shadow-md"
             >
-                <InputElement name="phone" label={'Phone Number'} />
-                <InputElement name="rental_amount" label={'Rental Amount (AED)'} />
-                {/* <InputElement name="payment_interval" label={'Payment Interval'} /> */}
+                <InputElement name="phone" type='number' label={'Phone Number'} />
+                <InputElement name="rental_amount" type='number' label={'Rental Amount (AED)'} />
                 <SelectElement name='payment_interval' label='Payment Interval' options={PaymentIntervals} />
                 <InputElement name="property_size" label={'Property Size (Sqft)'} />
                 <InputElement name="minimum_contract" label={'Minimum Contract (in months)'} />

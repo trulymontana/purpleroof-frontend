@@ -35,8 +35,6 @@ const formSchema = z.object({
 
 interface Props {
   onSave: (step: string, values: any) => void
-  onNext?: () => void
-  onPrevious?: () => void
 }
 
 const AmenitiesForm = ({ onSave }: Props) => {
@@ -45,9 +43,27 @@ const AmenitiesForm = ({ onSave }: Props) => {
 
   const [selectedAmenities, setSelectedAmenities] = useState<TOption[]>([]);
 
+  // @ts-ignore
+  const amenities_details: z.infer<typeof formSchema> = JSON.parse(localStorage.getItem("advertise/amenities"))
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      property_type: amenities_details?.property_type ?? "",
+      status: amenities_details?.status ?? "",
+      parking_spaces: amenities_details?.parking_spaces ?? "",
+      airport_distance: amenities_details?.airport_distance ?? "",
+      metro_station: amenities_details?.metro_station ?? "",
+      other_features: amenities_details?.other_features ?? "",
+      nearby_places: amenities_details?.nearby_places ?? ""
+    }
   })
+
+  // // @ts-ignore
+  // if (amenities_details?.amenities) {
+  //   // @ts-ignore
+  //   setSelectedAmenities(amenities_details?.amenities);
+  // }
 
 
   function onSubmit(values: z.infer<typeof formSchema>) {

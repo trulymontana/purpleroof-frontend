@@ -41,16 +41,26 @@ const formSchema = z.object({
 
 interface Props {
   onSave: (step: string, values: any) => void
-  onNext?: () => void
-  onPrevious?: () => void
 }
 
 const LocationDetailsForm = ({ onSave }: Props) => {
 
   const router = useRouter();
 
+  // @ts-ignore
+  const location_details: z.infer<typeof formSchema> = JSON.parse(localStorage.getItem("advertise/location-details"))
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      emirate: location_details?.emirate ?? "",
+      location: location_details?.location ?? "",
+      building_name: location_details?.building_name ?? "",
+      floor: location_details?.floor ?? "",
+      street: location_details?.street ?? "",
+      unit_number: location_details?.unit_number ?? "",
+      landmark: location_details?.landmark ?? ""
+    }
   })
 
 

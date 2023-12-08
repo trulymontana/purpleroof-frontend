@@ -32,19 +32,23 @@ const formSchema = z.object({
 
 interface Props {
     onSave: (step: string, values: any) => void
-    onNext?: () => void
-    onPrevious?: () => void
 }
 
-const BasicDetailsForm = ({ onSave, onNext, onPrevious }: Props) => {
+const BasicDetailsForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
-    // const [propertyType, setPropertyType] = useState("Residential");
+    // @ts-ignore
+    const basic_details = JSON.parse(localStorage.getItem("advertise/basic-details"))
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: { "category": "sell", "type_of_property": "Residential" }
+        defaultValues: {
+            category: basic_details?.category ?? "sell",
+            advert_title: basic_details?.advert_title ?? "",
+            type_of_property: basic_details?.type_of_property ?? "residential",
+            property_option: basic_details?.property_option ?? ""
+        }
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
@@ -76,8 +80,8 @@ const BasicDetailsForm = ({ onSave, onNext, onPrevious }: Props) => {
 
                 <SelectElement
                     name='property_option'
-                    label={propertyType}
-                    options={propertyType === "Residential" ? ResidentalTypes : CommercialTypes}
+                    label={propertyType === 'residential' ? "Residential" : "Commercial"}
+                    options={propertyType === "residential" ? ResidentalTypes : CommercialTypes}
                 />
                 <Button type='submit' className='w-full'>
                     Save and Continue

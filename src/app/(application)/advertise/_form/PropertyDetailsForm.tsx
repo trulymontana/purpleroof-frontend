@@ -9,11 +9,8 @@ import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { incomeProfiles, residentialTypes } from '@/constants/financial'
 import { BathRooms, BedRooms } from '@/constants/advertise'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
@@ -39,26 +36,34 @@ const formSchema = z.object({
     deed_number: z.string().optional()
 })
 
+
 interface Props {
     onSave: (step: string, values: any) => void
-    onNext?: () => void
-    onPrevious?: () => void
 }
 
 const PropertyDetailsForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
+    // @ts-ignore
+    const property_details: z.infer<typeof formSchema> = JSON.parse(localStorage.getItem("advertise/property-details"))
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
+        defaultValues: {
+            phone: property_details?.phone ?? "",
+            property_value: property_details?.property_value ?? 0,
+            property_size: property_details?.property_size ?? 0,
+            bed_rooms: property_details?.bed_rooms ?? 0,
+            bath_rooms: property_details?.bath_rooms ?? 0,
+            deed_number: property_details?.deed_number ?? "",
+        }
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         onSave("property-details", values)
         router.push(`/advertise/location-details`)
     }
-
-    // console.log(form.formState.errors)
 
     return (
         <Form {...form}>
@@ -87,7 +92,7 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
                 <Button type="submit" className="w-full">
                     Save and Continue
                 </Button>
-                <Button type='button' onClick={() => router.push(`/advertise/property-details`)} className="w-full">
+                <Button type='button' onClick={() => router.push(`/advertise/basic-details`)} className="w-full">
                     Go Back
                 </Button>
             </form>

@@ -24,16 +24,20 @@ const formSchema = z.object({
 
 interface Props {
     onSave: (step: string, values: any) => void
-    onNext?: () => void
-    onPrevious?: () => void
 }
 
 const CallPreferenceForm = ({ onSave }: Props) => {
 
-    const router = useRouter()
+    const router = useRouter();
+
+    // @ts-ignore
+    const call_preference: z.infer<typeof formSchema> = JSON.parse(localStorage.getItem("advertise/call-preference"))
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
+        defaultValues: {
+            call_preference: call_preference?.call_preference ?? ""
+        }
     })
 
     const handlePreferenceChange = (value: string) => {
