@@ -70,7 +70,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="w-96 space-y-4 p-4 shadow-md"
+                className="w-full space-y-4 p-4"
             >
                 <InputElement name="phone" type='number' placeholder='Please enter your phone number' label={'Phone Number'} />
                 <InputElement name="rental_amount" type='number' placeholder='Please enter rental amount' label={'Rental Amount (AED)'} />

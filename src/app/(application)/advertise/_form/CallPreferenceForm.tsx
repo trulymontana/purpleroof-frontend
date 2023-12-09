@@ -46,7 +46,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="w-[28rem] space-y-4 p-4 shadow-md"
+                className="w-full space-y-4 p-4"
             >
                 <RadioGroupElement
                     handleChange={handlePreferenceChange}

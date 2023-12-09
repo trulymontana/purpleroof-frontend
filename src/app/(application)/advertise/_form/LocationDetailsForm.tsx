@@ -76,7 +76,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-96 space-y-4 p-4 shadow-md"
+        className="w-full space-y-4 p-4"
       >
 
         <FormField
