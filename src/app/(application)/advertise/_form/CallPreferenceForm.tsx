@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
-import { CallPreferences } from '@/constants/advertise'
+import { callPreferences } from '@/constants/advertise'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import { useRouter } from 'next/navigation'
 
@@ -53,7 +53,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
                     name="call_preference"
                     label={'How would you prefer to handle inquiries from potential leads interested in this advertisement?'}
                     className='items-start gap-4 flex-col'
-                    options={CallPreferences}
+                    options={callPreferences}
                 />
 
                 <Button type="submit" className="w-full">

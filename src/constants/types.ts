@@ -101,3 +101,8 @@ export interface Property {
   // PropertyAmenities: PropertyAmenities[];
   // PropertyDocuments: PropertyDocuments[];
 }
+
+export type TOption = {
+  label: string
+  value: string
+}

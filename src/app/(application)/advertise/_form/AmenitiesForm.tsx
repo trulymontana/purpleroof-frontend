@@ -10,14 +10,11 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { Amenities, CommercialTypes, PropertyTypes, ResidentalTypes, Statuses } from '@/constants/advertise'
+import { amenities, propertyTypes, statuses } from '@/constants/advertise'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 import { useRouter } from 'next/navigation'
+import { TOption } from '@/constants/types'
 
-type TOption = {
-  label: string
-  value: string
-}
 
 const formSchema = z.object({
   property_type: z.string({
@@ -76,19 +73,19 @@ const AmenitiesForm = ({ onSave }: Props) => {
           name='property_type'
           label={"Property Type"}
           placeholder='Please select a property type'
-          options={PropertyTypes}
+          options={propertyTypes}
         />
 
         <SelectElement
           name='status'
           label={"Status"}
           placeholder='Please select a status'
-          options={Statuses}
+          options={statuses}
         />
 
         <InputElement name="parking_spaces" placeholder='Please enter parking spaces' label={'Number of Parking Spaces'} />
 
-        <MultiSelectCheckbox name='amenities' classNames='grid-cols-2' options={Amenities} selectedBoxes={selectedAmenities} setSelectedBoxes={setSelectedAmenities} />
+        <MultiSelectCheckbox name='amenities' classNames='grid-cols-2' options={amenities} selectedBoxes={selectedAmenities} setSelectedBoxes={setSelectedAmenities} />
 
         <InputElement name="airport_distance" placeholder='Please enter airport distance' label={'Distance from Airport (in km)'} />
 

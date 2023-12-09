@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import { EmiratesWithLocations } from '@/constants/advertise'
+import { emiratesWithLocations } from '@/constants/advertise'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import SelectElement from '@/components/forms/elements/select-element'
 import { useRouter } from 'next/navigation'
@@ -59,15 +59,13 @@ const LocationDetailsForm = ({ onSave }: Props) => {
     router.push(`/advertise/amenities-details`)
   }
 
-  const Emirates = Object.keys(EmiratesWithLocations)
+  const Emirates = Object.keys(emiratesWithLocations)
   const selectedEmirate = form.watch("emirate")
 
   let Locations: { label: string, value: string }[] = [];
 
-  if (selectedEmirate) {
-    // @ts-ignore
-    Locations = EmiratesWithLocations[selectedEmirate]
-  }
+  // @ts-ignore
+  const locations = selectedEmirate ? emiratesWithLocations[selectedEmirate] : []
 
   // @ts-ignore
   const basicDetails = JSON.parse(localStorage.getItem("advertise/basic-details"))

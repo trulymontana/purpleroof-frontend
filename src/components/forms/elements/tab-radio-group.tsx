@@ -1,26 +1,15 @@
 import React from 'react'
 import {
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
 } from '@/components/ui/form'
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { useFormContext } from 'react-hook-form'
+import { TOption } from '@/constants/types'
 
-type TOption = {
-    label: string
-    value: string
-}
 
 interface Props {
     name: string
@@ -33,7 +22,6 @@ interface Props {
 const TabRadioGroup = ({
     name,
     options,
-    placeholder,
     className
 }: Props) => {
     const { control } = useFormContext()

@@ -14,11 +14,7 @@ import SelectElement from '@/components/forms/elements/select-element'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import { Conditions, Documents } from '@/constants/requirements'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
-
-type TOption = {
-    label: string
-    value: string
-}
+import { TOption } from '@/constants/types'
 
 const formSchema = z.object({
     requirement_name: z.string({
@@ -47,7 +43,7 @@ const formSchema = z.object({
     })
 })
 
-const AddRequirementForm = () => {
+const AddRequirementsForm = () => {
 
     const [selectedAmenities, setSelectedAmenities] = useState<TOption[]>([]);
 
@@ -115,4 +111,4 @@ const AddRequirementForm = () => {
     )
 }
 
-export default AddRequirementForm
+export default AddRequirementsForm

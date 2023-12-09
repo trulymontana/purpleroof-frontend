@@ -1,26 +1,16 @@
 import React from 'react'
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { useFormContext } from 'react-hook-form'
+import { TOption } from '@/constants/types'
+import { cn } from '@/lib/utils'
 
-type TOption = {
-  label: string
-  value: string
-}
 
 interface Props {
   name: string
@@ -35,7 +25,6 @@ interface Props {
 const RadioGroupElement = ({
   name,
   label,
-  description,
   options,
   className,
 }: Props) => {
@@ -52,7 +41,7 @@ const RadioGroupElement = ({
               <RadioGroup
                 defaultValue={field.value}
                 onValueChange={field.onChange}
-                className={`flex ${className}`}
+                className={cn("flex", className)}
               >
                 {options.map((option) => (
                   <FormItem
