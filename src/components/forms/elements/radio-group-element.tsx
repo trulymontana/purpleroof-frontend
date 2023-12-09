@@ -28,6 +28,8 @@ interface Props {
   options: TOption[]
   description?: string
   placeholder?: string
+  handleChange?: (e: any) => void
+  className?: string
 }
 
 const RadioGroupElement = ({
@@ -35,7 +37,7 @@ const RadioGroupElement = ({
   label,
   description,
   options,
-  placeholder,
+  className,
 }: Props) => {
   const { control } = useFormContext()
   return (
@@ -48,9 +50,9 @@ const RadioGroupElement = ({
             <FormLabel>{label}</FormLabel>
             <FormControl>
               <RadioGroup
-                onValueChange={field.onChange}
                 defaultValue={field.value}
-                className="flex flex-col space-y-1"
+                onValueChange={field.onChange}
+                className={`flex ${className}`}
               >
                 {options.map((option) => (
                   <FormItem

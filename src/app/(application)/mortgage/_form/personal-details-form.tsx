@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -32,9 +32,6 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.',
     }),
-  description: z.string().min(10, {
-    message: 'Description must be at least 10 characters.',
-  }),
   agree_to_privacy_policy: z.boolean().refine((data) => data === true, {
     message: 'You must agree to the privacy policy.',
   }),
@@ -91,7 +88,7 @@ const PersonalDetailsForm = ({ onSubmitForm }: Props) => {
         />
 
         <Button type="submit" className="w-full">
-          Submit
+          Save and Continue
         </Button>
       </form>
     </Form>

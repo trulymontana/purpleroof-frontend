@@ -14,9 +14,11 @@ interface Props {
   name: string
   label: string
   description?: string
+  placeholder?: string
+  type?: string
 }
 
-const InputElement = ({ name, label, description }: Props) => {
+const InputElement = ({ name, label, description, placeholder, type = "text" }: Props) => {
   const { control } = useFormContext()
 
   return (
@@ -27,7 +29,7 @@ const InputElement = ({ name, label, description }: Props) => {
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Input placeholder="" {...field} />
+            <Input type={type} placeholder={placeholder} {...field} />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />

@@ -31,6 +31,11 @@ const navigationSidebarItems = [
     link: PageRoutes.admin.USERS,
     icon: <User size={ICON_SIZE} />,
   },
+  {
+    title: 'Requirements',
+    link: PageRoutes.admin.REQUIREMENTS,
+    icon: <User size={ICON_SIZE} />,
+  },
 ]
 
 interface SidebarNavigationLinkProps {
