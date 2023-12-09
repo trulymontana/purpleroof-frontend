@@ -45,15 +45,7 @@ const AmenitiesForm = ({ onSave }: Props) => {
 
   const storedValue = localStorage.getItem("advertise/amenities-details");
 
-  const defaultValues: z.infer<typeof formSchema> & { amenities: TOption[] } = storedValue !== null ? JSON.parse(storedValue) : {
-    property_type: "",
-    status: "",
-    parking_spaces: "",
-    airport_distance: "",
-    metro_station: "",
-    nearby_places: "",
-    other_features: "",
-  };
+  const defaultValues: z.infer<typeof formSchema> & { amenities: TOption[] } = storedValue !== null && JSON.parse(storedValue)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -77,26 +69,28 @@ const AmenitiesForm = ({ onSave }: Props) => {
         <SelectElement
           name='property_type'
           label={"Property Type"}
+          placeholder='Please select a property type'
           options={PropertyTypes}
         />
 
         <SelectElement
           name='status'
           label={"Status"}
+          placeholder='Please select a status'
           options={Statuses}
         />
 
-        <InputElement name="parking_spaces" label={'Number of Parking Spaces'} />
+        <InputElement name="parking_spaces" placeholder='Please enter parking spaces' label={'Number of Parking Spaces'} />
 
         <MultiSelectCheckbox name='amenities' classNames='grid-cols-2' options={Amenities} selectedBoxes={selectedAmenities} setSelectedBoxes={setSelectedAmenities} />
 
-        <InputElement name="airport_distance" label={'Distance from Airport (in km)'} />
+        <InputElement name="airport_distance" placeholder='Please enter airport distance' label={'Distance from Airport (in km)'} />
 
-        <InputElement name="metro_station" label={'Nearby Metro Station (in km)'} />
+        <InputElement name="metro_station" placeholder='Please enter metro station' label={'Nearby Metro Station (in km)'} />
 
-        <InputElement name="nearby_places" label={'Other Nearby Places'} />
+        <InputElement name="nearby_places" placeholder='Please enter nearby places' label={'Other Nearby Places'} />
 
-        <InputElement name="other_features" label={'Other Main Features'} />
+        <InputElement name="other_features" placeholder='Please enter other features' label={'Other Main Features'} />
 
         <Button type="submit" className="w-full">
           Save and Continue

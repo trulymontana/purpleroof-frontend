@@ -35,18 +35,12 @@ const ProjectStatusForm = ({ onSave }: Props) => {
 
     const storedValue = localStorage.getItem("advertise/project-status");
 
-    const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
-        project_status: "",
-        notice_period_property: "",
-        notice_period_rent: "",
-        rented_or_vacant: "",
-        rental_amount: "",
-        completion_date: new Date(Date.now()),
-        number_of_cheques: "",
-    };
+    const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
-    // @ts-ignore
-    defaultValues.completion_date = new Date(defaultValues?.completion_date)
+    if (defaultValues.completion_date) {
+        // @ts-ignore
+        defaultValues.completion_date = new Date(defaultValues?.completion_date)
+    }
 
     const form = useForm<TProjectStatus>({
         resolver: zodResolver(formSchema),

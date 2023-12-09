@@ -47,21 +47,12 @@ const LocationDetailsForm = ({ onSave }: Props) => {
 
   const storedValue = localStorage.getItem("advertise/location-details");
 
-  const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
-    emirate: "",
-    location: "",
-    building_name: "",
-    floor: "",
-    street: "",
-    unit_number: "",
-    landmark: "",
-  };
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues
   })
-
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave("location-details", values)
@@ -96,7 +87,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue />
+                    <SelectValue placeholder='Please select a Emirate' />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -114,11 +105,11 @@ const LocationDetailsForm = ({ onSave }: Props) => {
 
         <SelectElement name='location' label='Location' options={Locations} placeholder={!selectedEmirate ? "Please select emirate first" : "Please select a location"} disabled={!selectedEmirate} />
 
-        <InputElement name="building_name" label={'Building / Cluster Name'} />
-        <InputElement name="floor" label={'Floor'} />
-        <InputElement name="street" label={'Street'} />
-        <InputElement name="unit_number" label={'Unit Number'} />
-        <InputElement name="landmark" label={'Landmark'} />
+        <InputElement name="building_name" placeholder='Please enter your building name' label={'Building / Cluster Name'} />
+        <InputElement name="floor" placeholder='Please enter your floor' label={'Floor'} />
+        <InputElement name="street" placeholder='Please enter your street name' label={'Street'} />
+        <InputElement name="unit_number" placeholder='Please enter your unit number' label={'Unit Number'} />
+        <InputElement name="landmark" placeholder='Please enter a landmark' label={'Landmark'} />
 
         <Button type="submit" className="w-full">
           Save and Continue

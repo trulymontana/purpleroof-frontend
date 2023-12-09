@@ -54,16 +54,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
 
     const storedValue = localStorage.getItem("advertise/property-details");
 
-    const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
-        phone: "",
-        rental_amount: "",
-        payment_interval: "",
-        property_size: "",
-        minimum_contract: "",
-        bed_rooms: "",
-        bath_rooms: "",
-        deed_number: "",
-    };
+    const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -81,11 +72,11 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="w-96 space-y-4 p-4 shadow-md"
             >
-                <InputElement name="phone" type='number' label={'Phone Number'} />
-                <InputElement name="rental_amount" type='number' label={'Rental Amount (AED)'} />
+                <InputElement name="phone" type='number' placeholder='Please enter your phone number' label={'Phone Number'} />
+                <InputElement name="rental_amount" type='number' placeholder='Please enter rental amount' label={'Rental Amount (AED)'} />
                 <SelectElement name='payment_interval' label='Payment Interval' options={PaymentIntervals} />
-                <InputElement name="property_size" label={'Property Size (Sqft)'} />
-                <InputElement name="minimum_contract" label={'Minimum Contract (in months)'} />
+                <InputElement name="property_size" placeholder='Please enter property size' type='number' label={'Property Size (Sqft)'} />
+                <InputElement name="minimum_contract" placeholder='Please enter minimum contract period' type='number' label={'Minimum Contract (in months)'} />
 
                 <SelectElement
                     name="bed_rooms"
@@ -99,7 +90,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
                     options={BathRooms}
                 />
 
-                <InputElement name="deed_number" label={'Title Deed / Oqod / Initial Contract of Sales'} />
+                <InputElement name="deed_number" placeholder='Please enter deed number' label={'Title Deed / Oqod / Initial Contract of Sales'} />
 
                 <Button type="submit" className="w-full">
                     Save and Continue

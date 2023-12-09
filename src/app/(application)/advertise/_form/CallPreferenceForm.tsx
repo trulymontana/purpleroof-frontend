@@ -27,9 +27,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
 
     const storedValue = localStorage.getItem("advertise/location-details");
 
-    const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
-        call_preference: ""
-    };
+    const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -50,7 +48,6 @@ const CallPreferenceForm = ({ onSave }: Props) => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="w-[28rem] space-y-4 p-4 shadow-md"
             >
-
                 <RadioGroupElement
                     handleChange={handlePreferenceChange}
                     name="call_preference"

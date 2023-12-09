@@ -40,10 +40,7 @@ const BasicDetailsForm = ({ onSave }: Props) => {
 
     const storedValue = localStorage.getItem("advertise/basic-details");
     const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
-        advert_title: "",
         category: "sell",
-        property_option: "",
-        type_of_property: ""
     };
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -70,7 +67,7 @@ const BasicDetailsForm = ({ onSave }: Props) => {
                     options={Categories}
                 />
 
-                <InputElement name="advert_title" label={'Advert Title'} />
+                <InputElement name="advert_title" placeholder='Please enter Advert Title' label={'Advert Title'} />
 
                 <RadioGroupElement
                     name="type_of_property"

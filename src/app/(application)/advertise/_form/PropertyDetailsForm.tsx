@@ -49,14 +49,7 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
 
     const storedValue = localStorage.getItem("advertise/property-details");
 
-    const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
-        phone: "",
-        property_value: "",
-        property_size: "",
-        bed_rooms: "",
-        bath_rooms: "",
-        deed_number: "",
-    };
+    const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -74,23 +67,25 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="w-96 space-y-4 p-4 shadow-md"
             >
-                <InputElement name="phone" label={'Phone Number'} />
-                <InputElement name="property_value" label={'Property Value (AED)'} />
-                <InputElement name="property_size" label={'Property Size (Sqft)'} />
+                <InputElement name="phone" type='number' placeholder='Please enter your phone number' label={'Phone Number'} />
+                <InputElement name="property_value" type='number' placeholder='Please enter your property value' label={'Property Value (AED)'} />
+                <InputElement name="property_size" placeholder='Please enter your property size' type='number' label={'Property Size (Sqft)'} />
 
                 <SelectElement
                     name="bed_rooms"
+                    placeholder='Please select number of bed rooms'
                     label={'Number of Bed Rooms'}
                     options={BedRooms}
                 />
 
                 <SelectElement
                     name="bath_rooms"
+                    placeholder='Please select number of bath rooms'
                     label={'Number of Bath Rooms'}
                     options={BathRooms}
                 />
 
-                <InputElement name="deed_number" label={'Title Deed / Oqod / Initial Contract of Sales'} />
+                <InputElement name="deed_number" placeholder='Please enter deed number' label={'Title Deed / Oqod / Initial Contract of Sales'} />
 
                 <Button type="submit" className="w-full">
                     Save and Continue
