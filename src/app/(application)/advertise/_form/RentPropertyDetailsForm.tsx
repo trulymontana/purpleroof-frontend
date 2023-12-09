@@ -12,6 +12,7 @@ import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { BathRooms, BedRooms, PaymentIntervals } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
+import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
 
 const formSchema = z.object({
     phone: z
@@ -72,7 +73,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="w-full space-y-4 p-4"
             >
-                <InputElement name="phone" type='number' placeholder='Please enter your phone number' label={'Phone Number'} />
+                <PhoneNumberInputElement name='phone' label='Phone Number' />
                 <InputElement name="rental_amount" type='number' placeholder='Please enter rental amount' label={'Rental Amount (AED)'} />
                 <SelectElement name='payment_interval' label='Payment Interval' options={PaymentIntervals} />
                 <InputElement name="property_size" placeholder='Please enter property size' type='number' label={'Property Size (Sqft)'} />

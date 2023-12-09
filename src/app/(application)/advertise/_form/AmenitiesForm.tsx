@@ -52,6 +52,12 @@ const AmenitiesForm = ({ onSave }: Props) => {
     defaultValues
   })
 
+  useEffect(() => {
+    if (defaultValues?.amenities) {
+      setSelectedAmenities(defaultValues.amenities);
+    }
+  }, []);
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     const data = values;
     // @ts-ignore

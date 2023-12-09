@@ -21,15 +21,6 @@ const MultiSelectCheckbox = ({ name, options, selectedBoxes, setSelectedBoxes, c
     const { control, setValue } = useFormContext();
 
     const handleCheckboxChange = (checkedOption: TOption, checked: boolean) => {
-        // const updatedOptions = options.map(option => {
-        //     if (option.value === checkedOption.value) {
-        //         return { ...option, checked }
-        //     }
-        //     return option
-        // })
-
-        // setValue(name, updatedOptions)
-        // setSelectedAmenities(updatedOptions);
         setSelectedBoxes([...selectedBoxes, checkedOption])
     }
 
@@ -38,12 +29,12 @@ const MultiSelectCheckbox = ({ name, options, selectedBoxes, setSelectedBoxes, c
             <FormItem className={`grid ${classNames} space-y-0 gap-y-4`}>
                 {options.map((option) => (
                     <FormField key={option.value} control={control} name='amenities' render={({ field }) => {
+
                         return (
                             <FormItem key={option.value} className="flex flex-row items-start space-x-3 space-y-0">
                                 <FormControl>
                                     <Checkbox
-                                        // @ts-ignore
-                                        checked={field.value?.some((item: { item: TOption }) => item.value === option.value)}
+                                        checked={selectedBoxes.some(item => item.value === option.value)}
                                         onCheckedChange={(checked) => {
                                             handleCheckboxChange(option, Boolean(checked))
                                         }}
