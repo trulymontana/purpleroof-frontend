@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -12,6 +12,8 @@ import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { BathRooms, BedRooms } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
+import 'react-international-phone/style.css';
+import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
 
 const formSchema = z.object({
     phone: z
@@ -67,7 +69,9 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="w-full space-y-4 p-4"
             >
-                <InputElement name="phone" type='number' placeholder='Please enter your phone number' label={'Phone Number'} />
+                {/* <InputElement name="phone" type='number' placeholder='Please enter your phone number' label={'Phone Number'} /> */}
+                <PhoneNumberInputElement name='phone' label='Phone Number' />
+
                 <InputElement name="property_value" type='number' placeholder='Please enter your property value' label={'Property Value (AED)'} />
                 <InputElement name="property_size" placeholder='Please enter your property size' type='number' label={'Property Size (Sqft)'} />
 
