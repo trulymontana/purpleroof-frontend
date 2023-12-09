@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -17,33 +17,45 @@ import ComboboxElement from '@/components/forms/elements/combobox-element'
 import DatePickerElement from '@/components/forms/elements/date-picker-element'
 
 const formSchema = z.object({
-  country: z.string({
-    required_error: 'Country should not be empty!',
+  first_name: z.string().min(2, {
+    message: 'First Name must be at least 2 characters.',
   }),
-  dob: z.date({ required_error: "DOB should not be empty!" }),
-  value_of_property: z
+  last_name: z.string().min(2, {
+    message: 'Last Name must be at least 2 characters.',
+  }),
+  email: z
     .string({
-      required_error: 'Please enter a property value.',
-    }),
-  monthly_income: z
+      required_error: 'Please enter a valid email.',
+    })
+    .email(),
+  phone: z
     .string({
-      required_error: 'Please enter your correct montly income.',
+      required_error: 'Please enter a valid phone number.',
+    })
+    .min(10, {
+      message: 'Phone number must be at least 10 characters.',
     }),
-  loan_type: z.string({
-    required_error: 'Loan type should not be empty'
-  })
+  description: z.string().min(10, {
+    message: 'Description must be at least 10 characters.',
+  }),
+  agree_to_privacy_policy: z.boolean().refine((data) => data === true, {
+    message: 'You must agree to the privacy policy.',
+  }),
+  residential_status: z.string({
+    required_error: 'Please select a residential status.',
+  }),
+  income_profile: z.string({
+    required_error: 'Please select an income profile.',
+  }),
 })
 
-const IncomeDetailsForm = ({ onFormSubmit, createMortgage }: { onFormSubmit: (step: number, values: any) => void, createMortgage: () => void }) => {
-
+const IncomeDetailsForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log({ incomeForm: values })
-    onFormSubmit(2, values)
-    createMortgage()
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values)
   }
 
   return (
