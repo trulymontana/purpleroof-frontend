@@ -43,7 +43,11 @@ const formSchema = z.object({
   }),
 })
 
-const PersonalDetailsForm = ({ onFormSubmit }: { onFormSubmit: (step: number, values: any) => void }) => {
+interface Props {
+  onSubmitForm: (values: z.infer<typeof formSchema>) => void
+}
+
+const PersonalDetailsForm = ({ onSubmitForm }: Props) => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
