@@ -1,4 +1,4 @@
-export const Categories = [
+export const categories = [
   {
     label: 'I want to Sell',
     value: 'sell',
@@ -9,7 +9,7 @@ export const Categories = [
   },
 ]
 
-export const TypesOfProperties = [
+export const typesOfProperties = [
   {
     label: 'Residential',
     value: 'residential',
@@ -20,7 +20,7 @@ export const TypesOfProperties = [
   },
 ]
 
-export const CommercialTypes = [
+export const commercialTypes = [
   {
     label: 'Bulk Unit',
     value: 'Bulk Unit',
@@ -87,7 +87,7 @@ export const CommercialTypes = [
   },
 ]
 
-export const ResidentalTypes = [
+export const residentalTypes = [
   {
     label: 'Apartment & Unit',
     value: 'Apartment & Unit',
@@ -118,7 +118,7 @@ export const ResidentalTypes = [
   },
 ]
 
-export const PaymentIntervals = [
+export const paymentIntervals = [
   {
     label: 'Weekly',
     value: 'weekly',
@@ -133,7 +133,7 @@ export const PaymentIntervals = [
   },
 ]
 
-export const BedRooms = [
+export const bedRooms = [
   {
     label: 'Studio',
     value: 'Studio',
@@ -220,7 +220,7 @@ export const BedRooms = [
   },
 ]
 
-export const BathRooms = [
+export const bathRooms = [
   {
     label: '1',
     value: '1',
@@ -303,7 +303,7 @@ export const BathRooms = [
   },
 ]
 
-export const EmiratesWithLocations = {
+export const emiratesWithLocations = {
   Dubai: [
     {
       label: 'Al Barsha',
@@ -1616,7 +1616,7 @@ export const EmiratesWithLocations = {
   ],
 }
 
-export const PropertyTypes = [
+export const propertyTypes = [
   {
     label: 'Free Hold',
     value: 'Free Hold',
@@ -1627,7 +1627,7 @@ export const PropertyTypes = [
   },
 ]
 
-export const Statuses = [
+export const statuses = [
   {
     label: 'Fully Furnished',
     value: 'Fully Furnished',
@@ -1642,7 +1642,7 @@ export const Statuses = [
   },
 ]
 
-export const Amenities = [
+export const amenities = [
   {
     label: 'Property Type',
     value: 'Property Type',
@@ -1837,7 +1837,7 @@ export const Amenities = [
   },
 ]
 
-export const ProjectStatuses = [
+export const projectStatuses = [
   {
     label: 'Completed',
     value: 'completed',
@@ -1857,7 +1857,7 @@ export const rentedOrVacantOptions = [
   { label: 'Rented', value: 'rented' },
 ]
 
-export const CallPreferences = [
+export const callPreferences = [
   {
     label: "Ask Purple Roof's staff to handle and address the calls",
     value: 'purpleroof',

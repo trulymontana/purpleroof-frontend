@@ -5,7 +5,6 @@ import { AmenitiesForm, BasicDetailsForm, CallPreferenceForm, LocationDetailsFor
 import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 
-
 const Page = ({ params: { step } }: { params: { step: string } }) => {
 
     const searchParams = useSearchParams();

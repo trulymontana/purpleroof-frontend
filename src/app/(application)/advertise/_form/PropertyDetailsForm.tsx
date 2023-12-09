@@ -10,7 +10,7 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { BathRooms, BedRooms } from '@/constants/advertise'
+import { bathRooms, bedRooms } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
 import 'react-international-phone/style.css';
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
@@ -78,14 +78,14 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
                     name="bed_rooms"
                     placeholder='Please select number of bed rooms'
                     label={'Number of Bed Rooms'}
-                    options={BedRooms}
+                    options={bedRooms}
                 />
 
                 <SelectElement
                     name="bath_rooms"
                     placeholder='Please select number of bath rooms'
                     label={'Number of Bath Rooms'}
-                    options={BathRooms}
+                    options={bathRooms}
                 />
 
                 <InputElement name="deed_number" placeholder='Please enter deed number' label={'Title Deed / Oqod / Initial Contract of Sales'} />

@@ -9,7 +9,7 @@ const Page = () => {
 
   return (
     <section className="flex gap-16 p-4">
-      <PersonalDetailsForm onSubmitForm={storeValues} />
+      <PersonalDetailsForm onSave={storeValues} />
       <IncomeDetailsForm />
     </section>
   )

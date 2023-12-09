@@ -10,7 +10,7 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { Categories, CommercialTypes, ResidentalTypes, TypesOfProperties } from '@/constants/advertise'
+import { categories, commercialTypes, residentalTypes, typesOfProperties } from '@/constants/advertise'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import TabRadioGroup from '@/components/forms/elements/tab-radio-group'
 import { useRouter } from 'next/navigation'
@@ -64,7 +64,7 @@ const BasicDetailsForm = ({ onSave }: Props) => {
             >
                 <TabRadioGroup
                     name="category"
-                    options={Categories}
+                    options={categories}
                 />
 
                 <InputElement name="advert_title" placeholder='Please enter Advert Title' label={'Advert Title'} />
@@ -73,13 +73,13 @@ const BasicDetailsForm = ({ onSave }: Props) => {
                     name="type_of_property"
                     label={'Type of Property'}
                     className='items-center gap-10'
-                    options={TypesOfProperties}
+                    options={typesOfProperties}
                 />
 
                 <SelectElement
                     name='property_option'
                     label={propertyType === 'residential' ? "Residential" : "Commercial"}
-                    options={propertyType === "residential" ? ResidentalTypes : CommercialTypes}
+                    options={propertyType === "residential" ? residentalTypes : commercialTypes}
                 />
                 <Button variant={"default"} type='submit' className='w-full'>
                     Save and Continue

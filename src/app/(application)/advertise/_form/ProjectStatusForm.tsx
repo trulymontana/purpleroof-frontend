@@ -9,7 +9,7 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { ProjectStatuses, rentedOrVacantOptions } from '@/constants/advertise'
+import { projectStatuses, rentedOrVacantOptions } from '@/constants/advertise'
 import DatePickerElement from '@/components/forms/elements/date-picker-element'
 import { useRouter } from 'next/navigation'
 
@@ -62,7 +62,7 @@ const ProjectStatusForm = ({ onSave }: Props) => {
                 className="w-full space-y-4 p-4"
             >
 
-                <SelectElement name='project_status' label='Project Status' options={ProjectStatuses} />
+                <SelectElement name='project_status' label='Project Status' options={projectStatuses} />
 
                 {project_status === 'completed' && (
                     <>

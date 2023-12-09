@@ -10,7 +10,7 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { BathRooms, BedRooms, PaymentIntervals } from '@/constants/advertise'
+import { bathRooms, bedRooms, paymentIntervals } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
 
@@ -75,20 +75,20 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
             >
                 <PhoneNumberInputElement name='phone' label='Phone Number' />
                 <InputElement name="rental_amount" type='number' placeholder='Please enter rental amount' label={'Rental Amount (AED)'} />
-                <SelectElement name='payment_interval' label='Payment Interval' options={PaymentIntervals} />
+                <SelectElement name='payment_interval' label='Payment Interval' options={paymentIntervals} />
                 <InputElement name="property_size" placeholder='Please enter property size' type='number' label={'Property Size (Sqft)'} />
                 <InputElement name="minimum_contract" placeholder='Please enter minimum contract period' type='number' label={'Minimum Contract (in months)'} />
 
                 <SelectElement
                     name="bed_rooms"
                     label={'Number of Bed Rooms'}
-                    options={BedRooms}
+                    options={bedRooms}
                 />
 
                 <SelectElement
                     name="bath_rooms"
                     label={'Number of Bath Rooms'}
-                    options={BathRooms}
+                    options={bathRooms}
                 />
 
                 <InputElement name="deed_number" placeholder='Please enter deed number' label={'Title Deed / Oqod / Initial Contract of Sales'} />

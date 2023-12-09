@@ -1,10 +1,10 @@
 import React from 'react'
-import AddRequirementForm from '../_form/AddRequirementForm'
+import AddRequirementsForm from '../_form/AddRequirementForm'
 
-const AddRequirements = () => {
+const AddRequirementsPage = () => {
     return (
-        <AddRequirementForm />
+        <AddRequirementsForm />
     )
 }
 
-export default AddRequirements
+export default AddRequirementsPage

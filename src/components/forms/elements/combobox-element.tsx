@@ -26,11 +26,7 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { CaretSortIcon } from '@radix-ui/react-icons'
 import { useFormContext } from 'react-hook-form'
-
-type TOption = {
-  label: string
-  value: string
-}
+import { TOption } from '@/constants/types'
 
 interface Props {
   name: string
