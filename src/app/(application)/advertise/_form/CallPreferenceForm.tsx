@@ -59,7 +59,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
                 <Button type="submit" className="w-full">
                     Save and Continue
                 </Button>
-                <Button type='button' onClick={() => router.push(`/advertise/project-status`)} className="w-full">
+                <Button type='button' variant="outline" onClick={() => router.push(`/advertise/project-status`)} className="w-full">
                     Go Back
                 </Button>
             </form>
