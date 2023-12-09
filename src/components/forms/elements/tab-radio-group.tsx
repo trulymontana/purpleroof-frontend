@@ -58,7 +58,7 @@ const TabRadioGroup = ({
                                         <FormControl>
                                             <RadioGroupItem value={option.value} className="hidden" />
                                         </FormControl>
-                                        <FormLabel className={`cursor-pointer w-full font-normal rounded-xl text-center py-4 px-2 ${field.value === option.value ? "bg-[#613e83] text-white" : ""}`}>
+                                        <FormLabel className={`cursor-pointer  w-full font-medium text-[16px] rounded-xl text-center py-4 px-2 ${field.value === option.value ? "bg-[#613e83] text-white" : ""}`}>
                                             {option.label}
                                         </FormLabel>
                                     </FormItem>

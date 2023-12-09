@@ -81,7 +81,7 @@ const BasicDetailsForm = ({ onSave }: Props) => {
                     label={propertyType === 'residential' ? "Residential" : "Commercial"}
                     options={propertyType === "residential" ? ResidentalTypes : CommercialTypes}
                 />
-                <Button type='submit' className='w-full'>
+                <Button variant={"default"} type='submit' className='w-full'>
                     Save and Continue
                 </Button>
             </form>

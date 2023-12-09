@@ -32,8 +32,8 @@ const Page = ({ params: { step } }: { params: { step: string } }) => {
     return (
         <div>
 
-            <section className="relative">
-                <div className="absolute inset-0 w-full h-full bg-indigo-600 bg-opacity-25 bg-cover backdrop-opacity-10 -z-10 bg-advertise" />
+            <section className="relative min-h-screen h-auto">
+                <div className="absolute inset-0 w-full min-h-screen h-auto bg-indigo-600 bg-opacity-25 bg-cover backdrop-opacity-10 -z-10 bg-advertise" />
                 <div
                     className="absolute top-0 w-full h-full opacity-75 t-0 -z-10"
                     style={{
