@@ -1,22 +1,16 @@
 'use client'
-import React, { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { CommercialTypes, ProjectStatuses, ResidentalTypes, TypesOfProperties, rentedOrVacantOptions } from '@/constants/advertise'
-import RadioGroupElement from '@/components/forms/elements/radio-group-element'
+import { ProjectStatuses, rentedOrVacantOptions } from '@/constants/advertise'
 import DatePickerElement from '@/components/forms/elements/date-picker-element'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import CustomSelectElement from '@/components/forms/elements/custom-select-element'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
@@ -39,20 +33,24 @@ const ProjectStatusForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
+    const storedValue = localStorage.getItem("advertise/project-status");
+
+    const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
+        project_status: "",
+        notice_period_property: "",
+        notice_period_rent: "",
+        rented_or_vacant: "",
+        rental_amount: "",
+        completion_date: new Date(Date.now()),
+        number_of_cheques: "",
+    };
+
     // @ts-ignore
-    const project_status_data: z.infer<typeof formSchema> = JSON.parse(localStorage.getItem("advertise/project-status"))
+    defaultValues.completion_date = new Date(defaultValues?.completion_date)
 
     const form = useForm<TProjectStatus>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            project_status: project_status_data?.project_status ?? "",
-            notice_period_property: project_status_data?.notice_period_property ?? "",
-            notice_period_rent: project_status_data?.notice_period_rent ?? "",
-            rented_or_vacant: project_status_data?.rented_or_vacant ?? "",
-            rental_amount: project_status_data?.rental_amount ?? "",
-            // completion_date: project_status_data?.completion_date ?? new Date(),
-            number_of_cheques: project_status_data?.number_of_cheques ?? ""
-        }
+        defaultValues
     })
 
     function onSubmit(values: TProjectStatus) {

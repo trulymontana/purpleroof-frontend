@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation'
 const formSchema = z.object({
     category: z.string({
         required_error: "Please select a category"
-    }),
+    }).refine(val => val === 'sell' || val === 'rent'),
     advert_title: z.string({
         required_error: 'Title should not be empty!',
     }),
@@ -38,18 +38,19 @@ const BasicDetailsForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
-    // @ts-ignore
-    const basic_details = JSON.parse(localStorage.getItem("advertise/basic-details"))
+    const storedValue = localStorage.getItem("advertise/basic-details");
+    const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
+        advert_title: "",
+        category: "sell",
+        property_option: "",
+        type_of_property: ""
+    };
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            category: basic_details?.category ?? "sell",
-            advert_title: basic_details?.advert_title ?? "",
-            type_of_property: basic_details?.type_of_property ?? "residential",
-            property_option: basic_details?.property_option ?? ""
-        }
+        defaultValues
     })
+
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         onSave("basic-details", values)
@@ -62,7 +63,7 @@ const BasicDetailsForm = ({ onSave }: Props) => {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="w-[28rem] space-y-4 p-4 shadow-md"
+                className="w-full space-y-4 p-4 shadow-md"
             >
                 <TabRadioGroup
                     name="category"
@@ -88,6 +89,7 @@ const BasicDetailsForm = ({ onSave }: Props) => {
                 </Button>
             </form>
         </Form >
+
     )
 }
 

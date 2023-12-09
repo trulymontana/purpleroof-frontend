@@ -1,5 +1,4 @@
 'use client'
-import React, { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -12,7 +11,6 @@ import InputElement from '@/components/forms/elements/input-element'
 import { EmiratesWithLocations } from '@/constants/advertise'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import SelectElement from '@/components/forms/elements/select-element'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
@@ -47,20 +45,21 @@ const LocationDetailsForm = ({ onSave }: Props) => {
 
   const router = useRouter();
 
-  // @ts-ignore
-  const location_details: z.infer<typeof formSchema> = JSON.parse(localStorage.getItem("advertise/location-details"))
+  const storedValue = localStorage.getItem("advertise/location-details");
+
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
+    emirate: "",
+    location: "",
+    building_name: "",
+    floor: "",
+    street: "",
+    unit_number: "",
+    landmark: "",
+  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      emirate: location_details?.emirate ?? "",
-      location: location_details?.location ?? "",
-      building_name: location_details?.building_name ?? "",
-      floor: location_details?.floor ?? "",
-      street: location_details?.street ?? "",
-      unit_number: location_details?.unit_number ?? "",
-      landmark: location_details?.landmark ?? ""
-    }
+    defaultValues
   })
 
 

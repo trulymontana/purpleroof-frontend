@@ -9,11 +9,8 @@ import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { incomeProfiles, residentialTypes } from '@/constants/financial'
 import { BathRooms, BedRooms, PaymentIntervals } from '@/constants/advertise'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
@@ -42,7 +39,9 @@ const formSchema = z.object({
     bath_rooms: z.string({
         required_error: "Please enter number of bath rooms!"
     }),
-    deed_number: z.string().optional()
+    deed_number: z.string({
+        required_error: "Please enter your Deed Number"
+    })
 })
 
 interface Props {
@@ -53,21 +52,22 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
-    // @ts-ignore
-    const property_details: z.infer<typeof formSchema> = JSON.parse(localStorage.getItem("advertise/property-details"))
+    const storedValue = localStorage.getItem("advertise/property-details");
+
+    const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
+        phone: "",
+        rental_amount: "",
+        payment_interval: "",
+        property_size: "",
+        minimum_contract: "",
+        bed_rooms: "",
+        bath_rooms: "",
+        deed_number: "",
+    };
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            phone: property_details?.phone ?? "",
-            rental_amount: property_details?.rental_amount ?? 0,
-            payment_interval: property_details?.payment_interval ?? 0,
-            property_size: property_details?.property_size ?? 0,
-            minimum_contract: property_details?.minimum_contract ?? 0,
-            bed_rooms: property_details?.bed_rooms ?? 0,
-            bath_rooms: property_details?.bath_rooms ?? 0,
-            deed_number: property_details?.deed_number ?? "",
-        }
+        defaultValues
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -43,34 +43,28 @@ const AmenitiesForm = ({ onSave }: Props) => {
 
   const [selectedAmenities, setSelectedAmenities] = useState<TOption[]>([]);
 
-  // @ts-ignore
-  const amenities_details: z.infer<typeof formSchema> = JSON.parse(localStorage.getItem("advertise/amenities"))
+  const storedValue = localStorage.getItem("advertise/amenities-details");
+
+  const defaultValues: z.infer<typeof formSchema> & { amenities: TOption[] } = storedValue !== null ? JSON.parse(storedValue) : {
+    property_type: "",
+    status: "",
+    parking_spaces: "",
+    airport_distance: "",
+    metro_station: "",
+    nearby_places: "",
+    other_features: "",
+  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      property_type: amenities_details?.property_type ?? "",
-      status: amenities_details?.status ?? "",
-      parking_spaces: amenities_details?.parking_spaces ?? "",
-      airport_distance: amenities_details?.airport_distance ?? "",
-      metro_station: amenities_details?.metro_station ?? "",
-      other_features: amenities_details?.other_features ?? "",
-      nearby_places: amenities_details?.nearby_places ?? ""
-    }
+    defaultValues
   })
-
-  // // @ts-ignore
-  // if (amenities_details?.amenities) {
-  //   // @ts-ignore
-  //   setSelectedAmenities(amenities_details?.amenities);
-  // }
-
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     const data = values;
     // @ts-ignore
     data.amenities = selectedAmenities
-    onSave("amenities", data)
+    onSave("amenities-details", data)
     router.push(`/advertise/project-status`)
   }
 

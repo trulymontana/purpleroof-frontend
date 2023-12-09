@@ -44,9 +44,8 @@ const DatePickerElement = ({ name, label, description, disabled = false }: Props
                   )}
                 >
                   {field.value ? (
-                    field.value.toLocaleDateString()
+                    field?.value?.toLocaleDateString()
                   ) : (
-                    // format(field.value, 'PPP')
                     <span>Pick a date</span>
                   )}
                   <CalenderIcon className="ml-auto h-4 w-4" />

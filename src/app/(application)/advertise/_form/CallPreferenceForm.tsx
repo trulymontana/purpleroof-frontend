@@ -1,5 +1,4 @@
 'use client'
-import React, { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -8,12 +7,8 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
-import InputElement from '@/components/forms/elements/input-element'
-import SwitchElement from '@/components/forms/elements/switch-element'
-import SelectElement from '@/components/forms/elements/select-element'
-import { CallPreferences, CommercialTypes, ResidentalTypes, TypesOfProperties } from '@/constants/advertise'
+import { CallPreferences } from '@/constants/advertise'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
@@ -30,14 +25,15 @@ const CallPreferenceForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
-    // @ts-ignore
-    const call_preference: z.infer<typeof formSchema> = JSON.parse(localStorage.getItem("advertise/call-preference"))
+    const storedValue = localStorage.getItem("advertise/location-details");
+
+    const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
+        call_preference: ""
+    };
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            call_preference: call_preference?.call_preference ?? ""
-        }
+        defaultValues
     })
 
     const handlePreferenceChange = (value: string) => {
