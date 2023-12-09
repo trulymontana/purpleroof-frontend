@@ -69,7 +69,6 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="w-full space-y-4 p-4"
             >
-                {/* <InputElement name="phone" type='number' placeholder='Please enter your phone number' label={'Phone Number'} /> */}
                 <PhoneNumberInputElement name='phone' label='Phone Number' />
 
                 <InputElement name="property_value" type='number' placeholder='Please enter your property value' label={'Property Value (AED)'} />

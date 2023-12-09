@@ -38,10 +38,7 @@ const PhoneNumberInputElement = ({ name, label, description, placeholder, type =
                                 width: '100%',
                                 border: '1px solid #ccc',
                                 borderRadius: '4px',
-                                paddingLeft: '10px',
-                            }}
-                            style={{
-                                height: 40
+                                fontSize: "15px",
                             }}
                         />
                     </FormControl>
