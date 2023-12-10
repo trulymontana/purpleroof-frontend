@@ -1,4 +1,4 @@
-export const Conditions = [
+export const conditions = [
   {
     label: 'Rental Income',
     value: 'rental_income',
@@ -17,7 +17,7 @@ export const Conditions = [
   },
 ]
 
-export const Documents = [
+export const documents = [
   {
     label: 'Passport Copy',
     value: 'passport_copy',
