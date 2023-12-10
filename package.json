@@ -59,7 +59,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pnpm run format && git add ."
+      "pre-commit": "npm run format && git add ."
     }
   }
 }
