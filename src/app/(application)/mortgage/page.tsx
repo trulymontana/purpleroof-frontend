@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import PersonalDetailsForm from './_form/personal-details-form'
 import IncomeDetailsForm from './_form/income-details-form'
