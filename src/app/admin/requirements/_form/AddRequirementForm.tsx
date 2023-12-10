@@ -12,7 +12,7 @@ import InputElement from '@/components/forms/elements/input-element'
 import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
-import { Conditions, Documents } from '@/constants/requirements'
+import { conditions, documents } from '@/constants/requirements'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 import { TOption } from '@/constants/types'
 
@@ -97,11 +97,11 @@ const AddRequirementsForm = () => {
                     name="condition"
                     label={'Condition'}
                     className='items-center gap-10'
-                    options={Conditions}
+                    options={conditions}
                     handleChange={handleChange}
                 />
 
-                <MultiSelectCheckbox name='documents' classNames='grid-cols-2' options={Documents} selectedBoxes={selectedAmenities} setSelectedBoxes={setSelectedAmenities} />
+                <MultiSelectCheckbox name='documents' classNames='grid-cols-2' options={documents} selectedBoxes={selectedAmenities} setSelectedBoxes={setSelectedAmenities} />
 
                 <Button type="submit" className="w-full">
                     Save

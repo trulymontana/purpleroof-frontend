@@ -13,6 +13,7 @@ import SelectElement from '@/components/forms/elements/select-element'
 import { bathRooms, bedRooms, paymentIntervals } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
+import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
     phone: z
@@ -53,7 +54,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
-    const storedValue = localStorage.getItem("advertise/property-details");
+    const storedValue = localStorage.getItem(PageRoutes.advertise.PROPERTY_DETAILS);
 
     const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
@@ -63,8 +64,8 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        onSave("property-details", values)
-        router.push(`/advertise/location-details`)
+        onSave(PageRoutes.advertise.PROPERTY_DETAILS, values)
+        router.push(PageRoutes.advertise.LOCATION_DETAILS)
     }
 
     return (
@@ -96,7 +97,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
                 <Button type="submit" className="w-full">
                     Save and Continue
                 </Button>
-                <Button variant="outline" type='button' onClick={() => router.push(`/advertise/basic-details`)} className="w-full">
+                <Button variant="outline" type='button' onClick={() => router.push(PageRoutes.advertise.BASIC_DETAILS)} className="w-full">
                     Go Back
                 </Button>
             </form>

@@ -14,6 +14,7 @@ import { categories, commercialTypes, residentalTypes, typesOfProperties } from 
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import TabRadioGroup from '@/components/forms/elements/tab-radio-group'
 import { useRouter } from 'next/navigation'
+import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
     category: z.string({
@@ -38,7 +39,7 @@ const BasicDetailsForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
-    const storedValue = localStorage.getItem("advertise/basic-details");
+    const storedValue = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS);
     const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
         category: "sell",
     };
@@ -50,8 +51,8 @@ const BasicDetailsForm = ({ onSave }: Props) => {
 
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        onSave("basic-details", values)
-        router.push(`/advertise/property-details?categoryType=${form.getValues("category")}`)
+        onSave(PageRoutes.advertise.BASIC_DETAILS, values)
+        router.push(`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${form.getValues("category")}`)
     }
 
     const propertyType = form.watch("type_of_property")

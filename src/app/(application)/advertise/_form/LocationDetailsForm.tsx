@@ -12,6 +12,8 @@ import { emiratesWithLocations } from '@/constants/advertise'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import SelectElement from '@/components/forms/elements/select-element'
 import { useRouter } from 'next/navigation'
+import { BackButton } from '@/components/navigation/back-button'
+import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
   emirate: z.string({
@@ -45,7 +47,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
 
   const router = useRouter();
 
-  const storedValue = localStorage.getItem("advertise/location-details");
+  const storedValue = localStorage.getItem(PageRoutes.advertise.LOCATION_DETAILS);
 
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
@@ -55,20 +57,18 @@ const LocationDetailsForm = ({ onSave }: Props) => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    onSave("location-details", values)
-    router.push(`/advertise/amenities-details`)
+    onSave(PageRoutes.advertise.LOCATION_DETAILS, values)
+    router.push(PageRoutes.advertise.AMENITIES_DETAILS)
   }
 
   const Emirates = Object.keys(emiratesWithLocations)
   const selectedEmirate = form.watch("emirate")
 
-  let Locations: { label: string, value: string }[] = [];
-
   // @ts-ignore
   const locations = selectedEmirate ? emiratesWithLocations[selectedEmirate] : []
 
   // @ts-ignore
-  const basicDetails = JSON.parse(localStorage.getItem("advertise/basic-details"))
+  const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS))
 
   return (
     <Form {...form}>
@@ -101,7 +101,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
           )}
         />
 
-        <SelectElement name='location' label='Location' options={Locations} placeholder={!selectedEmirate ? "Please select emirate first" : "Please select a location"} disabled={!selectedEmirate} />
+        <SelectElement name='location' label='Location' options={locations} placeholder={!selectedEmirate ? "Please select emirate first" : "Please select a location"} disabled={!selectedEmirate} />
 
         <InputElement name="building_name" placeholder='Please enter your building name' label={'Building / Cluster Name'} />
         <InputElement name="floor" placeholder='Please enter your floor' label={'Floor'} />
@@ -112,9 +112,10 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
-        <Button type='button' variant="outline" onClick={() => router.push(`/advertise/property-details?categoryType=${basicDetails.category}`)} className="w-full">
+        {/* <Button type='button' variant="outline" onClick={() => router.push(`${advertiseSteps.PROPERTY_DETAILS}?categoryType=${basicDetails.category}`)} className="w-full">
           Go Back
-        </Button>
+        </Button> */}
+        <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails.category}`} />
       </form>
     </Form>
   )

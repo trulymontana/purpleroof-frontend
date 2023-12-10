@@ -10,6 +10,8 @@ import * as z from 'zod'
 import { callPreferences } from '@/constants/advertise'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import { useRouter } from 'next/navigation'
+import { BackButton } from '@/components/navigation/back-button'
+import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
     call_preference: z.string({
@@ -25,7 +27,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
-    const storedValue = localStorage.getItem("advertise/location-details");
+    const storedValue = localStorage.getItem(PageRoutes.advertise.CALL_PREFERENCE);
 
     const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
@@ -39,7 +41,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
     }
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        onSave("call-preference", values)
+        onSave(PageRoutes.advertise.CALL_PREFERENCE, values)
     }
 
     return (
@@ -59,9 +61,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
                 <Button type="submit" className="w-full">
                     Save and Continue
                 </Button>
-                <Button type='button' variant="outline" onClick={() => router.push(`/advertise/project-status`)} className="w-full">
-                    Go Back
-                </Button>
+                <BackButton route={PageRoutes.advertise.PROJECT_STATUS} />
             </form>
         </Form>
     )
