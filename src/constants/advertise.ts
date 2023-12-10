@@ -4,7 +4,7 @@ export const advertiseSteps = {
   LOCATION_DETAILS: 'location-details',
   AMENITIES_DETAILS: 'amenities-details',
   PROJECT_STATUS: 'project-status',
-  CALL_PREFERENCE: 'call-preference'
+  CALL_PREFERENCE: 'call-preference',
 }
 
 export const categories = [
