@@ -10,10 +10,11 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { categories, commercialTypes, residentalTypes, typesOfProperties } from '@/constants/advertise'
+import { advertiseSteps, categories, commercialTypes, residentalTypes, typesOfProperties } from '@/constants/advertise'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import TabRadioGroup from '@/components/forms/elements/tab-radio-group'
 import { useRouter } from 'next/navigation'
+import { AdvertiseKeys } from '@/constants/local-storage-keys'
 
 const formSchema = z.object({
     category: z.string({
@@ -38,7 +39,7 @@ const BasicDetailsForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
-    const storedValue = localStorage.getItem("advertise/basic-details");
+    const storedValue = localStorage.getItem(AdvertiseKeys.BASIC_DETAILS);
     const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
         category: "sell",
     };
@@ -50,8 +51,8 @@ const BasicDetailsForm = ({ onSave }: Props) => {
 
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        onSave("basic-details", values)
-        router.push(`/advertise/property-details?categoryType=${form.getValues("category")}`)
+        onSave(AdvertiseKeys.BASIC_DETAILS, values)
+        router.push(`${advertiseSteps.PROPERTY_DETAILS}?categoryType=${form.getValues("category")}`)
     }
 
     const propertyType = form.watch("type_of_property")

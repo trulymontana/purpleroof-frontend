@@ -10,10 +10,11 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { bathRooms, bedRooms } from '@/constants/advertise'
+import { advertiseSteps, bathRooms, bedRooms } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
 import 'react-international-phone/style.css';
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
+import { AdvertiseKeys } from '@/constants/local-storage-keys'
 
 const formSchema = z.object({
     phone: z
@@ -49,7 +50,7 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
-    const storedValue = localStorage.getItem("advertise/property-details");
+    const storedValue = localStorage.getItem(AdvertiseKeys.PROPERTY_DETAILS);
 
     const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue);
 
@@ -59,8 +60,8 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        onSave("property-details", values)
-        router.push(`/advertise/location-details`)
+        onSave(AdvertiseKeys.PROPERTY_DETAILS, values)
+        router.push(advertiseSteps.LOCATION_DETAILS)
     }
 
     return (
@@ -93,7 +94,7 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
                 <Button type="submit" className="w-full">
                     Save and Continue
                 </Button>
-                <Button type='button' variant="outline" onClick={() => router.push(`/advertise/basic-details`)} className="w-full">
+                <Button type='button' variant="outline" onClick={() => router.push(advertiseSteps.BASIC_DETAILS)} className="w-full">
                     Go Back
                 </Button>
             </form>

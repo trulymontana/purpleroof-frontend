@@ -13,7 +13,7 @@ const Page = ({ params: { step } }: { params: { step: string } }) => {
     const categoryType = searchParams.get("categoryType")
 
     const storeValues = (step: string, values: any) => {
-        localStorage.setItem(`advertise/${step}`, JSON.stringify(values))
+        localStorage.setItem(step, JSON.stringify(values))
     }
 
     const subComponents: { [key: string]: React.ReactElement } = {

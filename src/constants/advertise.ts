@@ -1,3 +1,12 @@
+export const advertiseSteps = {
+  BASIC_DETAILS: 'basic-details',
+  PROPERTY_DETAILS: 'property-details',
+  LOCATION_DETAILS: 'location-details',
+  AMENITIES_DETAILS: 'amenities-details',
+  PROJECT_STATUS: 'project-status',
+  CALL_PREFERENCE: 'call-preference'
+}
+
 export const categories = [
   {
     label: 'I want to Sell',
