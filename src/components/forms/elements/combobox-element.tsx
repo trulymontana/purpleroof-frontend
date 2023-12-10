@@ -50,7 +50,7 @@ const ComboboxElement = ({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-col">
+        <FormItem className="flex flex-col w-full">
           <FormLabel>{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
@@ -59,13 +59,13 @@ const ComboboxElement = ({
                   variant="outline"
                   role="combobox"
                   className={cn(
-                    'w-[200px] justify-between',
+                    'justify-between',
                     !field.value && 'text-muted-foreground',
                   )}
                 >
                   {field.value
                     ? options.find((option) => option.value === field.value)
-                        ?.label
+                      ?.label
                     : placeholder}
                   <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>

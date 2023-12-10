@@ -14,10 +14,10 @@ import { usePathname, useSearchParams } from 'next/navigation'
 
 
 import Image from 'next/image'
-import WhiteStrokes from '@/components/svgs/white-strokes'
 import { PageRoutes } from '@/constants/page-routes'
+import WhiteStrokesIcon from '@/components/svgs/white-strokes'
 
-const Page = ({ params: { step } }: { params: { step: string } }) => {
+const Page = () => {
     const pathName = usePathname();
     const searchParams = useSearchParams();
 
@@ -55,7 +55,7 @@ const Page = ({ params: { step } }: { params: { step: string } }) => {
                         background: 'linear-gradient(to bottom, #795695 30%, #795695 70%)',
                     }}
                 ></div>
-                <WhiteStrokes />
+                <WhiteStrokesIcon />
 
                 <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
                     <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-shrink">

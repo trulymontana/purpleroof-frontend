@@ -1,6 +1,6 @@
 import React from 'react'
 
-const WhiteStrokes = () => {
+const WhiteStrokesIcon = () => {
     return (
         <svg
             className="absolute inset-0 -z-10 h-full w-full stroke-slate-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
@@ -28,4 +28,4 @@ const WhiteStrokes = () => {
     )
 }
 
-export default WhiteStrokes
+export default WhiteStrokesIcon

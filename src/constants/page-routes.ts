@@ -14,6 +14,10 @@ export const PageRoutes = {
     PROJECT_STATUS: '/advertise/project-status',
     CALL_PREFERENCE: '/advertise/call-preference',
   },
+  mortgage: {
+    PERSONAL_DETAILS: '/mortgage/personal-details',
+    INCOME_DETAILS: '/mortgage/income-details',
+  },
   HOME: '/',
   ABOUT: '/about',
   CONTACT: '/contact',

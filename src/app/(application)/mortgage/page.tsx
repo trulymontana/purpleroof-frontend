@@ -1,6 +1,8 @@
+"use client";
+
 import React from 'react'
-import PersonalDetailsForm from './_form/personal-details-form'
-import IncomeDetailsForm from './_form/income-details-form'
+import PersonalDetailsForm from './_form/PersonalDetailsForm'
+import IncomeDetailsForm from './_form/IncomeDetailsForm'
 
 const Page = () => {
   const storeValues = (values: any) => {

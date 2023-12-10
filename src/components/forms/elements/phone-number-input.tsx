@@ -10,6 +10,8 @@ import { Input } from '@/components/ui/input'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { PhoneInput } from 'react-international-phone'
+import 'react-international-phone/style.css'
+
 
 interface Props {
     name: string

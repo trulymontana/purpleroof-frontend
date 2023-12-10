@@ -18,20 +18,13 @@ const Page = () => {
             }
         }
     }
-    // @ts-ignore
-    const data = JSON.parse(localStorage.getItem("advertise-1"))
 
 
     return (
         <section className="flex p-10 items-start gap-10">
             <BasicDetailsForm onSave={storeValues} />
-            {
-                data && data.category === 'sell' ? (
-                    <PropertyDetailsForm onSave={storeValues} />
-                ) : (data && data.category === 'rent' &&
-                    <RentPropertyDetailsForm onSave={storeValues} />
-                )
-            }
+            <PropertyDetailsForm onSave={storeValues} />
+            <RentPropertyDetailsForm onSave={storeValues} />
             <LocationDetailsForm onSave={storeValues} />
             <AmenitiesForm onSave={storeValues} />
             <ProjectStatusForm onSave={storeValues} />

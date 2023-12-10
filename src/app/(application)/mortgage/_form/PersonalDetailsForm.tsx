@@ -12,6 +12,9 @@ import InputElement from '@/components/forms/elements/input-element'
 import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { incomeProfiles, residentialTypes } from '@/constants/financial'
+import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
+import { PageRoutes } from '@/constants/page-routes'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   first_name: z.string().min(2, {
@@ -44,30 +47,44 @@ const formSchema = z.object({
 })
 
 interface Props {
-  onSave: (values: z.infer<typeof formSchema>) => void
+  onSave: (step: string, values: z.infer<typeof formSchema>) => void
 }
 const PersonalDetailsForm = ({ onSave }: Props) => {
+
+  const router = useRouter();
+
+  const storedValue = localStorage.getItem(PageRoutes.mortgage.PERSONAL_DETAILS);
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    onSave(PageRoutes.mortgage.PERSONAL_DETAILS, values)
+    router.push(PageRoutes.mortgage.INCOME_DETAILS)
   }
+
+  
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-96 space-y-4 p-4 shadow-md"
+        className="w-full space-y-4 p-4"
       >
-        <div className="flex gap-2">
-          <InputElement name="first_name" label={'First Name'} />
-          <InputElement name="last_name" label={'Last Name'} />
+        <div className="flex gap-2 w-full">
+          <div className='w-1/2'>
+            <InputElement name="first_name" label={'First Name'} />
+          </div>
+          <div className='w-1/2'>
+            <InputElement name="last_name" label={'Last Name'} />
+          </div>
         </div>
 
         <InputElement name="email" label={'Email'} />
-        <InputElement name="phone" label={'Phone Number'} />
+        <PhoneNumberInputElement name='phone' label='Phone Number' />
 
         <SelectElement
           name="residential_status"
