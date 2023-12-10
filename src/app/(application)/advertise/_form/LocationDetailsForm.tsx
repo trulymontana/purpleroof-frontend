@@ -8,11 +8,12 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import { advertiseSteps, emiratesWithLocations } from '@/constants/advertise'
+import { emiratesWithLocations } from '@/constants/advertise'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import SelectElement from '@/components/forms/elements/select-element'
 import { useRouter } from 'next/navigation'
-import { AdvertiseKeys } from '@/constants/local-storage-keys'
+import { BackButton } from '@/components/navigation/back-button'
+import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
   emirate: z.string({
@@ -46,7 +47,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
 
   const router = useRouter();
 
-  const storedValue = localStorage.getItem(AdvertiseKeys.LOCATION_DETAILS);
+  const storedValue = localStorage.getItem(PageRoutes.advertise.LOCATION_DETAILS);
 
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
@@ -56,8 +57,8 @@ const LocationDetailsForm = ({ onSave }: Props) => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    onSave(AdvertiseKeys.LOCATION_DETAILS, values)
-    router.push(advertiseSteps.AMENITIES_DETAILS)
+    onSave(PageRoutes.advertise.LOCATION_DETAILS, values)
+    router.push(PageRoutes.advertise.AMENITIES_DETAILS)
   }
 
   const Emirates = Object.keys(emiratesWithLocations)
@@ -67,7 +68,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
   const locations = selectedEmirate ? emiratesWithLocations[selectedEmirate] : []
 
   // @ts-ignore
-  const basicDetails = JSON.parse(localStorage.getItem(AdvertiseKeys.BASIC_DETAILS))
+  const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS))
 
   return (
     <Form {...form}>
@@ -111,9 +112,10 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
-        <Button type='button' variant="outline" onClick={() => router.push(`${advertiseSteps.PROPERTY_DETAILS}?categoryType=${basicDetails.category}`)} className="w-full">
+        {/* <Button type='button' variant="outline" onClick={() => router.push(`${advertiseSteps.PROPERTY_DETAILS}?categoryType=${basicDetails.category}`)} className="w-full">
           Go Back
-        </Button>
+        </Button> */}
+        <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails.category}`} />
       </form>
     </Form>
   )

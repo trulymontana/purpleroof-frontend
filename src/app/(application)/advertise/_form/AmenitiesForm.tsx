@@ -10,11 +10,12 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { advertiseSteps, amenities, propertyTypes, statuses } from '@/constants/advertise'
+import { amenities, propertyTypes, statuses } from '@/constants/advertise'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 import { useRouter } from 'next/navigation'
 import { TOption } from '@/constants/types'
-import { AdvertiseKeys } from '@/constants/local-storage-keys'
+import { BackButton } from '@/components/navigation/back-button'
+import { PageRoutes } from '@/constants/page-routes'
 
 
 const formSchema = z.object({
@@ -41,7 +42,7 @@ const AmenitiesForm = ({ onSave }: Props) => {
 
   const [selectedAmenities, setSelectedAmenities] = useState<TOption[]>([]);
 
-  const storedValue = localStorage.getItem(AdvertiseKeys.AMENITIES_DETAILS);
+  const storedValue = localStorage.getItem(PageRoutes.advertise.AMENITIES_DETAILS);
 
   const defaultValues: z.infer<typeof formSchema> & { amenities: TOption[] } = storedValue !== null && JSON.parse(storedValue)
 
@@ -60,8 +61,8 @@ const AmenitiesForm = ({ onSave }: Props) => {
     const data = values;
     // @ts-ignore
     data.amenities = selectedAmenities
-    onSave(AdvertiseKeys.AMENITIES_DETAILS, data)
-    router.push(advertiseSteps.PROJECT_STATUS)
+    onSave(PageRoutes.advertise.AMENITIES_DETAILS, data)
+    router.push(PageRoutes.advertise.PROJECT_STATUS)
   }
 
   return (
@@ -99,9 +100,7 @@ const AmenitiesForm = ({ onSave }: Props) => {
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
-        <Button type='button' variant="outline" onClick={() => router.push(advertiseSteps.LOCATION_DETAILS)} className="w-full">
-          Go Back
-        </Button>
+        <BackButton route={PageRoutes.advertise.LOCATION_DETAILS} />
       </form>
     </Form>
   )

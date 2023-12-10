@@ -10,12 +10,12 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { advertiseSteps, bathRooms, bedRooms } from '@/constants/advertise'
+import { bathRooms, bedRooms } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
 import 'react-international-phone/style.css'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
-import { AdvertiseKeys } from '@/constants/local-storage-keys'
 import { PageRoutes } from '@/constants/page-routes'
+import { BackButton } from '@/components/navigation/back-button'
 
 const formSchema = z.object({
   phone: z
@@ -49,7 +49,7 @@ interface Props {
 const PropertyDetailsForm = ({ onSave }: Props) => {
   const router = useRouter()
 
-  const storedValue = localStorage.getItem(AdvertiseKeys.PROPERTY_DETAILS)
+  const storedValue = localStorage.getItem(PageRoutes.advertise.PROPERTY_DETAILS)
 
   const defaultValues: z.infer<typeof formSchema> =
     storedValue !== null && JSON.parse(storedValue)
@@ -60,8 +60,8 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    onSave(AdvertiseKeys.PROPERTY_DETAILS, values)
-    router.push(advertiseSteps.LOCATION_DETAILS)
+    onSave(PageRoutes.advertise.PROPERTY_DETAILS, values)
+    router.push(PageRoutes.advertise.LOCATION_DETAILS)
   }
 
   return (
@@ -108,7 +108,7 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
-        <BackButton />
+        <BackButton route={PageRoutes.advertise.BASIC_DETAILS} />
       </form>
     </Form>
   )
@@ -116,16 +116,3 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
 
 export default PropertyDetailsForm
 
-const BackButton = () => {
-  const router = useRouter()
-  return (
-    <Button
-      type="button"
-      variant="outline"
-      onClick={() => router.back()}
-      className="w-full"
-    >
-      Go Back
-    </Button>
-  )
-}

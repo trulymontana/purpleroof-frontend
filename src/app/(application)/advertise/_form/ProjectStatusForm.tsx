@@ -9,10 +9,11 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { advertiseSteps, projectStatuses, rentedOrVacantOptions } from '@/constants/advertise'
+import {  projectStatuses, rentedOrVacantOptions } from '@/constants/advertise'
 import DatePickerElement from '@/components/forms/elements/date-picker-element'
 import { useRouter } from 'next/navigation'
-import { AdvertiseKeys } from '@/constants/local-storage-keys'
+import { BackButton } from '@/components/navigation/back-button'
+import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
     project_status: z.string(),
@@ -34,7 +35,7 @@ const ProjectStatusForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
-    const storedValue = localStorage.getItem(AdvertiseKeys.PROJECT_STATUS);
+    const storedValue = localStorage.getItem(PageRoutes.advertise.PROJECT_STATUS);
 
     const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
@@ -49,8 +50,8 @@ const ProjectStatusForm = ({ onSave }: Props) => {
     })
 
     function onSubmit(values: TProjectStatus) {
-        onSave(AdvertiseKeys.PROJECT_STATUS, values)
-        router.push(advertiseSteps.CALL_PREFERENCE)
+        onSave(PageRoutes.advertise.PROJECT_STATUS, values)
+        router.push(PageRoutes.advertise.CALL_PREFERENCE)
     }
 
     const project_status = form.watch("project_status")
@@ -87,9 +88,7 @@ const ProjectStatusForm = ({ onSave }: Props) => {
                 <Button type="submit" className="w-full">
                     Save and Continue
                 </Button>
-                <Button type='button' variant="outline" onClick={() => router.push(advertiseSteps.AMENITIES_DETAILS)} className="w-full">
-                    Go Back
-                </Button>
+                <BackButton route={PageRoutes.advertise.AMENITIES_DETAILS} />
             </form>
         </Form>
     )

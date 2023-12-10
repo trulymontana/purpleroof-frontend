@@ -7,10 +7,11 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
-import { advertiseSteps, callPreferences } from '@/constants/advertise'
+import { callPreferences } from '@/constants/advertise'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import { useRouter } from 'next/navigation'
-import { AdvertiseKeys } from '@/constants/local-storage-keys'
+import { BackButton } from '@/components/navigation/back-button'
+import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
     call_preference: z.string({
@@ -26,7 +27,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
-    const storedValue = localStorage.getItem(AdvertiseKeys.CALL_PREFERENCE);
+    const storedValue = localStorage.getItem(PageRoutes.advertise.CALL_PREFERENCE);
 
     const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
@@ -40,7 +41,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
     }
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        onSave(AdvertiseKeys.CALL_PREFERENCE, values)
+        onSave(PageRoutes.advertise.CALL_PREFERENCE, values)
     }
 
     return (
@@ -60,9 +61,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
                 <Button type="submit" className="w-full">
                     Save and Continue
                 </Button>
-                <Button type='button' variant="outline" onClick={() => router.push(advertiseSteps.PROJECT_STATUS)} className="w-full">
-                    Go Back
-                </Button>
+                <BackButton route={PageRoutes.advertise.PROJECT_STATUS} />
             </form>
         </Form>
     )
