@@ -4,6 +4,7 @@ import React from 'react'
 import { AmenitiesForm, BasicDetailsForm, CallPreferenceForm, LocationDetailsForm, ProjectStatusForm, PropertyDetailsForm, RentPropertyDetailsForm } from '../_form'
 import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
+import WhiteStrokes from '@/components/svgs/white-strokes'
 
 const Page = ({ params: { step } }: { params: { step: string } }) => {
 
@@ -39,29 +40,8 @@ const Page = ({ params: { step } }: { params: { step: string } }) => {
                         background: 'linear-gradient(to bottom, #795695 30%, #795695 70%)',
                     }}
                 ></div>
-                <svg
-                    className="absolute inset-0 -z-10 h-full w-full stroke-slate-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
-                    aria-hidden="true"
-                >
-                    <defs>
-                        <pattern
-                            id="83fd4e5a-9d52-42fc-97b6-718e5d7ee527"
-                            width="200"
-                            height="200"
-                            x="50%"
-                            y="-1"
-                            patternUnits="userSpaceOnUse"
-                        >
-                            <path d="M100 200V.5M.5 .5H200" fill="none"></path>
-                        </pattern>
-                    </defs>
-                    <rect
-                        width="100%"
-                        height="100%"
-                        strokeWidth="0"
-                        fill="url(#83fd4e5a-9d52-42fc-97b6-718e5d7ee527)"
-                    ></rect>
-                </svg>
+                <WhiteStrokes />
+
                 <div className="px-6 py-24 mx-auto max-w-7xl sm:py-32 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
                     <div className="max-w-2xl mx-auto lg:mx-0 lg:flex-shrink">
                         <Image src={'/assets/logos/logo-only-white.png'} quality={100} width={1000} height={1000} alt="" className="w-auto h-24" />
