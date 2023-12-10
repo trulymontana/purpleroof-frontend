@@ -11,6 +11,8 @@ import {
     RentPropertyDetailsForm,
 } from '../_form'
 import { usePathname, useSearchParams } from 'next/navigation'
+
+
 import Image from 'next/image'
 import WhiteStrokes from '@/components/svgs/white-strokes'
 import { PageRoutes } from '@/constants/page-routes'
@@ -80,7 +82,9 @@ const Page = ({ params: { step } }: { params: { step: string } }) => {
                 </div>
             </section>
         </div>
-    )
+      </section>
+    </div>
+  )
 }
 
 export default Page
