@@ -106,3 +106,8 @@ export type TOption = {
   label: string
   value: string
 }
+
+export type PreSignedFile = {
+  url: string
+  expiry: number
+}

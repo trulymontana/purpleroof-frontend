@@ -1,4 +1,5 @@
 import DemoForm from '@/components/forms/demo'
+import FileUploader from '@/components/forms/elements/file-uploader'
 
 export default function Home() {
   return (

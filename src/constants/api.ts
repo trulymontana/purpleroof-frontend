@@ -4,5 +4,6 @@ export const ApiEndpoints = {
   MORTGAGES: API_ROOT + '/mortgages',
   USERS: API_ROOT + '/users',
   PROPERTIES: API_ROOT + '/properties',
-  REQUIREMENTS: API_ROOT + '/requirements'
+  REQUIREMENTS: API_ROOT + '/requirements',
+  FILES: API_ROOT + '/files'
 }

@@ -16,6 +16,7 @@ import RadioGroupElement from './elements/radio-group-element'
 import DatePickerElement from './elements/date-picker-element'
 import ComboboxElement from './elements/combobox-element'
 import { Checkbox } from '../ui/checkbox'
+import FileUploader from './elements/file-uploader'
 
 const languages = [
   { label: 'English', value: 'en' },
@@ -50,6 +51,9 @@ const formSchema = z.object({
   }),
   language: z.string({
     required_error: 'Please select a language.'
+  }),
+  profileImage: z.string({
+    required_error: 'Please upload a profile image.'
   })
 })
 
@@ -61,7 +65,8 @@ const DemoForm = () => {
       description: '',
       eligible: false,
       dob: new Date(),
-      notification: 'all'
+      notification: 'all',
+      profileImage: ''
     }
   })
 
@@ -71,6 +76,7 @@ const DemoForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FileUploader folder="profile" name="profileImage" label={'Profile Image'} form={form} />
         <InputElement name="username" label={'User Name'} />
         <TextAreaElement name="description" label={'Description'} />
 
