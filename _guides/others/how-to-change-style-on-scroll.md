@@ -30,40 +30,38 @@ Now, open the project in your favorite code editor and create a new file called 
 Now, add the following code inside the `Header.js` file:
 
 ```jsx
-"use client";
-import React, { useState, useEffect } from "react";
+'use client'
+import React, { useState, useEffect } from 'react'
 
 const Header = () => {
-  const [background, setBackground] = useState("bg-transparent");
-  const [color, setColor] = useState("bg-white");
+  const [background, setBackground] = useState('bg-transparent')
+  const [color, setColor] = useState('bg-white')
 
   const changeColor = () => {
     if (window.scrollY >= 90) {
-      setBackground("bg-white");
-      setColor("text-primary");
+      setBackground('bg-white')
+      setColor('text-primary')
     } else {
-      setBackground("bg-transparent");
-      setColor("text-white");
+      setBackground('bg-transparent')
+      setColor('text-white')
     }
-  };
+  }
 
   useEffect(() => {
-    window.addEventListener("scroll", changeColor);
-    return () => window.removeEventListener("scroll", changeColor);
-  }, []);
+    window.addEventListener('scroll', changeColor)
+    return () => window.removeEventListener('scroll', changeColor)
+  }, [])
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 py-8 px-16 ${background} transition-all duration-300 ease-in-out`}
-    >
+    <nav className={`fixed left-0 right-0 top-0 z-50 px-16 py-8 ${background} transition-all duration-300 ease-in-out`}>
       <div className="flex items-center justify-between">
         <div className={`flex items-center ${color} text-3xl`}>Logo</div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
 ```
 
 In the above code, we have created a functional component called `Header`. Let's understand what we did here.
@@ -73,8 +71,8 @@ In the above code, we have created a functional component called `Header`. Let's
 We have created two state variables. These are utility values for tailwind css. Feel free to add more if you need more control.
 
 ```js
-const [background, setBackground] = useState("bg-transparent");
-const [color, setColor] = useState("bg-white");
+const [background, setBackground] = useState('bg-transparent')
+const [color, setColor] = useState('bg-white')
 ```
 
 Here,
@@ -90,13 +88,13 @@ Now, we have created a function called `changeColor` that will change the value 
 const changeColor = () => {
   //here, 90 means 90 px. Feel free to change the scroll value
   if (window.scrollY >= 90) {
-    setBackground("bg-white");
-    setColor("text-primary");
+    setBackground('bg-white')
+    setColor('text-primary')
   } else {
-    setBackground("bg-transparent");
-    setColor("text-white");
+    setBackground('bg-transparent')
+    setColor('text-white')
   }
-};
+}
 ```
 
 ## Register event listener
@@ -105,9 +103,9 @@ Then we have used the `useEffect` hook to register an event listener to the `scr
 
 ```js
 useEffect(() => {
-  window.addEventListener("scroll", changeColor);
-  return () => window.removeEventListener("scroll", changeColor);
-}, []);
+  window.addEventListener('scroll', changeColor)
+  return () => window.removeEventListener('scroll', changeColor)
+}, [])
 ```
 
 ## Return the header
@@ -115,9 +113,7 @@ useEffect(() => {
 Then, we have returned a `nav` element with some classes. We have used the `background` and `color` variables to set the background and color of the header.
 
 ```jsx
-<nav
-  className={`fixed top-0 left-0 right-0 z-50 py-8 px-16 ${background} transition-all duration-300 ease-in-out`}
->
+<nav className={`fixed left-0 right-0 top-0 z-50 px-16 py-8 ${background} transition-all duration-300 ease-in-out`}>
   <div className="flex items-center justify-between">
     <div className={`flex items-center ${color} text-3xl`}>Logo</div>
   </div>
@@ -129,7 +125,7 @@ Then, we have returned a `nav` element with some classes. We have used the `back
 Now, open the `pages/index.js` file and add the following code:
 
 ```jsx
-import Header from "../components/Header";
+import Header from '../components/Header'
 
 export default function Home() {
   return (
@@ -137,7 +133,7 @@ export default function Home() {
       <Header />
       <h1>Home</h1>
     </div>
-  );
+  )
 }
 ```
 

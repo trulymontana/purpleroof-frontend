@@ -6,7 +6,5 @@ import { ApiEndpoints } from '@/constants/api'
 interface CreatePropertyInput {}
 
 export const propertiesClient = {
-  ...crudFactory<Property, QueryOptions, CreatePropertyInput>(
-    ApiEndpoints.PROPERTIES,
-  ),
+  ...crudFactory<Property, QueryOptions, CreatePropertyInput>(ApiEndpoints.PROPERTIES)
 }

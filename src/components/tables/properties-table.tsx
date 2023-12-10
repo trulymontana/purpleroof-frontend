@@ -7,156 +7,156 @@ import { useGetProperties } from '@/data/hooks/usePropertiesClient'
 export const columns: ColumnDef<Property>[] = [
   {
     accessorKey: 'id',
-    header: 'ID',
+    header: 'ID'
   },
   {
     accessorKey: 'propertyTypeId',
-    header: 'Property Type ID',
+    header: 'Property Type ID'
   },
   {
     accessorKey: 'propertyTypeCategoryId',
-    header: 'Property Type Category ID',
+    header: 'Property Type Category ID'
   },
   {
     accessorKey: 'name',
-    header: 'Name',
+    header: 'Name'
   },
   {
     accessorKey: 'description',
-    header: 'Description',
+    header: 'Description'
   },
   {
     accessorKey: 'phone',
-    header: 'Phone',
+    header: 'Phone'
   },
   {
     accessorKey: 'amount',
-    header: 'Amount',
+    header: 'Amount'
   },
   {
     accessorKey: 'size',
-    header: 'Size',
+    header: 'Size'
   },
   {
     accessorKey: 'numberOfBedRooms',
-    header: 'Number of Bedrooms',
+    header: 'Number of Bedrooms'
   },
   {
     accessorKey: 'numberOfBathRooms',
-    header: 'Number of Bathrooms',
+    header: 'Number of Bathrooms'
   },
   {
     accessorKey: 'maintenanceFee',
-    header: 'Maintenance Fee',
+    header: 'Maintenance Fee'
   },
   {
     accessorKey: 'address',
-    header: 'Address',
+    header: 'Address'
   },
   {
     accessorKey: 'landmark',
-    header: 'Landmark',
+    header: 'Landmark'
   },
   {
     accessorKey: 'createdAt',
-    header: 'Created At',
+    header: 'Created At'
   },
   {
     accessorKey: 'updatedAt',
-    header: 'Updated At',
+    header: 'Updated At'
   },
   {
     accessorKey: 'locationId',
-    header: 'Location ID',
+    header: 'Location ID'
   },
   {
     accessorKey: 'minimumContract',
-    header: 'Minimum Contract',
+    header: 'Minimum Contract'
   },
   {
     accessorKey: 'noticePeriod',
-    header: 'Notice Period',
+    header: 'Notice Period'
   },
   {
     accessorKey: 'deedNumber',
-    header: 'Deed Number',
+    header: 'Deed Number'
   },
   {
     accessorKey: 'unitNumber',
-    header: 'Unit Number',
+    header: 'Unit Number'
   },
   {
     accessorKey: 'buildingName',
-    header: 'Building Name',
+    header: 'Building Name'
   },
   {
     accessorKey: 'floor',
-    header: 'Floor',
+    header: 'Floor'
   },
   {
     accessorKey: 'isApproved',
-    header: 'Is Approved',
+    header: 'Is Approved'
   },
   {
     accessorKey: 'status',
-    header: 'Status',
+    header: 'Status'
   },
   {
     accessorKey: 'userId',
-    header: 'User ID',
+    header: 'User ID'
   },
   {
     accessorKey: 'draft',
-    header: 'Draft',
+    header: 'Draft'
   },
   {
     accessorKey: 'agentInfoId',
-    header: 'Agent Info ID',
+    header: 'Agent Info ID'
   },
   {
     accessorKey: 'paymentInterval',
-    header: 'Payment Interval',
+    header: 'Payment Interval'
   },
   {
     accessorKey: 'emirateId',
-    header: 'Emirate ID',
+    header: 'Emirate ID'
   },
   {
     accessorKey: 'projectStatus',
-    header: 'Project Status',
+    header: 'Project Status'
   },
   {
     accessorKey: 'numberOfCheques',
-    header: 'Number of Cheques',
+    header: 'Number of Cheques'
   },
   {
     accessorKey: 'completionDate',
-    header: 'Completion Date',
+    header: 'Completion Date'
   },
   {
     accessorKey: 'noticePeriodOfRemainingRentalAgreement',
-    header: 'Notice Period of Remaining Rental Agreement',
+    header: 'Notice Period of Remaining Rental Agreement'
   },
   {
     accessorKey: 'numberOfLavatory',
-    header: 'Number of Lavatory',
+    header: 'Number of Lavatory'
   },
   {
     accessorKey: 'rentalAmount',
-    header: 'Rental Amount',
+    header: 'Rental Amount'
   },
   {
     accessorKey: 'trakheesiPermitNo',
-    header: 'Trakheesi Permit No',
+    header: 'Trakheesi Permit No'
   },
   {
     accessorKey: 'lat',
-    header: 'Latitude',
+    header: 'Latitude'
   },
   {
     accessorKey: 'lng',
-    header: 'Longitude',
-  },
+    header: 'Longitude'
+  }
 ]
 
 export default function PropertiesTable() {

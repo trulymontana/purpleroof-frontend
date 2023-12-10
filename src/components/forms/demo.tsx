@@ -26,19 +26,19 @@ const languages = [
   { label: 'Russian', value: 'ru' },
   { label: 'Japanese', value: 'ja' },
   { label: 'Korean', value: 'ko' },
-  { label: 'Chinese', value: 'zh' },
+  { label: 'Chinese', value: 'zh' }
 ]
 
 const formSchema = z.object({
   username: z.string().min(2, {
-    message: 'Username must be at least 2 characters.',
+    message: 'Username must be at least 2 characters.'
   }),
   description: z.string().min(10, {
-    message: 'Description must be at least 10 characters.',
+    message: 'Description must be at least 10 characters.'
   }),
   email: z
     .string({
-      required_error: 'Please select an email to display.',
+      required_error: 'Please select an email to display.'
     })
     .email(),
   marketing_emails: z.boolean().default(false).optional(),
@@ -46,11 +46,11 @@ const formSchema = z.object({
   eligible: z.boolean(),
   dob: z.date(),
   notification: z.enum(['all', 'mentions', 'none'], {
-    required_error: 'You need to select a notification type.',
+    required_error: 'You need to select a notification type.'
   }),
   language: z.string({
-    required_error: 'Please select a language.',
-  }),
+    required_error: 'Please select a language.'
+  })
 })
 
 const DemoForm = () => {
@@ -61,8 +61,8 @@ const DemoForm = () => {
       description: '',
       eligible: false,
       dob: new Date(),
-      notification: 'all',
-    },
+      notification: 'all'
+    }
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -74,11 +74,7 @@ const DemoForm = () => {
         <InputElement name="username" label={'User Name'} />
         <TextAreaElement name="description" label={'Description'} />
 
-        <SwitchElement
-          name="marketing_emails"
-          label={'Marketing Emails'}
-          description=""
-        />
+        <SwitchElement name="marketing_emails" label={'Marketing Emails'} description="" />
 
         <SelectElement
           name="email"
@@ -86,12 +82,12 @@ const DemoForm = () => {
           options={[
             {
               label: 'First',
-              value: 'first@example.com',
+              value: 'first@example.com'
             },
             {
               label: 'Second',
-              value: 'second@example.com',
-            },
+              value: 'second@example.com'
+            }
           ]}
         />
 
@@ -101,22 +97,22 @@ const DemoForm = () => {
           options={[
             {
               label: 'All',
-              value: 'all',
+              value: 'all'
             },
             {
               label: 'Mentions',
-              value: 'mentions',
+              value: 'mentions'
             },
             {
               label: 'None',
-              value: 'none',
-            },
+              value: 'none'
+            }
           ]}
         />
 
         <DatePickerElement name="dob" label={'Date of Birth'} />
 
-        <div className='flex items-center space-x-2'>
+        <div className="flex items-center space-x-2">
           <Checkbox id="terms" />
           <label
             htmlFor="terms"
@@ -126,12 +122,7 @@ const DemoForm = () => {
           </label>
         </div>
 
-        <ComboboxElement
-          name="language"
-          label={'Language'}
-          placeholder={'Select language'}
-          options={languages}
-        />
+        <ComboboxElement name="language" label={'Language'} placeholder={'Select language'} options={languages} />
 
         <Button type="submit">Submit</Button>
       </form>

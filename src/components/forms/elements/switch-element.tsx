@@ -1,12 +1,5 @@
 import React from 'react'
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Switch } from '@/components/ui/switch'
 import { useFormContext } from 'react-hook-form'
 

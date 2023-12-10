@@ -6,8 +6,8 @@ const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_API_ENDPOINT,
   timeout: 10000,
   headers: {
-    'Content-Type': 'application/json',
-  },
+    'Content-Type': 'application/json'
+  }
 })
 
 axiosClient.interceptors.request.use((config: any) => {
@@ -15,7 +15,7 @@ axiosClient.interceptors.request.use((config: any) => {
   if (token) {
     config.headers = {
       ...config.headers,
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`
     }
   }
   return config
@@ -35,23 +35,23 @@ axiosClient.interceptors.response.use(
       toast({
         variant: 'destructive',
         title: 'Uh oh! Something went wrong.',
-        description: error.response.data?.message,
+        description: error.response.data?.message
       })
     } else if (error.request) {
       toast({
         variant: 'destructive',
         title: 'Something went wrong',
-        description: 'No response was received.',
+        description: 'No response was received.'
       })
     } else {
       toast({
         variant: 'destructive',
         title: 'No response was received.',
-        description: 'error.response.data?.message',
+        description: 'error.response.data?.message'
       })
     }
     return Promise.reject(error)
-  },
+  }
 )
 
 export default class HttpClient {

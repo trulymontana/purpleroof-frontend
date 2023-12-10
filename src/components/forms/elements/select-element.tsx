@@ -1,19 +1,6 @@
 import React from 'react'
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useFormContext } from 'react-hook-form'
 import { TOption } from '@/constants/types'
 
@@ -26,14 +13,7 @@ interface Props {
   disabled?: boolean
 }
 
-const SelectElement = ({
-  name,
-  label,
-  description,
-  options,
-  placeholder,
-  disabled = false
-}: Props) => {
+const SelectElement = ({ name, label, description, options, placeholder, disabled = false }: Props) => {
   const { control } = useFormContext()
   return (
     <FormField

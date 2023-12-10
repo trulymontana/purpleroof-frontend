@@ -1,6 +1,6 @@
 export enum SortOrder {
   Asc = 'asc',
-  Desc = 'desc',
+  Desc = 'desc'
 }
 export interface QueryOptions {
   language: string

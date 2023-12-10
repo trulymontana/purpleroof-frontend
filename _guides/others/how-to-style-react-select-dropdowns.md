@@ -17,7 +17,7 @@ yarn add react-select
 Next, import the Select component:
 
 ```jsx
-import Select from "react-select";
+import Select from 'react-select'
 ```
 
 ## Step 3: Use React Select in your JSX

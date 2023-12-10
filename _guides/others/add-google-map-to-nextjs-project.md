@@ -111,9 +111,9 @@ Next, we need to update the center of the map. We can do it by using the `useMem
 const center = useMemo(() => {
   return {
     lat: 10.99835602,
-    lng: 77.01502627,
-  };
-}, []);
+    lng: 77.01502627
+  }
+}, [])
 ```
 
 Then, update the `center` prop of the `GoogleMapReact` component:

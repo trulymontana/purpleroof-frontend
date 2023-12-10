@@ -7,56 +7,56 @@ import { useGetMortgages } from '@/data/hooks/useMortgageClient'
 export const columns: ColumnDef<MortgageApplication>[] = [
   {
     accessorKey: 'id',
-    header: 'ID',
+    header: 'ID'
   },
   {
     accessorKey: 'firstName',
-    header: 'First Name',
+    header: 'First Name'
   },
   {
     accessorKey: 'lastName',
-    header: 'Last Name',
+    header: 'Last Name'
   },
   {
     accessorKey: 'email',
-    header: 'Email',
+    header: 'Email'
   },
   {
     accessorKey: 'phoneNumber',
-    header: 'Phone Number',
+    header: 'Phone Number'
   },
   {
     accessorKey: 'dateOfBirth',
-    header: 'Date of Birth',
+    header: 'Date of Birth'
   },
   {
     accessorKey: 'intendedProperty',
-    header: 'Intended Property',
+    header: 'Intended Property'
   },
   {
     accessorKey: 'monthlyIncome',
-    header: 'Monthly Income',
+    header: 'Monthly Income'
   },
   {
     accessorKey: 'createdAt',
-    header: 'Created At',
+    header: 'Created At'
   },
   {
     accessorKey: 'updatedAt',
-    header: 'Updated At',
+    header: 'Updated At'
   },
   {
     accessorKey: 'userId',
-    header: 'User ID',
+    header: 'User ID'
   },
   {
     accessorKey: 'dialCode',
-    header: 'Dial Code',
+    header: 'Dial Code'
   },
   {
     accessorKey: 'country',
-    header: 'Country',
-  },
+    header: 'Country'
+  }
 ]
 
 export default function MortgagesTable() {

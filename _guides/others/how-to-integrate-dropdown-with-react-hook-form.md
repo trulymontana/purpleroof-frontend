@@ -17,7 +17,7 @@ yarn add react-hook-form
 Next, import the useForm hook:
 
 ```jsx
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form'
 ```
 
 ## Step 3: Use React Hook Form in your JSX
@@ -25,15 +25,15 @@ import { useForm } from "react-hook-form";
 Finally, use the useForm hook in your JSX:
 
 ```jsx
-const { register, handleSubmit } = useForm();
+const { register, handleSubmit } = useForm()
 ```
 
 And your form will look like this
 
 ```jsx
 <form onSubmit={handleSubmit(onSubmit)}>
-  <input {...register("firstName")} />
-  <input {...register("lastName")} />
+  <input {...register('firstName')} />
+  <input {...register('lastName')} />
   <input type="submit" />
 </form>
 ```
@@ -43,7 +43,7 @@ And your form will look like this
 The problem with select dropdowns is that they don't have a value attribute. So you can't use the register prop to register them.
 
 ```jsx
-<select {...register("firstName")}>
+<select {...register('firstName')}>
   <option value="John">John</option>
   <option value="Jane">Jane</option>
 </select>
@@ -54,11 +54,11 @@ The problem with select dropdowns is that they don't have a value attribute. So 
 The solution is to use the Controller component from React Hook Form. The Controller component is a wrapper around the select dropdown that allows you to register it.
 
 ```jsx
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm } from 'react-hook-form'
 
-const { register, handleSubmit, control } = useForm();
+const { register, handleSubmit, control } = useForm()
 
-<Controller
+;<Controller
   name="firstName"
   control={control}
   render={({ field }) => (
@@ -67,7 +67,7 @@ const { register, handleSubmit, control } = useForm();
       <option value="Jane">Jane</option>
     </select>
   )}
-/>;
+/>
 ```
 
 ## Step 5: Use a third party dropdown component
@@ -83,26 +83,26 @@ yarn add react-select
 ```
 
 ```jsx
-import { Controller, useForm } from "react-hook-form";
+import { Controller, useForm } from 'react-hook-form'
 
-const { register, handleSubmit, control } = useForm();
+const { register, handleSubmit, control } = useForm()
 
-<Controller
+;<Controller
   name={label}
   control={control}
   render={({ field }) => (
     <Select
       {...field}
       options={[
-        { value: "chocolate", label: "Chocolate" },
-        { value: "strawberry", label: "Strawberry" },
-        { value: "vanilla", label: "Vanilla" },
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' }
       ]}
       value={options.find((option) => option.value === field.value)}
-      onChange={(selectedOption) => field.onChange(selectedOption?.value ?? "")}
+      onChange={(selectedOption) => field.onChange(selectedOption?.value ?? '')}
     />
   )}
-/>;
+/>
 ```
 
 And that's it! You can now use select dropdowns with React Hook Form.

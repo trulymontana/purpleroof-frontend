@@ -1,11 +1,5 @@
 import { PageRoutes } from '@/constants/page-routes'
-import {
-  Building,
-  FileCode,
-  Home,
-  PersonStandingIcon,
-  User,
-} from 'lucide-react'
+import { Building, FileCode, Home, PersonStandingIcon, User } from 'lucide-react'
 import Link from 'next/link'
 
 const ICON_SIZE = 20
@@ -14,28 +8,28 @@ const navigationSidebarItems = [
   {
     title: 'Mortgages',
     link: PageRoutes.admin.MORTGAGES,
-    icon: <FileCode size={ICON_SIZE} />,
+    icon: <FileCode size={ICON_SIZE} />
   },
   {
     title: 'Properties',
     link: PageRoutes.admin.PROPERTIES,
-    icon: <Building size={ICON_SIZE} />,
+    icon: <Building size={ICON_SIZE} />
   },
   {
     title: 'Agents',
     link: PageRoutes.admin.AGENTS,
-    icon: <PersonStandingIcon size={ICON_SIZE} />,
+    icon: <PersonStandingIcon size={ICON_SIZE} />
   },
   {
     title: 'Users',
     link: PageRoutes.admin.USERS,
-    icon: <User size={ICON_SIZE} />,
+    icon: <User size={ICON_SIZE} />
   },
   {
     title: 'Requirements',
     link: PageRoutes.admin.REQUIREMENTS,
-    icon: <User size={ICON_SIZE} />,
-  },
+    icon: <User size={ICON_SIZE} />
+  }
 ]
 
 interface SidebarNavigationLinkProps {
@@ -43,11 +37,7 @@ interface SidebarNavigationLinkProps {
   link: string
   icon?: React.ReactNode
 }
-const SidebarNavigationLink = ({
-  link,
-  title,
-  icon,
-}: SidebarNavigationLinkProps) => (
+const SidebarNavigationLink = ({ link, title, icon }: SidebarNavigationLinkProps) => (
   <Link
     className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-900 transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50"
     href={link}
@@ -70,12 +60,7 @@ export default function SideNavBar() {
         <div className="flex-1 overflow-auto">
           <nav className="grid items-start px-4 text-sm font-medium">
             {navigationSidebarItems.map((item) => (
-              <SidebarNavigationLink
-                key={item.title}
-                link={item.link}
-                title={item.title}
-                icon={item.icon}
-              />
+              <SidebarNavigationLink key={item.title} link={item.link} title={item.title} icon={item.icon} />
             ))}
           </nav>
         </div>

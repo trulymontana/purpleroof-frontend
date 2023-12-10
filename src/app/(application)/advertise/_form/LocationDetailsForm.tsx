@@ -17,26 +17,26 @@ import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
   emirate: z.string({
-    required_error: 'Please select a Emirate!',
+    required_error: 'Please select a Emirate!'
   }),
   location: z.string({
-    required_error: 'Please select a Location!',
+    required_error: 'Please select a Location!'
   }),
   building_name: z.string({
-    required_error: "Please enter your Building name!"
+    required_error: 'Please enter your Building name!'
   }),
   floor: z.string({
-    required_error: "Please enter your floor"
+    required_error: 'Please enter your floor'
   }),
   street: z.string({
-    required_error: "Please enter Street number"
+    required_error: 'Please enter Street number'
   }),
   unit_number: z.string({
-    required_error: "Please enter Unit number"
+    required_error: 'Please enter Unit number'
   }),
   landmark: z.string({
-    required_error: "Please enter a landmark"
-  }),
+    required_error: 'Please enter a landmark'
+  })
 })
 
 interface Props {
@@ -44,10 +44,9 @@ interface Props {
 }
 
 const LocationDetailsForm = ({ onSave }: Props) => {
+  const router = useRouter()
 
-  const router = useRouter();
-
-  const storedValue = localStorage.getItem(PageRoutes.advertise.LOCATION_DETAILS);
+  const storedValue = localStorage.getItem(PageRoutes.advertise.LOCATION_DETAILS)
 
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
@@ -62,7 +61,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
   }
 
   const Emirates = Object.keys(emiratesWithLocations)
-  const selectedEmirate = form.watch("emirate")
+  const selectedEmirate = form.watch('emirate')
 
   // @ts-ignore
   const locations = selectedEmirate ? emiratesWithLocations[selectedEmirate] : []
@@ -72,20 +71,16 @@ const LocationDetailsForm = ({ onSave }: Props) => {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full space-y-4 p-4"
-      >
-
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <FormField
-          name={"emirate"}
+          name={'emirate'}
           render={({ field }) => (
             <FormItem>
               <FormLabel>Emirate</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder='Please select a Emirate' />
+                    <SelectValue placeholder="Please select a Emirate" />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -101,13 +96,23 @@ const LocationDetailsForm = ({ onSave }: Props) => {
           )}
         />
 
-        <SelectElement name='location' label='Location' options={locations} placeholder={!selectedEmirate ? "Please select emirate first" : "Please select a location"} disabled={!selectedEmirate} />
+        <SelectElement
+          name="location"
+          label="Location"
+          options={locations}
+          placeholder={!selectedEmirate ? 'Please select emirate first' : 'Please select a location'}
+          disabled={!selectedEmirate}
+        />
 
-        <InputElement name="building_name" placeholder='Please enter your building name' label={'Building / Cluster Name'} />
-        <InputElement name="floor" placeholder='Please enter your floor' label={'Floor'} />
-        <InputElement name="street" placeholder='Please enter your street name' label={'Street'} />
-        <InputElement name="unit_number" placeholder='Please enter your unit number' label={'Unit Number'} />
-        <InputElement name="landmark" placeholder='Please enter a landmark' label={'Landmark'} />
+        <InputElement
+          name="building_name"
+          placeholder="Please enter your building name"
+          label={'Building / Cluster Name'}
+        />
+        <InputElement name="floor" placeholder="Please enter your floor" label={'Floor'} />
+        <InputElement name="street" placeholder="Please enter your street name" label={'Street'} />
+        <InputElement name="unit_number" placeholder="Please enter your unit number" label={'Unit Number'} />
+        <InputElement name="landmark" placeholder="Please enter a landmark" label={'Landmark'} />
 
         <Button type="submit" className="w-full">
           Save and Continue

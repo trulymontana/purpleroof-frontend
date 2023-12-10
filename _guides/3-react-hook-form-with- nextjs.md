@@ -80,18 +80,8 @@ const onSubmit = (data) => {
 
 return (
   <form onSubmit={handleSubmit(onSubmit)}>
-    <InputElement
-      control={control}
-      name="username"
-      label="Username"
-      description="Your username"
-    />
-    <InputElement
-      control={control}
-      name="password"
-      label="Password"
-      description="Your password"
-    />
+    <InputElement control={control} name="username" label="Username" description="Your username" />
+    <InputElement control={control} name="password" label="Password" description="Your password" />
     <button type="submit">Submit</button>
   </form>
 )
@@ -198,12 +188,7 @@ export default DatePickerElement
 So now you can just use it like the following
 
 ```jsx
-<DatePickerElement
-  control={control}
-  name="date"
-  label="Date"
-  description="Your date"
-/>
+<DatePickerElement control={control} name="date" label="Date" description="Your date" />
 ```
 
 How clean?
@@ -296,12 +281,12 @@ An example of this SelectElement will be like the following
   options={[
     {
       label: 'First',
-      value: 'first@example.com',
+      value: 'first@example.com'
     },
     {
       label: 'Second',
-      value: 'second@example.com',
-    },
+      value: 'second@example.com'
+    }
   ]}
 />
 ```

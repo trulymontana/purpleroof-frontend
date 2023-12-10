@@ -6,38 +6,38 @@ import {
   CircleIcon,
   CrossCircledIcon,
   QuestionMarkCircledIcon,
-  StopwatchIcon,
+  StopwatchIcon
 } from '@radix-ui/react-icons'
 
 export const labels = [
   {
     value: 'bug',
-    label: 'Bug',
+    label: 'Bug'
   },
   {
     value: 'feature',
-    label: 'Feature',
+    label: 'Feature'
   },
   {
     value: 'documentation',
-    label: 'Documentation',
-  },
+    label: 'Documentation'
+  }
 ]
 
 export const statuses = [
   {
     value: 'pending',
     label: 'Pending',
-    icon: StopwatchIcon,
+    icon: StopwatchIcon
   },
   {
     value: 'completed',
     label: 'Completed',
-    icon: CheckCircledIcon,
+    icon: CheckCircledIcon
   },
   {
     value: 'rejected',
     label: 'Rejected',
-    icon: CrossCircledIcon,
-  },
+    icon: CrossCircledIcon
+  }
 ]

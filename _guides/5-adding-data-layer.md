@@ -184,7 +184,7 @@ import { ApiEndpoints } from '@/constants/api'
 interface CreateUserInput {}
 
 export const userClient = {
-  ...crudFactory<User, QueryOptions, CreateUserInput>(ApiEndpoints.USERS),
+  ...crudFactory<User, QueryOptions, CreateUserInput>(ApiEndpoints.USERS)
 }
 ```
 
@@ -194,7 +194,7 @@ Then a reusable hook to use it.
 export function useGetUsers() {
   const { isLoading, data } = useQuery({
     queryKey: [ApiEndpoints.USERS],
-    queryFn: () => userClient.all(),
+    queryFn: () => userClient.all()
   })
 
   return { users: data?.data, loading: isLoading }

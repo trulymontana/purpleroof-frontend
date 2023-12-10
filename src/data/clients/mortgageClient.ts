@@ -6,7 +6,5 @@ import { ApiEndpoints } from '@/constants/api'
 interface CreateMortgageInput {}
 
 export const mortgageClient = {
-  ...crudFactory<MortgageApplication, QueryOptions, CreateMortgageInput>(
-    ApiEndpoints.MORTGAGES,
-  ),
+  ...crudFactory<MortgageApplication, QueryOptions, CreateMortgageInput>(ApiEndpoints.MORTGAGES)
 }

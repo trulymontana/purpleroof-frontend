@@ -1,27 +1,14 @@
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  DoubleArrowLeftIcon,
-  DoubleArrowRightIcon,
-} from '@radix-ui/react-icons'
+import { ChevronLeftIcon, ChevronRightIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
 
 import { Button } from '@/components/ui/button'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../../ui/select'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select'
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>
 }
 
-export function DataTablePagination<TData>({
-  table,
-}: DataTablePaginationProps<TData>) {
+export function DataTablePagination<TData>({ table }: DataTablePaginationProps<TData>) {
   return (
     <div className="flex items-center justify-between px-2">
       <div className="flex-1 text-sm text-muted-foreground">
@@ -50,8 +37,7 @@ export function DataTablePagination<TData>({
           </Select>
         </div>
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-          Page {table.getState().pagination.pageIndex + 1} of{' '}
-          {table.getPageCount()}
+          Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
         </div>
         <div className="flex items-center space-x-2">
           <Button
