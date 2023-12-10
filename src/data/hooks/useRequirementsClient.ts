@@ -5,7 +5,7 @@ import { requirementsClient } from '../clients/requirementsClient'
 export function useGetRequirements() {
   const { isLoading, data } = useQuery({
     queryKey: [ApiEndpoints.REQUIREMENTS],
-    queryFn: () => requirementsClient.all(),
+    queryFn: () => requirementsClient.all()
   })
 
   return { data: data?.data, loading: isLoading }

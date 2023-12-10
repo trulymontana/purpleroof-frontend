@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
@@ -49,10 +50,16 @@
     "eslint-config-next": "14.0.3",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "husky": "^8.0.3",
     "postcss": "^8",
     "prettier": "^3.1.0",
     "prettier-plugin-tailwindcss": "^0.5.7",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format && git add ."
+    }
   }
 }

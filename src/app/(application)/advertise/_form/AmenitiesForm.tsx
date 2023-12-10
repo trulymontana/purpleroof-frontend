@@ -17,13 +17,12 @@ import { TOption } from '@/constants/types'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 
-
 const formSchema = z.object({
   property_type: z.string({
-    required_error: "Please select a property type!"
+    required_error: 'Please select a property type!'
   }),
   status: z.string({
-    required_error: "Please select your property status"
+    required_error: 'Please select your property status'
   }),
   parking_spaces: z.string().optional(),
   airport_distance: z.string().optional(),
@@ -37,14 +36,14 @@ interface Props {
 }
 
 const AmenitiesForm = ({ onSave }: Props) => {
+  const router = useRouter()
 
-  const router = useRouter();
+  const [selectedAmenities, setSelectedAmenities] = useState<TOption[]>([])
 
-  const [selectedAmenities, setSelectedAmenities] = useState<TOption[]>([]);
+  const storedValue = localStorage.getItem(PageRoutes.advertise.AMENITIES_DETAILS)
 
-  const storedValue = localStorage.getItem(PageRoutes.advertise.AMENITIES_DETAILS);
-
-  const defaultValues: z.infer<typeof formSchema> & { amenities: TOption[] } = storedValue !== null && JSON.parse(storedValue)
+  const defaultValues: z.infer<typeof formSchema> & { amenities: TOption[] } =
+    storedValue !== null && JSON.parse(storedValue)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,12 +52,12 @@ const AmenitiesForm = ({ onSave }: Props) => {
 
   useEffect(() => {
     if (defaultValues?.amenities) {
-      setSelectedAmenities(defaultValues.amenities);
+      setSelectedAmenities(defaultValues.amenities)
     }
-  }, []);
+  }, [])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const data = values;
+    const data = values
     // @ts-ignore
     data.amenities = selectedAmenities
     onSave(PageRoutes.advertise.AMENITIES_DETAILS, data)
@@ -67,35 +66,45 @@ const AmenitiesForm = ({ onSave }: Props) => {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full space-y-4 p-4"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <SelectElement
-          name='property_type'
-          label={"Property Type"}
-          placeholder='Please select a property type'
+          name="property_type"
+          label={'Property Type'}
+          placeholder="Please select a property type"
           options={propertyTypes}
         />
 
-        <SelectElement
-          name='status'
-          label={"Status"}
-          placeholder='Please select a status'
-          options={statuses}
+        <SelectElement name="status" label={'Status'} placeholder="Please select a status" options={statuses} />
+
+        <InputElement
+          name="parking_spaces"
+          placeholder="Please enter parking spaces"
+          label={'Number of Parking Spaces'}
         />
 
-        <InputElement name="parking_spaces" placeholder='Please enter parking spaces' label={'Number of Parking Spaces'} />
+        <MultiSelectCheckbox
+          name="amenities"
+          classNames="grid-cols-2"
+          options={amenities}
+          selectedBoxes={selectedAmenities}
+          setSelectedBoxes={setSelectedAmenities}
+        />
 
-        <MultiSelectCheckbox name='amenities' classNames='grid-cols-2' options={amenities} selectedBoxes={selectedAmenities} setSelectedBoxes={setSelectedAmenities} />
+        <InputElement
+          name="airport_distance"
+          placeholder="Please enter airport distance"
+          label={'Distance from Airport (in km)'}
+        />
 
-        <InputElement name="airport_distance" placeholder='Please enter airport distance' label={'Distance from Airport (in km)'} />
+        <InputElement
+          name="metro_station"
+          placeholder="Please enter metro station"
+          label={'Nearby Metro Station (in km)'}
+        />
 
-        <InputElement name="metro_station" placeholder='Please enter metro station' label={'Nearby Metro Station (in km)'} />
+        <InputElement name="nearby_places" placeholder="Please enter nearby places" label={'Other Nearby Places'} />
 
-        <InputElement name="nearby_places" placeholder='Please enter nearby places' label={'Other Nearby Places'} />
-
-        <InputElement name="other_features" placeholder='Please enter other features' label={'Other Main Features'} />
+        <InputElement name="other_features" placeholder="Please enter other features" label={'Other Main Features'} />
 
         <Button type="submit" className="w-full">
           Save and Continue

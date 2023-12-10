@@ -34,8 +34,8 @@ export default NextAuth({
   providers: [
     Providers.Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+    })
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
@@ -50,8 +50,8 @@ export default NextAuth({
     },
     async jwt(token, user, account, profile, isNewUser) {
       return token
-    },
-  },
+    }
+  }
 })
 ```
 
@@ -71,11 +71,11 @@ export default NextAuth({
         port: process.env.EMAIL_SERVER_PORT,
         auth: {
           user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD,
-        },
+          pass: process.env.EMAIL_SERVER_PASSWORD
+        }
       },
-      from: process.env.EMAIL_FROM,
-    }),
+      from: process.env.EMAIL_FROM
+    })
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
@@ -90,7 +90,7 @@ export default NextAuth({
     },
     async jwt(token, user, account, profile, isNewUser) {
       return token
-    },
-  },
+    }
+  }
 })
 ```

@@ -35,6 +35,6 @@ export function crudFactory<Type, QueryParams, InputType>(endpoint: string) {
     },
     delete(id: number) {
       return HttpClient.delete<boolean>(`${endpoint}/${id}`)
-    },
+    }
   }
 }

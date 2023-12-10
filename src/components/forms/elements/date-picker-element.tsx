@@ -1,12 +1,5 @@
 import { Button } from '@/components/ui/button'
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Calendar as CalenderIcon } from 'lucide-react'
 import { Calendar } from '@/components/ui/calendar'
 
@@ -24,7 +17,7 @@ interface Props {
 }
 
 const DatePickerElement = ({ name, label, description, disabled = false }: Props) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
 
   return (
     <FormField
@@ -38,27 +31,22 @@ const DatePickerElement = ({ name, label, description, disabled = false }: Props
               <FormControl>
                 <Button
                   variant={'outline'}
-                  className={cn(
-                    'w-[240px] pl-3 text-left font-normal',
-                    !field.value && 'text-muted-foreground',
-                  )}
+                  className={cn('w-[240px] pl-3 text-left font-normal', !field.value && 'text-muted-foreground')}
                 >
-                  {field.value ? (
-                    field?.value?.toLocaleDateString()
-                  ) : (
-                    <span>Pick a date</span>
-                  )}
+                  {field.value ? field?.value?.toLocaleDateString() : <span>Pick a date</span>}
                   <CalenderIcon className="ml-auto h-4 w-4" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 bg-slate-950 text-white/80" align="start">
+            <PopoverContent className="w-auto bg-slate-950 p-0 text-white/80" align="start">
               <Calendar
                 mode="single"
                 selected={field.value}
                 onSelect={field.onChange}
-                disabled={!disabled ? ((date) =>
-                  date > new Date() || date < new Date('1900-01-01')) : ((date) => date < new Date('1900-01-01'))
+                disabled={
+                  !disabled
+                    ? (date) => date > new Date() || date < new Date('1900-01-01')
+                    : (date) => date < new Date('1900-01-01')
                 }
                 initialFocus
               />

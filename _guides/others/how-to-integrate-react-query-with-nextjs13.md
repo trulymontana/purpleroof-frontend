@@ -17,7 +17,7 @@ yarn add react-query
 Next, import the QueryClientProvider component:
 
 ```jsx
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from 'react-query'
 ```
 
 ## Step 3: Create a QueryClient
@@ -25,7 +25,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 Next, create a QueryClient:
 
 ```jsx
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 ```
 
 ## Step 4: Wrap your app in a QueryClientProvider
@@ -54,8 +54,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 Then import the `Providers` component in the `layout.tsx` file
 
 ```jsx
-import "./globals.css";
-import Providers from "./providers";
+import './globals.css'
+import Providers from './providers'
 
 export default function RootLayout({ children }) {
   return (
@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
         <Providers>{children}</Providers>
       </body>
     </html>
-  );
+  )
 }
 ```
 
@@ -75,21 +75,21 @@ React query provides a powerful `useQuery` hook to fetch data. You need to pass 
 In this example, we are using `axios` library to fetch data from the server. You can use `fetch` API as well.
 
 ```jsx
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import React from 'react'
+import { useQuery } from '@tanstack/react-query'
+import axios from 'axios'
 
 function Example() {
   const { isLoading, error, data, isFetching } = useQuery({
-    queryKey: ["data_key"],
-    queryFn: () => axios.get("url_endpoint").then((res) => res.data),
-  });
+    queryKey: ['data_key'],
+    queryFn: () => axios.get('url_endpoint').then((res) => res.data)
+  })
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return 'Loading...'
 
-  if (error) return "An error has occurred: " + error.message;
+  if (error) return 'An error has occurred: ' + error.message
 
-  return <div>{data.toString()}</div>;
+  return <div>{data.toString()}</div>
 }
 ```
 
@@ -98,30 +98,27 @@ function Example() {
 React query provides a powerful `useMutation` hook to mutate data.
 
 ```jsx
-import React from "react";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import React from 'react'
+import { useMutation } from '@tanstack/react-query'
+import axios from 'axios'
 
 function Example() {
-  const [mutate, { isLoading, error, data }] = useMutation(
-    (data) => axios.post("url_endpoint", data),
-    {
-      onSuccess: () => {
-        // Invalidate and refetch
-      },
+  const [mutate, { isLoading, error, data }] = useMutation((data) => axios.post('url_endpoint', data), {
+    onSuccess: () => {
+      // Invalidate and refetch
     }
-  );
+  })
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return 'Loading...'
 
-  if (error) return "An error has occurred: " + error.message;
+  if (error) return 'An error has occurred: ' + error.message
 
   return (
     <div>
       {data.toString()}
-      <button onClick={() => mutate(data)}> Update remote</button> // the data is
-      a parameter that will be passed to the mutation function
+      <button onClick={() => mutate(data)}> Update remote</button> // the data is a parameter that will be passed to the
+      mutation function
     </div>
-  );
+  )
 }
 ```

@@ -14,57 +14,53 @@ import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
-    call_preference: z.string({
-        required_error: "Please select a call preference!"
-    })
+  call_preference: z.string({
+    required_error: 'Please select a call preference!'
+  })
 })
 
 interface Props {
-    onSave: (step: string, values: any) => void
+  onSave: (step: string, values: any) => void
 }
 
 const CallPreferenceForm = ({ onSave }: Props) => {
+  const router = useRouter()
 
-    const router = useRouter();
+  const storedValue = localStorage.getItem(PageRoutes.advertise.CALL_PREFERENCE)
 
-    const storedValue = localStorage.getItem(PageRoutes.advertise.CALL_PREFERENCE);
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
-    const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues
+  })
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues
-    })
+  const handlePreferenceChange = (value: string) => {
+    form.setValue('call_preference', value)
+  }
 
-    const handlePreferenceChange = (value: string) => {
-        form.setValue("call_preference", value)
-    }
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    onSave(PageRoutes.advertise.CALL_PREFERENCE, values)
+  }
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        onSave(PageRoutes.advertise.CALL_PREFERENCE, values)
-    }
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
+        <RadioGroupElement
+          handleChange={handlePreferenceChange}
+          name="call_preference"
+          label={'How would you prefer to handle inquiries from potential leads interested in this advertisement?'}
+          className="flex-col items-start gap-4"
+          options={callPreferences}
+        />
 
-    return (
-        <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="w-full space-y-4 p-4"
-            >
-                <RadioGroupElement
-                    handleChange={handlePreferenceChange}
-                    name="call_preference"
-                    label={'How would you prefer to handle inquiries from potential leads interested in this advertisement?'}
-                    className='items-start gap-4 flex-col'
-                    options={callPreferences}
-                />
-
-                <Button type="submit" className="w-full">
-                    Save and Continue
-                </Button>
-                <BackButton route={PageRoutes.advertise.PROJECT_STATUS} />
-            </form>
-        </Form>
-    )
+        <Button type="submit" className="w-full">
+          Save and Continue
+        </Button>
+        <BackButton route={PageRoutes.advertise.PROJECT_STATUS} />
+      </form>
+    </Form>
+  )
 }
 
 export default CallPreferenceForm

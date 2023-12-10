@@ -17,78 +17,74 @@ import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
-    category: z.string({
-        required_error: "Please select a category"
-    }).refine(val => val === 'sell' || val === 'rent'),
-    advert_title: z.string({
-        required_error: 'Title should not be empty!',
-    }),
-    type_of_property: z.string({
-        required_error: "Please select a property type!"
-    }),
-    property_option: z.string({
-        required_error: "Please select a property option"
+  category: z
+    .string({
+      required_error: 'Please select a category'
     })
+    .refine((val) => val === 'sell' || val === 'rent'),
+  advert_title: z.string({
+    required_error: 'Title should not be empty!'
+  }),
+  type_of_property: z.string({
+    required_error: 'Please select a property type!'
+  }),
+  property_option: z.string({
+    required_error: 'Please select a property option'
+  })
 })
 
 interface Props {
-    onSave: (step: string, values: any) => void
+  onSave: (step: string, values: any) => void
 }
 
 const BasicDetailsForm = ({ onSave }: Props) => {
+  const router = useRouter()
 
-    const router = useRouter();
+  const storedValue = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS)
+  const defaultValues: z.infer<typeof formSchema> =
+    storedValue !== null
+      ? JSON.parse(storedValue)
+      : {
+          category: 'sell'
+        }
 
-    const storedValue = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS);
-    const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : {
-        category: "sell",
-    };
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues
+  })
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues
-    })
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    onSave(PageRoutes.advertise.BASIC_DETAILS, values)
+    router.push(`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${form.getValues('category')}`)
+  }
 
+  const propertyType = form.watch('type_of_property')
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        onSave(PageRoutes.advertise.BASIC_DETAILS, values)
-        router.push(`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${form.getValues("category")}`)
-    }
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
+        <TabRadioGroup name="category" options={categories} />
 
-    const propertyType = form.watch("type_of_property")
+        <InputElement name="advert_title" placeholder="Please enter Advert Title" label={'Advert Title'} />
 
-    return (
-        <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="w-full space-y-4 p-4"
-            >
-                <TabRadioGroup
-                    name="category"
-                    options={categories}
-                />
+        <RadioGroupElement
+          name="type_of_property"
+          label={'Type of Property'}
+          className="items-center gap-10"
+          options={typesOfProperties}
+        />
 
-                <InputElement name="advert_title" placeholder='Please enter Advert Title' label={'Advert Title'} />
-
-                <RadioGroupElement
-                    name="type_of_property"
-                    label={'Type of Property'}
-                    className='items-center gap-10'
-                    options={typesOfProperties}
-                />
-
-                <SelectElement
-                    name='property_option'
-                    label={propertyType === 'residential' ? "Residential" : "Commercial"}
-                    options={propertyType === "residential" ? residentalTypes : commercialTypes}
-                />
-                <Button variant={"default"} type='submit' className='w-full'>
-                    Save and Continue
-                </Button>
-            </form>
-        </Form >
-
-    )
+        <SelectElement
+          name="property_option"
+          label={propertyType === 'residential' ? 'Residential' : 'Commercial'}
+          options={propertyType === 'residential' ? residentalTypes : commercialTypes}
+        />
+        <Button variant={'default'} type="submit" className="w-full">
+          Save and Continue
+        </Button>
+      </form>
+    </Form>
+  )
 }
 
 export default BasicDetailsForm

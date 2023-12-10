@@ -6,7 +6,5 @@ import { ApiEndpoints } from '@/constants/api'
 interface CreateRequirementInput {}
 
 export const requirementsClient = {
-  ...crudFactory<RequirementApplication, QueryOptions, CreateRequirementInput>(
-    ApiEndpoints.REQUIREMENTS,
-  ),
+  ...crudFactory<RequirementApplication, QueryOptions, CreateRequirementInput>(ApiEndpoints.REQUIREMENTS)
 }

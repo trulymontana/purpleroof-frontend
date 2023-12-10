@@ -6,7 +6,7 @@ import { propertiesClient } from '../clients/propertiesClient'
 export function useGetProperties() {
   const { isLoading, data } = useQuery({
     queryKey: [ApiEndpoints.PROPERTIES],
-    queryFn: () => propertiesClient.all(),
+    queryFn: () => propertiesClient.all()
   })
 
   return { data: data?.data, loading: isLoading }

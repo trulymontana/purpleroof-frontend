@@ -20,26 +20,26 @@ import { BackButton } from '@/components/navigation/back-button'
 const formSchema = z.object({
   phone: z
     .string({
-      required_error: 'Please enter a valid phone number.',
+      required_error: 'Please enter a valid phone number.'
     })
     .min(10, {
-      message: 'Phone number must be at least 10 characters.',
+      message: 'Phone number must be at least 10 characters.'
     }),
   property_value: z.string({
-    required_error: 'Please enter a property value',
+    required_error: 'Please enter a property value'
   }),
   property_size: z.string({
-    required_error: 'Please enter a property size',
+    required_error: 'Please enter a property size'
   }),
   bed_rooms: z.string({
-    required_error: 'Please enter number of bed rooms!',
+    required_error: 'Please enter number of bed rooms!'
   }),
   bath_rooms: z.string({
-    required_error: 'Please enter number of bath rooms!',
+    required_error: 'Please enter number of bath rooms!'
   }),
   deed_number: z.string({
-    required_error: 'Please enter your Deed Number',
-  }),
+    required_error: 'Please enter your Deed Number'
+  })
 })
 
 interface Props {
@@ -51,12 +51,11 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.PROPERTY_DETAILS)
 
-  const defaultValues: z.infer<typeof formSchema> =
-    storedValue !== null && JSON.parse(storedValue)
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues,
+    defaultValues
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -66,10 +65,7 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full space-y-4 p-4"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <PhoneNumberInputElement name="phone" label="Phone Number" />
 
         <InputElement
@@ -115,4 +111,3 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
 }
 
 export default PropertyDetailsForm
-

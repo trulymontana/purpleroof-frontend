@@ -31,8 +31,8 @@ You can do it with dynamic routes as well. For example, if you want to pass 2 se
 ```jsx
 <Link
   href={{
-    pathname: "/search",
-    query: { locationId, categoryId },
+    pathname: '/search',
+    query: { locationId, categoryId }
   }}
 >
   Location Name
@@ -56,12 +56,12 @@ You can also use dynamic search parameters. For example, if you want to pass the
 NextJS 13 provides a hook called `useSearchParams` to access the search parameters.
 
 ```jsx
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from 'next/navigation'
 
 export default function Search() {
-  const searchParams = useSearchParams();
-  const searchTerm = searchParams.get("searchTerm") ?? "";
+  const searchParams = useSearchParams()
+  const searchTerm = searchParams.get('searchTerm') ?? ''
 
-  return <div>Search query: {searchTerm}</div>;
+  return <div>Search query: {searchTerm}</div>
 }
 ```

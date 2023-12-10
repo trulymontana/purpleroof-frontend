@@ -5,7 +5,7 @@ import { mortgageClient } from '../clients/mortgageClient'
 export function useGetMortgages() {
   const { isLoading, data } = useQuery({
     queryKey: [ApiEndpoints.MORTGAGES],
-    queryFn: () => mortgageClient.all(),
+    queryFn: () => mortgageClient.all()
   })
 
   return { data: data?.data, loading: isLoading }

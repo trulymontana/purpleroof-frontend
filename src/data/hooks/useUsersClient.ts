@@ -5,7 +5,7 @@ import { ApiEndpoints } from '@/constants/api'
 export function useGetUsers() {
   const { isLoading, data } = useQuery({
     queryKey: [ApiEndpoints.USERS],
-    queryFn: () => userClient.all(),
+    queryFn: () => userClient.all()
   })
 
   return { users: data?.data, loading: isLoading }

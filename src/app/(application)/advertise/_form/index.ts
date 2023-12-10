@@ -13,5 +13,5 @@ export {
   ProjectStatusForm,
   PropertyDetailsForm,
   RentPropertyDetailsForm,
-  CallPreferenceForm,
+  CallPreferenceForm
 }

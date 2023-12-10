@@ -21,8 +21,8 @@ Then, add the plugin to your `tailwind.config.js` file.
 ```js
 module.exports = {
   // ...
-  plugins: [require("@tailwindcss/forms")],
-};
+  plugins: [require('@tailwindcss/forms')]
+}
 ```
 
 We will use the `appearance-none` class to remove the default appearance of the checkbox.
