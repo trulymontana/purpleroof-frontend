@@ -6,6 +6,10 @@ export const PageRoutes = {
     USERS: '/admin/users',
     REQUIREMENTS: '/admin/requirements'
   },
+  mortgage: {
+    PERSONAL_DETAILS: '/mortgage/personal-details',
+    INCOME_DETAILS: '/advertise/income-details',
+  },
   advertise: {
     BASIC_DETAILS: '/advertise/basic-details',
     PROPERTY_DETAILS: '/advertise/property-details',
