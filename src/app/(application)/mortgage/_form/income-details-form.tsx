@@ -15,52 +15,47 @@ import { loanTypes } from '@/constants/financial'
 import { countries } from '@/constants/countries'
 import ComboboxElement from '@/components/forms/elements/combobox-element'
 import DatePickerElement from '@/components/forms/elements/date-picker-element'
+import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
-  first_name: z.string().min(2, {
-    message: 'First Name must be at least 2 characters.'
+  country: z.string({
+    required_error: "Please select your country"
   }),
-  last_name: z.string().min(2, {
-    message: 'Last Name must be at least 2 characters.'
+  dob: z.string({
+    required_error: "Please enter your DOB"
   }),
-  email: z
-    .string({
-      required_error: 'Please enter a valid email.'
-    })
-    .email(),
-  phone: z
-    .string({
-      required_error: 'Please enter a valid phone number.'
-    })
-    .min(10, {
-      message: 'Phone number must be at least 10 characters.'
-    }),
-  description: z.string().min(10, {
-    message: 'Description must be at least 10 characters.'
+  value_of_property: z.string({
+    required_error: "Please enter value of your property",
   }),
-  agree_to_privacy_policy: z.boolean().refine((data) => data === true, {
-    message: 'You must agree to the privacy policy.'
+  monthly_income: z.string({
+    required_error: "Please enter your montly income"
   }),
-  residential_status: z.string({
-    required_error: 'Please select a residential status.'
-  }),
-  income_profile: z.string({
-    required_error: 'Please select an income profile.'
+  loan_type: z.string({
+    required_error: "Please select a loan type"
   })
 })
 
-const IncomeDetailsForm = () => {
+interface Props {
+  onSave: (step: string, values: z.infer<typeof formSchema>) => void
+}
+
+const IncomeDetailsForm = ({ onSave }: Props) => {
+
+  const storedValue = localStorage.getItem(PageRoutes.mortgage.INCOME_DETAILS)
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
+
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema)
+    resolver: zodResolver(formSchema),
+    defaultValues
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    onSave(PageRoutes.mortgage.INCOME_DETAILS, values)
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-96 space-y-4 p-4 shadow-md">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <ComboboxElement name="country" label={'Country'} placeholder={'Select your country'} options={countries} />
         <DatePickerElement name="dob" label="Date of Birth" />
 

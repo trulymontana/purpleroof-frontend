@@ -120,7 +120,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         {/* <Button type='button' variant="outline" onClick={() => router.push(`${advertiseSteps.PROPERTY_DETAILS}?categoryType=${basicDetails.category}`)} className="w-full">
           Go Back
         </Button> */}
-        <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails.category}`} />
+        <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails?.category}`} />
       </form>
     </Form>
   )
