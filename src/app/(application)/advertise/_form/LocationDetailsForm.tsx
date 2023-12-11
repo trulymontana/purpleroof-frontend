@@ -14,6 +14,7 @@ import SelectElement from '@/components/forms/elements/select-element'
 import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
+import FileUploader from '@/components/forms/elements/file-uploader'
 
 const formSchema = z.object({
   emirate: z.string({
@@ -36,6 +37,9 @@ const formSchema = z.object({
   }),
   landmark: z.string({
     required_error: 'Please enter a landmark'
+  }),
+  property_image: z.string({
+    required_error: 'Please upload a property image'
   })
 })
 
@@ -67,7 +71,11 @@ const LocationDetailsForm = ({ onSave }: Props) => {
   const locations = selectedEmirate ? emiratesWithLocations[selectedEmirate] : []
 
   // @ts-ignore
-  const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS))
+  const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS));
+
+  const property_image = form.watch("property_image");
+
+  console.log(!property_image)
 
   return (
     <Form {...form}>
@@ -113,13 +121,11 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <InputElement name="street" placeholder="Please enter your street name" label={'Street'} />
         <InputElement name="unit_number" placeholder="Please enter your unit number" label={'Unit Number'} />
         <InputElement name="landmark" placeholder="Please enter a landmark" label={'Landmark'} />
+        <FileUploader folder="profile" name="property_image" label={'Upload Photo of the Property'} form={form} />
 
-        <Button type="submit" className="w-full">
+        <Button type="submit" disabled={!property_image} className="w-full">
           Save and Continue
         </Button>
-        {/* <Button type='button' variant="outline" onClick={() => router.push(`${advertiseSteps.PROPERTY_DETAILS}?categoryType=${basicDetails.category}`)} className="w-full">
-          Go Back
-        </Button> */}
         <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails?.category}`} />
       </form>
     </Form>

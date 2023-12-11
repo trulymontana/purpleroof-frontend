@@ -10,7 +10,7 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { bathRooms, bedRooms, paymentIntervals } from '@/constants/advertise'
+import { bathRooms, bedRooms, lavatories, paymentIntervals } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
 import { PageRoutes } from '@/constants/page-routes'
@@ -35,12 +35,9 @@ const formSchema = z.object({
   minimum_contract: z.string({
     required_error: 'Please enter a minimum contract period!'
   }),
-  bed_rooms: z.string({
-    required_error: 'Please enter number of bed rooms!'
-  }),
-  bath_rooms: z.string({
-    required_error: 'Please enter number of bath rooms!'
-  }),
+  bed_rooms: z.string().optional(),
+  bath_rooms: z.string().optional(),
+  lavatories: z.string().optional(),
   deed_number: z.string({
     required_error: 'Please enter your Deed Number'
   })
@@ -52,6 +49,8 @@ interface Props {
 
 const RentPropertyDetailsForm = ({ onSave }: Props) => {
   const router = useRouter()
+
+  const basic_details = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS);
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.PROPERTY_DETAILS)
 
@@ -91,9 +90,19 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
           label={'Minimum Contract (in months)'}
         />
 
-        <SelectElement name="bed_rooms" label={'Number of Bed Rooms'} options={bedRooms} />
+        {
+          basic_details && JSON.parse(basic_details).type_of_property === 'residential' ? (
+            <>
+              <SelectElement name="bed_rooms" label={'Number of Bed Rooms'} options={bedRooms} />
 
-        <SelectElement name="bath_rooms" label={'Number of Bath Rooms'} options={bathRooms} />
+              <SelectElement name="bath_rooms" label={'Number of Bath Rooms'} options={bathRooms} />
+            </>
+          ) : (
+            <SelectElement name='lavatories' label='Number of Lavatory' options={lavatories} />
+          )
+        }
+
+
 
         <InputElement
           name="deed_number"

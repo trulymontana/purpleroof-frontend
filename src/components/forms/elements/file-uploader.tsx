@@ -42,21 +42,23 @@ const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }
   const isLoading = isUploadLoading || isDeleteLoading
 
   return (
-    <div className="flex items-center  gap-4 px-4 py-2">
-      <div className="text-lg font-semibold ">{label}</div>
-      <div className="justify-self-end">
-        <div className="grid w-full max-w-sm items-center gap-1.5">
-          <Input id="file-upload" type="file" onChange={handleFileUpload} />
+    <div className="flex flex-col items-start  gap-2 py-2">
+      <div className="text-sm font-medium ">{label}</div>
+      <div className='flex items-center gap-2'>
+        <div className="justify-self-end">
+          <div className="grid w-full max-w-sm items-center gap-1.5">
+            <Input id="file-upload" type="file" onChange={handleFileUpload} />
+          </div>
         </div>
+        {isLoading && (
+          <div className="flex items-center justify-center">
+            <div className="h-4 w-4 animate-spin rounded-full border-t-2 border-solid border-slate-600"></div>
+          </div>
+        )}
+        {!isLoading && (
+          <span className="cursor-pointer">{fileUrl ? <XSquare onClick={handleFileDelete} /> : <FolderClosed />}</span>
+        )}
       </div>
-      {isLoading && (
-        <div className="flex items-center justify-center">
-          <div className="h-4 w-4 animate-spin rounded-full border-t-2 border-solid border-slate-600"></div>
-        </div>
-      )}
-      {!isLoading && (
-        <span className="cursor-pointer">{fileUrl ? <XSquare onClick={handleFileDelete} /> : <FolderClosed />}</span>
-      )}
     </div>
   )
 }
