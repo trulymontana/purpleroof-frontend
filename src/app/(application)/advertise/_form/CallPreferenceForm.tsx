@@ -57,7 +57,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
-        <BackButton route={PageRoutes.advertise.PROJECT_STATUS} />
+        <BackButton route={PageRoutes.advertise.UPLOAD_PHOTOS} />
       </form>
     </Form>
   )

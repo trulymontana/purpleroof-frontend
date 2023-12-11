@@ -8,7 +8,8 @@ import {
   LocationDetailsForm,
   ProjectStatusForm,
   PropertyDetailsForm,
-  RentPropertyDetailsForm
+  RentPropertyDetailsForm,
+  UploadDocumentsForm
 } from '../_form'
 import { usePathname, useSearchParams } from 'next/navigation'
 
@@ -39,6 +40,7 @@ const Page = ({ params: { step } }: { params: { step: string } }) => {
     [PageRoutes.advertise.LOCATION_DETAILS]: <LocationDetailsForm onSave={storeValues} />,
     [PageRoutes.advertise.AMENITIES_DETAILS]: <AmenitiesForm onSave={storeValues} />,
     [PageRoutes.advertise.PROJECT_STATUS]: <ProjectStatusForm onSave={storeValues} />,
+    [PageRoutes.advertise.UPLOAD_PHOTOS]: <UploadDocumentsForm onSave={storeValues} />,
     [PageRoutes.advertise.CALL_PREFERENCE]: <CallPreferenceForm onSave={storeValues} />
   }
 
