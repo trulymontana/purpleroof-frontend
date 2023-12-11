@@ -121,7 +121,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <InputElement name="street" placeholder="Please enter your street name" label={'Street'} />
         <InputElement name="unit_number" placeholder="Please enter your unit number" label={'Unit Number'} />
         <InputElement name="landmark" placeholder="Please enter a landmark" label={'Landmark'} />
-        <FileUploader folder="profile" name="property_image" label={'Upload Photo of the Property'} form={form} />
+        <FileUploader folder="advertise" name="property_image" label={'Upload Photo of the Property'} form={form} />
 
         <Button type="submit" disabled={!property_image} className="w-full">
           Save and Continue

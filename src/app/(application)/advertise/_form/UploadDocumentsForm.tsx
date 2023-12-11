@@ -13,7 +13,7 @@ import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
 
 const formSchema = z.object({
-    passporty_copy: z.string({
+    passport_copy: z.string({
         required_error: 'Please upload your passport copy'
     }),
     visa_copy: z.string({
@@ -46,7 +46,7 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
         defaultValues
     })
 
-    const passport_copy = form.watch("passporty_copy");
+    const passport_copy = form.watch("passport_copy");
     const visa_copy = form.watch("visa_copy");
     const emirates_id = form.watch("emirates_id");
     const title_deed_copy = form.watch("title_deed_copy");
@@ -64,11 +64,11 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
 
-                <FileUploader folder="profile" name="passporty_copy" label={'Passport Copy'} form={form} />
-                <FileUploader folder="profile" name="visa_copy" label={'Visa Copy'} form={form} />
-                <FileUploader folder="profile" name="emirates_id" label={'Emirates ID'} form={form} />
-                <FileUploader folder="profile" name="title_deed_copy" label={'Title Deed Copy'} form={form} />
-                <FileUploader folder="profile" name="owner_proof_of_mobile_number" label={'Ownership Proof of Mobile Number'} form={form} />
+                <FileUploader folder="advertise" name="passport_copy" label={'Passport Copy'} form={form} />
+                <FileUploader folder="advertise" name="visa_copy" label={'Visa Copy'} form={form} />
+                <FileUploader folder="advertise" name="emirates_id" label={'Emirates ID'} form={form} />
+                <FileUploader folder="advertise" name="title_deed_copy" label={'Title Deed Copy'} form={form} />
+                <FileUploader folder="advertise" name="owner_proof_of_mobile_number" label={'Ownership Proof of Mobile Number'} form={form} />
 
                 <Button
                     disabled={disable}

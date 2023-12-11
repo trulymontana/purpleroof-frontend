@@ -8,7 +8,10 @@ export const useFileUploader = (folder: string, fileName: string) => {
   const [loading, setLoading] = useState(false)
   const uploadFile = async (file: File) => {
     setLoading(true)
-    const uploadUrl: { data: PreSignedFile } = await fileClient.getPreSignedUrl(folder, `${fileName}-${file.name}`)
+    const uploadUrl: { data: PreSignedFile } = await fileClient.getPreSignedUrl(
+      folder,
+      `${fileName}-${new Date().toLocaleTimeString()}`
+    )
     const formData = new FormData()
     formData.append('file', file)
     await fetch(uploadUrl.data.url, {
@@ -25,7 +28,7 @@ export const useFileUploader = (folder: string, fileName: string) => {
       })
       .finally(() => setLoading(false))
 
-    const objectUrl = `https://${S3_BUCKET_NAME}.s3.amazonaws.com/${folder}/${fileName}-${file.name}`
+    const objectUrl = `https://${S3_BUCKET_NAME}.s3.amazonaws.com/${folder}/${fileName}-${new Date().toLocaleTimeString()}`
     return objectUrl
   }
 
