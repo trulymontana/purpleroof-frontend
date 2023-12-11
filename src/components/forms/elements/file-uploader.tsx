@@ -1,9 +1,11 @@
 'use client'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { useFileDeleter, useFileUploader } from '@/data/hooks/useFileClient'
 import { FolderClosed, XSquare } from 'lucide-react'
 
 import React, { useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 
 interface FileUploaderProps {
   form: any
@@ -13,6 +15,9 @@ interface FileUploaderProps {
 }
 
 const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }) => {
+
+  const { control } = useFormContext();
+
   const [file, setFile] = useState<File | undefined>(undefined)
   const [fileUrl, setFileUrl] = useState<string>('')
   const { loading: isUploadLoading, uploadFile } = useFileUploader(folder, name)
@@ -42,24 +47,29 @@ const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }
   const isLoading = isUploadLoading || isDeleteLoading
 
   return (
-    <div className="flex flex-col items-start  gap-2 py-2">
-      <div className="text-sm font-medium ">{label}</div>
-      <div className='flex items-center gap-2'>
-        <div className="justify-self-end">
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-            <Input id="file-upload" type="file" onChange={handleFileUpload} />
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
+          <div className='flex items-center gap-2'>
+            <FormControl>
+              <Input id="file-upload" type="file" onChange={handleFileUpload} />
+            </FormControl>
+            {isLoading && (
+              <div className="flex items-center justify-center">
+                <div className="h-4 w-4 animate-spin rounded-full border-t-2 border-solid border-slate-600"></div>
+              </div>
+            )}
+            {!isLoading && (
+              <span className="cursor-pointer">{fileUrl ? <XSquare onClick={handleFileDelete} /> : <FolderClosed />}</span>
+            )}
           </div>
-        </div>
-        {isLoading && (
-          <div className="flex items-center justify-center">
-            <div className="h-4 w-4 animate-spin rounded-full border-t-2 border-solid border-slate-600"></div>
-          </div>
-        )}
-        {!isLoading && (
-          <span className="cursor-pointer">{fileUrl ? <XSquare onClick={handleFileDelete} /> : <FolderClosed />}</span>
-        )}
-      </div>
-    </div>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   )
 }
 
