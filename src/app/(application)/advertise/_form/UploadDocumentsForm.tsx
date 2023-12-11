@@ -37,7 +37,7 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
 
     const router = useRouter();
 
-    const storedValue = localStorage.getItem(PageRoutes.advertise.UPLOAD_PHOTOS)
+    const storedValue = localStorage.getItem(PageRoutes.advertise.UPLOAD_PHOTOS);
 
     const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
@@ -46,9 +46,14 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
         defaultValues
     })
 
-    const passport = form.watch("passporty_copy")
+    const passport_copy = form.watch("passporty_copy");
+    const visa_copy = form.watch("visa_copy");
+    const emirates_id = form.watch("emirates_id");
+    const title_deed_copy = form.watch("title_deed_copy");
+    const owner_proof_of_mobile_number = form.watch("owner_proof_of_mobile_number");
 
-    console.log(!passport)
+    const disable = !passport_copy || !visa_copy || !emirates_id || !title_deed_copy || !owner_proof_of_mobile_number
+
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         onSave(PageRoutes.advertise.UPLOAD_PHOTOS, values)
@@ -65,7 +70,10 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
                 <FileUploader folder="profile" name="title_deed_copy" label={'Title Deed Copy'} form={form} />
                 <FileUploader folder="profile" name="owner_proof_of_mobile_number" label={'Ownership Proof of Mobile Number'} form={form} />
 
-                <Button disabled={!passport} type="submit" className="w-full">
+                <Button
+                    disabled={disable}
+                    type="submit"
+                    className="w-full">
                     Save and Continue
                 </Button>
 
