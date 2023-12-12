@@ -1,4 +1,13 @@
 export const PageRoutes = {
+  dashboard: {
+    admin: {
+      AGENTS: '/dashboard/admin/agents',
+      USERS: '/dashboard/admin/users',
+      REQUIREMENTS: '/dashboard/admin/requirements'
+    },
+    MORTGAGES: '/dashboard/mortgages',
+    PROPERTIES: '/dashboard/properties'
+  },
   admin: {
     MORTGAGES: '/admin/mortgages',
     PROPERTIES: '/admin/properties',
