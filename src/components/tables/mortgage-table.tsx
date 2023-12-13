@@ -56,6 +56,10 @@ export const columns: ColumnDef<MortgageApplication>[] = [
   {
     accessorKey: 'country',
     header: 'Country'
+  },
+  {
+    accessorKey: 'actions',
+    header: 'Actions'
   }
 ]
 
