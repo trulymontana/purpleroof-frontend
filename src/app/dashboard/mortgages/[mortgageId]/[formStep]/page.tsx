@@ -14,10 +14,14 @@ interface Props {
 
 const Page = ({ params: { mortgageId, formStep } }: Props) => {
 
+    const storeValues = (step: string, values: any) => {
+        localStorage.setItem(step, JSON.stringify(values))
+    }
+
     const subComponents: { [key: string]: React.ReactElement } = {
-        'transaction-info': <TransactionInfoForm mortgageId={mortgageId} />,
+        'transaction-info': <TransactionInfoForm mortgageId={mortgageId} onSave={storeValues} />,
         // documents form
-        'customer-info': <CustomerInfoForm mortgageId={mortgageId} />,
+        'customer-info': <CustomerInfoForm mortgageId={mortgageId} onSave={storeValues} />,
     }
 
     return (

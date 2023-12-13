@@ -19,10 +19,7 @@ import { Checkbox } from '../../../../components/ui/checkbox'
 import FileUploader from '../../../../components/forms/elements/file-uploader'
 import { financeTypes, completionStatus, emirate, propertyType, transactionTypes } from '@/constants/mortgage'
 import { usePathname, useRouter } from 'next/navigation'
-
-interface Props {
-    mortgageId: string
-}
+import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
     property_type: z.string({
@@ -40,18 +37,27 @@ const formSchema = z.object({
     additional_details: z.string().optional()
 })
 
-const TransactionInfoForm = ({ mortgageId }: Props) => {
+interface Props {
+    mortgageId: string
+    onSave: (step: string, values: any) => void
+}
+
+const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
 
     const router = useRouter();
-    const pathname = usePathname();
+
+    const storedValue = localStorage.getItem('mortgage/transaction-info')
+    const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
+        defaultValues
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
-        router.push(`/dashboard/mortgages/${mortgageId}/customer-info`)
+        onSave("mortgage/transaction-info", values)
+        router.push(`${PageRoutes.dashboard.MORTGAGES}/${mortgageId}/customer-info`)
     }
 
     return (

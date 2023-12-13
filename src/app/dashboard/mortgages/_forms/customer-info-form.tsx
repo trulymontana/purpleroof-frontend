@@ -19,10 +19,9 @@ import { Checkbox } from '../../../../components/ui/checkbox'
 import FileUploader from '../../../../components/forms/elements/file-uploader'
 import { financeTypes, completionStatus, emirate, propertyType, transactionTypes, educationOptions, maritalStatusOptions } from '@/constants/mortgage'
 import PhoneNumberInputElement from '../../../../components/forms/elements/phone-number-input'
+import { BackButton } from '@/components/navigation/back-button'
+import { PageRoutes } from '@/constants/page-routes'
 
-interface Props {
-    mortgageId: string
-}
 
 const formSchema = z.object({
     name: z.string({
@@ -60,13 +59,24 @@ const formSchema = z.object({
     }),
 })
 
-const CustomerInfoForm = ({ mortgageId }: Props) => {
+interface Props {
+    mortgageId: string
+    onSave: (step: string, values: any) => void
+}
+
+const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
+
+    const storedValue = localStorage.getItem('mortgage/customer-info')
+    const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
+        defaultValues
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
+        onSave("mortgage/customer-info", values)
     }
 
     return (
@@ -87,6 +97,7 @@ const CustomerInfoForm = ({ mortgageId }: Props) => {
                 <h2 className='font-bold'>Home Country References</h2>
 
                 <Button type="submit" className='w-full'>Next</Button>
+                <BackButton route={`${PageRoutes.dashboard.MORTGAGES}/${mortgageId}/transaction-info`} />
             </form>
         </Form>
     )
