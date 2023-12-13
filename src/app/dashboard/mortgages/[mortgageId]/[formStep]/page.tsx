@@ -27,7 +27,6 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
     return (
         <>
             <div className={`lg:p-6 p-3 border rounded mx-2 bg-white mb-10 flex flex-col gap-4 mt-6`}>
-                <h1 className='text-4xl font-bold text-black/80'>Transaction Info</h1>
                 {subComponents[formStep]}
             </div>
             <div className="mt-10 flex justify-end mx-2">

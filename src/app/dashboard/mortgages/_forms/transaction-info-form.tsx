@@ -62,6 +62,7 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
 
     return (
         <Form {...form}>
+            <h1 className='text-4xl font-bold text-black/80'>Transaction Info</h1>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <SelectElement name='property_type' label='Property Type' options={propertyType} />
                 <SelectElement name='completion_status' label='Completion Status' options={completionStatus} />

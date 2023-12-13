@@ -17,7 +17,7 @@ import DatePickerElement from '../../../../components/forms/elements/date-picker
 import ComboboxElement from '../../../../components/forms/elements/combobox-element'
 import { Checkbox } from '../../../../components/ui/checkbox'
 import FileUploader from '../../../../components/forms/elements/file-uploader'
-import { financeTypes, completionStatus, emirate, propertyType, transactionTypes, educationOptions, maritalStatusOptions } from '@/constants/mortgage'
+import { financeTypes, completionStatus, emirate, propertyType, transactionTypes, educationOptions, maritalStatusOptions, relationshipOptions } from '@/constants/mortgage'
 import PhoneNumberInputElement from '../../../../components/forms/elements/phone-number-input'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
@@ -30,9 +30,13 @@ const formSchema = z.object({
     email: z.string({
         required_error: 'Please enter your email'
     }),
-    contact: z.string({
-        required_error: 'Please enter your contact no.'
-    }),
+    contact: z
+        .string({
+            required_error: 'Please enter a valid phone number.'
+        })
+        .min(10, {
+            message: 'Phone number must be at least 10 characters.'
+        }),
     education: z.string({
         required_error: 'Please select your education qualification'
     }),
@@ -57,6 +61,58 @@ const formSchema = z.object({
     home_country_address: z.string({
         required_error: 'Please enter your home country address'
     }),
+    home_country_reference_1: z.object({
+        name: z.string({
+            required_error: "Please enter name"
+        }),
+        relationship: z.string({
+            required_error: "Please enter relationship"
+        }),
+        mobile: z.string({
+            required_error: "Please enter mobile number"
+        }).min(10, {
+            message: 'Phone number must be at least 10 characters.'
+        }),
+    }),
+    home_country_reference_2: z.object({
+        name: z.string({
+            required_error: "Please enter name"
+        }),
+        relationship: z.string({
+            required_error: "Please enter relationship"
+        }),
+        mobile: z.string({
+            required_error: "Please enter mobile number"
+        }).min(10, {
+            message: 'Phone number must be at least 10 characters.'
+        }),
+    }),
+    uae_reference_1: z.object({
+        name: z.string({
+            required_error: "Please enter name"
+        }),
+        relationship: z.string({
+            required_error: "Please enter relationship"
+        }),
+        mobile: z.string({
+            required_error: "Please enter mobile number"
+        }).min(10, {
+            message: 'Phone number must be at least 10 characters.'
+        }),
+    }),
+    uae_reference_2: z.object({
+        name: z.string({
+            required_error: "Please enter name"
+        }),
+        relationship: z.string({
+            required_error: "Please enter relationship"
+        }),
+        mobile: z.string({
+            required_error: "Please enter mobile number"
+        }).min(10, {
+            message: 'Phone number must be at least 10 characters.'
+        }),
+    }),
 })
 
 interface Props {
@@ -75,12 +131,13 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
-        onSave("mortgage/customer-info", values)
+        console.log({ values })
+        // onSave("mortgage/customer-info", values)
     }
 
     return (
         <Form {...form}>
+            <h1 className='text-4xl font-bold text-black/80'>Customer Info</h1>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <InputElement name='name' label='Name' />
                 <InputElement name='email' label='Email' />
@@ -94,7 +151,28 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
                 <InputElement name='uae_residence_address' label='UAE Residence Address' />
                 <InputElement name='home_country_address' label='Home Country Address' />
 
-                <h2 className='font-bold'>Home Country References</h2>
+                <h2 className='font-bold text-xl pt-5 '>HOME COUNTRY REFERENCES</h2>
+
+                <InputElement name='home_country_reference_1.name' label='Name' />
+                <SelectElement name='home_country_reference_1.relationship' label='Relationship' options={relationshipOptions} />
+                <PhoneNumberInputElement name='home_country_reference_1.mobile' label='Mobile' />
+
+                <div className='h-[3px] bg-black/20 w-full' />
+
+                <InputElement name='home_country_reference_2.name' label='Name' />
+                <SelectElement name='home_country_reference_2.relationship' label='Relationship' options={relationshipOptions} />
+                <PhoneNumberInputElement name='home_country_reference_2.mobile' label='Mobile' />
+
+                <h2 className='font-bold text-xl pt-5'>PERSONAL REFERENCES IN UAE</h2>
+                <InputElement name='uae_reference_1.name' label='Name' />
+                <SelectElement name='uae_reference_1.relationship' label='Relationship' options={relationshipOptions} />
+                <PhoneNumberInputElement name='uae_reference_1.mobile' label='Mobile' />
+
+                <div className='h-[3px] bg-black/20 w-full' />
+
+                <InputElement name='uae_reference_2.name' label='Name' />
+                <SelectElement name='uae_reference_2.relationship' label='Relationship' options={relationshipOptions} />
+                <PhoneNumberInputElement name='uae_reference_2.mobile' label='Mobile' />
 
                 <Button type="submit" className='w-full'>Next</Button>
                 <BackButton route={`${PageRoutes.dashboard.MORTGAGES}/${mortgageId}/transaction-info`} />

@@ -13,7 +13,7 @@ interface Props {
   type?: string
 }
 
-const PhoneNumberInputElement = ({ name, label, description, placeholder, type = 'text' }: Props) => {
+const PhoneNumberInputElement = ({ name, label, description, placeholder }: Props) => {
   const { control } = useFormContext()
 
   return (
