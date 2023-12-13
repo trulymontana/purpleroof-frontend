@@ -12,7 +12,7 @@ import InputElement from '@/components/forms/elements/input-element'
 import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
-import { conditions, documents } from '@/constants/requirements'
+import { conditions, documentTypeOptions } from '@/constants/requirements'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 import { TOption } from '@/constants/types'
 
@@ -125,7 +125,7 @@ const AddRequirementsForm = () => {
         <MultiSelectCheckbox
           name="documents"
           classNames="grid-cols-2"
-          options={documents}
+          options={documentTypeOptions}
           selectedBoxes={selectedAmenities}
           setSelectedBoxes={setSelectedAmenities}
         />
