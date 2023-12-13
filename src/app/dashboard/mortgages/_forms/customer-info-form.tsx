@@ -149,7 +149,7 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
                 <SelectElement name='home_country_reference_1.relationship' label='Relationship' options={relationshipOptions} />
                 <PhoneNumberInputElement name='home_country_reference_1.mobile' label='Mobile' />
 
-                <div className='h-[3px] bg-black/20 w-full' />
+                <div className='h-[3px] bg-black/20 w-1/2 mx-auto rounded-full' />
 
                 <InputElement name='home_country_reference_2.name' label='Name' />
                 <SelectElement name='home_country_reference_2.relationship' label='Relationship' options={relationshipOptions} />
@@ -160,7 +160,7 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
                 <SelectElement name='uae_reference_1.relationship' label='Relationship' options={relationshipOptions} />
                 <PhoneNumberInputElement name='uae_reference_1.mobile' label='Mobile' />
 
-                <div className='h-[3px] bg-black/20 w-full' />
+                <div className='h-[3px] bg-black/20 w-1/2 mx-auto rounded-full' />
 
                 <InputElement name='uae_reference_2.name' label='Name' />
                 <SelectElement name='uae_reference_2.relationship' label='Relationship' options={relationshipOptions} />
