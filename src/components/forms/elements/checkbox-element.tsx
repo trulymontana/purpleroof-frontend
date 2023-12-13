@@ -16,7 +16,11 @@ const MultiSelectCheckbox = ({ name, options, selectedBoxes, setSelectedBoxes, c
   const { control } = useFormContext()
 
   const handleCheckboxChange = (checkedOption: TOption, checked: boolean) => {
-    setSelectedBoxes([...selectedBoxes, checkedOption])
+    if (checked) {
+      setSelectedBoxes([...selectedBoxes, checkedOption])
+    } else {
+      setSelectedBoxes(selectedBoxes.filter((item) => item.value !== checkedOption.value))
+    }
   }
 
   return (
