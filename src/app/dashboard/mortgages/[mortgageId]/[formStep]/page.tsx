@@ -10,8 +10,6 @@ interface Props {
     }
 }
 
-
-
 const Page = ({ params: { mortgageId, formStep } }: Props) => {
 
     const storeValues = (step: string, values: any) => {

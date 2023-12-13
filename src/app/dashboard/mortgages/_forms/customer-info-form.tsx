@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -9,15 +8,8 @@ import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '../../../../components/forms/elements/input-element'
-import TextAreaElement from '../../../../components/forms/elements/text-area-element'
 import SelectElement from '../../../../components/forms/elements/select-element'
-import SwitchElement from '../../../../components/forms/elements/switch-element'
-import RadioGroupElement from '../../../../components/forms/elements/radio-group-element'
-import DatePickerElement from '../../../../components/forms/elements/date-picker-element'
-import ComboboxElement from '../../../../components/forms/elements/combobox-element'
-import { Checkbox } from '../../../../components/ui/checkbox'
-import FileUploader from '../../../../components/forms/elements/file-uploader'
-import { financeTypes, completionStatus, emirate, propertyType, transactionTypes, educationOptions, maritalStatusOptions, relationshipOptions } from '@/constants/mortgage'
+import { educationOptions, maritalStatusOptions, relationshipOptions } from '@/constants/mortgage'
 import PhoneNumberInputElement from '../../../../components/forms/elements/phone-number-input'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
@@ -132,7 +124,7 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log({ values })
-        // onSave("mortgage/customer-info", values)
+        onSave("mortgage/customer-info", values)
     }
 
     return (
