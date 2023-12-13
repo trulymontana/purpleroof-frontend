@@ -1,5 +1,6 @@
 import {
   CompletionStatusEnum,
+  EducationEnum,
   EmirateEnum,
   FinanceTypeEnum,
   LoanTypeEnum,
@@ -85,63 +86,59 @@ export const loanTypeOptions = [
 export const educationOptions = [
   {
     label: 'Elementary School',
-    value: 'Elementary School'
+    value: EducationEnum.ELEMENTARY_SCHOOL
   },
   {
     label: 'Middle School',
-    value: 'Middle School'
+    value: EducationEnum.MIDDLE_SCHOOL
   },
   {
     label: 'High School',
-    value: 'High School'
+    value: EducationEnum.HIGH_SCHOOL
   },
   {
     label: 'College / University',
-    value: 'College / University'
+    value: EducationEnum.COLLEGE
   },
   {
     label: 'Vocational / Technical School',
-    value: 'Vocational / Technical School'
+    value: EducationEnum.VOCATIONAL_SCHOOL
   },
   {
     label: 'Graduate School / Postgraduate Studies',
-    value: 'Graduate School / Postgraduate Studies'
+    value: EducationEnum.GRADUATE_SCHOOL
   },
   {
     label: 'Online Courses / E-Learning',
-    value: 'Online Courses / E-Learning'
+    value: EducationEnum.ONLINE_COURSES
   },
   {
     label: 'Continuing Education / Professional Development',
-    value: 'Continuing Education / Professional Development'
+    value: EducationEnum.PROFESSIONAL_DEVELOPMENT
   },
   {
     label: 'Homeschooling',
-    value: 'Homeschooling'
+    value: EducationEnum.HOMESCHOOLING
   },
   {
     label: 'Adult Education / Lifelong Learning',
-    value: 'Adult Education / Lifelong Learning'
+    value: EducationEnum.LIFELONG_LEARNING
   },
   {
     label: 'Specialized Training Programs',
-    value: 'Specialized Training Programs'
+    value: EducationEnum.SPECIALIZED_TRAINING_PROGRAMS
   },
   {
     label: 'Language Courses / ESL',
-    value: 'Language Courses / ESL'
-  },
-  {
-    label: 'Specialized Training Programs',
-    value: 'Specialized Training Programs'
+    value: EducationEnum.LANGUAGE_COURSES
   },
   {
     label: 'Certificate Programs',
-    value: 'Certificate Programs'
+    value: EducationEnum.CERTIFICATE_PROGRAMS
   },
   {
     label: 'Trade Schools / Apprenticeships',
-    value: 'Trade Schools / Apprenticeships'
+    value: EducationEnum.TRADE_SCHOOLS
   }
 ]
 
