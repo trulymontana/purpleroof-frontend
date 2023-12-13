@@ -45,6 +45,7 @@ export interface MortgageApplication {
   userId: number
   dialCode: string
   country: string
+  actions: string
 }
 
 export interface RequirementApplication {
