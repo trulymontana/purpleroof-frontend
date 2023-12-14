@@ -1,3 +1,12 @@
+import {
+  CommercialTypesEnum,
+  PaymentIntervalsEnum,
+  ProjectStatusesEnum,
+  RentedOrVacantEnum,
+  ResidentialTypesEnum,
+  StatusesEnum
+} from './enums'
+
 export const categories = [
   {
     label: 'I want to Sell',
@@ -23,113 +32,113 @@ export const typesOfProperties = [
 export const commercialTypes = [
   {
     label: 'Bulk Unit',
-    value: 'Bulk Unit'
+    value: CommercialTypesEnum.BULK_UNIT
   },
   {
     label: 'Commercial Building',
-    value: 'Commercial Building'
+    value: CommercialTypesEnum.COMMERCIAL_BUILDING
   },
   {
     label: 'Commercial Floor',
-    value: 'Commercial Floor'
+    value: CommercialTypesEnum.COMMERCIAL_FLOOR
   },
   {
     label: 'Commercial Villa',
-    value: 'Commercial Villa'
+    value: CommercialTypesEnum.COMMERCIAL_VILLA
   },
   {
     label: 'Commercial Plot',
-    value: 'Commercial Plot'
+    value: CommercialTypesEnum.COMMERCIAL_PLOT
   },
   {
     label: 'Factory',
-    value: 'Factory'
+    value: CommercialTypesEnum.FACTORY
   },
   {
     label: 'Industrial Unit For Sale',
-    value: 'Industrial Unit For Sale'
+    value: CommercialTypesEnum.INDUSTRIAL_UNIT_FOR_SALE
   },
   {
     label: 'Industrial Land',
-    value: 'Industrial Land'
+    value: CommercialTypesEnum.INDUSTRIAL_LAND
   },
   {
     label: 'Mixed Used Sand',
-    value: 'Mixed Used Sand'
+    value: CommercialTypesEnum.BULK_UNIT
   },
   {
     label: 'Office For Sale',
-    value: 'Office For Sale'
+    value: CommercialTypesEnum.OFFICE_FOR_SALE
   },
   {
     label: 'Retail For Sale',
-    value: 'Retail For Sale'
+    value: CommercialTypesEnum.RETAIL_FOR_SALE
   },
   {
     label: 'Shop',
-    value: 'Shop'
+    value: CommercialTypesEnum.SHOP
   },
   {
     label: 'Staff Accommodation for Sale',
-    value: 'Staff Accommodation for Sale'
+    value: CommercialTypesEnum.STAFF_ACCOMMODATION_FOR_SALE
   },
   {
     label: 'Warehouse',
-    value: 'Warehouse'
+    value: CommercialTypesEnum.WAREHOUSE
   },
   {
     label: 'Sell Commercial Land',
-    value: 'Sell Commercial Land'
+    value: CommercialTypesEnum.SELL_COMMERCIAL_LAND
   },
   {
     label: 'Other',
-    value: 'Other'
+    value: CommercialTypesEnum.OTHER
   }
 ]
 
 export const residentalTypes = [
   {
     label: 'Apartment & Unit',
-    value: 'Apartment & Unit'
+    value: ResidentialTypesEnum.APARTMENT_AND_UNIT
   },
   {
     label: 'Villa',
-    value: 'Villa'
+    value: ResidentialTypesEnum.VILLA
   },
   {
     label: 'Acreage',
-    value: 'Acreage'
+    value: ResidentialTypesEnum.ACREAGE
   },
   {
     label: 'Block of Units',
-    value: 'Block of Units'
+    value: ResidentialTypesEnum.BLOCKS_OF_UNITS
   },
   {
     label: 'House',
-    value: 'House'
+    value: ResidentialTypesEnum.HOUSE
   },
   {
     label: 'Townhouse',
-    value: 'Townhouse'
+    value: ResidentialTypesEnum.TOWNHOUSE
   },
   {
     label: 'Land',
-    value: 'Land'
+    value: ResidentialTypesEnum.LAND
   }
 ]
 
 export const paymentIntervals = [
   {
     label: 'Weekly',
-    value: 'weekly'
+    value: PaymentIntervalsEnum.WEEKLY
   },
   {
     label: 'Monthly',
-    value: 'monthly'
+    value: PaymentIntervalsEnum.MONTHLY
   },
   {
     label: 'Yearly',
-    value: 'yearly'
+    value: PaymentIntervalsEnum.YEARLY
   }
 ]
 
@@ -302,6 +311,7 @@ export const bathRooms = [
     value: '20'
   }
 ]
+
 export const lavatories = [
   {
     label: '1',
@@ -1712,15 +1722,15 @@ export const propertyTypes = [
 export const statuses = [
   {
     label: 'Fully Furnished',
-    value: 'Fully Furnished'
+    value: StatusesEnum.FULLY_FURNISHED
   },
   {
     label: 'Semi Furnished',
-    value: 'Semi Furnished'
+    value: StatusesEnum.SEMI_FURNISHED
   },
   {
     label: 'Unfurnished',
-    value: 'Unfurnished'
+    value: StatusesEnum.UNFURNISHED
   }
 ]
 
@@ -1922,21 +1932,27 @@ export const amenities = [
 export const projectStatuses = [
   {
     label: 'Completed',
-    value: 'completed'
+    value: ProjectStatusesEnum.COMPLETED
   },
   {
     label: 'Off plan/Under construction',
-    value: 'off plan/under construction'
+    value: ProjectStatusesEnum.UNDER_CONSTRUCTION
   },
   {
     label: 'Shell & Core',
-    value: 'shell & core'
+    value: ProjectStatusesEnum.SHELL_AND_CORE
   }
 ]
 
 export const rentedOrVacantOptions = [
-  { label: 'Vacant', value: 'vacant' },
-  { label: 'Rented', value: 'rented' }
+  {
+    label: 'Vacant',
+    value: RentedOrVacantEnum.VACANT
+  },
+  {
+    label: 'Rented',
+    value: RentedOrVacantEnum.RENTED
+  }
 ]
 
 export const callPreferences = [
