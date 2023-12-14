@@ -3,11 +3,43 @@ import {
   EducationEnum,
   EmirateEnum,
   FinanceTypeEnum,
+  IncomeProfileEnum,
   LoanTypeEnum,
   MaritalStatusEnum,
   PropertyTypeEnum,
-  RelationshipEnum
+  RelationshipEnum,
+  ResidenceTypeEnum
 } from './enums'
+
+export const residentialTypes = [
+  {
+    label: 'Non Resident of UAE',
+    value: ResidenceTypeEnum.NON_UAE_RESIDENT
+  },
+  {
+    label: 'UAE National',
+    value: ResidenceTypeEnum.UAE_NATIONAL
+  },
+  {
+    label: 'UAE Resident',
+    value: ResidenceTypeEnum.UAE_RESIDENT
+  }
+]
+
+export const incomeProfiles = [
+  {
+    label: 'Rental Income',
+    value: IncomeProfileEnum.RENTAL_INCOME
+  },
+  {
+    label: 'Salaried',
+    value: IncomeProfileEnum.SALARIED
+  },
+  {
+    label: 'Self Employed',
+    value: IncomeProfileEnum.SELF_EMPLOYED
+  }
+]
 
 export const propertyType = [
   {

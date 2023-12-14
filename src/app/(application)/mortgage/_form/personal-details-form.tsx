@@ -11,7 +11,7 @@ import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { incomeProfiles, residentialTypes } from '@/constants/financial'
+import { incomeProfiles, residentialTypes } from '@/constants/mortgage'
 import { PageRoutes } from '@/constants/page-routes'
 import { useRouter } from 'next/navigation'
 
