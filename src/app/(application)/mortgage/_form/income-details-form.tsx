@@ -16,6 +16,7 @@ import { countries } from '@/constants/countries'
 import ComboboxElement from '@/components/forms/elements/combobox-element'
 import DatePickerElement from '@/components/forms/elements/date-picker-element'
 import { PageRoutes } from '@/constants/page-routes'
+import { BackButton } from '@/components/navigation/back-button'
 
 const formSchema = z.object({
   country: z.string({
@@ -67,6 +68,8 @@ const IncomeDetailsForm = ({ onSave }: Props) => {
         <Button type="submit" className="w-full">
           Submit
         </Button>
+
+        <BackButton route={PageRoutes.mortgage.PERSONAL_DETAILS} />
       </form>
     </Form>
   )
