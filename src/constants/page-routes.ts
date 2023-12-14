@@ -3,7 +3,8 @@ export const PageRoutes = {
     admin: {
       AGENTS: '/dashboard/admin/agents',
       USERS: '/dashboard/admin/users',
-      REQUIREMENTS: '/dashboard/admin/requirements'
+      REQUIREMENTS: '/dashboard/admin/requirements',
+      REQUIREMENTS_ADD: '/dashboard/admin/requirements/add'
     },
     MORTGAGES: '/dashboard/mortgages',
     PROPERTIES: '/dashboard/properties'
