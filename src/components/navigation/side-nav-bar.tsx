@@ -7,27 +7,27 @@ const ICON_SIZE = 20
 const navigationSidebarItems = [
   {
     title: 'Mortgages',
-    link: PageRoutes.admin.MORTGAGES,
+    link: PageRoutes.dashboard.MORTGAGES,
     icon: <FileCode size={ICON_SIZE} />
   },
   {
     title: 'Properties',
-    link: PageRoutes.admin.PROPERTIES,
+    link: PageRoutes.dashboard.PROPERTIES,
     icon: <Building size={ICON_SIZE} />
   },
   {
     title: 'Agents',
-    link: PageRoutes.admin.AGENTS,
+    link: PageRoutes.dashboard.admin.AGENTS,
     icon: <PersonStandingIcon size={ICON_SIZE} />
   },
   {
     title: 'Users',
-    link: PageRoutes.admin.USERS,
+    link: PageRoutes.dashboard.admin.USERS,
     icon: <User size={ICON_SIZE} />
   },
   {
     title: 'Requirements',
-    link: PageRoutes.admin.REQUIREMENTS,
+    link: PageRoutes.dashboard.admin.REQUIREMENTS,
     icon: <User size={ICON_SIZE} />
   }
 ]
