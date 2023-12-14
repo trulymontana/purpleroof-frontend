@@ -1,5 +1,5 @@
 import React from 'react'
-import AddRequirementsForm from '../_form/AddRequirementForm'
+import AddRequirementsForm from '../_form/add-requirement-form'
 
 const AddRequirementsPage = () => {
   return <AddRequirementsForm />

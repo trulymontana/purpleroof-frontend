@@ -13,9 +13,10 @@ import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import { conditions, documentTypeOptions } from '@/constants/requirements'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 import { TOption } from '@/constants/types'
+import { useCreateRequirementMutation } from '@/data/hooks/useRequirementsClient'
 
 const formSchema = z.object({
-  requirement_name: z.string({
+  name: z.string({
     required_error: 'Please enter a Requirement Name!'
   }),
   pre_approval_fee: z.string({
@@ -36,7 +37,7 @@ const formSchema = z.object({
   valuation_fee: z.string({
     required_error: 'Please enter Valuation Fee!'
   }),
-  condition: z.string({
+  incomeProfile: z.string({
     required_error: 'Please select a Condition!'
   })
 })
@@ -44,23 +45,31 @@ const formSchema = z.object({
 const AddRequirementsForm = () => {
   const [selectedDocuments, setSelectedDocuments] = useState<TOption[]>([])
 
+  const { isPending: isLoading, mutate: createRequirement } = useCreateRequirementMutation()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema)
   })
 
   const handleChange = (value: string) => {
-    form.setValue('condition', value)
+    form.setValue('incomeProfile', value)
   }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log({ selectedDocuments })
+    // console.log({ selectedDocuments })
     console.log({ values })
+    createRequirement({
+      name: values.name,
+      incomeProfile: 'SALARIED',
+      residenceType: 'UAE_NATIONAL',
+      requiredDocuments: []
+    })
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-10 px-10 py-16">
-        <InputElement name="requirement_name" label={'Requirement Name'} placeholder="Enter Requirement Name" />
+        <InputElement name="name" label={'Requirement Name'} placeholder="Enter Requirement Name" />
 
         <div className="flex w-full items-center gap-10">
           <div className="w-1/2">
@@ -113,7 +122,7 @@ const AddRequirementsForm = () => {
         </div>
 
         <RadioGroupElement
-          name="condition"
+          name="incomeProfile"
           label={'Condition'}
           className="items-center gap-10"
           options={conditions}
@@ -121,7 +130,7 @@ const AddRequirementsForm = () => {
         />
 
         <MultiSelectCheckbox
-          name="documents"
+          name="requiredDocuments"
           classNames="grid-cols-2"
           options={documentTypeOptions}
           selectedBoxes={selectedDocuments}
@@ -129,7 +138,7 @@ const AddRequirementsForm = () => {
         />
 
         <Button type="submit" className="w-full">
-          Save
+          {isLoading ? 'Loading...' : 'Save'}
         </Button>
       </form>
     </Form>
