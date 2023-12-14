@@ -13,10 +13,14 @@ interface Props {
   classNames?: string
 }
 const MultiSelectCheckbox = ({ name, options, selectedBoxes, setSelectedBoxes, classNames }: Props) => {
-  const { control, setValue } = useFormContext()
+  const { control } = useFormContext()
 
   const handleCheckboxChange = (checkedOption: TOption, checked: boolean) => {
-    setSelectedBoxes([...selectedBoxes, checkedOption])
+    if (checked) {
+      setSelectedBoxes([...selectedBoxes, checkedOption])
+    } else {
+      setSelectedBoxes(selectedBoxes.filter((item) => item.value !== checkedOption.value))
+    }
   }
 
   return (

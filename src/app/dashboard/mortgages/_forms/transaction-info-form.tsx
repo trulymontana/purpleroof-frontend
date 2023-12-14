@@ -10,7 +10,7 @@ import * as z from 'zod'
 import InputElement from '../../../../components/forms/elements/input-element'
 import SelectElement from '../../../../components/forms/elements/select-element'
 import RadioGroupElement from '../../../../components/forms/elements/radio-group-element'
-import { completionStatus, emirate, propertyType, transactionTypes } from '@/constants/mortgage'
+import { completionStatus, emirate, loanTypeOptions, propertyType } from '@/constants/mortgage'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 
@@ -63,7 +63,7 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
                 <RadioGroupElement
                     name="transaction_type"
                     label={'Transaction Type'}
-                    options={transactionTypes}
+                    options={loanTypeOptions}
                     className='flex-col'
                 />
                 <InputElement name='additional_details' label='Additional Details' />

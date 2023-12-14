@@ -3,7 +3,8 @@ export const PageRoutes = {
     admin: {
       AGENTS: '/dashboard/admin/agents',
       USERS: '/dashboard/admin/users',
-      REQUIREMENTS: '/dashboard/admin/requirements'
+      REQUIREMENTS: '/dashboard/admin/requirements',
+      REQUIREMENTS_ADD: '/dashboard/admin/requirements/add'
     },
     MORTGAGES: '/dashboard/mortgages',
     PROPERTIES: '/dashboard/properties'
@@ -17,7 +18,7 @@ export const PageRoutes = {
   },
   mortgage: {
     PERSONAL_DETAILS: '/mortgage/personal-details',
-    INCOME_DETAILS: '/advertise/income-details'
+    INCOME_DETAILS: '/mortgage/income-details'
   },
   advertise: {
     BASIC_DETAILS: '/advertise/basic-details',

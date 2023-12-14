@@ -9,10 +9,8 @@ import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import SwitchElement from '@/components/forms/elements/switch-element'
-import SelectElement from '@/components/forms/elements/select-element'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
-import { conditions, documents } from '@/constants/requirements'
+import { conditions, documentTypeOptions } from '@/constants/requirements'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 import { TOption } from '@/constants/types'
 
@@ -44,7 +42,7 @@ const formSchema = z.object({
 })
 
 const AddRequirementsForm = () => {
-  const [selectedAmenities, setSelectedAmenities] = useState<TOption[]>([])
+  const [selectedDocuments, setSelectedDocuments] = useState<TOption[]>([])
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema)
@@ -55,7 +53,7 @@ const AddRequirementsForm = () => {
   }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log({ selectedAmenities })
+    console.log({ selectedDocuments })
     console.log({ values })
   }
 
@@ -125,9 +123,9 @@ const AddRequirementsForm = () => {
         <MultiSelectCheckbox
           name="documents"
           classNames="grid-cols-2"
-          options={documents}
-          selectedBoxes={selectedAmenities}
-          setSelectedBoxes={setSelectedAmenities}
+          options={documentTypeOptions}
+          selectedBoxes={selectedDocuments}
+          setSelectedBoxes={setSelectedDocuments}
         />
 
         <Button type="submit" className="w-full">
