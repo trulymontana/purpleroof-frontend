@@ -33,7 +33,7 @@ const MultiSelectCheckbox = ({ name, options, selectedBoxes, setSelectedBoxes, c
             <FormField
               key={option.value}
               control={control}
-              name="amenities"
+              name={name}
               render={({ field }) => {
                 return (
                   <FormItem key={option.value} className="flex flex-row items-start space-x-3 space-y-0">

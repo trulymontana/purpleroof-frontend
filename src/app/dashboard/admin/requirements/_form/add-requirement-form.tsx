@@ -10,7 +10,7 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
-import { conditions, documentTypeOptions } from '@/constants/requirements'
+import { documentTypeOptions, incomeProfiles, residenceTypes } from '@/constants/requirements'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 import { TOption } from '@/constants/types'
 import { useCreateRequirementMutation } from '@/data/hooks/useRequirementsClient'
@@ -19,30 +19,34 @@ const formSchema = z.object({
   name: z.string({
     required_error: 'Please enter a Requirement Name!'
   }),
-  pre_approval_fee: z.string({
+  preApprovalFee: z.number({
     required_error: 'Please enter Pre Approval Fee!'
   }),
-  processing_fee: z.string({
+  processingFee: z.number({
     required_error: 'Please enter Processing Fee!'
   }),
-  rate: z.string({
+  rate: z.number({
     required_error: 'Please enter a Rate!'
   }),
-  life_insurance: z.string({
+  lifeInsurance: z.number({
     required_error: 'Please enter Life Insurance!'
   }),
-  property_insurance: z.string({
+  propertyInsurance: z.number({
     required_error: 'Please enter Property Insurance!'
   }),
-  valuation_fee: z.string({
+  valuationFee: z.number({
     required_error: 'Please enter Valuation Fee!'
   }),
   incomeProfile: z.string({
-    required_error: 'Please select a Condition!'
+    required_error: 'Please select a Income Profile!'
+  }),
+  residenceType: z.string({
+    required_error: 'Please select a Residence Type!'
   })
 })
 
 const AddRequirementsForm = () => {
+
   const [selectedDocuments, setSelectedDocuments] = useState<TOption[]>([])
 
   const { isPending: isLoading, mutate: createRequirement } = useCreateRequirementMutation()
@@ -56,13 +60,16 @@ const AddRequirementsForm = () => {
   }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // console.log({ selectedDocuments })
-    console.log({ values })
+    let formattedDocuments = selectedDocuments.map(document => (
+      {
+        "name": document.label,
+        "documentType": document.value,
+        "isMandatory": true,
+      }
+    ));
     createRequirement({
-      name: values.name,
-      incomeProfile: 'SALARIED',
-      residenceType: 'UAE_NATIONAL',
-      requiredDocuments: []
+      ...values,
+      requiredDocuments: formattedDocuments
     })
   }
 
@@ -74,7 +81,7 @@ const AddRequirementsForm = () => {
         <div className="flex w-full items-center gap-10">
           <div className="w-1/2">
             <InputElement
-              name="pre_approval_fee"
+              name="preApprovalFee"
               type="number"
               label={'Pre Approval Fee (AED)'}
               placeholder="Enter Pre Approval Fee"
@@ -82,7 +89,7 @@ const AddRequirementsForm = () => {
           </div>
           <div className="w-1/2">
             <InputElement
-              name="processing_fee"
+              name="processingFee"
               type="number"
               label={'Processing Fee (%)'}
               placeholder="Enter Processing Fee"
@@ -95,7 +102,7 @@ const AddRequirementsForm = () => {
           </div>
           <div className="w-1/2">
             <InputElement
-              name="life_insurance"
+              name="lifeInsurance"
               type="number"
               label={'Life Insurance (%)'}
               placeholder="Enter Life Insurance"
@@ -105,7 +112,7 @@ const AddRequirementsForm = () => {
         <div className="flex w-full items-center gap-10">
           <div className="w-1/2">
             <InputElement
-              name="property_insurance"
+              name="propertyInsurance"
               type="number"
               label={'Property Insurance (%)'}
               placeholder="Enter Property Insurance"
@@ -113,7 +120,7 @@ const AddRequirementsForm = () => {
           </div>
           <div className="w-1/2">
             <InputElement
-              name="valuation_fee"
+              name="valuationFee"
               type="number"
               label={'Valuation Fee (AED)'}
               placeholder="Enter Valuation Fee"
@@ -123,9 +130,17 @@ const AddRequirementsForm = () => {
 
         <RadioGroupElement
           name="incomeProfile"
-          label={'Condition'}
+          label={'Income Profile'}
           className="items-center gap-10"
-          options={conditions}
+          options={incomeProfiles}
+          handleChange={handleChange}
+        />
+
+        <RadioGroupElement
+          name="residenceType"
+          label={'Residence Type'}
+          className="items-center gap-10"
+          options={residenceTypes}
           handleChange={handleChange}
         />
 

@@ -7,8 +7,14 @@ export interface CreateRequirementInput {
   name: string
   incomeProfile: any // Replace 'any' with the actual type for incomeProfile
   residenceType: any // Replace 'any' with the actual type for residenceType
+  preApprovalFee: number
+  processingFee: number
+  rate: number
+  lifeInsurance: number
+  propertyInsurance: number
+  valuationFee: number
   requiredDocuments: {
-    id: number
+    id?: number
     name: string
     documentType: any // Replace 'any' with the actual type for documentType
     isMandatory: boolean

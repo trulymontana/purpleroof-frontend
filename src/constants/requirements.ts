@@ -1,19 +1,30 @@
-export const conditions = [
+export const incomeProfiles = [
   {
     label: 'Rental Income',
-    value: 'rental_income'
+    value: 'RENTAL_INCOME'
   },
   {
     label: 'Salaried',
-    value: 'salaried'
+    value: 'SALARIED'
   },
   {
     label: 'Self Employed',
-    value: 'self_employed'
+    value: 'SELF_EMPLOYED'
+  }
+]
+
+export const residenceTypes = [
+  {
+    label: 'UAE National',
+    value: 'UAE_NATIONAL'
   },
   {
-    label: 'Non-Resident of UAE',
-    value: 'non_resident_of_uae'
+    label: 'UAE Resident',
+    value: 'UAE_RESIDENT'
+  },
+  {
+    label: 'Non-UAE Resident',
+    value: 'NON_UAE_RESIDENT'
   }
 ]
 
