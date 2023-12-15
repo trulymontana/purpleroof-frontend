@@ -2,7 +2,6 @@ import { QueryOptions, RequirementApplication, User } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
-import { isNumber } from 'util'
 
 export interface CreateRequirementInput {
   name: string
@@ -15,7 +14,7 @@ export interface CreateRequirementInput {
   propertyInsurance: number
   valuationFee: number
   requiredDocuments: {
-    id: number
+    id?: number
     name: string
     documentType: any // Replace 'any' with the actual type for documentType
     isMandatory: boolean

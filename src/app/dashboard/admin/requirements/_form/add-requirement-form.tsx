@@ -62,7 +62,6 @@ const AddRequirementsForm = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     let formattedDocuments = selectedDocuments.map(document => (
       {
-        id: 1,
         "name": document.label,
         "documentType": document.value,
         "isMandatory": true,
