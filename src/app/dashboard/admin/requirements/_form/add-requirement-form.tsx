@@ -14,6 +14,7 @@ import { documentTypeOptions, incomeProfiles, residenceTypes } from '@/constants
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 import { TOption } from '@/constants/types'
 import { useCreateRequirementMutation } from '@/data/hooks/useRequirementsClient'
+import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
   name: z.string({
@@ -80,17 +81,15 @@ const AddRequirementsForm = () => {
 
         <div className="flex w-full items-center gap-10">
           <div className="w-1/2">
-            <InputElement
+            <NumberInputElement
               name="preApprovalFee"
-              type="number"
               label={'Pre Approval Fee (AED)'}
               placeholder="Enter Pre Approval Fee"
             />
           </div>
           <div className="w-1/2">
-            <InputElement
+            <NumberInputElement
               name="processingFee"
-              type="number"
               label={'Processing Fee (%)'}
               placeholder="Enter Processing Fee"
             />
@@ -98,12 +97,11 @@ const AddRequirementsForm = () => {
         </div>
         <div className="flex w-full items-center gap-10">
           <div className="w-1/2">
-            <InputElement name="rate" type="number" label={'Rate (%)'} placeholder="Enter Rate" />
+            <NumberInputElement name="rate" label={'Rate (%)'} placeholder="Enter Rate" />
           </div>
           <div className="w-1/2">
-            <InputElement
+            <NumberInputElement
               name="lifeInsurance"
-              type="number"
               label={'Life Insurance (%)'}
               placeholder="Enter Life Insurance"
             />
@@ -111,17 +109,15 @@ const AddRequirementsForm = () => {
         </div>
         <div className="flex w-full items-center gap-10">
           <div className="w-1/2">
-            <InputElement
+            <NumberInputElement
               name="propertyInsurance"
-              type="number"
               label={'Property Insurance (%)'}
               placeholder="Enter Property Insurance"
             />
           </div>
           <div className="w-1/2">
-            <InputElement
+            <NumberInputElement
               name="valuationFee"
-              type="number"
               label={'Valuation Fee (AED)'}
               placeholder="Enter Valuation Fee"
             />

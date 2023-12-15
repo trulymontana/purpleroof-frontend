@@ -1,6 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { ApiEndpoints } from '@/constants/api'
 import { mortgageClient } from '../clients/mortgageClient'
+import { toast } from '@/components/ui/use-toast'
+import { PageRoutes } from '@/constants/page-routes'
 
 export function useGetMortgages() {
   const { isLoading, data } = useQuery({
@@ -9,6 +11,28 @@ export function useGetMortgages() {
   })
 
   return { data: data?.data, loading: isLoading }
+}
+
+export const useCreateMortgageMutation = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: mortgageClient.create,
+    onSuccess: (data: any) => {
+      toast({
+        variant: 'default',
+        title: 'Mortgage created successfully'
+      })
+      localStorage.removeItem(PageRoutes.mortgage.PERSONAL_DETAILS)
+      localStorage.removeItem(PageRoutes.mortgage.INCOME_DETAILS)
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.message
+      })
+    }
+  })
 }
 
 // export const useUpdateOpinionMutation = () => {
@@ -21,20 +45,6 @@ export function useGetMortgages() {
 //     },
 //     onSettled: () => {
 //       queryClient.invalidateQueries(ApiEndpoints.USERS)
-//     },
-//   })
-// }
-
-// export const useCreateOpinionMutation = () => {
-//   const queryClient = useQueryClient()
-//   const navigate = useNavigate()
-//   return useMutation(opinionClient.create, {
-//     onSuccess: (data) => {
-//       toast.success('Opinion Successfully Created')
-//       navigate(AppRoutes.OPINION_EDITOR)
-//     },
-//     onSettled: () => {
-//       queryClient.invalidateQueries(ApiEndpoints.OPINION)
 //     },
 //   })
 // }

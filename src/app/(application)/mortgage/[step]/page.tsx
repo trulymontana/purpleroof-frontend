@@ -2,28 +2,49 @@
 
 import { PageRoutes } from '@/constants/page-routes';
 import Image from 'next/image'
-import { usePathname, useSearchParams } from 'next/navigation'
-import React from 'react'
+import { usePathname } from 'next/navigation'
 import IncomeDetailsForm from '../_form/income-details-form';
 import PersonalDetailsForm from '../_form/personal-details-form';
 import BoxStrokesIcon from '@/components/svgs/box-strokes';
+import { useCreateMortgageMutation } from '@/data/hooks/useMortgageClient';
+import { MortgageStatusEnum } from '@/constants/enums';
+import { CreateMortgageInput } from '@/data/clients/mortgageClient';
 
 const Page = () => {
 
-    const pathName = usePathname()
+    const pathName = usePathname();
+
+    const { mutate: createMortgage } = useCreateMortgageMutation();
 
     const storeValues = (step: string, values: any) => {
         localStorage.setItem(step, JSON.stringify(values))
     }
 
+    const handleSubmit = (values: any) => {
+        const data = localStorage.getItem(PageRoutes.mortgage.PERSONAL_DETAILS);
+        let result;
+        if (data !== null) {
+            result = JSON.parse(data)
+            delete result.agreeToPrivacyPolicy
+        }
+
+        let mortgage: CreateMortgageInput = Object.assign({}, result, values);
+        mortgage.dateOfBirth = new Date(mortgage.dateOfBirth).toISOString();
+        mortgage.intendedProperty = ""
+        mortgage.status = MortgageStatusEnum.SUBMITTED
+        createMortgage({
+            ...mortgage,
+        })
+    }
+
     const subComponents: { [key: string]: React.ReactElement } = {
         [PageRoutes.mortgage.PERSONAL_DETAILS]: <PersonalDetailsForm onSave={storeValues} />,
-        [PageRoutes.mortgage.INCOME_DETAILS]: <IncomeDetailsForm onSave={storeValues} />,
+        [PageRoutes.mortgage.INCOME_DETAILS]: <IncomeDetailsForm handleSubmit={handleSubmit} />,
     }
 
     return (
-        <section className="relative">
-            <div className="absolute inset-0 w-full h-full bg-indigo-600 bg-opacity-25 bg-cover backdrop-opacity-10 -z-10 bg-mortgage" />
+        <section className="relative h-auto min-h-screen">
+            <div className="absolute inset-0 w-full h-auto min-h-screen bg-indigo-600 bg-opacity-25 bg-cover backdrop-opacity-10 -z-10 bg-mortgage" />
             <div
                 className="absolute top-0 w-full h-full opacity-75 t-0 -z-10"
                 style={{

@@ -7,6 +7,7 @@ import { Button } from '../ui/button'
 import { FileEdit, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
+import { Badge } from '../ui/badge'
 
 const ActionButtons = ({ row }: { row: any }) => {
   const router = useRouter();
@@ -37,9 +38,9 @@ export const columns: ColumnDef<RequirementApplication>[] = [
     header: 'Requirement Documents',
     cell: ({ row }) => {
       const document = row.original
-      const result = document.requiredDocuments.map((item: any) => item.name).join(', ');
+      const result = document.requiredDocuments.map((item: any, i: number) => <Badge key={i}>{item.documentType}</Badge>);
       return (
-        <div>{result}</div>
+        <div className='flex items-center gap-2'>{result}</div>
       )
     }
   },
