@@ -8,13 +8,13 @@ import { FileEdit, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 
-const CellWithDropdown = ({ row }: { row: any }) => {
+const ActionButtons = ({ row }: { row: any }) => {
   const router = useRouter();
-  const document = row.original;
+  const requirement = row.original;
 
   return (
     <div className='flex items-center gap-2'>
-      <Button variant={"link"} onClick={() => router.push(`${PageRoutes.admin.REQUIREMENTS}/${document.id}`)}><FileEdit size={17} color='black' /></Button>
+      <Button variant={"link"} onClick={() => router.push(`${PageRoutes.admin.REQUIREMENTS}/${requirement.id}`)}><FileEdit size={17} color='black' /></Button>
       <Button variant={"ghost"}><Trash2 color='red' size={17} /> </Button>
     </div>
   )
@@ -46,12 +46,11 @@ export const columns: ColumnDef<RequirementApplication>[] = [
   {
     id: "actions",
     enableHiding: false,
-    cell: ({ row }) => <CellWithDropdown row={row} />
+    cell: ({ row }) => <ActionButtons row={row} />
   }
 ]
 
 export default function RequirementsTable() {
   const { loading, data } = useGetRequirements()
-  console.log({ data })
   return <DataTable columns={columns} data={data ?? []} isLoading={loading} />
 }
