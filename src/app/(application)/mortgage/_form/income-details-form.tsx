@@ -17,6 +17,7 @@ import DatePickerElement from '@/components/forms/elements/date-picker-element'
 import { PageRoutes } from '@/constants/page-routes'
 import { BackButton } from '@/components/navigation/back-button'
 import { loanTypeOptions } from '@/constants/mortgage'
+import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
   country: z.string({
@@ -60,8 +61,8 @@ const IncomeDetailsForm = ({ handleSubmit }: Props) => {
         <ComboboxElement name="country" label={'Country'} placeholder={'Select your country'} options={countries} />
         <DatePickerElement name="dateOfBirth" label="Date of Birth" />
 
-        <InputElement name="valueOfProperty" type='number' label={'Approximate value of the intended property (AED)'} />
-        <InputElement name="monthlyIncome" type='number' label={'Gross monthly income (AED)'} />
+        <NumberInputElement name="valueOfProperty" label={'Approximate value of the intended property (AED)'} />
+        <NumberInputElement name="monthlyIncome" label={'Gross monthly income (AED)'} />
 
         <SelectElement name="loanType" label={'Loan Type'} options={loanTypeOptions} />
 

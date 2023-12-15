@@ -3,12 +3,11 @@
 import { PageRoutes } from '@/constants/page-routes';
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import React from 'react'
 import IncomeDetailsForm from '../_form/income-details-form';
 import PersonalDetailsForm from '../_form/personal-details-form';
 import BoxStrokesIcon from '@/components/svgs/box-strokes';
 import { useCreateMortgageMutation } from '@/data/hooks/useMortgageClient';
-import { IncomeProfileEnum, LoanTypeEnum, MortgageStatusEnum, ResidenceTypeEnum } from '@/constants/enums';
+import { MortgageStatusEnum } from '@/constants/enums';
 import { CreateMortgageInput } from '@/data/clients/mortgageClient';
 
 const Page = () => {
@@ -36,8 +35,6 @@ const Page = () => {
         createMortgage({
             ...mortgage,
         })
-        localStorage.removeItem(PageRoutes.mortgage.PERSONAL_DETAILS)
-        localStorage.removeItem(PageRoutes.mortgage.INCOME_DETAILS)
     }
 
     const subComponents: { [key: string]: React.ReactElement } = {

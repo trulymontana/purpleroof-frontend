@@ -21,9 +21,13 @@ export const useCreateRequirementMutation = () => {
         variant: 'default',
         title: 'Requirement created successfully'
       })
-    },
-    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.message
+      })
     }
   })
 }
