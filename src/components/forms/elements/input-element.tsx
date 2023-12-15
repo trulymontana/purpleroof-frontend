@@ -22,7 +22,13 @@ const InputElement = ({ name, label, description, placeholder, type = 'text' }: 
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Input type={type} placeholder={placeholder} {...field} />
+            {
+              type === 'number' ? (
+                <Input type={type} placeholder={placeholder} {...field} onChange={event => field.onChange(+event.target.value)} />
+              ) : (
+                <Input type={type} placeholder={placeholder} {...field} />
+              )
+            }
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
