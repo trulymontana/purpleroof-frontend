@@ -2,6 +2,7 @@
 
 import CustomerInfoForm from '@/app/dashboard/mortgages/_forms/customer-info-form'
 import TransactionInfoForm from '@/app/dashboard/mortgages/_forms/transaction-info-form'
+import { PageRoutes } from '@/constants/page-routes'
 
 interface Props {
     params: {
@@ -17,9 +18,9 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
     }
 
     const subComponents: { [key: string]: React.ReactElement } = {
-        'transaction-info': <TransactionInfoForm mortgageId={mortgageId} onSave={storeValues} />,
+        [PageRoutes.mortgage_transaction.TRANSACTION_INFO]: <TransactionInfoForm mortgageId={mortgageId} onSave={storeValues} />,
         // documents form
-        'customer-info': <CustomerInfoForm mortgageId={mortgageId} onSave={storeValues} />,
+        [PageRoutes.mortgage_transaction.CUSTOMER_INFO]: <CustomerInfoForm mortgageId={mortgageId} onSave={storeValues} />,
     }
 
     return (

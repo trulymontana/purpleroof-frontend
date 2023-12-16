@@ -5,6 +5,8 @@ import { MortgageApplication } from '@/constants/types'
 import { useGetMortgages } from '@/data/hooks/useMortgageClient'
 import ActionButtons from './action-buttons'
 import { PageRoutes } from '@/constants/page-routes'
+import Link from 'next/link'
+import { Badge } from '../ui/badge'
 
 export const columns: ColumnDef<MortgageApplication>[] = [
   {
@@ -48,8 +50,12 @@ export const columns: ColumnDef<MortgageApplication>[] = [
     header: 'Updated At'
   },
   {
-    accessorKey: 'status',
-    header: 'Status'
+    id: "status",
+    header: 'Status',
+    cell: ({ row }) => {
+      const data = row.original;
+      return <Link href={`/dashboard/mortgages/${data.id}/transaction-info`}><Badge>{data.status}</Badge></Link>
+    }
   },
   // {
   //   accessorKey: 'userId',

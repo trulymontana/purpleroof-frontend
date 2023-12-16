@@ -7,7 +7,7 @@ export const PageRoutes = {
       REQUIREMENTS_ADD: '/dashboard/admin/requirements/add'
     },
     MORTGAGES: '/dashboard/mortgages',
-    PROPERTIES: '/dashboard/properties'
+    PROPERTIES: '/dashboard/properties',
   },
   admin: {
     MORTGAGES: '/admin/mortgages',
@@ -28,6 +28,10 @@ export const PageRoutes = {
     UPLOAD_PHOTOS: '/advertise/upload-photos',
     PROJECT_STATUS: '/advertise/project-status',
     CALL_PREFERENCE: '/advertise/call-preference'
+  },
+  mortgage_transaction: {
+    TRANSACTION_INFO: 'transaction-info',
+    CUSTOMER_INFO: 'customer-info'
   },
   HOME: '/',
   ABOUT: '/about',

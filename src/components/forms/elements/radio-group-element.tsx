@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { useFormContext } from 'react-hook-form'
@@ -11,12 +11,13 @@ interface Props {
   options: TOption[]
   description?: string
   placeholder?: string
-  handleChange?: (e: any) => void
+  handleChange?: (e: ChangeEvent) => void
   className?: string
+  disabled?: boolean
 }
 
-const RadioGroupElement = ({ name, label, options, className }: Props) => {
-  const { control } = useFormContext()
+const RadioGroupElement = ({ name, label, options, className, disabled = false }: Props) => {
+  const { control } = useFormContext();
   return (
     <>
       <FormField
@@ -30,7 +31,7 @@ const RadioGroupElement = ({ name, label, options, className }: Props) => {
                 {options.map((option) => (
                   <FormItem key={option.value} className="flex items-center space-x-3 space-y-0">
                     <FormControl>
-                      <RadioGroupItem value={option.value} />
+                      <RadioGroupItem disabled={disabled} value={option.value} />
                     </FormControl>
                     <FormLabel className="font-normal">{option.label}</FormLabel>
                   </FormItem>

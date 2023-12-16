@@ -1,3 +1,5 @@
+import { MortgageStatusEnum } from './enums'
+
 export enum SortOrder {
   Asc = 'asc',
   Desc = 'desc'
@@ -43,9 +45,9 @@ export interface MortgageApplication {
   createdAt: string
   updatedAt: string
   userId: number
-  dialCode: string
   country: string
   actions: string
+  status: MortgageStatusEnum
 }
 
 export interface RequirementApplication {
