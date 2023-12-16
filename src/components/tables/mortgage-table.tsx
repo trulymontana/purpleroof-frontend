@@ -3,6 +3,8 @@ import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from './data-table'
 import { MortgageApplication } from '@/constants/types'
 import { useGetMortgages } from '@/data/hooks/useMortgageClient'
+import ActionButtons from './action-buttons'
+import { PageRoutes } from '@/constants/page-routes'
 
 export const columns: ColumnDef<MortgageApplication>[] = [
   {
@@ -46,20 +48,21 @@ export const columns: ColumnDef<MortgageApplication>[] = [
     header: 'Updated At'
   },
   {
-    accessorKey: 'userId',
-    header: 'User ID'
+    accessorKey: 'status',
+    header: 'Status'
   },
-  {
-    accessorKey: 'dialCode',
-    header: 'Dial Code'
-  },
+  // {
+  //   accessorKey: 'userId',
+  //   header: 'User ID'
+  // },
   {
     accessorKey: 'country',
     header: 'Country'
   },
   {
-    accessorKey: 'actions',
-    header: 'Actions'
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => <ActionButtons row={row} route={`${PageRoutes.dashboard.MORTGAGES}`} />
   }
 ]
 
