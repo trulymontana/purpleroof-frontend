@@ -71,9 +71,9 @@ const LocationDetailsForm = ({ onSave }: Props) => {
   const locations = selectedEmirate ? emiratesWithLocations[selectedEmirate] : []
 
   // @ts-ignore
-  const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS));
+  const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS))
 
-  const property_image = form.watch("property_image");
+  const property_image = form.watch('property_image')
 
   console.log(!property_image)
 

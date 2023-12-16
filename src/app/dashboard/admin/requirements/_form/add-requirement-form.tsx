@@ -47,7 +47,6 @@ const formSchema = z.object({
 })
 
 const AddRequirementsForm = () => {
-
   const [selectedDocuments, setSelectedDocuments] = useState<TOption[]>([])
 
   const { isPending: isLoading, mutate: createRequirement } = useCreateRequirementMutation()
@@ -61,13 +60,11 @@ const AddRequirementsForm = () => {
   }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    let formattedDocuments = selectedDocuments.map(document => (
-      {
-        "name": document.label,
-        "documentType": document.value,
-        "isMandatory": true,
-      }
-    ));
+    let formattedDocuments = selectedDocuments.map((document) => ({
+      name: document.label,
+      documentType: document.value,
+      isMandatory: true
+    }))
     createRequirement({
       ...values,
       requiredDocuments: formattedDocuments
@@ -88,11 +85,7 @@ const AddRequirementsForm = () => {
             />
           </div>
           <div className="w-1/2">
-            <NumberInputElement
-              name="processingFee"
-              label={'Processing Fee (%)'}
-              placeholder="Enter Processing Fee"
-            />
+            <NumberInputElement name="processingFee" label={'Processing Fee (%)'} placeholder="Enter Processing Fee" />
           </div>
         </div>
         <div className="flex w-full items-center gap-10">
@@ -100,11 +93,7 @@ const AddRequirementsForm = () => {
             <NumberInputElement name="rate" label={'Rate (%)'} placeholder="Enter Rate" />
           </div>
           <div className="w-1/2">
-            <NumberInputElement
-              name="lifeInsurance"
-              label={'Life Insurance (%)'}
-              placeholder="Enter Life Insurance"
-            />
+            <NumberInputElement name="lifeInsurance" label={'Life Insurance (%)'} placeholder="Enter Life Insurance" />
           </div>
         </div>
         <div className="flex w-full items-center gap-10">
@@ -116,11 +105,7 @@ const AddRequirementsForm = () => {
             />
           </div>
           <div className="w-1/2">
-            <NumberInputElement
-              name="valuationFee"
-              label={'Valuation Fee (AED)'}
-              placeholder="Enter Valuation Fee"
-            />
+            <NumberInputElement name="valuationFee" label={'Valuation Fee (AED)'} placeholder="Enter Valuation Fee" />
           </div>
         </div>
 

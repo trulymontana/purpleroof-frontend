@@ -10,16 +10,20 @@ import { PageRoutes } from '@/constants/page-routes'
 import { Badge } from '../ui/badge'
 
 const ActionButtons = ({ row }: { row: any }) => {
-  const router = useRouter();
-  const requirement = row.original;
+  const router = useRouter()
+  const requirement = row.original
 
   return (
-    <div className='flex items-center gap-2'>
-      <Button variant={"link"} onClick={() => router.push(`${PageRoutes.admin.REQUIREMENTS}/${requirement.id}`)}><FileEdit size={17} color='black' /></Button>
-      <Button variant={"ghost"}><Trash2 color='red' size={17} /> </Button>
+    <div className="flex items-center gap-2">
+      <Button variant={'link'} onClick={() => router.push(`${PageRoutes.admin.REQUIREMENTS}/${requirement.id}`)}>
+        <FileEdit size={17} color="black" />
+      </Button>
+      <Button variant={'ghost'}>
+        <Trash2 color="red" size={17} />{' '}
+      </Button>
     </div>
   )
-};
+}
 
 export const columns: ColumnDef<RequirementApplication>[] = [
   {
@@ -38,14 +42,14 @@ export const columns: ColumnDef<RequirementApplication>[] = [
     header: 'Requirement Documents',
     cell: ({ row }) => {
       const document = row.original
-      const result = document.requiredDocuments.map((item: any, i: number) => <Badge key={i}>{item.documentType}</Badge>);
-      return (
-        <div className='flex items-center gap-2'>{result}</div>
-      )
+      const result = document.requiredDocuments.map((item: any, i: number) => (
+        <Badge key={i}>{item.documentType}</Badge>
+      ))
+      return <div className="flex items-center gap-2">{result}</div>
     }
   },
   {
-    id: "actions",
+    id: 'actions',
     enableHiding: false,
     cell: ({ row }) => <ActionButtons row={row} />
   }

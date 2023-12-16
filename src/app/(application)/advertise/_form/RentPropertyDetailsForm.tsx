@@ -50,7 +50,7 @@ interface Props {
 const RentPropertyDetailsForm = ({ onSave }: Props) => {
   const router = useRouter()
 
-  const basic_details = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS);
+  const basic_details = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS)
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.PROPERTY_DETAILS)
 
@@ -90,19 +90,15 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
           label={'Minimum Contract (in months)'}
         />
 
-        {
-          basic_details && JSON.parse(basic_details).type_of_property === 'residential' ? (
-            <>
-              <SelectElement name="bed_rooms" label={'Number of Bed Rooms'} options={bedRooms} />
+        {basic_details && JSON.parse(basic_details).type_of_property === 'residential' ? (
+          <>
+            <SelectElement name="bed_rooms" label={'Number of Bed Rooms'} options={bedRooms} />
 
-              <SelectElement name="bath_rooms" label={'Number of Bath Rooms'} options={bathRooms} />
-            </>
-          ) : (
-            <SelectElement name='lavatories' label='Number of Lavatory' options={lavatories} />
-          )
-        }
-
-
+            <SelectElement name="bath_rooms" label={'Number of Bath Rooms'} options={bathRooms} />
+          </>
+        ) : (
+          <SelectElement name="lavatories" label="Number of Lavatory" options={lavatories} />
+        )}
 
         <InputElement
           name="deed_number"
