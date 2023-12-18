@@ -3,27 +3,11 @@ import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from './data-table'
 import { RequirementApplication } from '@/constants/types'
 import { useGetRequirements } from '@/data/hooks/useRequirementsClient'
-import { Button } from '../ui/button'
-import { FileEdit, Trash2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 import { Badge } from '../ui/badge'
 
-const ActionButtons = ({ row }: { row: any }) => {
-  const router = useRouter()
-  const requirement = row.original
+import ActionButtons from './action-buttons'
 
-  return (
-    <div className="flex items-center gap-2">
-      <Button variant={'link'} onClick={() => router.push(`${PageRoutes.admin.REQUIREMENTS}/${requirement.id}`)}>
-        <FileEdit size={17} color="black" />
-      </Button>
-      <Button variant={'ghost'}>
-        <Trash2 color="red" size={17} />{' '}
-      </Button>
-    </div>
-  )
-}
 
 export const columns: ColumnDef<RequirementApplication>[] = [
   {

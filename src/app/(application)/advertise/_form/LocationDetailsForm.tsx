@@ -75,8 +75,6 @@ const LocationDetailsForm = ({ onSave }: Props) => {
 
   const property_image = form.watch('propertyImage')
 
-  console.log(!property_image)
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
