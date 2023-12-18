@@ -5,7 +5,9 @@ import { RequirementApplication } from '@/constants/types'
 import { useGetRequirements } from '@/data/hooks/useRequirementsClient'
 import { PageRoutes } from '@/constants/page-routes'
 import { Badge } from '../ui/badge'
+
 import ActionButtons from './action-buttons'
+
 
 export const columns: ColumnDef<RequirementApplication>[] = [
   {
@@ -24,14 +26,14 @@ export const columns: ColumnDef<RequirementApplication>[] = [
     header: 'Requirement Documents',
     cell: ({ row }) => {
       const document = row.original
-      const result = document.requiredDocuments.map((item: any, i: number) => <Badge key={i}>{item.documentType}</Badge>);
-      return (
-        <div className='flex items-center gap-2'>{result}</div>
-      )
+      const result = document.requiredDocuments.map((item: any, i: number) => (
+        <Badge key={i}>{item.documentType}</Badge>
+      ))
+      return <div className="flex items-center gap-2">{result}</div>
     }
   },
   {
-    id: "actions",
+    id: 'actions',
     enableHiding: false,
     cell: ({ row }) => <ActionButtons row={row} route={`${PageRoutes.dashboard.admin.REQUIREMENTS}`} />
   }

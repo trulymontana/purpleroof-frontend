@@ -21,19 +21,19 @@ import NumberInputElement from '@/components/forms/elements/number-input-element
 
 const formSchema = z.object({
   country: z.string({
-    required_error: "Please select your country"
+    required_error: 'Please select your country'
   }),
   dateOfBirth: z.date({
-    required_error: "Please enter your DOB"
+    required_error: 'Please enter your DOB'
   }),
   valueOfProperty: z.number({
-    required_error: "Please enter value of your property",
+    required_error: 'Please enter value of your property'
   }),
   monthlyIncome: z.number({
-    required_error: "Please enter your montly income"
+    required_error: 'Please enter your montly income'
   }),
   loanType: z.string({
-    required_error: "Please select a loan type"
+    required_error: 'Please select a loan type'
   })
 })
 
@@ -42,7 +42,6 @@ interface Props {
 }
 
 const IncomeDetailsForm = ({ handleSubmit }: Props) => {
-
   const storedValue = localStorage.getItem(PageRoutes.mortgage.INCOME_DETAILS)
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
