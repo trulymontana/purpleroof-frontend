@@ -11,7 +11,7 @@ interface Props {
   options: TOption[]
   description?: string
   placeholder?: string
-  handleChange?: (e: ChangeEvent) => void
+  handleChange?: (e: any) => void
   className?: string
   disabled?: boolean
 }
