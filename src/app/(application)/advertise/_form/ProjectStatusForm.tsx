@@ -14,6 +14,7 @@ import DatePickerElement from '@/components/forms/elements/date-picker-element'
 import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
+import { ProjectStatusesEnum, RentedOrVacantEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   projectStatus: z.string(),
@@ -53,18 +54,18 @@ const ProjectStatusForm = ({ onSave }: Props) => {
     router.push(PageRoutes.advertise.UPLOAD_PHOTOS)
   }
 
-  const project_status = form.watch('projectStatus')
-  const rented_or_vacant = form.watch('rentedOrVacant')
+  const projectStatus = form.watch('projectStatus')
+  const rentedOrVacant = form.watch('rentedOrVacant')
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <SelectElement name="projectStatus" label="Project Status" options={projectStatuses} />
 
-        {project_status === 'completed' && (
+        {projectStatus === ProjectStatusesEnum.COMPLETED && (
           <>
             <SelectElement name="rentedOrVacant" label="Rented or Vacant" options={rentedOrVacantOptions} />
-            {rented_or_vacant === 'rented' && (
+            {rentedOrVacant === RentedOrVacantEnum.RENTED && (
               <>
                 <InputElement name="rentalAmount" label="Rental Amount (AED)" />
                 <InputElement name="numberOfCheques" label="Number of Cheques" />
@@ -77,7 +78,7 @@ const ProjectStatusForm = ({ onSave }: Props) => {
           </>
         )}
 
-        {project_status === 'off plan/under construction' && (
+        {projectStatus === ProjectStatusesEnum.UNDER_CONSTRUCTION && (
           <DatePickerElement name="completionDate" label="Completion Date" disabled={true} />
         )}
 
