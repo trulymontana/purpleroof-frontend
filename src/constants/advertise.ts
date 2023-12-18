@@ -2,6 +2,7 @@ import {
   CommercialTypesEnum,
   PaymentIntervalsEnum,
   ProjectStatusesEnum,
+  PropertyTypeEnum,
   RentedOrVacantEnum,
   ResidentialTypesEnum,
   StatusesEnum
@@ -1711,11 +1712,11 @@ export const emiratesWithLocations = {
 export const propertyTypes = [
   {
     label: 'Free Hold',
-    value: 'Free Hold'
+    value: PropertyTypeEnum.FREE_HOLD
   },
   {
     label: 'Lease Hold',
-    value: 'Lease Hold'
+    value: PropertyTypeEnum.LEASE_HOLD
   }
 ]
 

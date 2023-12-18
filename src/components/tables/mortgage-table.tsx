@@ -3,6 +3,9 @@ import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from './data-table'
 import { MortgageApplication } from '@/constants/types'
 import { useGetMortgages } from '@/data/hooks/useMortgageClient'
+import ActionButtons from './action-buttons'
+import Link from 'next/link'
+import { Badge } from '../ui/badge'
 
 export const columns: ColumnDef<MortgageApplication>[] = [
   {
@@ -46,20 +49,25 @@ export const columns: ColumnDef<MortgageApplication>[] = [
     header: 'Updated At'
   },
   {
-    accessorKey: 'userId',
-    header: 'User ID'
+    id: "status",
+    header: 'Status',
+    cell: ({ row }) => {
+      const data = row.original;
+      return <Link href={`/dashboard/mortgages/${data.id}/transaction-info`}><Badge>{data.status}</Badge></Link>
+    }
   },
-  {
-    accessorKey: 'dialCode',
-    header: 'Dial Code'
-  },
+  // {
+  //   accessorKey: 'userId',
+  //   header: 'User ID'
+  // },
   {
     accessorKey: 'country',
     header: 'Country'
   },
   {
-    accessorKey: 'actions',
-    header: 'Actions'
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => <ActionButtons row={row} />
   }
 ]
 

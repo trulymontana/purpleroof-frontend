@@ -13,21 +13,24 @@ import RadioGroupElement from '../../../../components/forms/elements/radio-group
 import { completionStatus, emirate, loanTypeOptions, propertyType } from '@/constants/mortgage'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 const formSchema = z.object({
-  property_type: z.string({
-    required_error: 'Please select a property type.'
-  }),
-  completion_status: z.string({
-    required_error: 'Please select completion status.'
-  }),
-  emirate: z.string({
-    required_error: 'Please select a emirate.'
-  }),
-  transaction_type: z.string({
-    required_error: 'Please select a transaction type.'
-  }),
-  additional_details: z.string().optional()
+
+    propertyType: z.string({
+        required_error: 'Please select a property type.'
+    }),
+    completionStatus: z.string({
+        required_error: "Please select completion status."
+    }),
+    emirate: z.string({
+        required_error: "Please select a emirate."
+    }),
+    loanType: z.string({
+        required_error: 'Please select a transaction type.'
+    }),
+    additionalDetail: z.string().optional()
+
 })
 
 interface Props {
@@ -48,30 +51,29 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
-    onSave('mortgage/transaction-info', values)
+    onSave(LocalStorageKeys.TRANSACTION_INFO, values)
     router.push(`${PageRoutes.dashboard.MORTGAGES}/${mortgageId}/customer-info`)
   }
 
-  return (
-    <Form {...form}>
-      <h1 className="text-4xl font-bold text-black/80">Transaction Info</h1>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <SelectElement name="property_type" label="Property Type" options={propertyType} />
-        <SelectElement name="completion_status" label="Completion Status" options={completionStatus} />
-        <SelectElement name="emirate" label="Emirate" options={emirate} />
-        <RadioGroupElement
-          name="transaction_type"
-          label={'Transaction Type'}
-          options={loanTypeOptions}
-          className="flex-col"
-        />
-        <InputElement name="additional_details" label="Additional Details" />
-        <Button type="submit" className="w-full">
-          Next
-        </Button>
-      </form>
-    </Form>
-  )
+    return (
+        <Form {...form}>
+            <h1 className='text-4xl font-bold text-black/80'>Transaction Info</h1>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <SelectElement name='propertyType' label='Property Type' options={propertyType} />
+                <SelectElement name='completionStatus' label='Completion Status' options={completionStatus} />
+                <SelectElement name='emirate' label='Emirate' options={emirate} />
+                <RadioGroupElement
+                    name="loanType"
+                    label={'Loan Type'}
+                    options={loanTypeOptions}
+                    className='flex-col'
+                />
+                <InputElement name='additionalDetail' label='Additional Details' />
+                <Button type="submit" className='w-full'>Next</Button>
+            </form>
+        </Form>
+    )
+
 }
 
 export default TransactionInfoForm
