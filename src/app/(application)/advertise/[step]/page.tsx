@@ -18,6 +18,7 @@ import WhiteStrokes from '@/components/svgs/white-strokes'
 import { PageRoutes } from '@/constants/page-routes'
 import { useCreatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 import { CreatePropertyInput } from '@/data/clients/propertiesClient'
+import { nullCheckAndMerge } from '@/lib/utils'
 
 const Page = () => {
   const pathName = usePathname()
@@ -42,28 +43,19 @@ const Page = () => {
 
     let result: any = {}
 
-    function nullCheckAndMerge(jsonString: any) {
-      if (jsonString !== null) {
-        const parsedResult = JSON.parse(jsonString)
-        Object.keys(parsedResult).forEach(key => {
-          if (parsedResult[key] !== '') {
-            result[key] = parsedResult[key]
-          }
-        })
-      }
-    }
+    nullCheckAndMerge(result, basicDetails)
+    nullCheckAndMerge(result, propertyDetails)
+    nullCheckAndMerge(result, locationDetails)
+    nullCheckAndMerge(result, amenitiesDetails)
+    nullCheckAndMerge(result, projectStatus)
+    nullCheckAndMerge(result, documentDetails)
+    nullCheckAndMerge(result, callPreferenceDetails)
 
-    nullCheckAndMerge(basicDetails)
-    nullCheckAndMerge(propertyDetails)
-    nullCheckAndMerge(locationDetails)
-    nullCheckAndMerge(amenitiesDetails)
-    nullCheckAndMerge(projectStatus)
-    nullCheckAndMerge(documentDetails)
-    nullCheckAndMerge(callPreferenceDetails)
+    let property: CreatePropertyInput = Object.assign({}, result, values)
 
-    console.log(result)
 
-    // let property: CreatePropertyInput = Object.assign({}, result, values)
+    console.log({ property })
+
     // createProperty({
     //   ...property
     // })
