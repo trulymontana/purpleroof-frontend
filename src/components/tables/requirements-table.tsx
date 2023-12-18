@@ -35,7 +35,7 @@ export const columns: ColumnDef<RequirementApplication>[] = [
   {
     id: 'actions',
     enableHiding: false,
-    cell: ({ row }) => <ActionButtons row={row} route={`${PageRoutes.dashboard.admin.REQUIREMENTS}`} />
+    cell: ({ row }) => <ActionButtons row={row} />
   }
 ]
 
