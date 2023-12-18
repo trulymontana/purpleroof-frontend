@@ -16,12 +16,13 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import WhiteStrokes from '@/components/svgs/white-strokes'
 import { PageRoutes } from '@/constants/page-routes'
+import { useCreatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 
 const Page = ({ params: { step } }: { params: { step: string } }) => {
   const pathName = usePathname()
   const searchParams = useSearchParams()
 
-  // const { mutate: createMortgage } = useCreateMortgageMutation()
+  const { mutate: createMortgage } = useCreatePropertyMutation()
 
   const categoryType = searchParams.get('categoryType')
 

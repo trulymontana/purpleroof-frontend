@@ -13,19 +13,19 @@ import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
 
 const formSchema = z.object({
-  passport_copy: z.string({
+  passportCopy: z.string({
     required_error: 'Please upload your passport copy'
   }),
-  visa_copy: z.string({
+  visaCopy: z.string({
     required_error: 'Please upload your visa copy'
   }),
-  emirates_id: z.string({
+  emiratesId: z.string({
     required_error: 'Please upload your emirates id'
   }),
-  title_deed_copy: z.string({
+  titleDeedCopy: z.string({
     required_error: 'Please upload your title deed copy'
   }),
-  owner_proof_of_mobile_number: z.string({
+  ownerProofOfMobileNumber: z.string({
     required_error: 'Please upload your owner proof of mobile number'
   })
 })
@@ -45,11 +45,11 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
     defaultValues
   })
 
-  const passport_copy = form.watch('passport_copy')
-  const visa_copy = form.watch('visa_copy')
-  const emirates_id = form.watch('emirates_id')
-  const title_deed_copy = form.watch('title_deed_copy')
-  const owner_proof_of_mobile_number = form.watch('owner_proof_of_mobile_number')
+  const passport_copy = form.watch('passportCopy')
+  const visa_copy = form.watch('visaCopy')
+  const emirates_id = form.watch('emiratesId')
+  const title_deed_copy = form.watch('titleDeedCopy')
+  const owner_proof_of_mobile_number = form.watch('ownerProofOfMobileNumber')
 
   const disable = !passport_copy || !visa_copy || !emirates_id || !title_deed_copy || !owner_proof_of_mobile_number
 
@@ -61,13 +61,13 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <FileUploader folder="advertise" name="passport_copy" label={'Passport Copy'} form={form} />
-        <FileUploader folder="advertise" name="visa_copy" label={'Visa Copy'} form={form} />
-        <FileUploader folder="advertise" name="emirates_id" label={'Emirates ID'} form={form} />
-        <FileUploader folder="advertise" name="title_deed_copy" label={'Title Deed Copy'} form={form} />
+        <FileUploader folder="advertise" name="passportCopy" label={'Passport Copy'} form={form} />
+        <FileUploader folder="advertise" name="visaCopy" label={'Visa Copy'} form={form} />
+        <FileUploader folder="advertise" name="emiratesId" label={'Emirates ID'} form={form} />
+        <FileUploader folder="advertise" name="titleDeedCopy" label={'Title Deed Copy'} form={form} />
         <FileUploader
           folder="advertise"
-          name="owner_proof_of_mobile_number"
+          name="ownerProofOfMobileNumber"
           label={'Ownership Proof of Mobile Number'}
           form={form}
         />

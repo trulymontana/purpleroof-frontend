@@ -10,7 +10,7 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { bathRooms, bedRooms } from '@/constants/advertise'
+import { bathRooms, bedRooms, lavatories } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
 import 'react-international-phone/style.css'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
@@ -31,12 +31,9 @@ const formSchema = z.object({
   propertySize: z.string({
     required_error: 'Please enter a property size'
   }),
-  numberOfBedRooms: z.string({
-    required_error: 'Please enter number of bed rooms!'
-  }),
-  numberOfBathRooms: z.string({
-    required_error: 'Please enter number of bath rooms!'
-  }),
+  numberOfBedRooms: z.string().optional(),
+  numberOfBathRooms: z.string().optional(),
+  lavatories: z.string().optional(),
   deedNumber: z.string({
     required_error: 'Please enter your Deed Number'
   })
@@ -49,6 +46,7 @@ interface Props {
 const PropertyDetailsForm = ({ onSave }: Props) => {
   const router = useRouter()
 
+  const basic_details = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS)
   const storedValue = localStorage.getItem(PageRoutes.advertise.PROPERTY_DETAILS)
 
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
@@ -80,6 +78,16 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
           type="number"
           label={'Property Size (Sqft)'}
         />
+
+        {basic_details && JSON.parse(basic_details).type_of_property === 'residential' ? (
+          <>
+            <SelectElement name="numberOfBedRooms" label={'Number of Bed Rooms'} options={bedRooms} />
+
+            <SelectElement name="numberOfBathRooms" label={'Number of Bath Rooms'} options={bathRooms} />
+          </>
+        ) : (
+          <SelectElement name="lavatories" label="Number of Lavatory" options={lavatories} />
+        )}
 
         <SelectElement
           name="numberOfBedRooms"
