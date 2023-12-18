@@ -14,7 +14,7 @@ import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
-  call_preference: z.string({
+  callPreference: z.string({
     required_error: 'Please select a call preference!'
   })
 })
@@ -36,7 +36,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
   })
 
   const handlePreferenceChange = (value: string) => {
-    form.setValue('call_preference', value)
+    form.setValue('callPreference', value)
   }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -48,7 +48,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <RadioGroupElement
           handleChange={handlePreferenceChange}
-          name="call_preference"
+          name="callPreference"
           label={'How would you prefer to handle inquiries from potential leads interested in this advertisement?'}
           className="flex-col items-start gap-4"
           options={callPreferences}

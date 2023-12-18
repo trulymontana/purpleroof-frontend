@@ -25,19 +25,19 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.'
     }),
-  property_value: z.string({
+  propertyValue: z.string({
     required_error: 'Please enter a property value'
   }),
-  property_size: z.string({
+  propertySize: z.string({
     required_error: 'Please enter a property size'
   }),
-  bed_rooms: z.string({
+  numberOfBedRooms: z.string({
     required_error: 'Please enter number of bed rooms!'
   }),
-  bath_rooms: z.string({
+  numberOfBathRooms: z.string({
     required_error: 'Please enter number of bath rooms!'
   }),
-  deed_number: z.string({
+  deedNumber: z.string({
     required_error: 'Please enter your Deed Number'
   })
 })
@@ -69,34 +69,34 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
         <PhoneNumberInputElement name="phone" label="Phone Number" />
 
         <InputElement
-          name="property_value"
+          name="propertyValue"
           type="number"
           placeholder="Please enter your property value"
           label={'Property Value (AED)'}
         />
         <InputElement
-          name="property_size"
+          name="propertySize"
           placeholder="Please enter your property size"
           type="number"
           label={'Property Size (Sqft)'}
         />
 
         <SelectElement
-          name="bed_rooms"
+          name="numberOfBedRooms"
           placeholder="Please select number of bed rooms"
           label={'Number of Bed Rooms'}
           options={bedRooms}
         />
 
         <SelectElement
-          name="bath_rooms"
+          name="numberOfBathRooms"
           placeholder="Please select number of bath rooms"
           label={'Number of Bath Rooms'}
           options={bathRooms}
         />
 
         <InputElement
-          name="deed_number"
+          name="deedNumber"
           placeholder="Please enter deed number"
           label={'Title Deed / Oqod / Initial Contract of Sales'}
         />

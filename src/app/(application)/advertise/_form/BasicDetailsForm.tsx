@@ -22,13 +22,13 @@ const formSchema = z.object({
       required_error: 'Please select a category'
     })
     .refine((val) => val === 'sell' || val === 'rent'),
-  advert_title: z.string({
+  advertTitle: z.string({
     required_error: 'Title should not be empty!'
   }),
-  type_of_property: z.string({
+  typeOfProperty: z.string({
     required_error: 'Please select a property type!'
   }),
-  property_option: z.string({
+  propertyOption: z.string({
     required_error: 'Please select a property option'
   })
 })
@@ -58,24 +58,24 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     router.push(`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${form.getValues('category')}`)
   }
 
-  const propertyType = form.watch('type_of_property')
+  const propertyType = form.watch('typeOfProperty')
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <TabRadioGroup name="category" options={categories} />
 
-        <InputElement name="advert_title" placeholder="Please enter Advert Title" label={'Advert Title'} />
+        <InputElement name="advertTitle" placeholder="Please enter Advert Title" label={'Advert Title'} />
 
         <RadioGroupElement
-          name="type_of_property"
+          name="typeOfProperty"
           label={'Type of Property'}
           className="items-center gap-10"
           options={typesOfProperties}
         />
 
         <SelectElement
-          name="property_option"
+          name="propertyOption"
           label={propertyType === 'residential' ? 'Residential' : 'Commercial'}
           options={propertyType === 'residential' ? residentalTypes : commercialTypes}
         />

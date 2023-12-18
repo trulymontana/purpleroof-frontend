@@ -23,7 +23,7 @@ const formSchema = z.object({
   location: z.string({
     required_error: 'Please select a Location!'
   }),
-  building_name: z.string({
+  buildingName: z.string({
     required_error: 'Please enter your Building name!'
   }),
   floor: z.string({
@@ -32,13 +32,13 @@ const formSchema = z.object({
   street: z.string({
     required_error: 'Please enter Street number'
   }),
-  unit_number: z.string({
+  unitNumber: z.string({
     required_error: 'Please enter Unit number'
   }),
   landmark: z.string({
     required_error: 'Please enter a landmark'
   }),
-  property_image: z.string({
+  propertyImage: z.string({
     required_error: 'Please upload a property image'
   })
 })
@@ -73,7 +73,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
   // @ts-ignore
   const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS))
 
-  const property_image = form.watch('property_image')
+  const property_image = form.watch('propertyImage')
 
   console.log(!property_image)
 
@@ -113,15 +113,15 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         />
 
         <InputElement
-          name="building_name"
+          name="buildingName"
           placeholder="Please enter your building name"
           label={'Building / Cluster Name'}
         />
         <InputElement name="floor" placeholder="Please enter your floor" label={'Floor'} />
         <InputElement name="street" placeholder="Please enter your street name" label={'Street'} />
-        <InputElement name="unit_number" placeholder="Please enter your unit number" label={'Unit Number'} />
+        <InputElement name="unitNumber" placeholder="Please enter your unit number" label={'Unit Number'} />
         <InputElement name="landmark" placeholder="Please enter a landmark" label={'Landmark'} />
-        <FileUploader folder="advertise" name="property_image" label={'Upload Photo of the Property'} form={form} />
+        <FileUploader folder="advertise" name="propertyImage" label={'Upload Photo of the Property'} form={form} />
 
         <Button type="submit" disabled={!property_image} className="w-full">
           Save and Continue

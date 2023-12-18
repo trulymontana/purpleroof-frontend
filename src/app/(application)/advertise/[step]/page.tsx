@@ -21,10 +21,29 @@ const Page = ({ params: { step } }: { params: { step: string } }) => {
   const pathName = usePathname()
   const searchParams = useSearchParams()
 
+  // const { mutate: createMortgage } = useCreateMortgageMutation()
+
   const categoryType = searchParams.get('categoryType')
 
   const storeValues = (step: string, values: any) => {
     localStorage.setItem(step, JSON.stringify(values))
+  }
+
+  const handleSubmit = (values: any) => {
+    const data = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS)
+    let result
+    if (data !== null) {
+      result = JSON.parse(data)
+      delete result.agreeToPrivacyPolicy
+    }
+
+    // let property: CreateMortgageInput = Object.assign({}, result, values)
+    // mortgage.dateOfBirth = new Date(mortgage.dateOfBirth).toISOString()
+    // mortgage.intendedProperty = ''
+    // mortgage.status = MortgageStatusEnum.SUBMITTED
+    // createMortgage({
+    //   ...mortgage
+    // })
   }
 
   const subComponents: { [key: string]: React.ReactElement } = {

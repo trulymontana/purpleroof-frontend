@@ -16,13 +16,13 @@ import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
-  project_status: z.string(),
-  rented_or_vacant: z.string().optional(),
-  rental_amount: z.string().optional(),
-  number_of_cheques: z.string().optional(),
-  notice_period_rent: z.string().optional(),
-  notice_period_property: z.string().optional(),
-  completion_date: z.date().optional()
+  projectStatus: z.string(),
+  rentedOrVacant: z.string().optional(),
+  rentalAmount: z.string().optional(),
+  numberOfCheques: z.string().optional(),
+  noticePeriodRent: z.string().optional(),
+  noticePeriodProperty: z.string().optional(),
+  completionDate: z.date().optional()
 })
 
 type TProjectStatus = z.infer<typeof formSchema>
@@ -38,9 +38,9 @@ const ProjectStatusForm = ({ onSave }: Props) => {
 
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
-  if (defaultValues.completion_date) {
+  if (defaultValues.completionDate) {
     // @ts-ignore
-    defaultValues.completion_date = new Date(defaultValues?.completion_date)
+    defaultValues.completionDate = new Date(defaultValues?.completionDate)
   }
 
   const form = useForm<TProjectStatus>({
@@ -53,23 +53,23 @@ const ProjectStatusForm = ({ onSave }: Props) => {
     router.push(PageRoutes.advertise.UPLOAD_PHOTOS)
   }
 
-  const project_status = form.watch('project_status')
-  const rented_or_vacant = form.watch('rented_or_vacant')
+  const project_status = form.watch('projectStatus')
+  const rented_or_vacant = form.watch('rentedOrVacant')
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <SelectElement name="project_status" label="Project Status" options={projectStatuses} />
+        <SelectElement name="projectStatus" label="Project Status" options={projectStatuses} />
 
         {project_status === 'completed' && (
           <>
-            <SelectElement name="rented_or_vacant" label="Rented or Vacant" options={rentedOrVacantOptions} />
+            <SelectElement name="rentedOrVacant" label="Rented or Vacant" options={rentedOrVacantOptions} />
             {rented_or_vacant === 'rented' && (
               <>
-                <InputElement name="rental_amount" label="Rental Amount (AED)" />
-                <InputElement name="number_of_cheques" label="Number of Cheques" />
+                <InputElement name="rentalAmount" label="Rental Amount (AED)" />
+                <InputElement name="numberOfCheques" label="Number of Cheques" />
                 <InputElement
-                  name="notice_period_rent"
+                  name="noticePeriodRent"
                   label="Notice Period of remaining rental agreement (in months)"
                 />
               </>
@@ -78,10 +78,10 @@ const ProjectStatusForm = ({ onSave }: Props) => {
         )}
 
         {project_status === 'off plan/under construction' && (
-          <DatePickerElement name="completion_date" label="Completion Date" disabled={true} />
+          <DatePickerElement name="completionDate" label="Completion Date" disabled={true} />
         )}
 
-        <InputElement name="notice_period_property" label={'Notice Period to vacate the property (in months)'} />
+        <InputElement name="noticePeriodProperty" label={'Notice Period to vacate the property (in months)'} />
 
         <Button type="submit" className="w-full">
           Save and Continue
