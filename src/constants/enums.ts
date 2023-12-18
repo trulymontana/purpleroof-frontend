@@ -1,3 +1,8 @@
+export enum categoryEnum {
+  SALE = 'SALE',
+  RENT = 'RENT'
+}
+
 export enum IncomeProfileEnum {
   SALARIED = 'SALARIED',
   SELF_EMPLOYED = 'SELF_EMPLOYED',
@@ -56,6 +61,7 @@ export enum EmirateEnum {
   UMM_AL_QUWAIN = 'UMM_AL_QUWAIN'
 }
 
+// remove this
 export enum PropertyTypeEnum {
   FREE_HOLD = 'FREE_HOLD',
   LEASE_HOLD = 'LEASE_HOLD'
@@ -146,7 +152,7 @@ export enum StatusesEnum {
 
 export enum ProjectStatusesEnum {
   COMPLETED = 'COMPLETED',
-  UNDER_CONSTRUCTION = 'UNDER_CONSTRUCTION',
+  OFF_PLAN_UNDER_CONSTRUCTION = 'OFF_PLAN_UNDER_CONSTRUCTION',
   SHELL_AND_CORE = 'SHELL_AND_CORE'
 }
 

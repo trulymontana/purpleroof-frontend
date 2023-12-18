@@ -1,16 +1,17 @@
-import { Property, QueryOptions } from '@/constants/types'
+import { Property, QueryOptions, TOption } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
 
 export interface CreatePropertyInput {
-  advertTitle: string
+  name: string
   category: string
   typeOfProperty: string
   propertyOption: string
   phone: string
   propertyValue: string
   propertySize: string
+  amenities: number[]
   numberOfBedRooms?: number
   numberOfBathRooms?: number
   deedNumber: string

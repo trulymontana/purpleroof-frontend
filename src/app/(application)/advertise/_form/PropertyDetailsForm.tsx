@@ -16,6 +16,7 @@ import 'react-international-phone/style.css'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
 import { PageRoutes } from '@/constants/page-routes'
 import { BackButton } from '@/components/navigation/back-button'
+import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
   phone: z
@@ -25,10 +26,10 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.'
     }),
-  propertyValue: z.string({
+  propertyValue: z.number({
     required_error: 'Please enter a property value'
   }),
-  propertySize: z.string({
+  propertySize: z.number({
     required_error: 'Please enter a property size'
   }),
   numberOfBedRooms: z.string().optional(),
@@ -66,20 +67,18 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <PhoneNumberInputElement name="phone" label="Phone Number" />
 
-        <InputElement
+        <NumberInputElement
           name="propertyValue"
-          type="number"
           placeholder="Please enter your property value"
           label={'Property Value (AED)'}
         />
-        <InputElement
+        <NumberInputElement
           name="propertySize"
           placeholder="Please enter your property size"
-          type="number"
           label={'Property Size (Sqft)'}
         />
 
-        {basic_details && JSON.parse(basic_details).type_of_property === 'residential' ? (
+        {basic_details && JSON.parse(basic_details).typeOfProperty === 'residential' ? (
           <>
             <SelectElement name="numberOfBedRooms" label={'Number of Bed Rooms'} options={bedRooms} />
 
@@ -88,20 +87,6 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
         ) : (
           <SelectElement name="lavatories" label="Number of Lavatory" options={lavatories} />
         )}
-
-        <SelectElement
-          name="numberOfBedRooms"
-          placeholder="Please select number of bed rooms"
-          label={'Number of Bed Rooms'}
-          options={bedRooms}
-        />
-
-        <SelectElement
-          name="numberOfBathRooms"
-          placeholder="Please select number of bath rooms"
-          label={'Number of Bath Rooms'}
-          options={bathRooms}
-        />
 
         <InputElement
           name="deedNumber"

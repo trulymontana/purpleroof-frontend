@@ -110,7 +110,7 @@ export interface Property {
 
 export type TOption = {
   label: string
-  value: string
+  value: string | number
 }
 
 export type PreSignedFile = {

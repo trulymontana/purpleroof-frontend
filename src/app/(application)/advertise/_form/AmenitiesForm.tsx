@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation'
 import { TOption } from '@/constants/types'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
+import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
   propertyType: z.string({
@@ -24,9 +25,9 @@ const formSchema = z.object({
   status: z.string({
     required_error: 'Please select your property status'
   }),
-  parkingSpaces: z.string().optional(),
-  airportDistance: z.string().optional(),
-  metroStation: z.string().optional(),
+  parkingSpaces: z.number().optional(),
+  airportDistance: z.number().optional(),
+  metroStation: z.number().optional(),
   nearbyPlaces: z.string().optional(),
   otherFeatures: z.string().optional()
 })
@@ -76,7 +77,7 @@ const AmenitiesForm = ({ onSave }: Props) => {
 
         <SelectElement name="status" label={'Status'} placeholder="Please select a status" options={statuses} />
 
-        <InputElement
+        <NumberInputElement
           name="parkingSpaces"
           placeholder="Please enter parking spaces"
           label={'Number of Parking Spaces'}
@@ -90,13 +91,13 @@ const AmenitiesForm = ({ onSave }: Props) => {
           setSelectedBoxes={setSelectedAmenities}
         />
 
-        <InputElement
+        <NumberInputElement
           name="airportDistance"
           placeholder="Please enter airport distance"
           label={'Distance from Airport (in km)'}
         />
 
-        <InputElement
+        <NumberInputElement
           name="metroStation"
           placeholder="Please enter metro station"
           label={'Nearby Metro Station (in km)'}

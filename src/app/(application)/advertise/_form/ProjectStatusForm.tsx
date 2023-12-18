@@ -15,14 +15,15 @@ import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import { ProjectStatusesEnum, RentedOrVacantEnum } from '@/constants/enums'
+import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
   projectStatus: z.string(),
   rentedOrVacant: z.string().optional(),
-  rentalAmount: z.string().optional(),
-  numberOfCheques: z.string().optional(),
-  noticePeriodRent: z.string().optional(),
-  noticePeriodProperty: z.string().optional(),
+  rentalAmount: z.number().optional(),
+  numberOfCheques: z.number().optional(),
+  noticePeriodRent: z.number().optional(),
+  noticePeriodProperty: z.number().optional(),
   completionDate: z.date().optional()
 })
 
@@ -67,9 +68,9 @@ const ProjectStatusForm = ({ onSave }: Props) => {
             <SelectElement name="rentedOrVacant" label="Rented or Vacant" options={rentedOrVacantOptions} />
             {rentedOrVacant === RentedOrVacantEnum.RENTED && (
               <>
-                <InputElement name="rentalAmount" label="Rental Amount (AED)" />
-                <InputElement name="numberOfCheques" label="Number of Cheques" />
-                <InputElement
+                <NumberInputElement name="rentalAmount" label="Rental Amount (AED)" />
+                <NumberInputElement name="numberOfCheques" label="Number of Cheques" />
+                <NumberInputElement
                   name="noticePeriodRent"
                   label="Notice Period of remaining rental agreement (in months)"
                 />
@@ -78,11 +79,11 @@ const ProjectStatusForm = ({ onSave }: Props) => {
           </>
         )}
 
-        {projectStatus === ProjectStatusesEnum.UNDER_CONSTRUCTION && (
+        {projectStatus === ProjectStatusesEnum.OFF_PLAN_UNDER_CONSTRUCTION && (
           <DatePickerElement name="completionDate" label="Completion Date" disabled={true} />
         )}
 
-        <InputElement name="noticePeriodProperty" label={'Notice Period to vacate the property (in months)'} />
+        <NumberInputElement name="noticePeriodProperty" label={'Notice Period to vacate the property (in months)'} />
 
         <Button type="submit" className="w-full">
           Save and Continue

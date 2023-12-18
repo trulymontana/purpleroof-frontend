@@ -19,6 +19,8 @@ import { PageRoutes } from '@/constants/page-routes'
 import { useCreatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 import { CreatePropertyInput } from '@/data/clients/propertiesClient'
 import { nullCheckAndMerge } from '@/lib/utils'
+import { TOption } from '@/constants/types'
+import { categoryEnum } from '@/constants/enums'
 
 const Page = () => {
   const pathName = usePathname()
@@ -53,8 +55,25 @@ const Page = () => {
 
     let property: CreatePropertyInput = Object.assign({}, result, values)
 
+    if (property.amenities && property.amenities.length > 0) {
+      let amenities_values: number[] = property.amenities.map((amenity: any) => amenity.value)
+      property.amenities = amenities_values;
+    }
 
     console.log({ property })
+
+    //     "amount must be a number conforming to the specified constraints", propertyValue
+    //     "numberOfBedRooms must be a number conforming to the specified constraints",
+    //     "numberOfBathRooms must be a number conforming to the specified constraints",
+    //     "unitNumber must be a number conforming to the specified constraints",
+    //     "floor must be a number conforming to the specified constraints",
+    //     "emirateId must be a number conforming to the specified constraints", ? 
+    //     "projectStatus must be one of the following values: OFF_PLAN_UNDER_CONSTRUCTION, SHELL_AND_CORE, VACANT, RENTED",
+    //     "status must be one of the following values: SALE, RENT",
+    //     "propertyType must be one of the following values: RESIDENTIAL, COMMERCIAL",
+    //     "emirate must be one of the following values: DUBAI, ABU_DHABI, RAS_AL_KHAIMAH, SHARJAH, FUJAIRAH, AJMAN, UMM_AL_QUWAIN",
+    //     "propertyTypeCategoryId must be a number conforming to the specified constraints" ? 
+    // ],
 
     // createProperty({
     //   ...property
@@ -64,9 +83,9 @@ const Page = () => {
   const subComponents: { [key: string]: React.ReactElement } = {
     [PageRoutes.advertise.BASIC_DETAILS]: <BasicDetailsForm onSave={storeValues} />,
     [PageRoutes.advertise.PROPERTY_DETAILS]:
-      categoryType === 'rent' ? (
+      categoryType === categoryEnum.RENT ? (
         <RentPropertyDetailsForm onSave={storeValues} />
-      ) : categoryType === 'sell' ? (
+      ) : categoryType === categoryEnum.SALE ? (
         <PropertyDetailsForm onSave={storeValues} />
       ) : (
         <div>Invalid Category</div>

@@ -14,6 +14,7 @@ import { bathRooms, bedRooms, lavatories, paymentIntervals } from '@/constants/a
 import { useRouter } from 'next/navigation'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
 import { PageRoutes } from '@/constants/page-routes'
+import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
   phone: z
@@ -23,16 +24,16 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.'
     }),
-  rentalAmount: z.string({
+  rentalAmount: z.number({
     required_error: 'Please enter a rental amount'
   }),
   paymentInterval: z.string({
     required_error: 'Please select a payment interval'
   }),
-  propertySize: z.string({
+  propertySize: z.number({
     required_error: 'Please enter a property size!'
   }),
-  minimumContract: z.string({
+  minimumContract: z.number({
     required_error: 'Please enter a minimum contract period!'
   }),
   numberOfBedRooms: z.string().optional(),
@@ -70,27 +71,24 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <PhoneNumberInputElement name="phone" label="Phone Number" />
-        <InputElement
+        <NumberInputElement
           name="rentalAmount"
-          type="number"
           placeholder="Please enter rental amount"
           label={'Rental Amount (AED)'}
         />
         <SelectElement name="payment_interval" label="Payment Interval" options={paymentIntervals} />
-        <InputElement
+        <NumberInputElement
           name="propertySize"
           placeholder="Please enter property size"
-          type="number"
           label={'Property Size (Sqft)'}
         />
-        <InputElement
+        <NumberInputElement
           name="minimumContract"
           placeholder="Please enter minimum contract period"
-          type="number"
           label={'Minimum Contract (in months)'}
         />
 
-        {basic_details && JSON.parse(basic_details).type_of_property === 'residential' ? (
+        {basic_details && JSON.parse(basic_details).typeOfProperty === 'residential' ? (
           <>
             <SelectElement name="numberOfBedRooms" label={'Number of Bed Rooms'} options={bedRooms} />
 
@@ -109,6 +107,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
+
         <Button
           variant="outline"
           type="button"

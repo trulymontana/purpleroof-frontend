@@ -15,14 +15,15 @@ import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import TabRadioGroup from '@/components/forms/elements/tab-radio-group'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
+import { PropertyTypeEnum, categoryEnum } from '@/constants/enums'
 
 const formSchema = z.object({
-  category: z
+  status: z
     .string({
       required_error: 'Please select a category'
     })
-    .refine((val) => val === 'sell' || val === 'rent'),
-  advertTitle: z.string({
+    .refine((val) => val === categoryEnum.SALE || val === categoryEnum.RENT),
+  name: z.string({
     required_error: 'Title should not be empty!'
   }),
   typeOfProperty: z.string({
@@ -45,8 +46,8 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     storedValue !== null
       ? JSON.parse(storedValue)
       : {
-          category: 'sell'
-        }
+        status: categoryEnum.SALE
+      }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,7 +56,7 @@ const BasicDetailsForm = ({ onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.BASIC_DETAILS, values)
-    router.push(`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${form.getValues('category')}`)
+    router.push(`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${form.getValues('status')}`)
   }
 
   const propertyType = form.watch('typeOfProperty')
@@ -63,9 +64,9 @@ const BasicDetailsForm = ({ onSave }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <TabRadioGroup name="category" options={categories} />
+        <TabRadioGroup name="status" options={categories} />
 
-        <InputElement name="advertTitle" placeholder="Please enter Advert Title" label={'Advert Title'} />
+        <InputElement name="name" placeholder="Please enter Advert Title" label={'Advert Title'} />
 
         <RadioGroupElement
           name="typeOfProperty"
@@ -76,9 +77,10 @@ const BasicDetailsForm = ({ onSave }: Props) => {
 
         <SelectElement
           name="propertyOption"
-          label={propertyType === 'residential' ? 'Residential' : 'Commercial'}
-          options={propertyType === 'residential' ? residentalTypes : commercialTypes}
+          label={propertyType === PropertyTypeEnum.RESIDENTIAL ? 'Residential' : 'Commercial'}
+          options={propertyType === PropertyTypeEnum.RESIDENTIAL ? residentalTypes : commercialTypes}
         />
+
         <Button variant={'default'} type="submit" className="w-full">
           Save and Continue
         </Button>
