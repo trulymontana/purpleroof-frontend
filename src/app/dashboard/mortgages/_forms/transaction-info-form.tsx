@@ -54,13 +54,6 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
     router.push(`${PageRoutes.dashboard.MORTGAGES}/${mortgageId}/customer-info`)
   }
 
-
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
-        onSave("mortgage/transaction-info", values)
-        router.push(`${PageRoutes.dashboard.MORTGAGES}/${mortgageId}/customer-info`)
-    }
-
     return (
         <Form {...form}>
             <h1 className='text-4xl font-bold text-black/80'>Transaction Info</h1>
