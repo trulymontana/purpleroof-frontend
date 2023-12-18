@@ -1,21 +1,21 @@
-"use client"
+'use client'
 
 import CustomerInfoForm from '@/app/dashboard/mortgages/_forms/customer-info-form'
 import TransactionInfoForm from '@/app/dashboard/mortgages/_forms/transaction-info-form'
 import { PageRoutes } from '@/constants/page-routes'
 
 interface Props {
-    params: {
-        mortgageId: string,
-        formStep: string
-    }
+  params: {
+    mortgageId: string
+    formStep: string
+  }
 }
 
 const Page = ({ params: { mortgageId, formStep } }: Props) => {
+  const storeValues = (step: string, values: any) => {
+    localStorage.setItem(step, JSON.stringify(values))
+  }
 
-    const storeValues = (step: string, values: any) => {
-        localStorage.setItem(step, JSON.stringify(values))
-    }
 
     const subComponents: { [key: string]: React.ReactElement } = {
         [PageRoutes.mortgage_transaction.TRANSACTION_INFO]: <TransactionInfoForm mortgageId={mortgageId} onSave={storeValues} />,
@@ -30,6 +30,7 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
             </div>
         </>
     )
+
 }
 
 export default Page

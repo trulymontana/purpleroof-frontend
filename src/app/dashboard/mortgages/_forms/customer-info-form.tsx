@@ -15,105 +15,113 @@ import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 
-
 const formSchema = z.object({
+  name: z.string({
+    required_error: 'Please enter your name'
+  }),
+  email: z.string({
+    required_error: 'Please enter your email'
+  }),
+  contact: z
+    .string({
+      required_error: 'Please enter a valid phone number.'
+    })
+    .min(10, {
+      message: 'Phone number must be at least 10 characters.'
+    }),
+  education: z.string({
+    required_error: 'Please select your education qualification'
+  }),
+  marital_status: z.string({
+    required_error: 'Please select your marital status'
+  }),
+  favorite_city: z.string({
+    required_error: 'Please enter your favorite city'
+  }),
+  number_of_family_member_in_uae: z.string({
+    required_error: 'Please enter your number of family member in UAE'
+  }),
+  years_in_uae: z.string({
+    required_error: 'Please enter your number years in UAE'
+  }),
+  annual_rental_income: z.string({
+    required_error: 'Please enter your annual rental income'
+  }),
+  uae_residence_address: z.string({
+    required_error: 'Please enter your UAE residence address'
+  }),
+  home_country_address: z.string({
+    required_error: 'Please enter your home country address'
+  }),
+  home_country_reference_1: z.object({
     name: z.string({
-        required_error: 'Please enter your name'
+      required_error: 'Please enter name'
     }),
-    email: z.string({
-        required_error: 'Please enter your email'
+    relationship: z.string({
+      required_error: 'Please enter relationship'
     }),
-    contact: z
-        .string({
-            required_error: 'Please enter a valid phone number.'
-        })
-        .min(10, {
-            message: 'Phone number must be at least 10 characters.'
-        }),
-    education: z.string({
-        required_error: 'Please select your education qualification'
+    mobile: z
+      .string({
+        required_error: 'Please enter mobile number'
+      })
+      .min(10, {
+        message: 'Phone number must be at least 10 characters.'
+      })
+  }),
+  home_country_reference_2: z.object({
+    name: z.string({
+      required_error: 'Please enter name'
     }),
-    marital_status: z.string({
-        required_error: 'Please select your marital status'
+    relationship: z.string({
+      required_error: 'Please enter relationship'
     }),
-    favorite_city: z.string({
-        required_error: 'Please enter your favorite city'
+    mobile: z
+      .string({
+        required_error: 'Please enter mobile number'
+      })
+      .min(10, {
+        message: 'Phone number must be at least 10 characters.'
+      })
+  }),
+  uae_reference_1: z.object({
+    name: z.string({
+      required_error: 'Please enter name'
     }),
-    number_of_family_member_in_uae: z.string({
-        required_error: 'Please enter your number of family member in UAE'
+    relationship: z.string({
+      required_error: 'Please enter relationship'
     }),
-    years_in_uae: z.string({
-        required_error: 'Please enter your number years in UAE'
+    mobile: z
+      .string({
+        required_error: 'Please enter mobile number'
+      })
+      .min(10, {
+        message: 'Phone number must be at least 10 characters.'
+      })
+  }),
+  uae_reference_2: z.object({
+    name: z.string({
+      required_error: 'Please enter name'
     }),
-    annual_rental_income: z.string({
-        required_error: 'Please enter your annual rental income'
+    relationship: z.string({
+      required_error: 'Please enter relationship'
     }),
-    uae_residence_address: z.string({
-        required_error: 'Please enter your UAE residence address'
-    }),
-    home_country_address: z.string({
-        required_error: 'Please enter your home country address'
-    }),
-    home_country_reference_1: z.object({
-        name: z.string({
-            required_error: "Please enter name"
-        }),
-        relationship: z.string({
-            required_error: "Please enter relationship"
-        }),
-        mobile: z.string({
-            required_error: "Please enter mobile number"
-        }).min(10, {
-            message: 'Phone number must be at least 10 characters.'
-        }),
-    }),
-    home_country_reference_2: z.object({
-        name: z.string({
-            required_error: "Please enter name"
-        }),
-        relationship: z.string({
-            required_error: "Please enter relationship"
-        }),
-        mobile: z.string({
-            required_error: "Please enter mobile number"
-        }).min(10, {
-            message: 'Phone number must be at least 10 characters.'
-        }),
-    }),
-    uae_reference_1: z.object({
-        name: z.string({
-            required_error: "Please enter name"
-        }),
-        relationship: z.string({
-            required_error: "Please enter relationship"
-        }),
-        mobile: z.string({
-            required_error: "Please enter mobile number"
-        }).min(10, {
-            message: 'Phone number must be at least 10 characters.'
-        }),
-    }),
-    uae_reference_2: z.object({
-        name: z.string({
-            required_error: "Please enter name"
-        }),
-        relationship: z.string({
-            required_error: "Please enter relationship"
-        }),
-        mobile: z.string({
-            required_error: "Please enter mobile number"
-        }).min(10, {
-            message: 'Phone number must be at least 10 characters.'
-        }),
-    }),
+    mobile: z
+      .string({
+        required_error: 'Please enter mobile number'
+      })
+      .min(10, {
+        message: 'Phone number must be at least 10 characters.'
+      })
+  })
 })
 
 interface Props {
-    mortgageId: string
-    onSave: (step: string, values: any) => void
+  mortgageId: string
+  onSave: (step: string, values: any) => void
 }
 
 const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
+
 
     const storedValue = localStorage.getItem('mortgage/customer-info')
     const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
@@ -233,6 +241,7 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
             </form>
         </Form>
     )
+
 }
 
 export default CustomerInfoForm

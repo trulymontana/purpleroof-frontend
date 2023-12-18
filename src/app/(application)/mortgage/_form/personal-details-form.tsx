@@ -50,7 +50,6 @@ interface Props {
   onSave: (step: string, values: z.infer<typeof formSchema>) => void
 }
 const PersonalDetailsForm = ({ onSave }: Props) => {
-
   const router = useRouter()
 
   const storedValue = localStorage.getItem(PageRoutes.mortgage.PERSONAL_DETAILS)
@@ -70,16 +69,16 @@ const PersonalDetailsForm = ({ onSave }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <div className="flex w-full gap-2">
-          <div className='w-1/2'>
+          <div className="w-1/2">
             <InputElement name="firstName" label={'First Name'} />
           </div>
-          <div className='w-1/2'>
+          <div className="w-1/2">
             <InputElement name="lastName" label={'Last Name'} />
           </div>
         </div>
 
         <InputElement name="email" label={'Email'} />
-        <PhoneNumberInputElement name='phoneNumber' label='Phone Number' />
+        <PhoneNumberInputElement name="phoneNumber" label="Phone Number" />
 
         <SelectElement name="residenceType" label={'Residential Status'} options={residentialTypes} />
 

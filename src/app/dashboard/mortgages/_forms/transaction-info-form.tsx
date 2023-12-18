@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
+
     propertyType: z.string({
         required_error: 'Please select a property type.'
     }),
@@ -28,24 +29,31 @@ const formSchema = z.object({
         required_error: 'Please select a transaction type.'
     }),
     additionalDetail: z.string().optional()
+
 })
 
 interface Props {
-    mortgageId: string
-    onSave: (step: string, values: any) => void
+  mortgageId: string
+  onSave: (step: string, values: any) => void
 }
 
 const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
+  const router = useRouter()
 
-    const router = useRouter();
+  const storedValue = localStorage.getItem('mortgage/transaction-info')
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
-    const storedValue = localStorage.getItem('mortgage/transaction-info')
-    const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues
+  })
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues
-    })
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values)
+    onSave('mortgage/transaction-info', values)
+    router.push(`${PageRoutes.dashboard.MORTGAGES}/${mortgageId}/customer-info`)
+  }
+
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
@@ -71,6 +79,7 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
             </form>
         </Form>
     )
+
 }
 
 export default TransactionInfoForm
