@@ -13,6 +13,7 @@ import RadioGroupElement from '../../../../components/forms/elements/radio-group
 import { completionStatus, emirate, loanTypeOptions, propertyType } from '@/constants/mortgage'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 const formSchema = z.object({
 
@@ -50,7 +51,7 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
-    onSave('mortgage/transaction-info', values)
+    onSave(LocalStorageKeys.TRANSACTION_INFO, values)
     router.push(`${PageRoutes.dashboard.MORTGAGES}/${mortgageId}/customer-info`)
   }
 

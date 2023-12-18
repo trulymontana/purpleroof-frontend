@@ -1,19 +1,18 @@
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Button } from "../ui/button";
 import { FileEdit, Trash2 } from "lucide-react";
-import { PageRoutes } from "@/constants/page-routes";
+import Link from "next/link";
 
 interface Props {
     row: any
-    route: string
 }
-const ActionButtons = ({ row, route }: Props) => {
-    const router = useRouter();
+const ActionButtons = ({ row }: Props) => {
+    const pathname = usePathname();
     const data = row.original;
 
     return (
         <div className='flex items-center gap-2'>
-            <Button type="button" variant={"link"} onClick={() => router.push(`${route}/${data.id}`)}><FileEdit size={17} color='black' /></Button>
+            <Link href={`${pathname}/${data.id}`}><FileEdit size={17} color='black' /></Link>
             <Button variant={"ghost"}><Trash2 color='red' size={17} /></Button>
         </div>
     )

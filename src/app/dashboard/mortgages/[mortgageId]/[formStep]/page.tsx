@@ -17,19 +17,17 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
   }
 
 
-    const subComponents: { [key: string]: React.ReactElement } = {
-        [PageRoutes.mortgage_transaction.TRANSACTION_INFO]: <TransactionInfoForm mortgageId={mortgageId} onSave={storeValues} />,
-        // documents form
-        [PageRoutes.mortgage_transaction.CUSTOMER_INFO]: <CustomerInfoForm mortgageId={mortgageId} onSave={storeValues} />,
-    }
+  const subComponents: { [key: string]: React.ReactElement } = {
+    [PageRoutes.mortgage_transaction.TRANSACTION_INFO]: <TransactionInfoForm mortgageId={mortgageId} onSave={storeValues} />,
+    // documents form
+    [PageRoutes.mortgage_transaction.CUSTOMER_INFO]: <CustomerInfoForm mortgageId={mortgageId} onSave={storeValues} />,
+  }
 
-    return (
-        <>
-            <div className={"lg:p-6 p-3 rounded mx-2 bg-white mb-10 flex flex-col gap-4 mt-6"}>
-                {subComponents[formStep]}
-            </div>
-        </>
-    )
+  return (
+    <div className={"lg:p-6 p-3 rounded mx-2 bg-white mb-10 flex flex-col gap-4 mt-6"}>
+      {subComponents[formStep]}
+    </div>
+  )
 
 }
 

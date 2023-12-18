@@ -14,6 +14,7 @@ import PhoneNumberInputElement from '../../../../components/forms/elements/phone
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 const formSchema = z.object({
   name: z.string({
@@ -133,7 +134,7 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log({ values })
-        onSave("mortgage/customer-info", values)
+        onSave(LocalStorageKeys.CUSTOMER_INFO, values)
     }
 
     return (

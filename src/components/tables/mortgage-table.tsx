@@ -4,7 +4,6 @@ import { DataTable } from './data-table'
 import { MortgageApplication } from '@/constants/types'
 import { useGetMortgages } from '@/data/hooks/useMortgageClient'
 import ActionButtons from './action-buttons'
-import { PageRoutes } from '@/constants/page-routes'
 import Link from 'next/link'
 import { Badge } from '../ui/badge'
 
@@ -68,7 +67,7 @@ export const columns: ColumnDef<MortgageApplication>[] = [
   {
     id: "actions",
     enableHiding: false,
-    cell: ({ row }) => <ActionButtons row={row} route={`${PageRoutes.dashboard.MORTGAGES}`} />
+    cell: ({ row }) => <ActionButtons row={row} />
   }
 ]
 
