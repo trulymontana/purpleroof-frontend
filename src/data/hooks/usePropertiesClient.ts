@@ -20,7 +20,7 @@ export const useCreatePropertyMutation = () => {
     onSuccess: (data: any) => {
       toast({
         variant: 'default',
-        title: 'Mortgage created successfully'
+        title: 'Property created successfully'
       })
       // localStorage.removeItem(PageRoutes.mortgage.PERSONAL_DETAILS)
       // localStorage.removeItem(PageRoutes.mortgage.INCOME_DETAILS)

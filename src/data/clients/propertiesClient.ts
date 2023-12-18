@@ -3,7 +3,7 @@ import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
 
-interface CreatePropertyInput {
+export interface CreatePropertyInput {
   advertTitle: string
   category: string
   typeOfProperty: string
@@ -30,20 +30,20 @@ interface CreatePropertyInput {
   nearbyPlaces: string
   otherFeatures: string
   projectStatus: string
-  rentedOrVacant: string
-  rentalAmount: string
-  numberOfCheques: string
-  noticePeriodRent: string
-  noticePeriodProperty: string
-  completionDate: string
+  rentedOrVacant?: string
+  rentalAmount?: string
+  numberOfCheques?: string
+  noticePeriodRent?: string
+  noticePeriodProperty?: string
+  completionDate?: string
   passportCopy: string
   visaCopy: string
   emiratesId: string
   titleDeedCopy: string
   ownerProofOfMobileNumber: string
   callPreference: string
-  paymentInterval: string
-  minimumContract: string
+  paymentInterval?: string
+  minimumContract?: string
   lavatories?: string
 }
 

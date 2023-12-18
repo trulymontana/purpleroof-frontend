@@ -20,10 +20,10 @@ const formSchema = z.object({
 })
 
 interface Props {
-  onSave: (step: string, values: any) => void
+  handleSubmit: (values: any) => void
 }
 
-const CallPreferenceForm = ({ onSave }: Props) => {
+const CallPreferenceForm = ({ handleSubmit }: Props) => {
   const router = useRouter()
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.CALL_PREFERENCE)
@@ -40,7 +40,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
   }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    onSave(PageRoutes.advertise.CALL_PREFERENCE, values)
+    handleSubmit(values)
   }
 
   return (
@@ -55,7 +55,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
         />
 
         <Button type="submit" className="w-full">
-          Save and Continue
+          Submit
         </Button>
         <BackButton route={PageRoutes.advertise.UPLOAD_PHOTOS} />
       </form>

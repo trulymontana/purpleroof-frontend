@@ -17,12 +17,13 @@ import Image from 'next/image'
 import WhiteStrokes from '@/components/svgs/white-strokes'
 import { PageRoutes } from '@/constants/page-routes'
 import { useCreatePropertyMutation } from '@/data/hooks/usePropertiesClient'
+import { CreatePropertyInput } from '@/data/clients/propertiesClient'
 
-const Page = ({ params: { step } }: { params: { step: string } }) => {
+const Page = () => {
   const pathName = usePathname()
   const searchParams = useSearchParams()
 
-  const { mutate: createMortgage } = useCreatePropertyMutation()
+  const { mutate: createProperty } = useCreatePropertyMutation()
 
   const categoryType = searchParams.get('categoryType')
 
@@ -31,19 +32,40 @@ const Page = ({ params: { step } }: { params: { step: string } }) => {
   }
 
   const handleSubmit = (values: any) => {
-    const data = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS)
-    let result
-    if (data !== null) {
-      result = JSON.parse(data)
-      delete result.agreeToPrivacyPolicy
+    const basicDetails = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS)
+    const propertyDetails = localStorage.getItem(PageRoutes.advertise.PROPERTY_DETAILS)
+    const locationDetails = localStorage.getItem(PageRoutes.advertise.LOCATION_DETAILS)
+    const amenitiesDetails = localStorage.getItem(PageRoutes.advertise.AMENITIES_DETAILS)
+    const projectStatus = localStorage.getItem(PageRoutes.advertise.PROJECT_STATUS)
+    const documentDetails = localStorage.getItem(PageRoutes.advertise.UPLOAD_PHOTOS)
+    const callPreferenceDetails = localStorage.getItem(PageRoutes.advertise.CALL_PREFERENCE)
+
+    let result: any = {}
+
+    function nullCheckAndMerge(jsonString: any) {
+      if (jsonString !== null) {
+        const parsedResult = JSON.parse(jsonString)
+        Object.keys(parsedResult).forEach(key => {
+          if (parsedResult[key] !== '') {
+            result[key] = parsedResult[key]
+          }
+        })
+      }
     }
 
-    // let property: CreateMortgageInput = Object.assign({}, result, values)
-    // mortgage.dateOfBirth = new Date(mortgage.dateOfBirth).toISOString()
-    // mortgage.intendedProperty = ''
-    // mortgage.status = MortgageStatusEnum.SUBMITTED
-    // createMortgage({
-    //   ...mortgage
+    nullCheckAndMerge(basicDetails)
+    nullCheckAndMerge(propertyDetails)
+    nullCheckAndMerge(locationDetails)
+    nullCheckAndMerge(amenitiesDetails)
+    nullCheckAndMerge(projectStatus)
+    nullCheckAndMerge(documentDetails)
+    nullCheckAndMerge(callPreferenceDetails)
+
+    console.log(result)
+
+    // let property: CreatePropertyInput = Object.assign({}, result, values)
+    // createProperty({
+    //   ...property
     // })
   }
 
@@ -61,7 +83,7 @@ const Page = ({ params: { step } }: { params: { step: string } }) => {
     [PageRoutes.advertise.AMENITIES_DETAILS]: <AmenitiesForm onSave={storeValues} />,
     [PageRoutes.advertise.PROJECT_STATUS]: <ProjectStatusForm onSave={storeValues} />,
     [PageRoutes.advertise.UPLOAD_PHOTOS]: <UploadDocumentsForm onSave={storeValues} />,
-    [PageRoutes.advertise.CALL_PREFERENCE]: <CallPreferenceForm onSave={storeValues} />
+    [PageRoutes.advertise.CALL_PREFERENCE]: <CallPreferenceForm handleSubmit={handleSubmit} />
   }
 
   return (
