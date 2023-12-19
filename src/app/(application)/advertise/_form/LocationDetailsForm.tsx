@@ -22,7 +22,7 @@ const formSchema = z.object({
   emirate: z.string({
     required_error: 'Please select a Emirate!'
   }),
-  location: z.string({
+  locationId: z.string({
     required_error: 'Please select a Location!'
   }),
   buildingName: z.string({
@@ -40,7 +40,7 @@ const formSchema = z.object({
   landmark: z.string({
     required_error: 'Please enter a landmark'
   }),
-  propertyImage: z.string({
+  propertyPhotos: z.string({
     required_error: 'Please upload a property image'
   })
 })
@@ -74,7 +74,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
   // @ts-ignore
   const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS))
 
-  const property_image = form.watch('propertyImage')
+  const property_image = form.watch('propertyPhotos')
 
   return (
     <Form {...form}>
@@ -83,7 +83,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <SelectElement name='emirate' label='Emirate' options={emirateOptions} placeholder='Please select a emirate' />
 
         <SelectElement
-          name="location"
+          name="locationId"
           label="Location"
           options={locations}
           placeholder={!selectedEmirate ? 'Please select emirate first' : 'Please select a location'}
@@ -99,7 +99,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <InputElement name="street" placeholder="Please enter your street name" label={'Street'} />
         <NumberInputElement name="unitNumber" placeholder="Please enter your unit number" label={'Unit Number'} />
         <InputElement name="landmark" placeholder="Please enter a landmark" label={'Landmark'} />
-        <FileUploader folder="advertise" name="propertyImage" label={'Upload Photo of the Property'} form={form} />
+        <FileUploader folder="advertise" name="propertyPhotos" label={'Upload Photo of the Property'} form={form} />
 
         <Button type="submit" disabled={!property_image} className="w-full">
           Save and Continue

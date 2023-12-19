@@ -1,6 +1,8 @@
 import {
   CommercialPropertyCategoryEnum,
   EmirateEnum,
+  HoldingTypeEnum,
+  OccupencyStatusEnum,
   PaymentIntervalsEnum,
   ProjectStatusesEnum,
   PropertyTypeEnum,
@@ -1745,11 +1747,11 @@ export const emiratesWithLocations = {
 export const propertyTypes = [
   {
     label: 'Free Hold',
-    value: PropertyTypeEnum.FREE_HOLD
+    value: HoldingTypeEnum.FREE_HOLD
   },
   {
     label: 'Lease Hold',
-    value: PropertyTypeEnum.LEASE_HOLD
+    value: HoldingTypeEnum.LEASE_HOLD
   }
 ]
 
@@ -1986,6 +1988,17 @@ export const rentedOrVacantOptions = [
   {
     label: 'Rented',
     value: RentedOrVacantEnum.RENTED
+  }
+]
+
+export const occupencyStatusOptions = [
+  {
+    label: 'Vacant',
+    value: OccupencyStatusEnum.VACANT
+  },
+  {
+    label: 'Rented',
+    value: OccupencyStatusEnum.OCCUPIED
   }
 ]
 

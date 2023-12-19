@@ -12,11 +12,15 @@ import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
 import { useEffect, useState } from 'react'
+import { DocumentTypeEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   documents: z.array(
     z.object({
-      path: z.string({
+      type: z.string({
+        required_error: "Type not found!"
+      }),
+      url: z.string({
         required_error: "This field is required!"
       }),
     })
@@ -31,28 +35,59 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.UPLOAD_PHOTOS)
 
-  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue);
+  let defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue);;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues
   })
 
+  const documents = form.watch("documents")
+
+  useEffect(() => {
+    // @ts-ignore
+    form.setValue("documents", [{ type: DocumentTypeEnum.PASSPORT_COPY }, { type: DocumentTypeEnum.VISA_COPY }, { type: DocumentTypeEnum.EMIRATES_ID }, { type: DocumentTypeEnum.TITLE_DEED_COPY }, { type: DocumentTypeEnum.OWNERSHIP_PROOF_MOBILE_NUMBER }])
+  }, [])
+
   function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log({ values })
     onSave(PageRoutes.advertise.UPLOAD_PHOTOS, values)
     router.push(PageRoutes.advertise.CALL_PREFERENCE)
   }
 
+  //   [
+  //     {
+  //         "type": "PASSPORT_COPY",
+  //         "url": "https://purpleroof.s3.amazonaws.com/advertise/documents[0].url-16:41:26"
+  //     },
+  //     {
+  //         "type": "VISA_COPY",
+  //         "url": "https://purpleroof.s3.amazonaws.com/advertise/documents[1].url-16:41:28"
+  //     },
+  //     {
+  //         "type": "EMIRATES_ID",
+  //         "url": "https://purpleroof.s3.amazonaws.com/advertise/documents[2].url-16:41:28"
+  //     },
+  //     {
+  //         "type": "TITLE_DEED_COPY",
+  //         "url": "https://purpleroof.s3.amazonaws.com/advertise/documents[3].url-16:41:33"
+  //     },
+  //     {
+  //         "type": "OWNERSHIP_PROOF_MOBILE_NUMBER",
+  //         "url": "https://purpleroof.s3.amazonaws.com/advertise/documents[4].url-16:41:35"
+  //     }
+  // ]
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <FileUploader folder="advertise" name="documents[0].path" label={'Passport Copy'} form={form} />
-        <FileUploader folder="advertise" name="documents[1].path" label={'Visa Copy'} form={form} />
-        <FileUploader folder="advertise" name="documents[2].path" label={'Emirates ID'} form={form} />
-        <FileUploader folder="advertise" name="documents[3].path" label={'Title Deed Copy'} form={form} />
+        <FileUploader folder="advertise" name="documents[0].url" label={'Passport Copy'} form={form} />
+        <FileUploader folder="advertise" name="documents[1].url" label={'Visa Copy'} form={form} />
+        <FileUploader folder="advertise" name="documents[2].url" label={'Emirates ID'} form={form} />
+        <FileUploader folder="advertise" name="documents[3].url" label={'Title Deed Copy'} form={form} />
         <FileUploader
           folder="advertise"
-          name="documents[4].path"
+          name="documents[4].url"
           label={'Owners Proof of Mobile Number'}
           form={form}
         />

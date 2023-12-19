@@ -61,8 +61,8 @@ export enum EmirateEnum {
   UMM_AL_QUWAIN = 'UMM_AL_QUWAIN'
 }
 
-// remove this
-export enum PropertyTypeEnum {
+
+export enum HoldingTypeEnum {
   FREE_HOLD = 'FREE_HOLD',
   LEASE_HOLD = 'LEASE_HOLD'
 }
@@ -161,6 +161,11 @@ export enum RentedOrVacantEnum {
   RENTED = 'RENTED'
 }
 
+export enum OccupencyStatusEnum {
+  VACANT = 'VACANT',
+  OCCUPIED = 'OCCUPIED'
+}
+
 export enum DocumentTypeEnum {
   PASSPORT_COPY = 'PASSPORT_COPY',
   VISA_COPY = 'VISA_COPY',
@@ -198,13 +203,6 @@ export enum UserRoleEnum {
 export enum PropertiesStatusEnum {
   SALE = 'SALE',
   RENT = 'RENT',
-}
-
-export enum ProjectStatusEnum {
-  OFF_PLAN_UNDER_CONSTRUCTION = 'OFF_PLAN_UNDER_CONSTRUCTION',
-  SHELL_AND_CORE = 'SHELL_AND_CORE',
-  VACANT = 'VACANT',
-  RENTED = 'RENTED',
 }
 
 export enum AmenityTypeEnum {

@@ -9,17 +9,17 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { projectStatuses, rentedOrVacantOptions } from '@/constants/advertise'
+import { occupencyStatusOptions, projectStatuses } from '@/constants/advertise'
 import DatePickerElement from '@/components/forms/elements/date-picker-element'
 import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
-import { ProjectStatusesEnum, RentedOrVacantEnum } from '@/constants/enums'
+import { OccupencyStatusEnum, ProjectStatusesEnum } from '@/constants/enums'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
   projectStatus: z.string(),
-  rentedOrVacant: z.string().optional(),
+  occupencyStatus: z.string().optional(),
   rentalAmount: z.number().optional(),
   numberOfCheques: z.number().optional(),
   noticePeriodRent: z.number().optional(),
@@ -56,7 +56,7 @@ const ProjectStatusForm = ({ onSave }: Props) => {
   }
 
   const projectStatus = form.watch('projectStatus')
-  const rentedOrVacant = form.watch('rentedOrVacant')
+  const occupencyStatus = form.watch('occupencyStatus')
 
   return (
     <Form {...form}>
@@ -65,8 +65,8 @@ const ProjectStatusForm = ({ onSave }: Props) => {
 
         {projectStatus === ProjectStatusesEnum.COMPLETED && (
           <>
-            <SelectElement name="rentedOrVacant" label="Rented or Vacant" options={rentedOrVacantOptions} />
-            {rentedOrVacant === RentedOrVacantEnum.RENTED && (
+            <SelectElement name="occupencyStatus" label="Occupency Status" options={occupencyStatusOptions} />
+            {occupencyStatus === OccupencyStatusEnum.OCCUPIED && (
               <>
                 <NumberInputElement name="rentalAmount" label="Rental Amount (AED)" />
                 <NumberInputElement name="numberOfCheques" label="Number of Cheques" />

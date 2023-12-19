@@ -18,7 +18,7 @@ import { PageRoutes } from '@/constants/page-routes'
 import { PropertyTypeEnum, categoryEnum } from '@/constants/enums'
 
 const formSchema = z.object({
-  status: z
+  propertyFor: z
     .string({
       required_error: 'Please select a category'
     })
@@ -26,10 +26,10 @@ const formSchema = z.object({
   name: z.string({
     required_error: 'Title should not be empty!'
   }),
-  typeOfProperty: z.string({
+  propertyType: z.string({
     required_error: 'Please select a property type!'
   }),
-  propertyOption: z.string({
+  propertyCategory: z.string({
     required_error: 'Please select a property option'
   })
 })
@@ -46,7 +46,7 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     storedValue !== null
       ? JSON.parse(storedValue)
       : {
-        status: categoryEnum.SALE
+        propertyFor: categoryEnum.SALE
       }
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -56,27 +56,27 @@ const BasicDetailsForm = ({ onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.BASIC_DETAILS, values)
-    router.push(`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${form.getValues('status')}`)
+    router.push(`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${form.getValues('propertyFor')}`)
   }
 
-  const propertyType = form.watch('typeOfProperty')
+  const propertyType = form.watch('propertyType')
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <TabRadioGroup name="status" options={categories} />
+        <TabRadioGroup name="propertyFor" options={categories} />
 
         <InputElement name="name" placeholder="Please enter Advert Title" label={'Advert Title'} />
 
         <RadioGroupElement
-          name="typeOfProperty"
+          name="propertyType"
           label={'Type of Property'}
           className="items-center gap-10"
           options={typesOfProperties}
         />
 
         <SelectElement
-          name="propertyOption"
+          name="propertyCategory"
           label={propertyType === PropertyTypeEnum.RESIDENTIAL ? 'Residential' : 'Commercial'}
           options={propertyType === PropertyTypeEnum.RESIDENTIAL ? residentalTypes : commercialTypes}
         />

@@ -19,7 +19,7 @@ import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
-  propertyType: z.string({
+  holdingType: z.string({
     required_error: 'Please select a property type!'
   }),
   status: z.string({
@@ -69,8 +69,8 @@ const AmenitiesForm = ({ onSave }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <SelectElement
-          name="propertyType"
-          label={'Property Type'}
+          name="holdingType"
+          label={'Holding Type'}
           placeholder="Please select a property type"
           options={propertyTypes}
         />

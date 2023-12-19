@@ -16,15 +16,17 @@ export interface CreatePropertyInput {
   numberOfBathRooms?: number
   deedNumber: string
   emirate: string
-  location: string
+  locationId: string
   buildingName: string
   floor: string
   street: string
   unitNumber: string
   landmark: string
   propertyImage: string
-  propertyType: string
   status: string
+  propertyPhotos: any
+  propertyType: string
+  propertyFor: string
   parkingSpaces: string
   airportDistance: string
   metroStation: string
@@ -46,6 +48,7 @@ export interface CreatePropertyInput {
   paymentInterval?: string
   minimumContract?: string
   lavatories?: string
+  // documents: DocumentEnum
 }
 
 export const propertiesClient = {

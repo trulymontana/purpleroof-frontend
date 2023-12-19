@@ -55,10 +55,45 @@ const Page = () => {
 
     let property: CreatePropertyInput = Object.assign({}, result, values)
 
+    // @ts-ignore
+    delete property.locationId
+    // @ts-ignore
+    delete property.street
+    // @ts-ignore
+    delete property.propertyImage
+    // @ts-ignore
+    delete property.propertyPhotos
+    // @ts-ignore
+    delete property.status
+    // @ts-ignore
+    delete property.parkingSpaces
+    // @ts-ignore
+    delete property.airportDistance
+    // @ts-ignore
+    delete property.metroStation
+    // @ts-ignore
+    delete property.nearbyPlaces
+    // @ts-ignore
+    delete property.otherFeatures
+    // @ts-ignore
+    delete property.amenities
+    // @ts-ignore
+    delete property.noticePeriodProperty
+    // @ts-ignore
+    delete property.callPreference
+
+    // property.propertyPhotos = []
+
     if (property.amenities && property.amenities.length > 0) {
       let amenities_values: number[] = property.amenities.map((amenity: any) => amenity.value)
       property.amenities = amenities_values;
     }
+
+  //   "details": [
+  //     "projectStatus must be one of the following values: OFF_PLAN_UNDER_CONSTRUCTION, SHELL_AND_CORE, VACANT, RENTED",
+  //     "status must be one of the following values: SALE, RENT",
+  //     "propertyType must be one of the following values: RESIDENTIAL, COMMERCIAL"
+  // ],
 
     console.log({ property })
 
@@ -75,9 +110,9 @@ const Page = () => {
     //     "propertyTypeCategoryId must be a number conforming to the specified constraints" ? 
     // ],
 
-    // createProperty({
-    //   ...property
-    // })
+    createProperty({
+      ...property
+    })
   }
 
   const subComponents: { [key: string]: React.ReactElement } = {

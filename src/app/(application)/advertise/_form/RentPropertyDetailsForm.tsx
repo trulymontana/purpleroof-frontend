@@ -31,7 +31,7 @@ const formSchema = z.object({
   paymentInterval: z.string({
     required_error: 'Please select a payment interval'
   }),
-  propertySize: z.number({
+  size: z.number({
     required_error: 'Please enter a property size!'
   }),
   minimumContract: z.number({
@@ -79,7 +79,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
         />
         <SelectElement name="paymentInterval" label="Payment Interval" options={paymentIntervals} />
         <NumberInputElement
-          name="propertySize"
+          name="size"
           placeholder="Please enter property size"
           label={'Property Size (Sqft)'}
         />

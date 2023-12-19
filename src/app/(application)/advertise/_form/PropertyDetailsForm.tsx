@@ -27,15 +27,15 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.'
     }),
-  propertyValue: z.number({
+  amount: z.number({
     required_error: 'Please enter a property value'
   }),
-  propertySize: z.number({
+  size: z.number({
     required_error: 'Please enter a property size'
   }),
-  numberOfBedRooms: z.string().optional(),
-  numberOfBathRooms: z.string().optional(),
-  lavatories: z.string().optional(),
+  numberOfBedRooms: z.number().optional(),
+  numberOfBathRooms: z.number().optional(),
+  numberOfLavatory: z.number().optional(),
   deedNumber: z.string({
     required_error: 'Please enter your Deed Number'
   })
@@ -69,24 +69,24 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
         <PhoneNumberInputElement name="phone" label="Phone Number" />
 
         <NumberInputElement
-          name="propertyValue"
+          name="amount"
           placeholder="Please enter your property value"
           label={'Property Value (AED)'}
         />
         <NumberInputElement
-          name="propertySize"
+          name="size"
           placeholder="Please enter your property size"
           label={'Property Size (Sqft)'}
         />
 
         {basic_details && JSON.parse(basic_details).typeOfProperty === PropertyTypeEnum.COMMERCIAL ? (
           <>
-            <SelectElement name="numberOfBedRooms" label={'Number of Bed Rooms'} options={bedRooms} />
+            <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
 
-            <SelectElement name="numberOfBathRooms" label={'Number of Bath Rooms'} options={bathRooms} />
+            <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
           </>
         ) : (
-          <SelectElement name="lavatories" label="Number of Lavatory" options={lavatories} />
+          <NumberInputElement name="numberOfLavatory" label="Number of Lavatory" />
         )}
 
         <InputElement
