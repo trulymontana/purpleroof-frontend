@@ -109,7 +109,7 @@ export enum RelationshipEnum {
   STEP_SIBLING = 'STEP_SIBLING'
 }
 
-export enum CommercialTypesEnum {
+export enum CommercialPropertyCategoryEnum {
   BULK_UNIT = 'BULK_UNIT',
   COMMERCIAL_BUILDING = 'COMMERCIAL_BUILDING',
   COMMERCIAL_FLOOR = 'COMMERCIAL_FLOOR',
@@ -128,7 +128,7 @@ export enum CommercialTypesEnum {
   OTHER = 'OTHER'
 }
 
-export enum ResidentialTypesEnum {
+export enum ResidentialPropertyCategoryEnum {
   APARTMENT_AND_UNIT = 'APARTMENT_AND_UNIT',
   VILLA = 'VILLA',
   ACREAGE = 'ACREAGE',

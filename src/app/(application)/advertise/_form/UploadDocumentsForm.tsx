@@ -11,24 +11,17 @@ import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
+import { useEffect, useState } from 'react'
 
 const formSchema = z.object({
-  passportCopy: z.string({
-    required_error: 'Please upload your passport copy'
-  }),
-  visaCopy: z.string({
-    required_error: 'Please upload your visa copy'
-  }),
-  emiratesId: z.string({
-    required_error: 'Please upload your emirates id'
-  }),
-  titleDeedCopy: z.string({
-    required_error: 'Please upload your title deed copy'
-  }),
-  ownerProofOfMobileNumber: z.string({
-    required_error: 'Please upload your owner proof of mobile number'
-  })
-})
+  documents: z.array(
+    z.object({
+      path: z.string({
+        required_error: "This field is required!"
+      }),
+    })
+  ),
+});
 
 interface Props {
   onSave: (step: string, values: any) => void
@@ -38,20 +31,12 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.UPLOAD_PHOTOS)
 
-  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues
   })
-
-  const passport_copy = form.watch('passportCopy')
-  const visa_copy = form.watch('visaCopy')
-  const emirates_id = form.watch('emiratesId')
-  const title_deed_copy = form.watch('titleDeedCopy')
-  const owner_proof_of_mobile_number = form.watch('ownerProofOfMobileNumber')
-
-  const disable = !passport_copy || !visa_copy || !emirates_id || !title_deed_copy || !owner_proof_of_mobile_number
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.UPLOAD_PHOTOS, values)
@@ -61,18 +46,18 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <FileUploader folder="advertise" name="passportCopy" label={'Passport Copy'} form={form} />
-        <FileUploader folder="advertise" name="visaCopy" label={'Visa Copy'} form={form} />
-        <FileUploader folder="advertise" name="emiratesId" label={'Emirates ID'} form={form} />
-        <FileUploader folder="advertise" name="titleDeedCopy" label={'Title Deed Copy'} form={form} />
+        <FileUploader folder="advertise" name="documents[0].path" label={'Passport Copy'} form={form} />
+        <FileUploader folder="advertise" name="documents[1].path" label={'Visa Copy'} form={form} />
+        <FileUploader folder="advertise" name="documents[2].path" label={'Emirates ID'} form={form} />
+        <FileUploader folder="advertise" name="documents[3].path" label={'Title Deed Copy'} form={form} />
         <FileUploader
           folder="advertise"
-          name="ownerProofOfMobileNumber"
-          label={'Ownership Proof of Mobile Number'}
+          name="documents[4].path"
+          label={'Owners Proof of Mobile Number'}
           form={form}
         />
 
-        <Button disabled={disable} type="submit" className="w-full">
+        <Button type="submit" className="w-full">
           Save and Continue
         </Button>
 

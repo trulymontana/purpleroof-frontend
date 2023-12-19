@@ -1,11 +1,11 @@
 import {
-  CommercialTypesEnum,
+  CommercialPropertyCategoryEnum,
   EmirateEnum,
   PaymentIntervalsEnum,
   ProjectStatusesEnum,
   PropertyTypeEnum,
   RentedOrVacantEnum,
-  ResidentialTypesEnum,
+  ResidentialPropertyCategoryEnum,
   StatusesEnum,
   categoryEnum
 } from './enums'
@@ -35,98 +35,98 @@ export const typesOfProperties = [
 export const commercialTypes = [
   {
     label: 'Bulk Unit',
-    value: CommercialTypesEnum.BULK_UNIT
+    value: CommercialPropertyCategoryEnum.BULK_UNIT
   },
   {
     label: 'Commercial Building',
-    value: CommercialTypesEnum.COMMERCIAL_BUILDING
+    value: CommercialPropertyCategoryEnum.COMMERCIAL_BUILDING
   },
   {
     label: 'Commercial Floor',
-    value: CommercialTypesEnum.COMMERCIAL_FLOOR
+    value: CommercialPropertyCategoryEnum.COMMERCIAL_FLOOR
   },
   {
     label: 'Commercial Villa',
-    value: CommercialTypesEnum.COMMERCIAL_VILLA
+    value: CommercialPropertyCategoryEnum.COMMERCIAL_VILLA
   },
   {
     label: 'Commercial Plot',
-    value: CommercialTypesEnum.COMMERCIAL_PLOT
+    value: CommercialPropertyCategoryEnum.COMMERCIAL_PLOT
   },
   {
     label: 'Factory',
-    value: CommercialTypesEnum.FACTORY
+    value: CommercialPropertyCategoryEnum.FACTORY
   },
   {
     label: 'Industrial Unit For Sale',
-    value: CommercialTypesEnum.INDUSTRIAL_UNIT_FOR_SALE
+    value: CommercialPropertyCategoryEnum.INDUSTRIAL_UNIT_FOR_SALE
   },
   {
     label: 'Industrial Land',
-    value: CommercialTypesEnum.INDUSTRIAL_LAND
+    value: CommercialPropertyCategoryEnum.INDUSTRIAL_LAND
   },
   {
     label: 'Mixed Used Sand',
-    value: CommercialTypesEnum.BULK_UNIT
+    value: CommercialPropertyCategoryEnum.BULK_UNIT
   },
   {
     label: 'Office For Sale',
-    value: CommercialTypesEnum.OFFICE_FOR_SALE
+    value: CommercialPropertyCategoryEnum.OFFICE_FOR_SALE
   },
   {
     label: 'Retail For Sale',
-    value: CommercialTypesEnum.RETAIL_FOR_SALE
+    value: CommercialPropertyCategoryEnum.RETAIL_FOR_SALE
   },
   {
     label: 'Shop',
-    value: CommercialTypesEnum.SHOP
+    value: CommercialPropertyCategoryEnum.SHOP
   },
   {
     label: 'Staff Accommodation for Sale',
-    value: CommercialTypesEnum.STAFF_ACCOMMODATION_FOR_SALE
+    value: CommercialPropertyCategoryEnum.STAFF_ACCOMMODATION_FOR_SALE
   },
   {
     label: 'Warehouse',
-    value: CommercialTypesEnum.WAREHOUSE
+    value: CommercialPropertyCategoryEnum.WAREHOUSE
   },
   {
     label: 'Sell Commercial Land',
-    value: CommercialTypesEnum.SELL_COMMERCIAL_LAND
+    value: CommercialPropertyCategoryEnum.SELL_COMMERCIAL_LAND
   },
   {
     label: 'Other',
-    value: CommercialTypesEnum.OTHER
+    value: CommercialPropertyCategoryEnum.OTHER
   }
 ]
 
 export const residentalTypes = [
   {
     label: 'Apartment & Unit',
-    value: ResidentialTypesEnum.APARTMENT_AND_UNIT
+    value: ResidentialPropertyCategoryEnum.APARTMENT_AND_UNIT
   },
   {
     label: 'Villa',
-    value: ResidentialTypesEnum.VILLA
+    value: ResidentialPropertyCategoryEnum.VILLA
   },
   {
     label: 'Acreage',
-    value: ResidentialTypesEnum.ACREAGE
+    value: ResidentialPropertyCategoryEnum.ACREAGE
   },
   {
     label: 'Block of Units',
-    value: ResidentialTypesEnum.BLOCKS_OF_UNITS
+    value: ResidentialPropertyCategoryEnum.BLOCKS_OF_UNITS
   },
   {
     label: 'House',
-    value: ResidentialTypesEnum.HOUSE
+    value: ResidentialPropertyCategoryEnum.HOUSE
   },
   {
     label: 'Townhouse',
-    value: ResidentialTypesEnum.TOWNHOUSE
+    value: ResidentialPropertyCategoryEnum.TOWNHOUSE
   },
   {
     label: 'Land',
-    value: ResidentialTypesEnum.LAND
+    value: ResidentialPropertyCategoryEnum.LAND
   }
 ]
 
