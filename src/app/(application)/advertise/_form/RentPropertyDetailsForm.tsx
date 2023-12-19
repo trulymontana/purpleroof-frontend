@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
 import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
+import { PropertyTypeEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   phone: z
@@ -76,7 +77,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
           placeholder="Please enter rental amount"
           label={'Rental Amount (AED)'}
         />
-        <SelectElement name="payment_interval" label="Payment Interval" options={paymentIntervals} />
+        <SelectElement name="paymentInterval" label="Payment Interval" options={paymentIntervals} />
         <NumberInputElement
           name="propertySize"
           placeholder="Please enter property size"
@@ -88,7 +89,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
           label={'Minimum Contract (in months)'}
         />
 
-        {basic_details && JSON.parse(basic_details).typeOfProperty === 'residential' ? (
+        {basic_details && JSON.parse(basic_details).typeOfProperty === PropertyTypeEnum.RESIDENTIAL ? (
           <>
             <SelectElement name="numberOfBedRooms" label={'Number of Bed Rooms'} options={bedRooms} />
 

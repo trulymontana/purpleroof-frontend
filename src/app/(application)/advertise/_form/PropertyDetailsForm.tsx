@@ -17,6 +17,7 @@ import PhoneNumberInputElement from '@/components/forms/elements/phone-number-in
 import { PageRoutes } from '@/constants/page-routes'
 import { BackButton } from '@/components/navigation/back-button'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
+import { PropertyTypeEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   phone: z
@@ -78,7 +79,7 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
           label={'Property Size (Sqft)'}
         />
 
-        {basic_details && JSON.parse(basic_details).typeOfProperty === 'residential' ? (
+        {basic_details && JSON.parse(basic_details).typeOfProperty === PropertyTypeEnum.COMMERCIAL ? (
           <>
             <SelectElement name="numberOfBedRooms" label={'Number of Bed Rooms'} options={bedRooms} />
 
