@@ -1,7 +1,8 @@
-import { Property, QueryOptions, TOption } from '@/constants/types'
+import { QueryOptions, TOption } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
+import { EmirateEnum, OccupencyStatusEnum } from '@/constants/enums'
 
 export interface CreatePropertyInput {
   name: string
@@ -15,7 +16,7 @@ export interface CreatePropertyInput {
   numberOfBedRooms?: number
   numberOfBathRooms?: number
   deedNumber: string
-  emirate: string
+  emirate: EmirateEnum
   locationId: string
   buildingName: string
   floor: string
@@ -49,6 +50,17 @@ export interface CreatePropertyInput {
   minimumContract?: string
   lavatories?: string
   // documents: DocumentEnum
+}
+
+export interface Property extends CreatePropertyInput {
+  emirate: EmirateEnum
+  address: string
+  amount: number
+  occupencyStatus: OccupencyStatusEnum
+  numberOfLavatory: number
+  size: number
+  noticePeriod: number
+  description: string
 }
 
 export const propertiesClient = {

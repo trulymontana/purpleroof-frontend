@@ -1,4 +1,4 @@
-import { MortgageStatusEnum } from './enums'
+import { EmirateEnum, MortgageStatusEnum } from './enums'
 
 export enum SortOrder {
   Asc = 'asc',
@@ -76,6 +76,7 @@ export interface Property {
   updatedAt: Date
   locationId?: number | null
   minimumContract?: number | null
+  emirate: EmirateEnum
   noticePeriod?: number | null
   deedNumber?: string | null
   unitNumber?: number | null

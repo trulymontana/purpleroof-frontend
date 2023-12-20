@@ -44,16 +44,16 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
                         <CardContent className="space-y-4">
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Location:</h3>
-                                <p className="text-lg">{data?.address}</p>
+                                <p className="text-lg">{data?.locationId}</p>
                             </div>
-                            {/* {
+                            {
                                 data?.emirate && (
                                     <div className="flex justify-between">
                                         <h3 className="text-lg font-medium">Emirate:</h3>
                                         <p className="text-lg capitalize">{data?.emirate.toLowerCase()}</p>
                                     </div>
                                 )
-                            } */}
+                            }
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Landmark:</h3>
                                 <p className="text-lg">{data?.landmark}</p>
@@ -70,10 +70,10 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
                                 <h3 className="text-lg font-medium">Contact No.:</h3>
                                 <p className="text-lg">{data?.phone}</p>
                             </div>
-                            {/* <div className="flex justify-between">
+                            <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Project Status:</h3>
                                 <p className="text-lg capitalize">{data?.projectStatus?.toLowerCase().replaceAll("_", " ")}</p>
-                            </div> */}
+                            </div>
                             {
                                 data?.completionDate && (
                                     <div className="flex justify-between">
@@ -82,14 +82,14 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
                                     </div>
                                 )
                             }
-                            {/* {
+                            {
                                 data?.occupencyStatus && (
                                     <div className="flex justify-between">
                                         <h3 className="text-lg font-medium">Occupency Status:</h3>
                                         <p className="text-lg capitalize">{data?.occupencyStatus.toLowerCase()}</p>
                                     </div>
                                 )
-                            } */}
+                            }
 
                             {data?.numberOfBathRooms && data?.numberOfBedRooms && (
                                 <>
