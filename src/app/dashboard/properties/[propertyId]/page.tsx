@@ -4,6 +4,7 @@ import Loader from "@/components/Loader"
 import { Button } from "@/components/ui/button"
 import { CardHeader, CardContent, Card } from "@/components/ui/card"
 import { useGetOneProperty } from "@/data/hooks/usePropertiesClient"
+import { Bath, BedDouble } from "lucide-react"
 import Image from "next/image"
 
 const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) => {
@@ -43,8 +44,16 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
                         </CardHeader>
                         <CardContent className="space-y-4">
                             <div className="flex justify-between">
-                                <h3 className="text-lg font-medium">Location:</h3>
-                                <p className="text-lg">{data?.locationId}</p>
+                                <h3 className="text-lg font-medium">Property For:</h3>
+                                <p className="text-lg capitalize">{data?.propertyFor.toLocaleLowerCase()}</p>
+                            </div>
+                            <div className="flex justify-between">
+                                <h3 className="text-lg font-medium">Property Type:</h3>
+                                <p className="text-lg capitalize">{data?.propertyType.toLocaleLowerCase()}</p>
+                            </div>
+                            <div className="flex justify-between">
+                                <h3 className="text-lg font-medium">Property Category:</h3>
+                                <p className="text-lg capitalize">{data?.propertyCategory.toLocaleLowerCase()}</p>
                             </div>
                             {
                                 data?.emirate && (
@@ -54,6 +63,22 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
                                     </div>
                                 )
                             }
+                            <div className="flex justify-between">
+                                <h3 className="text-lg font-medium">Building/Cluster Name:</h3>
+                                <p className="text-lg">{data?.buildingName}</p>
+                            </div>
+                            <div className="flex justify-between">
+                                <h3 className="text-lg font-medium">Floor:</h3>
+                                <p className="text-lg">{data?.floor}</p>
+                            </div>
+                            <div className="flex justify-between">
+                                <h3 className="text-lg font-medium">Street:</h3>
+                                <p className="text-lg">{data?.street}</p>
+                            </div>
+                            <div className="flex justify-between">
+                                <h3 className="text-lg font-medium">Unit Number:</h3>
+                                <p className="text-lg">{data?.unitNumber}</p>
+                            </div>
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Landmark:</h3>
                                 <p className="text-lg">{data?.landmark}</p>
@@ -95,23 +120,27 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
                                 <>
                                     <div className="flex justify-between">
                                         <h3 className="text-lg font-medium">Bedrooms:</h3>
-                                        <p className="text-lg">{data?.numberOfBedRooms}</p>
+                                        <p className="text-lg flex items-center gap-2">{data?.numberOfBedRooms} <BedDouble /></p>
                                     </div>
                                     <div className="flex justify-between">
                                         <h3 className="text-lg font-medium">Bathrooms:</h3>
-                                        <p className="text-lg">{data?.numberOfBathRooms}</p>
+                                        <p className="text-lg">{data?.numberOfBathRooms} <Bath /></p>
                                     </div>
                                 </>
                             )}
                             {data?.numberOfLavatory && (
                                 <div className="flex justify-between">
                                     <h3 className="text-lg font-medium">Lavatory:</h3>
-                                    <p className="text-lg">{data?.numberOfLavatory}</p>
+                                    <p className="text-lg flex items-center gap-2">{data?.numberOfLavatory} <Bath /></p>
                                 </div>
                             )}
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Area:</h3>
                                 <p className="text-lg">{data?.size} sqft</p>
+                            </div>
+                            <div className="flex justify-between">
+                                <h3 className="text-lg font-medium">Title Deed / Oqod / Initial Contract of Sales:</h3>
+                                <p className="text-lg">{data?.deedNumber}</p>
                             </div>
                             {
                                 data?.noticePeriod && (
@@ -135,7 +164,7 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
                             )}
                         </CardContent>
                     </Card>
-                    <Card className="p-4">
+                    <Card className="p-4 h-[310px]">
                         <CardHeader className="mb-4">
                             <h2 className="text-2xl font-semibold">Contact Agent</h2>
                         </CardHeader>

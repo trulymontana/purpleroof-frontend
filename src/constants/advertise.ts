@@ -2,6 +2,7 @@ import {
   CommercialPropertyCategoryEnum,
   EmirateEnum,
   HoldingTypeEnum,
+  MortgageStatusEnum,
   OccupencyStatusEnum,
   PaymentIntervalsEnum,
   ProjectStatusesEnum,
@@ -1974,6 +1975,17 @@ export const projectStatuses = [
     label: 'Shell & Core',
     value: ProjectStatusesEnum.SHELL_AND_CORE
   }
+]
+
+export const propertyStatuses = [
+  {
+    label: "Submitted",
+    value: MortgageStatusEnum.SUBMITTED
+  },
+  {
+    label: "Under Documentation Stage",
+    value: MortgageStatusEnum.UNDER_DOCUMENTATION_STAGE
+  },
 ]
 
 export const rentedOrVacantOptions = [

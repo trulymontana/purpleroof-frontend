@@ -167,5 +167,6 @@ export const columns: ColumnDef<Property>[] = [
 
 export default function PropertiesTable() {
   const { loading, data } = useGetProperties()
+  // @ts-ignore
   return <DataTable columns={columns} data={data ?? []} isLoading={loading} />
 }

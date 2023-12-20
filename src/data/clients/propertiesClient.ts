@@ -61,6 +61,7 @@ export interface Property extends CreatePropertyInput {
   size: number
   noticePeriod: number
   description: string
+  propertyCategory: string
 }
 
 export const propertiesClient = {
