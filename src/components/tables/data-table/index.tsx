@@ -20,6 +20,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 
 import { DataTablePagination } from '@/components/tables/data-table/data-table-pagination'
 import { DataTableToolbar } from '@/components/tables/data-table/data-table-toolbar'
+import Loader from '@/components/Loader'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -77,9 +78,10 @@ export function DataTable<TData, TValue>({ columns, data, isLoading = false }: D
             {isLoading && (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  <div className="flex items-center justify-center">
+                  {/* <div className="flex items-center justify-center">
                     <div className="h-8 w-8 animate-spin rounded-full border-t-4 border-solid border-slate-600"></div>
-                  </div>
+                  </div> */}
+                  <Loader />
                 </TableCell>
               </TableRow>
             )}

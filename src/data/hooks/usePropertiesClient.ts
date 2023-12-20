@@ -3,11 +3,21 @@ import { userClient } from '../clients/usersClient'
 import { ApiEndpoints } from '@/constants/api'
 import { propertiesClient } from '../clients/propertiesClient'
 import { toast } from '@/components/ui/use-toast'
+import { GetByIdParams } from '@/lib/crud-factory'
 
 export function useGetProperties() {
   const { isLoading, data } = useQuery({
     queryKey: [ApiEndpoints.PROPERTIES],
     queryFn: () => propertiesClient.all()
+  })
+
+  return { data: data?.data, loading: isLoading }
+}
+
+export function useGetOneProperty(id: number) {
+  const { isLoading, data } = useQuery({
+    queryKey: [ApiEndpoints.PROPERTIES],
+    queryFn: () => propertiesClient.getById({ id })
   })
 
   return { data: data?.data, loading: isLoading }
