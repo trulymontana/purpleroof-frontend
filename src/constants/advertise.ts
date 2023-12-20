@@ -438,10 +438,6 @@ export const emiratesWithLocations = {
       value: 'Al Barsha'
     },
     {
-      label: 'Al Barsha 1',
-      value: 'Al Barsha 1'
-    },
-    {
       label: 'Al Furjan',
       value: 'Al Furjan'
     },

@@ -104,7 +104,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <Button type="submit" disabled={!property_image} className="w-full">
           Save and Continue
         </Button>
-        <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails?.status}`} />
+        <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails?.propertyFor}`} />
       </form>
     </Form>
   )

@@ -10,8 +10,6 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
 
     const { loading, data } = useGetOneProperty(propertyId)
 
-    console.log({ loading, data })
-
     if (loading) {
         return (
             <div className="h-[100vh] flex items-center justify-center">
@@ -48,10 +46,14 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
                                 <h3 className="text-lg font-medium">Location:</h3>
                                 <p className="text-lg">{data?.address}</p>
                             </div>
-                            <div className="flex justify-between">
-                                <h3 className="text-lg font-medium">Emirate:</h3>
-                                <p className="text-lg capitalize">{data?.emirate.toLowerCase()}</p>
-                            </div>
+                            {/* {
+                                data?.emirate && (
+                                    <div className="flex justify-between">
+                                        <h3 className="text-lg font-medium">Emirate:</h3>
+                                        <p className="text-lg capitalize">{data?.emirate.toLowerCase()}</p>
+                                    </div>
+                                )
+                            } */}
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Landmark:</h3>
                                 <p className="text-lg">{data?.landmark}</p>
@@ -68,6 +70,27 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
                                 <h3 className="text-lg font-medium">Contact No.:</h3>
                                 <p className="text-lg">{data?.phone}</p>
                             </div>
+                            {/* <div className="flex justify-between">
+                                <h3 className="text-lg font-medium">Project Status:</h3>
+                                <p className="text-lg capitalize">{data?.projectStatus?.toLowerCase().replaceAll("_", " ")}</p>
+                            </div> */}
+                            {
+                                data?.completionDate && (
+                                    <div className="flex justify-between">
+                                        <h3 className="text-lg font-medium">Completion Date:</h3>
+                                        <p className="text-lg capitalize">{new Date(data?.completionDate).toLocaleDateString()}</p>
+                                    </div>
+                                )
+                            }
+                            {/* {
+                                data?.occupencyStatus && (
+                                    <div className="flex justify-between">
+                                        <h3 className="text-lg font-medium">Occupency Status:</h3>
+                                        <p className="text-lg capitalize">{data?.occupencyStatus.toLowerCase()}</p>
+                                    </div>
+                                )
+                            } */}
+
                             {data?.numberOfBathRooms && data?.numberOfBedRooms && (
                                 <>
                                     <div className="flex justify-between">

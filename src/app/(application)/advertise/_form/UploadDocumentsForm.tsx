@@ -35,14 +35,12 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.UPLOAD_PHOTOS)
 
-  let defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue);;
+  let defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues
   })
-
-  const documents = form.watch("documents")
 
   useEffect(() => {
     // @ts-ignore
@@ -50,33 +48,9 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
   }, [])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log({ values })
     onSave(PageRoutes.advertise.UPLOAD_PHOTOS, values)
     router.push(PageRoutes.advertise.CALL_PREFERENCE)
   }
-
-  //   [
-  //     {
-  //         "type": "PASSPORT_COPY",
-  //         "url": "https://purpleroof.s3.amazonaws.com/advertise/documents[0].url-16:41:26"
-  //     },
-  //     {
-  //         "type": "VISA_COPY",
-  //         "url": "https://purpleroof.s3.amazonaws.com/advertise/documents[1].url-16:41:28"
-  //     },
-  //     {
-  //         "type": "EMIRATES_ID",
-  //         "url": "https://purpleroof.s3.amazonaws.com/advertise/documents[2].url-16:41:28"
-  //     },
-  //     {
-  //         "type": "TITLE_DEED_COPY",
-  //         "url": "https://purpleroof.s3.amazonaws.com/advertise/documents[3].url-16:41:33"
-  //     },
-  //     {
-  //         "type": "OWNERSHIP_PROOF_MOBILE_NUMBER",
-  //         "url": "https://purpleroof.s3.amazonaws.com/advertise/documents[4].url-16:41:35"
-  //     }
-  // ]
 
   return (
     <Form {...form}>
