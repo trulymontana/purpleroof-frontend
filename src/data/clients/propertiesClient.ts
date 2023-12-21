@@ -19,9 +19,9 @@ export interface CreatePropertyInput {
   emirate: EmirateEnum
   locationId: string
   buildingName: string
-  floor: string
+  floor: number
   street: string
-  unitNumber: string
+  unitNumber: number
   landmark: string
   propertyImage: string
   status: string
@@ -35,8 +35,8 @@ export interface CreatePropertyInput {
   otherFeatures: string
   projectStatus: string
   rentedOrVacant?: string
-  rentalAmount?: string
-  numberOfCheques?: string
+  rentalAmount?: number
+  numberOfCheques?: number | null
   noticePeriodRent?: string
   noticePeriodProperty?: string
   completionDate?: string
@@ -47,7 +47,7 @@ export interface CreatePropertyInput {
   ownerProofOfMobileNumber: string
   callPreference: string
   paymentInterval?: string
-  minimumContract?: string
+  minimumContract?: number
   lavatories?: string
   // documents: DocumentEnum
 }
@@ -62,6 +62,13 @@ export interface Property extends CreatePropertyInput {
   noticePeriod: number
   description: string
   propertyCategory: string
+  propertyTypeId: number
+  propertyTypeCategoryId: number
+  createdAt: Date
+  updatedAt: Date
+  emirateId: number
+  status: string
+  id: number
 }
 
 export const propertiesClient = {

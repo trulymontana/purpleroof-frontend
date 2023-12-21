@@ -29,6 +29,13 @@ export enum MortgageStatusEnum {
   CASE_DECLINED = 'CASE_DECLINED'
 }
 
+export enum PropertySubmissionStatusEnum {
+  SUBMITTED = 'SUBMITTED',
+  UNDER_VERIFICATION = 'UNDER_VERIFICATION',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED'
+}
+
 export enum LoanTypeEnum {
   BUY_PROPERTY_FROM_SELLER = 'BUY_PROPERTY_FROM_SELLER',
   BUY_PROPERTY_FROM_DEVELOPER = 'BUY_PROPERTY_FROM_DEVELOPER',
@@ -195,9 +202,9 @@ export enum DocumentTypeEnum {
 // }
 
 export enum UserRoleEnum {
-  admin = 'admin',
-  advertiser = 'advertiser',
-  agent = 'agent',
+  ADMIN = 'ADMIN',
+  ADVERTISER = 'ADVERTISER',
+  AGENT = 'AGENT',
 }
 
 export enum PropertiesStatusEnum {

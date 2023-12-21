@@ -4,6 +4,8 @@ import { DataTable } from './data-table'
 import { Property } from '@/constants/types'
 import { useGetProperties } from '@/data/hooks/usePropertiesClient'
 import ActionButtons from './action-buttons'
+import Link from 'next/link'
+import { Badge } from '../ui/badge'
 
 export const columns: ColumnDef<Property>[] = [
   {
@@ -67,6 +69,14 @@ export const columns: ColumnDef<Property>[] = [
     header: 'Updated At'
   },
   {
+    id: "status",
+    header: 'Status',
+    cell: ({ row }) => {
+      const data = row.original;
+      return <Badge>{data.status}</Badge>
+    }
+  },
+  {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => <ActionButtons row={row} />
@@ -75,6 +85,5 @@ export const columns: ColumnDef<Property>[] = [
 
 export default function PropertiesTable() {
   const { loading, data } = useGetProperties()
-  // @ts-ignore
   return <DataTable columns={columns} data={data ?? []} isLoading={loading} />
 }

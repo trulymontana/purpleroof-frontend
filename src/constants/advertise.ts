@@ -6,6 +6,7 @@ import {
   OccupencyStatusEnum,
   PaymentIntervalsEnum,
   ProjectStatusesEnum,
+  PropertySubmissionStatusEnum,
   PropertyTypeEnum,
   RentedOrVacantEnum,
   ResidentialPropertyCategoryEnum,
@@ -1977,14 +1978,22 @@ export const projectStatuses = [
   }
 ]
 
-export const propertyStatuses = [
+export const propertySubmissionStatuses = [
   {
     label: "Submitted",
-    value: MortgageStatusEnum.SUBMITTED
+    value: PropertySubmissionStatusEnum.SUBMITTED
   },
   {
-    label: "Under Documentation Stage",
-    value: MortgageStatusEnum.UNDER_DOCUMENTATION_STAGE
+    label: "Under Verification",
+    value: PropertySubmissionStatusEnum.UNDER_VERIFICATION
+  },
+  {
+    label: "Approved",
+    value: PropertySubmissionStatusEnum.APPROVED
+  },
+  {
+    label: "Rejected",
+    value: PropertySubmissionStatusEnum.REJECTED
   },
 ]
 

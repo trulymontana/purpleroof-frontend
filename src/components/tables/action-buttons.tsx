@@ -17,7 +17,7 @@ import { Form } from "../ui/form";
 import * as z from 'zod'
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { propertyStatuses } from "@/constants/advertise";
+import { propertySubmissionStatuses } from "@/constants/advertise";
 
 interface Props {
     row: any
@@ -53,7 +53,7 @@ const ActionButtons = ({ row }: Props) => {
                     </DialogHeader>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-                            <SelectElement name="status" placeholder="Please select a status" label="Status" options={propertyStatuses} />
+                            <SelectElement name="status" placeholder="Please select a status" label="Status" options={propertySubmissionStatuses} />
                             <DialogFooter>
                                 <Button type="submit">Save changes</Button>
                             </DialogFooter>

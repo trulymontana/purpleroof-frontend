@@ -81,34 +81,13 @@ const Page = () => {
     delete property.noticePeriodProperty
     // @ts-ignore
     delete property.callPreference
-
-    // property.propertyPhotos = []
-
+    
     if (property.amenities && property.amenities.length > 0) {
       let amenities_values: number[] = property.amenities.map((amenity: any) => amenity.value)
       property.amenities = amenities_values;
     }
 
-  //   "details": [
-  //     "projectStatus must be one of the following values: OFF_PLAN_UNDER_CONSTRUCTION, SHELL_AND_CORE, VACANT, RENTED",
-  //     "status must be one of the following values: SALE, RENT",
-  //     "propertyType must be one of the following values: RESIDENTIAL, COMMERCIAL"
-  // ],
-
     console.log({ property })
-
-    //     "amount must be a number conforming to the specified constraints", propertyValue
-    //     "numberOfBedRooms must be a number conforming to the specified constraints",
-    //     "numberOfBathRooms must be a number conforming to the specified constraints",
-    //     "unitNumber must be a number conforming to the specified constraints",
-    //     "floor must be a number conforming to the specified constraints",
-    //     "emirateId must be a number conforming to the specified constraints", ? 
-    //     "projectStatus must be one of the following values: OFF_PLAN_UNDER_CONSTRUCTION, SHELL_AND_CORE, VACANT, RENTED",
-    //     "status must be one of the following values: SALE, RENT",
-    //     "propertyType must be one of the following values: RESIDENTIAL, COMMERCIAL",
-    //     "emirate must be one of the following values: DUBAI, ABU_DHABI, RAS_AL_KHAIMAH, SHARJAH, FUJAIRAH, AJMAN, UMM_AL_QUWAIN",
-    //     "propertyTypeCategoryId must be a number conforming to the specified constraints" ? 
-    // ],
 
     createProperty({
       ...property

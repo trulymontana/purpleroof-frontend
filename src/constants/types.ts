@@ -74,7 +74,7 @@ export interface Property {
   landmark?: string | null
   createdAt: Date
   updatedAt: Date
-  locationId?: number | null
+  locationId?: string
   minimumContract?: number | null
   emirate: EmirateEnum
   noticePeriod?: number | null
@@ -91,13 +91,14 @@ export interface Property {
   emirateId: number
   // projectStatus?: Properties_projectStatus | null;
   numberOfCheques?: number | null
-  completionDate?: Date | null
+  completionDate?: string | null
   noticePeriodOfRemainingRentalAgreement?: number | null
   numberOfLavatory?: number | null
   rentalAmount?: number | null
   trakheesiPermitNo?: string
   lat?: number | null
   lng?: number | null
+  status: string
   // AdvertiseDocuments: AdvertiseDocuments[];
   // AgentInformations?: AgentInformations | null;
   // Emirates: Emirates;

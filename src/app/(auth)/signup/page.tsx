@@ -1,8 +1,6 @@
 "use client"
 
 import { CardHeader, CardContent, Card } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Form } from '@/components/ui/form'
 import * as z from 'zod'
@@ -10,6 +8,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import InputElement from "@/components/forms/elements/input-element"
 import CustomInputElement from "@/components/forms/elements/custom-input-element"
+import { useSignUp } from "@/data/hooks/useAuthClient"
 
 const formSchema = z.object({
   firstName: z.string({
@@ -23,16 +22,20 @@ const formSchema = z.object({
   }),
   password: z.string({
     required_error: 'Please enter a password!'
-  }),
+  }).min(8).regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*#?&])[A-Za-z0-9@$!%*#?&]{8,}$/, 'Please enter a combination of uppercase letters, lowercase letters, numbers, and symbols.'),
 })
 const Page = () => {
+
+  const { mutate: createUser } = useSignUp();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log({ values })
+    createUser({
+      ...values
+    })
   }
 
   return (
@@ -58,7 +61,6 @@ const Page = () => {
               <div className="space-y-2">
                 <CustomInputElement name="password" label="Password" type="password" />
               </div>
-
               <Button className="w-full" type="submit">
                 Sign Up
               </Button>
