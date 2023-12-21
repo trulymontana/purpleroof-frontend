@@ -21,8 +21,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   // @ts-ignore
   const allowedPages = roleToPageMapping[user.role];
 
-  console.log({ user })
-
   if (!allowedPages?.includes(pathName)) {
     return (
       <div className="flex h-screen flex-col items-center justify-center">
