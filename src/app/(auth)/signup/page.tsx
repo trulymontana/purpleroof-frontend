@@ -9,6 +9,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import InputElement from "@/components/forms/elements/input-element"
 import CustomInputElement from "@/components/forms/elements/custom-input-element"
 import { useSignUp } from "@/data/hooks/useAuthClient"
+import Link from "next/link"
+import { PageRoutes } from "@/constants/page-routes"
 
 const formSchema = z.object({
   firstName: z.string({
@@ -26,7 +28,7 @@ const formSchema = z.object({
 })
 const Page = () => {
 
-  const { mutate: createUser } = useSignUp();
+  const { isPending: isLoading, mutate: createUser } = useSignUp();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -61,9 +63,15 @@ const Page = () => {
               <div className="space-y-2">
                 <CustomInputElement name="password" label="Password" type="password" />
               </div>
-              <Button className="w-full" type="submit">
-                Sign Up
+              <Button disabled={isLoading} className="w-full" type="submit">
+                {isLoading ? "Loading..." : "Sign In"}
               </Button>
+              <p className="mt-4 text-center">
+                Already have an account?{" "}
+                <Link className="text-primary underline" href={PageRoutes.SIGNIN}>
+                  Sign in here
+                </Link>
+              </p>
             </form>
           </Form>
         </CardContent>

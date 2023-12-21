@@ -11,7 +11,7 @@ export const authClient = {
   signUp: (user: any) => {
     return HttpClient.post<any>(ApiEndpoints.SIGNUP, user)
   },
-  signIn: (user: User) => {
-    return HttpClient.post<User>(ApiEndpoints.SIGNIN, user)
+  signIn: (user: any) => {
+    return HttpClient.post<any>(ApiEndpoints.SIGNIN, user)
   }
 }

@@ -1,15 +1,13 @@
 "use client"
 
 import { CardHeader, CardContent, Card } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import InputElement from "@/components/forms/elements/input-element"
 import CustomInputElement from "@/components/forms/elements/custom-input-element"
+import { useSignIn } from "@/data/hooks/useAuthClient"
 
 const formSchema = z.object({
     email: z.string({
@@ -21,12 +19,16 @@ const formSchema = z.object({
 })
 const Page = () => {
 
+    const { isPending: isLoading, mutate: signInUser } = useSignIn();
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log({ values })
+        signInUser({
+            ...values
+        })
     }
 
     return (
@@ -46,8 +48,8 @@ const Page = () => {
                             <div className="space-y-2">
                                 <CustomInputElement name="password" label="Password" type="password" />
                             </div>
-                            <Button className="w-full" type="submit">
-                                Sign Up
+                            <Button disabled={isLoading} className="w-full" type="submit">
+                                {isLoading ? "Loading..." : "Sign In"}
                             </Button>
                         </form>
                     </Form>

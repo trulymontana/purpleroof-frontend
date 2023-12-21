@@ -41,11 +41,39 @@ export function useSignUp() {
     }
   })
 }
-export function useSignIn(user: User) {
-  const { isLoading, data } = useQuery({
-    queryKey: [ApiEndpoints.SIGNIN],
-    queryFn: () => authClient.signIn(user)
-  })
+export function useSignIn() {
+  const router = useRouter()
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: authClient.signIn,
+    onSuccess: (response: any) => {
+      const { statusCode, data } = response
 
-  return { data: data?.data, loading: isLoading }
+      if (statusCode === 200) {
+        toast({
+          variant: 'default',
+          title: 'Signed in successfully'
+        })
+
+        const { jwtToken, user } = data
+
+        const { firstName, lastName, email, role } = user
+
+        localStorage.setItem('AUTH_TOKEN', jwtToken)
+        const newUser = JSON.stringify({ firstName, lastName, email, role })
+        localStorage.setItem('user', newUser)
+
+        router.push(PageRoutes.dashboard.MORTGAGES)
+      }
+
+      // queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.message
+      })
+      console.log({ error })
+    }
+  })
 }
