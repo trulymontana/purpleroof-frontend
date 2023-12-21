@@ -1,7 +1,7 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { ApiEndpoints } from '@/constants/api'
+'use client'
+
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { authClient } from '../clients/authClient'
-import { User } from '@/constants/types'
 import { toast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
@@ -13,7 +13,6 @@ export function useSignUp() {
     mutationFn: authClient.signUp,
     onSuccess: (response: any) => {
       const { statusCode, data } = response
-
       if (statusCode === 200) {
         toast({
           variant: 'default',
@@ -73,7 +72,6 @@ export function useSignIn() {
         variant: 'destructive',
         title: error.message
       })
-      console.log({ error })
     }
   })
 }

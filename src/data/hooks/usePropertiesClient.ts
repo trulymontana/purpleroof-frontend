@@ -45,6 +45,26 @@ export const useCreatePropertyMutation = () => {
   })
 }
 
+export const useUpdatePropertyMutation = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: propertiesClient.update,
+    onSuccess: (data: any) => {
+      toast({
+        variant: 'default',
+        title: 'Property updated successfully'
+      })
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.message
+      })
+    }
+  })
+}
+
 // export const useUpdateOpinionMutation = () => {
 //   const queryClient = useQueryClient()
 //   const navigate = useNavigate()

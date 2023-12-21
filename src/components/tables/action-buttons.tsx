@@ -1,7 +1,6 @@
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -18,6 +17,8 @@ import * as z from 'zod'
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { propertySubmissionStatuses } from "@/constants/advertise";
+import { useUpdatePropertyMutation } from "@/data/hooks/usePropertiesClient";
+import { Property } from "@/constants/types";
 
 interface Props {
     row: any
@@ -29,15 +30,24 @@ const formSchema = z.object({
 
 type TPropertyStatus = z.infer<typeof formSchema>
 const ActionButtons = ({ row }: Props) => {
+
+    const { mutate: updateProperty } = useUpdatePropertyMutation();
+
     const pathname = usePathname();
-    const data = row.original;
+    const data: Property = row.original;
 
     const form = useForm<TPropertyStatus>({
-        resolver: zodResolver(formSchema)
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            status: data?.status
+        }
     })
 
     function onSubmit(values: TPropertyStatus) {
-        console.log({ values })
+        updateProperty({
+            id: data?.id,
+            ...values
+        })
     }
 
     return (
