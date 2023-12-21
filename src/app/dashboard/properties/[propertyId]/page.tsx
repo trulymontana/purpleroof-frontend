@@ -45,15 +45,15 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
                         <CardContent className="space-y-4">
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Property For:</h3>
-                                <p className="text-lg capitalize">{data?.propertyFor.toLocaleLowerCase()}</p>
+                                <p className="text-lg capitalize">{data?.propertyFor?.toLocaleLowerCase()}</p>
                             </div>
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Property Type:</h3>
-                                <p className="text-lg capitalize">{data?.propertyType.toLocaleLowerCase()}</p>
+                                <p className="text-lg capitalize">{data?.propertyType?.toLocaleLowerCase()}</p>
                             </div>
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Property Category:</h3>
-                                <p className="text-lg capitalize">{data?.propertyCategory.toLocaleLowerCase()}</p>
+                                <p className="text-lg capitalize">{data?.propertyCategory?.toLocaleLowerCase()}</p>
                             </div>
                             {
                                 data?.emirate && (
@@ -124,7 +124,7 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
                                     </div>
                                     <div className="flex justify-between">
                                         <h3 className="text-lg font-medium">Bathrooms:</h3>
-                                        <p className="text-lg">{data?.numberOfBathRooms} <Bath /></p>
+                                        <p className="text-lg flex items-center gap-2">{data?.numberOfBathRooms} <Bath /></p>
                                     </div>
                                 </>
                             )}
