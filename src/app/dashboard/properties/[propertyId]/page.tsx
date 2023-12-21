@@ -170,7 +170,6 @@ const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) =>
                         </CardHeader>
                         <CardContent>
                             <div className="flex items-center space-x-4 mb-4">
-                                {/* <Avatar className="w-16 h-16" /> */}
                                 <div className="flex flex-col">
                                     <h3 className="text-lg font-medium">John Doe</h3>
                                     <p className="text-sm text-gray-500">Licensed Real Estate Agent</p>
