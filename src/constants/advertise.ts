@@ -1770,195 +1770,195 @@ export const statuses = [
 export const amenities = [
   {
     label: 'Property Type',
-    value: 1
+    value: '1'
   },
   {
     label: 'Completion status',
-    value: 2
+    value: '2'
   },
   {
     label: 'Balcony/ Terrace',
-    value: 3
+    value: '3'
   },
   {
     label: 'Double Glazed Windows',
-    value: 4
+    value: '4'
   },
   {
     label: 'Centrally Air-Conditioned',
-    value: 5
+    value: '5'
   },
   {
     label: 'Central Heating',
-    value: 6
+    value: '6'
   },
   {
     label: 'Electricity Backup',
-    value: 7
+    value: '7'
   },
   {
     label: 'Storage Areas',
-    value: 8
+    value: '8'
   },
   {
     label: 'Study Room',
-    value: 9
+    value: '9'
   },
   {
     label: 'Maid Room',
-    value: 10
+    value: '10'
   },
   {
     label: 'Driver Room',
-    value: 11
+    value: '11'
   },
   {
     label: 'Laundry Room',
-    value: 12
+    value: '12'
   },
   {
     label: 'Private Swimming Pool',
-    value: 13
+    value: '13'
   },
   {
     label: 'Number of Parking Spaces',
-    value: 14
+    value: '14'
   },
   {
     label: 'Recreation and Family',
-    value: 15
+    value: '15'
   },
   {
     label: 'Barbeque Area',
-    value: 16
+    value: '16'
   },
   {
     label: 'Day Care Center',
-    value: 17
+    value: '17'
   },
   {
     label: 'Kids Play Area',
-    value: 18
+    value: '18'
   },
   {
     label: 'Lawn or Garden',
-    value: 19
+    value: '19'
   },
   {
     label: 'Cafeteria or Canteen',
-    value: 20
+    value: '20'
   },
   {
     label: 'Laundry and Kitchen',
-    value: 21
+    value: '21'
   },
   {
     label: 'Laundry Facility',
-    value: 22
+    value: '22'
   },
   {
     label: 'Shared Kitchen',
-    value: 23
+    value: '23'
   },
   {
     label: 'Lobby in Building',
-    value: 24
+    value: '24'
   },
   {
     label: 'Elevators in Building',
-    value: 25
+    value: '25'
   },
   {
     label: 'Service Elevators',
-    value: 26
+    value: '26'
   },
   {
     label: 'Prayer Room',
-    value: 27
+    value: '27'
   },
   {
     label: 'Reception/Waiting Room',
-    value: 28
+    value: '28'
   },
   {
     label: 'Health and Fitness',
-    value: 29
+    value: '29'
   },
   {
     label: 'First Aid Medical Center',
-    value: 30
+    value: '30'
   },
   {
     label: 'Jacuzzi',
-    value: 31
+    value: '31'
   },
   {
     label: 'Sauna',
-    value: 32
+    value: '32'
   },
   {
     label: 'Steam Room',
-    value: 33
+    value: '33'
   },
   {
     label: 'Swimming Pool',
-    value: 34
+    value: '34'
   },
   {
     label: 'Facilities for Disabled',
-    value: 35
+    value: '35'
   },
   {
     label: 'Security Staff',
-    value: 36
+    value: '36'
   },
   {
     label: 'Business Center',
-    value: 37
+    value: '37'
   },
   {
     label: 'Pet Allowed',
-    value: 38
+    value: '38'
   },
   {
     label: 'Cleaning and Maintenance',
-    value: 39
+    value: '39'
   },
   {
     label: 'ATM Facility',
-    value: 40
+    value: '40'
   },
   {
     label: 'Nearby Schools',
-    value: 41
+    value: '41'
   },
   {
     label: 'Nearby Hospitals',
-    value: 42
+    value: '42'
   },
   {
     label: 'Nearby Mosque',
-    value: 43
+    value: '43'
   },
   {
     label: 'Nearby Shopping Malls',
-    value: 44
+    value: '44'
   },
   {
     label: 'Distance from Airport',
-    value: 45
+    value: '45'
   },
   {
     label: 'Nearby Metro Station',
-    value: 46
+    value: '46'
   },
   {
     label: 'Other Nearby Places',
-    value: 47
+    value: '47'
   },
   {
     label: 'Other Main Features',
-    value: 48
+    value: '48'
   }
 ]
 
