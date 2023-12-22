@@ -6,7 +6,7 @@ import Link from 'next/link'
 import SideNavBar from '@/components/navigation/side-nav-bar'
 import { UserRoleEnum } from '@/constants/enums'
 import { PageRoutes } from '@/constants/page-routes'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 const roleToPageMapping = {
   [UserRoleEnum.ADMIN]: [PageRoutes.admin.AGENTS, PageRoutes.admin.USERS, PageRoutes.admin.REQUIREMENTS],
@@ -15,9 +15,15 @@ const roleToPageMapping = {
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
 
+  const router = useRouter();
   const pathName = usePathname();
   // @ts-ignore
   const user: any = JSON.parse(localStorage.getItem("user"))
+
+  if (!user) {
+    router.push("/signup")
+    return null
+  }
   // @ts-ignore
   const allowedPages = roleToPageMapping[user.role];
 

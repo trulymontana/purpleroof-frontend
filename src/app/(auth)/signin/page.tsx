@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import CustomInputElement from "@/components/forms/elements/custom-input-element"
 import { useSignIn } from "@/data/hooks/useAuthClient"
+import Link from "next/link"
+import { PageRoutes } from "@/constants/page-routes"
 
 const formSchema = z.object({
     email: z.string({
@@ -17,6 +19,7 @@ const formSchema = z.object({
         required_error: 'Please enter a password!'
     }),
 })
+
 const Page = () => {
 
     const { isPending: isLoading, mutate: signInUser } = useSignIn();
@@ -51,6 +54,18 @@ const Page = () => {
                             <Button disabled={isLoading} className="w-full" type="submit">
                                 {isLoading ? "Loading..." : "Sign In"}
                             </Button>
+                            <p className="mt-4 text-center">
+                                Don&apos;t have an account?{" "}
+                                <Link className="text-primary underline" href={PageRoutes.SIGNUP}>
+                                    Create Account
+                                </Link>
+                            </p>
+                            <p className="mt-4 text-center">
+                                Forgot Password? {" "}
+                                <Link className="text-primary underline" href={PageRoutes.FORGOT_PASSWORD}>
+                                    Reset Password
+                                </Link>
+                            </p>
                         </form>
                     </Form>
                 </CardContent>

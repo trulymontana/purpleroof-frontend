@@ -37,5 +37,6 @@ export const PageRoutes = {
   ABOUT: '/about',
   CONTACT: '/contact',
   SIGNUP: '/signup',
-  SIGNIN: '/signin'
+  SIGNIN: '/signin',
+  FORGOT_PASSWORD: '/forgotPassword'
 }
