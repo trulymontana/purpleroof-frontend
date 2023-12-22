@@ -11,7 +11,7 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        search: "url('../assets/bg-search.jpg')",
+        search: "url('/assets/bg-search.jpg')",
         advertise: "url('/assets/bg-advertise.jpg')",
         footer: "url('../assets/Purple-Roof-Footer.png')",
         mortgage: "url('../assets/bg-mortgage.jpg')",

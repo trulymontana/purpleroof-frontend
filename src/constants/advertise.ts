@@ -2,7 +2,6 @@ import {
   CommercialPropertyCategoryEnum,
   EmirateEnum,
   HoldingTypeEnum,
-  MortgageStatusEnum,
   OccupencyStatusEnum,
   PaymentIntervalsEnum,
   ProjectStatusesEnum,
