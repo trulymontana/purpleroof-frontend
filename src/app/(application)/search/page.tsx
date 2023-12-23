@@ -11,6 +11,10 @@ import { useForm } from 'react-hook-form'
 import { PropertyTypeEnum, categoryEnum } from "@/constants/enums"
 import SelectElement from "@/components/forms/elements/select-element"
 import { searchCategories } from "@/constants/search"
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Slider } from "@/components/ui/slider"
+import SliderElement from "@/components/forms/elements/slider-element"
+import { useState } from "react"
 
 const formSchema = z.object({
     propertyFor: z
@@ -28,6 +32,7 @@ const formSchema = z.object({
     })
 })
 const Page = () => {
+    const [values, setValues] = useState([0, 1200])
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -82,8 +87,16 @@ const Page = () => {
                                         </>
                                     )
                                 }
-                                <div className="flex-1">
-                                    <SelectElement name="amenities" placeholder="Price Range" options={amenities} />
+                                <div className="w-1/4">
+                                    <SliderElement
+                                        values={values}
+                                        setValues={setValues}
+                                        name="priceRange"
+                                        min={values[0]}
+                                        minStepsBetweenThumbs={10}
+                                        max={values[1]}
+                                        step={1}
+                                    />
                                 </div>
                             </div>
                             <Button className="w-full bg-primary">Find</Button>
