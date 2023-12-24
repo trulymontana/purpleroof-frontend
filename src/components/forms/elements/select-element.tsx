@@ -6,7 +6,7 @@ import { TOption } from '@/constants/types'
 
 interface Props {
   name: string
-  label: string
+  label?: string
   options: TOption[]
   description?: string
   placeholder?: string
@@ -21,7 +21,7 @@ const SelectElement = ({ name, label, description, options, placeholder, disable
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          {label && <FormLabel>{label}</FormLabel>}
           <Select onValueChange={field.onChange} defaultValue={field.value} disabled={disabled}>
             <FormControl>
               <SelectTrigger>

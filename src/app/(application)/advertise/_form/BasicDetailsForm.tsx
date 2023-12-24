@@ -15,20 +15,21 @@ import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import TabRadioGroup from '@/components/forms/elements/tab-radio-group'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
+import { PropertyTypeEnum, categoryEnum } from '@/constants/enums'
 
 const formSchema = z.object({
-  category: z
+  propertyFor: z
     .string({
       required_error: 'Please select a category'
     })
-    .refine((val) => val === 'sell' || val === 'rent'),
-  advert_title: z.string({
+    .refine((val) => val === categoryEnum.SALE || val === categoryEnum.RENT),
+  name: z.string({
     required_error: 'Title should not be empty!'
   }),
-  type_of_property: z.string({
+  propertyType: z.string({
     required_error: 'Please select a property type!'
   }),
-  property_option: z.string({
+  propertyCategory: z.string({
     required_error: 'Please select a property option'
   })
 })
@@ -45,8 +46,8 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     storedValue !== null
       ? JSON.parse(storedValue)
       : {
-          category: 'sell'
-        }
+        propertyFor: categoryEnum.SALE
+      }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,30 +56,31 @@ const BasicDetailsForm = ({ onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.BASIC_DETAILS, values)
-    router.push(`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${form.getValues('category')}`)
+    router.push(`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${form.getValues('propertyFor')}`)
   }
 
-  const propertyType = form.watch('type_of_property')
+  const propertyType = form.watch('propertyType')
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <TabRadioGroup name="category" options={categories} />
+        <TabRadioGroup name="propertyFor" options={categories} />
 
-        <InputElement name="advert_title" placeholder="Please enter Advert Title" label={'Advert Title'} />
+        <InputElement name="name" placeholder="Please enter Advert Title" label={'Advert Title'} />
 
         <RadioGroupElement
-          name="type_of_property"
+          name="propertyType"
           label={'Type of Property'}
           className="items-center gap-10"
           options={typesOfProperties}
         />
 
         <SelectElement
-          name="property_option"
-          label={propertyType === 'residential' ? 'Residential' : 'Commercial'}
-          options={propertyType === 'residential' ? residentalTypes : commercialTypes}
+          name="propertyCategory"
+          label={propertyType === PropertyTypeEnum.RESIDENTIAL ? 'Residential' : 'Commercial'}
+          options={propertyType === PropertyTypeEnum.RESIDENTIAL ? residentalTypes : commercialTypes}
         />
+
         <Button variant={'default'} type="submit" className="w-full">
           Save and Continue
         </Button>

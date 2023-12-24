@@ -1,3 +1,8 @@
+export enum categoryEnum {
+  SALE = 'SALE',
+  RENT = 'RENT'
+}
+
 export enum IncomeProfileEnum {
   SALARIED = 'SALARIED',
   SELF_EMPLOYED = 'SELF_EMPLOYED',
@@ -22,6 +27,13 @@ export enum MortgageStatusEnum {
   TRANSACTION_COMPLETED = 'TRANSACTION_COMPLETED',
   CASE_CLOSED = 'CASE_CLOSED',
   CASE_DECLINED = 'CASE_DECLINED'
+}
+
+export enum PropertySubmissionStatusEnum {
+  SUBMITTED = 'SUBMITTED',
+  UNDER_VERIFICATION = 'UNDER_VERIFICATION',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED'
 }
 
 export enum LoanTypeEnum {
@@ -56,7 +68,8 @@ export enum EmirateEnum {
   UMM_AL_QUWAIN = 'UMM_AL_QUWAIN'
 }
 
-export enum PropertyTypeEnum {
+
+export enum HoldingTypeEnum {
   FREE_HOLD = 'FREE_HOLD',
   LEASE_HOLD = 'LEASE_HOLD'
 }
@@ -103,7 +116,7 @@ export enum RelationshipEnum {
   STEP_SIBLING = 'STEP_SIBLING'
 }
 
-export enum CommercialTypesEnum {
+export enum CommercialPropertyCategoryEnum {
   BULK_UNIT = 'BULK_UNIT',
   COMMERCIAL_BUILDING = 'COMMERCIAL_BUILDING',
   COMMERCIAL_FLOOR = 'COMMERCIAL_FLOOR',
@@ -122,7 +135,7 @@ export enum CommercialTypesEnum {
   OTHER = 'OTHER'
 }
 
-export enum ResidentialTypesEnum {
+export enum ResidentialPropertyCategoryEnum {
   APARTMENT_AND_UNIT = 'APARTMENT_AND_UNIT',
   VILLA = 'VILLA',
   ACREAGE = 'ACREAGE',
@@ -146,13 +159,18 @@ export enum StatusesEnum {
 
 export enum ProjectStatusesEnum {
   COMPLETED = 'COMPLETED',
-  UNDER_CONSTRUCTION = 'UNDER_CONSTRUCTION',
+  OFF_PLAN_UNDER_CONSTRUCTION = 'OFF_PLAN_UNDER_CONSTRUCTION',
   SHELL_AND_CORE = 'SHELL_AND_CORE'
 }
 
 export enum RentedOrVacantEnum {
   VACANT = 'VACANT',
   RENTED = 'RENTED'
+}
+
+export enum OccupencyStatusEnum {
+  VACANT = 'VACANT',
+  OCCUPIED = 'OCCUPIED'
 }
 
 export enum DocumentTypeEnum {
@@ -184,21 +202,14 @@ export enum DocumentTypeEnum {
 // }
 
 export enum UserRoleEnum {
-  admin = 'admin',
-  advertiser = 'advertiser',
-  agent = 'agent',
+  ADMIN = 'ADMIN',
+  ADVERTISER = 'ADVERTISER',
+  AGENT = 'AGENT',
 }
 
 export enum PropertiesStatusEnum {
   SALE = 'SALE',
   RENT = 'RENT',
-}
-
-export enum ProjectStatusEnum {
-  OFF_PLAN_UNDER_CONSTRUCTION = 'OFF_PLAN_UNDER_CONSTRUCTION',
-  SHELL_AND_CORE = 'SHELL_AND_CORE',
-  VACANT = 'VACANT',
-  RENTED = 'RENTED',
 }
 
 export enum AmenityTypeEnum {

@@ -14,16 +14,16 @@ import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
-  call_preference: z.string({
+  callPreference: z.string({
     required_error: 'Please select a call preference!'
   })
 })
 
 interface Props {
-  onSave: (step: string, values: any) => void
+  handleSubmit: (values: any) => void
 }
 
-const CallPreferenceForm = ({ onSave }: Props) => {
+const CallPreferenceForm = ({ handleSubmit }: Props) => {
   const router = useRouter()
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.CALL_PREFERENCE)
@@ -36,11 +36,11 @@ const CallPreferenceForm = ({ onSave }: Props) => {
   })
 
   const handlePreferenceChange = (value: string) => {
-    form.setValue('call_preference', value)
+    form.setValue('callPreference', value)
   }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    onSave(PageRoutes.advertise.CALL_PREFERENCE, values)
+    handleSubmit(values)
   }
 
   return (
@@ -48,14 +48,14 @@ const CallPreferenceForm = ({ onSave }: Props) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <RadioGroupElement
           handleChange={handlePreferenceChange}
-          name="call_preference"
+          name="callPreference"
           label={'How would you prefer to handle inquiries from potential leads interested in this advertisement?'}
           className="flex-col items-start gap-4"
           options={callPreferences}
         />
 
         <Button type="submit" className="w-full">
-          Save and Continue
+          Submit
         </Button>
         <BackButton route={PageRoutes.advertise.UPLOAD_PHOTOS} />
       </form>

@@ -1,130 +1,135 @@
 import {
-  CommercialTypesEnum,
+  CommercialPropertyCategoryEnum,
+  EmirateEnum,
+  HoldingTypeEnum,
+  OccupencyStatusEnum,
   PaymentIntervalsEnum,
   ProjectStatusesEnum,
+  PropertySubmissionStatusEnum,
   PropertyTypeEnum,
   RentedOrVacantEnum,
-  ResidentialTypesEnum,
-  StatusesEnum
+  ResidentialPropertyCategoryEnum,
+  StatusesEnum,
+  categoryEnum
 } from './enums'
 
 export const categories = [
   {
     label: 'I want to Sell',
-    value: 'sell'
+    value: categoryEnum.SALE
   },
   {
     label: 'I want a rental tenant',
-    value: 'rent'
+    value: categoryEnum.RENT
   }
 ]
 
 export const typesOfProperties = [
   {
     label: 'Residential',
-    value: 'residential'
+    value: PropertyTypeEnum.RESIDENTIAL
   },
   {
     label: 'Commercial',
-    value: 'commercial'
+    value: PropertyTypeEnum.COMMERCIAL
   }
 ]
 
 export const commercialTypes = [
   {
     label: 'Bulk Unit',
-    value: CommercialTypesEnum.BULK_UNIT
+    value: CommercialPropertyCategoryEnum.BULK_UNIT
   },
   {
     label: 'Commercial Building',
-    value: CommercialTypesEnum.COMMERCIAL_BUILDING
+    value: CommercialPropertyCategoryEnum.COMMERCIAL_BUILDING
   },
   {
     label: 'Commercial Floor',
-    value: CommercialTypesEnum.COMMERCIAL_FLOOR
+    value: CommercialPropertyCategoryEnum.COMMERCIAL_FLOOR
   },
   {
     label: 'Commercial Villa',
-    value: CommercialTypesEnum.COMMERCIAL_VILLA
+    value: CommercialPropertyCategoryEnum.COMMERCIAL_VILLA
   },
   {
     label: 'Commercial Plot',
-    value: CommercialTypesEnum.COMMERCIAL_PLOT
+    value: CommercialPropertyCategoryEnum.COMMERCIAL_PLOT
   },
   {
     label: 'Factory',
-    value: CommercialTypesEnum.FACTORY
+    value: CommercialPropertyCategoryEnum.FACTORY
   },
   {
     label: 'Industrial Unit For Sale',
-    value: CommercialTypesEnum.INDUSTRIAL_UNIT_FOR_SALE
+    value: CommercialPropertyCategoryEnum.INDUSTRIAL_UNIT_FOR_SALE
   },
   {
     label: 'Industrial Land',
-    value: CommercialTypesEnum.INDUSTRIAL_LAND
+    value: CommercialPropertyCategoryEnum.INDUSTRIAL_LAND
   },
   {
     label: 'Mixed Used Sand',
-    value: CommercialTypesEnum.BULK_UNIT
+    value: CommercialPropertyCategoryEnum.BULK_UNIT
   },
   {
     label: 'Office For Sale',
-    value: CommercialTypesEnum.OFFICE_FOR_SALE
+    value: CommercialPropertyCategoryEnum.OFFICE_FOR_SALE
   },
   {
     label: 'Retail For Sale',
-    value: CommercialTypesEnum.RETAIL_FOR_SALE
+    value: CommercialPropertyCategoryEnum.RETAIL_FOR_SALE
   },
   {
     label: 'Shop',
-    value: CommercialTypesEnum.SHOP
+    value: CommercialPropertyCategoryEnum.SHOP
   },
   {
     label: 'Staff Accommodation for Sale',
-    value: CommercialTypesEnum.STAFF_ACCOMMODATION_FOR_SALE
+    value: CommercialPropertyCategoryEnum.STAFF_ACCOMMODATION_FOR_SALE
   },
   {
     label: 'Warehouse',
-    value: CommercialTypesEnum.WAREHOUSE
+    value: CommercialPropertyCategoryEnum.WAREHOUSE
   },
   {
     label: 'Sell Commercial Land',
-    value: CommercialTypesEnum.SELL_COMMERCIAL_LAND
+    value: CommercialPropertyCategoryEnum.SELL_COMMERCIAL_LAND
   },
   {
     label: 'Other',
-    value: CommercialTypesEnum.OTHER
+    value: CommercialPropertyCategoryEnum.OTHER
   }
 ]
 
 export const residentalTypes = [
   {
     label: 'Apartment & Unit',
-    value: ResidentialTypesEnum.APARTMENT_AND_UNIT
+    value: ResidentialPropertyCategoryEnum.APARTMENT_AND_UNIT
   },
   {
     label: 'Villa',
-    value: ResidentialTypesEnum.VILLA
+    value: ResidentialPropertyCategoryEnum.VILLA
   },
   {
     label: 'Acreage',
-    value: ResidentialTypesEnum.ACREAGE
+    value: ResidentialPropertyCategoryEnum.ACREAGE
   },
   {
     label: 'Block of Units',
-    value: ResidentialTypesEnum.BLOCKS_OF_UNITS
+    value: ResidentialPropertyCategoryEnum.BLOCKS_OF_UNITS
   },
   {
     label: 'House',
-    value: ResidentialTypesEnum.HOUSE
+    value: ResidentialPropertyCategoryEnum.HOUSE
   },
   {
     label: 'Townhouse',
-    value: ResidentialTypesEnum.TOWNHOUSE
+    value: ResidentialPropertyCategoryEnum.TOWNHOUSE
   },
   {
     label: 'Land',
-    value: ResidentialTypesEnum.LAND
+    value: ResidentialPropertyCategoryEnum.LAND
   }
 ]
 
@@ -396,15 +401,42 @@ export const lavatories = [
   }
 ]
 
+export const emirateOptions = [
+  {
+    label: 'Dubai',
+    value: EmirateEnum.DUBAI
+  },
+  {
+    label: 'Abu Dhabi',
+    value: EmirateEnum.ABU_DHABI
+  },
+  {
+    label: 'Ras Al Khaimah',
+    value: EmirateEnum.RAS_AL_KHAIMAH
+  },
+  {
+    label: 'Sharjah',
+    value: EmirateEnum.SHARJAH
+  },
+  {
+    label: 'Fujairah',
+    value: EmirateEnum.FUJAIRAH
+  },
+  {
+    label: 'Ajman',
+    value: EmirateEnum.AJMAN
+  },
+  {
+    label: 'Umm al Quwain',
+    value: EmirateEnum.UMM_AL_QUWAIN
+  }
+]
+
 export const emiratesWithLocations = {
-  Dubai: [
+  [EmirateEnum.DUBAI]: [
     {
       label: 'Al Barsha',
       value: 'Al Barsha'
-    },
-    {
-      label: 'Al Barsha 1',
-      value: 'Al Barsha 1'
     },
     {
       label: 'Al Furjan',
@@ -599,7 +631,7 @@ export const emiratesWithLocations = {
       value: 'Tilal Al Ghaf'
     }
   ],
-  'Abu Dhabi': [
+  [EmirateEnum.ABU_DHABI]: [
     {
       label: 'Al Bateen',
       value: 'Al Bateen'
@@ -801,7 +833,7 @@ export const emiratesWithLocations = {
       value: 'Zone 18'
     }
   ],
-  'Ras Al Khaimah': [
+  [EmirateEnum.RAS_AL_KHAIMAH]: [
     {
       label: 'Al Dhait',
       value: 'Al Dhait'
@@ -1003,7 +1035,7 @@ export const emiratesWithLocations = {
       value: 'Yasmin Village Building 4'
     }
   ],
-  Sharjah: [
+  [EmirateEnum.SHARJAH]: [
     {
       label: '5208 Muweilah Building',
       value: '5208 Muweilah Building'
@@ -1205,7 +1237,7 @@ export const emiratesWithLocations = {
       value: 'Tilal City'
     }
   ],
-  Fujairah: [
+  [EmirateEnum.FUJAIRAH]: [
     {
       label: 'Address Fujairah Beach Resort',
       value: 'Address Fujairah Beach Resort'
@@ -1359,7 +1391,7 @@ export const emiratesWithLocations = {
       value: 'UNB Building Apartments'
     }
   ],
-  Ajman: [
+  [EmirateEnum.AJMAN]: [
     {
       label: 'Ajman Corniche Residence',
       value: 'Ajman Corniche Residence'
@@ -1561,7 +1593,7 @@ export const emiratesWithLocations = {
       value: 'Sheikh Maktoum Bin Rashid Street'
     }
   ],
-  'Umm al Quwain': [
+  [EmirateEnum.UMM_AL_QUWAIN]: [
     {
       label: 'ADIB Building',
       value: 'ADIB Building'
@@ -1712,11 +1744,11 @@ export const emiratesWithLocations = {
 export const propertyTypes = [
   {
     label: 'Free Hold',
-    value: PropertyTypeEnum.FREE_HOLD
+    value: HoldingTypeEnum.FREE_HOLD
   },
   {
     label: 'Lease Hold',
-    value: PropertyTypeEnum.LEASE_HOLD
+    value: HoldingTypeEnum.LEASE_HOLD
   }
 ]
 
@@ -1738,195 +1770,195 @@ export const statuses = [
 export const amenities = [
   {
     label: 'Property Type',
-    value: 'Property Type'
+    value: '1'
   },
   {
     label: 'Completion status',
-    value: 'Completion status'
+    value: '2'
   },
   {
     label: 'Balcony/ Terrace',
-    value: 'Balcony/ Terrace'
+    value: '3'
   },
   {
     label: 'Double Glazed Windows',
-    value: 'Double Glazed Windows'
+    value: '4'
   },
   {
     label: 'Centrally Air-Conditioned',
-    value: 'Centrally Air-Conditioned'
+    value: '5'
   },
   {
     label: 'Central Heating',
-    value: 'Central Heating'
+    value: '6'
   },
   {
     label: 'Electricity Backup',
-    value: 'Electricity Backup'
+    value: '7'
   },
   {
     label: 'Storage Areas',
-    value: 'Storage Areas'
+    value: '8'
   },
   {
     label: 'Study Room',
-    value: 'Study Room'
+    value: '9'
   },
   {
     label: 'Maid Room',
-    value: 'Maid Room'
+    value: '10'
   },
   {
     label: 'Driver Room',
-    value: 'Driver Room'
+    value: '11'
   },
   {
     label: 'Laundry Room',
-    value: 'Laundry Room'
+    value: '12'
   },
   {
     label: 'Private Swimming Pool',
-    value: 'Private Swimming Pool'
+    value: '13'
   },
   {
     label: 'Number of Parking Spaces',
-    value: 'Number of Parking Spaces'
+    value: '14'
   },
   {
     label: 'Recreation and Family',
-    value: 'Recreation and Family'
+    value: '15'
   },
   {
     label: 'Barbeque Area',
-    value: 'Barbeque Area'
+    value: '16'
   },
   {
     label: 'Day Care Center',
-    value: 'Day Care Center'
+    value: '17'
   },
   {
     label: 'Kids Play Area',
-    value: 'Kids Play Area'
+    value: '18'
   },
   {
     label: 'Lawn or Garden',
-    value: 'Lawn or Garden'
+    value: '19'
   },
   {
     label: 'Cafeteria or Canteen',
-    value: 'Cafeteria or Canteen'
+    value: '20'
   },
   {
     label: 'Laundry and Kitchen',
-    value: 'Laundry and Kitchen'
+    value: '21'
   },
   {
     label: 'Laundry Facility',
-    value: 'Laundry Facility'
+    value: '22'
   },
   {
     label: 'Shared Kitchen',
-    value: 'Shared Kitchen'
+    value: '23'
   },
   {
     label: 'Lobby in Building',
-    value: 'Lobby in Building'
+    value: '24'
   },
   {
     label: 'Elevators in Building',
-    value: 'Elevators in Building'
+    value: '25'
   },
   {
     label: 'Service Elevators',
-    value: 'Service Elevators'
+    value: '26'
   },
   {
     label: 'Prayer Room',
-    value: 'Prayer Room'
+    value: '27'
   },
   {
     label: 'Reception/Waiting Room',
-    value: 'Reception/Waiting Room'
+    value: '28'
   },
   {
     label: 'Health and Fitness',
-    value: 'Health and Fitness'
+    value: '29'
   },
   {
     label: 'First Aid Medical Center',
-    value: 'First Aid Medical Center'
+    value: '30'
   },
   {
     label: 'Jacuzzi',
-    value: 'Jacuzzi'
+    value: '31'
   },
   {
     label: 'Sauna',
-    value: 'Sauna'
+    value: '32'
   },
   {
     label: 'Steam Room',
-    value: 'Steam Room'
+    value: '33'
   },
   {
     label: 'Swimming Pool',
-    value: 'Swimming Pool'
+    value: '34'
   },
   {
     label: 'Facilities for Disabled',
-    value: 'Facilities for Disabled'
+    value: '35'
   },
   {
     label: 'Security Staff',
-    value: 'Security Staff'
+    value: '36'
   },
   {
     label: 'Business Center',
-    value: 'Business Center'
+    value: '37'
   },
   {
     label: 'Pet Allowed',
-    value: 'Pet Allowed'
+    value: '38'
   },
   {
     label: 'Cleaning and Maintenance',
-    value: 'Cleaning and Maintenance'
+    value: '39'
   },
   {
     label: 'ATM Facility',
-    value: 'ATM Facility'
+    value: '40'
   },
   {
     label: 'Nearby Schools',
-    value: 'Nearby Schools'
+    value: '41'
   },
   {
     label: 'Nearby Hospitals',
-    value: 'Nearby Hospitals'
+    value: '42'
   },
   {
     label: 'Nearby Mosque',
-    value: 'Nearby Mosque'
+    value: '43'
   },
   {
     label: 'Nearby Shopping Malls',
-    value: 'Nearby Shopping Malls'
+    value: '44'
   },
   {
     label: 'Distance from Airport',
-    value: 'Distance from Airport'
+    value: '45'
   },
   {
     label: 'Nearby Metro Station',
-    value: 'Nearby Metro Station'
+    value: '46'
   },
   {
     label: 'Other Nearby Places',
-    value: 'Other Nearby Places'
+    value: '47'
   },
   {
     label: 'Other Main Features',
-    value: 'Other Main Features'
+    value: '48'
   }
 ]
 
@@ -1937,12 +1969,31 @@ export const projectStatuses = [
   },
   {
     label: 'Off plan/Under construction',
-    value: ProjectStatusesEnum.UNDER_CONSTRUCTION
+    value: ProjectStatusesEnum.OFF_PLAN_UNDER_CONSTRUCTION
   },
   {
     label: 'Shell & Core',
     value: ProjectStatusesEnum.SHELL_AND_CORE
   }
+]
+
+export const propertySubmissionStatuses = [
+  {
+    label: "Submitted",
+    value: PropertySubmissionStatusEnum.SUBMITTED
+  },
+  {
+    label: "Under Verification",
+    value: PropertySubmissionStatusEnum.UNDER_VERIFICATION
+  },
+  {
+    label: "Approved",
+    value: PropertySubmissionStatusEnum.APPROVED
+  },
+  {
+    label: "Rejected",
+    value: PropertySubmissionStatusEnum.REJECTED
+  },
 ]
 
 export const rentedOrVacantOptions = [
@@ -1953,6 +2004,17 @@ export const rentedOrVacantOptions = [
   {
     label: 'Rented',
     value: RentedOrVacantEnum.RENTED
+  }
+]
+
+export const occupencyStatusOptions = [
+  {
+    label: 'Vacant',
+    value: OccupencyStatusEnum.VACANT
+  },
+  {
+    label: 'Rented',
+    value: OccupencyStatusEnum.OCCUPIED
   }
 ]
 

@@ -3,7 +3,6 @@ import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from './data-table'
 import { RequirementApplication } from '@/constants/types'
 import { useGetRequirements } from '@/data/hooks/useRequirementsClient'
-import { PageRoutes } from '@/constants/page-routes'
 import { Badge } from '../ui/badge'
 
 import ActionButtons from './action-buttons'

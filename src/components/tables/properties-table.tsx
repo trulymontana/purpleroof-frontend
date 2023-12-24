@@ -3,20 +3,23 @@ import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from './data-table'
 import { Property } from '@/constants/types'
 import { useGetProperties } from '@/data/hooks/usePropertiesClient'
+import ActionButtons from './action-buttons'
+import Link from 'next/link'
+import { Badge } from '../ui/badge'
 
 export const columns: ColumnDef<Property>[] = [
   {
     accessorKey: 'id',
     header: 'ID'
   },
-  {
-    accessorKey: 'propertyTypeId',
-    header: 'Property Type ID'
-  },
-  {
-    accessorKey: 'propertyTypeCategoryId',
-    header: 'Property Type Category ID'
-  },
+  // {
+  //   accessorKey: 'propertyTypeId',
+  //   header: 'Property Type ID'
+  // },
+  // {
+  //   accessorKey: 'propertyTypeCategoryId',
+  //   header: 'Property Type Category ID'
+  // },
   {
     accessorKey: 'name',
     header: 'Name'
@@ -37,18 +40,18 @@ export const columns: ColumnDef<Property>[] = [
     accessorKey: 'size',
     header: 'Size'
   },
-  {
-    accessorKey: 'numberOfBedRooms',
-    header: 'Number of Bedrooms'
-  },
-  {
-    accessorKey: 'numberOfBathRooms',
-    header: 'Number of Bathrooms'
-  },
-  {
-    accessorKey: 'maintenanceFee',
-    header: 'Maintenance Fee'
-  },
+  // {
+  //   accessorKey: 'numberOfBedRooms',
+  //   header: 'Number of Bedrooms'
+  // },
+  // {
+  //   accessorKey: 'numberOfBathRooms',
+  //   header: 'Number of Bathrooms'
+  // },
+  // {
+  //   accessorKey: 'maintenanceFee',
+  //   header: 'Maintenance Fee'
+  // },
   {
     accessorKey: 'address',
     header: 'Address'
@@ -66,96 +69,17 @@ export const columns: ColumnDef<Property>[] = [
     header: 'Updated At'
   },
   {
-    accessorKey: 'locationId',
-    header: 'Location ID'
+    id: "status",
+    header: 'Status',
+    cell: ({ row }) => {
+      const data = row.original;
+      return <Badge>{data.status}</Badge>
+    }
   },
   {
-    accessorKey: 'minimumContract',
-    header: 'Minimum Contract'
-  },
-  {
-    accessorKey: 'noticePeriod',
-    header: 'Notice Period'
-  },
-  {
-    accessorKey: 'deedNumber',
-    header: 'Deed Number'
-  },
-  {
-    accessorKey: 'unitNumber',
-    header: 'Unit Number'
-  },
-  {
-    accessorKey: 'buildingName',
-    header: 'Building Name'
-  },
-  {
-    accessorKey: 'floor',
-    header: 'Floor'
-  },
-  {
-    accessorKey: 'isApproved',
-    header: 'Is Approved'
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status'
-  },
-  {
-    accessorKey: 'userId',
-    header: 'User ID'
-  },
-  {
-    accessorKey: 'draft',
-    header: 'Draft'
-  },
-  {
-    accessorKey: 'agentInfoId',
-    header: 'Agent Info ID'
-  },
-  {
-    accessorKey: 'paymentInterval',
-    header: 'Payment Interval'
-  },
-  {
-    accessorKey: 'emirateId',
-    header: 'Emirate ID'
-  },
-  {
-    accessorKey: 'projectStatus',
-    header: 'Project Status'
-  },
-  {
-    accessorKey: 'numberOfCheques',
-    header: 'Number of Cheques'
-  },
-  {
-    accessorKey: 'completionDate',
-    header: 'Completion Date'
-  },
-  {
-    accessorKey: 'noticePeriodOfRemainingRentalAgreement',
-    header: 'Notice Period of Remaining Rental Agreement'
-  },
-  {
-    accessorKey: 'numberOfLavatory',
-    header: 'Number of Lavatory'
-  },
-  {
-    accessorKey: 'rentalAmount',
-    header: 'Rental Amount'
-  },
-  {
-    accessorKey: 'trakheesiPermitNo',
-    header: 'Trakheesi Permit No'
-  },
-  {
-    accessorKey: 'lat',
-    header: 'Latitude'
-  },
-  {
-    accessorKey: 'lng',
-    header: 'Longitude'
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => <ActionButtons row={row} />
   }
 ]
 

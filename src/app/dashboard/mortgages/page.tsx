@@ -1,3 +1,5 @@
+"use client"
+
 import MortgagesTable from '@/components/tables/mortgage-table'
 import React from 'react'
 

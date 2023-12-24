@@ -56,10 +56,6 @@ export const columns: ColumnDef<MortgageApplication>[] = [
       return <Link href={`/dashboard/mortgages/${data.id}/transaction-info`}><Badge>{data.status}</Badge></Link>
     }
   },
-  // {
-  //   accessorKey: 'userId',
-  //   header: 'User ID'
-  // },
   {
     accessorKey: 'country',
     header: 'Country'

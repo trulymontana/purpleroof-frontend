@@ -14,6 +14,8 @@ import { bathRooms, bedRooms, lavatories, paymentIntervals } from '@/constants/a
 import { useRouter } from 'next/navigation'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
 import { PageRoutes } from '@/constants/page-routes'
+import NumberInputElement from '@/components/forms/elements/number-input-element'
+import { PropertyTypeEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   phone: z
@@ -23,22 +25,22 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.'
     }),
-  rental_amount: z.string({
+  rentalAmount: z.number({
     required_error: 'Please enter a rental amount'
   }),
-  payment_interval: z.string({
+  paymentInterval: z.string({
     required_error: 'Please select a payment interval'
   }),
-  property_size: z.string({
+  size: z.number({
     required_error: 'Please enter a property size!'
   }),
-  minimum_contract: z.string({
+  minimumContract: z.number({
     required_error: 'Please enter a minimum contract period!'
   }),
-  bed_rooms: z.string().optional(),
-  bath_rooms: z.string().optional(),
+  numberOfBedRooms: z.string().optional(),
+  numberOfBathRooms: z.string().optional(),
   lavatories: z.string().optional(),
-  deed_number: z.string({
+  deedNumber: z.string({
     required_error: 'Please enter your Deed Number'
   })
 })
@@ -70,38 +72,35 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <PhoneNumberInputElement name="phone" label="Phone Number" />
-        <InputElement
-          name="rental_amount"
-          type="number"
+        <NumberInputElement
+          name="rentalAmount"
           placeholder="Please enter rental amount"
           label={'Rental Amount (AED)'}
         />
-        <SelectElement name="payment_interval" label="Payment Interval" options={paymentIntervals} />
-        <InputElement
-          name="property_size"
+        <SelectElement name="paymentInterval" label="Payment Interval" options={paymentIntervals} />
+        <NumberInputElement
+          name="size"
           placeholder="Please enter property size"
-          type="number"
           label={'Property Size (Sqft)'}
         />
-        <InputElement
-          name="minimum_contract"
+        <NumberInputElement
+          name="minimumContract"
           placeholder="Please enter minimum contract period"
-          type="number"
           label={'Minimum Contract (in months)'}
         />
 
-        {basic_details && JSON.parse(basic_details).type_of_property === 'residential' ? (
+        {basic_details && JSON.parse(basic_details).typeOfProperty === PropertyTypeEnum.RESIDENTIAL ? (
           <>
-            <SelectElement name="bed_rooms" label={'Number of Bed Rooms'} options={bedRooms} />
+            <SelectElement name="numberOfBedRooms" label={'Number of Bed Rooms'} options={bedRooms} />
 
-            <SelectElement name="bath_rooms" label={'Number of Bath Rooms'} options={bathRooms} />
+            <SelectElement name="numberOfBathRooms" label={'Number of Bath Rooms'} options={bathRooms} />
           </>
         ) : (
           <SelectElement name="lavatories" label="Number of Lavatory" options={lavatories} />
         )}
 
         <InputElement
-          name="deed_number"
+          name="deedNumber"
           placeholder="Please enter deed number"
           label={'Title Deed / Oqod / Initial Contract of Sales'}
         />
@@ -109,6 +108,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
+
         <Button
           variant="outline"
           type="button"

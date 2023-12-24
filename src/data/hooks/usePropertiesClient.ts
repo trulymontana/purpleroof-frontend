@@ -2,6 +2,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { userClient } from '../clients/usersClient'
 import { ApiEndpoints } from '@/constants/api'
 import { propertiesClient } from '../clients/propertiesClient'
+import { toast } from '@/components/ui/use-toast'
+import { GetByIdParams } from '@/lib/crud-factory'
 
 export function useGetProperties() {
   const { isLoading, data } = useQuery({
@@ -10,6 +12,57 @@ export function useGetProperties() {
   })
 
   return { data: data?.data, loading: isLoading }
+}
+
+export function useGetOneProperty(id: number) {
+  const { isLoading, data } = useQuery({
+    queryKey: [ApiEndpoints.PROPERTIES],
+    queryFn: () => propertiesClient.getById({ id })
+  })
+
+  return { data: data?.data, loading: isLoading }
+}
+
+export const useCreatePropertyMutation = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: propertiesClient.create,
+    onSuccess: (data: any) => {
+      toast({
+        variant: 'default',
+        title: 'Property created successfully'
+      })
+      // localStorage.removeItem(PageRoutes.mortgage.PERSONAL_DETAILS)
+      // localStorage.removeItem(PageRoutes.mortgage.INCOME_DETAILS)
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.message
+      })
+    }
+  })
+}
+
+export const useUpdatePropertyMutation = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: propertiesClient.update,
+    onSuccess: (data: any) => {
+      toast({
+        variant: 'default',
+        title: 'Property updated successfully'
+      })
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.message
+      })
+    }
+  })
 }
 
 // export const useUpdateOpinionMutation = () => {
@@ -22,20 +75,6 @@ export function useGetProperties() {
 //     },
 //     onSettled: () => {
 //       queryClient.invalidateQueries(ApiEndpoints.USERS)
-//     },
-//   })
-// }
-
-// export const useCreateOpinionMutation = () => {
-//   const queryClient = useQueryClient()
-//   const navigate = useNavigate()
-//   return useMutation(opinionClient.create, {
-//     onSuccess: (data) => {
-//       toast.success('Opinion Successfully Created')
-//       navigate(AppRoutes.OPINION_EDITOR)
-//     },
-//     onSettled: () => {
-//       queryClient.invalidateQueries(ApiEndpoints.OPINION)
 //     },
 //   })
 // }

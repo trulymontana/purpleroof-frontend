@@ -8,37 +8,39 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import { emiratesWithLocations } from '@/constants/advertise'
+import { emirateOptions, emiratesWithLocations } from '@/constants/advertise'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import SelectElement from '@/components/forms/elements/select-element'
 import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
+import NumberInputElement from '@/components/forms/elements/number-input-element'
+import { TOption } from '@/constants/types'
 
 const formSchema = z.object({
   emirate: z.string({
     required_error: 'Please select a Emirate!'
   }),
-  location: z.string({
+  locationId: z.string({
     required_error: 'Please select a Location!'
   }),
-  building_name: z.string({
+  buildingName: z.string({
     required_error: 'Please enter your Building name!'
   }),
-  floor: z.string({
+  floor: z.number({
     required_error: 'Please enter your floor'
   }),
   street: z.string({
     required_error: 'Please enter Street number'
   }),
-  unit_number: z.string({
+  unitNumber: z.number({
     required_error: 'Please enter Unit number'
   }),
   landmark: z.string({
     required_error: 'Please enter a landmark'
   }),
-  property_image: z.string({
+  propertyPhotos: z.string({
     required_error: 'Please upload a property image'
   })
 })
@@ -64,7 +66,6 @@ const LocationDetailsForm = ({ onSave }: Props) => {
     router.push(PageRoutes.advertise.AMENITIES_DETAILS)
   }
 
-  const Emirates = Object.keys(emiratesWithLocations)
   const selectedEmirate = form.watch('emirate')
 
   // @ts-ignore
@@ -73,37 +74,16 @@ const LocationDetailsForm = ({ onSave }: Props) => {
   // @ts-ignore
   const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS))
 
-  const property_image = form.watch('property_image')
+  const property_image = form.watch('propertyPhotos')
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <FormField
-          name={'emirate'}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Emirate</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Please select a Emirate" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {Emirates.map((option, i) => (
-                    <SelectItem key={i} value={option}>
-                      {option}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+
+        <SelectElement name='emirate' label='Emirate' options={emirateOptions} placeholder='Please select a emirate' />
 
         <SelectElement
-          name="location"
+          name="locationId"
           label="Location"
           options={locations}
           placeholder={!selectedEmirate ? 'Please select emirate first' : 'Please select a location'}
@@ -111,20 +91,20 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         />
 
         <InputElement
-          name="building_name"
+          name="buildingName"
           placeholder="Please enter your building name"
           label={'Building / Cluster Name'}
         />
-        <InputElement name="floor" placeholder="Please enter your floor" label={'Floor'} />
+        <NumberInputElement name="floor" placeholder="Please enter your floor" label={'Floor'} />
         <InputElement name="street" placeholder="Please enter your street name" label={'Street'} />
-        <InputElement name="unit_number" placeholder="Please enter your unit number" label={'Unit Number'} />
+        <NumberInputElement name="unitNumber" placeholder="Please enter your unit number" label={'Unit Number'} />
         <InputElement name="landmark" placeholder="Please enter a landmark" label={'Landmark'} />
-        <FileUploader folder="advertise" name="property_image" label={'Upload Photo of the Property'} form={form} />
+        <FileUploader folder="advertise" name="propertyPhotos" label={'Upload Photo of the Property'} form={form} />
 
         <Button type="submit" disabled={!property_image} className="w-full">
           Save and Continue
         </Button>
-        <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails?.category}`} />
+        <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails?.propertyFor}`} />
       </form>
     </Form>
   )

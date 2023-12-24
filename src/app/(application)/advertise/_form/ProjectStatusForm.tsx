@@ -9,20 +9,22 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { projectStatuses, rentedOrVacantOptions } from '@/constants/advertise'
+import { occupencyStatusOptions, projectStatuses } from '@/constants/advertise'
 import DatePickerElement from '@/components/forms/elements/date-picker-element'
 import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
+import { OccupencyStatusEnum, ProjectStatusesEnum } from '@/constants/enums'
+import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
-  project_status: z.string(),
-  rented_or_vacant: z.string().optional(),
-  rental_amount: z.string().optional(),
-  number_of_cheques: z.string().optional(),
-  notice_period_rent: z.string().optional(),
-  notice_period_property: z.string().optional(),
-  completion_date: z.date().optional()
+  projectStatus: z.string(),
+  occupencyStatus: z.string().optional(),
+  rentalAmount: z.number().optional(),
+  numberOfCheques: z.number().optional(),
+  noticePeriodRent: z.number().optional(),
+  noticePeriodProperty: z.number().optional(),
+  completionDate: z.date().optional()
 })
 
 type TProjectStatus = z.infer<typeof formSchema>
@@ -38,9 +40,9 @@ const ProjectStatusForm = ({ onSave }: Props) => {
 
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
-  if (defaultValues.completion_date) {
+  if (defaultValues.completionDate) {
     // @ts-ignore
-    defaultValues.completion_date = new Date(defaultValues?.completion_date)
+    defaultValues.completionDate = new Date(defaultValues?.completionDate)
   }
 
   const form = useForm<TProjectStatus>({
@@ -53,23 +55,23 @@ const ProjectStatusForm = ({ onSave }: Props) => {
     router.push(PageRoutes.advertise.UPLOAD_PHOTOS)
   }
 
-  const project_status = form.watch('project_status')
-  const rented_or_vacant = form.watch('rented_or_vacant')
+  const projectStatus = form.watch('projectStatus')
+  const occupencyStatus = form.watch('occupencyStatus')
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <SelectElement name="project_status" label="Project Status" options={projectStatuses} />
+        <SelectElement name="projectStatus" label="Project Status" options={projectStatuses} />
 
-        {project_status === 'completed' && (
+        {projectStatus === ProjectStatusesEnum.COMPLETED && (
           <>
-            <SelectElement name="rented_or_vacant" label="Rented or Vacant" options={rentedOrVacantOptions} />
-            {rented_or_vacant === 'rented' && (
+            <SelectElement name="occupencyStatus" label="Occupency Status" options={occupencyStatusOptions} />
+            {occupencyStatus === OccupencyStatusEnum.OCCUPIED && (
               <>
-                <InputElement name="rental_amount" label="Rental Amount (AED)" />
-                <InputElement name="number_of_cheques" label="Number of Cheques" />
-                <InputElement
-                  name="notice_period_rent"
+                <NumberInputElement name="rentalAmount" label="Rental Amount (AED)" />
+                <NumberInputElement name="numberOfCheques" label="Number of Cheques" />
+                <NumberInputElement
+                  name="noticePeriodRent"
                   label="Notice Period of remaining rental agreement (in months)"
                 />
               </>
@@ -77,11 +79,11 @@ const ProjectStatusForm = ({ onSave }: Props) => {
           </>
         )}
 
-        {project_status === 'off plan/under construction' && (
-          <DatePickerElement name="completion_date" label="Completion Date" disabled={true} />
+        {projectStatus === ProjectStatusesEnum.OFF_PLAN_UNDER_CONSTRUCTION && (
+          <DatePickerElement name="completionDate" label="Completion Date" disabled={true} />
         )}
 
-        <InputElement name="notice_period_property" label={'Notice Period to vacate the property (in months)'} />
+        <NumberInputElement name="noticePeriodProperty" label={'Notice Period to vacate the property (in months)'} />
 
         <Button type="submit" className="w-full">
           Save and Continue

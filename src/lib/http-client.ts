@@ -15,7 +15,7 @@ axiosClient.interceptors.request.use((config: any) => {
   if (token) {
     config.headers = {
       ...config.headers,
-      Authorization: `Bearer ${token}`
+      Authorization: token
     }
   }
   return config

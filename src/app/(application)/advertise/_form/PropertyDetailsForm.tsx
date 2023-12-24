@@ -10,12 +10,14 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { bathRooms, bedRooms } from '@/constants/advertise'
+import { bathRooms, bedRooms, lavatories } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
 import 'react-international-phone/style.css'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
 import { PageRoutes } from '@/constants/page-routes'
 import { BackButton } from '@/components/navigation/back-button'
+import NumberInputElement from '@/components/forms/elements/number-input-element'
+import { PropertyTypeEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   phone: z
@@ -25,19 +27,16 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.'
     }),
-  property_value: z.string({
+  amount: z.number({
     required_error: 'Please enter a property value'
   }),
-  property_size: z.string({
+  size: z.number({
     required_error: 'Please enter a property size'
   }),
-  bed_rooms: z.string({
-    required_error: 'Please enter number of bed rooms!'
-  }),
-  bath_rooms: z.string({
-    required_error: 'Please enter number of bath rooms!'
-  }),
-  deed_number: z.string({
+  numberOfBedRooms: z.number().optional(),
+  numberOfBathRooms: z.number().optional(),
+  numberOfLavatory: z.number().optional(),
+  deedNumber: z.string({
     required_error: 'Please enter your Deed Number'
   })
 })
@@ -49,6 +48,7 @@ interface Props {
 const PropertyDetailsForm = ({ onSave }: Props) => {
   const router = useRouter()
 
+  const basic_details = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS)
   const storedValue = localStorage.getItem(PageRoutes.advertise.PROPERTY_DETAILS)
 
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
@@ -68,35 +68,29 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <PhoneNumberInputElement name="phone" label="Phone Number" />
 
-        <InputElement
-          name="property_value"
-          type="number"
+        <NumberInputElement
+          name="amount"
           placeholder="Please enter your property value"
           label={'Property Value (AED)'}
         />
-        <InputElement
-          name="property_size"
+        <NumberInputElement
+          name="size"
           placeholder="Please enter your property size"
-          type="number"
           label={'Property Size (Sqft)'}
         />
 
-        <SelectElement
-          name="bed_rooms"
-          placeholder="Please select number of bed rooms"
-          label={'Number of Bed Rooms'}
-          options={bedRooms}
-        />
+        {basic_details && JSON.parse(basic_details).typeOfProperty === PropertyTypeEnum.COMMERCIAL ? (
+          <>
+            <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
 
-        <SelectElement
-          name="bath_rooms"
-          placeholder="Please select number of bath rooms"
-          label={'Number of Bath Rooms'}
-          options={bathRooms}
-        />
+            <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
+          </>
+        ) : (
+          <NumberInputElement name="numberOfLavatory" label="Number of Lavatory" />
+        )}
 
         <InputElement
-          name="deed_number"
+          name="deedNumber"
           placeholder="Please enter deed number"
           label={'Title Deed / Oqod / Initial Contract of Sales'}
         />

@@ -1,3 +1,5 @@
+"use client"
+
 import RequirementsTable from '@/components/tables/requirements-table'
 import { PageRoutes } from '@/constants/page-routes'
 import Link from 'next/link'

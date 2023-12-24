@@ -16,19 +16,20 @@ import { useRouter } from 'next/navigation'
 import { TOption } from '@/constants/types'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
+import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
-  property_type: z.string({
+  holdingType: z.string({
     required_error: 'Please select a property type!'
   }),
   status: z.string({
     required_error: 'Please select your property status'
   }),
-  parking_spaces: z.string().optional(),
-  airport_distance: z.string().optional(),
-  metro_station: z.string().optional(),
-  nearby_places: z.string().optional(),
-  other_features: z.string().optional()
+  parkingSpaces: z.number().optional(),
+  airportDistance: z.number().optional(),
+  metroStation: z.number().optional(),
+  nearbyPlaces: z.string().optional(),
+  otherFeatures: z.string().optional()
 })
 
 interface Props {
@@ -68,16 +69,16 @@ const AmenitiesForm = ({ onSave }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <SelectElement
-          name="property_type"
-          label={'Property Type'}
+          name="holdingType"
+          label={'Holding Type'}
           placeholder="Please select a property type"
           options={propertyTypes}
         />
 
         <SelectElement name="status" label={'Status'} placeholder="Please select a status" options={statuses} />
 
-        <InputElement
-          name="parking_spaces"
+        <NumberInputElement
+          name="parkingSpaces"
           placeholder="Please enter parking spaces"
           label={'Number of Parking Spaces'}
         />
@@ -90,21 +91,21 @@ const AmenitiesForm = ({ onSave }: Props) => {
           setSelectedBoxes={setSelectedAmenities}
         />
 
-        <InputElement
-          name="airport_distance"
+        <NumberInputElement
+          name="airportDistance"
           placeholder="Please enter airport distance"
           label={'Distance from Airport (in km)'}
         />
 
-        <InputElement
-          name="metro_station"
+        <NumberInputElement
+          name="metroStation"
           placeholder="Please enter metro station"
           label={'Nearby Metro Station (in km)'}
         />
 
-        <InputElement name="nearby_places" placeholder="Please enter nearby places" label={'Other Nearby Places'} />
+        <InputElement name="nearbyPlaces" placeholder="Please enter nearby places" label={'Other Nearby Places'} />
 
-        <InputElement name="other_features" placeholder="Please enter other features" label={'Other Main Features'} />
+        <InputElement name="otherFeatures" placeholder="Please enter other features" label={'Other Main Features'} />
 
         <Button type="submit" className="w-full">
           Save and Continue
