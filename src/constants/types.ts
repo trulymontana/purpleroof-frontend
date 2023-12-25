@@ -1,4 +1,4 @@
-import { EmirateEnum, MortgageStatusEnum } from './enums'
+import { EmirateEnum, MortgageStatusEnum, UserRoleEnum } from './enums'
 
 export enum SortOrder {
   Asc = 'asc',
@@ -18,17 +18,17 @@ export interface SuccessResponse<T> {
   statusCode: number
 }
 
-export interface User {
-  id: number
-  firstName: string
-  lastName: string
-  email: string
-  password: string
-  createdAt: string
-  updatedAt: string
-  role: string
-  isEmailConfirmed: boolean
-}
+// export interface User {
+//   id: number
+//   firstName: string
+//   lastName: string
+//   email: string
+//   password: string
+//   createdAt: string
+//   updatedAt: string
+//   role: string
+//   isEmailConfirmed: boolean
+// }
 
 export interface MortgageApplication {
   id: number
@@ -118,4 +118,11 @@ export type TOption = {
 export type PreSignedFile = {
   url: string
   expiry: number
+}
+
+export type User = {
+  email: string
+  firstName: string
+  lastName: string
+  role: UserRoleEnum
 }

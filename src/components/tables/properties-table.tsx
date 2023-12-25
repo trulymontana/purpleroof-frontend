@@ -4,7 +4,6 @@ import { DataTable } from './data-table'
 import { Property } from '@/constants/types'
 import { useGetProperties } from '@/data/hooks/usePropertiesClient'
 import ActionButtons from './action-buttons'
-import Link from 'next/link'
 import { Badge } from '../ui/badge'
 
 export const columns: ColumnDef<Property>[] = [

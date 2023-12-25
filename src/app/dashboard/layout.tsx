@@ -10,6 +10,8 @@ import { usePathname } from 'next/navigation'
 import { CardHeader, CardContent, Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { User } from '@/constants/types'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 const roleToPageMapping = {
   [UserRoleEnum.ADMIN]: [PageRoutes.admin.AGENTS, PageRoutes.admin.USERS, PageRoutes.admin.REQUIREMENTS],
@@ -19,8 +21,10 @@ const roleToPageMapping = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
 
   const pathName = usePathname();
-  // @ts-ignore
-  const user: any = JSON.parse(localStorage.getItem("user"))
+
+  const storedValue = localStorage.getItem(LocalStorageKeys.USER)
+
+  const user: User = storedValue !== null && JSON.parse(storedValue)
 
   if (!user) {
     return (
@@ -49,6 +53,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </main>
     )
   }
+
   // @ts-ignore
   const allowedPages = roleToPageMapping[user.role];
 
@@ -66,7 +71,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="grid  min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
-      <SideNavBar />
+      <SideNavBar user={user} />
       <div className="flex flex-col">{children}</div>
     </div>
   )

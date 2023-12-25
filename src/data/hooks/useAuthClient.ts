@@ -5,6 +5,7 @@ import { authClient } from '../clients/authClient'
 import { toast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 export function useSignUp() {
   const router = useRouter()
@@ -23,9 +24,9 @@ export function useSignUp() {
 
         const { firstName, lastName, email, role } = user
 
-        localStorage.setItem('AUTH_TOKEN', jwtToken)
+        localStorage.setItem(LocalStorageKeys.AUTH_TOKEN, jwtToken)
         const newUser = JSON.stringify({ firstName, lastName, email, role })
-        localStorage.setItem('user', newUser)
+        localStorage.setItem(LocalStorageKeys.USER, newUser)
 
         router.push(PageRoutes.dashboard.MORTGAGES)
       }
@@ -58,9 +59,9 @@ export function useSignIn() {
 
         const { firstName, lastName, email, role } = user
 
-        localStorage.setItem('AUTH_TOKEN', jwtToken)
+        localStorage.setItem(LocalStorageKeys.AUTH_TOKEN, jwtToken)
         const newUser = JSON.stringify({ firstName, lastName, email, role })
-        localStorage.setItem('user', newUser)
+        localStorage.setItem(LocalStorageKeys.USER, newUser)
 
         router.push(PageRoutes.dashboard.MORTGAGES)
       }
