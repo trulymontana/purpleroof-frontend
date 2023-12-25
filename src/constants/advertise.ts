@@ -1979,21 +1979,21 @@ export const projectStatuses = [
 
 export const propertySubmissionStatuses = [
   {
-    label: "Submitted",
+    label: 'Submitted',
     value: PropertySubmissionStatusEnum.SUBMITTED
   },
   {
-    label: "Under Verification",
+    label: 'Under Verification',
     value: PropertySubmissionStatusEnum.UNDER_VERIFICATION
   },
   {
-    label: "Approved",
+    label: 'Approved',
     value: PropertySubmissionStatusEnum.APPROVED
   },
   {
-    label: "Rejected",
+    label: 'Rejected',
     value: PropertySubmissionStatusEnum.REJECTED
-  },
+  }
 ]
 
 export const rentedOrVacantOptions = [

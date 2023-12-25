@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import RequirementsTable from '@/components/tables/requirements-table'
 import { PageRoutes } from '@/constants/page-routes'

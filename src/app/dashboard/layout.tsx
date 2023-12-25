@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { Package } from 'lucide-react'
 import Link from 'next/link'
@@ -14,25 +14,24 @@ const roleToPageMapping = {
 }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-
-  const router = useRouter();
-  const pathName = usePathname();
+  const router = useRouter()
+  const pathName = usePathname()
   // @ts-ignore
-  const user: any = JSON.parse(localStorage.getItem("user"))
+  const user: any = JSON.parse(localStorage.getItem('user'))
 
   if (!user) {
-    router.push("/signup")
+    router.push('/signup')
     return null
   }
   // @ts-ignore
-  const allowedPages = roleToPageMapping[user.role];
+  const allowedPages = roleToPageMapping[user.role]
 
   if (!allowedPages?.includes(pathName)) {
     return (
       <div className="flex h-screen flex-col items-center justify-center">
         <Package size={200} />
         <h1 className="text-3xl font-bold">You are not allowed to access this page</h1>
-        <Link className='text-primary underline' href={'/'}>
+        <Link className="text-primary underline" href={'/'}>
           Go to home page
         </Link>
       </div>

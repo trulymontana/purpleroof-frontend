@@ -17,7 +17,7 @@ interface Props {
 }
 
 const RadioGroupElement = ({ name, label, options, className, disabled = false }: Props) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext()
   return (
     <>
       <FormField

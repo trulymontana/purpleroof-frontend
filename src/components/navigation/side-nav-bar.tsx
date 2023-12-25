@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { PageRoutes } from '@/constants/page-routes'
 import { Building, FileCode, Home, PersonStandingIcon, User } from 'lucide-react'

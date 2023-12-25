@@ -18,14 +18,14 @@ const formSchema = z.object({
   documents: z.array(
     z.object({
       type: z.string({
-        required_error: "Type not found!"
+        required_error: 'Type not found!'
       }),
       url: z.string({
-        required_error: "This field is required!"
-      }),
+        required_error: 'This field is required!'
+      })
     })
-  ),
-});
+  )
+})
 
 interface Props {
   onSave: (step: string, values: any) => void
@@ -44,7 +44,13 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
 
   useEffect(() => {
     // @ts-ignore
-    form.setValue("documents", [{ type: DocumentTypeEnum.PASSPORT_COPY }, { type: DocumentTypeEnum.VISA_COPY }, { type: DocumentTypeEnum.EMIRATES_ID }, { type: DocumentTypeEnum.TITLE_DEED_COPY }, { type: DocumentTypeEnum.OWNERSHIP_PROOF_MOBILE_NUMBER }])
+    form.setValue('documents', [
+      { type: DocumentTypeEnum.PASSPORT_COPY },
+      { type: DocumentTypeEnum.VISA_COPY },
+      { type: DocumentTypeEnum.EMIRATES_ID },
+      { type: DocumentTypeEnum.TITLE_DEED_COPY },
+      { type: DocumentTypeEnum.OWNERSHIP_PROOF_MOBILE_NUMBER }
+    ])
   }, [])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -59,12 +65,7 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
         <FileUploader folder="advertise" name="documents[1].url" label={'Visa Copy'} form={form} />
         <FileUploader folder="advertise" name="documents[2].url" label={'Emirates ID'} form={form} />
         <FileUploader folder="advertise" name="documents[3].url" label={'Title Deed Copy'} form={form} />
-        <FileUploader
-          folder="advertise"
-          name="documents[4].url"
-          label={'Owners Proof of Mobile Number'}
-          form={form}
-        />
+        <FileUploader folder="advertise" name="documents[4].url" label={'Owners Proof of Mobile Number'} form={form} />
 
         <Button type="submit" className="w-full">
           Save and Continue

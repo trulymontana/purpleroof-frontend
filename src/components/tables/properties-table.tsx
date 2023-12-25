@@ -69,15 +69,15 @@ export const columns: ColumnDef<Property>[] = [
     header: 'Updated At'
   },
   {
-    id: "status",
+    id: 'status',
     header: 'Status',
     cell: ({ row }) => {
-      const data = row.original;
+      const data = row.original
       return <Badge>{data.status}</Badge>
     }
   },
   {
-    id: "actions",
+    id: 'actions',
     enableHiding: false,
     cell: ({ row }) => <ActionButtons row={row} />
   }

@@ -7,7 +7,6 @@ import { Badge } from '../ui/badge'
 
 import ActionButtons from './action-buttons'
 
-
 export const columns: ColumnDef<RequirementApplication>[] = [
   {
     accessorKey: 'name',
