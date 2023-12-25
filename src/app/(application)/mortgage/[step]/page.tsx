@@ -9,11 +9,12 @@ import BoxStrokesIcon from '@/components/svgs/box-strokes'
 import { useCreateMortgageMutation } from '@/data/hooks/useMortgageClient'
 import { MortgageStatusEnum } from '@/constants/enums'
 import { CreateMortgageInput } from '@/data/clients/mortgageClient'
+import CompleteApplicationForm from '../_form/complete-application-form'
 
 const Page = () => {
   const pathName = usePathname()
 
-  const { mutate: createMortgage } = useCreateMortgageMutation()
+  const { mutate: createMortgage, isPending } = useCreateMortgageMutation()
 
   const storeValues = (step: string, values: any) => {
     localStorage.setItem(step, JSON.stringify(values))
@@ -24,13 +25,13 @@ const Page = () => {
     let result
     if (data !== null) {
       result = JSON.parse(data)
-      delete result.agreeToPrivacyPolicy
     }
 
     let mortgage: CreateMortgageInput = Object.assign({}, result, values)
     mortgage.dateOfBirth = new Date(mortgage.dateOfBirth).toISOString()
     mortgage.intendedProperty = ''
     mortgage.status = MortgageStatusEnum.SUBMITTED
+
     createMortgage({
       ...mortgage
     })
@@ -38,7 +39,8 @@ const Page = () => {
 
   const subComponents: { [key: string]: React.ReactElement } = {
     [PageRoutes.mortgage.PERSONAL_DETAILS]: <PersonalDetailsForm onSave={storeValues} />,
-    [PageRoutes.mortgage.INCOME_DETAILS]: <IncomeDetailsForm handleSubmit={handleSubmit} />
+    [PageRoutes.mortgage.INCOME_DETAILS]: <IncomeDetailsForm isLoading={isPending} handleSubmit={handleSubmit} />,
+    [PageRoutes.mortgage.COMPLETE_APPLICATION]: <CompleteApplicationForm />
   }
 
   return (

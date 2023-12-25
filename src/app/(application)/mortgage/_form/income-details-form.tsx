@@ -39,9 +39,10 @@ const formSchema = z.object({
 
 interface Props {
   handleSubmit: (values: z.infer<typeof formSchema>) => void
+  isLoading: boolean
 }
 
-const IncomeDetailsForm = ({ handleSubmit }: Props) => {
+const IncomeDetailsForm = ({ handleSubmit, isLoading }: Props) => {
   const storedValue = localStorage.getItem(PageRoutes.mortgage.INCOME_DETAILS)
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
@@ -58,15 +59,15 @@ const IncomeDetailsForm = ({ handleSubmit }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <ComboboxElement name="country" label={'Country'} placeholder={'Select your country'} options={countries} />
-        <DatePickerElement name="dateOfBirth" label="Date of Birth" />
+        <DatePickerElement custom name="dateOfBirth" label="Date of Birth" />
 
         <NumberInputElement name="valueOfProperty" label={'Approximate value of the intended property (AED)'} />
         <NumberInputElement name="monthlyIncome" label={'Gross monthly income (AED)'} />
 
         <SelectElement name="loanType" label={'Loan Type'} options={loanTypeOptions} />
 
-        <Button type="submit" className="w-full">
-          Submit
+        <Button type="submit" disabled={isLoading} className="w-full">
+          Get Quote
         </Button>
 
         <BackButton route={PageRoutes.mortgage.PERSONAL_DETAILS} />

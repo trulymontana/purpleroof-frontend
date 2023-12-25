@@ -3,6 +3,7 @@ import { ApiEndpoints } from '@/constants/api'
 import { mortgageClient } from '../clients/mortgageClient'
 import { toast } from '@/components/ui/use-toast'
 import { PageRoutes } from '@/constants/page-routes'
+import { useRouter } from 'next/navigation'
 
 export function useGetMortgages() {
   const { isLoading, data } = useQuery({
@@ -15,6 +16,7 @@ export function useGetMortgages() {
 
 export const useCreateMortgageMutation = () => {
   const queryClient = useQueryClient()
+  const router = useRouter()
   return useMutation({
     mutationFn: mortgageClient.create,
     onSuccess: (data: any) => {
@@ -25,6 +27,7 @@ export const useCreateMortgageMutation = () => {
       localStorage.removeItem(PageRoutes.mortgage.PERSONAL_DETAILS)
       localStorage.removeItem(PageRoutes.mortgage.INCOME_DETAILS)
       queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
+      router.push(PageRoutes.mortgage.COMPLETE_APPLICATION)
     },
     onError: (error: any) => {
       toast({

@@ -19,7 +19,8 @@ export const PageRoutes = {
   },
   mortgage: {
     PERSONAL_DETAILS: '/mortgage/personal-details',
-    INCOME_DETAILS: '/mortgage/income-details'
+    INCOME_DETAILS: '/mortgage/income-details',
+    COMPLETE_APPLICATION: '/mortgage/complete-application'
   },
   advertise: {
     BASIC_DETAILS: '/advertise/basic-details',

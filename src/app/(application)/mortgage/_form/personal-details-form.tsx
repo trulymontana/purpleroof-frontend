@@ -15,6 +15,8 @@ import { incomeProfiles, residentialTypes } from '@/constants/mortgage'
 import { PageRoutes } from '@/constants/page-routes'
 import { useRouter } from 'next/navigation'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
 
 const formSchema = z.object({
   firstName: z.string().min(2, {
@@ -35,9 +37,6 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.'
     }),
-  agreeToPrivacyPolicy: z.boolean().refine((data) => data === true, {
-    message: 'You must agree to the privacy policy.'
-  }),
   residenceType: z.string({
     required_error: 'Please select a residential status.'
   }),
@@ -52,6 +51,8 @@ interface Props {
 const PersonalDetailsForm = ({ onSave }: Props) => {
   const router = useRouter()
 
+  const [isAgreed, setIsAgreed] = useState(false);
+
   const storedValue = localStorage.getItem(PageRoutes.mortgage.PERSONAL_DETAILS)
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
@@ -64,6 +65,7 @@ const PersonalDetailsForm = ({ onSave }: Props) => {
     onSave(PageRoutes.mortgage.PERSONAL_DETAILS, values)
     router.push(PageRoutes.mortgage.INCOME_DETAILS)
   }
+
 
   return (
     <Form {...form}>
@@ -84,13 +86,13 @@ const PersonalDetailsForm = ({ onSave }: Props) => {
 
         <SelectElement name="incomeProfile" label={'Income Profile'} options={incomeProfiles} />
 
-        <SwitchElement
-          name="agreeToPrivacyPolicy"
-          label={'By selecting this, you agree to our privacy policy'}
-          description=""
-        />
+        <div className='flex items-center justify-between'>
+          <Label htmlFor="isAgreed">By selecting this, you agree to our privacy policy</Label>
+          <Switch id='isAgreed' onCheckedChange={() => setIsAgreed(!isAgreed)} />
+        </div>
 
-        <Button type="submit" className="w-full">
+
+        <Button disabled={!isAgreed} type="submit" className="w-full">
           Save and Continue
         </Button>
       </form>
