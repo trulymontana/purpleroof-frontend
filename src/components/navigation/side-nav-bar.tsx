@@ -2,10 +2,9 @@
 
 import { PageRoutes } from '@/constants/page-routes'
 import { User } from '@/constants/types'
-import { Building, FileCode, Files, Home, PersonStandingIcon, User as UserIcon } from 'lucide-react'
+import { Building, FileCode, Files, Home, PersonStandingIcon, Settings, User as UserIcon } from 'lucide-react'
 import Link from 'next/link'
 import UserButton from './user-button'
-
 
 const ICON_SIZE = 20
 
@@ -38,7 +37,7 @@ const navigationSidebarItems = [
   {
     title: 'Profile',
     link: PageRoutes.dashboard.PROFILE,
-    icon: <Files size={ICON_SIZE} />
+    icon: <Settings size={ICON_SIZE} />
   },
 ]
 

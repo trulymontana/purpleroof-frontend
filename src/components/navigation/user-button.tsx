@@ -29,7 +29,7 @@ const UserButton = ({ user }: { user: User }) => {
                     Hello, {user.firstName}
                 </div>
                 <Link href={PageRoutes.dashboard.PROFILE}>
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                    <DropdownMenuItem>Profile</DropdownMenuItem>
                 </Link>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout}>
