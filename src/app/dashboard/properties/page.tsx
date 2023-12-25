@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import PropertiesTable from '@/components/tables/properties-table'
 import React from 'react'

@@ -1,4 +1,4 @@
-import { categoryEnum } from "./enums";
+import { categoryEnum } from './enums'
 
 export const searchCategories = [
   {

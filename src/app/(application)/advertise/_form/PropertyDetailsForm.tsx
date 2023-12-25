@@ -73,11 +73,7 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
           placeholder="Please enter your property value"
           label={'Property Value (AED)'}
         />
-        <NumberInputElement
-          name="size"
-          placeholder="Please enter your property size"
-          label={'Property Size (Sqft)'}
-        />
+        <NumberInputElement name="size" placeholder="Please enter your property size" label={'Property Size (Sqft)'} />
 
         {basic_details && JSON.parse(basic_details).typeOfProperty === PropertyTypeEnum.COMMERCIAL ? (
           <>

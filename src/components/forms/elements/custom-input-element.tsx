@@ -4,32 +4,32 @@ import React from 'react'
 import { useFormContext } from 'react-hook-form'
 
 interface Props {
-    name: string
-    label: string
-    description?: string
-    placeholder?: string
-    type: string
+  name: string
+  label: string
+  description?: string
+  placeholder?: string
+  type: string
 }
 
 const CustomInputElement = ({ name, label, description, placeholder, type }: Props) => {
-    const { control } = useFormContext()
+  const { control } = useFormContext()
 
-    return (
-        <FormField
-            control={control}
-            name={name}
-            render={({ field }) => (
-                <FormItem>
-                    <FormLabel>{label}</FormLabel>
-                    <FormControl>
-                        <Input type={type} placeholder={placeholder} {...field} />
-                    </FormControl>
-                    {description && <FormDescription>{description}</FormDescription>}
-                    <FormMessage />
-                </FormItem>
-            )}
-        />
-    )
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
+          <FormControl>
+            <Input type={type} placeholder={placeholder} {...field} />
+          </FormControl>
+          {description && <FormDescription>{description}</FormDescription>}
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  )
 }
 
 export default CustomInputElement

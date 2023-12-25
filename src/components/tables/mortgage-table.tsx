@@ -49,11 +49,15 @@ export const columns: ColumnDef<MortgageApplication>[] = [
     header: 'Updated At'
   },
   {
-    id: "status",
+    id: 'status',
     header: 'Status',
     cell: ({ row }) => {
-      const data = row.original;
-      return <Link href={`/dashboard/mortgages/${data.id}/transaction-info`}><Badge>{data.status}</Badge></Link>
+      const data = row.original
+      return (
+        <Link href={`/dashboard/mortgages/${data.id}/transaction-info`}>
+          <Badge>{data.status}</Badge>
+        </Link>
+      )
     }
   },
   {
@@ -61,7 +65,7 @@ export const columns: ColumnDef<MortgageApplication>[] = [
     header: 'Country'
   },
   {
-    id: "actions",
+    id: 'actions',
     enableHiding: false,
     cell: ({ row }) => <ActionButtons row={row} />
   }

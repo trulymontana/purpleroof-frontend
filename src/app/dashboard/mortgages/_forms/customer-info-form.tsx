@@ -122,127 +122,133 @@ interface Props {
 }
 
 const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
+  const storedValue = localStorage.getItem('mortgage/customer-info')
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues
+  })
 
-    const storedValue = localStorage.getItem('mortgage/customer-info')
-    const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log({ values })
+    onSave(LocalStorageKeys.CUSTOMER_INFO, values)
+  }
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues
-    })
+  return (
+    <Form {...form}>
+      <h1 className="text-4xl font-bold text-black/80">Customer Info</h1>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <div className="flex w-full items-center gap-2">
+          <div className="w-1/2">
+            <InputElement name="name" label="Name" />
+          </div>
+          <div className="w-1/2">
+            <InputElement name="email" label="Email" />
+          </div>
+        </div>
+        <div className="flex w-full items-center gap-2">
+          <div className="w-1/2">
+            <SelectElement name="marital_status" label="Marital Status" options={maritalStatusOptions} />
+          </div>
+          <div className="w-1/2">
+            <SelectElement name="education" label="Education" options={educationOptions} />
+          </div>
+        </div>
+        <PhoneNumberInputElement name="contact" label="Contact No." />
+        <div className="flex w-full items-center gap-2">
+          <div className="w-1/2">
+            <InputElement name="favorite_city" label="Favorite City" />
+          </div>
+          <div className="w-1/2">
+            <NumberInputElement name="number_of_family_member_in_uae" label="Number of Family Members in UAE" />
+          </div>
+        </div>
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log({ values })
-        onSave(LocalStorageKeys.CUSTOMER_INFO, values)
-    }
+        <div className="flex w-full items-center gap-2">
+          <div className="w-1/2">
+            <NumberInputElement name="years_in_uae" label="Years in UAE" />
+          </div>
+          <div className="w-1/2">
+            <NumberInputElement name="annual_rental_income" label="Annual Rental Income" />
+          </div>
+        </div>
+        <div className="flex w-full items-center gap-2">
+          <div className="w-1/2">
+            <InputElement name="uae_residence_address" label="UAE Residence Address" />
+          </div>
+          <div className="w-1/2">
+            <InputElement name="home_country_address" label="Home Country Address" />
+          </div>
+        </div>
 
-    return (
-        <Form {...form}>
-            <h1 className='text-4xl font-bold text-black/80'>Customer Info</h1>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <div className='flex items-center gap-2 w-full'>
-                    <div className='w-1/2'>
-                        <InputElement name='name' label='Name' />
-                    </div>
-                    <div className='w-1/2'>
-                        <InputElement name='email' label='Email' />
-                    </div>
-                </div>
-                <div className='flex items-center gap-2 w-full'>
-                    <div className='w-1/2'>
-                        <SelectElement name='marital_status' label='Marital Status' options={maritalStatusOptions} />
-                    </div>
-                    <div className='w-1/2'>
-                        <SelectElement name='education' label='Education' options={educationOptions} />
-                    </div>
-                </div>
-                <PhoneNumberInputElement name='contact' label='Contact No.' />
-                <div className='flex items-center gap-2 w-full'>
-                    <div className='w-1/2'>
-                        <InputElement name='favorite_city' label='Favorite City' />
-                    </div>
-                    <div className='w-1/2'>
-                        <NumberInputElement name='number_of_family_member_in_uae' label='Number of Family Members in UAE' />
-                    </div>
-                </div>
+        <h2 className="pt-5 text-xl font-bold ">HOME COUNTRY REFERENCES</h2>
 
-                <div className='flex items-center gap-2 w-full'>
-                    <div className='w-1/2'>
-                        <NumberInputElement name='years_in_uae' label='Years in UAE' />
-                    </div>
-                    <div className='w-1/2'>
-                        <NumberInputElement name='annual_rental_income' label='Annual Rental Income' />
-                    </div>
-                </div>
-                <div className='flex items-center gap-2 w-full'>
-                    <div className='w-1/2'>
-                        <InputElement name='uae_residence_address' label='UAE Residence Address' />
-                    </div>
-                    <div className='w-1/2'>
-                        <InputElement name='home_country_address' label='Home Country Address' />
-                    </div>
-                </div>
+        <div className="flex w-full items-start gap-2">
+          <div className="w-1/2">
+            <InputElement name="home_country_reference_1.name" label="Name" />
+          </div>
+          <div className="w-1/2">
+            <SelectElement
+              name="home_country_reference_1.relationship"
+              label="Relationship"
+              options={relationshipOptions}
+            />
+          </div>
+        </div>
 
+        <PhoneNumberInputElement name="home_country_reference_1.mobile" label="Mobile" />
 
-                <h2 className='font-bold text-xl pt-5 '>HOME COUNTRY REFERENCES</h2>
+        <div className="mx-auto h-[3px] w-1/2 rounded-full bg-black/20" />
 
-                <div className='flex items-start gap-2 w-full'>
-                    <div className='w-1/2'>
-                        <InputElement name='home_country_reference_1.name' label='Name' />
-                    </div>
-                    <div className='w-1/2'>
-                        <SelectElement name='home_country_reference_1.relationship' label='Relationship' options={relationshipOptions} />
-                    </div>
-                </div>
+        <div className="flex w-full items-start gap-2">
+          <div className="w-1/2">
+            <InputElement name="home_country_reference_2.name" label="Name" />
+          </div>
+          <div className="w-1/2">
+            <SelectElement
+              name="home_country_reference_2.relationship"
+              label="Relationship"
+              options={relationshipOptions}
+            />
+          </div>
+        </div>
 
-                <PhoneNumberInputElement name='home_country_reference_1.mobile' label='Mobile' />
+        <PhoneNumberInputElement name="home_country_reference_2.mobile" label="Mobile" />
 
-                <div className='h-[3px] bg-black/20 w-1/2 mx-auto rounded-full' />
+        <h2 className="pt-5 text-xl font-bold">PERSONAL REFERENCES IN UAE</h2>
 
-                <div className='flex items-start gap-2 w-full'>
-                    <div className='w-1/2'>
-                        <InputElement name='home_country_reference_2.name' label='Name' />
-                    </div>
-                    <div className='w-1/2'>
-                        <SelectElement name='home_country_reference_2.relationship' label='Relationship' options={relationshipOptions} />
-                    </div>
-                </div>
+        <div className="flex w-full items-start gap-2">
+          <div className="w-1/2">
+            <InputElement name="uae_reference_1.name" label="Name" />
+          </div>
+          <div className="w-1/2">
+            <SelectElement name="uae_reference_1.relationship" label="Relationship" options={relationshipOptions} />
+          </div>
+        </div>
 
-                <PhoneNumberInputElement name='home_country_reference_2.mobile' label='Mobile' />
+        <PhoneNumberInputElement name="uae_reference_1.mobile" label="Mobile" />
 
-                <h2 className='font-bold text-xl pt-5'>PERSONAL REFERENCES IN UAE</h2>
+        <div className="mx-auto h-[3px] w-1/2 rounded-full bg-black/20" />
 
-                <div className='flex items-start gap-2 w-full'>
-                    <div className='w-1/2'>
-                        <InputElement name='uae_reference_1.name' label='Name' />
-                    </div>
-                    <div className='w-1/2'>
-                        <SelectElement name='uae_reference_1.relationship' label='Relationship' options={relationshipOptions} />
-                    </div>
-                </div>
+        <div className="flex w-full items-start gap-2">
+          <div className="w-1/2">
+            <InputElement name="uae_reference_2.name" label="Name" />
+          </div>
+          <div className="w-1/2">
+            <SelectElement name="uae_reference_2.relationship" label="Relationship" options={relationshipOptions} />
+          </div>
+        </div>
 
-                <PhoneNumberInputElement name='uae_reference_1.mobile' label='Mobile' />
+        <PhoneNumberInputElement name="uae_reference_2.mobile" label="Mobile" />
 
-                <div className='h-[3px] bg-black/20 w-1/2 mx-auto rounded-full' />
-
-                <div className='flex items-start gap-2 w-full'>
-                    <div className='w-1/2'>
-                        <InputElement name='uae_reference_2.name' label='Name' />
-                    </div>
-                    <div className='w-1/2'>
-                        <SelectElement name='uae_reference_2.relationship' label='Relationship' options={relationshipOptions} />
-                    </div>
-                </div>
-
-                <PhoneNumberInputElement name='uae_reference_2.mobile' label='Mobile' />
-
-                <Button type="submit" className='w-full'>Next</Button>
-                <BackButton route={`${PageRoutes.dashboard.MORTGAGES}/${mortgageId}/transaction-info`} />
-            </form>
-        </Form>
-    )
-
+        <Button type="submit" className="w-full">
+          Next
+        </Button>
+        <BackButton route={`${PageRoutes.dashboard.MORTGAGES}/${mortgageId}/transaction-info`} />
+      </form>
+    </Form>
+  )
 }
 
 export default CustomerInfoForm
