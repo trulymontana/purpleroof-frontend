@@ -14,8 +14,8 @@ import { User } from '@/constants/types'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 const roleToPageMapping = {
-  [UserRoleEnum.ADMIN]: [PageRoutes.admin.AGENTS, PageRoutes.admin.USERS, PageRoutes.admin.REQUIREMENTS],
-  [UserRoleEnum.ADVERTISER]: [PageRoutes.dashboard.MORTGAGES, PageRoutes.dashboard.PROPERTIES]
+  [UserRoleEnum.ADMIN]: [PageRoutes.admin.AGENTS, PageRoutes.admin.USERS, PageRoutes.admin.REQUIREMENTS, PageRoutes.dashboard.PROFILE],
+  [UserRoleEnum.ADVERTISER]: [PageRoutes.dashboard.MORTGAGES, PageRoutes.dashboard.PROPERTIES, PageRoutes.dashboard.PROFILE]
 }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

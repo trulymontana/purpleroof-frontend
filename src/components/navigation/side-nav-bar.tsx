@@ -2,7 +2,7 @@
 
 import { PageRoutes } from '@/constants/page-routes'
 import { User } from '@/constants/types'
-import { Building, FileCode, Home, PersonStandingIcon, User as UserIcon } from 'lucide-react'
+import { Building, FileCode, Files, Home, PersonStandingIcon, User as UserIcon } from 'lucide-react'
 import Link from 'next/link'
 import UserButton from './user-button'
 
@@ -33,8 +33,13 @@ const navigationSidebarItems = [
   {
     title: 'Requirements',
     link: PageRoutes.dashboard.admin.REQUIREMENTS,
-    icon: <UserIcon size={ICON_SIZE} />
-  }
+    icon: <Files size={ICON_SIZE} />
+  },
+  {
+    title: 'Profile',
+    link: PageRoutes.dashboard.PROFILE,
+    icon: <Files size={ICON_SIZE} />
+  },
 ]
 
 interface SidebarNavigationLinkProps {
@@ -55,29 +60,24 @@ const SidebarNavigationLink = ({ link, title, icon }: SidebarNavigationLinkProps
 export default function SideNavBar({ user }: { user: User }) {
   return (
     <div className="hidden border-r bg-gray-100/40 dark:bg-gray-800/40 lg:block">
-      <div className='flex flex-col justify-between h-full pb-5'>
-        <div className="flex flex-col gap-2">
-          <div className="flex h-[60px] items-center px-6">
-            <div className="flex items-center justify-between w-full gap-2 font-semibold" >
-              <Link href="#" className='flex items-center w-full gap-2 font-semibold'>
-                <Home />
-                <span>PurpleRoof</span>
-              </Link>
-              <UserButton user={user} />
-            </div>
-          </div>
-          <div className="flex-1 overflow-auto">
-            <nav className="grid items-start px-4 text-sm font-medium">
-              {navigationSidebarItems.map((item) => (
-                <SidebarNavigationLink key={item.title} link={item.link} title={item.title} icon={item.icon} />
-              ))}
-            </nav>
+      <div className='flex flex-col gap-2 justify-between h-full'>
+        <div className="flex h-[60px] items-center px-6">
+          <div className="flex items-center justify-between w-full gap-2 font-semibold" >
+            <Link href="#" className='flex items-center w-full gap-2 font-semibold'>
+              <Home />
+              <span>PurpleRoof</span>
+            </Link>
+            <UserButton user={user} />
           </div>
         </div>
-        <div className='mt-auto p-4'>
-
+        <div className="flex-1 overflow-auto">
+          <nav className="grid items-start px-4 text-sm font-medium">
+            {navigationSidebarItems.map((item) => (
+              <SidebarNavigationLink key={item.title} link={item.link} title={item.title} icon={item.icon} />
+            ))}
+          </nav>
         </div>
       </div>
-    </div>
+    </div >
   )
 }

@@ -1,7 +1,9 @@
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { LocalStorageKeys } from "@/constants/local-storage-keys"
+import { PageRoutes } from "@/constants/page-routes"
 import { User } from "@/constants/types"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 const UserButton = ({ user }: { user: User }) => {
@@ -26,7 +28,9 @@ const UserButton = ({ user }: { user: User }) => {
                 <div className="mb-2 px-4 py-2 text-gray-800 text-sm font-semibold bg-gray-100">
                     Hello, {user.firstName}
                 </div>
-                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <Link href={PageRoutes.dashboard.PROFILE}>
+                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                </Link>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleLogout}>
                     Logout
