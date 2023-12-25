@@ -1,8 +1,18 @@
 import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
+import { LocalStorageKeys } from "@/constants/local-storage-keys"
 import { User } from "@/constants/types"
+import { useRouter } from "next/navigation"
 
 const UserButton = ({ user }: { user: User }) => {
+
+    const router = useRouter();
+
+    const handleLogout = () => {
+        localStorage.removeItem(LocalStorageKeys.USER)
+        router.refresh()
+    }
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -18,7 +28,7 @@ const UserButton = ({ user }: { user: User }) => {
                 </div>
                 <DropdownMenuItem>Settings</DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>
                     Logout
                 </DropdownMenuItem>
             </DropdownMenuContent>
