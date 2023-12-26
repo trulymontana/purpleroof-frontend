@@ -38,6 +38,26 @@ export const useCreateMortgageMutation = () => {
   })
 }
 
+export const useDeleteMortgageMutation = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: mortgageClient.delete,
+    onSuccess: (data: any) => {
+      toast({
+        variant: 'default',
+        title: 'Mortgage deleted successfully'
+      })
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.response.data.message
+      })
+    }
+  })
+}
+
 // export const useUpdateOpinionMutation = () => {
 //   const queryClient = useQueryClient()
 //   const navigate = useNavigate()
@@ -48,21 +68,6 @@ export const useCreateMortgageMutation = () => {
 //     },
 //     onSettled: () => {
 //       queryClient.invalidateQueries(ApiEndpoints.USERS)
-//     },
-//   })
-// }
-
-// export const useDeleteOpinionMutation = () => {
-//   const queryClient = useQueryClient()
-//   const navigate = useNavigate()
-//   return useMutation(opinionClient.delete, {
-//     onSuccess: (data) => {
-//       toast.success('Opinion and its contents are successfully deleted!')
-//       navigate(AppRoutes.OPINION_EDITOR)
-//       queryClient.refetchQueries(ApiEndpoints.OPINION)
-//     },
-//     onSettled: async () => {
-//       queryClient.invalidateQueries(ApiEndpoints.OPINION)
 //     },
 //   })
 // }

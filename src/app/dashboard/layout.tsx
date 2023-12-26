@@ -24,8 +24,10 @@ const roleToPageMapping = {
   [UserRoleEnum.ADVERTISER]: [
     PageRoutes.dashboard.MORTGAGES,
     PageRoutes.dashboard.PROPERTIES,
-    PageRoutes.dashboard.PROFILE
-  ]
+    PageRoutes.dashboard.PROFILE,
+    PageRoutes.admin.REQUIREMENTS
+  ],
+  [UserRoleEnum.AGENT]: [PageRoutes.dashboard.PROPERTIES, PageRoutes.dashboard.PROFILE]
 }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -67,8 +69,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     )
   }
 
-  // @ts-ignore
-  const allowedPages = roleToPageMapping[user.role]
+  const allowedPages = roleToPageMapping[userData.role]
 
   if (!allowedPages?.some((page: string) => pathName.includes(page))) {
     return (
