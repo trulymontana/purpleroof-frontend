@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { User } from '@/constants/types'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
+import { useEffect, useState } from 'react'
 
 const roleToPageMapping = {
   [UserRoleEnum.ADMIN]: [
@@ -30,11 +31,15 @@ const roleToPageMapping = {
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathName = usePathname()
 
-  const storedValue = localStorage.getItem(LocalStorageKeys.USER)
+  const [userData, setUserData] = useState<User | undefined>()
 
-  const user: User = storedValue !== null && JSON.parse(storedValue)
+  useEffect(() => {
+    const storedValue = localStorage.getItem(LocalStorageKeys.USER)
+    const user: User = storedValue !== null && JSON.parse(storedValue)
+    setUserData(user)
+  }, [])
 
-  if (!user) {
+  if (!userData) {
     return (
       <main className="flex h-screen flex-col items-center justify-center space-y-10 bg-gray-100">
         <div className="w-[300px]">
@@ -65,7 +70,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   // @ts-ignore
   const allowedPages = roleToPageMapping[user.role]
 
-  if (!allowedPages?.some((page: string) => pathName.startsWith(page))) {
+  if (!allowedPages?.some((page: string) => pathName.includes(page))) {
     return (
       <div className="flex h-screen flex-col items-center justify-center">
         <Package size={200} />
@@ -79,7 +84,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="grid  min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
-      <SideNavBar user={user} />
+      <SideNavBar user={userData} />
       <div className="flex flex-col">{children}</div>
     </div>
   )
