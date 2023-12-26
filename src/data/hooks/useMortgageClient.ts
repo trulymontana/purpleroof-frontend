@@ -14,6 +14,15 @@ export function useGetMortgages() {
   return { data: data?.data, loading: isLoading }
 }
 
+export function useGetOneMortgage(id: number) {
+  const { isLoading, data } = useQuery({
+    queryKey: [ApiEndpoints.MORTGAGES],
+    queryFn: () => mortgageClient.getById({ id })
+  })
+
+  return { data: data?.data, loading: isLoading }
+}
+
 export const useCreateMortgageMutation = () => {
   const queryClient = useQueryClient()
   const router = useRouter()

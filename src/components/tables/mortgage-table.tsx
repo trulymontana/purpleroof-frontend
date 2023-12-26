@@ -12,6 +12,7 @@ import { Eye, FileEdit } from 'lucide-react'
 import UpdateMortgageStatusForm from '@/app/dashboard/mortgages/_forms/update-status-form'
 import ConfirmActionDialog from '../dialogs/confirm-action-dialog'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 export default function MortgagesTable() {
   const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
@@ -81,11 +82,16 @@ export default function MortgagesTable() {
         const data = row.original
         if (data.status === MortgageStatusEnum.SUBMITTED) {
           return (
-            <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(data.id)}>
+            <Link href={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(data.id, LocalStorageKeys.MORTGAGE_TRANSACTION_INFO)}>
               <Badge>Complete Your Application</Badge>
             </Link>
           )
         }
+        return (
+          <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(data.id)}>
+            <Badge>View Your Application</Badge>
+          </Link>
+        )
       }
     },
     {
