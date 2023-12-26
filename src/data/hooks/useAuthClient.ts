@@ -9,9 +9,10 @@ import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 export function useSignUp() {
   const router = useRouter()
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
   return useMutation({
     mutationFn: authClient.signUp,
+
     onSuccess: (response: any) => {
       const { statusCode, data } = response
       if (statusCode === 200) {
@@ -30,13 +31,12 @@ export function useSignUp() {
 
         router.push(PageRoutes.dashboard.MORTGAGES)
       }
-
-      // queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
     },
     onError: (error: any) => {
       toast({
         variant: 'destructive',
-        title: error.message
+        title: error.response.data.message,
+        description: error.response.data.details
       })
     }
   })

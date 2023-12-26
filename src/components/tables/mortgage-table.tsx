@@ -7,6 +7,7 @@ import ActionButtons from './action-buttons'
 import Link from 'next/link'
 import { Badge } from '../ui/badge'
 import { MortgageStatusEnum } from '@/constants/enums'
+import { PageRoutes } from '@/constants/page-routes'
 
 export const columns: ColumnDef<MortgageApplication>[] = [
   {
@@ -35,9 +36,7 @@ export const columns: ColumnDef<MortgageApplication>[] = [
     cell: ({ row }) => {
       const data = row.original
       const dob = new Date(data.dateOfBirth).toLocaleDateString()
-      return (
-        <div>{dob}</div>
-      )
+      return <div>{dob}</div>
     }
   },
   // {
@@ -57,10 +56,10 @@ export const columns: ColumnDef<MortgageApplication>[] = [
   //   header: 'Updated At'
   // },
   {
-    id: "status",
+    id: 'status',
     header: 'Status',
     cell: ({ row }) => {
-      const data = row.original;
+      const data = row.original
       return <Badge variant="outline">{data.status}</Badge>
     }
   },
@@ -72,16 +71,18 @@ export const columns: ColumnDef<MortgageApplication>[] = [
     id: 'action',
     header: 'Action',
     cell: ({ row }) => {
-      const data = row.original;
+      const data = row.original
       if (data.status === MortgageStatusEnum.SUBMITTED) {
         return (
-          <Link href={`/dashboard/mortgages/${data.id}/transaction-info`}><Badge>Complete Your Application</Badge></Link>
+          <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(data.id)}>
+            <Badge>Complete Your Application</Badge>
+          </Link>
         )
       }
     }
   },
   {
-    id: "actions",
+    id: 'actions',
     enableHiding: false,
     cell: ({ row }) => <ActionButtons row={row} />
   }

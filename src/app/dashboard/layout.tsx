@@ -60,7 +60,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div className="flex items-center gap-2">
           <Badge variant="secondary">New User?</Badge>
           <Button className="border-black text-primary hover:bg-primary hover:text-white" variant="outline">
-            <Link href="/signup">Sign Up</Link>
+            <Link href={PageRoutes.SIGNUP}>Sign Up</Link>
           </Button>
         </div>
       </main>

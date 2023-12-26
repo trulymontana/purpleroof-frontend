@@ -7,6 +7,7 @@ export const PageRoutes = {
       REQUIREMENTS_ADD: '/dashboard/admin/requirements/add'
     },
     MORTGAGES: '/dashboard/mortgages',
+    MORTGAGE_DETAILS: (mortgageId: number) => `/dashboard/mortgages/${mortgageId}/transaction-info`,
     PROPERTIES: '/dashboard/properties',
     PROFILE: '/dashboard/profile'
   },
