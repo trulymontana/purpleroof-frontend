@@ -6,6 +6,7 @@ import { useGetMortgages } from '@/data/hooks/useMortgageClient'
 import ActionButtons from './action-buttons'
 import Link from 'next/link'
 import { Badge } from '../ui/badge'
+import { MortgageStatusEnum } from '@/constants/enums'
 
 export const columns: ColumnDef<MortgageApplication>[] = [
   {
@@ -29,36 +30,55 @@ export const columns: ColumnDef<MortgageApplication>[] = [
     header: 'Phone Number'
   },
   {
-    accessorKey: 'dateOfBirth',
-    header: 'Date of Birth'
+    id: 'dateOfBirth',
+    header: 'Date of Birth',
+    cell: ({ row }) => {
+      const data = row.original
+      const dob = new Date(data.dateOfBirth).toLocaleDateString()
+      return (
+        <div>{dob}</div>
+      )
+    }
   },
-  {
-    accessorKey: 'intendedProperty',
-    header: 'Intended Property'
-  },
+  // {
+  //   accessorKey: 'intendedProperty',
+  //   header: 'Intended Property'
+  // },
   {
     accessorKey: 'monthlyIncome',
     header: 'Monthly Income'
   },
-  {
-    accessorKey: 'createdAt',
-    header: 'Created At'
-  },
-  {
-    accessorKey: 'updatedAt',
-    header: 'Updated At'
-  },
+  // {
+  //   accessorKey: 'createdAt',
+  //   header: 'Created At'
+  // },
+  // {
+  //   accessorKey: 'updatedAt',
+  //   header: 'Updated At'
+  // },
   {
     id: "status",
     header: 'Status',
     cell: ({ row }) => {
       const data = row.original;
-      return <Link href={`/dashboard/mortgages/${data.id}/transaction-info`}><Badge>{data.status}</Badge></Link>
+      return <Badge variant="outline">{data.status}</Badge>
     }
   },
   {
     accessorKey: 'country',
     header: 'Country'
+  },
+  {
+    id: 'action',
+    header: 'Action',
+    cell: ({ row }) => {
+      const data = row.original;
+      if (data.status === MortgageStatusEnum.SUBMITTED) {
+        return (
+          <Link href={`/dashboard/mortgages/${data.id}/transaction-info`}><Badge>Complete Your Application</Badge></Link>
+        )
+      }
+    }
   },
   {
     id: "actions",
