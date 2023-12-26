@@ -35,8 +35,9 @@ export const PageRoutes = {
     CALL_PREFERENCE: '/advertise/call-preference'
   },
   mortgage_transaction: {
-    TRANSACTION_INFO: 'transaction-info',
-    CUSTOMER_INFO: 'customer-info'
+    TRANSACTION_INFO: 'mortgage-transaction-info',
+    DOCUMENTS: 'mortgage-documents',
+    CUSTOMER_INFO: 'mortgage-customer-info'
   },
   HOME: '/',
   ABOUT: '/about',

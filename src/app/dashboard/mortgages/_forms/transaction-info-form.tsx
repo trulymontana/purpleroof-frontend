@@ -14,7 +14,6 @@ import { completionStatus, emirate, loanTypeOptions, propertyType } from '@/cons
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
-import { useGetOneMortgage } from '@/data/hooks/useMortgageClient'
 
 const formSchema = z.object({
 
@@ -43,10 +42,6 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
 
     const router = useRouter()
 
-    const { loading, data } = useGetOneMortgage(mortgageId)
-
-    console.log({ data })
-
     const storedValue = localStorage.getItem(LocalStorageKeys.MORTGAGE_TRANSACTION_INFO)
     // @ts-ignore
     const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : data?.mortgage.loanType
@@ -58,7 +53,7 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         onSave(LocalStorageKeys.MORTGAGE_TRANSACTION_INFO, values)
-        router.push(PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_CUSTOMER_INFO))
+        router.push(PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_DOCUMENTS))
     }
 
     return (

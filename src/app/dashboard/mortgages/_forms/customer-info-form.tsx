@@ -117,7 +117,7 @@ const formSchema = z.object({
 })
 
 interface Props {
-  mortgageId: string
+  mortgageId: number
   onSave: (step: string, values: any) => void
 }
 

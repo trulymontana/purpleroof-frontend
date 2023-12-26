@@ -2,24 +2,29 @@
 
 import CustomerInfoForm from '@/app/dashboard/mortgages/_forms/customer-info-form'
 import TransactionInfoForm from '@/app/dashboard/mortgages/_forms/transaction-info-form'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { PageRoutes } from '@/constants/page-routes'
+import UploadDocumentsForm from '../../_forms/upload-documents-form'
+import { useGetOneMortgage } from '@/data/hooks/useMortgageClient'
 
 interface Props {
   params: {
-    mortgageId: string
+    mortgageId: number
     formStep: string
   }
 }
 
 const Page = ({ params: { mortgageId, formStep } }: Props) => {
+
+  const { data } = useGetOneMortgage(mortgageId)
+
   const storeValues = (step: string, values: any) => {
     localStorage.setItem(step, JSON.stringify(values))
   }
 
-
   const subComponents: { [key: string]: React.ReactElement } = {
     [PageRoutes.mortgage_transaction.TRANSACTION_INFO]: <TransactionInfoForm mortgageId={mortgageId} onSave={storeValues} />,
-    // documents form
+    [PageRoutes.mortgage_transaction.DOCUMENTS]: <UploadDocumentsForm />,
     [PageRoutes.mortgage_transaction.CUSTOMER_INFO]: <CustomerInfoForm mortgageId={mortgageId} onSave={storeValues} />,
   }
 
