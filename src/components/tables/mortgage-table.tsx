@@ -97,7 +97,7 @@ export default function MortgagesTable() {
             <Eye size={17} color="black" />
           </Link>
           <ConfirmActionDialog
-            title="Edit property"
+            title="Edit Mortgage"
             anchor={
               <Button variant="ghost">
                 <FileEdit size={17} color="black" />

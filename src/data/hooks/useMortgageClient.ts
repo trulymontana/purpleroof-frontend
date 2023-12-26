@@ -58,6 +58,26 @@ export const useDeleteMortgageMutation = () => {
   })
 }
 
+export const useUpdateMortgageMutation = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: mortgageClient.update,
+    onSuccess: (data: any) => {
+      toast({
+        variant: 'default',
+        title: 'Mortgage updated successfully'
+      })
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.message
+      })
+    }
+  })
+}
+
 // export const useUpdateOpinionMutation = () => {
 //   const queryClient = useQueryClient()
 //   const navigate = useNavigate()

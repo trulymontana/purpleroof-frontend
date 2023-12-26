@@ -1,8 +1,6 @@
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { DialogClose } from '@radix-ui/react-dialog'
 
 import React from 'react'
-import { Button } from '../ui/button'
 
 interface Props {
   title: string
@@ -18,7 +16,6 @@ const ConfirmActionDialog = ({ title, anchor, content }: Props) => {
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
-
         {content}
       </DialogContent>
     </Dialog>

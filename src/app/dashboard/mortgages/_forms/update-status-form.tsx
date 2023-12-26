@@ -1,35 +1,35 @@
-import { usePathname } from 'next/navigation'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { propertySubmissionStatuses } from '@/constants/advertise'
-import { useUpdatePropertyMutation } from '@/data/hooks/usePropertiesClient'
-import { MortgageApplication, Property } from '@/constants/types'
+import { MortgageApplication } from '@/constants/types'
 import { Form } from '@/components/ui/form'
 import SelectElement from '@/components/forms/elements/select-element'
 import { Button } from '@/components/ui/button'
+import { useUpdateMortgageMutation } from '@/data/hooks/useMortgageClient'
+import { MortgageStatusEnum } from '@/constants/enums'
+import { mortgageSubmissionStatuses } from '@/constants/mortgage'
 
 interface Props {
   data: MortgageApplication
 }
 
 const formSchema = z.object({
-  status: z.string()
+  status: z.nativeEnum(MortgageStatusEnum)
 })
 
-type TPropertyStatus = z.infer<typeof formSchema>
+type TMortgageStatus = z.infer<typeof formSchema>
 const UpdateMortgageStatusForm = ({ data }: Props) => {
-  const { mutate: updateProperty } = useUpdatePropertyMutation()
+  const { mutate: updateMortgage } = useUpdateMortgageMutation()
 
-  const form = useForm<TPropertyStatus>({
+  const form = useForm<TMortgageStatus>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       status: data?.status
     }
   })
 
-  function onSubmit(values: TPropertyStatus) {
-    updateProperty({
+  function onSubmit(values: TMortgageStatus) {
+    updateMortgage({
       id: data?.id,
       ...values
     })
@@ -42,7 +42,7 @@ const UpdateMortgageStatusForm = ({ data }: Props) => {
           name="status"
           placeholder="Please select a status"
           label="Status"
-          options={propertySubmissionStatuses}
+          options={mortgageSubmissionStatuses}
         />
         <Button type="submit">Save changes</Button>
       </form>

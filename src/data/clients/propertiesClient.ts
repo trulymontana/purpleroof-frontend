@@ -2,7 +2,7 @@ import { QueryOptions, TOption } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
-import { EmirateEnum, OccupencyStatusEnum } from '@/constants/enums'
+import { EmirateEnum, OccupencyStatusEnum, PropertySubmissionStatusEnum } from '@/constants/enums'
 
 export interface CreatePropertyInput {
   name: string
@@ -67,8 +67,8 @@ export interface Property extends CreatePropertyInput {
   createdAt: Date
   updatedAt: Date
   emirateId: number
-  status: string
   id: number
+  status: PropertySubmissionStatusEnum
 }
 
 export const propertiesClient = {

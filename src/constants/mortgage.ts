@@ -6,10 +6,58 @@ import {
   IncomeProfileEnum,
   LoanTypeEnum,
   MaritalStatusEnum,
+  MortgageStatusEnum,
   PropertyTypeEnum,
   RelationshipEnum,
   ResidenceTypeEnum
 } from './enums'
+
+export const mortgageSubmissionStatuses = [
+  {
+    label: 'Submitted',
+    value: MortgageStatusEnum.SUBMITTED
+  },
+  {
+    label: 'Under Documentation Stage',
+    value: MortgageStatusEnum.UNDER_DOCUMENTATION_STAGE
+  },
+  {
+    label: 'Submitted to Bank',
+    value: MortgageStatusEnum.SUBMITTED_TO_BANK
+  },
+  {
+    label: 'Approved',
+    value: MortgageStatusEnum.APPROVED
+  },
+  {
+    label: 'Valuation Stage',
+    value: MortgageStatusEnum.VALUATION_STAGE
+  },
+  {
+    label: 'Final Offer Letter',
+    value: MortgageStatusEnum.FINAL_OFFER_LETTER
+  },
+  {
+    label: 'Case Disbursed',
+    value: MortgageStatusEnum.CASE_DISBURSED
+  },
+  {
+    label: 'Property Transfer',
+    value: MortgageStatusEnum.PROPERTY_TRANSFER
+  },
+  {
+    label: 'Transaction Completed',
+    value: MortgageStatusEnum.TRANSACTION_COMPLETED
+  },
+  {
+    label: 'Case Closed',
+    value: MortgageStatusEnum.CASE_CLOSED
+  },
+  {
+    label: 'Case Declined',
+    value: MortgageStatusEnum.CASE_DECLINED
+  }
+]
 
 export const residentialTypes = [
   {

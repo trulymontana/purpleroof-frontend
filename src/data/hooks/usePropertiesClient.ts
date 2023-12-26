@@ -1,9 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { userClient } from '../clients/usersClient'
 import { ApiEndpoints } from '@/constants/api'
 import { propertiesClient } from '../clients/propertiesClient'
 import { toast } from '@/components/ui/use-toast'
-import { GetByIdParams } from '@/lib/crud-factory'
 
 export function useGetProperties() {
   const { isLoading, data } = useQuery({
@@ -40,6 +38,26 @@ export const useCreatePropertyMutation = () => {
       toast({
         variant: 'destructive',
         title: error.message
+      })
+    }
+  })
+}
+
+export const useDeletePropertyMutation = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: propertiesClient.delete,
+    onSuccess: (data: any) => {
+      toast({
+        variant: 'default',
+        title: 'Property deleted successfully'
+      })
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.response.data.message
       })
     }
   })

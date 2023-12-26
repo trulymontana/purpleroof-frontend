@@ -9,6 +9,7 @@ export const PageRoutes = {
     MORTGAGES: '/dashboard/mortgages',
     MORTGAGE_DETAILS: (mortgageId: number) => `/dashboard/mortgages/${mortgageId}/transaction-info`,
     PROPERTIES: '/dashboard/properties',
+    PROPERTY_DETAILS: (propertyId: number) => `/dashboard/properties/${propertyId}`,
     PROFILE: '/dashboard/profile'
   },
   admin: {

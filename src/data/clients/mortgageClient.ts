@@ -10,7 +10,7 @@ export interface CreateMortgageInput {
   email: string
   phoneNumber: string
   dateOfBirth: string
-  intendedProperty?: string
+  intendedProperty: string
   monthlyIncome: number
   dialCode: string
   country: string
@@ -20,6 +20,18 @@ export interface CreateMortgageInput {
   loanType: LoanTypeEnum
 }
 
+export interface Mortgage extends CreateMortgageInput {
+  status: MortgageStatusEnum
+  id: number
+  residentialTypeId: number
+  incomeProfileId: number
+  loanTypeId: number
+  createdAt: string
+  updatedAt: string
+  userId: number
+  actions: string
+}
+
 export const mortgageClient = {
-  ...crudFactory<MortgageApplication, QueryOptions, CreateMortgageInput>(ApiEndpoints.MORTGAGES)
+  ...crudFactory<Mortgage, QueryOptions, CreateMortgageInput>(ApiEndpoints.MORTGAGES)
 }
