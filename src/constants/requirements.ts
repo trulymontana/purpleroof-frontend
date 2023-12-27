@@ -1,30 +1,32 @@
+import { IncomeProfileEnum, ResidenceTypeEnum } from './enums'
+
 export const incomeProfiles = [
   {
     label: 'Rental Income',
-    value: 'RENTAL_INCOME'
+    value: IncomeProfileEnum.RENTAL_INCOME
   },
   {
     label: 'Salaried',
-    value: 'SALARIED'
+    value: IncomeProfileEnum.SALARIED
   },
   {
     label: 'Self Employed',
-    value: 'SELF_EMPLOYED'
+    value: IncomeProfileEnum.SELF_EMPLOYED
   }
 ]
 
 export const residenceTypes = [
   {
     label: 'UAE National',
-    value: 'UAE_NATIONAL'
+    value: ResidenceTypeEnum.UAE_NATIONAL
   },
   {
     label: 'UAE Resident',
-    value: 'UAE_RESIDENT'
+    value: ResidenceTypeEnum.UAE_RESIDENT
   },
   {
     label: 'Non-UAE Resident',
-    value: 'NON_UAE_RESIDENT'
+    value: ResidenceTypeEnum.NON_UAE_RESIDENT
   }
 ]
 

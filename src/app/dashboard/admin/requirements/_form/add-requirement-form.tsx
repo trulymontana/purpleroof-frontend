@@ -15,6 +15,7 @@ import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 import { TOption } from '@/constants/types'
 import { useCreateRequirementMutation } from '@/data/hooks/useRequirementsClient'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
+import { IncomeProfileEnum, ResidenceTypeEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   name: z.string({
@@ -38,10 +39,10 @@ const formSchema = z.object({
   valuationFee: z.number({
     required_error: 'Please enter Valuation Fee!'
   }),
-  incomeProfile: z.string({
-    required_error: 'Please select a Income Profile!'
+  incomeProfile: z.nativeEnum(IncomeProfileEnum, {
+    required_error: "Please select a Income Profile"
   }),
-  residenceType: z.string({
+  residenceType: z.nativeEnum(ResidenceTypeEnum, {
     required_error: 'Please select a Residence Type!'
   })
 })
@@ -54,10 +55,6 @@ const AddRequirementsForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema)
   })
-
-  const handleChange = (value: string) => {
-    form.setValue('incomeProfile', value)
-  }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     let formattedDocuments = selectedDocuments.map((document) => ({
@@ -114,7 +111,6 @@ const AddRequirementsForm = () => {
           label={'Income Profile'}
           className="items-center gap-10"
           options={incomeProfiles}
-          handleChange={handleChange}
         />
 
         <RadioGroupElement
@@ -122,7 +118,6 @@ const AddRequirementsForm = () => {
           label={'Residence Type'}
           className="items-center gap-10"
           options={residenceTypes}
-          handleChange={handleChange}
         />
 
         <MultiSelectCheckbox

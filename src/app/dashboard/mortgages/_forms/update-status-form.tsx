@@ -14,7 +14,9 @@ interface Props {
 }
 
 const formSchema = z.object({
-  status: z.nativeEnum(MortgageStatusEnum)
+  status: z.nativeEnum(MortgageStatusEnum, {
+    required_error: "Please select a status!"
+  })
 })
 
 type TMortgageStatus = z.infer<typeof formSchema>
