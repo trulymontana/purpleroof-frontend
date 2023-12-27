@@ -15,6 +15,7 @@ import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   name: z.string({
@@ -33,28 +34,28 @@ const formSchema = z.object({
   education: z.string({
     required_error: 'Please select your education qualification'
   }),
-  marital_status: z.string({
+  maritalStatus: z.string({
     required_error: 'Please select your marital status'
   }),
-  favorite_city: z.string({
+  favoriteCity: z.string({
     required_error: 'Please enter your favorite city'
   }),
-  number_of_family_member_in_uae: z.string({
+  numberOfFamilyMemberInUae: z.string({
     required_error: 'Please enter your number of family member in UAE'
   }),
-  years_in_uae: z.string({
+  yearsInUae: z.string({
     required_error: 'Please enter your number years in UAE'
   }),
-  annual_rental_income: z.string({
+  annualRentalIncome: z.string({
     required_error: 'Please enter your annual rental income'
   }),
-  uae_residence_address: z.string({
+  uaeResidenceAddress: z.string({
     required_error: 'Please enter your UAE residence address'
   }),
-  home_country_address: z.string({
+  homeCountryAddress: z.string({
     required_error: 'Please enter your home country address'
   }),
-  home_country_reference_1: z.object({
+  homeCountryReference1: z.object({
     name: z.string({
       required_error: 'Please enter name'
     }),
@@ -69,7 +70,7 @@ const formSchema = z.object({
         message: 'Phone number must be at least 10 characters.'
       })
   }),
-  home_country_reference_2: z.object({
+  homeCountryReference2: z.object({
     name: z.string({
       required_error: 'Please enter name'
     }),
@@ -84,7 +85,7 @@ const formSchema = z.object({
         message: 'Phone number must be at least 10 characters.'
       })
   }),
-  uae_reference_1: z.object({
+  uaeReference1: z.object({
     name: z.string({
       required_error: 'Please enter name'
     }),
@@ -99,7 +100,7 @@ const formSchema = z.object({
         message: 'Phone number must be at least 10 characters.'
       })
   }),
-  uae_reference_2: z.object({
+  uaeReference2: z.object({
     name: z.string({
       required_error: 'Please enter name'
     }),
@@ -123,6 +124,7 @@ interface Props {
 
 const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
 
+  const router = useRouter();
 
   const storedValue = localStorage.getItem(LocalStorageKeys.MORTGAGE_CUSTOMER_INFO)
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
@@ -134,6 +136,7 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(LocalStorageKeys.MORTGAGE_CUSTOMER_INFO, values)
+    router.push(PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_DOCUMENTS))
   }
 
   return (
@@ -150,7 +153,7 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
         </div>
         <div className='flex items-center gap-2 w-full'>
           <div className='w-1/2'>
-            <SelectElement name='marital_status' label='Marital Status' options={maritalStatusOptions} />
+            <SelectElement name='maritalStatus' label='Marital Status' options={maritalStatusOptions} />
           </div>
           <div className='w-1/2'>
             <SelectElement name='education' label='Education' options={educationOptions} />
@@ -159,27 +162,27 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
         <PhoneNumberInputElement name='contact' label='Contact No.' />
         <div className='flex items-center gap-2 w-full'>
           <div className='w-1/2'>
-            <InputElement name='favorite_city' label='Favorite City' />
+            <InputElement name='favoriteCity' label='Favorite City' />
           </div>
           <div className='w-1/2'>
-            <NumberInputElement name='number_of_family_member_in_uae' label='Number of Family Members in UAE' />
+            <NumberInputElement name='numberOfFamilyMemberInUae' label='Number of Family Members in UAE' />
           </div>
         </div>
 
         <div className='flex items-center gap-2 w-full'>
           <div className='w-1/2'>
-            <NumberInputElement name='years_in_uae' label='Years in UAE' />
+            <NumberInputElement name='yearsInUae' label='Years in UAE' />
           </div>
           <div className='w-1/2'>
-            <NumberInputElement name='annual_rental_income' label='Annual Rental Income' />
+            <NumberInputElement name='annualRentalIncome' label='Annual Rental Income' />
           </div>
         </div>
         <div className='flex items-center gap-2 w-full'>
           <div className='w-1/2'>
-            <InputElement name='uae_residence_address' label='UAE Residence Address' />
+            <InputElement name='uaeResidenceAddress' label='UAE Residence Address' />
           </div>
           <div className='w-1/2'>
-            <InputElement name='home_country_address' label='Home Country Address' />
+            <InputElement name='homeCountryAddress' label='Home Country Address' />
           </div>
         </div>
 
@@ -188,56 +191,56 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
 
         <div className='flex items-start gap-2 w-full'>
           <div className='w-1/2'>
-            <InputElement name='home_country_reference_1.name' label='Name' />
+            <InputElement name='homeCountryReference1.name' label='Name' />
           </div>
           <div className='w-1/2'>
-            <SelectElement name='home_country_reference_1.relationship' label='Relationship' options={relationshipOptions} />
+            <SelectElement name='homeCountryReference1.relationship' label='Relationship' options={relationshipOptions} />
           </div>
         </div>
 
-        <PhoneNumberInputElement name='home_country_reference_1.mobile' label='Mobile' />
+        <PhoneNumberInputElement name='homeCountryReference1.mobile' label='Mobile' />
 
         <div className='h-[3px] bg-black/20 w-1/2 mx-auto rounded-full' />
 
         <div className='flex items-start gap-2 w-full'>
           <div className='w-1/2'>
-            <InputElement name='home_country_reference_2.name' label='Name' />
+            <InputElement name='homeCountryReference2.name' label='Name' />
           </div>
           <div className='w-1/2'>
-            <SelectElement name='home_country_reference_2.relationship' label='Relationship' options={relationshipOptions} />
+            <SelectElement name='homeCountryReference2.relationship' label='Relationship' options={relationshipOptions} />
           </div>
         </div>
 
-        <PhoneNumberInputElement name='home_country_reference_2.mobile' label='Mobile' />
+        <PhoneNumberInputElement name='homeCountryReference2.mobile' label='Mobile' />
 
         <h2 className='font-bold text-xl pt-5'>PERSONAL REFERENCES IN UAE</h2>
 
         <div className='flex items-start gap-2 w-full'>
           <div className='w-1/2'>
-            <InputElement name='uae_reference_1.name' label='Name' />
+            <InputElement name='uaeReference1.name' label='Name' />
           </div>
           <div className='w-1/2'>
-            <SelectElement name='uae_reference_1.relationship' label='Relationship' options={relationshipOptions} />
+            <SelectElement name='uaeReference1.relationship' label='Relationship' options={relationshipOptions} />
           </div>
         </div>
 
-        <PhoneNumberInputElement name='uae_reference_1.mobile' label='Mobile' />
+        <PhoneNumberInputElement name='uaeReference1.mobile' label='Mobile' />
 
         <div className='h-[3px] bg-black/20 w-1/2 mx-auto rounded-full' />
 
         <div className='flex items-start gap-2 w-full'>
           <div className='w-1/2'>
-            <InputElement name='uae_reference_2.name' label='Name' />
+            <InputElement name='uaeReference2.name' label='Name' />
           </div>
           <div className='w-1/2'>
-            <SelectElement name='uae_reference_2.relationship' label='Relationship' options={relationshipOptions} />
+            <SelectElement name='uaeReference2.relationship' label='Relationship' options={relationshipOptions} />
           </div>
         </div>
 
-        <PhoneNumberInputElement name='uae_reference_2.mobile' label='Mobile' />
+        <PhoneNumberInputElement name='uaeReference2.mobile' label='Mobile' />
 
         <Button type="submit" className='w-full'>Next</Button>
-        <BackButton route={`${PageRoutes.dashboard.MORTGAGES}/${mortgageId}/transaction-info`} />
+        <BackButton route={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_TRANSACTION_INFO)} />
       </form>
     </Form>
   )

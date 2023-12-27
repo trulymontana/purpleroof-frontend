@@ -21,11 +21,15 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
     localStorage.setItem(step, JSON.stringify(values))
   }
 
+  const handleSubmit = (values: any) => {
+    console.log({ values })
+  }
+
   const subComponents: { [key: string]: React.ReactElement } = {
     [PageRoutes.mortgage_transaction.TRANSACTION_INFO]: <TransactionInfoForm mortgageId={mortgageId} onSave={storeValues} />,
-    // @ts-ignore
-    [PageRoutes.mortgage_transaction.DOCUMENTS]: <UploadDocumentsForm requiredDocuments={data?.requirement?.requiredDocuments} onSave={storeValues} />,
     [PageRoutes.mortgage_transaction.CUSTOMER_INFO]: <CustomerInfoForm mortgageId={mortgageId} onSave={storeValues} />,
+    // @ts-ignore
+    [PageRoutes.mortgage_transaction.DOCUMENTS]: <UploadDocumentsForm mortgageId={mortgageId} requiredDocuments={data?.requirement?.requiredDocuments} handleSubmit={handleSubmit} />,
   }
 
   return (

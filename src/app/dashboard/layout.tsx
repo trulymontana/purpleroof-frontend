@@ -13,6 +13,7 @@ import { Badge } from '@/components/ui/badge'
 import { User } from '@/constants/types'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { useEffect, useState } from 'react'
+import Loader from '@/components/Loader'
 
 const roleToPageMapping = {
   [UserRoleEnum.ADMIN]: [
@@ -34,12 +35,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathName = usePathname()
 
   const [userData, setUserData] = useState<User | undefined>()
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const storedValue = localStorage.getItem(LocalStorageKeys.USER)
     const user: User = storedValue !== null && JSON.parse(storedValue)
     setUserData(user)
+    setIsLoaded(true)
   }, [])
+
+  if (!isLoaded) {
+    return <Loader />
+  }
 
   if (!userData) {
     return (
@@ -84,7 +91,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="grid  min-h-screen w-full overflow-hidden lg:grid-cols-[280px_1fr]">
+    <div className="grid  min-h-screen w-full lg:grid-cols-[280px_1fr]">
       <SideNavBar user={userData} />
       <div className="flex flex-col">{children}</div>
     </div>

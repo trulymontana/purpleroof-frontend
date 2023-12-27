@@ -47,7 +47,6 @@ const CallPreferenceForm = ({ handleSubmit }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <RadioGroupElement
-          handleChange={handlePreferenceChange}
           name="callPreference"
           label={'How would you prefer to handle inquiries from potential leads interested in this advertisement?'}
           className="flex-col items-start gap-4"

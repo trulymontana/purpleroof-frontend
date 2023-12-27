@@ -12,6 +12,7 @@ import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
 import { useEffect } from 'react'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 const formSchema = z.object({
   documents: z.array(
@@ -27,10 +28,11 @@ const formSchema = z.object({
 })
 
 interface Props {
-  onSave: (step: string, values: any) => void
+  handleSubmit: (values: any) => void
   requiredDocuments?: any
+  mortgageId: number
 }
-const UploadDocumentsForm = ({ onSave, requiredDocuments }: Props) => {
+const UploadDocumentsForm = ({ handleSubmit, requiredDocuments, mortgageId }: Props) => {
 
   const router = useRouter()
 
@@ -48,9 +50,7 @@ const UploadDocumentsForm = ({ onSave, requiredDocuments }: Props) => {
   }, [requiredDocuments])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // onSave(PageRoutes.advertise.UPLOAD_PHOTOS, values)
-    // router.push(PageRoutes.advertise.CALL_PREFERENCE)
-    console.log({ values })
+    handleSubmit(values)
   }
 
   return (
@@ -70,7 +70,7 @@ const UploadDocumentsForm = ({ onSave, requiredDocuments }: Props) => {
             <Button type="submit" className="w-full">
               Save and Continue
             </Button>
-            <BackButton route={PageRoutes.advertise.PROJECT_STATUS} />
+            <BackButton route={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_CUSTOMER_INFO)} />
           </>
         )}
 

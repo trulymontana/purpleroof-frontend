@@ -19,7 +19,6 @@ import { PageRoutes } from '@/constants/page-routes'
 import { useCreatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 import { CreatePropertyInput } from '@/data/clients/propertiesClient'
 import { nullCheckAndMerge } from '@/lib/utils'
-import { TOption } from '@/constants/types'
 import { categoryEnum } from '@/constants/enums'
 
 const Page = () => {

@@ -53,7 +53,7 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         onSave(LocalStorageKeys.MORTGAGE_TRANSACTION_INFO, values)
-        router.push(PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_DOCUMENTS))
+        router.push(PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_CUSTOMER_INFO))
     }
 
     return (
