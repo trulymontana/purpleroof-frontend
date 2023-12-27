@@ -41,8 +41,9 @@ const Page = () => {
             <Card className="max-w-md w-full mx-auto  bg-opacity-75">
                 <CardHeader>
                     <h1 className="text-4xl font-bold text-center">Sign In</h1>
+                    <p className="text-center text-md font-light">Welcome Back!</p>
                 </CardHeader>
-                <CardContent className="p-8">
+                <CardContent className="">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 p-4">
                             <div className="space-y-2">

@@ -44,12 +44,7 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
 
   useEffect(() => {
     // @ts-ignore
-    form.setValue('documents', [
-      { type: DocumentTypeEnum.PASSPORT_COPY, url: '' },
-      { type: DocumentTypeEnum.VISA_COPY, url: '' },
-      { type: DocumentTypeEnum.EMIRATES_ID, url: '' },
-      { type: DocumentTypeEnum.TITLE_DEED_COPY, url: '' },
-      { type: DocumentTypeEnum.OWNERSHIP_PROOF_MOBILE_NUMBER, url: '' }
+    form.setValue('documents', [{ type: DocumentTypeEnum.PASSPORT_COPY }, { type: DocumentTypeEnum.VISA_COPY }, { type: DocumentTypeEnum.EMIRATES_ID }, { type: DocumentTypeEnum.TITLE_DEED_COPY }, { type: DocumentTypeEnum.OWNERSHIP_PROOF_MOBILE_NUMBER }
     ])
   }, [])
 
