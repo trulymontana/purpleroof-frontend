@@ -40,13 +40,13 @@ const formSchema = z.object({
   favoriteCity: z.string({
     required_error: 'Please enter your favorite city'
   }),
-  numberOfFamilyMemberInUae: z.string({
+  numberOfFamilyMemberInUae: z.number({
     required_error: 'Please enter your number of family member in UAE'
   }),
-  yearsInUae: z.string({
+  yearsInUae: z.number({
     required_error: 'Please enter your number years in UAE'
   }),
-  annualRentalIncome: z.string({
+  annualRentalIncome: z.number({
     required_error: 'Please enter your annual rental income'
   }),
   uaeResidenceAddress: z.string({
@@ -187,7 +187,7 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
         </div>
 
 
-        <h2 className='font-bold text-xl pt-5 '>HOME COUNTRY REFERENCES</h2>
+        <h2 className='font-bold text-xl pt-5'>HOME COUNTRY REFERENCES</h2>
 
         <div className='flex items-start gap-2 w-full'>
           <div className='w-1/2'>

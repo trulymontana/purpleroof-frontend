@@ -3,6 +3,7 @@ import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
 import { IncomeProfileEnum, LoanTypeEnum, MortgageStatusEnum, ResidenceTypeEnum } from '@/constants/enums'
+import HttpClient from '@/lib/http-client'
 
 export interface CreateMortgageInput {
   firstName: string
@@ -33,5 +34,8 @@ export interface Mortgage extends CreateMortgageInput {
 }
 
 export const mortgageClient = {
-  ...crudFactory<Mortgage, QueryOptions, CreateMortgageInput>(ApiEndpoints.MORTGAGES)
+  ...crudFactory<Mortgage, QueryOptions, CreateMortgageInput>(ApiEndpoints.MORTGAGES),
+  createMortgageTransaction: (mortgageId: number, mortgageTransaction: any) => {
+    return HttpClient.post<any>(`${ApiEndpoints.MORTGAGE_TRANSACTION}/${mortgageId}`, mortgageTransaction)
+  }
 }

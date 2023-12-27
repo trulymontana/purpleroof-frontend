@@ -44,7 +44,7 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
 
     const storedValue = localStorage.getItem(LocalStorageKeys.MORTGAGE_TRANSACTION_INFO)
     // @ts-ignore
-    const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : data?.mortgage.loanType
+    const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),

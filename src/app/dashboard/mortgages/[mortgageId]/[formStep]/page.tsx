@@ -4,7 +4,9 @@ import CustomerInfoForm from '@/app/dashboard/mortgages/_forms/customer-info-for
 import TransactionInfoForm from '@/app/dashboard/mortgages/_forms/transaction-info-form'
 import { PageRoutes } from '@/constants/page-routes'
 import UploadDocumentsForm from '../../_forms/upload-documents-form'
-import { useGetOneMortgage } from '@/data/hooks/useMortgageClient'
+import { useCreateMortgageTransactionMutation, useGetOneMortgage } from '@/data/hooks/useMortgageClient'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
+import { nullCheckAndMerge } from '@/lib/utils'
 
 interface Props {
   params: {
@@ -17,12 +19,30 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
 
   const { data } = useGetOneMortgage(mortgageId)
 
+  const { mutate: createMortgageTransaction } = useCreateMortgageTransactionMutation()
+
+
   const storeValues = (step: string, values: any) => {
     localStorage.setItem(step, JSON.stringify(values))
   }
 
   const handleSubmit = (values: any) => {
     console.log({ values })
+    const transactionInfo = localStorage.getItem(LocalStorageKeys.MORTGAGE_TRANSACTION_INFO)
+    const customerInfo = localStorage.getItem(LocalStorageKeys.MORTGAGE_CUSTOMER_INFO)
+
+    console.log({ transactionInfo, customerInfo })
+
+    let result: any = {}
+
+    nullCheckAndMerge(result, transactionInfo)
+    nullCheckAndMerge(result, customerInfo)
+
+    let mortgageTransaction = Object.assign({}, result, values)
+
+    createMortgageTransaction({
+      ...mortgageTransaction
+    })
   }
 
   const subComponents: { [key: string]: React.ReactElement } = {

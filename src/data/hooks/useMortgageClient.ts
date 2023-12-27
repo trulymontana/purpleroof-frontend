@@ -47,6 +47,28 @@ export const useCreateMortgageMutation = () => {
   })
 }
 
+export const useCreateMortgageTransactionMutation = () => {
+  const queryClient = useQueryClient()
+  const router = useRouter()
+  return useMutation({
+    mutationFn: mortgageClient.createMortgageTransaction,
+    onSuccess: (data: any) => {
+      toast({
+        variant: 'default',
+        title: 'Mortgage Application Created Successfully'
+      })
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGE_TRANSACTION] })
+      router.push(PageRoutes.dashboard.MORTGAGES)
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.message
+      })
+    }
+  })
+}
+
 export const useDeleteMortgageMutation = () => {
   const queryClient = useQueryClient()
   return useMutation({
