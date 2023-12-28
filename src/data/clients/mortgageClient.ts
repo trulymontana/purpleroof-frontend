@@ -31,6 +31,7 @@ export interface Mortgage extends CreateMortgageInput {
   updatedAt: string
   userId: number
   actions: string
+  requirement: any // replace any with correct type
 }
 
 export const mortgageClient = {
