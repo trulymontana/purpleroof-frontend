@@ -4,7 +4,7 @@ import CustomerInfoForm from '@/app/dashboard/mortgages/_forms/customer-info-for
 import TransactionInfoForm from '@/app/dashboard/mortgages/_forms/transaction-info-form'
 import { PageRoutes } from '@/constants/page-routes'
 import UploadDocumentsForm from '../../_forms/upload-documents-form'
-import { useCreateMortgageTransactionMutation, useGetOneMortgage } from '@/data/hooks/useMortgageClient'
+import { useGetOneMortgage, useUpdateMortgageMutation } from '@/data/hooks/useMortgageClient'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { nullCheckAndMerge } from '@/lib/utils'
 
@@ -18,8 +18,7 @@ interface Props {
 const Page = ({ params: { mortgageId, formStep } }: Props) => {
 
   const { data } = useGetOneMortgage(mortgageId)
-
-  const { mutate: createMortgageTransaction } = useCreateMortgageTransactionMutation()
+  const { mutate: updateMortgage } = useUpdateMortgageMutation()
 
   const storeValues = (step: string, values: any) => {
     localStorage.setItem(step, JSON.stringify(values))
@@ -27,9 +26,8 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
 
 
   const handleSubmit = (values: any) => {
-    console.log({ values })
-    const transactionInfo = localStorage.getItem(LocalStorageKeys.MORTGAGE_TRANSACTION_INFO)
-    const customerInfo = localStorage.getItem(LocalStorageKeys.MORTGAGE_CUSTOMER_INFO)
+    const transactionInfo = localStorage.getItem(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${mortgageId}`)
+    const customerInfo = localStorage.getItem(`${LocalStorageKeys.MORTGAGE_CUSTOMER_INFO}-${mortgageId}`)
 
     console.log({ transactionInfo, customerInfo })
 
@@ -40,7 +38,10 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
 
     let mortgageTransaction = Object.assign({}, result, values)
 
-    createMortgageTransaction({
+    console.log({ mortgageTransaction })
+
+    updateMortgage({
+      id: data?.id,
       ...mortgageTransaction
     })
   }
