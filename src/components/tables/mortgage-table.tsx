@@ -47,22 +47,10 @@ export default function MortgagesTable() {
         return <div>{dob}</div>
       }
     },
-    // {
-    //   accessorKey: 'intendedProperty',
-    //   header: 'Intended Property'
-    // },
     {
       accessorKey: 'monthlyIncome',
       header: 'Monthly Income'
     },
-    // {
-    //   accessorKey: 'createdAt',
-    //   header: 'Created At'
-    // },
-    // {
-    //   accessorKey: 'updatedAt',
-    //   header: 'Updated At'
-    // },
     {
       id: 'status',
       header: 'Status',
