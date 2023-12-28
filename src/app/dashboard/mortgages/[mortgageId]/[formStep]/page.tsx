@@ -21,7 +21,6 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
 
   const { mutate: createMortgageTransaction } = useCreateMortgageTransactionMutation()
 
-
   const storeValues = (step: string, values: any) => {
     localStorage.setItem(step, JSON.stringify(values))
   }
@@ -47,7 +46,7 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
 
   const subComponents: { [key: string]: React.ReactElement } = {
     [PageRoutes.mortgage_transaction.TRANSACTION_INFO]: <TransactionInfoForm mortgageId={mortgageId} onSave={storeValues} />,
-    [PageRoutes.mortgage_transaction.CUSTOMER_INFO]: <CustomerInfoForm mortgageId={mortgageId} onSave={storeValues} />,
+    [PageRoutes.mortgage_transaction.CUSTOMER_INFO]: <CustomerInfoForm data={data} mortgageId={mortgageId} onSave={storeValues} />,
     // @ts-ignore
     [PageRoutes.mortgage_transaction.DOCUMENTS]: <UploadDocumentsForm mortgageId={mortgageId} requiredDocuments={data?.requirement?.requiredDocuments} handleSubmit={handleSubmit} />,
   }

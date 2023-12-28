@@ -16,10 +16,15 @@ import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { useRouter } from 'next/navigation'
+import { Mortgage } from '@/data/clients/mortgageClient'
+import { useEffect } from 'react'
 
 const formSchema = z.object({
-  name: z.string({
-    required_error: 'Please enter your name'
+  firstName: z.string({
+    required_error: 'Please enter your first name'
+  }),
+  lastName: z.string({
+    required_error: 'Please enter your last name'
   }),
   email: z.string({
     required_error: 'Please enter your email'
@@ -120,9 +125,10 @@ const formSchema = z.object({
 interface Props {
   mortgageId: number
   onSave: (step: string, values: any) => void
+  data?: Mortgage
 }
 
-const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
+const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
 
   const router = useRouter();
 
@@ -134,6 +140,20 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
     defaultValues
   })
 
+  useEffect(() => {
+    if (data) {
+      const fields = {
+        firstName: data?.firstName,
+        lastName: data?.lastName,
+        email: data?.email
+      }
+
+      form.setValue("firstName", data?.firstName)
+      form.setValue("lastName", data?.lastName)
+      form.setValue("email", data?.email)
+    }
+  }, [data])
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(LocalStorageKeys.MORTGAGE_CUSTOMER_INFO, values)
     router.push(PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_DOCUMENTS))
@@ -143,45 +163,52 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
     <Form {...form}>
       <h1 className='text-4xl font-bold text-black/80'>Customer Info</h1>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className='flex items-center gap-2 w-full'>
-          <div className='w-1/2'>
-            <InputElement name='name' label='Name' />
+        <div className='flex flex-col md:flex-row items-center gap-2 w-full'>
+          <div className='w-full md:w-1/2'>
+            <InputElement name='firstName' label='First Name' />
           </div>
-          <div className='w-1/2'>
-            <InputElement name='email' label='Email' />
+          <div className='w-full md:w-1/2'>
+            <InputElement name='lastName' label='Last Name' />
           </div>
         </div>
-        <div className='flex items-center gap-2 w-full'>
-          <div className='w-1/2'>
+        <div className='flex flex-col md:flex-row items-center gap-2 w-full'>
+          <div className='w-full md:w-1/2'>
+            <InputElement name='email' label='Email' />
+          </div>
+          <div className='w-full md:w-1/2'>
             <SelectElement name='maritalStatus' label='Marital Status' options={maritalStatusOptions} />
           </div>
-          <div className='w-1/2'>
+        </div>
+        <div className='flex flex-col md:flex-row items-center gap-2 w-full'>
+          <div className='w-full md:w-1/2'>
+            <PhoneNumberInputElement name='contact' label='Contact No.' />
+          </div>
+          <div className='w-full md:w-1/2'>
             <SelectElement name='education' label='Education' options={educationOptions} />
           </div>
         </div>
-        <PhoneNumberInputElement name='contact' label='Contact No.' />
-        <div className='flex items-center gap-2 w-full'>
-          <div className='w-1/2'>
+        <div className='flex flex-col md:flex-row items-center gap-2 w-full'>
+          <div className='w-full md:w-1/2'>
             <InputElement name='favoriteCity' label='Favorite City' />
           </div>
-          <div className='w-1/2'>
+          <div className='w-full md:w-1/2'>
             <NumberInputElement name='numberOfFamilyMemberInUae' label='Number of Family Members in UAE' />
           </div>
         </div>
 
-        <div className='flex items-center gap-2 w-full'>
-          <div className='w-1/2'>
+        <div className='flex flex-col md:flex-row items-center gap-2 w-full'>
+          <div className='w-full md:w-1/2'>
             <NumberInputElement name='yearsInUae' label='Years in UAE' />
           </div>
-          <div className='w-1/2'>
+          <div className='w-full md:w-1/2'>
             <NumberInputElement name='annualRentalIncome' label='Annual Rental Income' />
           </div>
         </div>
-        <div className='flex items-center gap-2 w-full'>
-          <div className='w-1/2'>
+        <div className='flex flex-col md:flex-row items-center gap-2 w-full'>
+          <div className='w-full md:w-1/2'>
             <InputElement name='uaeResidenceAddress' label='UAE Residence Address' />
           </div>
-          <div className='w-1/2'>
+          <div className='w-full md:w-1/2'>
             <InputElement name='homeCountryAddress' label='Home Country Address' />
           </div>
         </div>
@@ -189,11 +216,11 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
 
         <h2 className='font-bold text-xl pt-5'>HOME COUNTRY REFERENCES</h2>
 
-        <div className='flex items-start gap-2 w-full'>
-          <div className='w-1/2'>
+        <div className='flex flex-col md:flex-row items-start gap-2 w-full'>
+          <div className='w-full md:w-1/2'>
             <InputElement name='homeCountryReference1.name' label='Name' />
           </div>
-          <div className='w-1/2'>
+          <div className='w-full md:w-1/2'>
             <SelectElement name='homeCountryReference1.relationship' label='Relationship' options={relationshipOptions} />
           </div>
         </div>
@@ -202,11 +229,11 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
 
         <div className='h-[3px] bg-black/20 w-1/2 mx-auto rounded-full' />
 
-        <div className='flex items-start gap-2 w-full'>
-          <div className='w-1/2'>
+        <div className='flex flex-col md:flex-row items-start gap-2 w-full'>
+          <div className='w-full md:w-1/2'>
             <InputElement name='homeCountryReference2.name' label='Name' />
           </div>
-          <div className='w-1/2'>
+          <div className='w-full md:w-1/2'>
             <SelectElement name='homeCountryReference2.relationship' label='Relationship' options={relationshipOptions} />
           </div>
         </div>
@@ -215,11 +242,11 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
 
         <h2 className='font-bold text-xl pt-5'>PERSONAL REFERENCES IN UAE</h2>
 
-        <div className='flex items-start gap-2 w-full'>
-          <div className='w-1/2'>
+        <div className='flex flex-col md:flex-row items-start gap-2 w-full'>
+          <div className='w-full md:w-1/2'>
             <InputElement name='uaeReference1.name' label='Name' />
           </div>
-          <div className='w-1/2'>
+          <div className='w-full md:w-1/2'>
             <SelectElement name='uaeReference1.relationship' label='Relationship' options={relationshipOptions} />
           </div>
         </div>
@@ -228,11 +255,11 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
 
         <div className='h-[3px] bg-black/20 w-1/2 mx-auto rounded-full' />
 
-        <div className='flex items-start gap-2 w-full'>
-          <div className='w-1/2'>
+        <div className='flex flex-col md:flex-row items-start gap-2 w-full'>
+          <div className='w-full md:w-1/2'>
             <InputElement name='uaeReference2.name' label='Name' />
           </div>
-          <div className='w-1/2'>
+          <div className='w-full md:w-1/2'>
             <SelectElement name='uaeReference2.relationship' label='Relationship' options={relationshipOptions} />
           </div>
         </div>

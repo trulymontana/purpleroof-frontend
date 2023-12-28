@@ -19,7 +19,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
     const { data } = useGetOneMortgage(mortgageId);
 
     return (
-        <div className='p-4'>
+        <div className='p-4 bg-gray-300/40 dark:bg-gray-800/40'>
             <p className="text-3xl text-center mb-2">Mortgage Timeline</p>
             <VerticalTimeline lineColor="#ddd">
                 {mortgageSubmissionStatuses.map((status, index) => (
@@ -28,12 +28,13 @@ const Page = ({ params: { mortgageId } }: Props) => {
                         key={index}
                         className="vertical-timeline-element"
                         contentStyle={{
-                            border: '1px solid rgb(221 221 221)',
-                            background: '#fff',
-                            color: '#000',
+                            borderBottom: "8px",
+                            borderStyle: "solid",
+                            borderBottomColor: "rgb(97, 62, 131)",
+                            boxShadow: "none",
                         }}
                         contentArrowStyle={{
-                            borderRight: '7px solid  rgb(221 221 221)',
+                            borderRight: '7px solid rgb(97, 62, 131)',
                         }}
                         iconStyle={{
                             background:
@@ -41,8 +42,9 @@ const Page = ({ params: { mortgageId } }: Props) => {
                                     (stat) => stat.value === data?.status
                                 )
                                     ? "#613e83"
-                                    : "#fff", color: '#000'
+                                    : "#f7f6f2", color: 'rgb(97, 62, 131)'
                         }}
+
                     >
                         <h3 className="vertical-timeline-element-title">
                             {status.label}
