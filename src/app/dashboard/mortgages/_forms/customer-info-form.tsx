@@ -60,66 +60,22 @@ const formSchema = z.object({
   homeCountryAddress: z.string({
     required_error: 'Please enter your home country address'
   }),
-  homeCountryReference1: z.object({
-    name: z.string({
-      required_error: 'Please enter name'
-    }),
-    relationship: z.string({
-      required_error: 'Please enter relationship'
-    }),
-    mobile: z
-      .string({
-        required_error: 'Please enter mobile number'
+  references: z.array(
+    z.object({
+      title: z.string({
+        required_error: 'Title not found!'
+      }),
+      name: z.string({
+        required_error: 'This field is required!'
+      }),
+      phone: z.string({
+        required_error: 'This field is required!'
+      }),
+      relationship: z.string({
+        required_error: 'This field is required!'
       })
-      .min(10, {
-        message: 'Phone number must be at least 10 characters.'
-      })
-  }),
-  homeCountryReference2: z.object({
-    name: z.string({
-      required_error: 'Please enter name'
-    }),
-    relationship: z.string({
-      required_error: 'Please enter relationship'
-    }),
-    mobile: z
-      .string({
-        required_error: 'Please enter mobile number'
-      })
-      .min(10, {
-        message: 'Phone number must be at least 10 characters.'
-      })
-  }),
-  uaeReference1: z.object({
-    name: z.string({
-      required_error: 'Please enter name'
-    }),
-    relationship: z.string({
-      required_error: 'Please enter relationship'
-    }),
-    mobile: z
-      .string({
-        required_error: 'Please enter mobile number'
-      })
-      .min(10, {
-        message: 'Phone number must be at least 10 characters.'
-      })
-  }),
-  uaeReference2: z.object({
-    name: z.string({
-      required_error: 'Please enter name'
-    }),
-    relationship: z.string({
-      required_error: 'Please enter relationship'
-    }),
-    mobile: z
-      .string({
-        required_error: 'Please enter mobile number'
-      })
-      .min(10, {
-        message: 'Phone number must be at least 10 characters.'
-      })
-  })
+    })
+  )
 })
 
 interface Props {
@@ -149,13 +105,22 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
     }
   }, [data])
 
-
+  useEffect(() => {
+    // @ts-ignore
+    form.setValue("references[0].title", "homeCountryReference1")
+    // @ts-ignore
+    form.setValue("references[1].title", "homeCountryReference2")
+    // @ts-ignore
+    form.setValue("references[2].title", "uaeReference1")
+    // @ts-ignore
+    form.setValue("references[3].title", "uaeReference2")
+  }, [])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // onSave(`${LocalStorageKeys.MORTGAGE_CUSTOMER_INFO}-${mortgageId}`, values)
-    // router.push(PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_DOCUMENTS))
-    console.log({ values })
+    onSave(`${LocalStorageKeys.MORTGAGE_CUSTOMER_INFO}-${mortgageId}`, values)
+    router.push(PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_DOCUMENTS))
   }
+
 
   return (
     <Form {...form}>
@@ -217,53 +182,53 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
 
         <div className='flex flex-col md:flex-row items-start gap-2 w-full'>
           <div className='w-full md:w-1/2'>
-            <InputElement name='homeCountryReference1.name' label='Name' />
+            <InputElement name='references[0].name' label='Name' />
           </div>
           <div className='w-full md:w-1/2'>
-            <SelectElement name='homeCountryReference1.relationship' label='Relationship' options={relationshipOptions} />
+            <SelectElement name='references[0].relationship' label='Relationship' options={relationshipOptions} />
           </div>
         </div>
 
-        <PhoneNumberInputElement name='homeCountryReference1.mobile' label='Mobile' />
+        <PhoneNumberInputElement name='references[0].phone' label='Mobile' />
 
         <div className='h-[3px] bg-black/20 w-1/2 mx-auto rounded-full' />
 
         <div className='flex flex-col md:flex-row items-start gap-2 w-full'>
           <div className='w-full md:w-1/2'>
-            <InputElement name='homeCountryReference2.name' label='Name' />
+            <InputElement name='references[1].name' label='Name' />
           </div>
           <div className='w-full md:w-1/2'>
-            <SelectElement name='homeCountryReference2.relationship' label='Relationship' options={relationshipOptions} />
+            <SelectElement name='references[1].relationship' label='Relationship' options={relationshipOptions} />
           </div>
         </div>
 
-        <PhoneNumberInputElement name='homeCountryReference2.mobile' label='Mobile' />
+        <PhoneNumberInputElement name='references[1].phone' label='Mobile' />
 
         <h2 className='font-bold text-xl pt-5'>PERSONAL REFERENCES IN UAE</h2>
 
         <div className='flex flex-col md:flex-row items-start gap-2 w-full'>
           <div className='w-full md:w-1/2'>
-            <InputElement name='uaeReference1.name' label='Name' />
+            <InputElement name='references[2].name' label='Name' />
           </div>
           <div className='w-full md:w-1/2'>
-            <SelectElement name='uaeReference1.relationship' label='Relationship' options={relationshipOptions} />
+            <SelectElement name='references[2].relationship' label='Relationship' options={relationshipOptions} />
           </div>
         </div>
 
-        <PhoneNumberInputElement name='uaeReference1.mobile' label='Mobile' />
+        <PhoneNumberInputElement name='references[2].phone' label='Mobile' />
 
         <div className='h-[3px] bg-black/20 w-1/2 mx-auto rounded-full' />
 
         <div className='flex flex-col md:flex-row items-start gap-2 w-full'>
           <div className='w-full md:w-1/2'>
-            <InputElement name='uaeReference2.name' label='Name' />
+            <InputElement name='references[3].name' label='Name' />
           </div>
           <div className='w-full md:w-1/2'>
-            <SelectElement name='uaeReference2.relationship' label='Relationship' options={relationshipOptions} />
+            <SelectElement name='references[3].relationship' label='Relationship' options={relationshipOptions} />
           </div>
         </div>
 
-        <PhoneNumberInputElement name='uaeReference2.mobile' label='Mobile' />
+        <PhoneNumberInputElement name='references[3].phone' label='Mobile' />
 
         <Button type="submit" className='w-full'>Next</Button>
         <BackButton route={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_TRANSACTION_INFO)} />
