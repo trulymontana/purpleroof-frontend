@@ -68,7 +68,6 @@ export enum EmirateEnum {
   UMM_AL_QUWAIN = 'UMM_AL_QUWAIN'
 }
 
-
 export enum HoldingTypeEnum {
   FREE_HOLD = 'FREE_HOLD',
   LEASE_HOLD = 'LEASE_HOLD'
@@ -192,28 +191,28 @@ export enum DocumentTypeEnum {
   PROOF_OF_RESIDENCE = 'PROOF_OF_RESIDENCE',
   PROOF_OF_INCOME = 'PROOF_OF_INCOME',
   COMPANY_BANK_STATEMENT_6_MONTHS = 'COMPANY_BANK_STATEMENT_6_MONTHS',
-  OWNERSHIP_PROOF_MOBILE_NUMBER = 'OWNERSHIP_PROOF_MOBILE_NUMBER',
+  OWNERSHIP_PROOF_MOBILE_NUMBER = 'OWNERSHIP_PROOF_MOBILE_NUMBER'
 }
 
 // same?
 // export enum CompletionStatusEnum {
-//   COMPLETED 
+//   COMPLETED
 //   UNDER_CONSTRUCTION
 // }
 
 export enum UserRoleEnum {
   ADMIN = 'ADMIN',
   ADVERTISER = 'ADVERTISER',
-  AGENT = 'AGENT',
+  AGENT = 'AGENT'
 }
 
 export enum PropertiesStatusEnum {
   SALE = 'SALE',
-  RENT = 'RENT',
+  RENT = 'RENT'
 }
 
 export enum AmenityTypeEnum {
   PROPERTY = 'PROPERTY',
   BUILDING = 'BUILDING',
-  COMMUNITY = 'COMMUNITY',
+  COMMUNITY = 'COMMUNITY'
 }

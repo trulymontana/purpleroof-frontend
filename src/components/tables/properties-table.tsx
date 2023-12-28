@@ -13,7 +13,6 @@ import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import UpdatePropertyForm from '@/app/dashboard/properties/_forms/update-property-form'
 import { Property } from '@/data/clients/propertiesClient'
 
-
 export default function PropertiesTable() {
 
   const { mutate: deleteProperty, isPending } = useDeletePropertyMutation()

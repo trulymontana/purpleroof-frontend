@@ -32,6 +32,7 @@ const roleToPageMapping = {
 }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+
   const pathName = usePathname()
 
   const [userData, setUserData] = useState<User | undefined>()
@@ -75,6 +76,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </main>
     )
   }
+
 
   const allowedPages = roleToPageMapping[userData.role]
 

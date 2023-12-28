@@ -78,11 +78,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
           label={'Rental Amount (AED)'}
         />
         <SelectElement name="paymentInterval" label="Payment Interval" options={paymentIntervals} />
-        <NumberInputElement
-          name="size"
-          placeholder="Please enter property size"
-          label={'Property Size (Sqft)'}
-        />
+        <NumberInputElement name="size" placeholder="Please enter property size" label={'Property Size (Sqft)'} />
         <NumberInputElement
           name="minimumContract"
           placeholder="Please enter minimum contract period"

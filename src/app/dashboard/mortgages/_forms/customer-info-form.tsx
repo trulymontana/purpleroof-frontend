@@ -123,6 +123,9 @@ interface Props {
 }
 
 const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
+  const storedValue = localStorage.getItem('mortgage/customer-info')
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
+
 
   const router = useRouter();
 
@@ -137,10 +140,12 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(LocalStorageKeys.MORTGAGE_CUSTOMER_INFO, values)
     router.push(PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_DOCUMENTS))
+
   }
 
   return (
     <Form {...form}>
+
       <h1 className='text-4xl font-bold text-black/80'>Customer Info</h1>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className='flex items-center gap-2 w-full'>
@@ -244,6 +249,7 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
       </form>
     </Form>
   )
+
 
 }
 

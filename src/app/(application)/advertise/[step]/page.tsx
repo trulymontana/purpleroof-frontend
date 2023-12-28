@@ -80,10 +80,10 @@ const Page = () => {
     delete property.noticePeriodProperty
     // @ts-ignore
     delete property.callPreference
-    
+
     if (property.amenities && property.amenities.length > 0) {
       let amenities_values: number[] = property.amenities.map((amenity: any) => amenity.value)
-      property.amenities = amenities_values;
+      property.amenities = amenities_values
     }
 
     console.log({ property })

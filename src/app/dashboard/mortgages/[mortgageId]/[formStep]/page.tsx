@@ -26,6 +26,7 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
     localStorage.setItem(step, JSON.stringify(values))
   }
 
+
   const handleSubmit = (values: any) => {
     console.log({ values })
     const transactionInfo = localStorage.getItem(LocalStorageKeys.MORTGAGE_TRANSACTION_INFO)
@@ -50,14 +51,12 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
     [PageRoutes.mortgage_transaction.CUSTOMER_INFO]: <CustomerInfoForm mortgageId={mortgageId} onSave={storeValues} />,
     // @ts-ignore
     [PageRoutes.mortgage_transaction.DOCUMENTS]: <UploadDocumentsForm mortgageId={mortgageId} requiredDocuments={data?.requirement?.requiredDocuments} handleSubmit={handleSubmit} />,
+
   }
 
   return (
-    <div className={"lg:p-6 p-3 rounded mx-2 bg-white mb-10 flex flex-col gap-4 mt-6"}>
-      {subComponents[formStep]}
-    </div>
+    <div className={'mx-2 mb-10 mt-6 flex flex-col gap-4 rounded bg-white p-3 lg:p-6'}>{subComponents[formStep]}</div>
   )
-
 }
 
 export default Page

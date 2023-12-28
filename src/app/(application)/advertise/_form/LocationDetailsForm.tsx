@@ -78,8 +78,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-
-        <SelectElement name='emirate' label='Emirate' options={emirateOptions} placeholder='Please select a emirate' />
+        <SelectElement name="emirate" label="Emirate" options={emirateOptions} placeholder="Please select a emirate" />
 
         <SelectElement
           name="locationId"
