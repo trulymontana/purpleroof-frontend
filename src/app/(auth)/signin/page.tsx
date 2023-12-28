@@ -12,27 +12,20 @@ import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
 
 const formSchema = z.object({
-  email: z.string({
-    required_error: 'Please enter your email!'
-  }),
-  password: z.string({
-    required_error: 'Please enter a password!'
-  })
+    email: z.string({
+        required_error: 'Please enter your email!'
+    }),
+    password: z.string({
+        required_error: 'Please enter a password!'
+    })
 })
 
 const Page = () => {
-  const { isPending: isLoading, mutate: signInUser } = useSignIn()
+    const { isPending: isLoading, mutate: signInUser } = useSignIn()
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema)
-  })
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    signInUser({
-      ...values
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema)
     })
-  }
-
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         signInUser({

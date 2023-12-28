@@ -119,58 +119,59 @@ const Page = () => {
                 </div>
 
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="bg-white flex flex-col gap-2 rounded-xl w-3/4 mx-auto">
-                        <div className="flex-1 mx-auto py-4">
-                            <CustomTabRadioGroup name="category" options={searchCategories} />
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="bg-white flex flex-col gap-2 rounded-xl w-3/4 mx-auto">
+                    <div className="flex-1 mx-auto py-4">
+                      <CustomTabRadioGroup name="category" options={searchCategories} />
+                    </div>
+                    <div className="flex-1 mx-auto py-4">
+                      <TabRadioGroup name="propertyFor" options={typesOfProperties} />
+                    </div>
+                    <div className="p-4 gap-5 rounded-lg flex flex-col items-center ">
+                      <div className="w-full flex items-center gap-4">
+                        <div className="flex-1">
+                          <MultiSelectElement name="location" placeholder="Please select a location" options={amenities} />
                         </div>
-                        <div className="flex-1 mx-auto py-4">
-                            <TabRadioGroup name="propertyFor" options={typesOfProperties} />
-                        </div>
-                        <div className="p-4 gap-5 rounded-lg flex flex-col items-center ">
-                            <div className="w-full flex items-center gap-4">
-                                <div className="flex-1">
-                                    <MultiSelectElement name="location" placeholder="Please select a location" options={amenities} />
-                                </div>
-                                {/* <div className="flex-1">
+                        {/* <div className="flex-1">
                                     <SelectElement name="category" options={searchCategories} placeholder="Please select a category" />
                                 </div> */}
-                                <div className="flex-1">
-                                    <MultiSelectElement name="propertyType" options={propertyFor === PropertyTypeEnum.RESIDENTIAL ? residentalTypes : commercialTypes} placeholder="Please select a Property Type" />
-                                </div>
-                            </div>
-                            <div className="w-full flex items-center justify-center gap-4">
-                                {
-                                    propertyFor === PropertyTypeEnum.RESIDENTIAL && (
-                                        <>
-                                            <div className="w-[10%]">
-                                                <SelectElement name="bed" placeholder="Bed" options={bedRooms} />
-                                            </div>
-                                            <div className="w-[10%]">
-                                                <SelectElement name="bath" placeholder="Bath" options={bathRooms} />
-                                            </div>
-                                            <div className="flex-1">
-                                                <MultiSelectElement name="amenities" placeholder="Select Amenities" options={amenities} />
-                                            </div>
-                                        </>
-                                    )
-                                }
-                                <div className="flex-1">
-                                    <SliderElement
-                                        values={values}
-                                        setValues={setValues}
-                                        name="priceRange"
-                                        min={values[0]}
-                                        minStepsBetweenThumbs={10}
-                                        max={values[1]}
-                                        step={1}
-                                    />
-                                </div>
-                            </div>
-                            <Button className="w-full bg-primary">Find</Button>
+                        <div className="flex-1">
+                          <MultiSelectElement name="propertyType" options={propertyFor === PropertyTypeEnum.RESIDENTIAL ? residentalTypes : commercialTypes} placeholder="Please select a Property Type" />
                         </div>
-                    </form>
+                      </div>
+                      <div className="w-full flex items-center justify-center gap-4">
+                        {
+                          propertyFor === PropertyTypeEnum.RESIDENTIAL && (
+                            <>
+                              <div className="w-[10%]">
+                                <SelectElement name="bed" placeholder="Bed" options={bedRooms} />
+                              </div>
+                              <div className="w-[10%]">
+                                <SelectElement name="bath" placeholder="Bath" options={bathRooms} />
+                              </div>
+                              <div className="flex-1">
+                                <MultiSelectElement name="amenities" placeholder="Select Amenities" options={amenities} />
+                              </div>
+                            </>
+                          )
+                        }
+                        <div className="flex-1">
+                          <SliderElement
+                            values={values}
+                            setValues={setValues}
+                            name="priceRange"
+                            min={values[0]}
+                            minStepsBetweenThumbs={10}
+                            max={values[1]}
+                            step={1}
+                          />
+                        </div>
+                      </div>
+                      <Button className="w-full bg-primary">Find</Button>
+                    </div>
+                  </form>
                 </Form>
 
+              </div>
             </div>
           </form>
         </Form>
