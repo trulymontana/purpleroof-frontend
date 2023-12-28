@@ -12,8 +12,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { propertySubmissionStatuses } from '@/constants/advertise'
 import { useUpdatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 import { Property } from '@/constants/types'
+
 import UpdateMortgageStatusForm from '@/app/dashboard/mortgages/_forms/update-status-form'
 import ConfirmDialog from '../dialogs/confirm-action-dialog'
+
 
 interface Props {
   row: any
@@ -49,6 +51,7 @@ const ActionButtons = ({ row }: Props) => {
       <Link href={`${pathname}/${data.id}`}>
         <Eye size={17} color="black" />
       </Link>
+
       <ConfirmDialog
         title="Edit property"
         anchor={
@@ -58,6 +61,7 @@ const ActionButtons = ({ row }: Props) => {
         }
         content={<UpdateMortgageStatusForm data={row.original} />}
       />
+
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="ghost">
@@ -68,7 +72,9 @@ const ActionButtons = ({ row }: Props) => {
           <DialogHeader>
             <DialogTitle>Edit property</DialogTitle>
           </DialogHeader>
+
           <UpdateMortgageStatusForm data={row.original} />
+
         </DialogContent>
       </Dialog>
       <Button variant={'ghost'}>

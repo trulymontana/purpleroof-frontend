@@ -128,7 +128,11 @@ interface Props {
   data?: Mortgage
 }
 
-const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
+
+const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
+  const storedValue = localStorage.getItem('mortgage/customer-info')
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
+
 
   const router = useRouter();
 
@@ -140,27 +144,16 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
     defaultValues
   })
 
-  useEffect(() => {
-    if (data) {
-      const fields = {
-        firstName: data?.firstName,
-        lastName: data?.lastName,
-        email: data?.email
-      }
-
-      form.setValue("firstName", data?.firstName)
-      form.setValue("lastName", data?.lastName)
-      form.setValue("email", data?.email)
-    }
-  }, [data])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(LocalStorageKeys.MORTGAGE_CUSTOMER_INFO, values)
     router.push(PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_DOCUMENTS))
+
   }
 
   return (
     <Form {...form}>
+
       <h1 className='text-4xl font-bold text-black/80'>Customer Info</h1>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <div className='flex flex-col md:flex-row items-center gap-2 w-full'>
@@ -271,6 +264,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
       </form>
     </Form>
   )
+
 
 }
 

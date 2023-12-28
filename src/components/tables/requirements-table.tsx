@@ -11,7 +11,6 @@ import { PageRoutes } from '@/constants/page-routes'
 import { Eye } from 'lucide-react'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 
-
 export const columns: ColumnDef<RequirementApplication>[] = [
   {
     accessorKey: 'name',

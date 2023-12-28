@@ -14,6 +14,7 @@ import ConfirmActionDialog from '../dialogs/confirm-action-dialog'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
+
 export default function MortgagesTable() {
   const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
 
@@ -104,6 +105,7 @@ export default function MortgagesTable() {
       )
     }
   ]
+
 
   const { loading, data } = useGetMortgages()
   return <DataTable columns={columns} data={data ?? []} isLoading={loading} />
