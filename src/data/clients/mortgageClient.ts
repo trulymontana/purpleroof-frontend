@@ -1,4 +1,4 @@
-import { MortgageApplication, QueryOptions, User } from '@/constants/types'
+import { MortgageApplication, QueryOptions, User, historyType } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
@@ -32,6 +32,7 @@ export interface Mortgage extends CreateMortgageInput {
   userId: number
   actions: string
   requirement: any // replace any with correct type
+  history: historyType[]
 }
 
 export const mortgageClient = {

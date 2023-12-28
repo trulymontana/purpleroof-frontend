@@ -7,6 +7,7 @@ import UploadDocumentsForm from '../../_forms/upload-documents-form'
 import { useGetOneMortgage, useUpdateMortgageMutation } from '@/data/hooks/useMortgageClient'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { nullCheckAndMerge } from '@/lib/utils'
+import { MortgageStatusEnum } from '@/constants/enums'
 
 interface Props {
   params: {
@@ -17,7 +18,7 @@ interface Props {
 
 const Page = ({ params: { mortgageId, formStep } }: Props) => {
 
-  const { data } = useGetOneMortgage(mortgageId)
+  const { loading, data } = useGetOneMortgage(mortgageId)
   const { mutate: updateMortgage } = useUpdateMortgageMutation()
 
   const storeValues = (step: string, values: any) => {
@@ -29,8 +30,6 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
     const transactionInfo = localStorage.getItem(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${mortgageId}`)
     const customerInfo = localStorage.getItem(`${LocalStorageKeys.MORTGAGE_CUSTOMER_INFO}-${mortgageId}`)
 
-    console.log({ transactionInfo, customerInfo })
-
     let result: any = {}
 
     nullCheckAndMerge(result, transactionInfo)
@@ -38,7 +37,7 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
 
     let mortgageTransaction = Object.assign({}, result, values)
 
-    console.log({ mortgageTransaction })
+    mortgageTransaction.status = MortgageStatusEnum.UNDER_DOCUMENTATION_STAGE
 
     updateMortgage({
       id: data?.id,
@@ -50,7 +49,7 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
     [PageRoutes.mortgage_transaction.TRANSACTION_INFO]: <TransactionInfoForm mortgageId={mortgageId} onSave={storeValues} />,
     [PageRoutes.mortgage_transaction.CUSTOMER_INFO]: <CustomerInfoForm data={data} mortgageId={mortgageId} onSave={storeValues} />,
     // @ts-ignore
-    [PageRoutes.mortgage_transaction.DOCUMENTS]: <UploadDocumentsForm mortgageId={mortgageId} requiredDocuments={data?.requirement?.requiredDocuments} handleSubmit={handleSubmit} />,
+    [PageRoutes.mortgage_transaction.DOCUMENTS]: <UploadDocumentsForm isLoading={loading} mortgageId={mortgageId} requiredDocuments={data?.requirement?.requiredDocuments} handleSubmit={handleSubmit} />,
 
   }
 

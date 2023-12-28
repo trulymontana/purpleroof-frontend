@@ -29,14 +29,14 @@ const formSchema = z.object({
   email: z.string({
     required_error: 'Please enter your email'
   }),
-  contact: z
+  phoneNumber: z
     .string({
       required_error: 'Please enter a valid phone number.'
     })
     .min(10, {
       message: 'Phone number must be at least 10 characters.'
     }),
-  education: z.string({
+  educationType: z.string({
     required_error: 'Please select your education qualification'
   }),
   maritalStatus: z.string({
@@ -45,7 +45,7 @@ const formSchema = z.object({
   favoriteCity: z.string({
     required_error: 'Please enter your favorite city'
   }),
-  numberOfFamilyMemberInUae: z.number({
+  familyMembersInUae: z.number({
     required_error: 'Please enter your number of family member in UAE'
   }),
   yearsInUae: z.number({
@@ -145,10 +145,10 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
         </div>
         <div className='flex flex-col md:flex-row items-center gap-2 w-full'>
           <div className='w-full md:w-1/2'>
-            <PhoneNumberInputElement name='contact' label='Contact No.' />
+            <PhoneNumberInputElement name='phoneNumber' label='Contact No.' />
           </div>
           <div className='w-full md:w-1/2'>
-            <SelectElement name='education' label='Education' options={educationOptions} />
+            <SelectElement name='educationType' label='Education' options={educationOptions} />
           </div>
         </div>
         <div className='flex flex-col md:flex-row items-center gap-2 w-full'>
@@ -156,7 +156,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
             <InputElement name='favoriteCity' label='Favorite City' />
           </div>
           <div className='w-full md:w-1/2'>
-            <NumberInputElement name='numberOfFamilyMemberInUae' label='Number of Family Members in UAE' />
+            <NumberInputElement name='familyMembersInUae' label='Number of Family Members in UAE' />
           </div>
         </div>
 

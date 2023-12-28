@@ -4,6 +4,7 @@ import { mortgageClient } from '../clients/mortgageClient'
 import { toast } from '@/components/ui/use-toast'
 import { PageRoutes } from '@/constants/page-routes'
 import { useRouter } from 'next/navigation'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 export function useGetMortgages() {
   const { isLoading, data } = useQuery({
@@ -68,6 +69,7 @@ export const useDeleteMortgageMutation = () => {
 }
 
 export const useUpdateMortgageMutation = () => {
+  const router = useRouter()
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: mortgageClient.update,
@@ -76,7 +78,11 @@ export const useUpdateMortgageMutation = () => {
         variant: 'default',
         title: 'Mortgage updated successfully'
       })
+      console.log({ data })
       queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
+      localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${data.data.id}`)
+      localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_CUSTOMER_INFO}-${data.data.id}`)
+      router.push(PageRoutes.dashboard.MORTGAGES)
     },
     onError: (error: any) => {
       toast({

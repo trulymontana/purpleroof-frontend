@@ -13,6 +13,7 @@ import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
 import { useEffect } from 'react'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
+import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
 
 const formSchema = z.object({
   documents: z.array(
@@ -31,8 +32,9 @@ interface Props {
   handleSubmit: (values: any) => void
   requiredDocuments?: any
   mortgageId: number
+  isLoading: boolean
 }
-const UploadDocumentsForm = ({ handleSubmit, requiredDocuments, mortgageId }: Props) => {
+const UploadDocumentsForm = ({ isLoading, handleSubmit, requiredDocuments, mortgageId }: Props) => {
 
   const router = useRouter()
 
@@ -67,10 +69,22 @@ const UploadDocumentsForm = ({ handleSubmit, requiredDocuments, mortgageId }: Pr
 
         {requiredDocuments && (
           <>
-            <Button type="submit" className="w-full">
-              Save and Continue
+            <Button disabled={isLoading} type="submit" className="w-full">
+              Submit
             </Button>
-            <BackButton route={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_CUSTOMER_INFO)} />
+            <ConfirmActionDialog
+              title="Are you sure?"
+              anchor={
+                <Button variant="outline" className="w-full">
+                  Go Back
+                </Button>
+              }
+              content={<div className='flex flex-col gap-5'>
+                <p>All progess of this page will be lost. Are you sure you want to go back?</p>
+                <BackButton variant="default" route={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_CUSTOMER_INFO)} />
+              </div>}
+            />
+
           </>
         )}
 

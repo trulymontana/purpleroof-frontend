@@ -126,3 +126,10 @@ export type User = {
   lastName: string
   role: UserRoleEnum
 }
+
+export type historyType = {
+  id: number,
+  title: string,
+  description: string,
+  mortgageId: number
+}
