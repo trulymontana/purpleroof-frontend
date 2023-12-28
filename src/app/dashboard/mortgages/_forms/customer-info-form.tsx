@@ -129,10 +129,7 @@ interface Props {
 }
 
 
-const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
-  const storedValue = localStorage.getItem('mortgage/customer-info')
-  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
-
+const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
 
   const router = useRouter();
 
@@ -143,6 +140,15 @@ const CustomerInfoForm = ({ mortgageId, onSave }: Props) => {
     resolver: zodResolver(formSchema),
     defaultValues
   })
+
+  useEffect(() => {
+    if (data) {
+      form.setValue("firstName", data?.firstName)
+      form.setValue("lastName", data?.lastName)
+      form.setValue("email", data?.email)
+    }
+  }, [data])
+
 
 
   function onSubmit(values: z.infer<typeof formSchema>) {
