@@ -21,7 +21,6 @@ interface Props {
 const Page = ({ params: { mortgageId } }: Props) => {
 
     const { loading, data } = useGetOneMortgage(mortgageId)
-    console.log({ data })
 
     if (loading) {
         return (
@@ -50,7 +49,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
                             </div>
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Email</h3>
-                                <p className="text-lg capitalize">{data?.email}</p>
+                                <p className="text-lg lowercase">{data?.email}</p>
                             </div>
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Contact</h3>
@@ -146,18 +145,22 @@ const Page = ({ params: { mortgageId } }: Props) => {
                         </CardFooter>
                     </Card>
                     <div className='space-y-4'>
-                        <Card className="p-4">
-                            <CardHeader className="mb-4">
-                                <h2 className="text-2xl font-semibold">Required Documents</h2>
-                            </CardHeader>
-                            <CardContent>
-                                <ul className='list-disc'>
-                                    {data?.requirement.requiredDocuments.map((item: any, i: number) => (
-                                        <li key={i}>{item.name}</li>
-                                    ))}
-                                </ul>
-                            </CardContent>
-                        </Card>
+                        {
+                            data?.requirement && (
+                                <Card className="p-4">
+                                    <CardHeader className="mb-4">
+                                        <h2 className="text-2xl font-semibold">Required Documents</h2>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <ul className='list-disc'>
+                                            {data?.requirement?.requiredDocuments.map((item: any, i: number) => (
+                                                <li key={i}>{item.name}</li>
+                                            ))}
+                                        </ul>
+                                    </CardContent>
+                                </Card>
+                            )
+                        }
                         <Card className="p-4">
                             <CardHeader className="mb-4">
                                 <h2 className="text-2xl font-semibold">Home Country Reference 1</h2>

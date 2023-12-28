@@ -88,7 +88,7 @@ export default function MortgagesTable() {
           )
         }
         return (
-          <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(data.id)}>
+          <Link href={PageRoutes.dashboard.MORTGAGE_TIMELINE(data.id)}>
             <Badge>View Your Application</Badge>
           </Link>
         )

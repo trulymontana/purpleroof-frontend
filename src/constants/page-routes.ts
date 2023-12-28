@@ -8,6 +8,7 @@ export const PageRoutes = {
     },
     MORTGAGES: '/dashboard/mortgages',
     MORTGAGE_DETAILS: (mortgageId: number) => `/dashboard/mortgages/${mortgageId}`,
+    MORTGAGE_TIMELINE: (mortgageId: number) => `/dashboard/mortgages/${mortgageId}/timeline`,
     COMPLETE_MORTGAGE_APPLICATION: (mortgageId: number, step: string) => `/dashboard/mortgages/${mortgageId}/${step}`,
     PROPERTIES: '/dashboard/properties',
     PROPERTY_DETAILS: (propertyId: number) => `/dashboard/properties/${propertyId}`,
