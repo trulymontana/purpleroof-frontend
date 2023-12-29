@@ -12,6 +12,7 @@ import { Button } from '../ui/button'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import UpdatePropertyForm from '@/app/dashboard/properties/_forms/update-property-form'
 import { Property } from '@/data/clients/propertiesClient'
+import currency from '@/lib/currency'
 
 export default function PropertiesTable() {
 
@@ -43,8 +44,12 @@ export default function PropertiesTable() {
       header: 'Phone'
     },
     {
-      accessorKey: 'amount',
-      header: 'Amount'
+      id: 'amount',
+      header: 'Amount',
+      cell: ({ row }) => {
+        const monthlyIncome = row.original.amount
+        return <span>{currency.format(monthlyIncome)}</span>
+      }
     },
     {
       accessorKey: 'size',

@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { Separator } from '@/components/ui/separator'
+import currency from '@/lib/currency'
 
 
 interface Props {
@@ -77,7 +78,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
                             </div>
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Annual Rental Income</h3>
-                                <p className="text-lg capitalize">AED 312312321</p>
+                                <p className="text-lg capitalize">{currency.format(3213)}</p>
                             </div>
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">UAE Residence Address</h3>
@@ -111,10 +112,14 @@ const Page = ({ params: { mortgageId } }: Props) => {
                                 <h3 className="text-lg font-medium">Loan Type</h3>
                                 <p className="text-lg capitalize">{data?.loanType?.toLocaleLowerCase().replaceAll("_", " ")}</p>
                             </div>
-                            <div className="flex justify-between">
-                                <h3 className="text-lg font-medium">Montly Income</h3>
-                                <p className="text-lg capitalize">AED {data?.monthlyIncome}</p>
-                            </div>
+                            {
+                                data?.monthlyIncome && (
+                                    <div className="flex justify-between">
+                                        <h3 className="text-lg font-medium">Montly Income</h3>
+                                        <p className="text-lg capitalize">{currency.format(data?.monthlyIncome)}</p>
+                                    </div>
+                                )
+                            }
                             <div className="flex justify-between">
                                 <h3 className="text-lg font-medium">Property Type</h3>
                                 <p className="text-lg capitalize">Apartment/ Townhouse/ Villa</p>

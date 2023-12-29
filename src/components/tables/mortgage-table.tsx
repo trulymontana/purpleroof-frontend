@@ -13,6 +13,7 @@ import UpdateMortgageStatusForm from '@/app/dashboard/mortgages/_forms/update-st
 import ConfirmActionDialog from '../dialogs/confirm-action-dialog'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
+import currency from '@/lib/currency'
 
 
 export default function MortgagesTable() {
@@ -49,8 +50,12 @@ export default function MortgagesTable() {
       }
     },
     {
-      accessorKey: 'monthlyIncome',
-      header: 'Monthly Income'
+      id: 'monthlyIncome',
+      header: 'Monthly Income',
+      cell: ({ row }) => {
+        const monthlyIncome = row.original.monthlyIncome
+        return <span>{currency.format(monthlyIncome)}</span>
+      }
     },
     {
       id: 'status',
