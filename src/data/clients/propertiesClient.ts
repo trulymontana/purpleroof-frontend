@@ -25,7 +25,7 @@ export interface CreatePropertyInput {
   landmark: string
   propertyImage: string
   status: string
-  propertyPhotos: any
+  image: any
   propertyType: string
   propertyFor: string
   parkingSpaces: string
@@ -68,7 +68,8 @@ export interface Property extends CreatePropertyInput {
   updatedAt: Date
   emirateId: number
   id: number
-  status: PropertySubmissionStatusEnum
+  submissionStatus: PropertySubmissionStatusEnum
+  documents: any
 }
 
 export const propertiesClient = {

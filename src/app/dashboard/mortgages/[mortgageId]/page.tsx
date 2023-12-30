@@ -4,14 +4,17 @@ import { useGetOneMortgage } from '@/data/hooks/useMortgageClient'
 import Loader from "@/components/Loader"
 import { Button } from "@/components/ui/button"
 import { CardHeader, CardContent, Card, CardFooter } from "@/components/ui/card"
-import { Bath, BedDouble } from "lucide-react"
-import Image from "next/image"
+import { DownloadIcon, FileEdit, MessageCircle, MessageCircleIcon, Paperclip, Send, X } from "lucide-react"
 import { MortgageStatusEnum } from '@/constants/enums'
 import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
-import { Separator } from '@/components/ui/separator'
 import currency from '@/lib/currency'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Input } from '@/components/ui/input'
+import { useState } from 'react'
+import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
+import UpdateMortgageStatusForm from '../_forms/update-status-form'
 
 
 interface Props {
@@ -22,6 +25,8 @@ interface Props {
 const Page = ({ params: { mortgageId } }: Props) => {
 
     const { loading, data } = useGetOneMortgage(mortgageId)
+
+    const [chatOpen, setChatOpen] = useState(false);
 
     if (loading) {
         return (
@@ -34,8 +39,23 @@ const Page = ({ params: { mortgageId } }: Props) => {
     return (
         <>
             <main className="container px-3 py-4">
+                <div className='py-3 flex items-end justify-end'>
+                    {
+                        !loading && data && (
+                            <ConfirmActionDialog
+                                title="Edit Mortgage"
+                                anchor={
+                                    <Button>
+                                        Update Status
+                                    </Button>
+                                }
+                                content={<UpdateMortgageStatusForm data={data} />}
+                            />
+                        )
+                    }
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <Card className="p-4 flex justify-between flex-col">
+                    <Card className="p-4 flex flex-col h-fit">
                         <CardHeader className="mb-4">
                             <h2 className="text-4xl font-bold underline">Mortgage Details</h2>
                         </CardHeader>
@@ -156,12 +176,18 @@ const Page = ({ params: { mortgageId } }: Props) => {
                                     <CardHeader className="mb-4">
                                         <h2 className="text-2xl font-semibold">Required Documents</h2>
                                     </CardHeader>
-                                    <CardContent>
-                                        <ul className='list-disc'>
-                                            {data?.requirement?.requiredDocuments.map((item: any, i: number) => (
-                                                <li key={i}>{item.name}</li>
-                                            ))}
-                                        </ul>
+                                    <CardContent className='space-y-4'>
+                                        {data?.requirement?.requiredDocuments.map((item: any, i: number) => (
+                                            <Card key={i} className="shadow-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200">
+                                                <CardContent className="flex justify-between items-center p-4">
+                                                    <h3 className="font-medium text-lg">{item?.name}</h3>
+                                                    <Button className="flex items-center">
+                                                        <DownloadIcon className="mr-2 h-4 w-4" />
+                                                        Download
+                                                    </Button>
+                                                </CardContent>
+                                            </Card>
+                                        ))}
                                     </CardContent>
                                 </Card>
                             )
@@ -246,6 +272,42 @@ const Page = ({ params: { mortgageId } }: Props) => {
                     </div>
                 </div>
             </main>
+            <div className="fixed bottom-4 right-4">
+                <Popover open={chatOpen} onOpenChange={setChatOpen}>
+                    <PopoverTrigger asChild>
+                        <Button className="rounded-full bg-primary w-15 h-15 flex items-center justify-center">
+                            <MessageCircle size={25} className="text-white" />
+                        </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-64 mt-2 bg-white rounded-lg">
+                        <Card className="border-none">
+                            <CardContent>
+                                <div className="fixed bottom-0 right-0 w-[350px] h-[505px] bg-white rounded-t-lg shadow-lg overflow-hidden">
+                                    <div className="bg-gray-100 p-3 flex items-center justify-between">
+                                        <div className="flex items-center space-x-2">
+                                            <MessageCircleIcon size={20} />
+                                            <h2 className="text-lg font-bold">Chat</h2>
+                                        </div>
+                                        <X onClick={() => setChatOpen(!chatOpen)} className="w-6 h-6 cursor-pointer" />
+                                    </div>
+                                    <div className="overflow-y-auto p-3 h-[400px]" />
+                                    <div className="border-t py-2 px-2 justify-between gap-2 flex items-center">
+                                        <div className="w-5 h-5">
+                                            <Paperclip size={20} className="w-5 h-5" />
+                                        </div>
+                                        <div className="flex-grow flex items-center space-x-2">
+                                            <Input className="flex-grow" placeholder="Type a message" />
+                                        </div>
+                                        <div className="w-5 h-5">
+                                            <Send className="w-5 h-5" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </PopoverContent>
+                </Popover>
+            </div>
         </>
     )
 }

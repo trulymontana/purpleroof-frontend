@@ -14,7 +14,7 @@ interface Props {
 }
 
 const formSchema = z.object({
-    status: z.nativeEnum(PropertySubmissionStatusEnum, {
+    submissionStatus: z.nativeEnum(PropertySubmissionStatusEnum, {
         required_error: "Please select a status!"
     })
 })
@@ -26,7 +26,7 @@ const UpdatePropertyForm = ({ data }: Props) => {
     const form = useForm<TPropertyStatus>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            status: data?.status
+            submissionStatus: data?.submissionStatus
         }
     })
 
@@ -41,7 +41,7 @@ const UpdatePropertyForm = ({ data }: Props) => {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
                 <SelectElement
-                    name="status"
+                    name="submissionStatus"
                     placeholder="Please select a status"
                     label="Status"
                     options={propertySubmissionStatuses}

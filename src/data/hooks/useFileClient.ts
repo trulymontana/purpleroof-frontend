@@ -8,8 +8,10 @@ export const useFileUploader = (folder: string, fileName: string) => {
   const [loading, setLoading] = useState(false)
   const uploadFile = async (file: File) => {
     setLoading(true)
+
     const fileNameAfterUpload = `${fileName}-${new Date().toISOString()}-${file.name.split(' ').join('-')}`
     const uploadUrl: { data: PreSignedFile } = await fileClient.getPreSignedUrl(folder, fileNameAfterUpload)
+
     const formData = new FormData()
     formData.append('file', file)
     await fetch(uploadUrl.data.url, {
@@ -26,7 +28,9 @@ export const useFileUploader = (folder: string, fileName: string) => {
       })
       .finally(() => setLoading(false))
 
+
     const objectUrl = `https://${S3_BUCKET_NAME}.s3.amazonaws.com/${folder}/${fileNameAfterUpload}`
+
     return objectUrl
   }
 

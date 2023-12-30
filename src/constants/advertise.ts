@@ -1,6 +1,7 @@
 import {
   CommercialPropertyCategoryEnum,
   EmirateEnum,
+  FurnishingStatusEnum,
   HoldingTypeEnum,
   OccupencyStatusEnum,
   PaymentIntervalsEnum,
@@ -9,7 +10,6 @@ import {
   PropertyTypeEnum,
   RentedOrVacantEnum,
   ResidentialPropertyCategoryEnum,
-  StatusesEnum,
   categoryEnum
 } from './enums'
 
@@ -1752,18 +1752,18 @@ export const propertyTypes = [
   }
 ]
 
-export const statuses = [
+export const furnishingStatuses = [
   {
     label: 'Fully Furnished',
-    value: StatusesEnum.FULLY_FURNISHED
+    value: FurnishingStatusEnum.FULLY_FURNISHED
   },
   {
     label: 'Semi Furnished',
-    value: StatusesEnum.SEMI_FURNISHED
+    value: FurnishingStatusEnum.SEMI_FURNISHED
   },
   {
     label: 'Unfurnished',
-    value: StatusesEnum.UNFURNISHED
+    value: FurnishingStatusEnum.UNFURNISHED
   }
 ]
 

@@ -10,7 +10,7 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { amenities, propertyTypes, statuses } from '@/constants/advertise'
+import { amenities, furnishingStatuses, propertyTypes } from '@/constants/advertise'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 import { useRouter } from 'next/navigation'
 import { TOption } from '@/constants/types'
@@ -22,12 +22,12 @@ const formSchema = z.object({
   holdingType: z.string({
     required_error: 'Please select a property type!'
   }),
-  status: z.string({
+  furnishingStatus: z.string({
     required_error: 'Please select your property status'
   }),
   parkingSpaces: z.number().optional(),
   airportDistance: z.number().optional(),
-  metroStation: z.number().optional(),
+  metroStationDistance: z.number().optional(),
   nearbyPlaces: z.string().optional(),
   otherFeatures: z.string().optional()
 })
@@ -75,7 +75,7 @@ const AmenitiesForm = ({ onSave }: Props) => {
           options={propertyTypes}
         />
 
-        <SelectElement name="status" label={'Status'} placeholder="Please select a status" options={statuses} />
+        <SelectElement name="furnishingStatus" label={'Status'} placeholder="Please select a status" options={furnishingStatuses} />
 
         <NumberInputElement
           name="parkingSpaces"
@@ -98,7 +98,7 @@ const AmenitiesForm = ({ onSave }: Props) => {
         />
 
         <NumberInputElement
-          name="metroStation"
+          name="metroStationDistance"
           placeholder="Please enter metro station"
           label={'Nearby Metro Station (in km)'}
         />
