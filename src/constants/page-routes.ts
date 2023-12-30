@@ -7,7 +7,12 @@ export const PageRoutes = {
       REQUIREMENTS_ADD: '/dashboard/admin/requirements/add'
     },
     MORTGAGES: '/dashboard/mortgages',
-    PROPERTIES: '/dashboard/properties'
+    MORTGAGE_DETAILS: (mortgageId: number) => `/dashboard/mortgages/${mortgageId}`,
+    MORTGAGE_TIMELINE: (mortgageId: number) => `/dashboard/mortgages/${mortgageId}/timeline`,
+    COMPLETE_MORTGAGE_APPLICATION: (mortgageId: number, step: string) => `/dashboard/mortgages/${mortgageId}/${step}`,
+    PROPERTIES: '/dashboard/properties',
+    PROPERTY_DETAILS: (propertyId: number) => `/dashboard/properties/${propertyId}`,
+    PROFILE: '/dashboard/profile'
   },
   admin: {
     MORTGAGES: '/admin/mortgages',
@@ -18,7 +23,8 @@ export const PageRoutes = {
   },
   mortgage: {
     PERSONAL_DETAILS: '/mortgage/personal-details',
-    INCOME_DETAILS: '/mortgage/income-details'
+    INCOME_DETAILS: '/mortgage/income-details',
+    COMPLETE_APPLICATION: '/mortgage/complete-application'
   },
   advertise: {
     BASIC_DETAILS: '/advertise/basic-details',
@@ -30,8 +36,9 @@ export const PageRoutes = {
     CALL_PREFERENCE: '/advertise/call-preference'
   },
   mortgage_transaction: {
-    TRANSACTION_INFO: 'transaction-info',
-    CUSTOMER_INFO: 'customer-info'
+    TRANSACTION_INFO: 'mortgage-transaction-info',
+    DOCUMENTS: 'mortgage-documents',
+    CUSTOMER_INFO: 'mortgage-customer-info'
   },
   HOME: '/',
   ABOUT: '/about',

@@ -5,12 +5,14 @@ import { authClient } from '../clients/authClient'
 import { toast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 export function useSignUp() {
   const router = useRouter()
-  const queryClient = useQueryClient()
+  // const queryClient = useQueryClient()
   return useMutation({
     mutationFn: authClient.signUp,
+
     onSuccess: (response: any) => {
       const { statusCode, data } = response
       if (statusCode === 200) {
@@ -23,19 +25,18 @@ export function useSignUp() {
 
         const { firstName, lastName, email, role } = user
 
-        localStorage.setItem('AUTH_TOKEN', jwtToken)
+        localStorage.setItem(LocalStorageKeys.AUTH_TOKEN, jwtToken)
         const newUser = JSON.stringify({ firstName, lastName, email, role })
-        localStorage.setItem('user', newUser)
+        localStorage.setItem(LocalStorageKeys.USER, newUser)
 
         router.push(PageRoutes.dashboard.MORTGAGES)
       }
-
-      // queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
     },
     onError: (error: any) => {
       toast({
         variant: 'destructive',
-        title: error.message
+        title: error.response.data.message,
+        description: error.response.data.details
       })
     }
   })
@@ -58,9 +59,9 @@ export function useSignIn() {
 
         const { firstName, lastName, email, role } = user
 
-        localStorage.setItem('AUTH_TOKEN', jwtToken)
+        localStorage.setItem(LocalStorageKeys.AUTH_TOKEN, jwtToken)
         const newUser = JSON.stringify({ firstName, lastName, email, role })
-        localStorage.setItem('user', newUser)
+        localStorage.setItem(LocalStorageKeys.USER, newUser)
 
         router.push(PageRoutes.dashboard.MORTGAGES)
       }

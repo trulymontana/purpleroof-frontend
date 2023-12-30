@@ -2,6 +2,7 @@ export const API_ROOT = process.env.NEXT_PUBLIC_API_ROOT || 'http://localhost:40
 
 export const ApiEndpoints = {
   MORTGAGES: API_ROOT + '/mortgages',
+  MORTGAGE_TRANSACTION: API_ROOT + '/mortgage-transactions',
   USERS: API_ROOT + '/users',
   PROPERTIES: API_ROOT + '/properties',
   REQUIREMENTS: API_ROOT + '/requirements',

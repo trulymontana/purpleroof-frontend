@@ -50,8 +50,11 @@ const Page = () => {
       <Card className="mx-auto w-full max-w-md  bg-opacity-75">
         <CardHeader>
           <h1 className="text-center text-4xl font-bold">Sign Up</h1>
+
+          <p className="text-center text-md font-light">Create Account</p>
+
         </CardHeader>
-        <CardContent className="p-8">
+        <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 p-4">
               <div className="space-y-2">
@@ -67,7 +70,9 @@ const Page = () => {
                 <CustomInputElement name="password" label="Password" type="password" />
               </div>
               <Button disabled={isLoading} className="w-full" type="submit">
-                {isLoading ? 'Loading...' : 'Sign In'}
+
+                {isLoading ? 'Loading...' : 'Sign Up'}
+
               </Button>
               <p className="mt-4 text-center">
                 Already have an account?{' '}

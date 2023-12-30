@@ -1,8 +1,10 @@
 'use client'
 
 import { PageRoutes } from '@/constants/page-routes'
-import { Building, FileCode, Home, PersonStandingIcon, User } from 'lucide-react'
+import { User } from '@/constants/types'
+import { Building, FileCode, Files, Home, PersonStandingIcon, Settings, User as UserIcon } from 'lucide-react'
 import Link from 'next/link'
+import UserButton from './user-button'
 
 const ICON_SIZE = 20
 
@@ -25,13 +27,18 @@ const navigationSidebarItems = [
   {
     title: 'Users',
     link: PageRoutes.dashboard.admin.USERS,
-    icon: <User size={ICON_SIZE} />
+    icon: <UserIcon size={ICON_SIZE} />
   },
   {
     title: 'Requirements',
     link: PageRoutes.dashboard.admin.REQUIREMENTS,
-    icon: <User size={ICON_SIZE} />
-  }
+    icon: <Files size={ICON_SIZE} />
+  },
+  {
+    title: 'Profile',
+    link: PageRoutes.dashboard.PROFILE,
+    icon: <Settings size={ICON_SIZE} />
+  },
 ]
 
 interface SidebarNavigationLinkProps {
@@ -49,15 +56,18 @@ const SidebarNavigationLink = ({ link, title, icon }: SidebarNavigationLinkProps
   </Link>
 )
 
-export default function SideNavBar() {
+export default function SideNavBar({ user }: { user: User }) {
   return (
     <div className="hidden border-r bg-gray-100/40 dark:bg-gray-800/40 lg:block">
-      <div className="flex flex-col gap-2">
+      <div className='flex flex-col gap-2 justify-between h-full'>
         <div className="flex h-[60px] items-center px-6">
-          <Link className="flex items-center gap-2 font-semibold" href="#">
-            <Home />
-            <span>PurpleRoof</span>
-          </Link>
+          <div className="flex items-center justify-between w-full gap-2 font-semibold" >
+            <Link href="#" className='flex items-center w-full gap-2 font-semibold'>
+              <Home />
+              <span>PurpleRoof</span>
+            </Link>
+            <UserButton user={user} />
+          </div>
         </div>
         <div className="flex-1 overflow-auto">
           <nav className="grid items-start px-4 text-sm font-medium">
@@ -67,6 +77,6 @@ export default function SideNavBar() {
           </nav>
         </div>
       </div>
-    </div>
+    </div >
   )
 }

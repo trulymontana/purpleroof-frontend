@@ -32,14 +32,16 @@ const formSchema = z.object({
 })
 
 interface Props {
-  mortgageId: string
+  mortgageId: number
   onSave: (step: string, values: any) => void
 }
 
 const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
+
   const router = useRouter()
 
-  const storedValue = localStorage.getItem('mortgage/transaction-info')
+  const storedValue = localStorage.getItem(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${mortgageId}`)
+  // @ts-ignore
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -48,9 +50,8 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-    onSave(LocalStorageKeys.TRANSACTION_INFO, values)
-    router.push(`${PageRoutes.dashboard.MORTGAGES}/${mortgageId}/customer-info`)
+    onSave(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${mortgageId}`, values)
+    router.push(PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_CUSTOMER_INFO))
   }
 
   return (

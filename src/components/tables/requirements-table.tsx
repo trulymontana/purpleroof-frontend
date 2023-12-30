@@ -6,6 +6,10 @@ import { useGetRequirements } from '@/data/hooks/useRequirementsClient'
 import { Badge } from '../ui/badge'
 
 import ActionButtons from './action-buttons'
+import Link from 'next/link'
+import { PageRoutes } from '@/constants/page-routes'
+import { Eye } from 'lucide-react'
+import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 
 export const columns: ColumnDef<RequirementApplication>[] = [
   {
@@ -33,7 +37,23 @@ export const columns: ColumnDef<RequirementApplication>[] = [
   {
     id: 'actions',
     enableHiding: false,
-    cell: ({ row }) => <ActionButtons row={row} />
+    cell: ({ row }) => (
+      <div className="flex items-center gap-4">
+        <Link href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
+          <Eye size={17} color="black" />
+        </Link>
+        {/* <ConfirmActionDialog
+          title="Edit Property"
+          anchor={
+            <Button variant="ghost">
+              <FileEdit size={17} color="black" />
+            </Button>
+          }
+          content={<UpdatePropertyForm data={row.original} />}
+        /> */}
+        <ConfirmDeleteDialog onDelete={() => { }} isLoading />
+      </div>
+    )
   }
 ]
 

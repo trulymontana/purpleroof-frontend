@@ -3,6 +3,8 @@ import { ApiEndpoints } from '@/constants/api'
 import { mortgageClient } from '../clients/mortgageClient'
 import { toast } from '@/components/ui/use-toast'
 import { PageRoutes } from '@/constants/page-routes'
+import { useRouter } from 'next/navigation'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 export function useGetMortgages() {
   const { isLoading, data } = useQuery({
@@ -13,8 +15,18 @@ export function useGetMortgages() {
   return { data: data?.data, loading: isLoading }
 }
 
+export function useGetOneMortgage(id: number) {
+  const { isLoading, data } = useQuery({
+    queryKey: [ApiEndpoints.MORTGAGES],
+    queryFn: () => mortgageClient.getById({ id })
+  })
+
+  return { data: data?.data, loading: isLoading }
+}
+
 export const useCreateMortgageMutation = () => {
   const queryClient = useQueryClient()
+  const router = useRouter()
   return useMutation({
     mutationFn: mortgageClient.create,
     onSuccess: (data: any) => {
@@ -25,6 +37,52 @@ export const useCreateMortgageMutation = () => {
       localStorage.removeItem(PageRoutes.mortgage.PERSONAL_DETAILS)
       localStorage.removeItem(PageRoutes.mortgage.INCOME_DETAILS)
       queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
+      router.push(PageRoutes.mortgage.COMPLETE_APPLICATION)
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.message
+      })
+    }
+  })
+}
+
+export const useDeleteMortgageMutation = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: mortgageClient.delete,
+    onSuccess: (data: any) => {
+      toast({
+        variant: 'default',
+        title: 'Mortgage deleted successfully'
+      })
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.response.data.message
+      })
+    }
+  })
+}
+
+export const useUpdateMortgageMutation = () => {
+  const router = useRouter()
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: mortgageClient.update,
+    onSuccess: (data: any) => {
+      toast({
+        variant: 'default',
+        title: 'Mortgage updated successfully'
+      })
+      console.log({ data })
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
+      localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${data.data.id}`)
+      localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_CUSTOMER_INFO}-${data.data.id}`)
+      router.push(PageRoutes.dashboard.MORTGAGES)
     },
     onError: (error: any) => {
       toast({
@@ -45,21 +103,6 @@ export const useCreateMortgageMutation = () => {
 //     },
 //     onSettled: () => {
 //       queryClient.invalidateQueries(ApiEndpoints.USERS)
-//     },
-//   })
-// }
-
-// export const useDeleteOpinionMutation = () => {
-//   const queryClient = useQueryClient()
-//   const navigate = useNavigate()
-//   return useMutation(opinionClient.delete, {
-//     onSuccess: (data) => {
-//       toast.success('Opinion and its contents are successfully deleted!')
-//       navigate(AppRoutes.OPINION_EDITOR)
-//       queryClient.refetchQueries(ApiEndpoints.OPINION)
-//     },
-//     onSettled: async () => {
-//       queryClient.invalidateQueries(ApiEndpoints.OPINION)
 //     },
 //   })
 // }

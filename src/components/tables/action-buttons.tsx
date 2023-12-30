@@ -13,6 +13,10 @@ import { propertySubmissionStatuses } from '@/constants/advertise'
 import { useUpdatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 import { Property } from '@/constants/types'
 
+import UpdateMortgageStatusForm from '@/app/dashboard/mortgages/_forms/update-status-form'
+import ConfirmDialog from '../dialogs/confirm-action-dialog'
+
+
 interface Props {
   row: any
 }
@@ -47,6 +51,17 @@ const ActionButtons = ({ row }: Props) => {
       <Link href={`${pathname}/${data.id}`}>
         <Eye size={17} color="black" />
       </Link>
+
+      <ConfirmDialog
+        title="Edit property"
+        anchor={
+          <Button variant="ghost">
+            <FileEdit size={17} color="black" />
+          </Button>
+        }
+        content={<UpdateMortgageStatusForm data={row.original} />}
+      />
+
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="ghost">
@@ -57,19 +72,9 @@ const ActionButtons = ({ row }: Props) => {
           <DialogHeader>
             <DialogTitle>Edit property</DialogTitle>
           </DialogHeader>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-              <SelectElement
-                name="status"
-                placeholder="Please select a status"
-                label="Status"
-                options={propertySubmissionStatuses}
-              />
-              <DialogFooter>
-                <Button type="submit">Save changes</Button>
-              </DialogFooter>
-            </form>
-          </Form>
+
+          <UpdateMortgageStatusForm data={row.original} />
+
         </DialogContent>
       </Dialog>
       <Button variant={'ghost'}>

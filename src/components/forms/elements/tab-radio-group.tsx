@@ -33,9 +33,8 @@ const TabRadioGroup = ({ name, options, className }: Props) => {
                       <RadioGroupItem value={option.value} className="hidden" />
                     </FormControl>
                     <FormLabel
-                      className={`w-full  cursor-pointer rounded-xl px-2 py-4 text-center text-[16px] font-medium ${
-                        field.value === option.value ? 'bg-[#613e83] text-white' : ''
-                      }`}
+                      className={`w-full  cursor-pointer rounded-xl px-8 py-4 text-center text-[10px] md:text-[16px]  font-medium ${field.value === option.value ? 'bg-[#613e83] text-white' : '' 
+                        }`}
                     >
                       {option.label}
                     </FormLabel>

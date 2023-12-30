@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Calendar as CalendarIcon, CheckIcon } from 'lucide-react'
 
@@ -22,6 +22,8 @@ interface Props {
 const ComboboxElement = ({ name, label, description, options, placeholder }: Props) => {
   const { control, setValue } = useFormContext()
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <FormField
       control={control}
@@ -29,20 +31,20 @@ const ComboboxElement = ({ name, label, description, options, placeholder }: Pro
       render={({ field }) => (
         <FormItem className="flex flex-col">
           <FormLabel>{label}</FormLabel>
-          <Popover>
+          <Popover open={isOpen} onOpenChange={setIsOpen}>
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
                   variant="outline"
                   role="combobox"
-                  className={cn('w-[200px] justify-between', !field.value && 'text-muted-foreground')}
+                  className={cn('w-full justify-between', !field.value && 'text-muted-foreground')}
                 >
                   {field.value ? options.find((option) => option.value === field.value)?.label : placeholder}
                   <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0">
+            <PopoverContent className="w-full p-0">
               <Command>
                 <CommandInput placeholder={placeholder} className="h-9" />
                 <CommandEmpty>No results found.</CommandEmpty>
@@ -53,6 +55,7 @@ const ComboboxElement = ({ name, label, description, options, placeholder }: Pro
                       key={option.value}
                       onSelect={() => {
                         setValue(name, option.value)
+                        setIsOpen(false)
                       }}
                     >
                       {option.label}
