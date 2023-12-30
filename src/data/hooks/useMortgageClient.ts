@@ -36,7 +36,7 @@ export const useCreateMortgageMutation = () => {
       })
       localStorage.removeItem(PageRoutes.mortgage.PERSONAL_DETAILS)
       localStorage.removeItem(PageRoutes.mortgage.INCOME_DETAILS)
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
       router.push(PageRoutes.mortgage.COMPLETE_APPLICATION)
     },
     onError: (error: any) => {
