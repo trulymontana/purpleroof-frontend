@@ -28,7 +28,7 @@ export const useFileUploader = (folder: string, fileName: string) => {
       })
       .finally(() => setLoading(false))
 
-    const objectUrl = `https://${S3_BUCKET_NAME}.s3.amazonaws.com/${folder}/${fileName}-${new Date().toLocaleTimeString()}`
+    const objectUrl = `https://${S3_BUCKET_NAME}.s3.amazonaws.com/${folder}/${fileName}-${new Date().toISOString()}`
     return objectUrl
   }
 

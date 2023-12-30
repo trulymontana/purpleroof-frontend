@@ -4,7 +4,7 @@ import { useGetOneMortgage } from '@/data/hooks/useMortgageClient'
 import Loader from "@/components/Loader"
 import { Button } from "@/components/ui/button"
 import { CardHeader, CardContent, Card, CardFooter } from "@/components/ui/card"
-import { Bird, MessageCircle, MessageCircleIcon, Paperclip, Pencil, PlaneIcon, Send, X } from "lucide-react"
+import { DownloadIcon, FileEdit, MessageCircle, MessageCircleIcon, Paperclip, Send, X } from "lucide-react"
 import { MortgageStatusEnum } from '@/constants/enums'
 import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
@@ -13,6 +13,8 @@ import currency from '@/lib/currency'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Input } from '@/components/ui/input'
 import { useState } from 'react'
+import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
+import UpdateMortgageStatusForm from '../_forms/update-status-form'
 
 
 interface Props {
@@ -37,8 +39,23 @@ const Page = ({ params: { mortgageId } }: Props) => {
     return (
         <>
             <main className="container px-3 py-4">
+                <div className='py-3 flex items-end justify-end'>
+                    {
+                        !loading && data && (
+                            <ConfirmActionDialog
+                                title="Edit Mortgage"
+                                anchor={
+                                    <Button>
+                                        Update Status
+                                    </Button>
+                                }
+                                content={<UpdateMortgageStatusForm data={data} />}
+                            />
+                        )
+                    }
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <Card className="p-4 flex justify-between flex-col">
+                    <Card className="p-4 flex flex-col h-fit">
                         <CardHeader className="mb-4">
                             <h2 className="text-4xl font-bold underline">Mortgage Details</h2>
                         </CardHeader>
@@ -159,12 +176,18 @@ const Page = ({ params: { mortgageId } }: Props) => {
                                     <CardHeader className="mb-4">
                                         <h2 className="text-2xl font-semibold">Required Documents</h2>
                                     </CardHeader>
-                                    <CardContent>
-                                        <ul className='list-disc'>
-                                            {data?.requirement?.requiredDocuments.map((item: any, i: number) => (
-                                                <li key={i}>{item.name}</li>
-                                            ))}
-                                        </ul>
+                                    <CardContent className='space-y-4'>
+                                        {data?.requirement?.requiredDocuments.map((item: any, i: number) => (
+                                            <Card key={i} className="shadow-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200">
+                                                <CardContent className="flex justify-between items-center p-4">
+                                                    <h3 className="font-medium text-lg">{item?.name}</h3>
+                                                    <Button className="flex items-center">
+                                                        <DownloadIcon className="mr-2 h-4 w-4" />
+                                                        Download
+                                                    </Button>
+                                                </CardContent>
+                                            </Card>
+                                        ))}
                                     </CardContent>
                                 </Card>
                             )
