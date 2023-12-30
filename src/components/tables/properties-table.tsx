@@ -76,7 +76,7 @@ export default function PropertiesTable() {
       header: 'Status',
       cell: ({ row }) => {
         const data = row.original;
-        return <Badge>{data.status}</Badge>
+        return <Badge>{data.submissionStatus}</Badge>
       }
     },
     {

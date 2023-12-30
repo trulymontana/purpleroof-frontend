@@ -57,10 +57,10 @@ export function useSignIn() {
 
         const { jwtToken, user } = data
 
-        const { firstName, lastName, email, role } = user
+        const { firstName, lastName, email, role, id } = user
 
         localStorage.setItem(LocalStorageKeys.AUTH_TOKEN, jwtToken)
-        const newUser = JSON.stringify({ firstName, lastName, email, role })
+        const newUser = JSON.stringify({ firstName, lastName, email, role, id })
         localStorage.setItem(LocalStorageKeys.USER, newUser)
 
         router.push(PageRoutes.dashboard.MORTGAGES)

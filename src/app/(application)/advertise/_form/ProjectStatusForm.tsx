@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
-import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { occupencyStatusOptions, projectStatuses } from '@/constants/advertise'
 import DatePickerElement from '@/components/forms/elements/date-picker-element'

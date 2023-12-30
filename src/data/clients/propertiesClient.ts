@@ -68,7 +68,7 @@ export interface Property extends CreatePropertyInput {
   updatedAt: Date
   emirateId: number
   id: number
-  status: PropertySubmissionStatusEnum
+  submissionStatus: PropertySubmissionStatusEnum
 }
 
 export const propertiesClient = {

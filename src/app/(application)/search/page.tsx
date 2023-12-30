@@ -70,6 +70,12 @@ const formSchema = z.object({
     })
     .optional()
 })
+
+//  propertyFor - sale or rent
+//  propertyType - resi or comm
+// propertyCategory - apartment and unit
+//  add emirate field and location accordingly
+
 const Page = () => {
   const [values, setValues] = useState([0, 1200])
 
@@ -111,12 +117,12 @@ const Page = () => {
             </div>
             <div className="flex flex-col items-center gap-5 rounded-lg p-4 ">
               <div className="flex w-full items-center gap-4">
-                <div className="flex-1">
+                {/* <div className="flex-1">
                   <MultiSelectElement name="location" placeholder="Please select a location" options={amenities} />
                 </div>
                 <div className="flex-1">
                   <SelectElement name="category" options={searchCategories} placeholder="Please select a category" />
-                </div>
+                </div> */}
 
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="bg-white flex flex-col gap-2 rounded-xl w-3/4 mx-auto">

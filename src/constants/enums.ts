@@ -150,7 +150,7 @@ export enum PaymentIntervalsEnum {
   YEARLY = 'YEARLY'
 }
 
-export enum StatusesEnum {
+export enum FurnishingStatusEnum {
   FULLY_FURNISHED = 'FULLY_FURNISHED',
   SEMI_FURNISHED = 'SEMI_FURNISHED',
   UNFURNISHED = 'UNFURNISHED'

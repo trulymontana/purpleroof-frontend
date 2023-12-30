@@ -10,7 +10,7 @@ export const useFileUploader = (folder: string, fileName: string) => {
     setLoading(true)
     const uploadUrl: { data: PreSignedFile } = await fileClient.getPreSignedUrl(
       folder,
-      `${fileName}-${new Date().toLocaleTimeString()}`
+      `${fileName}-${new Date().toISOString()}`
     )
     const formData = new FormData()
     formData.append('file', file)
