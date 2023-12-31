@@ -7,7 +7,11 @@ import RequiredDocumentsCards from '@/components/cards/required-documents'
 import PropertyDetailsCard from '@/components/cards/property-details'
 import ContactAgentCard from '@/components/cards/contact-agent'
 
-const Page = ({ params: { propertyId } }: { params: { propertyId: number } }) => {
+interface Props {
+  params: { propertyId: number }
+}
+
+const Page = ({ params: { propertyId } }: Props) => {
   const { loading, data } = useGetOneProperty(propertyId)
 
   if (loading) {

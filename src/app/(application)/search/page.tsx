@@ -261,7 +261,9 @@ const Page = () => {
                         </p>
                       </CardContent>
                       <CardFooter className="p-4">
-                        <Button className="w-full">View More Details</Button>
+                        <Link className='w-full' href={`/search/${property.id}`} >
+                          <Button className="w-full">View More Details</Button>
+                        </Link>
                       </CardFooter>
                     </Card>
                   )
