@@ -6,6 +6,7 @@ import Image from 'next/image'
 import RequiredDocumentsCards from '@/components/cards/required-documents'
 import PropertyDetailsCard from '@/components/cards/property-details'
 import ContactAgentCard from '@/components/cards/contact-agent'
+import AmenitiesCard from '@/components/cards/amenities'
 
 interface Props {
   params: { propertyId: number }
@@ -27,12 +28,12 @@ const Page = ({ params: { propertyId } }: Props) => {
       <section className="h-[500px] w-full">
         <Image
           alt="Property Image"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover border-b-2"
           height="500"
           src={data?.image || "/placeholder.svg"}
           style={{
             aspectRatio: '1000/500',
-            objectFit: 'cover'
+            objectFit: 'contain'
           }}
           width="1000"
           priority
@@ -47,6 +48,11 @@ const Page = ({ params: { propertyId } }: Props) => {
         )}
 
         <div className='w-1/3 space-y-4'>
+          {
+            data && (
+              <AmenitiesCard data={data} />
+            )
+          }
           {
             data && (
               <RequiredDocumentsCards data={data} />

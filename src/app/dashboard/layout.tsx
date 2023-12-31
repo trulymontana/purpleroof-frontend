@@ -93,7 +93,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="grid  min-h-screen w-full lg:grid-cols-[280px_1fr]">
+    <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       <SideNavBar user={userData} />
       <div className="flex flex-col">{children}</div>
     </div>

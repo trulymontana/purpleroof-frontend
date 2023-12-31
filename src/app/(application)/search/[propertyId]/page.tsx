@@ -1,6 +1,7 @@
 'use client'
 
 import Loader from "@/components/Loader"
+import AmenitiesCard from "@/components/cards/amenities"
 import PropertyDetailsCard from "@/components/cards/property-details"
 import { useGetOneProperty } from "@/data/hooks/usePropertiesClient"
 import Image from "next/image"
@@ -21,30 +22,38 @@ const Page = ({ params: { propertyId } }: Props) => {
     }
 
     return (
-        <>
-            <section className="h-[500px] w-full">
+        
+        <section className="max-w-[90vw] mx-auto">
+            <div className="h-[500px] w-full">
                 <Image
                     alt="Property Image"
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover border-b-2"
                     height="500"
                     src={data?.image || "/placeholder.svg"}
                     style={{
                         aspectRatio: '1000/500',
-                        objectFit: 'cover'
+                        objectFit: 'contain'
                     }}
                     width="1000"
                     priority
                     quality={100}
                 />
-            </section>
-            <div className="max-w-7xl flex items-start gap-8 mx-auto p-6 bg-white">
+            </div>
+            <div className="w-full flex items-center justify-center gap-8 mx-auto p-6">
                 {data && (
                     <div className='flex flex-col gap-8 w-2/3'>
                         <PropertyDetailsCard data={data} />
                     </div>
                 )}
             </div>
-        </>
+            <div className='w-1/3 space-y-4'>
+                {
+                    data && (
+                        <AmenitiesCard data={data} />
+                    )
+                }
+            </div>
+        </section>
     )
 }
 

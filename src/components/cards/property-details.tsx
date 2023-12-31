@@ -76,7 +76,6 @@ const PropertyDetailsCard = ({ data }: Props) => {
                         )}
                     </div>
                 </div>
-
             </div>
             <div className="grid grid-cols-3 gap-8">
                 <div className="col-span-2">
