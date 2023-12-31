@@ -18,6 +18,7 @@ import { PageRoutes } from '@/constants/page-routes'
 import { BackButton } from '@/components/navigation/back-button'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 import { PropertyTypeEnum } from '@/constants/enums'
+import TextAreaElement from '@/components/forms/elements/text-area-element'
 
 const formSchema = z.object({
   phone: z
@@ -36,6 +37,7 @@ const formSchema = z.object({
   numberOfBedRooms: z.number().optional(),
   numberOfBathRooms: z.number().optional(),
   numberOfLavatory: z.number().optional(),
+  description: z.string().optional(),
   deedNumber: z.string({
     required_error: 'Please enter your Deed Number'
   })
@@ -90,6 +92,8 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
           placeholder="Please enter deed number"
           label={'Title Deed / Oqod / Initial Contract of Sales'}
         />
+
+        <TextAreaElement name='description' label='Description' placeholder="Enter description of property here..." />
 
         <Button type="submit" className="w-full">
           Save and Continue

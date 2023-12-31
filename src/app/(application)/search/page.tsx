@@ -51,6 +51,7 @@ const Page = () => {
   const root = useRef<HTMLDivElement>(null)
 
   const [locations, setLocations] = useState<TOption[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const { data, mutate: searchProperties, isPending: isLoading, isSuccess } = useSearchProperties()
 
@@ -153,7 +154,7 @@ const Page = () => {
                         )
                       }
                       <div className={propertyTypes === PropertyTypeEnum.RESIDENTIAL ? "" : "w-full"}>
-                        <DropdownMenu>
+                        <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
                           <DropdownMenuTrigger asChild>
                             <Button variant="outline" className='flex-1 w-full'>Select Price Range</Button>
                           </DropdownMenuTrigger>
@@ -171,7 +172,7 @@ const Page = () => {
                                 Reset
                               </Button>
 
-                              <Button className="w-1/2 ml-2">
+                              <Button onClick={() => setIsOpen(!isOpen)} className="w-1/2 ml-2">
                                 Done
                               </Button>
                             </div>

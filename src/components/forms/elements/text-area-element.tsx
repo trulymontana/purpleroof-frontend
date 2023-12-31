@@ -7,9 +7,10 @@ interface Props {
   name: string
   label: string
   description?: string
+  placeholder?: string
 }
 
-const TextAreaElement = ({ name, label, description }: Props) => {
+const TextAreaElement = ({ name, label, description, placeholder }: Props) => {
   const { control } = useFormContext()
   return (
     <FormField
@@ -19,7 +20,7 @@ const TextAreaElement = ({ name, label, description }: Props) => {
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Textarea placeholder="" {...field} />
+            <Textarea placeholder={placeholder} {...field} />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />

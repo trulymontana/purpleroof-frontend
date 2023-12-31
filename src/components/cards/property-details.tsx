@@ -44,8 +44,7 @@ const PropertyDetailsCard = ({ data }: Props) => {
                 </div>
                 <h2 className="text-2xl font-semibold my-2 capitalize"> {data?.occupencyStatus?.toLocaleLowerCase()} | {data?.furnishingStatus?.toLocaleLowerCase().replaceAll("_", " ")}</h2>
                 <p className="my-4">
-                    18Bricks Real Estate is delighted to present to you this two (2) bedrooms apartment located in Amna Tower Al
-                    Habtoor, BusinessBay.
+                    {data?.description}
                 </p>
             </div>
             <div className="grid grid-cols-3 gap-8">
@@ -119,7 +118,7 @@ const PropertyDetailsCard = ({ data }: Props) => {
                     <div className="grid grid-cols-2 gap-y-4 gap-x-10 mt-5">
                         <div>
                             <p>Project Status</p>
-                            <p className="font-semibold capitalize">{data?.projectStatus.toLocaleLowerCase().replaceAll("_", " ")}</p>
+                            <p className="font-semibold capitalize">{data?.projectStatus?.toLocaleLowerCase().replaceAll("_", " ")}</p>
                         </div>
                         {data?.occupencyStatus && (
                             <div>
