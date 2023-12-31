@@ -44,7 +44,7 @@ const ContactAgentCard = () => {
 
     return (
         <Card className="w-full">
-            <CardHeader className="mb-4">
+            <CardHeader className="">
                 <h2 className="text-2xl font-semibold">Contact Agent</h2>
             </CardHeader>
             <CardContent>

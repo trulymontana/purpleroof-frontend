@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { LocalStorageKeys } from "@/constants/local-storage-keys"
-import { User } from "@/constants/types"
+import { TOption, User } from "@/constants/types"
 import Link from "next/link"
 import { PageRoutes } from "@/constants/page-routes"
 import * as z from 'zod'
@@ -17,6 +17,12 @@ import { Form } from "@/components/ui/form"
 import InputElement from "@/components/forms/elements/input-element"
 import PhoneNumberInputElement from "@/components/forms/elements/phone-number-input"
 import FileUploader from "@/components/forms/elements/file-uploader"
+import MultiSelectElement from "@/components/forms/elements/multiselect-element"
+import { emirateOptions, emiratesWithLocations } from "@/constants/advertise"
+import { useEffect, useState } from "react"
+import { Separator } from "@/components/ui/separator"
+import { useCreateAgentMutation } from "@/data/hooks/useAgentsClient"
+import { getValuesFrom } from "@/lib/utils"
 
 const formSchema = z.object({
     agency: z.string({
@@ -30,23 +36,45 @@ const formSchema = z.object({
     realEstateLicense: z.string({
         required_error: 'Please upload your real estate license.'
     }),
+    emirates: z.any().optional(),
     locations: z.any().optional()
 })
 
-
 const Page = () => {
 
+    const [locations, setLocations] = useState<TOption[]>([]);
+
     const storedValue = localStorage.getItem(LocalStorageKeys.USER)
+
+    const { mutate: createAgent, isPending: isLoading } = useCreateAgentMutation()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema)
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
+        delete values.emirates
+        values.locations.length > 0 && (values.locations = getValuesFrom(values.locations))
         console.log({ values })
+        createAgent({
+            ...values
+        })
     }
 
+    const emirates: TOption[] = form.watch('emirates')
     const user: User = storedValue !== null && JSON.parse(storedValue)
+
+    useEffect(() => {
+        emirates &&
+            emirates.length > 0 &&
+            emirates.map((emirate: TOption) => {
+                // @ts-ignore
+                const response: TOption[] = emiratesWithLocations[emirate.value];
+
+                setLocations((prevLocations: any) => [...prevLocations, ...response]);
+            });
+    }, [emirates]);
+
 
     return (
         <div className="w-full px-6 py-10 space-y-8">
@@ -105,12 +133,15 @@ const Page = () => {
                                             <InputElement name='agency' label='Agency Name' />
                                             <PhoneNumberInputElement name='contactNumber' label='Contact Number' />
                                             <FileUploader folder="agent" form={form} name="realEstateLicense" label="Real Estate License" />
-                                            <Button type="submit" className="w-full">Apply</Button>
+                                            <MultiSelectElement label="Emirates" name="emirates" placeholder="Please select emirates" options={emirateOptions} />
+                                            <MultiSelectElement label="Locations" disabled={!emirates || emirates.length === 0} name="locations" placeholder={!emirates || emirates?.length === 0 ? "Please select atleast one emirate" : "Please select locations"} options={locations!} />
+                                            <Separator />
+                                            <Button disabled={isLoading} type="submit" className="w-full">{isLoading ? "Applying..." : "Apply"}</Button>
                                         </form>
                                     </Form>
                                 </DialogContent>
                             </Dialog>
-                            <Button variant="default" className="hover:bg-primary">Submit</Button>
+                            <Button>Submit</Button>
                         </div>
                     </CardContent>
                 </Card>

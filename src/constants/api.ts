@@ -9,5 +9,6 @@ export const ApiEndpoints = {
   SEARCH: API_ROOT + '/properties/search',
   FILES: API_ROOT + '/files',
   SIGNIN: API_ROOT + '/auth/sign-in',
-  SIGNUP: API_ROOT + '/auth/sign-up'
+  SIGNUP: API_ROOT + '/auth/sign-up',
+  AGENTS: API_ROOT + '/agents'
 }
