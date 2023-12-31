@@ -80,20 +80,6 @@ export default function PropertiesTable() {
       }
     },
     {
-      id: 'action',
-      header: 'Action',
-      cell: ({ row }) => {
-        const data = row.original
-        if (data.status === PropertySubmissionStatusEnum.SUBMITTED) {
-          return (
-            <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(data.id)}>
-              <Badge>Complete Your Application</Badge>
-            </Link>
-          )
-        }
-      }
-    },
-    {
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => (

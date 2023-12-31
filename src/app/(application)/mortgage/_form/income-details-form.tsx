@@ -67,7 +67,7 @@ const IncomeDetailsForm = ({ handleSubmit, isLoading }: Props) => {
         <SelectElement name="loanType" label={'Loan Type'} options={loanTypeOptions} />
 
         <Button type="submit" disabled={isLoading} className="w-full">
-          Get Quote
+          {isLoading ? "Submitting..." : "Get Quote"}
         </Button>
 
         <BackButton route={PageRoutes.mortgage.PERSONAL_DETAILS} />
