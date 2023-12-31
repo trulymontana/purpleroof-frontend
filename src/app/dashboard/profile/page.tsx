@@ -9,10 +9,42 @@ import { LocalStorageKeys } from "@/constants/local-storage-keys"
 import { User } from "@/constants/types"
 import Link from "next/link"
 import { PageRoutes } from "@/constants/page-routes"
+import * as z from 'zod'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Form } from "@/components/ui/form"
+import InputElement from "@/components/forms/elements/input-element"
+import PhoneNumberInputElement from "@/components/forms/elements/phone-number-input"
+import FileUploader from "@/components/forms/elements/file-uploader"
+
+const formSchema = z.object({
+    agency: z.string({
+        required_error: "Please enter your name"
+    }),
+    contactNumber: z.string({
+        required_error: 'Please enter a valid contact number.'
+    }).min(10, {
+        message: 'Contact number must be at least 10 characters.'
+    }),
+    realEstateLicense: z.string({
+        required_error: 'Please upload your real estate license.'
+    }),
+    locations: z.any().optional()
+})
+
 
 const Page = () => {
 
     const storedValue = localStorage.getItem(LocalStorageKeys.USER)
+
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema)
+    })
+
+    function onSubmit(values: z.infer<typeof formSchema>) {
+        console.log({ values })
+    }
 
     const user: User = storedValue !== null && JSON.parse(storedValue)
 
@@ -56,9 +88,28 @@ const Page = () => {
                             </Link>
                         </div>
                         <div className="flex items-center justify-between mt-6">
-                            <Button variant={"outline"}>
-                                Apply as Agent
-                            </Button>
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <Button variant={"outline"}>Apply as Agent</Button>
+                                </DialogTrigger>
+                                <DialogContent className='sm:max-w-[425px]'>
+                                    <DialogHeader>
+                                        <DialogTitle>
+                                            <h2 className="text-xl font-semibold capitalize">Apply as Agent</h2>
+                                        </DialogTitle>
+                                        <DialogDescription>Fill the following details to apply as a agent</DialogDescription>
+
+                                    </DialogHeader>
+                                    <Form {...form}>
+                                        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
+                                            <InputElement name='agency' label='Agency Name' />
+                                            <PhoneNumberInputElement name='contactNumber' label='Contact Number' />
+                                            <FileUploader folder="agent" form={form} name="realEstateLicense" label="Real Estate License" />
+                                            <Button type="submit" className="w-full">Apply</Button>
+                                        </form>
+                                    </Form>
+                                </DialogContent>
+                            </Dialog>
                             <Button variant="default" className="hover:bg-primary">Submit</Button>
                         </div>
                     </CardContent>

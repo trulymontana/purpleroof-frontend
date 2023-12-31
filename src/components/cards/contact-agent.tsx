@@ -2,14 +2,13 @@
 
 import { Card, CardContent, CardHeader } from '../ui/card'
 import { Button } from '../ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 import { PhoneCall } from 'lucide-react'
 import { Separator } from '../ui/separator'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import InputElement from '../forms/elements/input-element'
-import Image from 'next/image'
 import TextAreaElement from '../forms/elements/text-area-element'
 import { Form } from '../ui/form'
 import PhoneNumberInputElement from '../forms/elements/phone-number-input'
@@ -72,7 +71,7 @@ const ContactAgentCard = () => {
                                 <InputElement name='email' label='Email' />
                                 <PhoneNumberInputElement name='phoneNumber' label='Phone Number' />
                                 <TextAreaElement label='Message' name='message' />
-                                <Button className="w-full">Send Email</Button>
+                                <Button type='submit' className="w-full">Send Email</Button>
                             </form>
                         </Form>
                     </DialogContent>
