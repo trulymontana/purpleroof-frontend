@@ -8,10 +8,6 @@ export function useSearchProperties() {
   return useMutation({
     mutationFn: searchClient.create,
     onSuccess: (data: any) => {
-      toast({
-        variant: 'default',
-        title: 'Properties fetched successfully'
-      })
       queryClient.invalidateQueries({ queryKey: [ApiEndpoints.SEARCH] })
     },
     onError: (error: any) => {
