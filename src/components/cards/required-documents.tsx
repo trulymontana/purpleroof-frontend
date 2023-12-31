@@ -10,7 +10,6 @@ interface Props {
 }
 
 const RequiredDocumentsCards = ({ data }: Props) => {
-    console.log({ data })
     return (
         <>
             {data?.documents && data?.documents?.length > 0 && (

@@ -2,7 +2,7 @@
 
 import { Property } from "@/data/clients/propertiesClient"
 import currency from "@/lib/currency"
-import { Bath, Bed, Grid, LandPlot, MapPin } from "lucide-react"
+import { Bath, Bed, Grid, LandPlot, MapPin, TrendingUp } from "lucide-react"
 
 interface Props {
     data: Property
@@ -112,6 +112,64 @@ const PropertyDetailsCard = ({ data }: Props) => {
                     </div>
                 </div>
 
+            </div>
+            <div className="grid grid-cols-3 gap-8">
+                <div className="col-span-2">
+                    <h3 className="text-3xl font-semibold my-2 flex items-center gap-2"><TrendingUp className='font-semibold' /> Project Status Information</h3>
+                    <div className="grid grid-cols-2 gap-y-4 gap-x-10 mt-5">
+                        <div>
+                            <p>Project Status</p>
+                            <p className="font-semibold capitalize">{data?.projectStatus.toLocaleLowerCase().replaceAll("_", " ")}</p>
+                        </div>
+                        {data?.occupencyStatus && (
+                            <div>
+                                <p>Occupency Status</p>
+                                <p className="font-semibold capitalize">{data?.occupencyStatus?.toLocaleLowerCase()}</p>
+                            </div>
+                        )}
+                        {data?.completionDate && (
+                            <div>
+                                <p>Occupency Status</p>
+                                <p className="font-semibold capitalize">{new Date(data.completionDate).toLocaleDateString()}</p>
+                            </div>
+                        )}
+                        {data?.noticePeriodProperty && (
+                            <div>
+                                <p>Notice Period</p>
+                                <p className="font-semibold capitalize">{data?.noticePeriodProperty} months</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+            <div className="grid grid-cols-3 gap-8">
+                <div className="col-span-2">
+                    <h3 className="text-3xl font-semibold my-2 flex items-center gap-2"><Grid className='font-semibold' /> Other Details</h3>
+                    <div className="grid grid-cols-2 gap-y-4 gap-x-10 mt-5">
+                        <div>
+                            <p>Distance From Airport</p>
+                            <p className="font-semibold capitalize">{data?.airportDistance} kms</p>
+                        </div>
+                        {data?.metroStation && (
+                            <div>
+                                <p>Nearest Metro Station Distance</p>
+                                <p className="font-semibold capitalize">{data?.metroStation} kms</p>
+                            </div>
+                        )}
+                        {data?.nearbyPlaces && (
+                            <div>
+                                <p>Nearby Places</p>
+                                <p className="font-semibold capitalize">{data?.nearbyPlaces}</p>
+                            </div>
+                        )}
+                        {data?.otherFeatures && (
+                            <div>
+                                <p>Other Main Features</p>
+                                <p className="font-semibold capitalize">{data?.otherFeatures}</p>
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
         </>
     )
