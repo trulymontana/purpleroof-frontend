@@ -6,21 +6,21 @@ import {
   OccupencyStatusEnum,
   PaymentIntervalsEnum,
   ProjectStatusesEnum,
+  PropertyForEnum,
   PropertySubmissionStatusEnum,
   PropertyTypeEnum,
   RentedOrVacantEnum,
   ResidentialPropertyCategoryEnum,
-  categoryEnum
 } from './enums'
 
 export const categories = [
   {
     label: 'I want to Sell',
-    value: categoryEnum.SALE
+    value: PropertyForEnum.SALE
   },
   {
     label: 'I want a rental tenant',
-    value: categoryEnum.RENT
+    value: PropertyForEnum.RENT
   }
 ]
 

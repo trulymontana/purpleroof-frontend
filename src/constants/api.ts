@@ -6,7 +6,10 @@ export const ApiEndpoints = {
   USERS: API_ROOT + '/users',
   PROPERTIES: API_ROOT + '/properties',
   REQUIREMENTS: API_ROOT + '/requirements',
+  SEARCH: API_ROOT + '/properties/search',
   FILES: API_ROOT + '/files',
   SIGNIN: API_ROOT + '/auth/sign-in',
-  SIGNUP: API_ROOT + '/auth/sign-up'
+  SIGNUP: API_ROOT + '/auth/sign-up',
+  AGENTS: API_ROOT + '/agents',
+  LOCATIONS: API_ROOT + '/locations'
 }

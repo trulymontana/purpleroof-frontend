@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form'
 
 interface Props {
   name: string
-  label: string
+  label?: string
   description?: string
   placeholder?: string
 }
@@ -19,7 +19,7 @@ const NumberInputElement = ({ name, label, description, placeholder }: Props) =>
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
             <Input
               type="number"

@@ -1,12 +1,12 @@
-import { categoryEnum } from './enums'
+import { PropertyForEnum } from './enums'
 
-export const searchCategories = [
+export const propertyForOptions = [
   {
     label: 'Sale',
-    value: categoryEnum.SALE
+    value: PropertyForEnum.SALE
   },
   {
     label: 'Rent',
-    value: categoryEnum.RENT
+    value: PropertyForEnum.RENT
   }
 ]

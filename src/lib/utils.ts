@@ -1,3 +1,4 @@
+import { TOption } from '@/constants/types'
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
@@ -14,4 +15,8 @@ export function nullCheckAndMerge(result: any, jsonString: string | null) {
       }
     })
   }
+}
+
+export const getValuesFrom = (arr: TOption[]) => {
+  return arr.map((item) => item.value)
 }

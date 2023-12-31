@@ -15,14 +15,14 @@ import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import TabRadioGroup from '@/components/forms/elements/tab-radio-group'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
-import { PropertyTypeEnum, categoryEnum } from '@/constants/enums'
+import { PropertyTypeEnum, PropertyForEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   propertyFor: z
     .string({
       required_error: 'Please select a category'
     })
-    .refine((val) => val === categoryEnum.SALE || val === categoryEnum.RENT),
+    .refine((val) => val === PropertyForEnum.SALE || val === PropertyForEnum.RENT),
   name: z.string({
     required_error: 'Title should not be empty!'
   }),
@@ -46,7 +46,7 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     storedValue !== null
       ? JSON.parse(storedValue)
       : {
-          propertyFor: categoryEnum.SALE
+          propertyFor: PropertyForEnum.SALE
         }
 
   const form = useForm<z.infer<typeof formSchema>>({

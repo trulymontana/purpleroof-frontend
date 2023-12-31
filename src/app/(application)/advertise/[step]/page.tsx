@@ -19,7 +19,7 @@ import { PageRoutes } from '@/constants/page-routes'
 import { useCreatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 import { CreatePropertyInput } from '@/data/clients/propertiesClient'
 import { nullCheckAndMerge } from '@/lib/utils'
-import { categoryEnum } from '@/constants/enums'
+import { PropertyForEnum } from '@/constants/enums'
 
 const Page = () => {
   const pathName = usePathname()
@@ -69,9 +69,9 @@ const Page = () => {
   const subComponents: { [key: string]: React.ReactElement } = {
     [PageRoutes.advertise.BASIC_DETAILS]: <BasicDetailsForm onSave={storeValues} />,
     [PageRoutes.advertise.PROPERTY_DETAILS]:
-      categoryType === categoryEnum.RENT ? (
+      categoryType === PropertyForEnum.RENT ? (
         <RentPropertyDetailsForm onSave={storeValues} />
-      ) : categoryType === categoryEnum.SALE ? (
+      ) : categoryType === PropertyForEnum.SALE ? (
         <PropertyDetailsForm onSave={storeValues} />
       ) : (
         <div>Invalid Category</div>

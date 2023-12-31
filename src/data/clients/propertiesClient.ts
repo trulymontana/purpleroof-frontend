@@ -2,7 +2,7 @@ import { QueryOptions, TOption } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
-import { EmirateEnum, OccupencyStatusEnum, PropertySubmissionStatusEnum } from '@/constants/enums'
+import { EmirateEnum, FurnishingStatusEnum, OccupencyStatusEnum, PropertySubmissionStatusEnum } from '@/constants/enums'
 
 export interface CreatePropertyInput {
   name: string
@@ -17,14 +17,14 @@ export interface CreatePropertyInput {
   numberOfBathRooms?: number
   deedNumber: string
   emirate: EmirateEnum
-  locationId: string
+  location: string
   buildingName: string
   floor: number
   street: string
   unitNumber: number
   landmark: string
   propertyImage: string
-  status: string
+  furnishingStatus: FurnishingStatusEnum
   image: any
   propertyType: string
   propertyFor: string

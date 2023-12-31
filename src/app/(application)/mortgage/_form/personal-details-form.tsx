@@ -9,7 +9,6 @@ import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import SwitchElement from '@/components/forms/elements/switch-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { incomeProfiles, residentialTypes } from '@/constants/mortgage'
 import { PageRoutes } from '@/constants/page-routes'
