@@ -23,6 +23,7 @@ import { useEffect, useState } from "react"
 import { Separator } from "@/components/ui/separator"
 import { useCreateAgentMutation } from "@/data/hooks/useAgentsClient"
 import { getValuesFrom } from "@/lib/utils"
+import { useGetLocations } from "@/data/hooks/useLocationsClient"
 
 const formSchema = z.object({
     agency: z.string({
@@ -40,11 +41,15 @@ const formSchema = z.object({
     locations: z.any().optional()
 })
 
+
+
 const Page = () => {
 
     const [locations, setLocations] = useState<TOption[]>([]);
 
     const storedValue = localStorage.getItem(LocalStorageKeys.USER)
+
+    const { data: locationsData } = useGetLocations();
 
     const { mutate: createAgent, isPending: isLoading } = useCreateAgentMutation()
 
@@ -62,17 +67,23 @@ const Page = () => {
     }
 
     const emirates: TOption[] = form.watch('emirates')
+
+    let emirateValues: string[];
+
+    emirates?.length > 0 && (emirateValues = getValuesFrom(emirates))
+
     const user: User = storedValue !== null && JSON.parse(storedValue)
 
-    useEffect(() => {
-        emirates &&
-            emirates.length > 0 &&
-            emirates.map((emirate: TOption) => {
-                // @ts-ignore
-                const response: TOption[] = emiratesWithLocations[emirate.value];
+    const filterLocations = (emirateValues: string[]) => {
+        if (locationsData && locationsData?.length > 0 && emirateValues?.length > 0) {
+            // @ts-ignore
+            const filteredLocations = locationsData?.filter((item: Location) => emirateValues?.includes(item.emirate)).map((location) => ({ label: location.name, value: location.id }))
+            setLocations(filteredLocations)
+        }
+    }
 
-                setLocations((prevLocations: any) => [...prevLocations, ...response]);
-            });
+    useEffect(() => {
+        filterLocations(emirateValues)
     }, [emirates]);
 
 

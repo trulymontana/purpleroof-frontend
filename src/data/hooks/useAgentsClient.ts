@@ -5,7 +5,7 @@ import { agentsClient } from '../clients/agentsClient'
 
 export function useGetAgents() {
   const { isLoading, data } = useQuery({
-    queryKey: [ApiEndpoints.REQUIREMENTS],
+    queryKey: [ApiEndpoints.AGENTS],
     queryFn: () => agentsClient.all()
   })
 
