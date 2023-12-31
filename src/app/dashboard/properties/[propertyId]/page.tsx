@@ -48,6 +48,7 @@ const Page = ({ params: { propertyId } }: Props) => {
         )}
 
         <div className='w-1/3 space-y-4'>
+          <ContactAgentCard />
           {
             data && (
               <AmenitiesCard data={data} />
@@ -58,7 +59,6 @@ const Page = ({ params: { propertyId } }: Props) => {
               <RequiredDocumentsCards data={data} />
             )
           }
-          <ContactAgentCard />
         </div>
       </div>
     </>
