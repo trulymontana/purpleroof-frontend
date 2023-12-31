@@ -1,4 +1,4 @@
-export enum categoryEnum {
+export enum PropertyForEnum {
   SALE = 'SALE',
   RENT = 'RENT'
 }

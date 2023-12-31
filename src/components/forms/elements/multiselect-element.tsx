@@ -14,9 +14,10 @@ interface Props {
   placeholder?: string
   type?: string
   options: TOption[]
+  disabled?: boolean
 }
 
-const MultiSelectElement = ({ name, label, description, placeholder, options }: Props) => {
+const MultiSelectElement = ({ name, label, description, placeholder, options, disabled = false }: Props) => {
   const { control } = useFormContext()
 
   return (
@@ -29,6 +30,7 @@ const MultiSelectElement = ({ name, label, description, placeholder, options }: 
             {label && <FormLabel>{label}</FormLabel>}
             <FormControl>
               <Select
+                isDisabled={disabled}
                 value={field.value}
                 onChange={field.onChange}
                 closeMenuOnSelect={false}
