@@ -22,7 +22,6 @@ const Page = ({ params: { propertyId } }: Props) => {
     }
 
     return (
-        
         <section className="max-w-[90vw] mx-auto">
             <div className="h-[500px] w-full">
                 <Image
@@ -39,19 +38,19 @@ const Page = ({ params: { propertyId } }: Props) => {
                     quality={100}
                 />
             </div>
-            <div className="w-full flex items-center justify-center gap-8 mx-auto p-6">
+            <div className="max-w-7xl flex items-start gap-8 mx-auto p-6">
                 {data && (
                     <div className='flex flex-col gap-8 w-2/3'>
                         <PropertyDetailsCard data={data} />
                     </div>
                 )}
-            </div>
-            <div className='w-1/3 space-y-4'>
-                {
-                    data && (
-                        <AmenitiesCard data={data} />
-                    )
-                }
+                <div className='w-1/3 space-y-4'>
+                    {
+                        data && (
+                            <AmenitiesCard data={data} />
+                        )
+                    }
+                </div>
             </div>
         </section>
     )
