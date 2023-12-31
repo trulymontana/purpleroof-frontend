@@ -60,7 +60,7 @@ const Page = () => {
     function onSubmit(values: z.infer<typeof formSchema>) {
         delete values.emirates
         values.locations.length > 0 && (values.locations = getValuesFrom(values.locations))
-        console.log({ values })
+        values.locations.length > 0 && (values.locations = values.locations.map((location: string) => Number(location)))
         createAgent({
             ...values
         })
@@ -76,8 +76,8 @@ const Page = () => {
 
     const filterLocations = (emirateValues: string[]) => {
         if (locationsData && locationsData?.length > 0 && emirateValues?.length > 0) {
-            // @ts-ignore
-            const filteredLocations = locationsData?.filter((item: Location) => emirateValues?.includes(item.emirate)).map((location) => ({ label: location.name, value: location.id }))
+
+            const filteredLocations = locationsData?.filter((item) => emirateValues?.includes(item.emirate)).map((data) => ({ label: data.name, value: data.id.toString() }))
             setLocations(filteredLocations)
         }
     }

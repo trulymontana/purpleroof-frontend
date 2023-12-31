@@ -11,10 +11,6 @@ export interface Location {
   updatedAt: string
 }
 
-export interface Locations {
-  Locations: Location[]
-}
-
 export const locationsClient = {
-  ...crudFactory<Locations, QueryOptions, Locations>(ApiEndpoints.LOCATIONS)
+  ...crudFactory<Location, QueryOptions, Location>(ApiEndpoints.LOCATIONS)
 }
