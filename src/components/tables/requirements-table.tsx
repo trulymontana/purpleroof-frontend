@@ -5,18 +5,11 @@ import { RequirementApplication } from '@/constants/types'
 import { useGetRequirements } from '@/data/hooks/useRequirementsClient'
 import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
-import { Eye, Plus, PlusSquare } from 'lucide-react'
+import { Eye, FileEdit, Plus, PlusSquare } from 'lucide-react'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 import { Card, CardHeader, CardTitle } from '../ui/card'
 import { Button } from '../ui/button'
-
-// "name": "Non resident + Salaried",
-//             "incomeProfile": "SALARIED",
-//             "residenceType": "NON_UAE_RESIDENT",
-//             "lifeInsurance": 12,
-//             "propertyInsurance": 12,
-//             "valuationFee": 12,
 
 export const columns: ColumnDef<RequirementApplication>[] = [
   {
@@ -116,18 +109,9 @@ export const columns: ColumnDef<RequirementApplication>[] = [
       <div className="flex items-center">
         <Link href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
           <Button variant="ghost">
-            <Eye size={17} color="black" />
+            <FileEdit size={17} color="black" />
           </Button>
         </Link>
-        {/* <ConfirmActionDialog
-          title="Edit Property"
-          anchor={
-            <Button variant="ghost">
-              <FileEdit size={17} color="black" />
-            </Button>
-          }
-          content={<UpdatePropertyForm data={row.original} />}
-        /> */}
         <ConfirmDeleteDialog onDelete={() => { }} isLoading />
       </div>
     )
