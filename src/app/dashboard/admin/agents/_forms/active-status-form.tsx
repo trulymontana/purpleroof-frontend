@@ -5,13 +5,13 @@ import { Form } from '@/components/ui/form'
 import SelectElement from '@/components/forms/elements/select-element'
 import { Button } from '@/components/ui/button'
 import { useUpdatePropertyMutation } from '@/data/hooks/usePropertiesClient'
-import { Agents } from '@/data/clients/agentsClient'
+import { Agent } from '@/data/clients/agentsClient'
 import { activeStatusOptions, approvalStatusOptions } from '@/constants/agents'
 import { ActiveStatusEnum, ApprovalStatusEnum } from '@/constants/enums'
-import { useUpdateAgentMutation } from '@/data/hooks/useAgentsClient'
+import { useUpdateActiveStatus, useUpdateAgentMutation } from '@/data/hooks/useAgentsClient'
 
 interface Props {
-    data: Agents
+    data: Agent
 }
 
 const formSchema = z.object({
@@ -22,7 +22,7 @@ const formSchema = z.object({
 
 type TApprovalStatus = z.infer<typeof formSchema>
 const AgentActiveStausForm = ({ data }: Props) => {
-    const { mutate: updateAgentApprovalStatus } = useUpdateAgentMutation()
+    const { mutate: updateAgentActiveStatus } = useUpdateActiveStatus()
 
     const form = useForm<TApprovalStatus>({
         resolver: zodResolver(formSchema),
@@ -32,11 +32,10 @@ const AgentActiveStausForm = ({ data }: Props) => {
     })
 
     function onSubmit(values: TApprovalStatus) {
-        updateAgentApprovalStatus({
+        updateAgentActiveStatus({
             id: data?.id,
             ...values
         })
-        console.log({ values })
     }
 
     return (

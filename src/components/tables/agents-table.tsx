@@ -14,7 +14,7 @@ import UpdatePropertyForm from '@/app/dashboard/properties/_forms/update-propert
 import { Property } from '@/data/clients/propertiesClient'
 import currency from '@/lib/currency'
 import { useGetAgents } from '@/data/hooks/useAgentsClient'
-import { Agents, CreateAgentInput } from '@/data/clients/agentsClient'
+import { Agent, CreateAgentInput } from '@/data/clients/agentsClient'
 import ApproveAgentForm from '@/app/dashboard/admin/agents/_forms/approval-status-form'
 import { ActiveStatusEnum, ApprovalStatusEnum } from '@/constants/enums'
 import AgentApprovalStatusForm from '@/app/dashboard/admin/agents/_forms/approval-status-form'
@@ -85,7 +85,7 @@ export default function AgentsTable() {
     //     }
     // ]
 
-    const columns: ColumnDef<Agents>[] = [
+    const columns: ColumnDef<Agent>[] = [
         {
             accessorKey: 'id',
             header: 'ID'
@@ -128,17 +128,17 @@ export default function AgentsTable() {
                     <ConfirmActionDialog
                         title="Edit Agent Active Status"
                         anchor={
-                            <Button>Active Agent</Button>
+                            <Button>Set Active Status</Button>
                         }
                         content={<AgentActiveStausForm data={row.original} />}
                     />
-                    <ConfirmActionDialog
+                    {row.original.approvalStatus === ApprovalStatusEnum.NOT_APPROVED && <ConfirmActionDialog
                         title="Edit Agent Approval Status"
                         anchor={
                             <Button>Approve Agent</Button>
                         }
                         content={<AgentApprovalStatusForm data={row.original} />}
-                    />
+                    />}
                 </div>
             )
         },

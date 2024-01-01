@@ -4,14 +4,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '@/components/ui/form'
 import SelectElement from '@/components/forms/elements/select-element'
 import { Button } from '@/components/ui/button'
-import { useUpdatePropertyMutation } from '@/data/hooks/usePropertiesClient'
-import { Agents } from '@/data/clients/agentsClient'
+import { Agent } from '@/data/clients/agentsClient'
 import { approvalStatusOptions } from '@/constants/agents'
 import { ApprovalStatusEnum } from '@/constants/enums'
-import { useUpdateAgentMutation } from '@/data/hooks/useAgentsClient'
+import { useUpdateApprovalStatus } from '@/data/hooks/useAgentsClient'
 
 interface Props {
-    data: Agents
+    data: Agent
 }
 
 const formSchema = z.object({
@@ -22,7 +21,7 @@ const formSchema = z.object({
 
 type TApprovalStatus = z.infer<typeof formSchema>
 const AgentApprovalStatusForm = ({ data }: Props) => {
-    const { mutate: updateAgentApprovalStatus } = useUpdateAgentMutation()
+    const { mutate: updateAgentApprovalStatus } = useUpdateApprovalStatus()
 
     const form = useForm<TApprovalStatus>({
         resolver: zodResolver(formSchema),
@@ -36,7 +35,6 @@ const AgentApprovalStatusForm = ({ data }: Props) => {
             id: data?.id,
             ...values
         })
-        console.log({ values })
     }
 
     return (
