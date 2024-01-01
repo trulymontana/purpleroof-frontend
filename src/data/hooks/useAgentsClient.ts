@@ -3,7 +3,6 @@ import { ApiEndpoints } from '@/constants/api'
 import { toast } from '@/components/ui/use-toast'
 import { agentsClient } from '../clients/agentsClient'
 import { useRouter } from 'next/navigation'
-import { revalidatePath } from 'next/cache'
 
 export function useGetAgents() {
   const { isLoading, data } = useQuery({
@@ -23,6 +22,7 @@ export const useCreateAgentMutation = () => {
         variant: 'default',
         title: 'Applied for agent successfully'
       })
+      location.reload()
       queryClient.invalidateQueries({ queryKey: [ApiEndpoints.AGENTS] })
     },
     onError: (error: any) => {
@@ -50,14 +50,14 @@ export const useUpdateAgentMutation = () => {
   })
 }
 
-export const useDeleteRequirementMutation = () => {
+export const useDeleteAgentMutation = () => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: agentsClient.delete,
     onSuccess: (data: any) => {
       toast({
         variant: 'default',
-        title: 'Requirement successfully deleted'
+        title: 'Agent successfully deleted'
       })
     },
     onSettled: () => {
@@ -66,7 +66,7 @@ export const useDeleteRequirementMutation = () => {
   })
 }
 
-export function useUpdateApprovalStatus() {
+export function useUpdateApprovalStatusMutation() {
   const queryClient = useQueryClient()
   const router = useRouter()
   return useMutation({
@@ -79,7 +79,7 @@ export function useUpdateApprovalStatus() {
           variant: 'default',
           title: 'Agent updated successfully'
         })
-        router.refresh()
+        location.reload()
       }
     },
     onError: (error: any) => {
@@ -91,7 +91,7 @@ export function useUpdateApprovalStatus() {
   })
 }
 
-export function useUpdateActiveStatus() {
+export function useUpdateActiveStatusMutation() {
   const queryClient = useQueryClient()
   const router = useRouter()
   return useMutation({
@@ -104,7 +104,8 @@ export function useUpdateActiveStatus() {
           variant: 'default',
           title: 'Agent updated successfully'
         })
-        router.refresh()
+
+        location.reload()
       }
     },
     onError: (error: any) => {

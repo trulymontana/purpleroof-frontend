@@ -18,6 +18,8 @@ export interface Agent extends CreateAgentInput {
   id: number
   createdAt: string
   updatedAt: string
+  documents: { type: string; url: string }[]
+  locations: { id: number; name: string; emirate: string; createdAt: string; updatedAt: string }[]
 }
 
 export const agentsClient = {

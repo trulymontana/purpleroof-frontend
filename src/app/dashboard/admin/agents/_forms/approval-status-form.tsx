@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Agent } from '@/data/clients/agentsClient'
 import { approvalStatusOptions } from '@/constants/agents'
 import { ApprovalStatusEnum } from '@/constants/enums'
-import { useUpdateApprovalStatus } from '@/data/hooks/useAgentsClient'
+import { useUpdateApprovalStatusMutation } from '@/data/hooks/useAgentsClient'
 
 interface Props {
     data: Agent
@@ -21,7 +21,7 @@ const formSchema = z.object({
 
 type TApprovalStatus = z.infer<typeof formSchema>
 const AgentApprovalStatusForm = ({ data }: Props) => {
-    const { mutate: updateAgentApprovalStatus } = useUpdateApprovalStatus()
+    const { mutate: updateAgentApprovalStatus } = useUpdateApprovalStatusMutation()
 
     const form = useForm<TApprovalStatus>({
         resolver: zodResolver(formSchema),

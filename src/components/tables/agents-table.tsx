@@ -2,88 +2,23 @@
 
 import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from './data-table'
-import { useDeletePropertyMutation, useGetProperties } from '@/data/hooks/usePropertiesClient'
 import { Badge } from '../ui/badge'
-import Link from 'next/link'
-import { PageRoutes } from '@/constants/page-routes'
-import { Eye, FileEdit } from 'lucide-react'
 import ConfirmActionDialog from '../dialogs/confirm-action-dialog'
 import { Button } from '../ui/button'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
-import UpdatePropertyForm from '@/app/dashboard/properties/_forms/update-property-form'
-import { Property } from '@/data/clients/propertiesClient'
-import currency from '@/lib/currency'
-import { useGetAgents } from '@/data/hooks/useAgentsClient'
-import { Agent, CreateAgentInput } from '@/data/clients/agentsClient'
-import ApproveAgentForm from '@/app/dashboard/admin/agents/_forms/approval-status-form'
+import { useDeleteAgentMutation, useGetAgents } from '@/data/hooks/useAgentsClient'
+import { Agent } from '@/data/clients/agentsClient'
 import { ActiveStatusEnum, ApprovalStatusEnum } from '@/constants/enums'
 import AgentApprovalStatusForm from '@/app/dashboard/admin/agents/_forms/approval-status-form'
 import AgentActiveStausForm from '@/app/dashboard/admin/agents/_forms/active-status-form'
+import Link from 'next/link'
+import { DownloadIcon, Eye } from 'lucide-react'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
+import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card'
 
 export default function AgentsTable() {
 
-    const { mutate: deleteProperty, isPending } = useDeletePropertyMutation()
-
-    // [
-    //     {
-    //         "id": 1,
-    //         "agency": "Bhavesh",
-    //         "contactNumber": "+32131231232",
-    //         "isActive": true,
-    //         "isApproved": false,
-    //         "userId": 9,
-    //         "createdAt": "2023-12-31T17:30:30.000Z",
-    //         "updatedAt": "2023-12-31T17:30:30.261Z",
-    //         "user": {
-    //             "id": 9,
-    //             "authId": "813098dcb913dfd5e332203854c65b82",
-    //             "firstName": "BHAVESH",
-    //             "lastName": "YADAV",
-    //             "email": "cabra@gmail.com",
-    //             "password": "$2b$10$sfeJ3kDoM0Ud82E5XNGqK.0Tb9ZNK2SlvZQd1uW5g0/ZMv1iAPUwa",
-    //             "isEmailConfirmed": null,
-    //             "role": "ADMIN",
-    //             "createdAt": "2023-12-21T12:30:29.000Z",
-    //             "updatedAt": "2023-12-21T12:30:28.696Z",
-    //             "agentId": null
-    //         },
-    //         "locations": [
-    //             {
-    //                 "id": 151,
-    //                 "name": "5208 Muweilah Building",
-    //                 "emirate": "SHARJAH",
-    //                 "createdAt": "2023-09-14T08:50:34.000Z",
-    //                 "updatedAt": "2023-09-14T08:50:34.000Z"
-    //             },
-    //             {
-    //                 "id": 152,
-    //                 "name": "Abu Shagara",
-    //                 "emirate": "SHARJAH",
-    //                 "createdAt": "2023-09-14T08:50:34.000Z",
-    //                 "updatedAt": "2023-09-14T08:50:34.000Z"
-    //             },
-    //             {
-    //                 "id": 153,
-    //                 "name": "Ajmal Makan",
-    //                 "emirate": "SHARJAH",
-    //                 "createdAt": "2023-09-14T08:50:34.000Z",
-    //                 "updatedAt": "2023-09-14T08:50:34.000Z"
-    //             }
-    //         ],
-    //         "documents": [
-    //             {
-    //                 "id": 83,
-    //                 "type": "REAL_ESTATE_LICENSE",
-    //                 "url": "https://purpleroof.s3.amazonaws.com/agent/realEstateLicense-1704043712328-Screenshot-2023-12-25-at-4.17.28 PM.png",
-    //                 "createdAt": "2023-12-31T17:30:30.000Z",
-    //                 "updatedAt": "2023-12-31T17:30:30.261Z",
-    //                 "mortgageId": null,
-    //                 "propertyId": null,
-    //                 "agentId": 1
-    //             }
-    //         ]
-    //     }
-    // ]
+    // const { mutate: deleteAgent, isPending } = useDeleteAgentMutation()
 
     const columns: ColumnDef<Agent>[] = [
         {
@@ -99,14 +34,66 @@ export default function AgentsTable() {
             header: 'Contact Number'
         },
         {
+            id: 'locations',
+            header: 'Locations',
+            cell: ({ row }) => {
+                const locations = row.original.locations
+                return (
+                    <div className='flex items-center gap-2'>
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <Button variant="outline">View Locations</Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-[800px]">
+                                <DialogHeader>
+                                    <DialogTitle>Locations</DialogTitle>
+                                    <DialogDescription>
+                                        Locations where agent is available.
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className="grid grid-cols-3 gap-4 py-4 overflow-y-auto max-h-[500px]">
+                                    {
+                                        locations.map((location, i) => {
+                                            return (
+                                                <Card key={i} className="">
+                                                    <CardHeader>
+                                                        <CardTitle>{location.name}</CardTitle>
+                                                    </CardHeader>
+                                                </Card>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </DialogContent>
+                        </Dialog>
+                    </div>
+                )
+            }
+        },
+        {
+            id: 'realEstateLicense',
+            header: 'Real Estate License',
+            cell: ({ row }) => {
+                const documentLink = row.original.documents[0].url
+                return (
+                    <Link href={documentLink}>
+                        <Button className="flex items-center">
+                            <DownloadIcon className="mr-2 h-4 w-4" />
+                            Download
+                        </Button>
+                    </Link>
+                )
+            }
+        },
+        {
             id: 'activeStatus',
             header: 'Active Status',
             cell: ({ row }) => {
                 const activeStatus = row.original.activeStatus
                 if (activeStatus === ActiveStatusEnum.ACTIVE) {
-                    return <Badge className={`bg-green-400 text-black`}>Active</Badge>
+                    return <Badge className={`bg-green-400 hover:bg-green-600 text-black`}>Active</Badge>
                 }
-                return <Badge className={`bg-red-400 text-black`}>Inactive</Badge>
+                return <Badge className={`bg-red-400 hover:bg-red-600 text-black`}>Inactive</Badge>
             }
         },
         {
@@ -115,32 +102,10 @@ export default function AgentsTable() {
             cell: ({ row }) => {
                 const approvalStatus = row.original.approvalStatus
                 if (approvalStatus === ApprovalStatusEnum.APPROVED) {
-                    return <Badge className={`bg-green-400 text-black`}>Approved</Badge>
+                    return <Badge className={`bg-green-400 hover:bg-green-600 text-black`}>Approved</Badge>
                 }
-                return <Badge className={`bg-red-400 text-black`}>Not Approved</Badge>
+                return <Badge className={`bg-red-400 hover:bg-red-600 text-black`}>Not Approved</Badge>
             }
-        },
-        {
-            id: 'action',
-            header: 'Action',
-            cell: ({ row }) => (
-                <div className='space-x-2'>
-                    <ConfirmActionDialog
-                        title="Edit Agent Active Status"
-                        anchor={
-                            <Button>Set Active Status</Button>
-                        }
-                        content={<AgentActiveStausForm data={row.original} />}
-                    />
-                    {row.original.approvalStatus === ApprovalStatusEnum.NOT_APPROVED && <ConfirmActionDialog
-                        title="Edit Agent Approval Status"
-                        anchor={
-                            <Button>Approve Agent</Button>
-                        }
-                        content={<AgentApprovalStatusForm data={row.original} />}
-                    />}
-                </div>
-            )
         },
         {
             id: 'createdAt',
@@ -158,16 +123,37 @@ export default function AgentsTable() {
                 return new Date(updatedAt).toLocaleDateString()
             }
         },
-
         {
-            id: 'actions',
-            enableHiding: false,
+            id: 'action',
+            header: 'Action',
             cell: ({ row }) => (
-                <div className="flex items-center gap-4">
-                    <ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />
+                <div className='space-x-2'>
+                    <ConfirmActionDialog
+                        title="Update Status"
+                        anchor={
+                            <Button>Update Active Status</Button>
+                        }
+                        content={<AgentActiveStausForm data={row.original} />}
+                    />
+                    {row.original.approvalStatus === ApprovalStatusEnum.NOT_APPROVED && <ConfirmActionDialog
+                        title="Update Status"
+                        anchor={
+                            <Button>Approve Agent</Button>
+                        }
+                        content={<AgentApprovalStatusForm data={row.original} />}
+                    />}
                 </div>
             )
-        }
+        },
+        // {
+        //     id: 'actions',
+        //     enableHiding: false,
+        //     cell: ({ row }) => (
+        //         <div className="flex items-center gap-4">
+        //             <ConfirmDeleteDialog onDelete={() => deleteAgent(row.original.id)} isLoading={isPending} />
+        //         </div>
+        //     )
+        // }
     ]
 
 

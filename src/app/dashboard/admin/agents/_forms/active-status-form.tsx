@@ -4,11 +4,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '@/components/ui/form'
 import SelectElement from '@/components/forms/elements/select-element'
 import { Button } from '@/components/ui/button'
-import { useUpdatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 import { Agent } from '@/data/clients/agentsClient'
-import { activeStatusOptions, approvalStatusOptions } from '@/constants/agents'
-import { ActiveStatusEnum, ApprovalStatusEnum } from '@/constants/enums'
-import { useUpdateActiveStatus, useUpdateAgentMutation } from '@/data/hooks/useAgentsClient'
+import { activeStatusOptions } from '@/constants/agents'
+import { ActiveStatusEnum } from '@/constants/enums'
+import { useUpdateActiveStatusMutation } from '@/data/hooks/useAgentsClient'
+import { useRouter } from 'next/navigation'
 
 interface Props {
     data: Agent
@@ -22,7 +22,9 @@ const formSchema = z.object({
 
 type TApprovalStatus = z.infer<typeof formSchema>
 const AgentActiveStausForm = ({ data }: Props) => {
-    const { mutate: updateAgentActiveStatus } = useUpdateActiveStatus()
+    const { mutate: updateAgentActiveStatus, isPending: isLoading } = useUpdateActiveStatusMutation()
+
+    const router = useRouter();
 
     const form = useForm<TApprovalStatus>({
         resolver: zodResolver(formSchema),
@@ -47,7 +49,7 @@ const AgentActiveStausForm = ({ data }: Props) => {
                     label="Active Status"
                     options={activeStatusOptions}
                 />
-                <Button type="submit">Save changes</Button>
+                <Button disabled={isLoading} className='w-full' type="submit">{isLoading ? "Saving..." : "Save changes"}</Button>
             </form>
         </Form>
     )
