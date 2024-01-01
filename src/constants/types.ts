@@ -53,7 +53,7 @@ export interface MortgageApplication {
 export interface RequirementApplication {
   id: number
   name: string
-  requiredDocuments: any
+  requiredDocuments: { name: string; documentType: string }[]
   incomeProfile: string
   residenceType: string
 }
