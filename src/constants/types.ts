@@ -53,9 +53,17 @@ export interface MortgageApplication {
 export interface RequirementApplication {
   id: number
   name: string
-  requiredDocuments: any
+  requiredDocuments: { name: string; documentType: string }[]
   incomeProfile: string
   residenceType: string
+  createdAt: string
+  updatedAt: string
+  preApprovalFee: number
+  processingFee: number
+  lifeInsurance: number
+  propertyInsurance: number
+  rate: number
+  valuationFee: number
 }
 
 export interface Property {
@@ -89,7 +97,6 @@ export interface Property {
   agentInfoId?: number | null
   paymentInterval?: string | null
   emirateId: number
-  // projectStatus?: Properties_projectStatus | null;
   numberOfCheques?: number | null
   completionDate?: string | null
   noticePeriodOfRemainingRentalAgreement?: number | null
@@ -99,15 +106,6 @@ export interface Property {
   lat?: number | null
   lng?: number | null
   status: string
-  // AdvertiseDocuments: AdvertiseDocuments[];
-  // AgentInformations?: AgentInformations | null;
-  // Emirates: Emirates;
-  // PropertyTypes: PropertyTypes;
-  // PropertyTypeCategories: PropertyTypeCategories;
-  // PropertyLocations?: PropertyLocations | null;
-  // Users?: Users | null;
-  // PropertyAmenities: PropertyAmenities[];
-  // PropertyDocuments: PropertyDocuments[];
 }
 
 export type TOption = {
@@ -128,8 +126,8 @@ export type User = {
 }
 
 export type historyType = {
-  id: number,
-  title: string,
-  description: string,
+  id: number
+  title: string
+  description: string
   mortgageId: number
 }

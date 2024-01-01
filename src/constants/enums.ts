@@ -216,3 +216,13 @@ export enum AmenityTypeEnum {
   BUILDING = 'BUILDING',
   COMMUNITY = 'COMMUNITY'
 }
+
+export enum ApprovalStatusEnum {
+  APPROVED = 'APPROVED',
+  NOT_APPROVED = 'NOT_APPROVED'
+}
+
+export enum ActiveStatusEnum {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE'
+}

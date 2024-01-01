@@ -20,7 +20,9 @@ const roleToPageMapping = {
     PageRoutes.admin.AGENTS,
     PageRoutes.admin.USERS,
     PageRoutes.admin.REQUIREMENTS,
-    PageRoutes.dashboard.PROFILE
+    PageRoutes.dashboard.PROFILE,
+    PageRoutes.dashboard.MORTGAGES,
+    PageRoutes.dashboard.PROPERTIES,
   ],
   [UserRoleEnum.ADVERTISER]: [
     PageRoutes.dashboard.MORTGAGES,

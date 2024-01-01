@@ -3,7 +3,6 @@ import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from './data-table'
 import { useDeletePropertyMutation, useGetProperties } from '@/data/hooks/usePropertiesClient'
 import { Badge } from '../ui/badge'
-import { PropertySubmissionStatusEnum } from '@/constants/enums'
 import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
 import { Eye, FileEdit } from 'lucide-react'
@@ -64,12 +63,20 @@ export default function PropertiesTable() {
       header: 'Landmark'
     },
     {
-      accessorKey: 'createdAt',
-      header: 'Created At'
+      id: 'createdAt',
+      header: 'Created At',
+      cell: ({ row }) => {
+        const createdAt = row.original.createdAt;
+        return new Date(createdAt).toLocaleDateString()
+      }
     },
     {
-      accessorKey: 'updatedAt',
-      header: 'Updated At'
+      id: 'updatedAt',
+      header: 'Updated At',
+      cell: ({ row }) => {
+        const updatedAt = row.original.createdAt;
+        return new Date(updatedAt).toLocaleDateString()
+      }
     },
     {
       id: "status",
