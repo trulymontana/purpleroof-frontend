@@ -3,18 +3,26 @@ import { ColumnDef } from '@tanstack/react-table'
 import { DataTable } from './data-table'
 import { RequirementApplication } from '@/constants/types'
 import { useGetRequirements } from '@/data/hooks/useRequirementsClient'
-import { Badge } from '../ui/badge'
-
-import ActionButtons from './action-buttons'
 import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
-import { Eye } from 'lucide-react'
+import { Eye, Plus, PlusSquare } from 'lucide-react'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
-import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
+import { Card, CardHeader, CardTitle } from '../ui/card'
 import { Button } from '../ui/button'
 
+// "name": "Non resident + Salaried",
+//             "incomeProfile": "SALARIED",
+//             "residenceType": "NON_UAE_RESIDENT",
+//             "lifeInsurance": 12,
+//             "propertyInsurance": 12,
+//             "valuationFee": 12,
+
 export const columns: ColumnDef<RequirementApplication>[] = [
+  {
+    accessorKey: 'id',
+    header: 'Id'
+  },
   {
     accessorKey: 'name',
     header: 'Name'
@@ -26,6 +34,30 @@ export const columns: ColumnDef<RequirementApplication>[] = [
   {
     accessorKey: 'residenceType',
     header: 'Residence Type'
+  },
+  {
+    accessorKey: 'preApprovalFee',
+    header: 'Pre Approval Fee (AED)'
+  },
+  {
+    accessorKey: 'processingFee',
+    header: 'Processing Fee (%)'
+  },
+  {
+    accessorKey: 'lifeInsurance',
+    header: 'Life Insurance (%)'
+  },
+  {
+    accessorKey: 'propertyInsurance',
+    header: 'Property Insurance (%)'
+  },
+  {
+    accessorKey: 'valuationFee',
+    header: 'Valuation Fee(AED)'
+  },
+  {
+    accessorKey: 'rate',
+    header: 'Rate (%)'
   },
   {
     id: 'requiredDocuments',
@@ -46,7 +78,7 @@ export const columns: ColumnDef<RequirementApplication>[] = [
                 {
                   document.requiredDocuments.map((document, i) => {
                     return (
-                      <Card key={i} className="">
+                      <Card key={i}>
                         <CardHeader>
                           <CardTitle>{document.name}</CardTitle>
                         </CardHeader>
@@ -62,12 +94,30 @@ export const columns: ColumnDef<RequirementApplication>[] = [
     }
   },
   {
+    id: 'createdAt',
+    header: 'Created At',
+    cell: ({ row }) => {
+      const createdAt = row.original.createdAt;
+      return new Date(createdAt).toLocaleDateString()
+    }
+  },
+  {
+    id: 'updatedAt',
+    header: 'Updated At',
+    cell: ({ row }) => {
+      const updatedAt = row.original.createdAt;
+      return new Date(updatedAt).toLocaleDateString()
+    }
+  },
+  {
     id: 'actions',
     enableHiding: false,
     cell: ({ row }) => (
-      <div className="flex items-center gap-4">
+      <div className="flex items-center">
         <Link href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
-          <Eye size={17} color="black" />
+          <Button variant="ghost">
+            <Eye size={17} color="black" />
+          </Button>
         </Link>
         {/* <ConfirmActionDialog
           title="Edit Property"
