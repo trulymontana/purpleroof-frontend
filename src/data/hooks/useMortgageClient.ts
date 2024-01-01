@@ -32,7 +32,7 @@ export const useCreateMortgageMutation = () => {
     onSuccess: (data: any) => {
       toast({
         variant: 'default',
-        title: 'Mortgage created successfully'
+        title: 'Application submitted successfully'
       })
       localStorage.removeItem(PageRoutes.mortgage.PERSONAL_DETAILS)
       localStorage.removeItem(PageRoutes.mortgage.INCOME_DETAILS)
@@ -79,7 +79,7 @@ export const useUpdateMortgageMutation = () => {
         title: 'Mortgage updated successfully'
       })
       console.log({ data })
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
       localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${data.data.id}`)
       localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_CUSTOMER_INFO}-${data.data.id}`)
       router.push(PageRoutes.dashboard.MORTGAGES)

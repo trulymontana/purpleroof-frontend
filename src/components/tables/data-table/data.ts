@@ -1,3 +1,4 @@
+import { MortgageStatusEnum } from '@/constants/enums'
 import {
   ArrowDownIcon,
   ArrowRightIcon,
@@ -41,3 +42,21 @@ export const statuses = [
     icon: CrossCircledIcon
   }
 ]
+
+// export const statuses = [
+//   {
+//     value: 'SUBMITTED',
+//     label: 'Pending',
+//     icon: StopwatchIcon
+//   },
+//   {
+//     value: MortgageStatusEnum.APPROVED.toString(),
+//     label: 'Completed',
+//     icon: CheckCircledIcon
+//   },
+//   {
+//     value: MortgageStatusEnum.CASE_DECLINED.toString(),
+//     label: 'Rejected',
+//     icon: CrossCircledIcon
+//   }
+// ]

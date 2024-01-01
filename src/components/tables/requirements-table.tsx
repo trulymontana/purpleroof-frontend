@@ -5,7 +5,7 @@ import { RequirementApplication } from '@/constants/types'
 import { useGetRequirements } from '@/data/hooks/useRequirementsClient'
 import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
-import { Eye, FileEdit, Plus, PlusSquare } from 'lucide-react'
+import { FileEdit } from 'lucide-react'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 import { Card, CardHeader, CardTitle } from '../ui/card'
@@ -58,7 +58,7 @@ export const columns: ColumnDef<RequirementApplication>[] = [
     cell: ({ row }) => {
       const document = row.original
       return (
-        <div className='flex items-center gap-2'>
+        <div className="flex items-center gap-2">
           <Dialog>
             <DialogTrigger asChild>
               <Button variant="outline">View Documents</Button>
@@ -67,18 +67,16 @@ export const columns: ColumnDef<RequirementApplication>[] = [
               <DialogHeader>
                 <DialogTitle>Required Documents</DialogTitle>
               </DialogHeader>
-              <div className="grid grid-cols-2 gap-4 py-4 overflow-y-auto max-h-[500px]">
-                {
-                  document.requiredDocuments.map((document, i) => {
-                    return (
-                      <Card key={i}>
-                        <CardHeader>
-                          <CardTitle>{document.name}</CardTitle>
-                        </CardHeader>
-                      </Card>
-                    )
-                  })
-                }
+              <div className="grid max-h-[500px] grid-cols-2 gap-4 overflow-y-auto py-4">
+                {document.requiredDocuments.map((document, i) => {
+                  return (
+                    <Card key={i}>
+                      <CardHeader>
+                        <CardTitle>{document.name}</CardTitle>
+                      </CardHeader>
+                    </Card>
+                  )
+                })}
               </div>
             </DialogContent>
           </Dialog>
@@ -90,7 +88,7 @@ export const columns: ColumnDef<RequirementApplication>[] = [
     id: 'createdAt',
     header: 'Created At',
     cell: ({ row }) => {
-      const createdAt = row.original.createdAt;
+      const createdAt = row.original.createdAt
       return new Date(createdAt).toLocaleDateString()
     }
   },
@@ -98,7 +96,7 @@ export const columns: ColumnDef<RequirementApplication>[] = [
     id: 'updatedAt',
     header: 'Updated At',
     cell: ({ row }) => {
-      const updatedAt = row.original.createdAt;
+      const updatedAt = row.original.createdAt
       return new Date(updatedAt).toLocaleDateString()
     }
   },
@@ -112,7 +110,7 @@ export const columns: ColumnDef<RequirementApplication>[] = [
             <FileEdit size={17} color="black" />
           </Button>
         </Link>
-        <ConfirmDeleteDialog onDelete={() => { }} isLoading />
+        <ConfirmDeleteDialog onDelete={() => {}} isLoading />
       </div>
     )
   }
