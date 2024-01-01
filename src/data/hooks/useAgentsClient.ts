@@ -32,14 +32,14 @@ export const useCreateAgentMutation = () => {
   })
 }
 
-export const useUpdateRequirementMutation = () => {
+export const useUpdateAgentMutation = () => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: agentsClient.update,
     onSuccess: (data: any) => {
       toast({
         variant: 'default',
-        title: 'Requirement updated successfully'
+        title: 'Status updated successfully'
       })
     },
     onSettled: () => {
