@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -12,7 +12,7 @@ import InputElement from '@/components/forms/elements/input-element'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import { documentTypeOptions, incomeProfiles, residenceTypes } from '@/constants/requirements'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
-import { TOption } from '@/constants/types'
+import { RequirementApplication, TOption } from '@/constants/types'
 import { useCreateRequirementMutation } from '@/data/hooks/useRequirementsClient'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 import { IncomeProfileEnum, ResidenceTypeEnum } from '@/constants/enums'
@@ -47,13 +47,30 @@ const formSchema = z.object({
   })
 })
 
-const AddRequirementsForm = () => {
+interface Props {
+  data?: RequirementApplication
+  isLoading: Boolean
+  mutate: any
+}
+
+const RequirementsForm = ({ data, isLoading, mutate }: Props) => {
+
   const [selectedDocuments, setSelectedDocuments] = useState<TOption[]>([])
 
-  const { isPending: isLoading, mutate: createRequirement } = useCreateRequirementMutation()
+  // const { isPending: isLoading, mutate: createRequirement } = useCreateRequirementMutation()
+
+  let values = {}
+
+  if (data) {
+    values = {
+      incomeProfile: data.incomeProfile,
+      residenceType: data.residenceType,
+    }
+  }
 
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema)
+    resolver: zodResolver(formSchema),
+    defaultValues: values
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -62,11 +79,37 @@ const AddRequirementsForm = () => {
       documentType: document.value,
       isMandatory: true
     }))
-    createRequirement({
-      ...values,
-      requiredDocuments: formattedDocuments
-    })
+    if (data && data.id) {
+      mutate({
+        id: data.id,
+        ...values,
+        requiredDocuments: formattedDocuments
+      })
+    } else {
+      mutate({
+        ...values,
+        requiredDocuments: formattedDocuments
+      })
+    }
   }
+
+  useEffect(() => {
+    if (data) {
+      form.setValue("name", data.name)
+      form.setValue("preApprovalFee", data.preApprovalFee)
+      form.setValue("processingFee", data.processingFee)
+      form.setValue("propertyInsurance", data.propertyInsurance)
+      form.setValue("rate", data.rate)
+      form.setValue("lifeInsurance", data.lifeInsurance)
+      form.setValue("valuationFee", data.valuationFee)
+
+      let unformattedDocuments = data?.requiredDocuments?.map((document) => ({
+        label: document.name,
+        value: document.documentType
+      }))
+      setSelectedDocuments(unformattedDocuments)
+    }
+  }, [data])
 
   return (
     <Form {...form}>
@@ -136,4 +179,4 @@ const AddRequirementsForm = () => {
   )
 }
 
-export default AddRequirementsForm
+export default RequirementsForm
