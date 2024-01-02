@@ -20,7 +20,7 @@ const RequiredDocumentsCards = ({ data }: Props) => {
                     </CardHeader>
                     <CardContent className='space-y-4'>
                         {data?.documents?.map((item: any, i: number) => (
-                            <Card key={i} className="shadow-md hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200">
+                            <Card key={i} className="shadow-md shadow-primary/30 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200">
                                 <CardContent className="flex justify-between items-center p-4">
                                     <h3 className="font-medium text-sm capitalize">{item?.type?.toLocaleLowerCase().replaceAll("_", " ")}</h3>
                                     <Link href={item.url}>

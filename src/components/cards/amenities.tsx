@@ -15,7 +15,7 @@ const AmenitiesCard = ({ data }: Props) => {
             <CardContent className='grid grid-cols-2 gap-6'>
                 {data?.amenities?.length > 0 && data?.amenities.map((amenity: any, i: number) => {
                     return (
-                        <div key={i} className="bg-white shadow rounded-xl p-2 text-center text-sm font-medium text-gray-700 h-fit">
+                        <div key={i} className="bg-white shadow rounded-xl p-2 text-center text-sm font-medium text-gray-700 h-fit shadow-primary/30">
                             {amenity.name}
                         </div>
                     )
