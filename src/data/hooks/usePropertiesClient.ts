@@ -52,13 +52,15 @@ export const useDeletePropertyMutation = () => {
         variant: 'default',
         title: 'Property deleted successfully'
       })
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
     },
     onError: (error: any) => {
       toast({
         variant: 'destructive',
         title: error.response.data.message
       })
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
     }
   })
 }
@@ -72,7 +74,34 @@ export const useUpdatePropertyMutation = () => {
         variant: 'default',
         title: 'Property updated successfully'
       })
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.message
+      })
+    },
+    onSettled: () => {
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
+    }
+  })
+}
+
+export function useAssignAgentMutation() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: propertiesClient.assignAgent,
+    onSuccess: (response: any) => {
+      const { statusCode, data } = response
+
+      if (statusCode === 200) {
+        toast({
+          variant: 'default',
+          title: 'Agent assigned successfully'
+        })
+
+        queryClient.refetchQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
+      }
     },
     onError: (error: any) => {
       toast({
@@ -82,32 +111,3 @@ export const useUpdatePropertyMutation = () => {
     }
   })
 }
-
-// export const useUpdateOpinionMutation = () => {
-//   const queryClient = useQueryClient()
-//   const navigate = useNavigate()
-//   return useMutation(opinionClient.update, {
-//     onSuccess: () => {
-//       toast.success('Opinion Successfully Updated')
-//       navigate(AppRoutes.OPINION_EDITOR)
-//     },
-//     onSettled: () => {
-//       queryClient.invalidateQueries(ApiEndpoints.USERS)
-//     },
-//   })
-// }
-
-// export const useDeleteOpinionMutation = () => {
-//   const queryClient = useQueryClient()
-//   const navigate = useNavigate()
-//   return useMutation(opinionClient.delete, {
-//     onSuccess: (data) => {
-//       toast.success('Opinion and its contents are successfully deleted!')
-//       navigate(AppRoutes.OPINION_EDITOR)
-//       queryClient.refetchQueries(ApiEndpoints.OPINION)
-//     },
-//     onSettled: async () => {
-//       queryClient.invalidateQueries(ApiEndpoints.OPINION)
-//     },
-//   })
-// }

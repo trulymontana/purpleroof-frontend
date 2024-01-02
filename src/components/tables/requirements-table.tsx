@@ -105,7 +105,7 @@ export const columns: ColumnDef<RequirementApplication>[] = [
     enableHiding: false,
     cell: ({ row }) => (
       <div className="flex items-center">
-        <Link href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
+        <Link href={PageRoutes.dashboard.admin.REQUIREMENTS_EDIT(row.original.id)}>
           <Button variant="ghost">
             <FileEdit size={17} color="black" />
           </Button>

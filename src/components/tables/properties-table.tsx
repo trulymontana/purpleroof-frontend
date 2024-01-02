@@ -12,8 +12,12 @@ import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import UpdatePropertyForm from '@/app/dashboard/properties/_forms/update-property-form'
 import { Property } from '@/data/clients/propertiesClient'
 import currency from '@/lib/currency'
+import AssignAgentForm from '@/app/dashboard/properties/_forms/assign-agent-form'
+import { useGetAgents } from '@/data/hooks/useAgentsClient'
 
 export default function PropertiesTable() {
+
+  const { loading: isLoading, data: agentsData } = useGetAgents();
 
   const { mutate: deleteProperty, isPending } = useDeletePropertyMutation()
 
@@ -87,12 +91,37 @@ export default function PropertiesTable() {
       }
     },
     {
+      id: 'agent',
+      header: 'Agent',
+      cell: ({ row }) => (
+        <>
+          {
+            !row.original.agentId ? (
+              <ConfirmActionDialog
+                title="Assign Agent"
+                anchor={
+                  <Button>
+                    Assign Agent
+                  </Button>
+                }
+                content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
+              />
+            ) : (
+              <Badge>{row.original.agentId}</Badge>
+            )
+          }
+        </>
+      )
+    },
+    {
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => (
-        <div className="flex items-center gap-4">
-          <Link href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
-            <Eye size={17} color="black" />
+        <div className="flex items-center">
+          <Link prefetch={false} href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
+            <Button variant="ghost">
+              <Eye size={17} color="black" />
+            </Button>
           </Link>
           <ConfirmActionDialog
             title="Edit Property"

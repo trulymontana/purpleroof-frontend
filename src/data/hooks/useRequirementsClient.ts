@@ -1,7 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { ApiEndpoints } from '@/constants/api'
-import { CreateRequirementInput, requirementsClient } from '../clients/requirementsClient'
+import { requirementsClient } from '../clients/requirementsClient'
 import { toast } from '@/components/ui/use-toast'
+import { useRouter } from 'next/navigation'
+import { PageRoutes } from '@/constants/page-routes'
 
 export function useGetRequirements() {
   const { isLoading, data } = useQuery({
@@ -12,8 +14,20 @@ export function useGetRequirements() {
   return { data: data?.data, loading: isLoading }
 }
 
+export function useGetOneRequirement(id: number) {
+  const { isLoading, data } = useQuery({
+    queryKey: [ApiEndpoints.REQUIREMENTS],
+    queryFn: () => requirementsClient.getById({ id })
+  })
+
+  return { data: data?.data, loading: isLoading }
+}
+
 export const useCreateRequirementMutation = () => {
   const queryClient = useQueryClient()
+
+  const router = useRouter()
+
   return useMutation({
     mutationFn: requirementsClient.create,
     onSuccess: (data: any) => {
@@ -21,19 +35,25 @@ export const useCreateRequirementMutation = () => {
         variant: 'default',
         title: 'Requirement created successfully'
       })
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
+      router.push(PageRoutes.dashboard.admin.REQUIREMENTS)
     },
     onError: (error: any) => {
       toast({
         variant: 'destructive',
         title: error.message
       })
+    },
+    onSettled: () => {
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
     }
   })
 }
 
 export const useUpdateRequirementMutation = () => {
   const queryClient = useQueryClient()
+
+  const router = useRouter()
+
   return useMutation({
     mutationFn: requirementsClient.update,
     onSuccess: (data: any) => {
@@ -41,9 +61,10 @@ export const useUpdateRequirementMutation = () => {
         variant: 'default',
         title: 'Requirement updated successfully'
       })
+      router.push(PageRoutes.dashboard.admin.REQUIREMENTS)
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
     }
   })
 }
@@ -59,7 +80,7 @@ export const useDeleteRequirementMutation = () => {
       })
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
     }
   })
 }

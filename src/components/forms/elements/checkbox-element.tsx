@@ -39,7 +39,7 @@ const MultiSelectCheckbox = ({ name, options, selectedBoxes, setSelectedBoxes, c
                   <FormItem key={option.value} className="flex flex-row items-start space-x-3 space-y-0">
                     <FormControl>
                       <Checkbox
-                        checked={selectedBoxes.some((item) => item.value === option.value)}
+                        checked={selectedBoxes?.some((item) => item.value === option.value)}
                         onCheckedChange={(checked) => {
                           handleCheckboxChange(option, Boolean(checked))
                         }}

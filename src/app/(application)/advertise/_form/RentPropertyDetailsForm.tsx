@@ -40,7 +40,7 @@ const formSchema = z.object({
   }),
   numberOfBedRooms: z.string().optional(),
   numberOfBathRooms: z.string().optional(),
-  lavatories: z.string().optional(),
+  numberOfLavatory: z.number().optional(),
   description: z.string().optional(),
   deedNumber: z.string({
     required_error: 'Please enter your Deed Number'
@@ -89,12 +89,12 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
 
         {basic_details && JSON.parse(basic_details).typeOfProperty === PropertyTypeEnum.RESIDENTIAL ? (
           <>
-            <SelectElement name="numberOfBedRooms" label={'Number of Bed Rooms'} options={bedRooms} />
+            <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
 
-            <SelectElement name="numberOfBathRooms" label={'Number of Bath Rooms'} options={bathRooms} />
+            <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
           </>
         ) : (
-          <SelectElement name="lavatories" label="Number of Lavatory" options={lavatories} />
+          <NumberInputElement name="numberOfLavatory" label="Number of Lavatory" />
         )}
 
         <InputElement

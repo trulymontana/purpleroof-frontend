@@ -1,10 +1,14 @@
 'use client'
 
 import React from 'react'
-import AddRequirementsForm from '../_form/add-requirement-form'
+import RequirementsForm from '../_form/requirement-form'
+import { useCreateRequirementMutation } from '@/data/hooks/useRequirementsClient'
 
-const AddRequirementsPage = () => {
-  return <AddRequirementsForm />
+const Page = () => {
+
+  const { isPending: isLoading, mutate: createRequirement } = useCreateRequirementMutation()
+
+  return <RequirementsForm isLoading={isLoading} mutate={createRequirement} />
 }
 
-export default AddRequirementsPage
+export default Page

@@ -67,11 +67,11 @@ const Page = () => {
           <h1 className="mt-10 text-center text-4xl font-bold tracking-tight text-gray-200 sm:text-5xl lg:text-left">
             Your Home Loan is just a few steps away
           </h1>
-          {/* <p className="mt-6 text-lg leading-8 text-gray-100">
-                        {currentStep === 1
-                            ? `Let's calculate your mortgage in 2 steps`
-                            : 'Please provide the following information'}
-                    </p> */}
+          <p className="mt-6 text-lg leading-8 text-gray-100">
+            {pathName === PageRoutes.mortgage.PERSONAL_DETAILS
+              ? `Let's calculate your mortgage in 2 steps`
+              : 'Please provide the following information'}
+          </p>
           <hr className="my-2 w-1/4 text-muted shadow-md" />
           <p className="mt-6 text-lg leading-8 text-gray-100">
             Welcome to Purple Roof, we give you the best hassle-free mortgage solutions. Get a personalized estimation

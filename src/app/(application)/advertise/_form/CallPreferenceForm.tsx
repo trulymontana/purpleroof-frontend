@@ -21,9 +21,10 @@ const formSchema = z.object({
 
 interface Props {
   handleSubmit: (values: any) => void
+  isLoading: boolean
 }
 
-const CallPreferenceForm = ({ handleSubmit }: Props) => {
+const CallPreferenceForm = ({ handleSubmit, isLoading }: Props) => {
   const router = useRouter()
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.CALL_PREFERENCE)
@@ -53,8 +54,8 @@ const CallPreferenceForm = ({ handleSubmit }: Props) => {
           options={callPreferences}
         />
 
-        <Button type="submit" className="w-full">
-          Submit
+        <Button disabled={isLoading} type="submit" className="w-full">
+          {isLoading ? "Submitting..." : "Submit"}
         </Button>
         <BackButton route={PageRoutes.advertise.UPLOAD_PHOTOS} />
       </form>

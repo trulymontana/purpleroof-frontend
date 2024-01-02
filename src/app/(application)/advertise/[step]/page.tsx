@@ -25,7 +25,7 @@ const Page = () => {
   const pathName = usePathname()
   const searchParams = useSearchParams()
 
-  const { mutate: createProperty } = useCreatePropertyMutation()
+  const { mutate: createProperty, isPending: isLoading } = useCreatePropertyMutation()
 
   const categoryType = searchParams.get('categoryType')
 
@@ -59,8 +59,6 @@ const Page = () => {
       property.amenities = amenities_values
     }
 
-    console.log({ property })
-
     createProperty({
       ...property
     })
@@ -80,7 +78,7 @@ const Page = () => {
     [PageRoutes.advertise.AMENITIES_DETAILS]: <AmenitiesForm onSave={storeValues} />,
     [PageRoutes.advertise.PROJECT_STATUS]: <ProjectStatusForm onSave={storeValues} />,
     [PageRoutes.advertise.UPLOAD_PHOTOS]: <UploadDocumentsForm onSave={storeValues} />,
-    [PageRoutes.advertise.CALL_PREFERENCE]: <CallPreferenceForm handleSubmit={handleSubmit} />
+    [PageRoutes.advertise.CALL_PREFERENCE]: <CallPreferenceForm handleSubmit={handleSubmit} isLoading={isLoading} />
   }
 
   return (

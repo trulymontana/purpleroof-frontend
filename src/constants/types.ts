@@ -1,4 +1,4 @@
-import { EmirateEnum, MortgageStatusEnum, UserRoleEnum } from './enums'
+import { EmirateEnum, IncomeProfileEnum, MortgageStatusEnum, ResidenceTypeEnum, UserRoleEnum } from './enums'
 
 export enum SortOrder {
   Asc = 'asc',
@@ -54,8 +54,8 @@ export interface RequirementApplication {
   id: number
   name: string
   requiredDocuments: { name: string; documentType: string }[]
-  incomeProfile: string
-  residenceType: string
+  incomeProfile: IncomeProfileEnum
+  residenceType: ResidenceTypeEnum
   createdAt: string
   updatedAt: string
   preApprovalFee: number
