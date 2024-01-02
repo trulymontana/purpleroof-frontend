@@ -58,7 +58,7 @@ const PropertyDetailsCard = ({ data }: Props) => {
                         {data?.description}
                     </p>
                 </div>
-                <div className="grid gap-8 shadow-lg rounded-xl border w-3/4 p-5">
+                <div className="grid gap-8 shadow-md rounded-xl border shadow-primary/30 p-5">
                     <div className="w-full ">
                         <h3 className="text-3xl font-semibold my-2 flex items-center gap-2 text-primary"><LandPlot className='font-semibold' /> Property Information</h3>
                         <div className="grid grid-cols-2 gap-y-4 gap-x-16 mt-5 w-full content-between">
@@ -87,7 +87,7 @@ const PropertyDetailsCard = ({ data }: Props) => {
                         </div>
                     </div>
                 </div>
-                <div className="grid gap-8 shadow-lg rounded-xl border w-3/4 p-5">
+                <div className="grid gap-8 shadow-md rounded-xl shadow-primary/30 border p-5">
                     <div className="col-span-2">
                         <h3 className="text-3xl font-semibold my-2 flex items-center gap-1 text-primary"><MapPin className='font-semibold' /> Location Information</h3>
                         <div className="grid grid-cols-2 gap-y-4 gap-x-16 mt-5 w-full content-between">
@@ -122,7 +122,7 @@ const PropertyDetailsCard = ({ data }: Props) => {
                         </div>
                     </div>
                 </div>
-                <div className="grid gap-8 shadow-lg rounded-xl border w-3/4 p-5">
+                <div className="grid gap-8 shadow-md rounded-xl shadow-primary/30 border p-5">
                     <div className="col-span-2">
                         <h3 className="text-3xl font-semibold my-2 flex items-center gap-2 text-primary"><TrendingUp className='font-semibold' /> Project Status Information</h3>
                         <div className="grid grid-cols-2 gap-y-4 gap-x-16 mt-5 w-full content-between">
@@ -151,7 +151,7 @@ const PropertyDetailsCard = ({ data }: Props) => {
                         </div>
                     </div>
                 </div>
-                <div className="grid gap-8 shadow-lg rounded-xl border w-3/4 p-5">
+                <div className="grid gap-8 shadow-md rounded-xl shadow-primary/30 border p-5">
                     <div className="col-span-2">
                         <h3 className="text-3xl font-semibold my-2 flex items-center gap-2 text-primary"><Grid className='font-semibold' /> Other Details</h3>
                         <div className="grid grid-cols-2 gap-y-4 gap-x-16 mt-5 w-full content-between">

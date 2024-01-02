@@ -14,7 +14,7 @@ const RequiredDocumentsCards = ({ data }: Props) => {
     return (
         <>
             {data?.documents && data?.documents?.length > 0 && (
-                <Card className="">
+                <Card className="shadow-primary/30 shadow-md">
                     <CardHeader className="">
                         <h2 className="text-2xl font-semibold">Required Documents</h2>
                     </CardHeader>

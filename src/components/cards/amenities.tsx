@@ -8,7 +8,7 @@ interface Props {
 
 const AmenitiesCard = ({ data }: Props) => {
     return (
-        <Card className="">
+        <Card className="shadow-primary/30 shadow-md">
             <CardHeader>
                 <h3 className="text-2xl font-semibold">Features / Amenities</h3>
             </CardHeader>

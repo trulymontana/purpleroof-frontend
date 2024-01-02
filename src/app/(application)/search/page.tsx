@@ -191,24 +191,22 @@ const Page = () => {
 
       {data?.data && (
         <div className='relative h-auto min-h-screen'>
-          <div ref={root} className='absolute pt-10 bg-gray-100 w-full'>
+          <div ref={root} className='absolute pt-10 bg-primary/20 w-full'>
             <div className="max-w-2xl px-6 py-1 mx-auto lg:max-w-7xl lg:px-8 z-10">
-              <h1 className='text-4xl font-bold mb-10 underline underline-offset-4'>Properties You Searched For</h1>
+              <h1 className='text-4xl font-bold mb-10 underline text-primary underline-offset-4'>Properties You Searched For</h1>
               <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 xl:gap-x-6 pb-10">
                 {data?.data && data.data.length > 0 && data.data?.map((property: Property, i: number) => {
                   return (
-                    <Card key={i} className="max-w-sm rounded-lg">
-                      <Image
-                        alt="Property Image"
-                        className="w-full h-64 object-cover border-b-2"
-                        height="256"
-                        src={property?.image || "/placeholder.svg"}
-                        style={{
-                          aspectRatio: "256/256",
-                          objectFit: "cover",
-                        }}
-                        width="256"
-                      />
+                    <Card key={i} className="max-w-sm w-full rounded-xl">
+                      <div>
+                        <Image
+                          alt="Property Image"
+                          className="border-b-2 w-full h-full"
+                          src={property?.image || "/placeholder.svg"}
+                          width={1000}
+                          height={1000}
+                        />
+                      </div>
                       <CardHeader className="p-4">
                         <CardTitle className="text-lg font-semibold line-clamp-2 h-[60px]">{property?.name}</CardTitle>
                         <CardDescription className="text-gray-500">{property?.location}</CardDescription>
