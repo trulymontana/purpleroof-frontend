@@ -59,18 +59,12 @@ const RequirementsForm = ({ data, isLoading, mutate }: Props) => {
 
   // const { isPending: isLoading, mutate: createRequirement } = useCreateRequirementMutation()
 
-  let values = {}
-
-  if (data) {
-    values = {
-      incomeProfile: data.incomeProfile,
-      residenceType: data.residenceType,
-    }
-  }
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: values
+    defaultValues: {
+      incomeProfile: data?.incomeProfile,
+      residenceType: data?.residenceType,
+    }
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
