@@ -22,14 +22,15 @@ export const useCreateAgentMutation = () => {
         variant: 'default',
         title: 'Applied for agent successfully'
       })
-      location.reload()
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.AGENTS] })
     },
     onError: (error: any) => {
       toast({
         variant: 'destructive',
         title: error.message
       })
+    },
+    onSettled: () => {
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
     }
   })
 }
@@ -45,7 +46,7 @@ export const useUpdateAgentMutation = () => {
       })
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.AGENTS] })
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
     }
   })
 }
@@ -61,7 +62,7 @@ export const useDeleteAgentMutation = () => {
       })
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.AGENTS] })
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
     }
   })
 }
@@ -87,6 +88,9 @@ export function useUpdateApprovalStatusMutation() {
         variant: 'destructive',
         title: error.message
       })
+    },
+    onSettled: () => {
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
     }
   })
 }

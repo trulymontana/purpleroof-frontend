@@ -52,13 +52,15 @@ export const useDeletePropertyMutation = () => {
         variant: 'default',
         title: 'Property deleted successfully'
       })
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
     },
     onError: (error: any) => {
       toast({
         variant: 'destructive',
         title: error.response.data.message
       })
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
     }
   })
 }
@@ -72,13 +74,15 @@ export const useUpdatePropertyMutation = () => {
         variant: 'default',
         title: 'Property updated successfully'
       })
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
     },
     onError: (error: any) => {
       toast({
         variant: 'destructive',
         title: error.message
       })
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
     }
   })
 }

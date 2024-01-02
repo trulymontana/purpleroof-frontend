@@ -11,6 +11,8 @@ import CustomInputElement from '@/components/forms/elements/custom-input-element
 import { useSignUp } from '@/data/hooks/useAuthClient'
 import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
+import { useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
 
 const formSchema = z.object({
   firstName: z.string({
@@ -33,11 +35,27 @@ const formSchema = z.object({
     )
 })
 const Page = () => {
+
+  const searchParams = useSearchParams()
+
+  const email = searchParams.get("email")
+  const firstName = searchParams.get("firstName")
+  const lastName = searchParams.get("lastName")
+
   const { isPending: isLoading, mutate: createUser } = useSignUp()
 
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema)
+    resolver: zodResolver(formSchema),
   })
+
+  useEffect(() => {
+    if (email && firstName && lastName) {
+      form.setValue("email", email),
+        form.setValue("firstName", firstName),
+        form.setValue("lastName", lastName)
+    }
+  }, [])
+
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     createUser({
@@ -76,7 +94,7 @@ const Page = () => {
               </Button>
               <p className="mt-4 text-center">
                 Already have an account?{' '}
-                <Link className="text-primary underline" href={PageRoutes.SIGNIN}>
+                <Link className="text-primary underline" href={`${PageRoutes.SIGNIN}?email=${email}`}>
                   Sign in here
                 </Link>
               </p>

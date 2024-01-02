@@ -10,6 +10,8 @@ import CustomInputElement from '@/components/forms/elements/custom-input-element
 import { useSignIn } from '@/data/hooks/useAuthClient'
 import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
+import { useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
 
 const formSchema = z.object({
     email: z.string({
@@ -21,11 +23,22 @@ const formSchema = z.object({
 })
 
 const Page = () => {
+
+    const searchParams = useSearchParams()
+
+    const email = searchParams.get("email")
+
     const { isPending: isLoading, mutate: signInUser } = useSignIn()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema)
     })
+
+    useEffect(() => {
+        if (email) {
+            form.setValue("email", email)
+        }
+    }, [])
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         signInUser({

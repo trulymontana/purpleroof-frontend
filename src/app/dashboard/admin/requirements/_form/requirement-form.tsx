@@ -61,10 +61,6 @@ const RequirementsForm = ({ data, isLoading, mutate }: Props) => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      incomeProfile: data?.incomeProfile,
-      residenceType: data?.residenceType,
-    }
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -89,6 +85,8 @@ const RequirementsForm = ({ data, isLoading, mutate }: Props) => {
 
   useEffect(() => {
     if (data) {
+      form.setValue("incomeProfile", data.incomeProfile)
+      form.setValue("residenceType", data.residenceType)
       form.setValue("name", data.name)
       form.setValue("preApprovalFee", data.preApprovalFee)
       form.setValue("processingFee", data.processingFee)

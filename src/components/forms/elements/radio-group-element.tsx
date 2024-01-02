@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { TOption } from '@/constants/types'
 import { cn } from '@/lib/utils'
 
@@ -19,7 +19,7 @@ const RadioGroupElement = ({ name, label, options, className, disabled = false }
   const { control } = useFormContext()
   return (
     <>
-      <FormField
+      <Controller
         control={control}
         name={name}
         render={({ field }) => (

@@ -37,7 +37,9 @@ export const useCreateMortgageMutation = () => {
       localStorage.removeItem(PageRoutes.mortgage.PERSONAL_DETAILS)
       localStorage.removeItem(PageRoutes.mortgage.INCOME_DETAILS)
       queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
-      router.push(PageRoutes.mortgage.COMPLETE_APPLICATION)
+      router.push(
+        `${PageRoutes.mortgage.COMPLETE_APPLICATION}?email=${data.data.email}&firstName=${data.data.firstName}&lastName=${data.data.lastName}`
+      )
     },
     onError: (error: any) => {
       toast({
@@ -57,13 +59,15 @@ export const useDeleteMortgageMutation = () => {
         variant: 'default',
         title: 'Mortgage deleted successfully'
       })
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
     },
     onError: (error: any) => {
       toast({
         variant: 'destructive',
         title: error.response.data.message
       })
+    },
+    onSettled: () => {
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
     }
   })
 }

@@ -35,8 +35,6 @@ export const useCreateRequirementMutation = () => {
         variant: 'default',
         title: 'Requirement created successfully'
       })
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
-
       router.push(PageRoutes.dashboard.admin.REQUIREMENTS)
     },
     onError: (error: any) => {
@@ -44,6 +42,9 @@ export const useCreateRequirementMutation = () => {
         variant: 'destructive',
         title: error.message
       })
+    },
+    onSettled: () => {
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
     }
   })
 }
@@ -52,7 +53,7 @@ export const useUpdateRequirementMutation = () => {
   const queryClient = useQueryClient()
 
   const router = useRouter()
-  
+
   return useMutation({
     mutationFn: requirementsClient.update,
     onSuccess: (data: any) => {
@@ -79,7 +80,7 @@ export const useDeleteRequirementMutation = () => {
       })
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
     }
   })
 }
