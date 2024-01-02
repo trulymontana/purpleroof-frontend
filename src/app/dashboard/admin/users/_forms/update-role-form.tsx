@@ -8,6 +8,7 @@ import { UserRoleEnum } from '@/constants/enums'
 import { useUpdatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 import { User } from '@/constants/types'
 import { UserRoleOptions } from '@/constants/users'
+import { useUpdateUserRole } from '@/data/hooks/useUsersClient'
 
 interface Props {
     data: User
@@ -21,7 +22,8 @@ const formSchema = z.object({
 
 type TPropertyStatus = z.infer<typeof formSchema>
 const UpdateUserRoleForm = ({ data }: Props) => {
-    const { mutate: updateProperty } = useUpdatePropertyMutation()
+
+    const { mutate: updateRole } = useUpdateUserRole()
 
     const form = useForm<TPropertyStatus>({
         resolver: zodResolver(formSchema),
@@ -31,7 +33,10 @@ const UpdateUserRoleForm = ({ data }: Props) => {
     })
 
     function onSubmit(values: TPropertyStatus) {
-        console.log({ values })
+        updateRole({
+            id: data.id,
+            ...values
+        })
     }
 
     return (
