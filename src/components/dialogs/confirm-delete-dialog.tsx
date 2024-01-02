@@ -29,7 +29,7 @@ const ConfirmDeleteDialog = ({ onDelete, isLoading }: Props) => {
             </Button>
           </DialogClose>
           <Button variant="destructive" disabled={isLoading} onClick={onDelete}>
-            Delete
+            Yes I am sure
           </Button>
         </DialogFooter>
       </DialogContent>

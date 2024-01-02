@@ -15,7 +15,6 @@ import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import currency from '@/lib/currency'
 
-
 export default function MortgagesTable() {
   const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
 
@@ -65,34 +64,15 @@ export default function MortgagesTable() {
         return <Badge variant="outline">{data.status}</Badge>
       }
     },
-    {
-      accessorKey: 'country',
-      header: 'Country'
-    },
-    {
-      id: 'action',
-      header: 'Action',
-      cell: ({ row }) => {
-        const data = row.original
-        if (data.status === MortgageStatusEnum.SUBMITTED) {
-          return (
-            <Link href={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(data.id, LocalStorageKeys.MORTGAGE_TRANSACTION_INFO)}>
-              <Badge>Complete Your Application</Badge>
-            </Link>
-          )
-        }
-        return (
-          <Link href={PageRoutes.dashboard.MORTGAGE_TIMELINE(data.id)}>
-            <Badge>View Your Application</Badge>
-          </Link>
-        )
-      }
-    },
+    // {
+    //   accessorKey: 'country',
+    //   header: 'Country'
+    // },
     {
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
           <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
             <Eye size={17} color="black" />
           </Link>
@@ -108,9 +88,32 @@ export default function MortgagesTable() {
           <ConfirmDeleteDialog onDelete={() => deleteMortgage(row.original.id)} isLoading={isPending} />
         </div>
       )
+    },
+    {
+      id: 'action',
+      header: 'Action',
+      cell: ({ row }) => {
+        const data = row.original
+        if (data.status === MortgageStatusEnum.SUBMITTED) {
+          return (
+            <Link
+              href={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
+                data.id,
+                LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
+              )}
+            >
+              <Badge>Complete Your Application</Badge>
+            </Link>
+          )
+        }
+        return (
+          <Link href={PageRoutes.dashboard.MORTGAGE_TIMELINE(data.id)}>
+            <Badge>View Your Application</Badge>
+          </Link>
+        )
+      }
     }
   ]
-
 
   const { loading, data } = useGetMortgages()
   return <DataTable columns={columns} data={data ?? []} isLoading={loading} />
