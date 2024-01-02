@@ -118,7 +118,7 @@ export default function PropertiesTable() {
       enableHiding: false,
       cell: ({ row }) => (
         <div className="flex items-center">
-          <Link href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
+          <Link prefetch={false} href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
             <Button variant="ghost">
               <Eye size={17} color="black" />
             </Button>
