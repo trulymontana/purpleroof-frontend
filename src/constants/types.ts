@@ -123,6 +123,8 @@ export type User = {
   firstName: string
   lastName: string
   role: UserRoleEnum
+  createdAt: string
+  updatedAt: string
 }
 
 export type historyType = {
