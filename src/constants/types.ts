@@ -119,10 +119,13 @@ export type PreSignedFile = {
 }
 
 export type User = {
+  id: number
   email: string
   firstName: string
   lastName: string
   role: UserRoleEnum
+  createdAt: string
+  updatedAt: string
 }
 
 export type historyType = {
