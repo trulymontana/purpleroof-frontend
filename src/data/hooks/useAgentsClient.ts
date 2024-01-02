@@ -80,7 +80,7 @@ export function useUpdateApprovalStatusMutation() {
           variant: 'default',
           title: 'Agent updated successfully'
         })
-        location.reload()
+        queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
       }
     },
     onError: (error: any) => {
@@ -88,9 +88,6 @@ export function useUpdateApprovalStatusMutation() {
         variant: 'destructive',
         title: error.message
       })
-    },
-    onSettled: () => {
-      queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
     }
   })
 }
@@ -108,8 +105,7 @@ export function useUpdateActiveStatusMutation() {
           variant: 'default',
           title: 'Agent updated successfully'
         })
-
-        location.reload()
+        queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
       }
     },
     onError: (error: any) => {

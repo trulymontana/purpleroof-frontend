@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { ApiEndpoints } from '@/constants/api'
-import { CreateRequirementInput, requirementsClient } from '../clients/requirementsClient'
+import { requirementsClient } from '../clients/requirementsClient'
 import { toast } from '@/components/ui/use-toast'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
@@ -64,7 +64,7 @@ export const useUpdateRequirementMutation = () => {
       router.push(PageRoutes.dashboard.admin.REQUIREMENTS)
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
     }
   })
 }

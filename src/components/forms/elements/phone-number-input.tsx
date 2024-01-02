@@ -1,6 +1,4 @@
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { PhoneInput } from 'react-international-phone'
 import 'react-international-phone/style.css'
@@ -25,7 +23,7 @@ const PhoneNumberInputElement = ({ name, label, description, placeholder }: Prop
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <PhoneInput
-              defaultCountry="us"
+              defaultCountry="ae"
               value={field.value}
               onChange={field.onChange}
               inputStyle={{
