@@ -71,13 +71,13 @@ const Footer = () => {
                 <div className="border-t border-white mt-10 pt-6 text-sm">
                     <div className="flex justify-between items-center">
                         <div>
-                            <span>Terms of use</span>
-                            <span className="mx-3">|</span>
-                            <span>Privacy Policy</span>
-                            <span className="mx-3">|</span>
-                            <span>Staff Application</span>
-                            <span className="mx-3">|</span>
-                            <span>Benefits of Purple Roof Home Loan</span>
+                            <Link href={"/"} className='hover:text-gray-300'>Terms of use</Link>
+                            <Link href={"/"} className="mx-3 hover:text-gray-300">|</Link>
+                            <Link href={"/"} className='hover:text-gray-300'>Privacy Policy</Link>
+                            <Link href={"/"} className="mx-3 hover:text-gray-300">|</Link>
+                            <Link href={"/"} className='hover:text-gray-300'>Staff Application</Link>
+                            <Link href={"/"} className="mx-3 hover:text-gray-300">|</Link>
+                            <Link href={"/"} className='hover:text-gray-300'>Benefits of Purple Roof Home Loan</Link>
                         </div>
                         <div>
                             <p>© 2023 Purple Roof, Inc. All rights reserved.</p>

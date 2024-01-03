@@ -1,17 +1,25 @@
 'use client'
 
-import { ArrowRight, Home } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { Button } from "./ui/button"
 import { headerLinks } from "@/constants/navigation"
+import Image from "next/image"
 
 const Header = () => {
     return (
         <nav className="bg-primary/90 py-5 px-10 flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-                <Home className="text-white h-6 w-6" />
+            <Link href="/" className="flex items-center space-x-2">
+                <Image
+                    src={'/assets/logos/logo-only-white.png'}
+                    quality={100}
+                    width={1000}
+                    height={1000}
+                    alt=""
+                    className="h-6 w-auto"
+                />
                 <span className="text-white font-bold uppercase">Purple Roof</span>
-            </div>
+            </Link>
             <div className="flex items-center space-x-14">
                 {
                     headerLinks.map(({ link, label }, i) => (
