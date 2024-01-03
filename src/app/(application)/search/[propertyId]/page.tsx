@@ -2,6 +2,7 @@
 
 import Loader from "@/components/Loader"
 import AmenitiesCard from "@/components/cards/amenities"
+import ContactAgentCard from "@/components/cards/contact-agent"
 import PropertyDetailsCard from "@/components/cards/property-details"
 import { useGetOneProperty } from "@/data/hooks/usePropertiesClient"
 import Image from "next/image"
@@ -45,6 +46,7 @@ const Page = ({ params: { propertyId } }: Props) => {
                     </div>
                 )}
                 <div className='w-1/3 space-y-4'>
+                    <ContactAgentCard />
                     {
                         data && (
                             <AmenitiesCard data={data} />
