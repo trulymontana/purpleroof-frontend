@@ -15,7 +15,7 @@ const PropertyCard = ({ property }: Props) => {
         <Card className="max-w-sm w-full rounded-xl">
             <Image
                 alt="Property Image"
-                className="w-full h-64 object-cover border-b-2"
+                className="w-full h-64 object-cover border-b-2 rounded-t-xl"
                 height="256"
                 src={property?.image || "/placeholder.svg"}
                 style={{
