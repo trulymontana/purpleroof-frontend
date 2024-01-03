@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button'
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Calendar as CalenderIcon } from 'lucide-react'
+import { Calendar as CalenderIcon, X } from 'lucide-react'
 import { Calendar } from '@/components/ui/calendar'
 
 import { Popover } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
-import { PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
+import { PopoverClose, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover'
 import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { CustomCalendar } from '@/components/ui/custom-calendar'
@@ -41,6 +41,12 @@ const DatePickerElement = ({ name, label, description, disabled = false, custom 
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-full bg-slate-950 p-0 text-white/80" align="start">
+              <div className="flex pt-2 pr-2">
+                <div className="flex-1"></div>
+                <PopoverClose>
+                  <X size={24} className="text-primary/60 hover:text-destructive" />
+                </PopoverClose>
+              </div>
               {custom ? (
                 <CustomCalendar
                   mode="single"

@@ -2,6 +2,7 @@
 
 import Loader from "@/components/Loader"
 import AmenitiesCard from "@/components/cards/amenities"
+import ContactAgentCard from "@/components/cards/contact-agent"
 import PropertyDetailsCard from "@/components/cards/property-details"
 import { useGetOneProperty } from "@/data/hooks/usePropertiesClient"
 import Image from "next/image"
@@ -22,7 +23,7 @@ const Page = ({ params: { propertyId } }: Props) => {
     }
 
     return (
-        <section className="max-w-[90vw] mx-auto">
+        <section className="w-full md:max-w-[90vw] mx-auto">
             <div className="h-[500px] w-full">
                 <Image
                     alt="Property Image"
@@ -38,13 +39,14 @@ const Page = ({ params: { propertyId } }: Props) => {
                     quality={100}
                 />
             </div>
-            <div className="max-w-7xl flex items-start gap-8 mx-auto p-6">
+            <div className="max-w-7xl flex flex-col md:flex-row items-start gap-8 mx-auto p-6">
                 {data && (
-                    <div className='flex flex-col gap-8 w-2/3'>
+                    <div className='flex flex-col gap-8 w-full md:w-2/3'>
                         <PropertyDetailsCard data={data} />
                     </div>
                 )}
-                <div className='w-1/3 space-y-4'>
+                <div className='w-full md:w-1/3 space-y-4'>
+                    <ContactAgentCard />
                     {
                         data && (
                             <AmenitiesCard data={data} />

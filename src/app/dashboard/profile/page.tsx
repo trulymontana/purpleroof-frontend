@@ -18,7 +18,7 @@ import InputElement from "@/components/forms/elements/input-element"
 import PhoneNumberInputElement from "@/components/forms/elements/phone-number-input"
 import FileUploader from "@/components/forms/elements/file-uploader"
 import MultiSelectElement from "@/components/forms/elements/multiselect-element"
-import { emirateOptions, emiratesWithLocations } from "@/constants/advertise"
+import { emirateOptions } from "@/constants/advertise"
 import { useEffect, useState } from "react"
 import { Separator } from "@/components/ui/separator"
 import { useCreateAgentMutation } from "@/data/hooks/useAgentsClient"
@@ -92,7 +92,7 @@ const Page = () => {
             <div className="flex items-center gap-4">
                 <Avatar className="h-20 w-20">
                     <AvatarImage alt="User Avatar" src="/placeholder-avatar.jpg" />
-                    <AvatarFallback>{user.firstName.charAt(0) + user.lastName.charAt(0)}</AvatarFallback>
+                    <AvatarFallback>{user?.firstName?.charAt(0) + user.lastName.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div className="grid gap-1 text-lg">
                     <div className="font-bold text-2xl">{user.firstName + " " + user.lastName}</div>
