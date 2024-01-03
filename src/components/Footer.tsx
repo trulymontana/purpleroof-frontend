@@ -1,6 +1,8 @@
 import React from 'react'
 import { Button } from './ui/button'
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react'
+import { headerLinks, requirements, services } from '@/constants/navigation'
+import Link from 'next/link'
 
 const Footer = () => {
     return (
@@ -16,77 +18,38 @@ const Footer = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     <div>
                         <h5 className="text-sm font-semibold mb-4">EXPLORE</h5>
-                        <ul className="space-y-3">
-                            <li>
-                                <a className="text-white hover:text-gray-300" href="#">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a className="text-white hover:text-gray-300" href="#">
-                                    About Us
-                                </a>
-                            </li>
-                            <li>
-                                <a className="text-white hover:text-gray-300" href="#">
-                                    Home Loans
-                                </a>
-                            </li>
-                            <li>
-                                <a className="text-white hover:text-gray-300" href="#">
-                                    Careers
-                                </a>
-                            </li>
-                            <li>
-                                <a className="text-white hover:text-gray-300" href="#">
-                                    Contact Us
-                                </a>
-                            </li>
-                            <li>
-                                <a className="text-white hover:text-gray-300" href="#">
-                                    Blog
-                                </a>
-                            </li>
+                        <ul className='space-y-3'>
+                            {
+                                headerLinks.map(({ label, link }, i) => (
+                                    <li key={i}>
+                                        <Link href={link} className='text-white hover:text-gray-300'>{label}</Link>
+                                    </li>
+                                ))
+                            }
                         </ul>
                     </div>
                     <div>
                         <h5 className="text-sm font-semibold mb-4">REQUIREMENTS</h5>
-                        <ul className="space-y-3">
-                            <li>
-                                <a className="text-white hover:text-gray-300" href="#">
-                                    Salaried
-                                </a>
-                            </li>
-                            <li>
-                                <a className="text-white hover:text-gray-300" href="#">
-                                    Self-Employed
-                                </a>
-                            </li>
-                            <li>
-                                <a className="text-white hover:text-gray-300" href="#">
-                                    Non-Resident
-                                </a>
-                            </li>
+                        <ul className='space-y-3'>
+                            {
+                                requirements.map(({ label, link }, i) => (
+                                    <li key={i}>
+                                        <Link href={link} className='text-white hover:text-gray-300'>{label}</Link>
+                                    </li>
+                                ))
+                            }
                         </ul>
                     </div>
                     <div>
                         <h5 className="text-sm font-semibold mb-4">SERVICES</h5>
-                        <ul className="space-y-3">
-                            <li>
-                                <a className="text-white hover:text-gray-300" href="#">
-                                    Apply for Home Loan
-                                </a>
-                            </li>
-                            <li>
-                                <a className="text-white hover:text-gray-300" href="#">
-                                    Property Search
-                                </a>
-                            </li>
-                            <li>
-                                <a className="text-white hover:text-gray-300" href="#">
-                                    Advertise your Property
-                                </a>
-                            </li>
+                        <ul className='space-y-3'>
+                            {
+                                services.map(({ label, link }, i) => (
+                                    <li key={i}>
+                                        <Link href={link} className='text-white hover:text-gray-300'>{label}</Link>
+                                    </li>
+                                ))
+                            }
                         </ul>
                     </div>
                     <div>

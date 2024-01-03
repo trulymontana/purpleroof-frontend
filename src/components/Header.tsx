@@ -3,6 +3,7 @@
 import { ArrowRight, Home } from "lucide-react"
 import Link from "next/link"
 import { Button } from "./ui/button"
+import { headerLinks } from "@/constants/navigation"
 
 const Header = () => {
     return (
@@ -12,23 +13,15 @@ const Header = () => {
                 <span className="text-white font-bold uppercase">Purple Roof</span>
             </div>
             <div className="flex items-center space-x-14">
-                <Link className="text-white hover:text-opacity-75" href="#">
-                    Home
-                </Link>
-                <Link className="text-white hover:text-opacity-75" href="#">
-                    About Us
-                </Link>
-                <Link className="text-white hover:text-opacity-75" href="#">
-                    Home Loan
-                </Link>
-                <Link className="text-white hover:text-opacity-75" href="#">
-                    Careers
-                </Link>
-                <Link className="text-white hover:text-opacity-75" href="#">
-                    Contact Us
-                </Link>
+                {
+                    headerLinks.map(({ link, label }, i) => (
+                        <Link key={i} className="text-white hover:text-opacity-75" href={link}>
+                            {label}
+                        </Link>
+                    ))
+                }
             </div>
-            <Button className="text-white bg-transparent border border-white hover:bg-white hover:text-[#6B4E90]">
+            <Button variant="outline" className="text-white hover:text-primary">
                 Dashboard
                 <ArrowRight className="ml-2" />
             </Button>
