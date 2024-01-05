@@ -6,8 +6,8 @@ export const UserRoleOptions = [
     value: UserRoleEnum.ADMIN
   },
   {
-    label: 'Advertiser',
-    value: UserRoleEnum.ADVERTISER
+    label: 'General User',
+    value: UserRoleEnum.GENERAL_USER
   },
   {
     label: 'Agent',
