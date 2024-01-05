@@ -34,7 +34,8 @@ export const PageRoutes = {
     AMENITIES_DETAILS: '/advertise/amenities-details',
     UPLOAD_PHOTOS: '/advertise/upload-photos',
     PROJECT_STATUS: '/advertise/project-status',
-    CALL_PREFERENCE: '/advertise/call-preference'
+    CALL_PREFERENCE: '/advertise/call-preference',
+    APPLICATION_COMPLETED: '/advertise/application-completed'
   },
   mortgage_transaction: {
     TRANSACTION_INFO: 'mortgage-transaction-info',

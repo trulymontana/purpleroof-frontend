@@ -10,7 +10,7 @@ import {
   PropertySubmissionStatusEnum,
   PropertyTypeEnum,
   RentedOrVacantEnum,
-  ResidentialPropertyCategoryEnum,
+  ResidentialPropertyCategoryEnum
 } from './enums'
 
 export const categories = [
@@ -117,7 +117,7 @@ export const residentalTypes = [
   },
   {
     label: 'Block of Units',
-    value: ResidentialPropertyCategoryEnum.BLOCKS_OF_UNITS
+    value: ResidentialPropertyCategoryEnum.BLOCK_OF_UNITS
   },
   {
     label: 'House',

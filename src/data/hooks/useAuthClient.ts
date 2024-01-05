@@ -33,10 +33,11 @@ export function useSignUp() {
       }
     },
     onError: (error: any) => {
+      console.log({ toastError: error })
       toast({
         variant: 'destructive',
-        title: error.response.data.message,
-        description: error.response.data.details
+        title: error.message,
+        description: error.message
       })
     }
   })
@@ -71,7 +72,8 @@ export function useSignIn() {
     onError: (error: any) => {
       toast({
         variant: 'destructive',
-        title: error.message
+        title: error.response.data.message,
+        description: error.response.data.details
       })
     }
   })

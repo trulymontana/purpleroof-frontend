@@ -26,21 +26,12 @@ export default function PropertiesTable() {
       accessorKey: 'id',
       header: 'ID'
     },
-    // {
-    //   accessorKey: 'propertyTypeId',
-    //   header: 'Property Type ID'
-    // },
-    // {
-    //   accessorKey: 'propertyTypeCategoryId',
-    //   header: 'Property Type Category ID'
-    // },
     {
-      accessorKey: 'name',
-      header: 'Name'
-    },
-    {
-      accessorKey: 'description',
-      header: 'Description'
+      id: 'name',
+      header: 'Name',
+      cell: ({ row }) => {
+        return <span className='line-clamp-1 max-w-sm'>{row.original.name}</span>
+      }
     },
     {
       accessorKey: 'phone',
@@ -53,14 +44,6 @@ export default function PropertiesTable() {
         const monthlyIncome = row.original.amount
         return <span>{currency.format(monthlyIncome)}</span>
       }
-    },
-    {
-      accessorKey: 'size',
-      header: 'Size'
-    },
-    {
-      accessorKey: 'address',
-      header: 'Address'
     },
     {
       accessorKey: 'landmark',
@@ -91,25 +74,30 @@ export default function PropertiesTable() {
       }
     },
     {
-      id: 'agent',
+      id: "agent",
       header: 'Agent',
+      cell: ({ row }) => {
+        const data = row.original;
+        if (data?.agentId) {
+          return <Badge className='bg-teal-600 '>Assigned</Badge>
+        }
+        return <Badge variant="outline">Not Assigned</Badge>
+      }
+    },
+    {
+      id: 'action',
+      header: 'Action',
       cell: ({ row }) => (
         <>
-          {
-            !row.original.agentId ? (
-              <ConfirmActionDialog
-                title="Assign Agent"
-                anchor={
-                  <Button>
-                    Assign Agent
-                  </Button>
-                }
-                content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
-              />
-            ) : (
-              <Badge>{row.original.agentId}</Badge>
-            )
-          }
+          <ConfirmActionDialog
+            title="Assign Agent"
+            anchor={
+              <Button>
+                Assign Agent
+              </Button>
+            }
+            content={<AssignAgentForm isLoading={isLoading} agentsData={agentsData} data={row.original} />}
+          />
         </>
       )
     },
@@ -137,7 +125,6 @@ export default function PropertiesTable() {
       )
     }
   ]
-
 
   const { loading, data } = useGetProperties()
   return <DataTable columns={columns} data={data ?? []} isLoading={loading} />

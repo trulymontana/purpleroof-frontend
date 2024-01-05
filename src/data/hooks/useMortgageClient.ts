@@ -82,7 +82,6 @@ export const useUpdateMortgageMutation = () => {
         variant: 'default',
         title: 'Mortgage updated successfully'
       })
-      console.log({ data })
       queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
       localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${data.data.id}`)
       localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_CUSTOMER_INFO}-${data.data.id}`)

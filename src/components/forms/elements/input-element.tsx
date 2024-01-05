@@ -12,7 +12,7 @@ interface Props {
 }
 
 const InputElement = ({ name, label, description, placeholder }: Props) => {
-  const { control } = useFormContext()
+  const { control, register } = useFormContext()
 
   return (
     <FormField

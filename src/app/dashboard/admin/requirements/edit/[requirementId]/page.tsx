@@ -24,7 +24,7 @@ const Page = ({ params: { requirementId } }: Props) => {
 
     return (
         <>
-            {data && <RequirementsForm data={data} isLoading={isLoading} mutate={updateRequirement} />}
+            {data && <RequirementsForm mode="EDIT" data={data} isLoading={isLoading} mutate={updateRequirement} />}
         </>
     )
 }

@@ -16,6 +16,14 @@ import { useEffect, useState } from 'react'
 import Loader from '@/components/Loader'
 
 const roleToPageMapping = {
+  [UserRoleEnum.SUPER_ADMIN]: [
+    PageRoutes.admin.AGENTS,
+    PageRoutes.admin.USERS,
+    PageRoutes.admin.REQUIREMENTS,
+    PageRoutes.dashboard.PROFILE,
+    PageRoutes.dashboard.MORTGAGES,
+    PageRoutes.dashboard.PROPERTIES,
+  ],
   [UserRoleEnum.ADMIN]: [
     PageRoutes.admin.AGENTS,
     PageRoutes.admin.USERS,
@@ -24,13 +32,13 @@ const roleToPageMapping = {
     PageRoutes.dashboard.MORTGAGES,
     PageRoutes.dashboard.PROPERTIES,
   ],
-  [UserRoleEnum.ADVERTISER]: [
+  [UserRoleEnum.GENERAL_USER]: [
     PageRoutes.dashboard.MORTGAGES,
     PageRoutes.dashboard.PROPERTIES,
     PageRoutes.dashboard.PROFILE,
     PageRoutes.admin.REQUIREMENTS
   ],
-  [UserRoleEnum.AGENT]: [PageRoutes.dashboard.PROPERTIES, PageRoutes.dashboard.PROFILE]
+  [UserRoleEnum.AGENT]: [PageRoutes.dashboard.MORTGAGES , PageRoutes.dashboard.PROPERTIES, PageRoutes.dashboard.PROFILE]
 }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

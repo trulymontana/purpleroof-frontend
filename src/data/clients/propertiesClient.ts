@@ -4,6 +4,7 @@ import { crudFactory } from '@/lib/crud-factory'
 import { ApiEndpoints } from '@/constants/api'
 import { EmirateEnum, FurnishingStatusEnum, OccupencyStatusEnum, PropertySubmissionStatusEnum } from '@/constants/enums'
 import HttpClient from '@/lib/http-client'
+import { Agent } from './agentsClient'
 
 export interface CreatePropertyInput {
   name: string
@@ -72,6 +73,7 @@ export interface Property extends CreatePropertyInput {
   submissionStatus: PropertySubmissionStatusEnum
   documents: any
   agentId?: number
+  agent?: Agent
 }
 
 export const propertiesClient = {

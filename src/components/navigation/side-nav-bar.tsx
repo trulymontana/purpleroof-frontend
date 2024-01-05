@@ -5,6 +5,7 @@ import { User } from '@/constants/types'
 import { Building, FileCode, Files, Home, PersonStandingIcon, Settings, User as UserIcon } from 'lucide-react'
 import Link from 'next/link'
 import UserButton from './user-button'
+import { UserRoleEnum } from '@/constants/enums'
 
 const ICON_SIZE = 20
 
@@ -12,32 +13,43 @@ const navigationSidebarItems = [
   {
     title: 'Mortgages',
     link: PageRoutes.dashboard.MORTGAGES,
-    icon: <FileCode size={ICON_SIZE} />
+    icon: <FileCode size={ICON_SIZE} />,
+    roles: [UserRoleEnum.ADMIN, UserRoleEnum.GENERAL_USER, UserRoleEnum.SUPER_ADMIN, UserRoleEnum.AGENT]
   },
   {
     title: 'Properties',
     link: PageRoutes.dashboard.PROPERTIES,
-    icon: <Building size={ICON_SIZE} />
+    icon: <Building size={ICON_SIZE} />,
+    roles: [UserRoleEnum.ADMIN, UserRoleEnum.GENERAL_USER, UserRoleEnum.SUPER_ADMIN, UserRoleEnum.AGENT]
+
   },
   {
     title: 'Agents',
     link: PageRoutes.dashboard.admin.AGENTS,
-    icon: <PersonStandingIcon size={ICON_SIZE} />
+    icon: <PersonStandingIcon size={ICON_SIZE} />,
+    roles: [UserRoleEnum.ADMIN, UserRoleEnum.SUPER_ADMIN]
+
   },
   {
     title: 'Users',
     link: PageRoutes.dashboard.admin.USERS,
-    icon: <UserIcon size={ICON_SIZE} />
+    icon: <UserIcon size={ICON_SIZE} />,
+    roles: [UserRoleEnum.SUPER_ADMIN]
+
   },
   {
     title: 'Requirements',
     link: PageRoutes.dashboard.admin.REQUIREMENTS,
-    icon: <Files size={ICON_SIZE} />
+    icon: <Files size={ICON_SIZE} />,
+    roles: [UserRoleEnum.SUPER_ADMIN]
+
   },
   {
     title: 'Profile',
     link: PageRoutes.dashboard.PROFILE,
-    icon: <Settings size={ICON_SIZE} />
+    icon: <Settings size={ICON_SIZE} />,
+    roles: [UserRoleEnum.ADMIN, UserRoleEnum.GENERAL_USER, UserRoleEnum.SUPER_ADMIN, UserRoleEnum.AGENT]
+
   },
 ]
 
@@ -71,7 +83,7 @@ export default function SideNavBar({ user }: { user: User }) {
         </div>
         <div className="flex-1 overflow-auto">
           <nav className="grid items-start px-4 text-sm font-medium">
-            {navigationSidebarItems.map((item) => (
+            {navigationSidebarItems.filter(item => item.roles.includes(user.role)).map((item) => (
               <SidebarNavigationLink key={item.title} link={item.link} title={item.title} icon={item.icon} />
             ))}
           </nav>

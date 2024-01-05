@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
@@ -16,6 +16,7 @@ import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 import { TOption } from '@/constants/types'
+import MapComponent from '@/components/MapPicker'
 
 const formSchema = z.object({
   emirate: z.string({
@@ -41,7 +42,14 @@ const formSchema = z.object({
   }),
   image: z.string({
     required_error: 'Please upload a property image'
-  })
+  }),
+  lat: z.number({
+    required_error: 'Please select a lat'
+  }).optional(),
+  lng: z.number({
+    required_error: 'Please select a long'
+  }).optional(),
+
 })
 
 interface Props {
@@ -98,6 +106,13 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <NumberInputElement name="unitNumber" placeholder="Please enter your unit number" label={'Unit Number'} />
         <InputElement name="landmark" placeholder="Please enter a landmark" label={'Landmark'} />
         <FileUploader folder="advertise" name="image" label={'Upload Photo of the Property'} form={form} />
+
+        <MapComponent
+          onSelectLocation={({ lat, lng }) => {
+            form.setValue("lat", lat)
+            form.setValue("lng", lng)
+          }}
+        />
 
         <Button type="submit" disabled={!property_image} className="w-full">
           Save and Continue

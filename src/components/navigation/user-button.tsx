@@ -17,7 +17,7 @@ const UserButton = ({ user }: { user: User }) => {
 
   const handleLogout = () => {
     localStorage.removeItem(LocalStorageKeys.USER)
-    router.refresh()
+    router.push(PageRoutes.SIGNIN)
   }
 
   return (

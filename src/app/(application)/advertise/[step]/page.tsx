@@ -20,6 +20,7 @@ import { useCreatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 import { CreatePropertyInput } from '@/data/clients/propertiesClient'
 import { nullCheckAndMerge } from '@/lib/utils'
 import { PropertyForEnum } from '@/constants/enums'
+import ApplicationCompletedForm from '../_form/application-completed-form'
 
 const Page = () => {
   const pathName = usePathname()
@@ -78,7 +79,8 @@ const Page = () => {
     [PageRoutes.advertise.AMENITIES_DETAILS]: <AmenitiesForm onSave={storeValues} />,
     [PageRoutes.advertise.PROJECT_STATUS]: <ProjectStatusForm onSave={storeValues} />,
     [PageRoutes.advertise.UPLOAD_PHOTOS]: <UploadDocumentsForm onSave={storeValues} />,
-    [PageRoutes.advertise.CALL_PREFERENCE]: <CallPreferenceForm handleSubmit={handleSubmit} isLoading={isLoading} />
+    [PageRoutes.advertise.CALL_PREFERENCE]: <CallPreferenceForm handleSubmit={handleSubmit} isLoading={isLoading} />,
+    [PageRoutes.advertise.APPLICATION_COMPLETED]: <ApplicationCompletedForm />
   }
 
   return (

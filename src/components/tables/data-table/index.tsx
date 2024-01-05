@@ -58,7 +58,7 @@ export function DataTable<TData, TValue>({ columns, data, isLoading = false }: D
 
   return (
     <div className="space-y-4">
-      <DataTableToolbar table={table} />
+      {/* <DataTableToolbar table={table} /> */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
