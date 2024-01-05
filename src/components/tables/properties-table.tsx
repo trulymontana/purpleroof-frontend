@@ -27,8 +27,11 @@ export default function PropertiesTable() {
       header: 'ID'
     },
     {
-      accessorKey: 'name',
-      header: 'Name'
+      id: 'name',
+      header: 'Name',
+      cell: ({ row }) => {
+        return <span className='line-clamp-1 max-w-sm'>{row.original.name}</span>
+      }
     },
     {
       accessorKey: 'phone',
@@ -71,8 +74,19 @@ export default function PropertiesTable() {
       }
     },
     {
-      id: 'agent',
+      id: "agent",
       header: 'Agent',
+      cell: ({ row }) => {
+        const data = row.original;
+        if (data?.agentId) {
+          return <Badge>{data.agentId}</Badge>
+        }
+        return <Badge variant="outline">Not Assigned</Badge>
+      }
+    },
+    {
+      id: 'action',
+      header: 'Action',
       cell: ({ row }) => (
         <>
           <ConfirmActionDialog

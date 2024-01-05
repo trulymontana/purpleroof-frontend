@@ -26,9 +26,7 @@ import { getValuesFrom } from "@/lib/utils"
 import { useGetLocations } from "@/data/hooks/useLocationsClient"
 
 const formSchema = z.object({
-    agency: z.string({
-        required_error: "Please enter your name"
-    }),
+    agency: z.string().optional(),
     contactNumber: z.string({
         required_error: 'Please enter a valid contact number.'
     }).min(10, {
@@ -40,8 +38,6 @@ const formSchema = z.object({
     emirates: z.any().optional(),
     locations: z.any().optional()
 })
-
-
 
 const Page = () => {
 
@@ -76,7 +72,6 @@ const Page = () => {
 
     const filterLocations = (emirateValues: string[]) => {
         if (locationsData && locationsData?.length > 0 && emirateValues?.length > 0) {
-
             const filteredLocations = locationsData?.filter((item) => emirateValues?.includes(item.emirate)).map((data) => ({ label: data.name, value: data.id.toString() }))
             setLocations(filteredLocations)
         }
@@ -141,13 +136,13 @@ const Page = () => {
                                     </DialogHeader>
                                     <Form {...form}>
                                         <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
-                                            <InputElement name='agency' label='Agency Name' />
+                                            <InputElement name='agency' label='Agency Name (optional)' />
                                             <PhoneNumberInputElement name='contactNumber' label='Contact Number' />
                                             <FileUploader folder="agent" form={form} name="realEstateLicense" label="Real Estate License" />
                                             <MultiSelectElement label="Emirates" name="emirates" placeholder="Please select emirates" options={emirateOptions} />
                                             <MultiSelectElement label="Locations" disabled={!emirates || emirates.length === 0} name="locations" placeholder={!emirates || emirates?.length === 0 ? "Please select atleast one emirate" : "Please select locations"} options={locations!} />
                                             <Separator />
-                                            <Button disabled={isLoading} type="submit" className="w-full">{isLoading ? "Applying..." : "Apply"}</Button>
+                                            <Button disabled={isLoading} type="submit" className="w-full">{isLoading ? "Applying..." : "Apply for Agent"}</Button>
                                         </form>
                                     </Form>
                                 </DialogContent>

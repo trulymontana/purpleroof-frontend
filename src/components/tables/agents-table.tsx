@@ -87,7 +87,6 @@ export default function AgentsTable() {
         )
       }
     },
-
     {
       id: 'action',
       header: 'Action',
@@ -100,7 +99,7 @@ export default function AgentsTable() {
           />
           {row.original.approvalStatus === ApprovalStatusEnum.NOT_APPROVED && (
             <ConfirmActionDialog
-              title="Update Status"
+              title="Are you sure you want to approve this agent?"
               anchor={<Button>Approve Agent</Button>}
               content={<AgentApprovalStatusForm data={row.original} />}
             />

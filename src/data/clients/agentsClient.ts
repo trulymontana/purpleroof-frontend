@@ -6,7 +6,7 @@ import { ActiveStatusEnum, ApprovalStatusEnum } from '@/constants/enums'
 import HttpClient from '@/lib/http-client'
 
 export interface CreateAgentInput {
-  agency: string
+  agency?: string
   contactNumber: string
   realEstateLicense: string
   locations?: any

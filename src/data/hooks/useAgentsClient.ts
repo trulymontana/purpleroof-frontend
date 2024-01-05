@@ -22,6 +22,7 @@ export const useCreateAgentMutation = () => {
         variant: 'default',
         title: 'Applied for agent successfully'
       })
+      location.reload()
     },
     onError: (error: any) => {
       toast({
