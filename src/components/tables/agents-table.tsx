@@ -5,7 +5,7 @@ import { DataTable } from './data-table'
 import { Badge } from '../ui/badge'
 import ConfirmActionDialog from '../dialogs/confirm-action-dialog'
 import { Button } from '../ui/button'
-import { useGetAgents } from '@/data/hooks/useAgentsClient'
+import { useDeleteAgentMutation, useGetAgents } from '@/data/hooks/useAgentsClient'
 import { Agent } from '@/data/clients/agentsClient'
 import { ActiveStatusEnum, ApprovalStatusEnum } from '@/constants/enums'
 import AgentApprovalStatusForm from '@/app/dashboard/admin/agents/_forms/approval-status-form'
@@ -14,9 +14,10 @@ import Link from 'next/link'
 import { DownloadIcon, Eye } from 'lucide-react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 import { Card, CardHeader, CardTitle } from '../ui/card'
+import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 
 export default function AgentsTable() {
-  // const { mutate: deleteAgent, isPending } = useDeleteAgentMutation()
+  const { mutate: deleteAgent, isPending } = useDeleteAgentMutation()
 
   const columns: ColumnDef<Agent>[] = [
     {
@@ -121,33 +122,16 @@ export default function AgentsTable() {
           </Link>
         )
       }
+    },
+    {
+      id: 'actions',
+      enableHiding: false,
+      cell: ({ row }) => (
+        <div className="flex items-center gap-4">
+          <ConfirmDeleteDialog onDelete={() => deleteAgent(row.original.id)} isLoading={isPending} />
+        </div>
+      )
     }
-
-    // {
-    //   id: 'createdAt',
-    //   header: 'Created At',
-    //   cell: ({ row }) => {
-    //     const createdAt = row.original.createdAt
-    //     return new Date(createdAt).toLocaleDateString()
-    //   }
-    // },
-    // {
-    //   id: 'updatedAt',
-    //   header: 'Updated At',
-    //   cell: ({ row }) => {
-    //     const updatedAt = row.original.createdAt
-    //     return new Date(updatedAt).toLocaleDateString()
-    //   }
-    // }
-    // {
-    //     id: 'actions',
-    //     enableHiding: false,
-    //     cell: ({ row }) => (
-    //         <div className="flex items-center gap-4">
-    //             <ConfirmDeleteDialog onDelete={() => deleteAgent(row.original.id)} isLoading={isPending} />
-    //         </div>
-    //     )
-    // }
   ]
 
   const { loading, data } = useGetAgents()
