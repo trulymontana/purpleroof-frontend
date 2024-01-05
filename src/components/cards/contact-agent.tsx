@@ -12,6 +12,7 @@ import InputElement from '../forms/elements/input-element'
 import TextAreaElement from '../forms/elements/text-area-element'
 import { Form } from '../ui/form'
 import PhoneNumberInputElement from '../forms/elements/phone-number-input'
+import { Property } from '@/data/clients/propertiesClient'
 
 
 const formSchema = z.object({
@@ -29,9 +30,11 @@ const formSchema = z.object({
     message: z.string().optional()
 })
 
-const ContactAgentCard = () => {
+interface Props {
+    data: Property
+}
 
-    
+const ContactAgentCard = ({ data }: Props) => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -52,7 +55,7 @@ const ContactAgentCard = () => {
             <CardContent>
                 <div className="mb-4 flex items-center space-x-4">
                     <div className="flex flex-col">
-                        <h3 className="text-lg font-medium">John Doe</h3>
+                        <h3 className="text-lg font-medium">{data.agent?.user?.firstName} {data?.agent?.user?.lastName}</h3>
                         <p className="text-sm text-gray-500">Licensed Real Estate Agent</p>
                     </div>
                 </div>
@@ -91,20 +94,20 @@ const ContactAgentCard = () => {
                             </DialogDescription>
                         </DialogHeader>
                         <div>
-                            <div className="text-lg mb-4">
-                                <p className="font-medium">18 Bricks Real Estate</p>
-                            </div>
+                            {data?.agent?.agency && (<div className="text-lg mb-4">
+                                <p className="font-medium">{data?.agent?.agency}</p>
+                            </div>)}
                             <div className="flex items-center mb-4">
                                 <div className='p-2 rounded-full bg-emerald-600/10  mr-2'>
                                     <PhoneCall size={20} className="text-green-500" />
                                 </div>
                                 <span className="text-lg font-medium ">
-                                    +971-55-9053828
+                                    {data?.agent?.contactNumber}
                                 </span>
                             </div>
                             <Separator className="my-4" />
                             <div className="text-lg mb-4">
-                                <p>Agent: Vinay Raju Daryani</p>
+                                <p>Agent: {data.agent?.user?.firstName} {data?.agent?.user?.lastName}</p>
                             </div>
                         </div>
                     </DialogContent>

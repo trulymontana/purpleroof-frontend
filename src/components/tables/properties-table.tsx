@@ -79,7 +79,7 @@ export default function PropertiesTable() {
       cell: ({ row }) => {
         const data = row.original;
         if (data?.agentId) {
-          return <Badge>{data.agentId}</Badge>
+          return <Badge className='bg-teal-600 '>Assigned</Badge>
         }
         return <Badge variant="outline">Not Assigned</Badge>
       }
