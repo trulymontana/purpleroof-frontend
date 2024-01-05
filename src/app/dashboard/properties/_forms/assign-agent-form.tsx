@@ -36,7 +36,7 @@ const AssignAgentForm = ({ data, agentsData, isLoading }: Props) => {
             let options: TOption[] = [];
             agentsData?.map((agent) => {
                 if (agent.approvalStatus === ApprovalStatusEnum.APPROVED) {
-                    options.push({ label: `${agent.user.firstName} ${agent.user.lastName} - ${agent.agency}`, value: agent.id.toString() })
+                    options.push({ label: `${agent.user.firstName} ${agent.user.lastName} ${agent?.agency ?? "-"} ${agent.agency}`, value: agent.id.toString() })
                 }
             })
             setAgentOptions(options)

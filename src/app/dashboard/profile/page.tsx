@@ -26,6 +26,7 @@ import { getValuesFrom } from "@/lib/utils"
 import { useGetLocations } from "@/data/hooks/useLocationsClient"
 import { UserRoleEnum } from "@/constants/enums"
 import { useGetAgentApplications } from "@/data/hooks/useUsersClient"
+import { Locate, Phone } from "lucide-react"
 
 const formSchema = z.object({
     agency: z.string().optional(),
@@ -49,7 +50,7 @@ const Page = () => {
 
     const { data: locationsData } = useGetLocations();
     const { mutate: createAgent, isPending: isLoading } = useCreateAgentMutation()
-    const { data: agentApplication } = useGetAgentApplications();
+    const { data: agentApplicationDetails } = useGetAgentApplications();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema)
@@ -95,14 +96,14 @@ const Page = () => {
                     <div className="font-bold text-2xl">{user.firstName + " " + user.lastName}</div>
                 </div>
             </div>
-            <div className="space-y-6">
+            <div className="space-y-4">
                 <Card className="w-full">
                     <CardHeader>
-                        <CardTitle>User Details</CardTitle>
+                        <CardTitle className="text-primary">User Details</CardTitle>
                         <CardDescription>Overview of user information.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                        <div className="space-y-2">
+                        <div className="space-x-2">
                             <Label htmlFor="username">First Name</Label>
                             <Input disabled id="username" value={user.firstName} />
                         </div>
@@ -152,6 +153,48 @@ const Page = () => {
                                     </Dialog>
                                 )
                             }
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <Card className="w-1/4 bg-white rounded-xl shadow-md">
+                    <CardHeader>
+                        <CardTitle className="text-primary">Agent Details</CardTitle>
+                        <CardDescription>Overview of agent information.</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        {agentApplicationDetails?.agency && <p className="mt-2 text-gray-500">Agency Name: {agentApplicationDetails?.agency}</p>}
+                        {agentApplicationDetails?.contactNumber && (
+                            <div className="mt-2 flex items-center text-sm text-gray-500">
+                                <Phone className="h-5 w-5 text-gray-500 mr-2" />
+                                <span>Contact: {agentApplicationDetails?.contactNumber}</span>
+                            </div>
+                        )}
+                        <div className="mt-4 flex">
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <Button className="w-full" variant="outline">
+                                        <Locate className="h-5 w-5 text-gray-500 mr-2" />
+                                        View Locations
+                                    </Button>
+                                </DialogTrigger>
+                                <DialogContent className="sm:max-w-[800px]">
+                                    <DialogHeader>
+                                        <DialogTitle>Locations</DialogTitle>
+                                    </DialogHeader>
+                                    <div className="grid max-h-[500px] grid-cols-2 gap-4 overflow-y-auto py-4">
+                                        {agentApplicationDetails?.locations.map((location, i) => {
+                                            return (
+                                                <Card key={i}>
+                                                    <CardHeader>
+                                                        <CardTitle>{location.name}</CardTitle>
+                                                    </CardHeader>
+                                                </Card>
+                                            )
+                                        })}
+                                    </div>
+                                </DialogContent>
+                            </Dialog>
                         </div>
                     </CardContent>
                 </Card>

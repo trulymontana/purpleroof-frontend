@@ -46,7 +46,11 @@ const Page = ({ params: { propertyId } }: Props) => {
                     </div>
                 )}
                 <div className='w-full md:w-1/3 space-y-4'>
-                    <ContactAgentCard />
+                    {
+                        data && (
+                            <ContactAgentCard data={data} />
+                        )
+                    }
                     {
                         data && (
                             <AmenitiesCard data={data} />
