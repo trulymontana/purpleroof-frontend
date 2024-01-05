@@ -27,7 +27,8 @@ export const useCreateAgentMutation = () => {
     onError: (error: any) => {
       toast({
         variant: 'destructive',
-        title: error.message
+        title: error.response.data.message,
+        description: error.response.data.details
       })
     },
     onSettled: () => {
@@ -79,7 +80,7 @@ export function useUpdateApprovalStatusMutation() {
       if (statusCode === 200) {
         toast({
           variant: 'default',
-          title: 'Agent updated successfully'
+          title: 'Agent approved successfully'
         })
         queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
       }

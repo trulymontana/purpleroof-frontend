@@ -26,6 +26,11 @@ const formSchema = z.object({
   name: z.string({
     required_error: 'Title should not be empty!'
   }),
+  email: z
+    .string({
+      required_error: 'Please enter a valid email.'
+    })
+    .email(),
   propertyType: z.string({
     required_error: 'Please select a property type!'
   }),
@@ -46,8 +51,8 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     storedValue !== null
       ? JSON.parse(storedValue)
       : {
-          propertyFor: PropertyForEnum.SALE
-        }
+        propertyFor: PropertyForEnum.SALE
+      }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,6 +70,8 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <TabRadioGroup name="propertyFor" options={categories} />
+
+        <InputElement name="email" placeholder="Please enter Email" label={'Email'} />
 
         <InputElement name="name" placeholder="Please enter Advert Title" label={'Advert Title'} />
 

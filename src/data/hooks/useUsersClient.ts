@@ -12,6 +12,15 @@ export function useGetUsers() {
   return { users: data?.data, loading: isLoading }
 }
 
+export function useGetAgentApplications() {
+  const { isLoading, data } = useQuery({
+    queryKey: [ApiEndpoints.AGENT_APPLICATION],
+    queryFn: () => userClient.getAgentApplication()
+  })
+
+  return { data: data?.data, loading: isLoading }
+}
+
 export function useUpdateUserRole() {
   const queryClient = useQueryClient()
   return useMutation({

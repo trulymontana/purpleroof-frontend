@@ -16,6 +16,7 @@ import { RequirementApplication, TOption } from '@/constants/types'
 import { useCreateRequirementMutation } from '@/data/hooks/useRequirementsClient'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 import { IncomeProfileEnum, ResidenceTypeEnum } from '@/constants/enums'
+import { Badge } from '@/components/ui/badge'
 
 const formSchema = z.object({
   name: z.string({
@@ -49,18 +50,25 @@ const formSchema = z.object({
 
 interface Props {
   data?: RequirementApplication
-  isLoading: Boolean
+  isLoading: boolean
   mutate: any
+  mode?: 'CREATE' | 'EDIT'
 }
 
-const RequirementsForm = ({ data, isLoading, mutate }: Props) => {
+const RequirementsForm = ({ data, isLoading, mutate, mode = 'CREATE' }: Props) => {
 
   const [selectedDocuments, setSelectedDocuments] = useState<TOption[]>([])
 
   // const { isPending: isLoading, mutate: createRequirement } = useCreateRequirementMutation()
 
+  const values = {
+    incomeProfile: data?.incomeProfile,
+    residenceType: data?.residenceType
+  }
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: values || {},
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -101,7 +109,7 @@ const RequirementsForm = ({ data, isLoading, mutate }: Props) => {
       }))
       setSelectedDocuments(unformattedDocuments)
     }
-  }, [data])
+  }, [data, form])
 
   return (
     <Form {...form}>
@@ -141,19 +149,30 @@ const RequirementsForm = ({ data, isLoading, mutate }: Props) => {
           </div>
         </div>
 
-        <RadioGroupElement
-          name="incomeProfile"
-          label={'Income Profile'}
-          className="items-center gap-10"
-          options={incomeProfiles}
-        />
+        {
+          mode === 'CREATE' ? (
+            <>
+              <RadioGroupElement
+                name="incomeProfile"
+                label={'Income Profile'}
+                className="items-center gap-10"
+                options={incomeProfiles}
+              />
 
-        <RadioGroupElement
-          name="residenceType"
-          label={'Residence Type'}
-          className="items-center gap-10"
-          options={residenceTypes}
-        />
+              <RadioGroupElement
+                name="residenceType"
+                label={'Residence Type'}
+                className="items-center gap-10"
+                options={residenceTypes}
+              />
+            </>
+          ) : (
+            <div className='flex gap-2 flex-col'>
+              <span>Income Profile: <Badge>{data?.incomeProfile}</Badge></span>
+              <span>Residence Type: <Badge>{data?.residenceType}</Badge></span>
+            </div>
+          )
+        }
 
         <MultiSelectCheckbox
           name="requiredDocuments"
@@ -163,7 +182,7 @@ const RequirementsForm = ({ data, isLoading, mutate }: Props) => {
           setSelectedBoxes={setSelectedDocuments}
         />
 
-        <Button type="submit" className="w-full">
+        <Button disabled={isLoading} type="submit" className="w-full">
           {isLoading ? 'Loading...' : 'Save'}
         </Button>
       </form>

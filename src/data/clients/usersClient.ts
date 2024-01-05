@@ -10,5 +10,8 @@ export const userClient = {
   ...crudFactory<User, QueryOptions, CreateUserInput>(ApiEndpoints.USERS),
   updateUserRole: (data: any) => {
     return HttpClient.patch<any>(`${ApiEndpoints.USERS}/update-role/${data.id}/${data.role}`, data)
+  },
+  getAgentApplication: () => {
+    return HttpClient.get<any>(`${ApiEndpoints.AGENT_APPLICATION}`)
   }
 }

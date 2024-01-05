@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input'
 import { useFileDeleter, useFileUploader } from '@/data/hooks/useFileClient'
 import { FolderClosed, XSquare } from 'lucide-react'
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 interface FileUploaderProps {
@@ -16,6 +16,8 @@ interface FileUploaderProps {
 
 const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }) => {
   const { control } = useFormContext()
+
+  const ref = useRef();
 
   const [file, setFile] = useState<File | undefined>(undefined)
   const [fileUrl, setFileUrl] = useState<string>('')
@@ -52,7 +54,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }
       render={({ field }) => (
         <FormItem>
           <FormLabel>{label}</FormLabel>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 cursor-pointer">
             <FormControl>
               <Input id="file-upload" type="file" onChange={handleFileUpload} />
             </FormControl>
@@ -63,7 +65,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }
             )}
             {!isLoading && (
               <span className="cursor-pointer">
-                {fileUrl ? <XSquare onClick={handleFileDelete} /> : <FolderClosed />}
+                {fileUrl ? <XSquare onClick={handleFileDelete} /> : <FolderClosed  />}
               </span>
             )}
           </div>

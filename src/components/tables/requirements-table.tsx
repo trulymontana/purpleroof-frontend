@@ -121,5 +121,6 @@ export default function RequirementsTable() {
   ]
 
   const { loading, data } = useGetRequirements()
+
   return <DataTable columns={columns} data={data ?? []} isLoading={loading} />
 }

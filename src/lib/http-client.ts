@@ -5,7 +5,8 @@ const axiosClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_API_ENDPOINT,
   timeout: 10000,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'ngrok-skip-browser-warning': 'anything'
   }
 })
 
@@ -28,13 +29,13 @@ axiosClient.interceptors.response.use(
     return response
   },
   (error: any) => {
-    if (error.response) {
-      console.error(error.response.data)
-    } else if (error.request) {
-      console.error(error.request)
-    } else {
-      console.error('Error', error.message)
-    }
+    // if (error.response) {
+    //   console.error(error.response.data)
+    // } else if (error.request) {
+    //   console.error(error.request)
+    // } else {
+    //   console.error('Error', error.message)
+    // }
     return Promise.reject(error)
   }
 )

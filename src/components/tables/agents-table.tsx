@@ -25,8 +25,18 @@ export default function AgentsTable() {
       header: 'ID'
     },
     {
-      accessorKey: 'agency',
-      header: 'Agency Name'
+      id: 'agency',
+      header: 'Agency Name',
+      cell: ({ row }) => {
+
+        const agency = row.original.agency
+
+        if (agency) {
+          return <span>{agency}</span>
+        }
+
+        return <span>Not Provided</span>
+      }
     },
     {
       accessorKey: 'contactNumber',

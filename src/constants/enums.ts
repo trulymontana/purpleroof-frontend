@@ -138,7 +138,7 @@ export enum ResidentialPropertyCategoryEnum {
   APARTMENT_AND_UNIT = 'APARTMENT_AND_UNIT',
   VILLA = 'VILLA',
   ACREAGE = 'ACREAGE',
-  BLOCKS_OF_UNITS = 'BLOCKS_OF_UNITS',
+  BLOCK_OF_UNITS = 'BLOCK_OF_UNITS',
   HOUSE = 'HOUSE',
   TOWNHOUSE = 'TOWNHOUSE',
   LAND = 'LAND'
@@ -201,8 +201,9 @@ export enum DocumentTypeEnum {
 // }
 
 export enum UserRoleEnum {
+  SUPER_ADMIN = 'SUPER_ADMIN',
   ADMIN = 'ADMIN',
-  ADVERTISER = 'ADVERTISER',
+  GENERAL_USER = 'GENERAL_USER',
   AGENT = 'AGENT'
 }
 

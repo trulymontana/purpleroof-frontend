@@ -26,7 +26,7 @@ const RadioGroupElement = ({ name, label, options, className, disabled = false }
           <FormItem className="space-y-3">
             <FormLabel>{label}</FormLabel>
             <FormControl>
-              <RadioGroup defaultValue={field.value} onValueChange={field.onChange} className={cn('flex', className)}>
+              <RadioGroup defaultValue={field.value ?? null} onValueChange={field.onChange} className={cn('flex', className)}>
                 {options.map((option) => (
                   <FormItem key={option.value} className="flex items-center space-x-3 space-y-0">
                     <FormControl>

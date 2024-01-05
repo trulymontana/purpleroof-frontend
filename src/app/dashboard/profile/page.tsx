@@ -24,6 +24,8 @@ import { Separator } from "@/components/ui/separator"
 import { useCreateAgentMutation } from "@/data/hooks/useAgentsClient"
 import { getValuesFrom } from "@/lib/utils"
 import { useGetLocations } from "@/data/hooks/useLocationsClient"
+import { UserRoleEnum } from "@/constants/enums"
+import { useGetAgentApplications } from "@/data/hooks/useUsersClient"
 
 const formSchema = z.object({
     agency: z.string().optional(),
@@ -46,8 +48,8 @@ const Page = () => {
     const storedValue = localStorage.getItem(LocalStorageKeys.USER)
 
     const { data: locationsData } = useGetLocations();
-
     const { mutate: createAgent, isPending: isLoading } = useCreateAgentMutation()
+    const { data: agentApplication } = useGetAgentApplications();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema)
@@ -116,38 +118,40 @@ const Page = () => {
                             <Label htmlFor="role">Role</Label>
                             <Input disabled id="role" value={user?.role.toLocaleLowerCase()} />
                         </div>
-                        <div>
+                        {/* <div>
                             <Link className="text-primary hover:underline" href={PageRoutes.FORGOT_PASSWORD}>
                                 Forgot Password?
                             </Link>
-                        </div>
+                        </div> */}
                         <div className="flex items-center justify-between mt-6">
-                            <Dialog>
-                                <DialogTrigger asChild>
-                                    <Button variant={"outline"}>Apply as Agent</Button>
-                                </DialogTrigger>
-                                <DialogContent className='sm:max-w-[425px]'>
-                                    <DialogHeader>
-                                        <DialogTitle>
-                                            <h2 className="text-xl font-semibold capitalize">Apply as Agent</h2>
-                                        </DialogTitle>
-                                        <DialogDescription>Fill the following details to apply as a agent</DialogDescription>
-
-                                    </DialogHeader>
-                                    <Form {...form}>
-                                        <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
-                                            <InputElement name='agency' label='Agency Name (optional)' />
-                                            <PhoneNumberInputElement name='contactNumber' label='Contact Number' />
-                                            <FileUploader folder="agent" form={form} name="realEstateLicense" label="Real Estate License" />
-                                            <MultiSelectElement label="Emirates" name="emirates" placeholder="Please select emirates" options={emirateOptions} />
-                                            <MultiSelectElement label="Locations" disabled={!emirates || emirates.length === 0} name="locations" placeholder={!emirates || emirates?.length === 0 ? "Please select atleast one emirate" : "Please select locations"} options={locations!} />
-                                            <Separator />
-                                            <Button disabled={isLoading} type="submit" className="w-full">{isLoading ? "Applying..." : "Apply for Agent"}</Button>
-                                        </form>
-                                    </Form>
-                                </DialogContent>
-                            </Dialog>
-                            <Button>Submit</Button>
+                            {
+                                user?.role === UserRoleEnum.GENERAL_USER && (
+                                    <Dialog>
+                                        <DialogTrigger asChild>
+                                            <Button variant={"outline"}>Apply as Agent</Button>
+                                        </DialogTrigger>
+                                        <DialogContent className='sm:max-w-[425px]'>
+                                            <DialogHeader>
+                                                <DialogTitle>
+                                                    <h2 className="text-xl font-semibold capitalize">Apply as Agent</h2>
+                                                </DialogTitle>
+                                                <DialogDescription>Fill the following details to apply as a agent</DialogDescription>
+                                            </DialogHeader>
+                                            <Form {...form}>
+                                                <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
+                                                    <InputElement name='agency' label='Agency Name (optional)' />
+                                                    <PhoneNumberInputElement name='contactNumber' label='Contact Number' />
+                                                    <FileUploader folder="agent" form={form} name="realEstateLicense" label="Real Estate License" />
+                                                    <MultiSelectElement label="Emirates" name="emirates" placeholder="Please select emirates" options={emirateOptions} />
+                                                    <MultiSelectElement label="Locations" disabled={!emirates || emirates.length === 0} name="locations" placeholder={!emirates || emirates?.length === 0 ? "Please select atleast one emirate" : "Please select locations"} options={locations!} />
+                                                    <Separator />
+                                                    <Button disabled={isLoading} type="submit" className="w-full">{isLoading ? "Applying..." : "Apply for Agent"}</Button>
+                                                </form>
+                                            </Form>
+                                        </DialogContent>
+                                    </Dialog>
+                                )
+                            }
                         </div>
                     </CardContent>
                 </Card>

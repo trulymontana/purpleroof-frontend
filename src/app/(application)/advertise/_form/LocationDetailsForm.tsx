@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
@@ -46,7 +46,7 @@ const formSchema = z.object({
   lat: z.number({
     required_error: 'Please select a lat'
   }).optional(),
-  long: z.number({
+  lng: z.number({
     required_error: 'Please select a long'
   }).optional(),
 
@@ -110,7 +110,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <MapComponent
           onSelectLocation={({ lat, lng }) => {
             form.setValue("lat", lat)
-            form.setValue("long", lng)
+            form.setValue("lng", lng)
           }}
         />
 

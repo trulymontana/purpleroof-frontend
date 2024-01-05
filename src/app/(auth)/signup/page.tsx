@@ -88,9 +88,7 @@ const Page = () => {
                 <CustomInputElement name="password" label="Password" type="password" />
               </div>
               <Button disabled={isLoading} className="w-full" type="submit">
-
                 {isLoading ? 'Loading...' : 'Sign Up'}
-
               </Button>
               <p className="mt-4 text-center">
                 Already have an account?{' '}
