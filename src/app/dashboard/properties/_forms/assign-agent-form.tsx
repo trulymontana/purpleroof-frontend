@@ -16,6 +16,7 @@ import { TOption } from '@/constants/types'
 interface Props {
     data: Property
     agentsData: Agent[] | undefined
+    isLoading: boolean
 }
 
 const formSchema = z.object({
@@ -25,7 +26,7 @@ const formSchema = z.object({
 })
 
 type TAgent = z.infer<typeof formSchema>
-const AssignAgentForm = ({ data, agentsData }: Props) => {
+const AssignAgentForm = ({ data, agentsData, isLoading }: Props) => {
 
     const [agentOptions, setAgentOptions] = useState<TOption[]>();
     const { mutate: assignAgent } = useAssignAgentMutation()
@@ -61,7 +62,7 @@ const AssignAgentForm = ({ data, agentsData }: Props) => {
                     label="Agent"
                     options={agentOptions || []}
                 />
-                <Button type="submit">Save changes</Button>
+                <Button disabled={isLoading} type="submit">{isLoading ? "Saving..." : "Save changes"}</Button>
             </form>
         </Form>
     )

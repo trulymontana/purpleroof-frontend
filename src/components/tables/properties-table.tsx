@@ -104,7 +104,7 @@ export default function PropertiesTable() {
                     Assign Agent
                   </Button>
                 }
-                content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
+                content={<AssignAgentForm isLoading={isLoading} agentsData={agentsData} data={row.original} />}
               />
             ) : (
               <Badge>{row.original.agentId}</Badge>
@@ -137,7 +137,6 @@ export default function PropertiesTable() {
       )
     }
   ]
-
 
   const { loading, data } = useGetProperties()
   return <DataTable columns={columns} data={data ?? []} isLoading={loading} />
