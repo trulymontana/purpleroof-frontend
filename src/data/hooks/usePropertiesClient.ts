@@ -2,6 +2,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { ApiEndpoints } from '@/constants/api'
 import { propertiesClient } from '../clients/propertiesClient'
 import { toast } from '@/components/ui/use-toast'
+import { PageRoutes } from '@/constants/page-routes'
+import { useRouter } from 'next/navigation'
 
 export function useGetProperties() {
   const { isLoading, data } = useQuery({
@@ -23,6 +25,7 @@ export function useGetOneProperty(id: number) {
 
 export const useCreatePropertyMutation = () => {
   const queryClient = useQueryClient()
+  const router = useRouter()
   return useMutation({
     mutationFn: propertiesClient.create,
     onSuccess: (data: any) => {
@@ -30,9 +33,15 @@ export const useCreatePropertyMutation = () => {
         variant: 'default',
         title: 'Property created successfully'
       })
-      // localStorage.removeItem(PageRoutes.mortgage.PERSONAL_DETAILS)
-      // localStorage.removeItem(PageRoutes.mortgage.INCOME_DETAILS)
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
+      localStorage.removeItem(PageRoutes.advertise.BASIC_DETAILS)
+      localStorage.removeItem(PageRoutes.advertise.AMENITIES_DETAILS)
+      localStorage.removeItem(PageRoutes.advertise.CALL_PREFERENCE)
+      localStorage.removeItem(PageRoutes.advertise.LOCATION_DETAILS)
+      localStorage.removeItem(PageRoutes.advertise.PROJECT_STATUS)
+      localStorage.removeItem(PageRoutes.advertise.PROPERTY_DETAILS)
+      localStorage.removeItem(PageRoutes.advertise.UPLOAD_PHOTOS)
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
+      router.push(`${PageRoutes.advertise.APPLICATION_COMPLETED}`)
     },
     onError: (error: any) => {
       toast({

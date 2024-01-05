@@ -25,9 +25,6 @@ const formSchema = z.object({
   emirate: z.string({
     required_error: 'Please select a emirate.'
   }),
-  loanType: z.string({
-    required_error: 'Please select a transaction type.'
-  }),
   additionalDetail: z.string().optional()
 })
 
@@ -61,7 +58,6 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
         <SelectElement name="propertyType" label="Property Type" options={propertyType} />
         <SelectElement name="completionStatus" label="Completion Status" options={completionStatus} />
         <SelectElement name="emirate" label="Emirate" options={emirate} />
-        <RadioGroupElement name="loanType" label={'Loan Type'} options={loanTypeOptions} className="flex-col" />
         <InputElement name="additionalDetail" label="Additional Details" />
         <Button type="submit" className="w-full">
           Next
