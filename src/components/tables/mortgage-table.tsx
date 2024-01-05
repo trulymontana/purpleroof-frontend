@@ -64,31 +64,6 @@ export default function MortgagesTable() {
         return <Badge variant="outline">{data.status}</Badge>
       }
     },
-    // {
-    //   accessorKey: 'country',
-    //   header: 'Country'
-    // },
-    {
-      id: 'actions',
-      enableHiding: false,
-      cell: ({ row }) => (
-        <div className="flex items-center gap-2">
-          <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
-            <Eye size={17} color="black" />
-          </Link>
-          <ConfirmActionDialog
-            title="Edit Mortgage"
-            anchor={
-              <Button variant="ghost">
-                <FileEdit size={17} color="black" />
-              </Button>
-            }
-            content={<UpdateMortgageStatusForm data={row.original} />}
-          />
-          <ConfirmDeleteDialog onDelete={() => deleteMortgage(row.original.id)} isLoading={isPending} />
-        </div>
-      )
-    },
     {
       id: 'action',
       header: 'Action',
@@ -112,7 +87,30 @@ export default function MortgagesTable() {
           </Link>
         )
       }
-    }
+    },
+    {
+      id: 'actions',
+      enableHiding: false,
+      cell: ({ row }) => (
+        <div className="flex items-center">
+          <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
+            <Button variant="ghost">
+              <Eye size={17} color="black" />
+            </Button>
+          </Link>
+          <ConfirmActionDialog
+            title="Edit Mortgage"
+            anchor={
+              <Button variant="ghost">
+                <FileEdit size={17} color="black" />
+              </Button>
+            }
+            content={<UpdateMortgageStatusForm data={row.original} />}
+          />
+          <ConfirmDeleteDialog onDelete={() => deleteMortgage(row.original.id)} isLoading={isPending} />
+        </div>
+      )
+    },
   ]
 
   const { loading, data } = useGetMortgages()

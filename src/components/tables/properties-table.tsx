@@ -26,21 +26,9 @@ export default function PropertiesTable() {
       accessorKey: 'id',
       header: 'ID'
     },
-    // {
-    //   accessorKey: 'propertyTypeId',
-    //   header: 'Property Type ID'
-    // },
-    // {
-    //   accessorKey: 'propertyTypeCategoryId',
-    //   header: 'Property Type Category ID'
-    // },
     {
       accessorKey: 'name',
       header: 'Name'
-    },
-    {
-      accessorKey: 'description',
-      header: 'Description'
     },
     {
       accessorKey: 'phone',
@@ -53,14 +41,6 @@ export default function PropertiesTable() {
         const monthlyIncome = row.original.amount
         return <span>{currency.format(monthlyIncome)}</span>
       }
-    },
-    {
-      accessorKey: 'size',
-      header: 'Size'
-    },
-    {
-      accessorKey: 'address',
-      header: 'Address'
     },
     {
       accessorKey: 'landmark',
@@ -95,21 +75,15 @@ export default function PropertiesTable() {
       header: 'Agent',
       cell: ({ row }) => (
         <>
-          {
-            !row.original.agentId ? (
-              <ConfirmActionDialog
-                title="Assign Agent"
-                anchor={
-                  <Button>
-                    Assign Agent
-                  </Button>
-                }
-                content={<AssignAgentForm isLoading={isLoading} agentsData={agentsData} data={row.original} />}
-              />
-            ) : (
-              <Badge>{row.original.agentId}</Badge>
-            )
-          }
+          <ConfirmActionDialog
+            title="Assign Agent"
+            anchor={
+              <Button>
+                Assign Agent
+              </Button>
+            }
+            content={<AssignAgentForm isLoading={isLoading} agentsData={agentsData} data={row.original} />}
+          />
         </>
       )
     },
