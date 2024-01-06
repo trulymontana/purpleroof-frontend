@@ -26,7 +26,7 @@ const PropertyCard = ({ property }: Props) => {
       />
       <CardHeader className="p-4">
         <CardTitle className="line-clamp-2 h-[60px] text-lg font-semibold">{property?.name}</CardTitle>
-        <CardDescription className="text-gray-500">{property?.location}</CardDescription>
+        <CardDescription className="text-gray-500">{property?.location.name}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-2 px-4">
         <div className="flex items-center justify-between">

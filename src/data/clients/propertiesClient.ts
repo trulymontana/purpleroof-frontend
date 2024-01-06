@@ -19,7 +19,7 @@ export interface CreatePropertyInput {
   numberOfBathRooms?: number
   deedNumber: string
   emirate: EmirateEnum
-  location: string
+  locationId: number
   buildingName: string
   floor: number
   street: string
@@ -74,6 +74,9 @@ export interface Property extends CreatePropertyInput {
   documents: any
   agentId?: number
   agent?: Agent
+  location: {
+    name: string
+  }
 }
 
 export const propertiesClient = {

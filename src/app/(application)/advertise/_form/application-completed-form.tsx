@@ -14,6 +14,8 @@ const ApplicationCompletedForm = () => {
 
   const searchParams = useSearchParams()
 
+  const email = searchParams.get('email')
+
   return (
     <div className="flex flex-col items-center justify-center gap-5 p-3">
       <CheckCircle color="#6abf6f" size={80} />
@@ -29,7 +31,7 @@ const ApplicationCompletedForm = () => {
           </Button>
         </Link>
       ) : (
-        <Link className="w-full" href={PageRoutes.SIGNUP}>
+        <Link className="w-full" href={`${PageRoutes.SIGNUP}?email=${email}`}>
           <Button type="submit" className="flex w-full items-center gap-2">
             Dashboard <ArrowRight />
           </Button>

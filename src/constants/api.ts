@@ -12,5 +12,6 @@ export const ApiEndpoints = {
   SIGNUP: API_ROOT + '/auth/sign-up',
   AGENTS: API_ROOT + '/agents',
   AGENT_APPLICATION: API_ROOT + '/agents/get-by-user-id',
-  LOCATIONS: API_ROOT + '/locations'
+  LOCATIONS: API_ROOT + '/locations',
+  USER_ROLE: API_ROOT + '/auth/user',
 }

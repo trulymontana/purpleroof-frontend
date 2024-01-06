@@ -15,14 +15,17 @@ import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
-import { TOption } from '@/constants/types'
 import MapComponent from '@/components/MapPicker'
+import { useEffect, useState } from 'react'
+import { useGetLocations } from '@/data/hooks/useLocationsClient'
+import { EmirateEnum } from '@/constants/enums'
+import { TOption } from '@/constants/types'
 
 const formSchema = z.object({
-  emirate: z.string({
+  emirate: z.nativeEnum(EmirateEnum, {
     required_error: 'Please select a Emirate!'
   }),
-  location: z.string({
+  locationId: z.string({
     required_error: 'Please select a Location!'
   }),
   buildingName: z.string({
@@ -39,9 +42,6 @@ const formSchema = z.object({
   }),
   landmark: z.string({
     required_error: 'Please enter a landmark'
-  }),
-  image: z.string({
-    required_error: 'Please upload a property image'
   }),
   lat: z
     .number({
@@ -60,6 +60,7 @@ interface Props {
 }
 
 const LocationDetailsForm = ({ onSave }: Props) => {
+
   const router = useRouter()
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.LOCATION_DETAILS)
@@ -71,20 +72,17 @@ const LocationDetailsForm = ({ onSave }: Props) => {
     defaultValues
   })
 
+  const selectedEmirate = form.watch('emirate')
+  const { data: locationOptions } = useGetLocations([selectedEmirate]);
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.LOCATION_DETAILS, values)
     router.push(PageRoutes.advertise.AMENITIES_DETAILS)
   }
 
-  const selectedEmirate = form.watch('emirate')
-
-  // @ts-ignore
-  const locations = selectedEmirate ? emiratesWithLocations[selectedEmirate] : []
 
   // @ts-ignore
   const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS))
-
-  const property_image = form.watch('image')
 
   return (
     <Form {...form}>
@@ -92,9 +90,9 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <SelectElement name="emirate" label="Emirate" options={emirateOptions} placeholder="Please select a emirate" />
 
         <SelectElement
-          name="location"
+          name="locationId"
           label="Location"
-          options={locations}
+          options={locationOptions || [{ label: "Dubai", value: "1" }]}
           placeholder={!selectedEmirate ? 'Please select emirate first' : 'Please select a location'}
           disabled={!selectedEmirate}
         />
@@ -108,7 +106,6 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <InputElement name="street" placeholder="Please enter your street name" label={'Street'} />
         <NumberInputElement name="unitNumber" placeholder="Please enter your unit number" label={'Unit Number'} />
         <InputElement name="landmark" placeholder="Please enter a landmark" label={'Landmark'} />
-        <FileUploader folder="advertise" name="image" label={'Upload Photo of the Property'} form={form} />
 
         <MapComponent
           onSelectLocation={({ lat, lng }) => {
@@ -117,7 +114,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
           }}
         />
 
-        <Button type="submit" disabled={!property_image} className="w-full">
+        <Button type="submit" className="w-full">
           Save and Continue
         </Button>
         <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails?.propertyFor}`} />

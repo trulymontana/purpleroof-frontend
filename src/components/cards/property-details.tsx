@@ -56,7 +56,7 @@ const PropertyDetailsCard = ({ data }: Props) => {
             {data?.occupencyStatus?.toLocaleLowerCase()} |{' '}
             {data?.furnishingStatus?.toLocaleLowerCase().replaceAll('_', ' ')}
           </h2>
-          <p className="my-4">{data?.description}</p>
+          <p className="my-4 text-gray-500">{data?.description}</p>
         </div>
         <div className="grid gap-8 rounded-xl border p-5 shadow-md shadow-primary/30">
           <div className="w-full ">
@@ -105,7 +105,7 @@ const PropertyDetailsCard = ({ data }: Props) => {
               </div>
               <div className="flex justify-between">
                 <p>Location</p>
-                <p className="font-semibold capitalize ">{data?.location?.toLocaleLowerCase().replaceAll('_', ' ')}</p>
+                <p className="font-semibold capitalize ">{data?.location?.name?.toLocaleLowerCase().replaceAll('_', ' ')}</p>
               </div>
               <div className="flex justify-between">
                 <p>Building Name</p>

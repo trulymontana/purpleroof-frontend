@@ -1,11 +1,13 @@
 'use client'
 
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { authClient } from '../clients/authClient'
 import { toast } from '@/components/ui/use-toast'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
+import { ApiEndpoints } from '@/constants/api'
+import { UserRoleEnum } from '@/constants/enums'
 
 export function useSignUp() {
   const router = useRouter()
@@ -77,4 +79,46 @@ export function useSignIn() {
       })
     }
   })
+}
+
+export function useGetUserDetails() {
+  const pathName = usePathname()
+  const router = useRouter()
+  const { isLoading, data } = useQuery({
+    queryKey: [ApiEndpoints.USER_ROLE],
+    queryFn: () => authClient.getUserRole(),
+    throwOnError: (error: any) => {
+      if (error.response.status === 401) {
+        if (pathName.includes('dashboard')) {
+          localStorage.removeItem(LocalStorageKeys.USER)
+          localStorage.removeItem(LocalStorageKeys.AUTH_TOKEN)
+          toast({
+            variant: 'destructive',
+            title: 'Session expired'
+          })
+          router.push(PageRoutes.SIGNIN)
+        }
+      }
+      return false
+    }
+  })
+
+  return {
+    data: data?.data ?? {
+      firstName: 'John',
+      lastName: 'Wick',
+      role: UserRoleEnum.GENERAL_USER,
+      email: 'johnwick@gmail.com'
+    },
+    loading: isLoading
+  }
+}
+export function useGetUserRole() {
+  const { isLoading, data } = useQuery({
+    queryKey: [ApiEndpoints.USER_ROLE],
+    queryFn: () => authClient.getUserRole(),
+    refetchInterval: 300000
+  })
+
+  return { data: data?.data.role ?? {}, loading: isLoading }
 }

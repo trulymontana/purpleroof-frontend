@@ -20,11 +20,10 @@ const formSchema = z.object({
 })
 
 interface Props {
-  handleSubmit: (values: any) => void
-  isLoading: boolean
+  onSave: (step: string, values: any) => void
 }
 
-const CallPreferenceForm = ({ handleSubmit, isLoading }: Props) => {
+const CallPreferenceForm = ({ onSave }: Props) => {
   const router = useRouter()
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.CALL_PREFERENCE)
@@ -36,12 +35,9 @@ const CallPreferenceForm = ({ handleSubmit, isLoading }: Props) => {
     defaultValues
   })
 
-  const handlePreferenceChange = (value: string) => {
-    form.setValue('callPreference', value)
-  }
-
   function onSubmit(values: z.infer<typeof formSchema>) {
-    handleSubmit(values)
+    onSave(PageRoutes.advertise.CALL_PREFERENCE, values)
+    router.push(PageRoutes.advertise.UPLOAD_PHOTOS)
   }
 
   return (
@@ -54,10 +50,10 @@ const CallPreferenceForm = ({ handleSubmit, isLoading }: Props) => {
           options={callPreferences}
         />
 
-        <Button disabled={isLoading} type="submit" className="w-full">
-          {isLoading ? 'Submitting...' : 'Submit'}
+        <Button type="submit" className="w-full">
+          Save and Continue
         </Button>
-        <BackButton route={PageRoutes.advertise.UPLOAD_PHOTOS} />
+        <BackButton route={PageRoutes.advertise.PROJECT_STATUS} />
       </form>
     </Form>
   )
