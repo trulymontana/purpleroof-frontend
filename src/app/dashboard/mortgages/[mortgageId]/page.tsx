@@ -29,7 +29,7 @@ import TextAreaElement from '@/components/forms/elements/text-area-element'
 const formSchema = z.object({
   title: z.string({
     required_error: 'Please enter a message'
-  }),
+  })
 })
 
 interface Props {
@@ -38,10 +38,9 @@ interface Props {
   }
 }
 const Page = ({ params: { mortgageId } }: Props) => {
-
   const { loading, data } = useGetOneMortgage(mortgageId)
   const { mutate: sendComment, isPending: isLoading } = useCreateCommentMutation(mortgageId)
-  const { data: userDetails } = useGetUserDetails();
+  const { data: userDetails } = useGetUserDetails()
 
   const { data: comments } = useGetCommentsByMortgage(Number(mortgageId))
 
@@ -57,7 +56,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
     sendComment({
       mortgageId: Number(mortgageId),
       attachments: [],
-      message: "test",
+      message: 'test',
       ...values
     })
   }
@@ -316,33 +315,33 @@ const Page = ({ params: { mortgageId } }: Props) => {
                     </div>
                     <X onClick={() => setChatOpen(!chatOpen)} className="h-6 w-6 cursor-pointer" />
                   </div>
-                  <div className="h-[400px] overflow-y-scroll p-3 flex flex-col gap-4">
-                    {
-                      comments && comments?.map((comment, i) => {
+                  <div className="flex h-[400px] flex-col gap-4 overflow-y-scroll p-3">
+                    {comments &&
+                      comments?.map((comment, i) => {
                         return (
-                          <div className='flex flex-col gap-4' key={i}>
+                          <div className="flex flex-col gap-4" key={i}>
                             {comment.userId === userDetails.id ? (
                               <div className="flex items-end">
-                                <div className="flex-none w-10 h-10">
+                                <div className="h-10 w-10 flex-none">
                                   <Avatar className="h-full w-full">
                                     <AvatarImage alt="User" src="/placeholder-avatar.jpg" />
                                     <AvatarFallback>U</AvatarFallback>
                                   </Avatar>
                                 </div>
-                                <div className="flex-1 ml-2">
-                                  <div className="p-3 bg-blue-100 text-black dark:bg-blue-900 dark:text-white rounded-r-lg">
+                                <div className="ml-2 flex-1">
+                                  <div className="rounded-r-lg bg-blue-100 p-3 text-black dark:bg-blue-900 dark:text-white">
                                     {comment.title}
                                   </div>
                                 </div>
                               </div>
                             ) : (
                               <div className="flex items-end justify-end">
-                                <div className="flex-1 mr-2">
-                                  <div className="p-3 bg-gray-200 text-black dark:bg-gray-800 dark:text-white rounded-l-lg">
+                                <div className="mr-2 flex-1">
+                                  <div className="rounded-l-lg bg-gray-200 p-3 text-black dark:bg-gray-800 dark:text-white">
                                     {comment.title}
                                   </div>
                                 </div>
-                                <div className="flex-none w-10 h-10">
+                                <div className="h-10 w-10 flex-none">
                                   <Avatar className="h-full w-full">
                                     <AvatarImage alt="Admin" src="/placeholder-avatar.jpg" />
                                     <AvatarFallback>A</AvatarFallback>
@@ -352,22 +351,23 @@ const Page = ({ params: { mortgageId } }: Props) => {
                             )}
                           </div>
                         )
-                      })
-                    }
+                      })}
                   </div>
-                  <div className="gap-2 border-t px-2 py-2 w-fit">
+                  <div className="w-fit gap-2 border-t px-2 py-2">
                     {/* <div className="h-5 w-5">
                       <Paperclip size={20} className="h-5 w-5" />
                     </div> */}
                     <div className="flex w-full items-center space-x-2">
                       <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                          <div className='flex flex-col items-center gap-2 w-full'>
-                            <TextAreaElement name='title' label='Message' placeholder='Type here...' />
+                          <div className="flex w-full flex-col items-center gap-2">
+                            <TextAreaElement name="title" label="Message" placeholder="Type here..." />
                             <Button disabled={isLoading} type="submit" className="w-full ">
-                              {isLoading ? "Sending..." : (
-                                <span className='flex items-center gap-2'>
-                                  Send < Send className="h-5 w-5" />
+                              {isLoading ? (
+                                'Sending...'
+                              ) : (
+                                <span className="flex items-center gap-2">
+                                  Send <Send className="h-5 w-5" />
                                 </span>
                               )}
                             </Button>
@@ -381,7 +381,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
             </Card>
           </PopoverContent>
         </Popover>
-      </div >
+      </div>
     </>
   )
 }

@@ -26,7 +26,7 @@ export default function PropertiesTable() {
 
   const storedValue = localStorage.getItem(LocalStorageKeys.USER)
 
-  const { data: role } = useGetUserRole();
+  const { data: role } = useGetUserRole()
 
   const columns: ColumnDef<Property>[] = [
     {
@@ -101,16 +101,20 @@ export default function PropertiesTable() {
               <Eye size={17} color="black" />
             </Button>
           </Link>
-          {(role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) && (<ConfirmActionDialog
-            title="Edit Property"
-            anchor={
-              <Button variant="ghost">
-                <FileEdit size={17} color="black" />
-              </Button>
-            }
-            content={<UpdatePropertyForm data={row.original} />}
-          />)}
-          {(role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) && (<ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />)}
+          {(role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) && (
+            <ConfirmActionDialog
+              title="Edit Property"
+              anchor={
+                <Button variant="ghost">
+                  <FileEdit size={17} color="black" />
+                </Button>
+              }
+              content={<UpdatePropertyForm data={row.original} />}
+            />
+          )}
+          {(role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) && (
+            <ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />
+          )}
         </div>
       )
     }
@@ -122,18 +126,16 @@ export default function PropertiesTable() {
       header: 'Action',
       cell: ({ row }) => (
         <>
-          {
-            row.original.submissionStatus === PropertySubmissionStatusEnum.APPROVED && (
-              <ConfirmActionDialog
-                title="Assign Agent"
-                anchor={<Button>Assign Agent</Button>}
-                content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
-              />
-            )
-          }
+          {row.original.submissionStatus === PropertySubmissionStatusEnum.APPROVED && (
+            <ConfirmActionDialog
+              title="Assign Agent"
+              anchor={<Button>Assign Agent</Button>}
+              content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
+            />
+          )}
         </>
       )
-    },)
+    })
   }
 
   const { loading, data } = useGetProperties()

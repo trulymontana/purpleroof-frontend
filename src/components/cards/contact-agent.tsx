@@ -52,7 +52,7 @@ const ContactAgentCard = ({ data }: Props) => {
   return (
     <>
       {data?.agent && (
-        <Card className="w-full shadow-md shadow-primary/30" >
+        <Card className="w-full shadow-md shadow-primary/30">
           <CardHeader className="">
             <h2 className="text-2xl font-semibold">Contact Agent</h2>
           </CardHeader>
@@ -99,7 +99,9 @@ const ContactAgentCard = ({ data }: Props) => {
               <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                   <DialogTitle>Contact Us</DialogTitle>
-                  <DialogDescription>Feel free to call agent for getting more info about the property.</DialogDescription>
+                  <DialogDescription>
+                    Feel free to call agent for getting more info about the property.
+                  </DialogDescription>
                 </DialogHeader>
                 <div>
                   {data?.agent?.agency && (
@@ -123,7 +125,7 @@ const ContactAgentCard = ({ data }: Props) => {
               </DialogContent>
             </Dialog>
           </CardContent>
-        </Card >
+        </Card>
       )}
     </>
   )

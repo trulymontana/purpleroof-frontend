@@ -15,7 +15,7 @@ export function useCreateCommentMutation(mortgageId: number) {
         console.log({ success: data })
       }
       queryClient.refetchQueries({ queryKey: [`${ApiEndpoints.COMMENTS_BY_MORTGAGE}/${response.mortgageId}`] })
-    },
+    }
     // onMutate: async (newComment) => {
     //   console.log({ newComment })
     //   // await queryClient.cancelQueries({ queryKey: [`${ApiEndpoints.COMMENTS_BY_MORTGAGE}/${mortgageId}`] })

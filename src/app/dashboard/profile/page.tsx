@@ -56,7 +56,7 @@ const formSchema = z.object({
 const Page = () => {
   const [locations, setLocations] = useState<TOption[]>([])
 
-  const { data: userDetails, loading } = useGetUserDetails();
+  const { data: userDetails, loading } = useGetUserDetails()
   const { mutate: createAgent, isPending: isLoading } = useCreateAgentMutation()
   const { data: agentApplicationDetails } = useGetAgentApplications()
 
@@ -79,23 +79,21 @@ const Page = () => {
 
   emirates?.length > 0 && (emirateValues = getValuesFrom(emirates))
 
-  const { data: locationOptions } = useGetLocations(emirateValues);
+  const { data: locationOptions } = useGetLocations(emirateValues)
 
   // useEffect(() => {
   //   filterLocations(emirateValues)
   // }, [emirates])
 
-
-
   if (loading) {
     return (
-      <div className='flex items-center justify-center min-h-screen'>
+      <div className="flex min-h-screen items-center justify-center">
         <Loader />
       </div>
     )
   }
 
-  const { firstName, lastName, role, email } = userDetails;
+  const { firstName, lastName, role, email } = userDetails
 
   return (
     <div className="w-full space-y-8 px-6 py-10">
@@ -164,7 +162,7 @@ const Page = () => {
                               ? 'Please select atleast one emirate'
                               : 'Please select locations'
                           }
-                          options={locationOptions || [{ label: "Dubai", value: "1" }]}
+                          options={locationOptions || [{ label: 'Dubai', value: '1' }]}
                         />
                         <Separator />
                         <Button disabled={isLoading} type="submit" className="w-full">
@@ -179,49 +177,51 @@ const Page = () => {
           </CardContent>
         </Card>
 
-        {agentApplicationDetails && <Card className="w-1/4 rounded-xl bg-white shadow-md">
-          <CardHeader>
-            <CardTitle className="text-primary">Agent Details</CardTitle>
-            <CardDescription>Overview of agent information.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {agentApplicationDetails?.agency && (
-              <p className="mt-2 text-gray-500">Agency Name: {agentApplicationDetails?.agency}</p>
-            )}
-            {agentApplicationDetails?.contactNumber && (
-              <div className="mt-2 flex items-center text-sm text-gray-500">
-                <Phone className="mr-2 h-5 w-5 text-gray-500" />
-                <span>Contact: {agentApplicationDetails?.contactNumber}</span>
+        {agentApplicationDetails && (
+          <Card className="w-1/4 rounded-xl bg-white shadow-md">
+            <CardHeader>
+              <CardTitle className="text-primary">Agent Details</CardTitle>
+              <CardDescription>Overview of agent information.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {agentApplicationDetails?.agency && (
+                <p className="mt-2 text-gray-500">Agency Name: {agentApplicationDetails?.agency}</p>
+              )}
+              {agentApplicationDetails?.contactNumber && (
+                <div className="mt-2 flex items-center text-sm text-gray-500">
+                  <Phone className="mr-2 h-5 w-5 text-gray-500" />
+                  <span>Contact: {agentApplicationDetails?.contactNumber}</span>
+                </div>
+              )}
+              <div className="mt-4 flex">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button className="w-full" variant="outline">
+                      <Locate className="mr-2 h-5 w-5 text-gray-500" />
+                      View Locations
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[800px]">
+                    <DialogHeader>
+                      <DialogTitle>Locations</DialogTitle>
+                    </DialogHeader>
+                    <div className="grid max-h-[500px] grid-cols-2 gap-4 overflow-y-auto py-4">
+                      {agentApplicationDetails?.locations.map((location, i) => {
+                        return (
+                          <Card key={i}>
+                            <CardHeader>
+                              <CardTitle>{location.name}</CardTitle>
+                            </CardHeader>
+                          </Card>
+                        )
+                      })}
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
-            )}
-            <div className="mt-4 flex">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button className="w-full" variant="outline">
-                    <Locate className="mr-2 h-5 w-5 text-gray-500" />
-                    View Locations
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[800px]">
-                  <DialogHeader>
-                    <DialogTitle>Locations</DialogTitle>
-                  </DialogHeader>
-                  <div className="grid max-h-[500px] grid-cols-2 gap-4 overflow-y-auto py-4">
-                    {agentApplicationDetails?.locations.map((location, i) => {
-                      return (
-                        <Card key={i}>
-                          <CardHeader>
-                            <CardTitle>{location.name}</CardTitle>
-                          </CardHeader>
-                        </Card>
-                      )
-                    })}
-                  </div>
-                </DialogContent>
-              </Dialog>
-            </div>
-          </CardContent>
-        </Card>}
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   )

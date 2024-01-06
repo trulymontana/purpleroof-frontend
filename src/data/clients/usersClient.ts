@@ -14,5 +14,5 @@ export const userClient = {
   },
   getAgentApplication: () => {
     return HttpClient.get<Agent>(ApiEndpoints.AGENT_APPLICATION)
-  },
+  }
 }

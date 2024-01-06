@@ -46,7 +46,9 @@ const UpdatePropertyForm = ({ data }: Props) => {
           label="Status"
           options={propertySubmissionStatuses}
         />
-        <Button disabled={isLoading} type="submit">{isLoading ? "Saving..." : "Save changes"}</Button>
+        <Button disabled={isLoading} type="submit">
+          {isLoading ? 'Saving...' : 'Save changes'}
+        </Button>
       </form>
     </Form>
   )

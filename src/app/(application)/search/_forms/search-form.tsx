@@ -98,7 +98,7 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
         <div className="mx-auto flex-1 py-4">
           <CustomTabRadioGroup name="propertyFor" options={propertyForOptions} />
         </div>
-        <div className="w-1/2 mx-auto flex-1 py-4">
+        <div className="mx-auto w-1/2 flex-1 py-4">
           <TabRadioGroup name="propertyTypes" options={typesOfProperties} />
         </div>
         <div className="flex flex-col items-center gap-5 rounded-lg p-4">

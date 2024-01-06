@@ -105,7 +105,9 @@ const PropertyDetailsCard = ({ data }: Props) => {
               </div>
               <div className="flex justify-between">
                 <p>Location</p>
-                <p className="font-semibold capitalize ">{data?.location?.name?.toLocaleLowerCase().replaceAll('_', ' ')}</p>
+                <p className="font-semibold capitalize ">
+                  {data?.location?.name?.toLocaleLowerCase().replaceAll('_', ' ')}
+                </p>
               </div>
               <div className="flex justify-between">
                 <p>Building Name</p>

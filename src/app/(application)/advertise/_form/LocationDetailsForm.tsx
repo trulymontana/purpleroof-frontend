@@ -60,7 +60,6 @@ interface Props {
 }
 
 const LocationDetailsForm = ({ onSave }: Props) => {
-
   const router = useRouter()
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.LOCATION_DETAILS)
@@ -73,13 +72,12 @@ const LocationDetailsForm = ({ onSave }: Props) => {
   })
 
   const selectedEmirate = form.watch('emirate')
-  const { data: locationOptions } = useGetLocations([selectedEmirate]);
+  const { data: locationOptions } = useGetLocations([selectedEmirate])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.LOCATION_DETAILS, values)
     router.push(PageRoutes.advertise.AMENITIES_DETAILS)
   }
-
 
   // @ts-ignore
   const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS))
@@ -92,7 +90,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <SelectElement
           name="locationId"
           label="Location"
-          options={locationOptions || [{ label: "Dubai", value: "1" }]}
+          options={locationOptions || [{ label: 'Dubai', value: '1' }]}
           placeholder={!selectedEmirate ? 'Please select emirate first' : 'Please select a location'}
           disabled={!selectedEmirate}
         />
