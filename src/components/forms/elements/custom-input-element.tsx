@@ -8,7 +8,7 @@ interface Props {
   label?: string
   description?: string
   placeholder?: string
-  type: "string" | "number"
+  type: string
   className?: string
 }
 
