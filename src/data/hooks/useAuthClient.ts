@@ -85,8 +85,8 @@ export function useGetUserDetails() {
   const pathName = usePathname()
   const router = useRouter()
   const { isLoading, data } = useQuery({
-    queryKey: [ApiEndpoints.USER_ROLE],
-    queryFn: () => authClient.getUserRole(),
+    queryKey: [ApiEndpoints.USER],
+    queryFn: () => authClient.getUserDetails(),
     throwOnError: (error: any) => {
       if (error.response.status === 401) {
         if (pathName.includes('dashboard')) {
@@ -108,15 +108,16 @@ export function useGetUserDetails() {
       firstName: 'John',
       lastName: 'Wick',
       role: UserRoleEnum.GENERAL_USER,
-      email: 'johnwick@gmail.com'
+      email: 'johnwick@gmail.com',
+      id: 1
     },
     loading: isLoading
   }
 }
 export function useGetUserRole() {
   const { isLoading, data } = useQuery({
-    queryKey: [ApiEndpoints.USER_ROLE],
-    queryFn: () => authClient.getUserRole(),
+    queryKey: [ApiEndpoints.USER],
+    queryFn: () => authClient.getUserDetails(),
     refetchInterval: 300000
   })
 
