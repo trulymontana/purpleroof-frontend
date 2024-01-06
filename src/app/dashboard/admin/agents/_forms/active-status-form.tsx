@@ -11,49 +11,50 @@ import { useUpdateActiveStatusMutation } from '@/data/hooks/useAgentsClient'
 import { useRouter } from 'next/navigation'
 
 interface Props {
-    data: Agent
+  data: Agent
 }
 
 const formSchema = z.object({
-    activeStatus: z.nativeEnum(ActiveStatusEnum, {
-        required_error: "Please select a status!"
-    })
+  activeStatus: z.nativeEnum(ActiveStatusEnum, {
+    required_error: 'Please select a status!'
+  })
 })
 
 type TApprovalStatus = z.infer<typeof formSchema>
 const AgentActiveStausForm = ({ data }: Props) => {
-    const { mutate: updateAgentActiveStatus, isPending: isLoading } = useUpdateActiveStatusMutation()
+  const { mutate: updateAgentActiveStatus, isPending: isLoading } = useUpdateActiveStatusMutation()
 
-    const router = useRouter();
+  const router = useRouter()
 
-    const form = useForm<TApprovalStatus>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            activeStatus: data?.activeStatus
-        }
-    })
-
-    function onSubmit(values: TApprovalStatus) {
-        updateAgentActiveStatus({
-            id: data?.id,
-            ...values
-        })
+  const form = useForm<TApprovalStatus>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      activeStatus: data?.activeStatus
     }
+  })
 
-    return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-                <SelectElement
-                    name="activeStatus"
-                    placeholder="Please select a status"
-                    label="Active Status"
-                    options={activeStatusOptions}
-                />
-                <Button disabled={isLoading} className='w-full' type="submit">{isLoading ? "Saving..." : "Save changes"}</Button>
-            </form>
-        </Form>
-    )
+  function onSubmit(values: TApprovalStatus) {
+    updateAgentActiveStatus({
+      id: data?.id,
+      ...values
+    })
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
+        <SelectElement
+          name="activeStatus"
+          placeholder="Please select a status"
+          label="Active Status"
+          options={activeStatusOptions}
+        />
+        <Button disabled={isLoading} className="w-full" type="submit">
+          {isLoading ? 'Saving...' : 'Save changes'}
+        </Button>
+      </form>
+    </Form>
+  )
 }
 
 export default AgentActiveStausForm
-

@@ -30,7 +30,7 @@ export const userColumns: ColumnDef<User>[] = [
     id: 'createdAt',
     header: 'Created At',
     cell: ({ row }) => {
-      const createdAt = row.original.createdAt;
+      const createdAt = row.original.createdAt
       return new Date(createdAt).toLocaleDateString()
     }
   },
@@ -38,7 +38,7 @@ export const userColumns: ColumnDef<User>[] = [
     id: 'updatedAt',
     header: 'Updated At',
     cell: ({ row }) => {
-      const updatedAt = row.original.createdAt;
+      const updatedAt = row.original.createdAt
       return new Date(updatedAt).toLocaleDateString()
     }
   },
@@ -46,7 +46,7 @@ export const userColumns: ColumnDef<User>[] = [
     id: 'role',
     header: 'Role',
     cell: ({ row }) => {
-      return <Badge className='capitalize'>{row.original.role.toLocaleLowerCase()}</Badge>
+      return <Badge className="capitalize">{row.original.role.toLocaleLowerCase()}</Badge>
     }
   },
   {
@@ -55,13 +55,9 @@ export const userColumns: ColumnDef<User>[] = [
     cell: ({ row }) => {
       return (
         <>
-          < ConfirmActionDialog
+          <ConfirmActionDialog
             title="Edit Role"
-            anchor={
-              <Button>
-                Update Role
-              </Button>
-            }
+            anchor={<Button>Update Role</Button>}
             content={<UpdateUserRoleForm data={row.original} />}
           />
         </>

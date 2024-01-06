@@ -14,59 +14,58 @@ import { useEffect, useState } from 'react'
 import { TOption } from '@/constants/types'
 
 interface Props {
-    data: Property
-    agentsData: Agent[] | undefined
-    isLoading: boolean
+  data: Property
+  agentsData: Agent[] | undefined
+  isLoading: boolean
 }
 
 const formSchema = z.object({
-    agentId: z.string({
-        required_error: "Please select a agent!"
-    })
+  agentId: z.string({
+    required_error: 'Please select a agent!'
+  })
 })
 
 type TAgent = z.infer<typeof formSchema>
 const AssignAgentForm = ({ data, agentsData, isLoading }: Props) => {
+  const [agentOptions, setAgentOptions] = useState<TOption[]>()
+  const { mutate: assignAgent } = useAssignAgentMutation()
 
-    const [agentOptions, setAgentOptions] = useState<TOption[]>();
-    const { mutate: assignAgent } = useAssignAgentMutation()
-
-    useEffect(() => {
-        if (agentsData && agentsData?.length > 0) {
-            let options: TOption[] = [];
-            agentsData?.map((agent) => {
-                if (agent.approvalStatus === ApprovalStatusEnum.APPROVED) {
-                    options.push({ label: `${agent.user.firstName} ${agent.user.lastName} ${agent?.agency ?? "-"} ${agent.agency}`, value: agent.id.toString() })
-                }
-            })
-            setAgentOptions(options)
+  useEffect(() => {
+    if (agentsData && agentsData?.length > 0) {
+      let options: TOption[] = []
+      agentsData?.map((agent) => {
+        if (agent.approvalStatus === ApprovalStatusEnum.APPROVED) {
+          options.push({
+            label: `${agent.user.firstName} ${agent.user.lastName} ${agent?.agency ?? '-'} ${agent.agency}`,
+            value: agent.id.toString()
+          })
         }
-    }, [agentsData])
-
-    const form = useForm<TAgent>({
-        resolver: zodResolver(formSchema),
-    })
-
-    function onSubmit(values: TAgent) {
-        assignAgent({
-            id: data.id,
-            ...values,
-        })
+      })
+      setAgentOptions(options)
     }
+  }, [agentsData])
 
-    return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-                <SelectElement
-                    name="agentId"
-                    placeholder="Please select a agent"
-                    label="Agent"
-                    options={agentOptions || []}
-                />
-                <Button disabled={isLoading} type="submit">{isLoading ? "Saving..." : "Save changes"}</Button>
-            </form>
-        </Form>
-    )
+  const form = useForm<TAgent>({
+    resolver: zodResolver(formSchema)
+  })
+
+  function onSubmit(values: TAgent) {
+    assignAgent({
+      id: data.id,
+      ...values
+    })
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
+        <SelectElement name="agentId" placeholder="Please select a agent" label="Agent" options={agentOptions || []} />
+        <Button disabled={isLoading} type="submit">
+          {isLoading ? 'Saving...' : 'Save changes'}
+        </Button>
+      </form>
+    </Form>
+  )
 }
 
 export default AssignAgentForm

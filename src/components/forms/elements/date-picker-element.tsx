@@ -41,7 +41,7 @@ const DatePickerElement = ({ name, label, description, disabled = false, custom 
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-full bg-slate-950 p-0 text-white/80" align="start">
-              <div className="flex pt-2 pr-2">
+              <div className="flex pr-2 pt-2">
                 <div className="flex-1"></div>
                 <PopoverClose>
                   <X size={24} className="text-primary/60 hover:text-destructive" />
@@ -56,18 +56,19 @@ const DatePickerElement = ({ name, label, description, disabled = false, custom 
                   fromYear={1960}
                   toYear={2030}
                 />
-              ) : (<Calendar
-                mode="single"
-                selected={field.value}
-                onSelect={field.onChange}
-                disabled={
-                  !disabled
-                    ? (date) => date > new Date() || date < new Date('1900-01-01')
-                    : (date) => date < new Date('1900-01-01')
-                }
-                initialFocus
-              />)}
-
+              ) : (
+                <Calendar
+                  mode="single"
+                  selected={field.value}
+                  onSelect={field.onChange}
+                  disabled={
+                    !disabled
+                      ? (date) => date > new Date() || date < new Date('1900-01-01')
+                      : (date) => date < new Date('1900-01-01')
+                  }
+                  initialFocus
+                />
+              )}
             </PopoverContent>
           </Popover>
           <FormDescription>{description}</FormDescription>

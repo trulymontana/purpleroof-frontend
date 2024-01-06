@@ -50,7 +50,7 @@ interface Props {
 const PersonalDetailsForm = ({ onSave }: Props) => {
   const router = useRouter()
 
-  const [isAgreed, setIsAgreed] = useState(false);
+  const [isAgreed, setIsAgreed] = useState(false)
 
   const storedValue = localStorage.getItem(PageRoutes.mortgage.PERSONAL_DETAILS)
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
@@ -64,7 +64,6 @@ const PersonalDetailsForm = ({ onSave }: Props) => {
     onSave(PageRoutes.mortgage.PERSONAL_DETAILS, values)
     router.push(PageRoutes.mortgage.INCOME_DETAILS)
   }
-
 
   return (
     <Form {...form}>
@@ -85,11 +84,10 @@ const PersonalDetailsForm = ({ onSave }: Props) => {
 
         <SelectElement name="incomeProfile" label={'Income Profile'} options={incomeProfiles} />
 
-        <div className='flex items-center justify-between'>
+        <div className="flex items-center justify-between">
           <Label htmlFor="isAgreed">By selecting this, you agree to our privacy policy</Label>
-          <Switch id='isAgreed' onCheckedChange={() => setIsAgreed(!isAgreed)} />
+          <Switch id="isAgreed" onCheckedChange={() => setIsAgreed(!isAgreed)} />
         </div>
-
 
         <Button disabled={!isAgreed} type="submit" className="w-full">
           Save and Continue

@@ -103,7 +103,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
           label={'Title Deed / Oqod / Initial Contract of Sales'}
         />
 
-        <TextAreaElement name='description' label='Description' placeholder="Enter description of property here..." />
+        <TextAreaElement name="description" label="Description" placeholder="Enter description of property here..." />
 
         <Button type="submit" className="w-full">
           Save and Continue

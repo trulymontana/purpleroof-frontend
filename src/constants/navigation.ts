@@ -41,16 +41,16 @@ export const requirements = [
 ]
 
 export const services = [
-    {
-        label: "Apply for Home Loan",
-        link: "/"
-    },
-    {
-        label: "Property Search",
-        link: "/"
-    },
-    {
-        label: "Advertise Your Property",
-        link: "/"
-    },
+  {
+    label: 'Apply for Home Loan',
+    link: '/'
+  },
+  {
+    label: 'Property Search',
+    link: '/'
+  },
+  {
+    label: 'Advertise Your Property',
+    link: '/'
+  }
 ]

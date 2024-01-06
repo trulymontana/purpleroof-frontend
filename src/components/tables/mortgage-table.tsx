@@ -110,7 +110,7 @@ export default function MortgagesTable() {
           <ConfirmDeleteDialog onDelete={() => deleteMortgage(row.original.id)} isLoading={isPending} />
         </div>
       )
-    },
+    }
   ]
 
   const { loading, data } = useGetMortgages()

@@ -51,8 +51,8 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     storedValue !== null
       ? JSON.parse(storedValue)
       : {
-        propertyFor: PropertyForEnum.SALE
-      }
+          propertyFor: PropertyForEnum.SALE
+        }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

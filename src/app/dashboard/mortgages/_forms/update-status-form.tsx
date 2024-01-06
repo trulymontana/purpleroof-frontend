@@ -15,7 +15,7 @@ interface Props {
 
 const formSchema = z.object({
   status: z.nativeEnum(MortgageStatusEnum, {
-    required_error: "Please select a status!"
+    required_error: 'Please select a status!'
   })
 })
 

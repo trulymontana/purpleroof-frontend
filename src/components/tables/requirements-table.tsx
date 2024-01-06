@@ -12,7 +12,6 @@ import { Card, CardHeader, CardTitle } from '../ui/card'
 import { Button } from '../ui/button'
 
 export default function RequirementsTable() {
-
   const { mutate: deleteRequirement, isPending: isLoading } = useDeleteRequirementMutation()
 
   const columns: ColumnDef<RequirementApplication>[] = [

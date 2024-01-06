@@ -75,7 +75,12 @@ const AmenitiesForm = ({ onSave }: Props) => {
           options={propertyTypes}
         />
 
-        <SelectElement name="furnishingStatus" label={'Status'} placeholder="Please select a status" options={furnishingStatuses} />
+        <SelectElement
+          name="furnishingStatus"
+          label={'Status'}
+          placeholder="Please select a status"
+          options={furnishingStatuses}
+        />
 
         <NumberInputElement
           name="parkingSpaces"

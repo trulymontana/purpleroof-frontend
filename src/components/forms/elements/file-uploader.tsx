@@ -17,7 +17,7 @@ interface FileUploaderProps {
 const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }) => {
   const { control } = useFormContext()
 
-  const ref = useRef();
+  const ref = useRef()
 
   const [file, setFile] = useState<File | undefined>(undefined)
   const [fileUrl, setFileUrl] = useState<string>('')
@@ -54,7 +54,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }
       render={({ field }) => (
         <FormItem>
           <FormLabel>{label}</FormLabel>
-          <div className="flex items-center gap-2 cursor-pointer">
+          <div className="flex cursor-pointer items-center gap-2">
             <FormControl>
               <Input id="file-upload" type="file" onChange={handleFileUpload} />
             </FormControl>
@@ -65,7 +65,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }
             )}
             {!isLoading && (
               <span className="cursor-pointer">
-                {fileUrl ? <XSquare onClick={handleFileDelete} /> : <FolderClosed  />}
+                {fileUrl ? <XSquare onClick={handleFileDelete} /> : <FolderClosed />}
               </span>
             )}
           </div>

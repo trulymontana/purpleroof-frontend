@@ -9,38 +9,34 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
 const ApplicationCompletedForm = () => {
+  const storedValue = localStorage.getItem(LocalStorageKeys.USER)
+  const user: User = storedValue !== null && JSON.parse(storedValue)
 
-    const storedValue = localStorage.getItem(LocalStorageKeys.USER)
-    const user: User = storedValue !== null && JSON.parse(storedValue)
+  const searchParams = useSearchParams()
 
-    const searchParams = useSearchParams();
-
-    return (
-        <div className="flex flex-col gap-5 items-center justify-center p-3">
-            <CheckCircle color="#6abf6f" size={80} />
-            <p className=" text-slate-700 text-start">
-                Property application submitted successfully.
-            </p>
-            <p className="text-slate-700">
-                If you want to see the property, click the button below to go to your dashboard and find all the properties you listed.
-            </p>
-            {
-                user ? (
-                    <Link className='w-full' href={PageRoutes.dashboard.PROPERTIES}>
-                        <Button type="submit" className="w-full flex items-center gap-2">
-                            Dashboard <ArrowRight />
-                        </Button>
-                    </Link>
-                ) : (
-                    <Link className='w-full' href={PageRoutes.SIGNUP}>
-                        <Button type="submit" className="w-full flex items-center gap-2">
-                            Dashboard <ArrowRight />
-                        </Button>
-                    </Link>
-                )
-            }
-        </div>
-    )
+  return (
+    <div className="flex flex-col items-center justify-center gap-5 p-3">
+      <CheckCircle color="#6abf6f" size={80} />
+      <p className=" text-start text-slate-700">Property application submitted successfully.</p>
+      <p className="text-slate-700">
+        If you want to see the property, click the button below to go to your dashboard and find all the properties you
+        listed.
+      </p>
+      {user ? (
+        <Link className="w-full" href={PageRoutes.dashboard.PROPERTIES}>
+          <Button type="submit" className="flex w-full items-center gap-2">
+            Dashboard <ArrowRight />
+          </Button>
+        </Link>
+      ) : (
+        <Link className="w-full" href={PageRoutes.SIGNUP}>
+          <Button type="submit" className="flex w-full items-center gap-2">
+            Dashboard <ArrowRight />
+          </Button>
+        </Link>
+      )}
+    </div>
+  )
 }
 
 export default ApplicationCompletedForm

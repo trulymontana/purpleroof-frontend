@@ -35,27 +35,23 @@ const formSchema = z.object({
     )
 })
 const Page = () => {
-
   const searchParams = useSearchParams()
 
-  const email = searchParams.get("email")
-  const firstName = searchParams.get("firstName")
-  const lastName = searchParams.get("lastName")
+  const email = searchParams.get('email')
+  const firstName = searchParams.get('firstName')
+  const lastName = searchParams.get('lastName')
 
   const { isPending: isLoading, mutate: createUser } = useSignUp()
 
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema)
   })
 
   useEffect(() => {
     if (email && firstName && lastName) {
-      form.setValue("email", email),
-        form.setValue("firstName", firstName),
-        form.setValue("lastName", lastName)
+      form.setValue('email', email), form.setValue('firstName', firstName), form.setValue('lastName', lastName)
     }
   }, [])
-
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     createUser({
@@ -69,8 +65,7 @@ const Page = () => {
         <CardHeader>
           <h1 className="text-center text-4xl font-bold">Sign Up</h1>
 
-          <p className="text-center text-md font-light">Create Account</p>
-
+          <p className="text-md text-center font-light">Create Account</p>
         </CardHeader>
         <CardContent>
           <Form {...form}>

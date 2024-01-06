@@ -16,8 +16,7 @@ import AssignAgentForm from '@/app/dashboard/properties/_forms/assign-agent-form
 import { useGetAgents } from '@/data/hooks/useAgentsClient'
 
 export default function PropertiesTable() {
-
-  const { loading: isLoading, data: agentsData } = useGetAgents();
+  const { loading: isLoading, data: agentsData } = useGetAgents()
 
   const { mutate: deleteProperty, isPending } = useDeletePropertyMutation()
 
@@ -30,7 +29,7 @@ export default function PropertiesTable() {
       id: 'name',
       header: 'Name',
       cell: ({ row }) => {
-        return <span className='line-clamp-1 max-w-sm'>{row.original.name}</span>
+        return <span className="line-clamp-1 max-w-sm">{row.original.name}</span>
       }
     },
     {
@@ -53,7 +52,7 @@ export default function PropertiesTable() {
       id: 'createdAt',
       header: 'Created At',
       cell: ({ row }) => {
-        const createdAt = row.original.createdAt;
+        const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()
       }
     },
@@ -61,25 +60,25 @@ export default function PropertiesTable() {
       id: 'updatedAt',
       header: 'Updated At',
       cell: ({ row }) => {
-        const updatedAt = row.original.createdAt;
+        const updatedAt = row.original.createdAt
         return new Date(updatedAt).toLocaleDateString()
       }
     },
     {
-      id: "status",
+      id: 'status',
       header: 'Status',
       cell: ({ row }) => {
-        const data = row.original;
+        const data = row.original
         return <Badge>{data.submissionStatus}</Badge>
       }
     },
     {
-      id: "agent",
+      id: 'agent',
       header: 'Agent',
       cell: ({ row }) => {
-        const data = row.original;
+        const data = row.original
         if (data?.agentId) {
-          return <Badge className='bg-teal-600 '>Assigned</Badge>
+          return <Badge className="bg-teal-600 ">Assigned</Badge>
         }
         return <Badge variant="outline">Not Assigned</Badge>
       }
@@ -91,11 +90,7 @@ export default function PropertiesTable() {
         <>
           <ConfirmActionDialog
             title="Assign Agent"
-            anchor={
-              <Button>
-                Assign Agent
-              </Button>
-            }
+            anchor={<Button>Assign Agent</Button>}
             content={<AssignAgentForm isLoading={isLoading} agentsData={agentsData} data={row.original} />}
           />
         </>

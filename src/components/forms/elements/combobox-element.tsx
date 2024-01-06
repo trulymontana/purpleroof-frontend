@@ -22,7 +22,7 @@ interface Props {
 const ComboboxElement = ({ name, label, description, options, placeholder }: Props) => {
   const { control, setValue } = useFormContext()
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <FormField

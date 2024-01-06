@@ -28,7 +28,6 @@ export default function AgentsTable() {
       id: 'agency',
       header: 'Agency Name',
       cell: ({ row }) => {
-
         const agency = row.original.agency
 
         if (agency) {

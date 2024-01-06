@@ -17,14 +17,12 @@ interface Props {
 }
 
 const Page = ({ params: { mortgageId, formStep } }: Props) => {
-
   const { loading, data } = useGetOneMortgage(mortgageId)
   const { mutate: updateMortgage } = useUpdateMortgageMutation()
 
   const storeValues = (step: string, values: any) => {
     localStorage.setItem(step, JSON.stringify(values))
   }
-
 
   const handleSubmit = (values: any) => {
     const transactionInfo = localStorage.getItem(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${mortgageId}`)
@@ -46,11 +44,21 @@ const Page = ({ params: { mortgageId, formStep } }: Props) => {
   }
 
   const subComponents: { [key: string]: React.ReactElement } = {
-    [PageRoutes.mortgage_transaction.TRANSACTION_INFO]: <TransactionInfoForm mortgageId={mortgageId} onSave={storeValues} />,
-    [PageRoutes.mortgage_transaction.CUSTOMER_INFO]: <CustomerInfoForm data={data} mortgageId={mortgageId} onSave={storeValues} />,
+    [PageRoutes.mortgage_transaction.TRANSACTION_INFO]: (
+      <TransactionInfoForm mortgageId={mortgageId} onSave={storeValues} />
+    ),
+    [PageRoutes.mortgage_transaction.CUSTOMER_INFO]: (
+      <CustomerInfoForm data={data} mortgageId={mortgageId} onSave={storeValues} />
+    ),
     // @ts-ignore
-    [PageRoutes.mortgage_transaction.DOCUMENTS]: <UploadDocumentsForm isLoading={loading} mortgageId={mortgageId} requiredDocuments={data?.requirement?.requiredDocuments} handleSubmit={handleSubmit} />,
-
+    [PageRoutes.mortgage_transaction.DOCUMENTS]: (
+      <UploadDocumentsForm
+        isLoading={loading}
+        mortgageId={mortgageId}
+        requiredDocuments={data?.requirement?.requiredDocuments}
+        handleSubmit={handleSubmit}
+      />
+    )
   }
 
   return (

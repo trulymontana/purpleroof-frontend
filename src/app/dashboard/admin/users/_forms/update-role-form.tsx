@@ -11,47 +11,43 @@ import { UserRoleOptions } from '@/constants/users'
 import { useUpdateUserRole } from '@/data/hooks/useUsersClient'
 
 interface Props {
-    data: User
+  data: User
 }
 
 const formSchema = z.object({
-    role: z.nativeEnum(UserRoleEnum, {
-        required_error: "Please select a role!"
-    })
+  role: z.nativeEnum(UserRoleEnum, {
+    required_error: 'Please select a role!'
+  })
 })
 
 type TPropertyStatus = z.infer<typeof formSchema>
 const UpdateUserRoleForm = ({ data }: Props) => {
+  const { mutate: updateRole } = useUpdateUserRole()
 
-    const { mutate: updateRole } = useUpdateUserRole()
-
-    const form = useForm<TPropertyStatus>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            role: data?.role
-        }
-    })
-
-    function onSubmit(values: TPropertyStatus) {
-        updateRole({
-            id: data.id,
-            ...values
-        })
+  const form = useForm<TPropertyStatus>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      role: data?.role
     }
+  })
 
-    return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-                <SelectElement
-                    name="role"
-                    placeholder="Please select a role"
-                    label="Role"
-                    options={UserRoleOptions}
-                />
-                <Button className='w-full' type="submit">Save changes</Button>
-            </form>
-        </Form>
-    )
+  function onSubmit(values: TPropertyStatus) {
+    updateRole({
+      id: data.id,
+      ...values
+    })
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
+        <SelectElement name="role" placeholder="Please select a role" label="Role" options={UserRoleOptions} />
+        <Button className="w-full" type="submit">
+          Save changes
+        </Button>
+      </form>
+    </Form>
+  )
 }
 
 export default UpdateUserRoleForm

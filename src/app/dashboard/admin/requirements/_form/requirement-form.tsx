@@ -41,7 +41,7 @@ const formSchema = z.object({
     required_error: 'Please enter Valuation Fee!'
   }),
   incomeProfile: z.nativeEnum(IncomeProfileEnum, {
-    required_error: "Please select a Income Profile"
+    required_error: 'Please select a Income Profile'
   }),
   residenceType: z.nativeEnum(ResidenceTypeEnum, {
     required_error: 'Please select a Residence Type!'
@@ -56,7 +56,6 @@ interface Props {
 }
 
 const RequirementsForm = ({ data, isLoading, mutate, mode = 'CREATE' }: Props) => {
-
   const [selectedDocuments, setSelectedDocuments] = useState<TOption[]>([])
 
   // const { isPending: isLoading, mutate: createRequirement } = useCreateRequirementMutation()
@@ -68,7 +67,7 @@ const RequirementsForm = ({ data, isLoading, mutate, mode = 'CREATE' }: Props) =
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: values || {},
+    defaultValues: values || {}
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -93,15 +92,15 @@ const RequirementsForm = ({ data, isLoading, mutate, mode = 'CREATE' }: Props) =
 
   useEffect(() => {
     if (data) {
-      form.setValue("incomeProfile", data.incomeProfile)
-      form.setValue("residenceType", data.residenceType)
-      form.setValue("name", data.name)
-      form.setValue("preApprovalFee", data.preApprovalFee)
-      form.setValue("processingFee", data.processingFee)
-      form.setValue("propertyInsurance", data.propertyInsurance)
-      form.setValue("rate", data.rate)
-      form.setValue("lifeInsurance", data.lifeInsurance)
-      form.setValue("valuationFee", data.valuationFee)
+      form.setValue('incomeProfile', data.incomeProfile)
+      form.setValue('residenceType', data.residenceType)
+      form.setValue('name', data.name)
+      form.setValue('preApprovalFee', data.preApprovalFee)
+      form.setValue('processingFee', data.processingFee)
+      form.setValue('propertyInsurance', data.propertyInsurance)
+      form.setValue('rate', data.rate)
+      form.setValue('lifeInsurance', data.lifeInsurance)
+      form.setValue('valuationFee', data.valuationFee)
 
       let unformattedDocuments = data?.requiredDocuments?.map((document) => ({
         label: document.name,
@@ -149,30 +148,32 @@ const RequirementsForm = ({ data, isLoading, mutate, mode = 'CREATE' }: Props) =
           </div>
         </div>
 
-        {
-          mode === 'CREATE' ? (
-            <>
-              <RadioGroupElement
-                name="incomeProfile"
-                label={'Income Profile'}
-                className="items-center gap-10"
-                options={incomeProfiles}
-              />
+        {mode === 'CREATE' ? (
+          <>
+            <RadioGroupElement
+              name="incomeProfile"
+              label={'Income Profile'}
+              className="items-center gap-10"
+              options={incomeProfiles}
+            />
 
-              <RadioGroupElement
-                name="residenceType"
-                label={'Residence Type'}
-                className="items-center gap-10"
-                options={residenceTypes}
-              />
-            </>
-          ) : (
-            <div className='flex gap-2 flex-col'>
-              <span>Income Profile: <Badge>{data?.incomeProfile}</Badge></span>
-              <span>Residence Type: <Badge>{data?.residenceType}</Badge></span>
-            </div>
-          )
-        }
+            <RadioGroupElement
+              name="residenceType"
+              label={'Residence Type'}
+              className="items-center gap-10"
+              options={residenceTypes}
+            />
+          </>
+        ) : (
+          <div className="flex flex-col gap-2">
+            <span>
+              Income Profile: <Badge>{data?.incomeProfile}</Badge>
+            </span>
+            <span>
+              Residence Type: <Badge>{data?.residenceType}</Badge>
+            </span>
+          </div>
+        )}
 
         <MultiSelectCheckbox
           name="requiredDocuments"

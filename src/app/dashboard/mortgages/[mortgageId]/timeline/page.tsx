@@ -1,36 +1,33 @@
-"use client"
+'use client'
 
-import Loader from '@/components/Loader';
-import VerticalTimelineComponent from '@/components/timeline/vertical-timeline';
-import { useGetOneMortgage } from '@/data/hooks/useMortgageClient';
+import Loader from '@/components/Loader'
+import VerticalTimelineComponent from '@/components/timeline/vertical-timeline'
+import { useGetOneMortgage } from '@/data/hooks/useMortgageClient'
 import 'react-vertical-timeline-component/style.min.css'
 
 interface Props {
-    params: {
-        mortgageId: number
-    }
+  params: {
+    mortgageId: number
+  }
 }
 
 const Page = ({ params: { mortgageId } }: Props) => {
+  const { data, loading } = useGetOneMortgage(mortgageId)
 
-    const { data, loading } = useGetOneMortgage(mortgageId);
-
-    if (loading) {
-        return (
-            <div className='w-full min-h-screen flex items-center justify-center bg-gray-300/40'>
-                <Loader />
-            </div>
-        )
-    }
-
+  if (loading) {
     return (
-        <div className='p-4 bg-gray-300/40 dark:bg-gray-800/40 min-h-screen'>
-            <p className="text-3xl text-center mb-2">Mortgage Timeline</p>
-            {data?.history && data?.history.length > 0 && (
-                <VerticalTimelineComponent options={data?.history} />
-            )}
-        </div>
-    );
-};
+      <div className="flex min-h-screen w-full items-center justify-center bg-gray-300/40">
+        <Loader />
+      </div>
+    )
+  }
 
-export default Page;
+  return (
+    <div className="min-h-screen bg-gray-300/40 p-4 dark:bg-gray-800/40">
+      <p className="mb-2 text-center text-3xl">Mortgage Timeline</p>
+      {data?.history && data?.history.length > 0 && <VerticalTimelineComponent options={data?.history} />}
+    </div>
+  )
+}
+
+export default Page

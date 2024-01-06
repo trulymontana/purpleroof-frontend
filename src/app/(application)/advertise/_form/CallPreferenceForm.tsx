@@ -55,7 +55,7 @@ const CallPreferenceForm = ({ handleSubmit, isLoading }: Props) => {
         />
 
         <Button disabled={isLoading} type="submit" className="w-full">
-          {isLoading ? "Submitting..." : "Submit"}
+          {isLoading ? 'Submitting...' : 'Submit'}
         </Button>
         <BackButton route={PageRoutes.advertise.UPLOAD_PHOTOS} />
       </form>

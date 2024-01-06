@@ -43,13 +43,16 @@ const formSchema = z.object({
   image: z.string({
     required_error: 'Please upload a property image'
   }),
-  lat: z.number({
-    required_error: 'Please select a lat'
-  }).optional(),
-  lng: z.number({
-    required_error: 'Please select a long'
-  }).optional(),
-
+  lat: z
+    .number({
+      required_error: 'Please select a lat'
+    })
+    .optional(),
+  lng: z
+    .number({
+      required_error: 'Please select a long'
+    })
+    .optional()
 })
 
 interface Props {
@@ -109,8 +112,8 @@ const LocationDetailsForm = ({ onSave }: Props) => {
 
         <MapComponent
           onSelectLocation={({ lat, lng }) => {
-            form.setValue("lat", lat)
-            form.setValue("lng", lng)
+            form.setValue('lat', lat)
+            form.setValue('lng', lng)
           }}
         />
 

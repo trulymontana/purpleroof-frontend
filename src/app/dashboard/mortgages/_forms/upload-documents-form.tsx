@@ -35,7 +35,6 @@ interface Props {
   isLoading: boolean
 }
 const UploadDocumentsForm = ({ isLoading, handleSubmit, requiredDocuments, mortgageId }: Props) => {
-
   const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -58,14 +57,19 @@ const UploadDocumentsForm = ({ isLoading, handleSubmit, requiredDocuments, mortg
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-
-        {
-          requiredDocuments && requiredDocuments.length > 0 && requiredDocuments.map((document: any, i: number) => {
+        {requiredDocuments &&
+          requiredDocuments.length > 0 &&
+          requiredDocuments.map((document: any, i: number) => {
             return (
-              <FileUploader key={i} folder="mortgage-transaction" name={`documents[${i}].url`} label={document.name} form={form} />
+              <FileUploader
+                key={i}
+                folder="mortgage-transaction"
+                name={`documents[${i}].url`}
+                label={document.name}
+                form={form}
+              />
             )
-          })
-        }
+          })}
 
         {requiredDocuments && (
           <>
@@ -79,15 +83,21 @@ const UploadDocumentsForm = ({ isLoading, handleSubmit, requiredDocuments, mortg
                   Go Back
                 </Button>
               }
-              content={<div className='flex flex-col gap-5'>
-                <p>All progess of this page will be lost. Are you sure you want to go back?</p>
-                <BackButton variant="default" route={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(mortgageId, LocalStorageKeys.MORTGAGE_CUSTOMER_INFO)} />
-              </div>}
+              content={
+                <div className="flex flex-col gap-5">
+                  <p>All progess of this page will be lost. Are you sure you want to go back?</p>
+                  <BackButton
+                    variant="default"
+                    route={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
+                      mortgageId,
+                      LocalStorageKeys.MORTGAGE_CUSTOMER_INFO
+                    )}
+                  />
+                </div>
+              }
             />
-
           </>
         )}
-
       </form>
     </Form>
   )

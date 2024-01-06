@@ -22,7 +22,7 @@ const roleToPageMapping = {
     PageRoutes.admin.REQUIREMENTS,
     PageRoutes.dashboard.PROFILE,
     PageRoutes.dashboard.MORTGAGES,
-    PageRoutes.dashboard.PROPERTIES,
+    PageRoutes.dashboard.PROPERTIES
   ],
   [UserRoleEnum.ADMIN]: [
     PageRoutes.admin.AGENTS,
@@ -30,7 +30,7 @@ const roleToPageMapping = {
     PageRoutes.admin.REQUIREMENTS,
     PageRoutes.dashboard.PROFILE,
     PageRoutes.dashboard.MORTGAGES,
-    PageRoutes.dashboard.PROPERTIES,
+    PageRoutes.dashboard.PROPERTIES
   ],
   [UserRoleEnum.GENERAL_USER]: [
     PageRoutes.dashboard.MORTGAGES,
@@ -38,15 +38,14 @@ const roleToPageMapping = {
     PageRoutes.dashboard.PROFILE,
     PageRoutes.admin.REQUIREMENTS
   ],
-  [UserRoleEnum.AGENT]: [PageRoutes.dashboard.MORTGAGES , PageRoutes.dashboard.PROPERTIES, PageRoutes.dashboard.PROFILE]
+  [UserRoleEnum.AGENT]: [PageRoutes.dashboard.MORTGAGES, PageRoutes.dashboard.PROPERTIES, PageRoutes.dashboard.PROFILE]
 }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
-
   const pathName = usePathname()
 
   const [userData, setUserData] = useState<User | undefined>()
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     const storedValue = localStorage.getItem(LocalStorageKeys.USER)
@@ -86,7 +85,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </main>
     )
   }
-
 
   const allowedPages = roleToPageMapping[userData.role]
 

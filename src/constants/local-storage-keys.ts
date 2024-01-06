@@ -5,5 +5,4 @@ export const LocalStorageKeys = {
   MORTGAGE_DOCUMENTS: 'mortgage-documents',
   MORTGAGE_CUSTOMER_INFO: 'mortgage-customer-info',
   USER: 'USER'
-
 }

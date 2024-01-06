@@ -16,7 +16,6 @@ import { Property } from '@/constants/types'
 import UpdateMortgageStatusForm from '@/app/dashboard/mortgages/_forms/update-status-form'
 import ConfirmDialog from '../dialogs/confirm-action-dialog'
 
-
 interface Props {
   row: any
 }
@@ -74,7 +73,6 @@ const ActionButtons = ({ row }: Props) => {
           </DialogHeader>
 
           <UpdateMortgageStatusForm data={row.original} />
-
         </DialogContent>
       </Dialog>
       <Button variant={'ghost'}>

@@ -34,7 +34,6 @@ interface Props {
 }
 
 const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
-
   const router = useRouter()
 
   const storedValue = localStorage.getItem(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${mortgageId}`)
