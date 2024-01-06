@@ -14,9 +14,10 @@ import { Property } from '@/data/clients/propertiesClient'
 import currency from '@/lib/currency'
 import AssignAgentForm from '@/app/dashboard/properties/_forms/assign-agent-form'
 import { useGetAgents } from '@/data/hooks/useAgentsClient'
-import { UserRoleEnum } from '@/constants/enums'
+import { PropertySubmissionStatusEnum, UserRoleEnum } from '@/constants/enums'
 import { User } from '@/constants/types'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
+import { useGetUserRole } from '@/data/hooks/useAuthClient'
 
 export default function PropertiesTable() {
   const { loading: isLoading, data: agentsData } = useGetAgents()
@@ -24,7 +25,8 @@ export default function PropertiesTable() {
   const { mutate: deleteProperty, isPending } = useDeletePropertyMutation()
 
   const storedValue = localStorage.getItem(LocalStorageKeys.USER)
-  const user: User = storedValue !== null && JSON.parse(storedValue)
+
+  const { data: role } = useGetUserRole();
 
   const columns: ColumnDef<Property>[] = [
     {
@@ -99,7 +101,7 @@ export default function PropertiesTable() {
               <Eye size={17} color="black" />
             </Button>
           </Link>
-          {(user.role === UserRoleEnum.ADMIN || user.role === UserRoleEnum.SUPER_ADMIN) && (<ConfirmActionDialog
+          {(role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) && (<ConfirmActionDialog
             title="Edit Property"
             anchor={
               <Button variant="ghost">
@@ -108,25 +110,27 @@ export default function PropertiesTable() {
             }
             content={<UpdatePropertyForm data={row.original} />}
           />)}
-          {(user.role === UserRoleEnum.ADMIN || user.role === UserRoleEnum.SUPER_ADMIN) && (<ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />)}
+          {(role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) && (<ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />)}
         </div>
       )
     }
   ]
 
-
-
-  if (user.role !== UserRoleEnum.AGENT) {
+  if (role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) {
     columns.push({
       id: 'action',
       header: 'Action',
       cell: ({ row }) => (
         <>
-          <ConfirmActionDialog
-            title="Assign Agent"
-            anchor={<Button>Assign Agent</Button>}
-            content={<AssignAgentForm isLoading={isLoading} agentsData={agentsData} data={row.original} />}
-          />
+          {
+            row.original.submissionStatus === PropertySubmissionStatusEnum.APPROVED && (
+              <ConfirmActionDialog
+                title="Assign Agent"
+                anchor={<Button>Assign Agent</Button>}
+                content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
+              />
+            )
+          }
         </>
       )
     },)

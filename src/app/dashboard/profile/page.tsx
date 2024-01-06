@@ -31,7 +31,7 @@ import { Separator } from '@/components/ui/separator'
 import { useCreateAgentMutation } from '@/data/hooks/useAgentsClient'
 import { getValuesFrom } from '@/lib/utils'
 import { useGetLocations } from '@/data/hooks/useLocationsClient'
-import { UserRoleEnum } from '@/constants/enums'
+import { EmirateEnum, UserRoleEnum } from '@/constants/enums'
 import { useGetAgentApplications } from '@/data/hooks/useUsersClient'
 import { Locate, Phone } from 'lucide-react'
 import { useGetUserDetails, useGetUserRole } from '@/data/hooks/useAuthClient'
@@ -56,7 +56,6 @@ const formSchema = z.object({
 const Page = () => {
   const [locations, setLocations] = useState<TOption[]>([])
 
-  const { data: locationsData } = useGetLocations()
   const { data: userDetails, loading } = useGetUserDetails();
   const { mutate: createAgent, isPending: isLoading } = useCreateAgentMutation()
   const { data: agentApplicationDetails } = useGetAgentApplications()
@@ -76,22 +75,15 @@ const Page = () => {
 
   const emirates: TOption[] = form.watch('emirates')
 
-  let emirateValues: string[]
+  let emirateValues: any
 
   emirates?.length > 0 && (emirateValues = getValuesFrom(emirates))
 
-  const filterLocations = (emirateValues: string[]) => {
-    if (locationsData && locationsData?.length > 0 && emirateValues?.length > 0) {
-      const filteredLocations = locationsData
-        ?.filter((item) => emirateValues?.includes(item.emirate))
-        .map((data) => ({ label: data.name, value: data.id.toString() }))
-      setLocations(filteredLocations)
-    }
-  }
+  const { data: locationOptions } = useGetLocations(emirateValues);
 
-  useEffect(() => {
-    filterLocations(emirateValues)
-  }, [emirates])
+  // useEffect(() => {
+  //   filterLocations(emirateValues)
+  // }, [emirates])
 
 
 
@@ -139,11 +131,6 @@ const Page = () => {
               <Label htmlFor="role">Role</Label>
               <Input disabled id="role" value={role.toLocaleLowerCase()} />
             </div>
-            {/* <div>
-                            <Link className="text-primary hover:underline" href={PageRoutes.FORGOT_PASSWORD}>
-                                Forgot Password?
-                            </Link>
-                        </div> */}
             <div className="mt-6 flex items-center justify-between">
               {role === UserRoleEnum.GENERAL_USER && !agentApplicationDetails && (
                 <Dialog>
@@ -177,7 +164,7 @@ const Page = () => {
                               ? 'Please select atleast one emirate'
                               : 'Please select locations'
                           }
-                          options={locations!}
+                          options={locationOptions || [{ label: "Dubai", value: "1" }]}
                         />
                         <Separator />
                         <Button disabled={isLoading} type="submit" className="w-full">

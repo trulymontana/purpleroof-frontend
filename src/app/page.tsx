@@ -21,7 +21,7 @@ export default function Home() {
           <h1 className="mb-10 text-5xl font-bold text-white">Place a FREE Advertisement to Sell or Rent Your Property</h1>
           <div className='flex items-center gap-10 justify-center'>
             <Link href={PageRoutes.mortgage.PERSONAL_DETAILS}>
-              <Button size="lg">Apply for a Mortgage</Button>
+              <Button className='' size="lg">Apply for a Mortgage</Button>
             </Link>
             <Link href={PageRoutes.advertise.BASIC_DETAILS}>
               <Button size="lg">Advertise your Property</Button>

@@ -50,7 +50,7 @@ export const useCreatePropertyMutation = () => {
       localStorage.removeItem(PageRoutes.advertise.PROPERTY_DETAILS)
       localStorage.removeItem(PageRoutes.advertise.UPLOAD_PHOTOS)
       queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
-      router.push(`${PageRoutes.advertise.APPLICATION_COMPLETED}`)
+      router.push(`${PageRoutes.advertise.APPLICATION_COMPLETED}?email=${data.property.email}`)
     },
     onError: (error: any) => {
       toast({

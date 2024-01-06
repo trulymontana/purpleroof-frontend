@@ -51,7 +51,7 @@ const ProjectStatusForm = ({ onSave }: Props) => {
 
   function onSubmit(values: TProjectStatus) {
     onSave(PageRoutes.advertise.PROJECT_STATUS, values)
-    router.push(PageRoutes.advertise.UPLOAD_PHOTOS)
+    router.push(PageRoutes.advertise.CALL_PREFERENCE)
   }
 
   const projectStatus = form.watch('projectStatus')

@@ -21,7 +21,7 @@ const formSchema = z.object({
 
 type TPropertyStatus = z.infer<typeof formSchema>
 const UpdatePropertyForm = ({ data }: Props) => {
-  const { mutate: updateProperty } = useUpdatePropertyMutation()
+  const { mutate: updateProperty, isPending: isLoading } = useUpdatePropertyMutation()
 
   const form = useForm<TPropertyStatus>({
     resolver: zodResolver(formSchema),
@@ -46,7 +46,7 @@ const UpdatePropertyForm = ({ data }: Props) => {
           label="Status"
           options={propertySubmissionStatuses}
         />
-        <Button type="submit">Save changes</Button>
+        <Button disabled={isLoading} type="submit">{isLoading ? "Saving..." : "Save changes"}</Button>
       </form>
     </Form>
   )

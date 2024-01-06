@@ -48,8 +48,14 @@ const Page = () => {
   })
 
   useEffect(() => {
-    if (email && firstName && lastName) {
-      form.setValue('email', email), form.setValue('firstName', firstName), form.setValue('lastName', lastName)
+    if (email) {
+      form.setValue('email', email)
+    }
+    if (firstName) {
+      form.setValue('firstName', firstName)
+    }
+    if (lastName) {
+      form.setValue('lastName', lastName)
     }
   }, [])
 

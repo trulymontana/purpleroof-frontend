@@ -13,8 +13,12 @@ import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
 import { useEffect, useState } from 'react'
 import { DocumentTypeEnum } from '@/constants/enums'
+import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
 
 const formSchema = z.object({
+  image: z.string({
+    required_error: 'Please upload a property image'
+  }),
   documents: z.array(
     z.object({
       type: z.string({
@@ -28,9 +32,11 @@ const formSchema = z.object({
 })
 
 interface Props {
-  onSave: (step: string, values: any) => void
+  handleSubmit: (values: any) => void
+  isLoading: boolean
 }
-const UploadDocumentsForm = ({ onSave }: Props) => {
+
+const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
   const router = useRouter()
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.UPLOAD_PHOTOS)
@@ -44,34 +50,42 @@ const UploadDocumentsForm = ({ onSave }: Props) => {
 
   useEffect(() => {
     // @ts-ignore
-    form.setValue('documents', [
-      { type: DocumentTypeEnum.PASSPORT_COPY },
-      { type: DocumentTypeEnum.VISA_COPY },
-      { type: DocumentTypeEnum.EMIRATES_ID },
-      { type: DocumentTypeEnum.TITLE_DEED_COPY },
-      { type: DocumentTypeEnum.OWNERSHIP_PROOF_MOBILE_NUMBER }
+    form.setValue('documents', [{ type: DocumentTypeEnum.PASSPORT_COPY }, { type: DocumentTypeEnum.VISA_COPY }, { type: DocumentTypeEnum.EMIRATES_ID }, { type: DocumentTypeEnum.TITLE_DEED_COPY }, { type: DocumentTypeEnum.OWNERSHIP_PROOF_MOBILE_NUMBER }
     ])
   }, [])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    onSave(PageRoutes.advertise.UPLOAD_PHOTOS, values)
-    router.push(PageRoutes.advertise.CALL_PREFERENCE)
+    handleSubmit(values)
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
+        <FileUploader folder="advertise" name="image" label={'Upload Photo of the Property'} form={form} />
         <FileUploader folder="advertise" name="documents[0].url" label={'Passport Copy'} form={form} />
         <FileUploader folder="advertise" name="documents[1].url" label={'Visa Copy'} form={form} />
         <FileUploader folder="advertise" name="documents[2].url" label={'Emirates ID'} form={form} />
         <FileUploader folder="advertise" name="documents[3].url" label={'Title Deed Copy'} form={form} />
         <FileUploader folder="advertise" name="documents[4].url" label={'Owners Proof of Mobile Number'} form={form} />
 
-        <Button type="submit" className="w-full">
-          Save and Continue
+        <Button disabled={isLoading} type="submit" className="w-full">
+          {isLoading ? 'Submitting...' : 'Submit'}
         </Button>
 
-        <BackButton route={PageRoutes.advertise.PROJECT_STATUS} />
+        <ConfirmActionDialog
+          title="Are you sure?"
+          anchor={
+            <Button variant="outline" className="w-full">
+              Go Back
+            </Button>
+          }
+          content={
+            <div className="flex flex-col gap-5">
+              <p>All progess of this page will be lost. Are you sure you want to go back?</p>
+              <BackButton route={PageRoutes.advertise.CALL_PREFERENCE} />
+            </div>
+          }
+        />
       </form>
     </Form>
   )

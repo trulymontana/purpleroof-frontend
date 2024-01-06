@@ -116,7 +116,8 @@ export function useGetUserDetails() {
 export function useGetUserRole() {
   const { isLoading, data } = useQuery({
     queryKey: [ApiEndpoints.USER_ROLE],
-    queryFn: () => authClient.getUserRole()
+    queryFn: () => authClient.getUserRole(),
+    refetchInterval: 300000
   })
 
   return { data: data?.data.role ?? {}, loading: isLoading }

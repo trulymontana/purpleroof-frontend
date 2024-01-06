@@ -11,5 +11,11 @@ export function useGetLocations(selectedEmirates?: EmirateEnum[]) {
 
   const filteredData = data?.data.filter((location) => selectedEmirates?.includes(location.emirate))
 
-  return { data: filteredData, loading: isLoading }
+  const locationsData =
+    filteredData &&
+    filteredData.map((location) => {
+      return { label: location.name, value: location.id.toString() }
+    })
+
+  return { data: locationsData, loading: isLoading }
 }

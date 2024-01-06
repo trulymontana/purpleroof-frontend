@@ -40,7 +40,6 @@ const Page = () => {
     const locationDetails = localStorage.getItem(PageRoutes.advertise.LOCATION_DETAILS)
     const amenitiesDetails = localStorage.getItem(PageRoutes.advertise.AMENITIES_DETAILS)
     const projectStatus = localStorage.getItem(PageRoutes.advertise.PROJECT_STATUS)
-    const documentDetails = localStorage.getItem(PageRoutes.advertise.UPLOAD_PHOTOS)
     const callPreferenceDetails = localStorage.getItem(PageRoutes.advertise.CALL_PREFERENCE)
 
     let result: any = {}
@@ -50,10 +49,11 @@ const Page = () => {
     nullCheckAndMerge(result, locationDetails)
     nullCheckAndMerge(result, amenitiesDetails)
     nullCheckAndMerge(result, projectStatus)
-    nullCheckAndMerge(result, documentDetails)
     nullCheckAndMerge(result, callPreferenceDetails)
 
     let property: CreatePropertyInput = Object.assign({}, result, values)
+
+    property.locationId = Number(property.locationId)
 
     if (property.amenities && property.amenities.length > 0) {
       let amenities_values: number[] = property.amenities.map((amenity: any) => amenity.value)
@@ -78,8 +78,8 @@ const Page = () => {
     [PageRoutes.advertise.LOCATION_DETAILS]: <LocationDetailsForm onSave={storeValues} />,
     [PageRoutes.advertise.AMENITIES_DETAILS]: <AmenitiesForm onSave={storeValues} />,
     [PageRoutes.advertise.PROJECT_STATUS]: <ProjectStatusForm onSave={storeValues} />,
-    [PageRoutes.advertise.UPLOAD_PHOTOS]: <UploadDocumentsForm onSave={storeValues} />,
-    [PageRoutes.advertise.CALL_PREFERENCE]: <CallPreferenceForm handleSubmit={handleSubmit} isLoading={isLoading} />,
+    [PageRoutes.advertise.CALL_PREFERENCE]: <CallPreferenceForm onSave={storeValues} />,
+    [PageRoutes.advertise.UPLOAD_PHOTOS]: <UploadDocumentsForm handleSubmit={handleSubmit} isLoading={isLoading} />,
     [PageRoutes.advertise.APPLICATION_COMPLETED]: <ApplicationCompletedForm />
   }
 
