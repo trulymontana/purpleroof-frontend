@@ -5,10 +5,7 @@ import { CardTitle, CardDescription, CardHeader, CardContent, Card } from '@/com
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { LocalStorageKeys } from '@/constants/local-storage-keys'
-import { TOption, User } from '@/constants/types'
-import Link from 'next/link'
-import { PageRoutes } from '@/constants/page-routes'
+import { TOption } from '@/constants/types'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -26,15 +23,15 @@ import PhoneNumberInputElement from '@/components/forms/elements/phone-number-in
 import FileUploader from '@/components/forms/elements/file-uploader'
 import MultiSelectElement from '@/components/forms/elements/multiselect-element'
 import { emirateOptions } from '@/constants/advertise'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Separator } from '@/components/ui/separator'
 import { useCreateAgentMutation } from '@/data/hooks/useAgentsClient'
 import { getValuesFrom } from '@/lib/utils'
 import { useGetLocations } from '@/data/hooks/useLocationsClient'
-import { EmirateEnum, UserRoleEnum } from '@/constants/enums'
+import { UserRoleEnum } from '@/constants/enums'
 import { useGetAgentApplications } from '@/data/hooks/useUsersClient'
+import { useGetUserDetails } from '@/data/hooks/useAuthClient'
 import { Locate, Phone } from 'lucide-react'
-import { useGetUserDetails, useGetUserRole } from '@/data/hooks/useAuthClient'
 import Loader from '@/components/Loader'
 
 const formSchema = z.object({
@@ -54,8 +51,6 @@ const formSchema = z.object({
 })
 
 const Page = () => {
-  const [locations, setLocations] = useState<TOption[]>([])
-
   const { data: userDetails, loading } = useGetUserDetails()
   const { mutate: createAgent, isPending: isLoading } = useCreateAgentMutation()
   const { data: agentApplicationDetails } = useGetAgentApplications()

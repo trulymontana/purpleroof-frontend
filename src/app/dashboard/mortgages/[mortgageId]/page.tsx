@@ -19,10 +19,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useCreateCommentMutation, useGetCommentsByMortgage } from '@/data/hooks/useCommentsClient'
-import CustomInputElement from '@/components/forms/elements/custom-input-element'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import FileUploader from '@/components/forms/elements/file-uploader'
-import InputElement from '@/components/forms/elements/input-element'
 import { useGetUserDetails } from '@/data/hooks/useAuthClient'
 import TextAreaElement from '@/components/forms/elements/text-area-element'
 
@@ -39,12 +37,10 @@ interface Props {
 }
 const Page = ({ params: { mortgageId } }: Props) => {
   const { loading, data } = useGetOneMortgage(mortgageId)
-  const { mutate: sendComment, isPending: isLoading } = useCreateCommentMutation(mortgageId)
+  const { mutate: sendComment, isPending: isLoading } = useCreateCommentMutation()
   const { data: userDetails } = useGetUserDetails()
 
   const { data: comments } = useGetCommentsByMortgage(Number(mortgageId))
-
-  console.log({ comments })
 
   const [chatOpen, setChatOpen] = useState(false)
 
@@ -357,11 +353,13 @@ const Page = ({ params: { mortgageId } }: Props) => {
                     {/* <div className="h-5 w-5">
                       <Paperclip size={20} className="h-5 w-5" />
                     </div> */}
+
                     <div className="flex w-full items-center space-x-2">
                       <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                          <FileUploader form={form} folder="mortgage" name="attachments" label="Attachments" />
                           <div className="flex w-full flex-col items-center gap-2">
-                            <TextAreaElement name="title" label="Message" placeholder="Type here..." />
+                            <TextAreaElement name="title" label="" placeholder="Type here..." />
                             <Button disabled={isLoading} type="submit" className="w-full ">
                               {isLoading ? (
                                 'Sending...'

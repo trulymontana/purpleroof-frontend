@@ -17,7 +17,7 @@ interface FileUploaderProps {
 const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }) => {
   const { control } = useFormContext()
 
-  const ref = useRef()
+  const ref = useRef(null)
 
   const [file, setFile] = useState<File | undefined>(undefined)
   const [fileUrl, setFileUrl] = useState<string>('')
@@ -38,7 +38,6 @@ const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }
   const handleFileDelete = async () => {
     if (fileUrl && file) {
       const response = await deleteFile(file)
-      console.log(response)
       setFile(undefined)
       setFileUrl('')
       form.setValue(name, '')
@@ -52,11 +51,11 @@ const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className="cursor-pointer">
           <FormLabel>{label}</FormLabel>
           <div className="flex cursor-pointer items-center gap-2">
             <FormControl>
-              <Input id="file-upload" type="file" onChange={handleFileUpload} />
+              <Input ref={ref} id="file-upload" type="file" onChange={handleFileUpload} className="cursor-pointer" />
             </FormControl>
             {isLoading && (
               <div className="flex items-center justify-center">
@@ -65,7 +64,12 @@ const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }
             )}
             {!isLoading && (
               <span className="cursor-pointer">
-                {fileUrl ? <XSquare onClick={handleFileDelete} /> : <FolderClosed />}
+                {fileUrl ? (
+                  <XSquare onClick={handleFileDelete} />
+                ) : (
+                  //@ts-ignore
+                  <FolderClosed onClick={() => ref?.current?.click()} />
+                )}
               </span>
             )}
           </div>

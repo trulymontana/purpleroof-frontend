@@ -17,20 +17,24 @@ export default function Home() {
         ></div>
         <div className="absolute inset-0 bg-black opacity-50" />
         <div className="relative flex min-h-screen flex-col items-center justify-center gap-4 text-center">
-          <h1 className="mb-10 text-5xl font-bold text-white">
+          <h1 className="-leading-10 mb-10 rounded-xl bg-purple-300/25 p-20 text-5xl font-bold text-white md:mx-40">
             Place a FREE Advertisement to Sell or Rent Your Property
           </h1>
           <div className="flex items-center justify-center gap-10">
             <Link href={PageRoutes.mortgage.PERSONAL_DETAILS}>
-              <Button className="" size="lg">
+              <Button className="p-8 text-lg" size="lg">
                 Apply for a Mortgage
               </Button>
             </Link>
             <Link href={PageRoutes.advertise.BASIC_DETAILS}>
-              <Button size="lg">Advertise your Property</Button>
+              <Button className="p-8 text-lg" size="lg">
+                Advertise your Property
+              </Button>
             </Link>
             <Link href={PageRoutes.SEARCH}>
-              <Button size="lg">Search a Property</Button>
+              <Button className="p-8 text-lg" size="lg">
+                Search a Property
+              </Button>
             </Link>
           </div>
         </div>

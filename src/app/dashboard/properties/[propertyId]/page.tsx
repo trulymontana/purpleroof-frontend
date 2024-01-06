@@ -7,7 +7,6 @@ import RequiredDocumentsCards from '@/components/cards/required-documents'
 import PropertyDetailsCard from '@/components/cards/property-details'
 import ContactAgentCard from '@/components/cards/contact-agent'
 import AmenitiesCard from '@/components/cards/amenities'
-import { useEffect, useState } from 'react'
 
 interface Props {
   params: { propertyId: number }
