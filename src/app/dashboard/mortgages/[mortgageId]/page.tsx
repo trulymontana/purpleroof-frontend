@@ -15,6 +15,19 @@ import { Input } from '@/components/ui/input'
 import { useState } from 'react'
 import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
 import UpdateMortgageStatusForm from '../_forms/update-status-form'
+import { Form } from '@/components/ui/form'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+import { useCreateCommentMutation } from '@/data/hooks/useCommentsClient'
+import CustomInputElement from '@/components/forms/elements/custom-input-element'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+
+const formSchema = z.object({
+  title: z.string({
+    required_error: 'Please enter a message'
+  }),
+})
 
 interface Props {
   params: {
@@ -22,9 +35,25 @@ interface Props {
   }
 }
 const Page = ({ params: { mortgageId } }: Props) => {
+
   const { loading, data } = useGetOneMortgage(mortgageId)
+  const { mutate: sendComment } = useCreateCommentMutation()
 
   const [chatOpen, setChatOpen] = useState(false)
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema)
+  })
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log({ values })
+    sendComment({
+      mortgageId: Number(mortgageId),
+      message: "test 2",
+      attachments: ["urlfdsa"],
+      ...values
+    })
+  }
 
   if (loading) {
     return (
@@ -272,7 +301,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
           <PopoverContent className="mt-2 w-64 rounded-lg bg-white">
             <Card className="border-none">
               <CardContent>
-                <div className="fixed bottom-0 right-0 h-[505px] w-[350px] overflow-hidden rounded-t-lg bg-white shadow-lg">
+                <div className="fixed bottom-0 right-0  w-[350px] overflow-hidden rounded-t-lg bg-white shadow-lg">
                   <div className="flex items-center justify-between bg-gray-100 p-3">
                     <div className="flex items-center space-x-2">
                       <MessageCircleIcon size={20} />
@@ -280,16 +309,60 @@ const Page = ({ params: { mortgageId } }: Props) => {
                     </div>
                     <X onClick={() => setChatOpen(!chatOpen)} className="h-6 w-6 cursor-pointer" />
                   </div>
-                  <div className="h-[400px] overflow-y-auto p-3" />
-                  <div className="flex items-center justify-between gap-2 border-t px-2 py-2">
+                  <div className="h-[400px] overflow-y-scroll p-3 flex flex-col gap-4">
+                    {
+                      data && data?.comments?.map((comment, i) => {
+                        return (
+                          <div className='flex flex-col gap-2' key={i}>
+                            <div className="flex flex-col gap-4">
+                              <div className="flex items-end">
+                                <div className="flex-none w-10 h-10">
+                                  <Avatar className="h-full w-full">
+                                    <AvatarImage alt="User" src="/placeholder-avatar.jpg" />
+                                    <AvatarFallback>U</AvatarFallback>
+                                  </Avatar>
+                                </div>
+                                <div className="flex-1 ml-2">
+                                  <div className="p-3 bg-blue-100 text-black dark:bg-blue-900 dark:text-white rounded-r-lg">
+                                    {comment.title}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex items-end justify-end">
+                                <div className="flex-1 mr-2">
+                                  <div className="p-3 bg-gray-200 text-black dark:bg-gray-800 dark:text-white rounded-l-lg">
+                                    Sure, I&apos;d be happy to help! What seems to be the problem?
+                                  </div>
+                                </div>
+                                <div className="flex-none w-10 h-10">
+                                  <Avatar className="h-full w-full">
+                                    <AvatarImage alt="Admin" src="/placeholder-avatar.jpg" />
+                                    <AvatarFallback>A</AvatarFallback>
+                                  </Avatar>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                  <div className="flex items-center justify-between gap-2 border-t px-2 py-2 w-full">
                     <div className="h-5 w-5">
                       <Paperclip size={20} className="h-5 w-5" />
                     </div>
-                    <div className="flex flex-grow items-center space-x-2">
-                      <Input className="flex-grow" placeholder="Type a message" />
-                    </div>
-                    <div className="h-5 w-5">
-                      <Send className="h-5 w-5" />
+                    <div className="flex w-full items-center space-x-2">
+                      <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                          <div className='flex items-center gap-10 justify-between w-full'>
+                            <CustomInputElement name='title' type='string' className='flex-1' placeholder='Please enter a message' />
+                            <Button type="submit" className="w-fit">
+                              <Send className="h-5 w-5" />
+                            </Button>
+                          </div>
+
+                        </form>
+                      </Form>
                     </div>
                   </div>
                 </div>

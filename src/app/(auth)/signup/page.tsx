@@ -93,7 +93,7 @@ const Page = () => {
               </Button>
               <p className="mt-4 text-center">
                 Already have an account?{' '}
-                <Link className="text-primary underline" href={`${PageRoutes.SIGNIN}?email=${email}`}>
+                <Link className="text-primary underline" href={`${PageRoutes.SIGNIN}?email=${email ? email : ""}`}>
                   Sign in here
                 </Link>
               </p>

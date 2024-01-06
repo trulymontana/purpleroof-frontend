@@ -5,13 +5,14 @@ import { useFormContext } from 'react-hook-form'
 
 interface Props {
   name: string
-  label: string
+  label?: string
   description?: string
   placeholder?: string
-  type: string
+  type: "string" | "number"
+  className?: string
 }
 
-const CustomInputElement = ({ name, label, description, placeholder, type }: Props) => {
+const CustomInputElement = ({ name, label, description, placeholder, type, className }: Props) => {
   const { control } = useFormContext()
 
   return (
@@ -20,9 +21,9 @@ const CustomInputElement = ({ name, label, description, placeholder, type }: Pro
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
-            <Input type={type} placeholder={placeholder} {...field} />
+            <Input type={type} placeholder={placeholder} className={className} {...field} />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />

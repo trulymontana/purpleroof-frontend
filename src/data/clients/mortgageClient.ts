@@ -33,6 +33,7 @@ export interface Mortgage extends CreateMortgageInput {
   actions: string
   requirement: any // replace any with correct type
   history: historyType[]
+  comments: { title: string; message: string }[]
 }
 
 export const mortgageClient = {

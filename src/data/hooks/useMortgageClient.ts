@@ -40,12 +40,6 @@ export const useCreateMortgageMutation = () => {
       router.push(
         `${PageRoutes.mortgage.COMPLETE_APPLICATION}?email=${data.data.email}&firstName=${data.data.firstName}&lastName=${data.data.lastName}`
       )
-    },
-    onError: (error: any) => {
-      toast({
-        variant: 'destructive',
-        title: error.message
-      })
     }
   })
 }
