@@ -4,17 +4,33 @@ import { useGetOneMortgage } from '@/data/hooks/useMortgageClient'
 import Loader from '@/components/Loader'
 import { Button } from '@/components/ui/button'
 import { CardHeader, CardContent, Card, CardFooter } from '@/components/ui/card'
-import { DownloadIcon, FileEdit, MessageCircle, MessageCircleIcon, Paperclip, Send, X } from 'lucide-react'
+import { DownloadIcon, MessageCircle, MessageCircleIcon, Paperclip, Send, X } from 'lucide-react'
 import { MortgageStatusEnum } from '@/constants/enums'
 import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import currency from '@/lib/currency'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Input } from '@/components/ui/input'
 import { useState } from 'react'
 import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
 import UpdateMortgageStatusForm from '../_forms/update-status-form'
+import { Form } from '@/components/ui/form'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+import { useCreateCommentMutation, useGetCommentsByMortgage } from '@/data/hooks/useCommentsClient'
+import CustomInputElement from '@/components/forms/elements/custom-input-element'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import FileUploader from '@/components/forms/elements/file-uploader'
+import InputElement from '@/components/forms/elements/input-element'
+import { useGetUserDetails } from '@/data/hooks/useAuthClient'
+import TextAreaElement from '@/components/forms/elements/text-area-element'
+
+const formSchema = z.object({
+  title: z.string({
+    required_error: 'Please enter a message'
+  }),
+})
 
 interface Props {
   params: {
@@ -22,9 +38,29 @@ interface Props {
   }
 }
 const Page = ({ params: { mortgageId } }: Props) => {
+
   const { loading, data } = useGetOneMortgage(mortgageId)
+  const { mutate: sendComment, isPending: isLoading } = useCreateCommentMutation(mortgageId)
+  const { data: userDetails } = useGetUserDetails();
+
+  const { data: comments } = useGetCommentsByMortgage(Number(mortgageId))
+
+  console.log({ comments })
 
   const [chatOpen, setChatOpen] = useState(false)
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema)
+  })
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    sendComment({
+      mortgageId: Number(mortgageId),
+      attachments: [],
+      message: "test",
+      ...values
+    })
+  }
 
   if (loading) {
     return (
@@ -269,10 +305,10 @@ const Page = ({ params: { mortgageId } }: Props) => {
               <MessageCircle size={25} className="text-white" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="mt-2 w-64 rounded-lg bg-white">
+          <PopoverContent className="mt-2 w-[400px] rounded-lg bg-white">
             <Card className="border-none">
               <CardContent>
-                <div className="fixed bottom-0 right-0 h-[505px] w-[350px] overflow-hidden rounded-t-lg bg-white shadow-lg">
+                <div className="fixed bottom-0 right-0  w-[400px] overflow-hidden rounded-t-lg bg-white shadow-lg">
                   <div className="flex items-center justify-between bg-gray-100 p-3">
                     <div className="flex items-center space-x-2">
                       <MessageCircleIcon size={20} />
@@ -280,16 +316,64 @@ const Page = ({ params: { mortgageId } }: Props) => {
                     </div>
                     <X onClick={() => setChatOpen(!chatOpen)} className="h-6 w-6 cursor-pointer" />
                   </div>
-                  <div className="h-[400px] overflow-y-auto p-3" />
-                  <div className="flex items-center justify-between gap-2 border-t px-2 py-2">
-                    <div className="h-5 w-5">
+                  <div className="h-[400px] overflow-y-scroll p-3 flex flex-col gap-4">
+                    {
+                      comments && comments?.map((comment, i) => {
+                        return (
+                          <div className='flex flex-col gap-4' key={i}>
+                            {comment.userId === userDetails.id ? (
+                              <div className="flex items-end">
+                                <div className="flex-none w-10 h-10">
+                                  <Avatar className="h-full w-full">
+                                    <AvatarImage alt="User" src="/placeholder-avatar.jpg" />
+                                    <AvatarFallback>U</AvatarFallback>
+                                  </Avatar>
+                                </div>
+                                <div className="flex-1 ml-2">
+                                  <div className="p-3 bg-blue-100 text-black dark:bg-blue-900 dark:text-white rounded-r-lg">
+                                    {comment.title}
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="flex items-end justify-end">
+                                <div className="flex-1 mr-2">
+                                  <div className="p-3 bg-gray-200 text-black dark:bg-gray-800 dark:text-white rounded-l-lg">
+                                    {comment.title}
+                                  </div>
+                                </div>
+                                <div className="flex-none w-10 h-10">
+                                  <Avatar className="h-full w-full">
+                                    <AvatarImage alt="Admin" src="/placeholder-avatar.jpg" />
+                                    <AvatarFallback>A</AvatarFallback>
+                                  </Avatar>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                  <div className="gap-2 border-t px-2 py-2 w-fit">
+                    {/* <div className="h-5 w-5">
                       <Paperclip size={20} className="h-5 w-5" />
-                    </div>
-                    <div className="flex flex-grow items-center space-x-2">
-                      <Input className="flex-grow" placeholder="Type a message" />
-                    </div>
-                    <div className="h-5 w-5">
-                      <Send className="h-5 w-5" />
+                    </div> */}
+                    <div className="flex w-full items-center space-x-2">
+                      <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                          <div className='flex flex-col items-center gap-2 w-full'>
+                            <TextAreaElement name='title' label='Message' placeholder='Type here...' />
+                            <Button disabled={isLoading} type="submit" className="w-full ">
+                              {isLoading ? "Sending..." : (
+                                <span className='flex items-center gap-2'>
+                                  Send < Send className="h-5 w-5" />
+                                </span>
+                              )}
+                            </Button>
+                          </div>
+                        </form>
+                      </Form>
                     </div>
                   </div>
                 </div>
@@ -297,7 +381,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
             </Card>
           </PopoverContent>
         </Popover>
-      </div>
+      </div >
     </>
   )
 }

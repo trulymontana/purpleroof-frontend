@@ -13,5 +13,7 @@ export const ApiEndpoints = {
   AGENTS: API_ROOT + '/agents',
   AGENT_APPLICATION: API_ROOT + '/agents/get-by-user-id',
   LOCATIONS: API_ROOT + '/locations',
-  USER_ROLE: API_ROOT + '/auth/user',
+  USER: API_ROOT + '/auth/user',
+  COMMENTS: API_ROOT + '/comments',
+  COMMENTS_BY_MORTGAGE: API_ROOT + '/comments/all-by-mortgage'
 }

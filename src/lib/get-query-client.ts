@@ -6,12 +6,14 @@ const getQueryClient = cache(
   () =>
     new QueryClient({
       queryCache: new QueryCache({
-        onError: (error: any) =>
+        onError: (error: any) => {
           toast({
             variant: 'destructive',
             title: error.response.data.message,
             description: error.response.data.details
           })
+          console.log({ error })
+        }
       })
     })
 )

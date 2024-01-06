@@ -34,7 +34,7 @@ const Page = () => {
   })
 
   useEffect(() => {
-    if (email) {
+    if (email !== null && email !== undefined) {
       form.setValue('email', email)
     }
   }, [])
