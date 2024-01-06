@@ -34,6 +34,8 @@ import { useGetLocations } from '@/data/hooks/useLocationsClient'
 import { UserRoleEnum } from '@/constants/enums'
 import { useGetAgentApplications } from '@/data/hooks/useUsersClient'
 import { Locate, Phone } from 'lucide-react'
+import { useGetUserDetails, useGetUserRole } from '@/data/hooks/useAuthClient'
+import Loader from '@/components/Loader'
 
 const formSchema = z.object({
   agency: z.string().optional(),
@@ -54,9 +56,8 @@ const formSchema = z.object({
 const Page = () => {
   const [locations, setLocations] = useState<TOption[]>([])
 
-  const storedValue = localStorage.getItem(LocalStorageKeys.USER)
-
   const { data: locationsData } = useGetLocations()
+  const { data: userDetails, loading } = useGetUserDetails();
   const { mutate: createAgent, isPending: isLoading } = useCreateAgentMutation()
   const { data: agentApplicationDetails } = useGetAgentApplications()
 
@@ -79,8 +80,6 @@ const Page = () => {
 
   emirates?.length > 0 && (emirateValues = getValuesFrom(emirates))
 
-  const user: User = storedValue !== null && JSON.parse(storedValue)
-
   const filterLocations = (emirateValues: string[]) => {
     if (locationsData && locationsData?.length > 0 && emirateValues?.length > 0) {
       const filteredLocations = locationsData
@@ -94,15 +93,27 @@ const Page = () => {
     filterLocations(emirateValues)
   }, [emirates])
 
+
+
+  if (loading) {
+    return (
+      <div className='flex items-center justify-center min-h-screen'>
+        <Loader />
+      </div>
+    )
+  }
+
+  const { firstName, lastName, role, email } = userDetails;
+
   return (
     <div className="w-full space-y-8 px-6 py-10">
       <div className="flex items-center gap-4">
         <Avatar className="h-20 w-20">
           <AvatarImage alt="User Avatar" src="/placeholder-avatar.jpg" />
-          <AvatarFallback>{user?.firstName?.charAt(0) + user.lastName.charAt(0)}</AvatarFallback>
+          <AvatarFallback>{firstName?.charAt(0) + lastName.charAt(0)}</AvatarFallback>
         </Avatar>
         <div className="grid gap-1 text-lg">
-          <div className="text-2xl font-bold">{user.firstName + ' ' + user.lastName}</div>
+          <div className="text-2xl font-bold">{firstName + ' ' + lastName}</div>
         </div>
       </div>
       <div className="space-y-4">
@@ -114,19 +125,19 @@ const Page = () => {
           <CardContent className="space-y-4">
             <div className="space-x-2">
               <Label htmlFor="username">First Name</Label>
-              <Input disabled id="username" value={user.firstName} />
+              <Input disabled id="username" value={firstName} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="username">Last Name</Label>
-              <Input disabled id="username" value={user.lastName} />
+              <Input disabled id="username" value={lastName} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input disabled id="email" value={user?.email} />
+              <Input disabled id="email" value={email} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="role">Role</Label>
-              <Input disabled id="role" value={user?.role.toLocaleLowerCase()} />
+              <Input disabled id="role" value={role.toLocaleLowerCase()} />
             </div>
             {/* <div>
                             <Link className="text-primary hover:underline" href={PageRoutes.FORGOT_PASSWORD}>
@@ -134,7 +145,7 @@ const Page = () => {
                             </Link>
                         </div> */}
             <div className="mt-6 flex items-center justify-between">
-              {user?.role === UserRoleEnum.GENERAL_USER && (
+              {role === UserRoleEnum.GENERAL_USER && !agentApplicationDetails && (
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button variant={'outline'}>Apply as Agent</Button>
@@ -181,7 +192,7 @@ const Page = () => {
           </CardContent>
         </Card>
 
-        <Card className="w-1/4 rounded-xl bg-white shadow-md">
+        {agentApplicationDetails && <Card className="w-1/4 rounded-xl bg-white shadow-md">
           <CardHeader>
             <CardTitle className="text-primary">Agent Details</CardTitle>
             <CardDescription>Overview of agent information.</CardDescription>
@@ -223,7 +234,7 @@ const Page = () => {
               </Dialog>
             </div>
           </CardContent>
-        </Card>
+        </Card>}
       </div>
     </div>
   )

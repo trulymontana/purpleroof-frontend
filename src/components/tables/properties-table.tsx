@@ -14,11 +14,17 @@ import { Property } from '@/data/clients/propertiesClient'
 import currency from '@/lib/currency'
 import AssignAgentForm from '@/app/dashboard/properties/_forms/assign-agent-form'
 import { useGetAgents } from '@/data/hooks/useAgentsClient'
+import { UserRoleEnum } from '@/constants/enums'
+import { User } from '@/constants/types'
+import { LocalStorageKeys } from '@/constants/local-storage-keys'
 
 export default function PropertiesTable() {
   const { loading: isLoading, data: agentsData } = useGetAgents()
 
   const { mutate: deleteProperty, isPending } = useDeletePropertyMutation()
+
+  const storedValue = localStorage.getItem(LocalStorageKeys.USER)
+  const user: User = storedValue !== null && JSON.parse(storedValue)
 
   const columns: ColumnDef<Property>[] = [
     {
@@ -78,12 +84,40 @@ export default function PropertiesTable() {
       cell: ({ row }) => {
         const data = row.original
         if (data?.agentId) {
-          return <Badge className="bg-teal-600 ">Assigned</Badge>
+          return <Badge className="bg-teal-600">Assigned</Badge>
         }
         return <Badge variant="outline">Not Assigned</Badge>
       }
     },
     {
+      id: 'actions',
+      enableHiding: false,
+      cell: ({ row }) => (
+        <div className="flex items-center">
+          <Link href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
+            <Button variant="ghost">
+              <Eye size={17} color="black" />
+            </Button>
+          </Link>
+          {(user.role === UserRoleEnum.ADMIN || user.role === UserRoleEnum.SUPER_ADMIN) && (<ConfirmActionDialog
+            title="Edit Property"
+            anchor={
+              <Button variant="ghost">
+                <FileEdit size={17} color="black" />
+              </Button>
+            }
+            content={<UpdatePropertyForm data={row.original} />}
+          />)}
+          {(user.role === UserRoleEnum.ADMIN || user.role === UserRoleEnum.SUPER_ADMIN) && (<ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />)}
+        </div>
+      )
+    }
+  ]
+
+
+
+  if (user.role !== UserRoleEnum.AGENT) {
+    columns.push({
       id: 'action',
       header: 'Action',
       cell: ({ row }) => (
@@ -95,31 +129,8 @@ export default function PropertiesTable() {
           />
         </>
       )
-    },
-    {
-      id: 'actions',
-      enableHiding: false,
-      cell: ({ row }) => (
-        <div className="flex items-center">
-          <Link prefetch={false} href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
-            <Button variant="ghost">
-              <Eye size={17} color="black" />
-            </Button>
-          </Link>
-          <ConfirmActionDialog
-            title="Edit Property"
-            anchor={
-              <Button variant="ghost">
-                <FileEdit size={17} color="black" />
-              </Button>
-            }
-            content={<UpdatePropertyForm data={row.original} />}
-          />
-          <ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />
-        </div>
-      )
-    }
-  ]
+    },)
+  }
 
   const { loading, data } = useGetProperties()
   return <DataTable columns={columns} data={data ?? []} isLoading={loading} />

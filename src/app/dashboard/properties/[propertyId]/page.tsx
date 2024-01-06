@@ -14,17 +14,9 @@ interface Props {
 }
 
 const Page = ({ params: { propertyId } }: Props) => {
-  const { loading: pending, data } = useGetOneProperty(propertyId)
+  const { loading: pending, data, isFetched } = useGetOneProperty(propertyId)
 
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    if (data) {
-      setLoading(false)
-    }
-  }, [data])
-
-  if (loading) {
+  if (!data?.name) {
     return (
       <div className="flex h-[100vh] items-center justify-center">
         <Loader />
@@ -32,7 +24,7 @@ const Page = ({ params: { propertyId } }: Props) => {
     )
   }
 
-  if (data) {
+  if (data?.name) {
     return (
       <div className="">
         <section className="h-[500px] w-full">

@@ -95,7 +95,7 @@ const Page = () => {
         ></div>
         <WhiteStrokes />
 
-        <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
+        <div className="mx-auto max-w-7xl px-6 md:py-24 py-6 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-shrink">
             <Image
               src={'/assets/logos/logo-only-white.png'}
@@ -103,12 +103,12 @@ const Page = () => {
               width={1000}
               height={1000}
               alt=""
-              className="h-24 w-auto"
+              className="h-24 w-auto hidden md:flex"
             />
-            <h1 className="mt-10 text-center text-4xl font-bold tracking-tight text-gray-200 sm:text-5xl lg:text-left">
+            <h1 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-200 sm:text-5xl lg:text-left">
               Advertise your property
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-100">Place a free ad to sell or rent property.</p>
+            <p className=" md:mt-6 text-base md:text-xl leading-8 text-gray-300 text-center md:text-start">Place a free ad to sell or rent property</p>
           </div>
           <div className="mt-16 rounded-md pb-8 text-black sm:mt-24 md:pt-8 lg:mt-0 lg:flex-shrink-0 lg:flex-grow lg:pt-0">
             <div className="card ml-auto w-full max-w-[500px] rounded-xl border border-gray-200 bg-gray-50 px-4 py-5 shadow-lg sm:px-6">

@@ -56,7 +56,7 @@ const PropertyDetailsCard = ({ data }: Props) => {
             {data?.occupencyStatus?.toLocaleLowerCase()} |{' '}
             {data?.furnishingStatus?.toLocaleLowerCase().replaceAll('_', ' ')}
           </h2>
-          <p className="my-4">{data?.description}</p>
+          <p className="my-4 text-gray-500">{data?.description}</p>
         </div>
         <div className="grid gap-8 rounded-xl border p-5 shadow-md shadow-primary/30">
           <div className="w-full ">

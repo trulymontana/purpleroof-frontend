@@ -88,7 +88,6 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
       emirates.map((emirate: TOption) => {
         // @ts-ignore
         const response: TOption[] = emiratesWithLocations[emirate.value]
-
         setLocations((prevLocations: any) => [...prevLocations, ...response])
       })
   }, [emirates])

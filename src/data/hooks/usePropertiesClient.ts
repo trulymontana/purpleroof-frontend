@@ -14,13 +14,22 @@ export function useGetProperties() {
   return { data: data?.data, loading: isLoading }
 }
 
-export function useGetOneProperty(id: number) {
+export function useGetLocations() {
   const { isLoading, data } = useQuery({
+    queryKey: [ApiEndpoints.PROPERTIES],
+    queryFn: () => propertiesClient.all()
+  })
+
+  return { data: data?.data, loading: isLoading }
+}
+
+export function useGetOneProperty(id: number) {
+  const { data, isFetched, isPending } = useQuery({
     queryKey: [ApiEndpoints.PROPERTIES],
     queryFn: () => propertiesClient.getById({ id })
   })
 
-  return { data: data?.data, loading: isLoading }
+  return { data: data?.data, loading: isPending, isFetched }
 }
 
 export const useCreatePropertyMutation = () => {

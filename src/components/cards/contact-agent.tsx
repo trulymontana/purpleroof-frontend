@@ -50,7 +50,7 @@ const ContactAgentCard = ({ data }: Props) => {
   }
 
   return (
-    <Card className="w-full shadow-md shadow-primary/30">
+    <Card className="w-full shadow-md shadow-primary/30" >
       <CardHeader className="">
         <h2 className="text-2xl font-semibold">Contact Agent</h2>
       </CardHeader>
@@ -121,7 +121,8 @@ const ContactAgentCard = ({ data }: Props) => {
           </DialogContent>
         </Dialog>
       </CardContent>
-    </Card>
+    </Card >
+
   )
 }
 

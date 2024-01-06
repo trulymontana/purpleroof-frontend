@@ -13,5 +13,8 @@ export const authClient = {
   },
   signIn: (user: any) => {
     return HttpClient.post<any>(ApiEndpoints.SIGNIN, user)
+  },
+  getUserRole: () => {
+    return HttpClient.get<User>(ApiEndpoints.USER_ROLE)
   }
 }

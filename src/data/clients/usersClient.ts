@@ -13,6 +13,6 @@ export const userClient = {
     return HttpClient.patch<any>(`${ApiEndpoints.USERS}/update-role/${data.id}/${data.role}`, data)
   },
   getAgentApplication: () => {
-    return HttpClient.get<Agent>(`${ApiEndpoints.AGENT_APPLICATION}`)
-  }
+    return HttpClient.get<Agent>(ApiEndpoints.AGENT_APPLICATION)
+  },
 }

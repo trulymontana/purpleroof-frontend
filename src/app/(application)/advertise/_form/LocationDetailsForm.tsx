@@ -15,11 +15,13 @@ import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
-import { TOption } from '@/constants/types'
 import MapComponent from '@/components/MapPicker'
+import { useEffect, useState } from 'react'
+import { useGetLocations } from '@/data/hooks/useLocationsClient'
+import { EmirateEnum } from '@/constants/enums'
 
 const formSchema = z.object({
-  emirate: z.string({
+  emirate: z.nativeEnum(EmirateEnum, {
     required_error: 'Please select a Emirate!'
   }),
   location: z.string({
@@ -60,6 +62,9 @@ interface Props {
 }
 
 const LocationDetailsForm = ({ onSave }: Props) => {
+
+  const [locationOptions, setLocationOptions] = useState();
+
   const router = useRouter()
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.LOCATION_DETAILS)
@@ -71,12 +76,22 @@ const LocationDetailsForm = ({ onSave }: Props) => {
     defaultValues
   })
 
+  const selectedEmirate = form.watch('emirate')
+  const { data } = useGetLocations([selectedEmirate]);
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.LOCATION_DETAILS, values)
     router.push(PageRoutes.advertise.AMENITIES_DETAILS)
   }
 
-  const selectedEmirate = form.watch('emirate')
+
+  useEffect(() => {
+    if (data) {
+      console.log("locationsData", data)
+      // setLocationOptions(data)
+    }
+  }, [data])
+
 
   // @ts-ignore
   const locations = selectedEmirate ? emiratesWithLocations[selectedEmirate] : []
