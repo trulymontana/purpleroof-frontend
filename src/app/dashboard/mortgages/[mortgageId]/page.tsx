@@ -68,7 +68,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
               </Link>
             )}
           </div>
-          <div className="w-1/3 space-y-4">
+          <div className="w-full md:w-1/3 space-y-4">
             {data && <RequiredDocumentsCards data={data} />}
             {data && data.status !== MortgageStatusEnum.SUBMITTED && data.references.map(({ title, name, phone, relationship }, i) => (
               <ReferenceCard key={i} title={title} name={name} phone={phone} relationship={relationship} />

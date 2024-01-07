@@ -11,7 +11,7 @@ const PropertyInformationCard = ({ data }: Props) => {
         <h3 className="my-2 flex items-center gap-2 text-3xl font-semibold text-primary">
           <LandPlot className="font-semibold" /> Property Information
         </h3>
-        <div className="mt-5 grid w-full grid-cols-2 content-between gap-x-16 gap-y-4">
+        <div className="custom_card_details">
           <div className="flex justify-between">
             <p>Property Type</p>
             <p className="detail">{data?.propertyType.toLocaleLowerCase().replaceAll("_", " ") ?? "-"}</p>

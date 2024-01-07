@@ -90,3 +90,16 @@
     0 4px 6px -1px rgb(222, 201, 242),
     0 2px 4px -1px rgb(186, 133, 235);
 }
+
+.custom_card_details {
+  display: grid;
+  margin-top: 1.25rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  column-gap: 4rem;
+  row-gap: 1rem;
+  align-content: space-between;
+  width: 100%;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

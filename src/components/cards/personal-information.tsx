@@ -12,7 +12,7 @@ const PersonalInformationCard = ({ data }: Props) => {
                 <h3 className="my-2 flex items-center gap-2 text-3xl font-semibold text-primary">
                     <User className="font-semibold" /> Personal Information
                 </h3>
-                <div className="mt-5 grid w-full grid-cols-2 content-between gap-x-16 gap-y-4">
+                <div className="custom_card_details">
                     <div className="flex justify-between">
                         <p>First Name</p>
                         <p className="detail">{data?.firstName.toLocaleLowerCase() ?? "-"}</p>
