@@ -21,7 +21,7 @@ const formSchema = z.object({
 
 type TMortgageStatus = z.infer<typeof formSchema>
 const UpdateMortgageStatusForm = ({ data }: Props) => {
-  const { mutate: updateMortgage } = useUpdateMortgageMutation()
+  const { mutate: updateMortgage, isPending: isLoading } = useUpdateMortgageMutation()
 
   const form = useForm<TMortgageStatus>({
     resolver: zodResolver(formSchema),
@@ -46,7 +46,7 @@ const UpdateMortgageStatusForm = ({ data }: Props) => {
           label="Status"
           options={mortgageSubmissionStatuses}
         />
-        <Button type="submit">Save changes</Button>
+        <Button disabled={isLoading} type="submit">{isLoading ? "Saving..." : "Save changes"}</Button>
       </form>
     </Form>
   )

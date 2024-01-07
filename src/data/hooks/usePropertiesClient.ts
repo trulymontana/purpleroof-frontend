@@ -24,12 +24,12 @@ export function useGetLocations() {
 }
 
 export function useGetOneProperty(id: number) {
-  const { data, isFetched, isPending } = useQuery({
+  const { data, isFetching, isPending } = useQuery({
     queryKey: [ApiEndpoints.PROPERTIES],
     queryFn: () => propertiesClient.getById({ id })
   })
 
-  return { data: data?.data, loading: isPending, isFetched }
+  return { data: data?.data, loading: isPending, isFetching }
 }
 
 export const useCreatePropertyMutation = () => {

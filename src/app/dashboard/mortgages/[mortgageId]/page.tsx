@@ -3,32 +3,20 @@
 import { useGetOneMortgage } from '@/data/hooks/useMortgageClient'
 import Loader from '@/components/Loader'
 import { Button } from '@/components/ui/button'
-import { CardHeader, CardContent, Card, CardFooter } from '@/components/ui/card'
-import { DownloadIcon, MessageCircle, MessageCircleIcon, Paperclip, Send, X } from 'lucide-react'
-import { MortgageStatusEnum } from '@/constants/enums'
+import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
+import UpdateMortgageStatusForm from '../_forms/update-status-form'
+import { useGetUserDetails } from '@/data/hooks/useAuthClient'
+import PersonalInformationCard from '@/components/cards/personal-information'
+import IncomeInformationCard from '@/components/cards/income-information'
+import PropertyInformationCard from '@/components/cards/mortgage-property-information'
+import { MortgageStatusEnum, UserRoleEnum } from '@/constants/enums'
+import OtherInformationCard from '@/components/cards/other-information'
 import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
-import currency from '@/lib/currency'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { useState } from 'react'
-import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
-import UpdateMortgageStatusForm from '../_forms/update-status-form'
-import { Form } from '@/components/ui/form'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { useCreateCommentMutation, useGetCommentsByMortgage } from '@/data/hooks/useCommentsClient'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import FileUploader from '@/components/forms/elements/file-uploader'
-import { useGetUserDetails } from '@/data/hooks/useAuthClient'
-import TextAreaElement from '@/components/forms/elements/text-area-element'
-
-const formSchema = z.object({
-  title: z.string({
-    required_error: 'Please enter a message'
-  })
-})
+import RequiredDocumentsCards from '@/components/cards/required-documents'
+import ReferenceCard from '@/components/cards/reference'
+import ChatBox from '@/components/cards/chat-box'
 
 interface Props {
   params: {
@@ -36,28 +24,12 @@ interface Props {
   }
 }
 const Page = ({ params: { mortgageId } }: Props) => {
-  const { loading, data } = useGetOneMortgage(mortgageId)
-  const { mutate: sendComment, isPending: isLoading } = useCreateCommentMutation()
+
+  const { loading, data, fetching } = useGetOneMortgage(mortgageId)
   const { data: userDetails } = useGetUserDetails()
 
-  const { data: comments } = useGetCommentsByMortgage(Number(mortgageId))
 
-  const [chatOpen, setChatOpen] = useState(false)
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema)
-  })
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    sendComment({
-      mortgageId: Number(mortgageId),
-      attachments: [],
-      message: 'test',
-      ...values
-    })
-  }
-
-  if (loading) {
+  if (fetching) {
     return (
       <div className="flex h-[100vh] items-center justify-center">
         <Loader />
@@ -68,8 +40,9 @@ const Page = ({ params: { mortgageId } }: Props) => {
   return (
     <>
       <main className="container px-3 py-4">
-        <div className="flex items-end justify-end py-3">
-          {!loading && data && (
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between py-3">
+          <h2 className="text-4xl font-bold underline underline-offset-4 text-primary">Mortgage Details</h2>
+          {!loading && (userDetails.role === UserRoleEnum.ADMIN || userDetails.role === UserRoleEnum.SUPER_ADMIN) && data && (
             <ConfirmActionDialog
               title="Edit Mortgage"
               anchor={<Button>Update Status</Button>}
@@ -77,308 +50,34 @@ const Page = ({ params: { mortgageId } }: Props) => {
             />
           )}
         </div>
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <Card className="flex h-fit flex-col p-4">
-            <CardHeader className="mb-4">
-              <h2 className="text-4xl font-bold underline">Mortgage Details</h2>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex justify-between">
-                <h3 className="flex-1 text-lg font-medium">First Name</h3>
-                <p className="text-lg capitalize">{data?.firstName}</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Last Name</h3>
-                <p className="text-lg capitalize">{data?.lastName}</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Email</h3>
-                <p className="text-lg lowercase">{data?.email}</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Contact</h3>
-                <p className="text-lg capitalize">{data?.phoneNumber}</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Marital Status</h3>
-                <p className="text-lg capitalize">Single</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Education</h3>
-                <p className="text-lg capitalize">Elementary School</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Favorite City</h3>
-                <p className="text-lg capitalize">Dubai</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Number of Family Members in UAE</h3>
-                <p className="text-lg capitalize">5</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Years in UAE</h3>
-                <p className="text-lg capitalize">2</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Annual Rental Income</h3>
-                <p className="text-lg capitalize">{currency.format(3213)}</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">UAE Residence Address</h3>
-                <p className="text-lg capitalize">mock address</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Home Country Address</h3>
-                <p className="text-lg capitalize">mock address</p>
-              </div>
-              {data?.dateOfBirth && (
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Date of Birth</h3>
-                  <p className="text-lg capitalize">{new Date(data?.dateOfBirth).toLocaleDateString()}</p>
-                </div>
-              )}
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Country</h3>
-                <p className="text-lg capitalize">{data?.country}</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Income Profile</h3>
-                <p className="text-lg capitalize">{data?.incomeProfile?.toLocaleLowerCase()}</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Residence Type</h3>
-                <p className="text-lg capitalize">{data?.residenceType?.toLocaleLowerCase().replaceAll('_', ' ')}</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Loan Type</h3>
-                <p className="text-lg capitalize">{data?.loanType?.toLocaleLowerCase().replaceAll('_', ' ')}</p>
-              </div>
-              {data?.monthlyIncome && (
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Montly Income</h3>
-                  <p className="text-lg capitalize">{currency.format(data?.monthlyIncome)}</p>
-                </div>
-              )}
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Property Type</h3>
-                <p className="text-lg capitalize">Apartment/ Townhouse/ Villa</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Completion Status</h3>
-                <p className="text-lg capitalize">Completed</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Emirate</h3>
-                <p className="text-lg capitalize">Dubai</p>
-              </div>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-medium">Additional Details</h3>
-                <p className="line-clamp-1 text-lg capitalize">test additional details</p>
-              </div>
-            </CardContent>
-            <CardFooter className="w-full">
-              {data?.status === MortgageStatusEnum.SUBMITTED && (
-                <Link
-                  className="w-full"
-                  href={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
-                    mortgageId,
-                    LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
-                  )}
-                >
-                  <Button className="w-full">Complete Your Application</Button>
-                </Link>
-              )}
-            </CardFooter>
-          </Card>
-          <div className="space-y-4">
-            {data?.requirement && (
-              <Card className="p-4">
-                <CardHeader className="mb-4">
-                  <h2 className="text-2xl font-semibold">Required Documents</h2>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {data?.requirement?.requiredDocuments.map((item: any, i: number) => (
-                    <Card
-                      key={i}
-                      className="shadow-md transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800"
-                    >
-                      <CardContent className="flex items-center justify-between p-4">
-                        <h3 className="text-lg font-medium">{item?.name}</h3>
-                        <Button className="flex items-center">
-                          <DownloadIcon className="mr-2 h-4 w-4" />
-                          Download
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </CardContent>
-              </Card>
+        <div className="mx-auto flex w-full flex-col md:flex-row items-start gap-8 py-6">
+          <div className='flex flex-1 min-w-2/3 flex-col gap-8'>
+            {data && <PersonalInformationCard data={data} />}
+            {data && <IncomeInformationCard data={data} />}
+            {data && data.status !== MortgageStatusEnum.SUBMITTED && <PropertyInformationCard data={data} />}
+            {data && data.status !== MortgageStatusEnum.SUBMITTED && <OtherInformationCard data={data} />}
+            {data?.status === MortgageStatusEnum.SUBMITTED && (
+              <Link
+                className="w-full"
+                href={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
+                  mortgageId,
+                  LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
+                )}
+              >
+                <Button className="w-full">Complete Your Application</Button>
+              </Link>
             )}
-            <Card className="p-4">
-              <CardHeader className="mb-4">
-                <h2 className="text-2xl font-semibold">Home Country Reference 1</h2>
-              </CardHeader>
-              <CardContent>
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Name</h3>
-                  <p className="text-lg capitalize">John</p>
-                </div>
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Relationship</h3>
-                  <p className="text-lg capitalize">Brother</p>
-                </div>
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Contact</h3>
-                  <p className="text-lg capitalize">{data?.phoneNumber}</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="p-4">
-              <CardHeader className="mb-4">
-                <h2 className="text-2xl font-semibold">Home Country Reference 2</h2>
-              </CardHeader>
-              <CardContent>
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Name</h3>
-                  <p className="text-lg capitalize">Michael</p>
-                </div>
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Relationship</h3>
-                  <p className="text-lg capitalize">Brother</p>
-                </div>
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Contact</h3>
-                  <p className="text-lg capitalize">{data?.phoneNumber}</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="p-4">
-              <CardHeader className="mb-4">
-                <h2 className="text-2xl font-semibold">Personal Reference in UAE 1</h2>
-              </CardHeader>
-              <CardContent>
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Name</h3>
-                  <p className="text-lg capitalize">Liza</p>
-                </div>
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Relationship</h3>
-                  <p className="text-lg capitalize">Sister</p>
-                </div>
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Contact</h3>
-                  <p className="text-lg capitalize">{data?.phoneNumber}</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="p-4">
-              <CardHeader className="mb-4">
-                <h2 className="text-2xl font-semibold">Personal Reference in UAE 2</h2>
-              </CardHeader>
-              <CardContent>
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Name</h3>
-                  <p className="text-lg capitalize">Kyle</p>
-                </div>
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Relationship</h3>
-                  <p className="text-lg capitalize">Child</p>
-                </div>
-                <div className="flex justify-between">
-                  <h3 className="text-lg font-medium">Contact</h3>
-                  <p className="text-lg capitalize">{data?.phoneNumber}</p>
-                </div>
-              </CardContent>
-            </Card>
+          </div>
+          <div className="w-full md:w-1/3 space-y-4">
+            {data && <RequiredDocumentsCards data={data} />}
+            {data && data.status !== MortgageStatusEnum.SUBMITTED && data.references.map(({ title, name, phone, relationship }, i) => (
+              <ReferenceCard key={i} title={title} name={name} phone={phone} relationship={relationship} />
+            ))}
           </div>
         </div>
       </main>
       <div className="fixed bottom-4 right-4">
-        <Popover open={chatOpen} onOpenChange={setChatOpen}>
-          <PopoverTrigger asChild>
-            <Button className="w-15 h-15 flex items-center justify-center rounded-full bg-primary">
-              <MessageCircle size={25} className="text-white" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="mt-2 w-[400px] rounded-lg bg-white">
-            <Card className="border-none">
-              <CardContent>
-                <div className="fixed bottom-0 right-0  w-[400px] overflow-hidden rounded-t-lg bg-white shadow-lg">
-                  <div className="flex items-center justify-between bg-gray-100 p-3">
-                    <div className="flex items-center space-x-2">
-                      <MessageCircleIcon size={20} />
-                      <h2 className="text-lg font-bold">Chat</h2>
-                    </div>
-                    <X onClick={() => setChatOpen(!chatOpen)} className="h-6 w-6 cursor-pointer" />
-                  </div>
-                  <div className="flex h-[400px] flex-col gap-4 overflow-y-scroll p-3">
-                    {comments &&
-                      comments?.map((comment, i) => {
-                        return (
-                          <div className="flex flex-col gap-4" key={i}>
-                            {comment.userId === userDetails.id ? (
-                              <div className="flex items-end">
-                                <div className="h-10 w-10 flex-none">
-                                  <Avatar className="h-full w-full">
-                                    <AvatarImage alt="User" src="/placeholder-avatar.jpg" />
-                                    <AvatarFallback>U</AvatarFallback>
-                                  </Avatar>
-                                </div>
-                                <div className="ml-2 flex-1">
-                                  <div className="rounded-r-lg bg-blue-100 p-3 text-black dark:bg-blue-900 dark:text-white">
-                                    {comment.title}
-                                  </div>
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="flex items-end justify-end">
-                                <div className="mr-2 flex-1">
-                                  <div className="rounded-l-lg bg-gray-200 p-3 text-black dark:bg-gray-800 dark:text-white">
-                                    {comment.title}
-                                  </div>
-                                </div>
-                                <div className="h-10 w-10 flex-none">
-                                  <Avatar className="h-full w-full">
-                                    <AvatarImage alt="Admin" src="/placeholder-avatar.jpg" />
-                                    <AvatarFallback>A</AvatarFallback>
-                                  </Avatar>
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        )
-                      })}
-                  </div>
-                  <div className="w-fit gap-2 border-t px-2 py-2">
-                    {/* <div className="h-5 w-5">
-                      <Paperclip size={20} className="h-5 w-5" />
-                    </div> */}
-
-                    <div className="flex w-full items-center space-x-2">
-                      <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                          <FileUploader form={form} folder="mortgage" name="attachments" label="Attachments" />
-                          <div className="flex w-full flex-col items-center gap-2">
-                            <TextAreaElement name="title" label="" placeholder="Type here..." />
-                            <Button disabled={isLoading} type="submit" className="w-full ">
-                              {isLoading ? (
-                                'Sending...'
-                              ) : (
-                                <span className="flex items-center gap-2">
-                                  Send <Send className="h-5 w-5" />
-                                </span>
-                              )}
-                            </Button>
-                          </div>
-                        </form>
-                      </Form>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </PopoverContent>
-        </Popover>
+        <ChatBox userDetails={userDetails} mortgageId={mortgageId} />
       </div>
     </>
   )

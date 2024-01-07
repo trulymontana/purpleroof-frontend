@@ -16,12 +16,12 @@ export function useGetMortgages() {
 }
 
 export function useGetOneMortgage(id: number) {
-  const { isLoading, data } = useQuery({
+  const { isFetching, isLoading, data } = useQuery({
     queryKey: [ApiEndpoints.MORTGAGES],
     queryFn: () => mortgageClient.getById({ id })
   })
 
-  return { data: data?.data, loading: isLoading }
+  return { data: data?.data, loading: isLoading, fetching: isFetching }
 }
 
 export const useCreateMortgageMutation = () => {
@@ -89,17 +89,3 @@ export const useUpdateMortgageMutation = () => {
     }
   })
 }
-
-// export const useUpdateOpinionMutation = () => {
-//   const queryClient = useQueryClient()
-//   const navigate = useNavigate()
-//   return useMutation(opinionClient.update, {
-//     onSuccess: () => {
-//       toast.success('Opinion Successfully Updated')
-//       navigate(AppRoutes.OPINION_EDITOR)
-//     },
-//     onSettled: () => {
-//       queryClient.invalidateQueries(ApiEndpoints.USERS)
-//     },
-//   })
-// }

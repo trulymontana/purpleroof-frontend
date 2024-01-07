@@ -18,6 +18,7 @@ import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { useRouter } from 'next/navigation'
 import { Mortgage } from '@/data/clients/mortgageClient'
 import { useEffect } from 'react'
+import { EducationEnum, MaritalStatusEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   firstName: z.string({
@@ -36,10 +37,10 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.'
     }),
-  educationType: z.string({
+  educationType: z.nativeEnum(EducationEnum, {
     required_error: 'Please select your education qualification'
   }),
-  maritalStatus: z.string({
+  maritalStatus: z.nativeEnum(MaritalStatusEnum, {
     required_error: 'Please select your marital status'
   }),
   favoriteCity: z.string({

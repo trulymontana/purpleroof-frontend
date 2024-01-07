@@ -1,7 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useRouter } from 'next/navigation'
-import { Comment, commentsClient } from '../clients/commentsClient'
-import { toast } from '@/components/ui/use-toast'
+import { commentsClient } from '../clients/commentsClient'
 import { ApiEndpoints } from '@/constants/api'
 
 export function useCreateCommentMutation() {

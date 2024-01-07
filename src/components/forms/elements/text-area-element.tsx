@@ -5,12 +5,13 @@ import { useFormContext } from 'react-hook-form'
 
 interface Props {
   name: string
-  label: string
+  label?: string
   description?: string
   placeholder?: string
+  className?: string
 }
 
-const TextAreaElement = ({ name, label, description, placeholder }: Props) => {
+const TextAreaElement = ({ name, label, description, placeholder, className }: Props) => {
   const { control } = useFormContext()
   return (
     <FormField
@@ -18,9 +19,9 @@ const TextAreaElement = ({ name, label, description, placeholder }: Props) => {
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
-            <Textarea placeholder={placeholder} {...field} />
+            <Textarea placeholder={placeholder} className={className} {...field} />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />
