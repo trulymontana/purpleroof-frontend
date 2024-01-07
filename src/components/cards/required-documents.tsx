@@ -15,7 +15,9 @@ const RequiredDocumentsCards = ({ data }: Props) => {
       {data?.documents && data?.documents?.length > 0 && (
         <Card className="shadow-md shadow-primary/30">
           <CardHeader className="">
-            <h2 className="my-2 flex items-center gap-2 text-2xl font-semibold text-primary"><FileMinus2 /> Documents Uploaded</h2>
+            <h2 className="my-2 flex items-center gap-2 text-2xl font-semibold text-primary">
+              <FileMinus2 /> Documents Uploaded
+            </h2>
           </CardHeader>
           <CardContent className="space-y-4">
             {data?.documents?.map((document: any, i: number) => (

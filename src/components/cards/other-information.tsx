@@ -14,35 +14,35 @@ const OtherInformationCard = ({ data }: Props) => {
         <div className="custom_card_details">
           <div className="flex justify-between">
             <p>Education Type</p>
-            <p className="detail">{data?.educationType.toLocaleLowerCase().replaceAll("_", " ") ?? "-"}</p>
+            <p className="detail">{data?.educationType.toLocaleLowerCase().replaceAll('_', ' ') ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Marital Status</p>
-            <p className="detail">{data?.maritalStatus.toLocaleLowerCase() ?? "-"}</p>
+            <p className="detail">{data?.maritalStatus.toLocaleLowerCase() ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Favorite City</p>
-            <p className="font-semibold">{data?.favoriteCity ?? "-"}</p>
+            <p className="font-semibold">{data?.favoriteCity ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Family Members in UAE</p>
-            <p className="detail">{data?.familyMembersInUae ?? "-"}</p>
+            <p className="detail">{data?.familyMembersInUae ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Years in UAE</p>
-            <p className="detail">{data?.yearsInUae ?? "-"}</p>
+            <p className="detail">{data?.yearsInUae ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Annual Rental Income</p>
-            <p className="detail">{data?.annualRentalIncome ?? "-"}</p>
+            <p className="detail">{data?.annualRentalIncome ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>UAE Residence Address</p>
-            <p className="detail">{data?.uaeResidenceAddress ?? "-"}</p>
+            <p className="detail">{data?.uaeResidenceAddress ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Home Country Address</p>
-            <p className="detail">{data?.homeCountryAddress ?? "-"}</p>
+            <p className="detail">{data?.homeCountryAddress ?? '-'}</p>
           </div>
         </div>
       </div>

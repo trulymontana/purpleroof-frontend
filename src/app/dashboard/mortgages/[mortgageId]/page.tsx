@@ -24,10 +24,8 @@ interface Props {
   }
 }
 const Page = ({ params: { mortgageId } }: Props) => {
-
   const { loading, data, fetching } = useGetOneMortgage(mortgageId)
   const { data: userDetails } = useGetUserDetails()
-
 
   if (fetching) {
     return (
@@ -40,18 +38,20 @@ const Page = ({ params: { mortgageId } }: Props) => {
   return (
     <>
       <main className="container px-3 py-4">
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between py-3">
-          <h2 className="text-4xl font-bold underline underline-offset-4 text-primary">Mortgage Details</h2>
-          {!loading && (userDetails.role === UserRoleEnum.ADMIN || userDetails.role === UserRoleEnum.SUPER_ADMIN) && data && (
-            <ConfirmActionDialog
-              title="Edit Mortgage"
-              anchor={<Button>Update Status</Button>}
-              content={<UpdateMortgageStatusForm data={data} />}
-            />
-          )}
+        <div className="flex flex-col items-center justify-between gap-4 py-3 md:flex-row">
+          <h2 className="text-4xl font-bold text-primary underline underline-offset-4">Mortgage Details</h2>
+          {!loading &&
+            (userDetails.role === UserRoleEnum.ADMIN || userDetails.role === UserRoleEnum.SUPER_ADMIN) &&
+            data && (
+              <ConfirmActionDialog
+                title="Edit Mortgage"
+                anchor={<Button>Update Status</Button>}
+                content={<UpdateMortgageStatusForm data={data} />}
+              />
+            )}
         </div>
-        <div className="mx-auto flex w-full flex-col md:flex-row items-start gap-8 py-6">
-          <div className='flex flex-1 min-w-2/3 flex-col gap-8'>
+        <div className="mx-auto flex w-full flex-col items-start gap-8 py-6 md:flex-row">
+          <div className="min-w-2/3 flex flex-1 flex-col gap-8">
             {data && <PersonalInformationCard data={data} />}
             {data && <IncomeInformationCard data={data} />}
             {data && data.status !== MortgageStatusEnum.SUBMITTED && <PropertyInformationCard data={data} />}
@@ -68,11 +68,13 @@ const Page = ({ params: { mortgageId } }: Props) => {
               </Link>
             )}
           </div>
-          <div className="w-full md:w-1/3 space-y-4">
+          <div className="w-full space-y-4 md:w-1/3">
             {data && <RequiredDocumentsCards data={data} />}
-            {data && data.status !== MortgageStatusEnum.SUBMITTED && data.references.map(({ title, name, phone, relationship }, i) => (
-              <ReferenceCard key={i} title={title} name={name} phone={phone} relationship={relationship} />
-            ))}
+            {data &&
+              data.status !== MortgageStatusEnum.SUBMITTED &&
+              data.references.map(({ title, name, phone, relationship }, i) => (
+                <ReferenceCard key={i} title={title} name={name} phone={phone} relationship={relationship} />
+              ))}
           </div>
         </div>
       </main>

@@ -46,7 +46,9 @@ const UpdateMortgageStatusForm = ({ data }: Props) => {
           label="Status"
           options={mortgageSubmissionStatuses}
         />
-        <Button disabled={isLoading} type="submit">{isLoading ? "Saving..." : "Save changes"}</Button>
+        <Button disabled={isLoading} type="submit">
+          {isLoading ? 'Saving...' : 'Save changes'}
+        </Button>
       </form>
     </Form>
   )
