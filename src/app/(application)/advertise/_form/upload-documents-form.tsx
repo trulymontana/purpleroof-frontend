@@ -50,15 +50,15 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
 
   useEffect(() => {
     form.setValue('documents', [
-    // @ts-ignore
-    { type: DocumentTypeEnum.PASSPORT_COPY },
-    // @ts-ignore
-    { type: DocumentTypeEnum.VISA_COPY },
-    // @ts-ignore
-    { type: DocumentTypeEnum.EMIRATES_ID },
-    // @ts-ignore
-    { type: DocumentTypeEnum.TITLE_DEED_COPY },
-    // @ts-ignore
+      // @ts-ignore
+      { type: DocumentTypeEnum.PASSPORT_COPY },
+      // @ts-ignore
+      { type: DocumentTypeEnum.VISA_COPY },
+      // @ts-ignore
+      { type: DocumentTypeEnum.EMIRATES_ID },
+      // @ts-ignore
+      { type: DocumentTypeEnum.TITLE_DEED_COPY },
+      // @ts-ignore
       { type: DocumentTypeEnum.OWNERSHIP_PROOF_MOBILE_NUMBER }
     ])
   }, [])

@@ -1,6 +1,6 @@
-import { Mortgage } from "@/data/clients/mortgageClient"
-import currency from "@/lib/currency"
-import { CreditCard, DollarSign, LandPlot } from "lucide-react"
+import { Mortgage } from '@/data/clients/mortgageClient'
+import currency from '@/lib/currency'
+import { CreditCard, DollarSign, LandPlot } from 'lucide-react'
 
 interface Props {
   data: Mortgage
@@ -16,23 +16,23 @@ const IncomeInformationCard = ({ data }: Props) => {
         <div className="custom_card_details">
           <div className="flex justify-between">
             <p>Gross Montly Income</p>
-            <p className="detail">{currency.format(data?.monthlyIncome) ?? "-"}</p>
+            <p className="detail">{currency.format(data?.monthlyIncome) ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Value of Property</p>
-            <p className="detail">{currency.format(data?.valueOfProperty) ?? "-"}</p>
+            <p className="detail">{currency.format(data?.valueOfProperty) ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Income Profile</p>
-            <p className="detail">{data?.incomeProfile?.toLocaleLowerCase().replaceAll("_", " ") ?? "-"}</p>
+            <p className="detail">{data?.incomeProfile?.toLocaleLowerCase().replaceAll('_', ' ') ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Residential Status</p>
-            <p className="detail">{data?.residenceType?.toLocaleLowerCase().replaceAll("_", " ") ?? "-"}</p>
+            <p className="detail">{data?.residenceType?.toLocaleLowerCase().replaceAll('_', ' ') ?? '-'}</p>
           </div>
-          <div className="flex items-center justify-between w-full">
+          <div className="flex w-full items-center justify-between">
             <p>Loan Type</p>
-            <p className="detail">{data?.loanType?.toLocaleLowerCase().replaceAll("_", " ") ?? "-"}</p>
+            <p className="detail">{data?.loanType?.toLocaleLowerCase().replaceAll('_', ' ') ?? '-'}</p>
           </div>
         </div>
       </div>
