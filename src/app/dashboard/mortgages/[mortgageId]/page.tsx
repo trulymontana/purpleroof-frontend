@@ -50,7 +50,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
             />
           )}
         </div>
-        <div className="mx-auto flex w-full flex-col items-start gap-8 py-6">
+        <div className="mx-auto flex w-full flex-col md:flex-row items-start gap-8 py-6">
           <div className='flex flex-1 min-w-2/3 flex-col gap-8'>
             {data && <PersonalInformationCard data={data} />}
             {data && <IncomeInformationCard data={data} />}

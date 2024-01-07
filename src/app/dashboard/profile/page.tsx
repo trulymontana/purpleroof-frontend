@@ -76,10 +76,6 @@ const Page = () => {
 
   const { data: locationOptions } = useGetLocations(emirateValues)
 
-  // useEffect(() => {
-  //   filterLocations(emirateValues)
-  // }, [emirates])
-
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">

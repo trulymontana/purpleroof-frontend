@@ -59,10 +59,10 @@ const ChatBox = ({ mortgageId, userDetails }: Props) => {
                     <MessageCircle size={25} className="text-white" />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="mt-2 w-[400px] rounded-lg bg-white">
+            <PopoverContent className="mt-2 w-[300px] md:w-[400px] rounded-lg bg-white">
                 <Card className="border-none">
                     <CardContent>
-                        <div className="fixed bottom-0 right-0  w-[400px] overflow-hidden rounded-t-lg bg-white shadow-lg">
+                        <div className="fixed bottom-0 right-0 w-full md:w-[400px] overflow-hidden rounded-t-lg bg-white shadow-lg">
                             <div className="flex items-center justify-between bg-gray-100 p-3">
                                 <div className="flex items-center space-x-2">
                                     <MessageCircleIcon size={20} />
@@ -70,7 +70,7 @@ const ChatBox = ({ mortgageId, userDetails }: Props) => {
                                 </div>
                                 <X onClick={() => setChatOpen(!chatOpen)} className="h-6 w-6 cursor-pointer" />
                             </div>
-                            <div className="flex h-[400px] flex-col gap-4 overflow-y-scroll p-3">
+                            <div className="flex h-[200px] md:h-[400px] flex-col gap-4 overflow-y-scroll p-3">
                                 {comments &&
                                     comments?.map((comment, i) => {
                                         return (
@@ -80,7 +80,7 @@ const ChatBox = ({ mortgageId, userDetails }: Props) => {
                                                         <div className="h-10 w-10 flex-none">
                                                             <Avatar className="h-full w-full">
                                                                 <AvatarImage alt="User" src="/placeholder-avatar.jpg" />
-                                                                <AvatarFallback>U</AvatarFallback>
+                                                                <AvatarFallback>{userDetails.firstName?.charAt(0) + userDetails.lastName.charAt(0)}</AvatarFallback>
                                                             </Avatar>
                                                         </div>
                                                         <div className="ml-2 flex-1">
