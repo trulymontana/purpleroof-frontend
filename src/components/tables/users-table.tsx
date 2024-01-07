@@ -8,6 +8,9 @@ import { Badge } from '../ui/badge'
 import { Button } from '../ui/button'
 import ConfirmActionDialog from '../dialogs/confirm-action-dialog'
 import UpdateUserRoleForm from '@/app/dashboard/admin/users/_forms/update-role-form'
+import { UserRoleEnum } from '@/constants/enums'
+import { FacetOption } from './data-table/data'
+import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
 
 export const userColumns: ColumnDef<User>[] = [
   {
@@ -44,9 +47,17 @@ export const userColumns: ColumnDef<User>[] = [
   },
   {
     id: 'role',
+    accessorKey: 'role',
     header: 'Role',
     cell: ({ row }) => {
-      return <Badge className="capitalize">{row.original.role.toLocaleLowerCase()}</Badge>
+      return (
+        <Badge className="capitalize" variant="outline">
+          {row.original.role.toLocaleLowerCase()}
+        </Badge>
+      )
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
     }
   },
   {
@@ -55,18 +66,46 @@ export const userColumns: ColumnDef<User>[] = [
     cell: ({ row }) => {
       return (
         <>
-          <ConfirmActionDialog
-            title="Edit Role"
-            anchor={<Button>Update Role</Button>}
-            content={<UpdateUserRoleForm data={row.original} />}
-          />
+          {row.original.role !== UserRoleEnum.SUPER_ADMIN && (
+            <ConfirmActionDialog
+              title="Edit Role"
+              anchor={<Button>Change Role</Button>}
+              content={<UpdateUserRoleForm data={row.original} />}
+            />
+          )}
         </>
       )
     }
   }
 ]
 
+const userTypeFilter: FacetOption[] = [
+  {
+    label: 'Admin',
+    value: UserRoleEnum.ADMIN,
+    icon: CheckCircledIcon
+  },
+  {
+    label: 'Agent',
+    value: UserRoleEnum.AGENT,
+    icon: StopwatchIcon
+  },
+  {
+    label: 'General Users',
+    value: UserRoleEnum.GENERAL_USER,
+    icon: CrossCircledIcon
+  }
+]
+
 export default function UsersTable() {
   const { loading, users } = useGetUsers()
-  return <DataTable columns={userColumns} data={users ?? []} isLoading={loading} />
+  return (
+    <DataTable
+      columns={userColumns}
+      data={users ?? []}
+      isLoading={loading}
+      facetKey={'role'}
+      facetOptions={userTypeFilter}
+    />
+  )
 }

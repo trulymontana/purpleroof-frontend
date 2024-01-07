@@ -33,11 +33,11 @@ export default function RequirementsTable() {
     },
     {
       accessorKey: 'preApprovalFee',
-      header: 'Pre Approval Fee (AED)'
+      header: 'Pre Approval (AED)'
     },
     {
       accessorKey: 'processingFee',
-      header: 'Processing Fee (%)'
+      header: 'Processing (%)'
     },
     {
       accessorKey: 'lifeInsurance',
@@ -49,7 +49,7 @@ export default function RequirementsTable() {
     },
     {
       accessorKey: 'valuationFee',
-      header: 'Valuation Fee(AED)'
+      header: 'Valuation (AED)'
     },
     {
       accessorKey: 'rate',
@@ -88,22 +88,6 @@ export default function RequirementsTable() {
       }
     },
     {
-      id: 'createdAt',
-      header: 'Created At',
-      cell: ({ row }) => {
-        const createdAt = row.original.createdAt
-        return new Date(createdAt).toLocaleDateString()
-      }
-    },
-    {
-      id: 'updatedAt',
-      header: 'Updated At',
-      cell: ({ row }) => {
-        const updatedAt = row.original.createdAt
-        return new Date(updatedAt).toLocaleDateString()
-      }
-    },
-    {
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => (
@@ -121,5 +105,5 @@ export default function RequirementsTable() {
 
   const { loading, data } = useGetRequirements()
 
-  return <DataTable columns={columns} data={data ?? []} isLoading={loading} />
+  return <DataTable columns={columns} data={data ?? []} isLoading={loading} filterKey="name" />
 }

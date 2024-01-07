@@ -5,18 +5,24 @@ import { MortgageApplication } from '@/constants/types'
 import { useDeleteMortgageMutation, useGetMortgages } from '@/data/hooks/useMortgageClient'
 import Link from 'next/link'
 import { Badge } from '../ui/badge'
-import { MortgageStatusEnum } from '@/constants/enums'
+import { MortgageStatusEnum, UserRoleEnum } from '@/constants/enums'
 import { PageRoutes } from '@/constants/page-routes'
 import { Button } from '../ui/button'
-import { Eye, FileEdit } from 'lucide-react'
 import UpdateMortgageStatusForm from '@/app/dashboard/mortgages/_forms/update-status-form'
 import ConfirmActionDialog from '../dialogs/confirm-action-dialog'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import currency from '@/lib/currency'
+import { useGetUserRole } from '@/data/hooks/useAuthClient'
+import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
+import { FacetOption } from './data-table/data'
 
 export default function MortgagesTable() {
   const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
+
+  const userRole = useGetUserRole()
+
+  const isAdmin = userRole === UserRoleEnum.ADMIN || userRole === UserRoleEnum.SUPER_ADMIN
 
   const columns: ColumnDef<MortgageApplication>[] = [
     {
@@ -59,9 +65,13 @@ export default function MortgagesTable() {
     {
       id: 'status',
       header: 'Status',
+      accessorKey: 'status',
       cell: ({ row }) => {
         const data = row.original
         return <Badge variant="outline">{data.status}</Badge>
+      },
+      filterFn: (row, id, value) => {
+        return value.includes(row.getValue(id))
       }
     },
     {
@@ -77,13 +87,13 @@ export default function MortgagesTable() {
                 LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
               )}
             >
-              <Badge>Complete Your Application</Badge>
+              <Button>{isAdmin ? 'View Details' : 'Complete Application'}</Button>
             </Link>
           )
         }
         return (
           <Link href={PageRoutes.dashboard.MORTGAGE_TIMELINE(data.id)}>
-            <Badge>View Your Application</Badge>
+            <Button>{isAdmin ? 'View Details' : 'View Application'}</Button>
           </Link>
         )
       }
@@ -93,26 +103,50 @@ export default function MortgagesTable() {
       enableHiding: false,
       cell: ({ row }) => (
         <div className="flex items-center">
-          <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
+          {/* <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
             <Button variant="ghost">
               <Eye size={17} color="black" />
             </Button>
-          </Link>
-          <ConfirmActionDialog
-            title="Edit Mortgage"
-            anchor={
-              <Button variant="ghost">
-                <FileEdit size={17} color="black" />
-              </Button>
-            }
-            content={<UpdateMortgageStatusForm data={row.original} />}
-          />
-          <ConfirmDeleteDialog onDelete={() => deleteMortgage(row.original.id)} isLoading={isPending} />
+          </Link> */}
+          {isAdmin && (
+            <ConfirmActionDialog
+              title="Edit Mortgage"
+              anchor={<Button variant="secondary">Update Status</Button>}
+              content={<UpdateMortgageStatusForm data={row.original} />}
+            />
+          )}
+          {isAdmin && <ConfirmDeleteDialog onDelete={() => deleteMortgage(row.original.id)} isLoading={isPending} />}
         </div>
       )
     }
   ]
 
+  const mortgageFilterOptions: FacetOption[] = [
+    {
+      label: 'Approved',
+      value: MortgageStatusEnum.APPROVED,
+      icon: CheckCircledIcon
+    },
+    {
+      label: 'Pending',
+      value: MortgageStatusEnum.SUBMITTED,
+      icon: StopwatchIcon
+    },
+    {
+      label: 'Rejected',
+      value: MortgageStatusEnum.CASE_DECLINED,
+      icon: CrossCircledIcon
+    }
+  ]
+
   const { loading, data } = useGetMortgages()
-  return <DataTable columns={columns} data={data ?? []} isLoading={loading} />
+  return (
+    <DataTable
+      columns={columns}
+      data={data ?? []}
+      isLoading={loading}
+      facetKey={'status'}
+      facetOptions={mortgageFilterOptions}
+    />
+  )
 }
