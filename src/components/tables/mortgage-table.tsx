@@ -5,18 +5,17 @@ import { MortgageApplication } from '@/constants/types'
 import { useDeleteMortgageMutation, useGetMortgages } from '@/data/hooks/useMortgageClient'
 import Link from 'next/link'
 import { Badge } from '../ui/badge'
-import { MortgageStatusEnum } from '@/constants/enums'
+import { MortgageStatusEnum, UserRoleEnum } from '@/constants/enums'
 import { PageRoutes } from '@/constants/page-routes'
 import { Button } from '../ui/button'
-import { Eye, FileEdit } from 'lucide-react'
 import UpdateMortgageStatusForm from '@/app/dashboard/mortgages/_forms/update-status-form'
 import ConfirmActionDialog from '../dialogs/confirm-action-dialog'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import currency from '@/lib/currency'
+import { useGetUserRole } from '@/data/hooks/useAuthClient'
 
 export default function MortgagesTable() {
-  const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
 
   const columns: ColumnDef<MortgageApplication>[] = [
     {
@@ -82,37 +81,42 @@ export default function MortgagesTable() {
           )
         }
         return (
-          <Link href={PageRoutes.dashboard.MORTGAGE_TIMELINE(data.id)}>
-            <Badge>View Your Application</Badge>
+          <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
+            <Button size="sm">View Your Application</Button>
           </Link>
         )
       }
     },
     {
+      id: "updateStatus",
+      header: "Update Status",
+      cell: ({ row }) => (
+        <ConfirmActionDialog
+          title="Edit Mortgage"
+          anchor={
+            <Button size="sm" className='w-full'>
+              Update
+            </Button>
+          }
+          content={<UpdateMortgageStatusForm data={row.original} />}
+        />
+      )
+    },
+  ]
+  const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
+  const { loading, data } = useGetMortgages()
+  const { data: role } = useGetUserRole();
+
+  if (role === UserRoleEnum.ADMIN || role === UserRoleEnum.ADMIN) {
+    columns.push({
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => (
         <div className="flex items-center">
-          <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
-            <Button variant="ghost">
-              <Eye size={17} color="black" />
-            </Button>
-          </Link>
-          <ConfirmActionDialog
-            title="Edit Mortgage"
-            anchor={
-              <Button variant="ghost">
-                <FileEdit size={17} color="black" />
-              </Button>
-            }
-            content={<UpdateMortgageStatusForm data={row.original} />}
-          />
           <ConfirmDeleteDialog onDelete={() => deleteMortgage(row.original.id)} isLoading={isPending} />
         </div>
       )
-    }
-  ]
-
-  const { loading, data } = useGetMortgages()
+    })
+  }
   return <DataTable columns={columns} data={data ?? []} isLoading={loading} />
 }
