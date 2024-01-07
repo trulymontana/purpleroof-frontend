@@ -14,15 +14,15 @@ const PropertyInformationCard = ({ data }: Props) => {
         <div className="mt-5 grid w-full grid-cols-2 content-between gap-x-16 gap-y-4">
           <div className="flex justify-between">
             <p>Property Type</p>
-            <p className="detail">{data?.propertyType ?? "-"}</p>
+            <p className="detail">{data?.propertyType.toLocaleLowerCase().replaceAll("_", " ") ?? "-"}</p>
           </div>
           <div className="flex justify-between">
             <p>Completion Status</p>
-            <p className="detail">{data?.completionStatus ?? "-"}</p>
+            <p className="detail">{data?.completionStatus?.toLocaleLowerCase().replaceAll("_", " ") ?? "-"}</p>
           </div>
           <div className="flex justify-between">
             <p>Emirate</p>
-            <p className="font-semibold">{data?.emirate ?? "-"}</p>
+            <p className="detail">{data?.emirate.toLocaleLowerCase().replaceAll("_", " ") ?? "-"}</p>
           </div>
           <div className="flex justify-between">
             <p>Additional Details</p>

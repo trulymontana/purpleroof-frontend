@@ -1,6 +1,5 @@
 import { Mortgage } from '@/data/clients/mortgageClient'
 import { GanttChartSquare } from 'lucide-react'
-import React from 'react'
 
 interface Props {
   data: Mortgage
@@ -15,11 +14,11 @@ const OtherInformationCard = ({ data }: Props) => {
         <div className="mt-5 grid w-full grid-cols-2 content-between gap-x-16 gap-y-4">
           <div className="flex justify-between">
             <p>Education Type</p>
-            <p className="detail">{data?.educationType ?? "-"}</p>
+            <p className="detail">{data?.educationType.toLocaleLowerCase().replaceAll("_", " ") ?? "-"}</p>
           </div>
           <div className="flex justify-between">
             <p>Marital Status</p>
-            <p className="detail">{data?.maritalStatus ?? "-"}</p>
+            <p className="detail">{data?.maritalStatus.toLocaleLowerCase() ?? "-"}</p>
           </div>
           <div className="flex justify-between">
             <p>Favorite City</p>

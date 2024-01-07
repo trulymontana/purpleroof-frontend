@@ -1,4 +1,4 @@
-import { MortgageApplication, QueryOptions, User, historyType } from '@/constants/types'
+import { QueryOptions, historyType } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'

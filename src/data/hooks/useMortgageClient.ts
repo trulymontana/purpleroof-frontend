@@ -79,6 +79,7 @@ export const useUpdateMortgageMutation = () => {
       queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
       localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${data.data.id}`)
       localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_CUSTOMER_INFO}-${data.data.id}`)
+      router.push(PageRoutes.dashboard.MORTGAGES)
     },
     onError: (error: any) => {
       toast({
@@ -88,17 +89,3 @@ export const useUpdateMortgageMutation = () => {
     }
   })
 }
-
-// export const useUpdateOpinionMutation = () => {
-//   const queryClient = useQueryClient()
-//   const navigate = useNavigate()
-//   return useMutation(opinionClient.update, {
-//     onSuccess: () => {
-//       toast.success('Opinion Successfully Updated')
-//       navigate(AppRoutes.OPINION_EDITOR)
-//     },
-//     onSettled: () => {
-//       queryClient.invalidateQueries(ApiEndpoints.USERS)
-//     },
-//   })
-// }

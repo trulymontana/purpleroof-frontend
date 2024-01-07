@@ -15,11 +15,11 @@ const PersonalInformationCard = ({ data }: Props) => {
                 <div className="mt-5 grid w-full grid-cols-2 content-between gap-x-16 gap-y-4">
                     <div className="flex justify-between">
                         <p>First Name</p>
-                        <p className="detail">{data?.firstName ?? "-"}</p>
+                        <p className="detail">{data?.firstName.toLocaleLowerCase() ?? "-"}</p>
                     </div>
                     <div className="flex justify-between">
                         <p>Last Name</p>
-                        <p className="detail">{data?.lastName ?? "-"}</p>
+                        <p className="detail">{data?.lastName.toLocaleLowerCase() ?? "-"}</p>
                     </div>
                     <div className="flex justify-between">
                         <p>Email</p>
