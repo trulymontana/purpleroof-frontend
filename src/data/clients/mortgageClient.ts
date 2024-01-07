@@ -2,7 +2,18 @@ import { MortgageApplication, QueryOptions, User, historyType } from '@/constant
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
-import { IncomeProfileEnum, LoanTypeEnum, MortgageStatusEnum, ResidenceTypeEnum } from '@/constants/enums'
+import {
+  CompletionStatusEnum,
+  EducationEnum,
+  EmirateEnum,
+  IncomeProfileEnum,
+  LoanTypeEnum,
+  MaritalStatusEnum,
+  MortgageStatusEnum,
+  PropertyTypeEnum,
+  RelationshipEnum,
+  ResidenceTypeEnum
+} from '@/constants/enums'
 import HttpClient from '@/lib/http-client'
 
 export interface CreateMortgageInput {
@@ -34,6 +45,20 @@ export interface Mortgage extends CreateMortgageInput {
   requirement: any // replace any with correct type
   history: historyType[]
   comments: { title: string; message: string; userId: number }[]
+  valueOfProperty: number
+  propertyType: PropertyTypeEnum
+  completionStatus: CompletionStatusEnum
+  emirate: EmirateEnum
+  additionalDetails: string
+  educationType: EducationEnum
+  maritalStatus: MaritalStatusEnum
+  favoriteCity: string
+  familyMembersInUae: number
+  yearsInUae: number
+  annualRentalIncome: number
+  uaeResidenceAddress: string
+  homeCountryAddress: string
+  references: { title: string; name: string; phone: string; relationship: RelationshipEnum }[]
 }
 
 export const mortgageClient = {

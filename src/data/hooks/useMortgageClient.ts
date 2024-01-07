@@ -16,12 +16,12 @@ export function useGetMortgages() {
 }
 
 export function useGetOneMortgage(id: number) {
-  const { isLoading, data } = useQuery({
+  const { isFetching, isLoading, data } = useQuery({
     queryKey: [ApiEndpoints.MORTGAGES],
     queryFn: () => mortgageClient.getById({ id })
   })
 
-  return { data: data?.data, loading: isLoading }
+  return { data: data?.data, loading: isLoading, fetching: isFetching }
 }
 
 export const useCreateMortgageMutation = () => {
@@ -79,7 +79,6 @@ export const useUpdateMortgageMutation = () => {
       queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
       localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${data.data.id}`)
       localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_CUSTOMER_INFO}-${data.data.id}`)
-      router.push(PageRoutes.dashboard.MORTGAGES)
     },
     onError: (error: any) => {
       toast({

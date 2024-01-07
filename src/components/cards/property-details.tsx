@@ -59,7 +59,7 @@ const PropertyDetailsCard = ({ data }: Props) => {
           <p className="my-4 text-gray-500">{data?.description}</p>
         </div>
         <div className="grid gap-8 rounded-xl border p-5 shadow-md shadow-primary/30">
-          <div className="w-full ">
+          <div className="w-full">
             <h3 className="my-2 flex items-center gap-2 text-3xl font-semibold text-primary">
               <LandPlot className="font-semibold" /> Property Information
             </h3>
