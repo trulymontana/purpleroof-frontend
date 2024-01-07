@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import * as z from 'zod'
 import { Card, CardContent } from '../ui/card'
 import { MessageCircle, MessageCircleIcon, Send, X } from 'lucide-react'
@@ -19,7 +19,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 const formSchema = z.object({
     title: z.string({
         required_error: 'Please enter a message'
-    })
+    }),
+    attachment: z.string().optional()
 })
 
 interface Props {
@@ -33,6 +34,7 @@ interface Props {
     }
 }
 const ChatBox = ({ mortgageId, userDetails }: Props) => {
+
     const [chatOpen, setChatOpen] = useState(false)
     const { data: comments } = useGetCommentsByMortgage(Number(mortgageId))
     const { mutate: sendComment, isPending: isLoading } = useCreateCommentMutation()
@@ -44,8 +46,8 @@ const ChatBox = ({ mortgageId, userDetails }: Props) => {
     function onSubmit(values: z.infer<typeof formSchema>) {
         sendComment({
             mortgageId: Number(mortgageId),
-            attachments: [],
-            message: 'test',
+            attachments: [values.attachment ?? ""],
+            message: "",
             ...values
         })
     }
@@ -107,17 +109,13 @@ const ChatBox = ({ mortgageId, userDetails }: Props) => {
                                     })}
                             </div>
                             <div className="w-fit gap-2 border-t px-2 py-2">
-                                {/* <div className="h-5 w-5">
-                      <Paperclip size={20} className="h-5 w-5" />
-                    </div> */}
-
                                 <div className="flex w-full items-center space-x-2">
                                     <Form {...form}>
                                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                                            <FileUploader form={form} folder="mortgage" name="attachments" label="Attachments" />
+                                            <FileUploader form={form} folder="mortgage" name="attachment" label="Attachment" />
                                             <div className="flex w-full flex-col items-center gap-2">
-                                                <TextAreaElement name="title" label="" placeholder="Type here..." />
-                                                <Button disabled={isLoading} type="submit" className="w-full ">
+                                                <TextAreaElement name="title" placeholder="Type here..." className="w-full" />
+                                                <Button disabled={isLoading} type="submit" className="w-full h-full">
                                                     {isLoading ? (
                                                         'Sending...'
                                                     ) : (

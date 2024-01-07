@@ -7,8 +7,8 @@ import HttpClient from '@/lib/http-client'
 export interface CreateCommentInput {
   title: string
   mortgageId: number
-  message: string
-  attachments: string[]
+  message?: string
+  attachments?: string[]
 }
 
 export interface Comment extends CreateCommentInput {

@@ -79,3 +79,14 @@
   font-weight: 600;
   text-transform: capitalize;
 }
+
+.custom_card {
+  display: grid;
+  gap: 8;
+  border-radius: 0.75rem;
+  border-width: 1px;
+  padding: 1.25rem;
+  box-shadow:
+    0 4px 6px -1px rgb(222, 201, 242),
+    0 2px 4px -1px rgb(186, 133, 235);
+}

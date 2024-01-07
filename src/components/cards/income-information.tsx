@@ -8,7 +8,7 @@ interface Props {
 
 const IncomeInformationCard = ({ data }: Props) => {
   return (
-    <div className="grid gap-8 rounded-xl border p-5 shadow-md shadow-primary/30">
+    <div className="custom_card">
       <div className="w-full">
         <h3 className="my-2 flex items-center gap-2 text-3xl font-semibold text-primary">
           <CreditCard className="font-semibold" /> Financial Information

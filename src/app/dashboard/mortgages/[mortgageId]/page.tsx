@@ -3,18 +3,13 @@
 import { useGetOneMortgage } from '@/data/hooks/useMortgageClient'
 import Loader from '@/components/Loader'
 import { Button } from '@/components/ui/button'
-import { useState } from 'react'
 import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
 import UpdateMortgageStatusForm from '../_forms/update-status-form'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { useCreateCommentMutation, useGetCommentsByMortgage } from '@/data/hooks/useCommentsClient'
 import { useGetUserDetails } from '@/data/hooks/useAuthClient'
 import PersonalInformationCard from '@/components/cards/personal-information'
 import IncomeInformationCard from '@/components/cards/income-information'
 import PropertyInformationCard from '@/components/cards/mortgage-property-information'
-import { MortgageStatusEnum } from '@/constants/enums'
+import { MortgageStatusEnum, UserRoleEnum } from '@/constants/enums'
 import OtherInformationCard from '@/components/cards/other-information'
 import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'
@@ -31,7 +26,6 @@ interface Props {
 const Page = ({ params: { mortgageId } }: Props) => {
 
   const { loading, data, fetching } = useGetOneMortgage(mortgageId)
-  const { mutate: sendComment, isPending: isLoading } = useCreateCommentMutation()
   const { data: userDetails } = useGetUserDetails()
 
 
@@ -46,9 +40,9 @@ const Page = ({ params: { mortgageId } }: Props) => {
   return (
     <>
       <main className="container px-3 py-4">
-        <div className="flex items-center justify-between py-3">
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between py-3">
           <h2 className="text-4xl font-bold underline underline-offset-4 text-primary">Mortgage Details</h2>
-          {!loading && data && (
+          {!loading && (userDetails.role === UserRoleEnum.ADMIN || userDetails.role === UserRoleEnum.SUPER_ADMIN) && data && (
             <ConfirmActionDialog
               title="Edit Mortgage"
               anchor={<Button>Update Status</Button>}
@@ -56,7 +50,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
             />
           )}
         </div>
-        <div className="mx-auto flex w-full items-start gap-8 py-6">
+        <div className="mx-auto flex w-full flex-col items-start gap-8 py-6">
           <div className='flex flex-1 min-w-2/3 flex-col gap-8'>
             {data && <PersonalInformationCard data={data} />}
             {data && <IncomeInformationCard data={data} />}
