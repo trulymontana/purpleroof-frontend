@@ -25,7 +25,7 @@ const NumberInputElement = ({ name, label, description, placeholder }: Props) =>
               type="number"
               placeholder={placeholder}
               {...field}
-              onChange={(event) => field.onChange(event.target.value)}
+              onChange={(event) => field.onChange(Number(event.target.value))}
             />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
