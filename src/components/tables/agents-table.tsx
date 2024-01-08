@@ -38,6 +38,14 @@ export default function AgentsTable() {
       }
     },
     {
+      id: 'createdAt',
+      header: 'Applied At',
+      cell: ({ row }) => {
+        const createdAt = row.original.createdAt
+        return new Date(createdAt).toLocaleDateString()
+      }
+    },
+    {
       accessorKey: 'contactNumber',
       header: 'Contact Number'
     },
