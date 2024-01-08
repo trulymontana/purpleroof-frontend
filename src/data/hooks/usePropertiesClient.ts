@@ -25,7 +25,7 @@ export function useGetLocations() {
 
 export function useGetOneProperty(id: number) {
   const { data, isFetching, isPending } = useQuery({
-    queryKey: [ApiEndpoints.PROPERTIES],
+    queryKey: [`${ApiEndpoints.PROPERTIES}-${id}`],
     queryFn: () => propertiesClient.getById({ id })
   })
 

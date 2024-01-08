@@ -24,13 +24,6 @@ export const useCreateAgentMutation = () => {
       })
       location.reload()
     },
-    onError: (error: any) => {
-      toast({
-        variant: 'destructive',
-        title: error.response.data.message,
-        description: error.response.data.details
-      })
-    },
     onSettled: () => {
       queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
     }
@@ -84,12 +77,6 @@ export function useUpdateApprovalStatusMutation() {
         })
         queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
       }
-    },
-    onError: (error: any) => {
-      toast({
-        variant: 'destructive',
-        title: error.message
-      })
     }
   })
 }
@@ -109,12 +96,6 @@ export function useUpdateActiveStatusMutation() {
         })
         queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
       }
-    },
-    onError: (error: any) => {
-      toast({
-        variant: 'destructive',
-        title: error.message
-      })
     }
   })
 }

@@ -9,12 +9,6 @@ export function useSearchProperties() {
     mutationFn: searchClient.create,
     onSuccess: (data: any) => {
       queryClient.refetchQueries({ queryKey: [ApiEndpoints.SEARCH] })
-    },
-    onError: (error: any) => {
-      toast({
-        variant: 'destructive',
-        title: error.message
-      })
     }
   })
 }

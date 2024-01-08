@@ -80,12 +80,19 @@ export default function PropertiesTable() {
       accessorKey: 'submissionStatus',
       cell: ({ row }) => {
         const data = row.original
+        if (data.submissionStatus === PropertySubmissionStatusEnum.REJECTED) {
+          return <Badge className={`bg-red-500 text-white hover:bg-red-400`}>{data.submissionStatus}</Badge>
+        }
         return (
           <Badge
             variant="outline"
-            className={`uppercase ${data.submissionStatus === PropertySubmissionStatusEnum.APPROVED ? 'bg-teal-600 text-white' : ''}`}
+            className={`uppercase ${
+              data.submissionStatus === PropertySubmissionStatusEnum.APPROVED ? 'bg-teal-600 text-white' : ''
+            }`}
           >
-            {data.submissionStatus === PropertySubmissionStatusEnum.SUBMITTED ? "Waiting For approval" : data.submissionStatus}
+            {data.submissionStatus === PropertySubmissionStatusEnum.SUBMITTED
+              ? 'Waiting For approval'
+              : data.submissionStatus}
           </Badge>
         )
       },
@@ -102,7 +109,7 @@ export default function PropertiesTable() {
           return <Badge className="bg-teal-600">Assigned</Badge>
         }
         return (
-          <Badge variant="outline" className="bg-red-400 text-white">
+          <Badge variant="outline" className="bg-red-500 text-white">
             Not Assigned
           </Badge>
         )
