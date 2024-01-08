@@ -19,9 +19,9 @@ import { FacetOption } from './data-table/data'
 
 export default function MortgagesTable() {
 
-  const userRole = useGetUserRole()
+  const role = useGetUserRole();
 
-  const isAdmin = userRole === UserRoleEnum.ADMIN || userRole === UserRoleEnum.SUPER_ADMIN
+  const isAdmin = role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN
 
   const columns: ColumnDef<MortgageApplication>[] = [
     {
@@ -86,44 +86,28 @@ export default function MortgagesTable() {
                 LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
               )}
             >
-              <Button>{isAdmin ? 'View Details' : 'Complete Application'}</Button>
+              <Button size="sm">{isAdmin ? 'View Details' : 'Complete Application'}</Button>
             </Link>
           )
         }
         return (
           <Link href={PageRoutes.dashboard.MORTGAGE_TIMELINE(data.id)}>
-            <Button>{isAdmin ? 'View Details' : 'View Application'}</Button>
+            <Button size="sm">{isAdmin ? 'View Details' : 'View Application'}</Button>
           </Link>
         )
       }
     },
-    {
-      id: "updateStatus",
-      header: "Update Status",
-      cell: ({ row }) => (
-        <ConfirmActionDialog
-          title="Edit Mortgage"
-          anchor={
-            <Button size="sm" className='w-full'>
-              Update
-            </Button>
-          }
-          content={<UpdateMortgageStatusForm data={row.original} />}
-        />
-      )
-    },
   ]
+
   const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
   const { loading, data } = useGetMortgages()
-  const { data: role } = useGetUserRole();
 
-  if (role === UserRoleEnum.ADMIN || role === UserRoleEnum.ADMIN) {
+  if (role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) {
     columns.push({
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => (
         <div className="flex items-center">
-
           {/* <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
             <Button variant="ghost">
               <Eye size={17} color="black" />
@@ -132,7 +116,7 @@ export default function MortgagesTable() {
           {isAdmin && (
             <ConfirmActionDialog
               title="Edit Mortgage"
-              anchor={<Button variant="secondary">Update Status</Button>}
+              anchor={<Button variant="secondary" size="sm">Update Status</Button>}
               content={<UpdateMortgageStatusForm data={row.original} />}
             />
           )}
@@ -140,34 +124,33 @@ export default function MortgagesTable() {
         </div>
       )
     })
-
-    const mortgageFilterOptions: FacetOption[] = [
-      {
-        label: 'Approved',
-        value: MortgageStatusEnum.APPROVED,
-        icon: CheckCircledIcon
-      },
-      {
-        label: 'Pending',
-        value: MortgageStatusEnum.SUBMITTED,
-        icon: StopwatchIcon
-      },
-      {
-        label: 'Rejected',
-        value: MortgageStatusEnum.CASE_DECLINED,
-        icon: CrossCircledIcon
-      }
-    ]
-
-    const { loading, data } = useGetMortgages()
-    return (
-      <DataTable
-        columns={columns}
-        data={data ?? []}
-        isLoading={loading}
-        facetKey={'status'}
-        facetOptions={mortgageFilterOptions}
-      />
-    )
   }
+
+  const mortgageFilterOptions: FacetOption[] = [
+    {
+      label: 'Approved',
+      value: MortgageStatusEnum.APPROVED,
+      icon: CheckCircledIcon
+    },
+    {
+      label: 'Pending',
+      value: MortgageStatusEnum.SUBMITTED,
+      icon: StopwatchIcon
+    },
+    {
+      label: 'Rejected',
+      value: MortgageStatusEnum.CASE_DECLINED,
+      icon: CrossCircledIcon
+    }
+  ]
+
+  return (
+    <DataTable
+      columns={columns}
+      data={data ?? []}
+      isLoading={loading}
+      facetKey={'status'}
+      facetOptions={mortgageFilterOptions}
+    />
+  )
 }
