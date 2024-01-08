@@ -15,19 +15,17 @@ import currency from '@/lib/currency'
 import AssignAgentForm from '@/app/dashboard/properties/_forms/assign-agent-form'
 import { useGetAgents } from '@/data/hooks/useAgentsClient'
 import { PropertySubmissionStatusEnum, UserRoleEnum } from '@/constants/enums'
-import { User } from '@/constants/types'
-import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { useGetUserRole } from '@/data/hooks/useAuthClient'
+import { FacetOption } from './data-table/data'
+import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
 
 export default function PropertiesTable() {
   const { loading: isLoading, data: agentsData } = useGetAgents()
 
   const { mutate: deleteProperty, isPending } = useDeletePropertyMutation()
 
-  const storedValue = localStorage.getItem(LocalStorageKeys.USER)
-
-  const { data: role } = useGetUserRole()
-
+  const userRole = useGetUserRole()
+  const isAdmin = userRole === UserRoleEnum.ADMIN || userRole === UserRoleEnum.SUPER_ADMIN
   const columns: ColumnDef<Property>[] = [
     {
       accessorKey: 'id',
@@ -39,6 +37,10 @@ export default function PropertiesTable() {
       cell: ({ row }) => {
         return <span className="line-clamp-1 max-w-sm">{row.original.name}</span>
       }
+    },
+    {
+      accessorKey: 'email',
+      header: 'Email'
     },
     {
       accessorKey: 'phone',
@@ -58,7 +60,7 @@ export default function PropertiesTable() {
     },
     {
       id: 'createdAt',
-      header: 'Created At',
+      header: 'Created',
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()
@@ -66,18 +68,29 @@ export default function PropertiesTable() {
     },
     {
       id: 'updatedAt',
-      header: 'Updated At',
+      header: 'Updated',
       cell: ({ row }) => {
         const updatedAt = row.original.createdAt
         return new Date(updatedAt).toLocaleDateString()
       }
     },
     {
-      id: 'status',
-      header: 'Status',
+      id: 'submissionStatus',
+      header: 'Submission Status',
+      accessorKey: 'submissionStatus',
       cell: ({ row }) => {
         const data = row.original
-        return <Badge>{data.submissionStatus}</Badge>
+        return (
+          <Badge
+            variant="outline"
+            className={data.submissionStatus === PropertySubmissionStatusEnum.APPROVED ? 'bg-teal-600 text-white' : ''}
+          >
+            {data.submissionStatus}
+          </Badge>
+        )
+      },
+      filterFn: (row, id, value) => {
+        return value.includes(row.getValue(id))
       }
     },
     {
@@ -88,7 +101,11 @@ export default function PropertiesTable() {
         if (data?.agentId) {
           return <Badge className="bg-teal-600">Assigned</Badge>
         }
-        return <Badge variant="outline">Not Assigned</Badge>
+        return (
+          <Badge variant="outline" className="bg-red-400 text-white">
+            Not Assigned
+          </Badge>
+        )
       }
     },
     {
@@ -101,7 +118,7 @@ export default function PropertiesTable() {
               <Eye size={17} color="black" />
             </Button>
           </Link>
-          {(role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) && (
+          {isAdmin && (
             <ConfirmActionDialog
               title="Edit Property"
               anchor={
@@ -112,15 +129,13 @@ export default function PropertiesTable() {
               content={<UpdatePropertyForm data={row.original} />}
             />
           )}
-          {(role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) && (
-            <ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />
-          )}
+          {isAdmin && <ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />}
         </div>
       )
     }
   ]
 
-  if (role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) {
+  if (isAdmin) {
     columns.push({
       id: 'action',
       header: 'Action',
@@ -128,8 +143,8 @@ export default function PropertiesTable() {
         <>
           {row.original.submissionStatus === PropertySubmissionStatusEnum.APPROVED && (
             <ConfirmActionDialog
-              title="Assign Agent"
-              anchor={<Button>Assign Agent</Button>}
+              title={row.original?.agentId ? 'Change Agent' : 'Assign Agent'}
+              anchor={<Button>{row.original?.agentId ? 'Change Agent' : 'Assign Agent'}</Button>}
               content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
             />
           )}
@@ -138,6 +153,32 @@ export default function PropertiesTable() {
     })
   }
 
+  const propertyFilterOptions: FacetOption[] = [
+    {
+      label: 'Approved',
+      value: PropertySubmissionStatusEnum.APPROVED,
+      icon: CheckCircledIcon
+    },
+    {
+      label: 'Pending',
+      value: PropertySubmissionStatusEnum.SUBMITTED,
+      icon: StopwatchIcon
+    },
+    {
+      label: 'Rejected',
+      value: PropertySubmissionStatusEnum.REJECTED,
+      icon: CrossCircledIcon
+    }
+  ]
+
   const { loading, data } = useGetProperties()
-  return <DataTable columns={columns} data={data ?? []} isLoading={loading} />
+  return (
+    <DataTable
+      columns={columns}
+      data={data ?? []}
+      isLoading={loading}
+      facetKey={'submissionStatus'}
+      facetOptions={propertyFilterOptions}
+    />
+  )
 }

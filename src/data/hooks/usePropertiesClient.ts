@@ -37,7 +37,7 @@ export const useCreatePropertyMutation = () => {
   const router = useRouter()
   return useMutation({
     mutationFn: propertiesClient.create,
-    onSuccess: (data: any) => {
+    onSuccess: (response: any) => {
       toast({
         variant: 'default',
         title: 'Property created successfully'
@@ -49,8 +49,8 @@ export const useCreatePropertyMutation = () => {
       localStorage.removeItem(PageRoutes.advertise.PROJECT_STATUS)
       localStorage.removeItem(PageRoutes.advertise.PROPERTY_DETAILS)
       localStorage.removeItem(PageRoutes.advertise.UPLOAD_PHOTOS)
-      queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
-      router.push(`${PageRoutes.advertise.APPLICATION_COMPLETED}?email=${data.property.email}`)
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
+      router.push(`${PageRoutes.advertise.APPLICATION_COMPLETED}?email=${response.data?.property?.email}`)
     },
     onError: (error: any) => {
       toast({

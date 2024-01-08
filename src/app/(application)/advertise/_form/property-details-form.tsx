@@ -4,13 +4,9 @@ import React, { useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
-
 import { Form } from '@/components/ui/form'
-
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import SelectElement from '@/components/forms/elements/select-element'
-import { bathRooms, bedRooms, lavatories } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
 import 'react-international-phone/style.css'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
