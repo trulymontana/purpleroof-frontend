@@ -15,6 +15,7 @@ import {
   SheetTitle,
   SheetTrigger
 } from './ui/sheet'
+import { PageRoutes } from '@/constants/page-routes'
 
 const Header = () => {
   return (
@@ -37,10 +38,12 @@ const Header = () => {
           </Link>
         ))}
       </div>
-      <Button variant="outline" className="hidden text-white hover:text-primary xl:flex">
-        Dashboard
-        <ArrowRight className="ml-2" />
-      </Button>
+      <Link href={PageRoutes.dashboard.MORTGAGES}>
+        <Button variant="outline" className="hidden text-white hover:text-primary xl:flex">
+          Dashboard
+          <ArrowRight className="ml-2" />
+        </Button>
+      </Link>
       <Sheet>
         <SheetTrigger asChild>
           <Menu className="text-white xl:hidden" />
