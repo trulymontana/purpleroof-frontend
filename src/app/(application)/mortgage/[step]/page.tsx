@@ -51,7 +51,7 @@ const Page = () => {
         style={{
           backgroundColor: `rgb(91, 55, 118)`
         }}
-      ></div>
+      />
       <BoxStrokesIcon />
 
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
@@ -80,7 +80,6 @@ const Page = () => {
         </div>
         <div className="mt-16 rounded-md pb-8 text-black sm:mt-24 md:pt-8 lg:mt-0 lg:flex-shrink-0 lg:flex-grow lg:pt-0">
           <div className="card ml-auto w-full max-w-[500px] rounded-xl border border-gray-200 bg-gray-50 px-4 py-5 shadow-lg sm:px-6">
-            {/* Form Here */}
             {subComponents[pathName]}
           </div>
         </div>

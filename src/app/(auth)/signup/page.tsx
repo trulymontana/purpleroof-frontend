@@ -66,12 +66,11 @@ const Page = () => {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-white px-4 py-8 dark:bg-gray-800">
-      <Card className="mx-auto w-full max-w-md  bg-opacity-75">
+    <section className="auth_section">
+      <Card className="auth_card">
         <CardHeader>
-          <h1 className="text-center text-4xl font-bold">Sign Up</h1>
-
-          <p className="text-md text-center font-light">Create Account</p>
+          <h1 className="auth_head">Sign Up</h1>
+          <p className="auth_subhead">Create Account</p>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -101,7 +100,7 @@ const Page = () => {
           </Form>
         </CardContent>
       </Card>
-    </main>
+    </section>
   )
 }
 
