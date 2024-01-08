@@ -15,7 +15,15 @@ import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import currency from '@/lib/currency'
 import { useGetUserRole } from '@/data/hooks/useAuthClient'
 
+import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
+import { FacetOption } from './data-table/data'
+
+
 export default function MortgagesTable() {
+
+  const userRole = useGetUserRole()
+
+  const isAdmin = userRole === UserRoleEnum.ADMIN || userRole === UserRoleEnum.SUPER_ADMIN
 
   const columns: ColumnDef<MortgageApplication>[] = [
     {
@@ -58,9 +66,13 @@ export default function MortgagesTable() {
     {
       id: 'status',
       header: 'Status',
+      accessorKey: 'status',
       cell: ({ row }) => {
         const data = row.original
         return <Badge variant="outline">{data.status}</Badge>
+      },
+      filterFn: (row, id, value) => {
+        return value.includes(row.getValue(id))
       }
     },
     {
@@ -76,13 +88,13 @@ export default function MortgagesTable() {
                 LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
               )}
             >
-              <Badge>Complete Your Application</Badge>
+              <Button>{isAdmin ? 'View Details' : 'Complete Application'}</Button>
             </Link>
           )
         }
         return (
-          <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
-            <Button size="sm">View Your Application</Button>
+          <Link href={PageRoutes.dashboard.MORTGAGE_TIMELINE(data.id)}>
+            <Button>{isAdmin ? 'View Details' : 'View Application'}</Button>
           </Link>
         )
       }
@@ -113,10 +125,52 @@ export default function MortgagesTable() {
       enableHiding: false,
       cell: ({ row }) => (
         <div className="flex items-center">
-          <ConfirmDeleteDialog onDelete={() => deleteMortgage(row.original.id)} isLoading={isPending} />
+
+          {/* <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
+            <Button variant="ghost">
+              <Eye size={17} color="black" />
+            </Button>
+          </Link> */}
+          {isAdmin && (
+            <ConfirmActionDialog
+              title="Edit Mortgage"
+              anchor={<Button variant="secondary">Update Status</Button>}
+              content={<UpdateMortgageStatusForm data={row.original} />}
+            />
+          )}
+          {isAdmin && <ConfirmDeleteDialog onDelete={() => deleteMortgage(row.original.id)} isLoading={isPending} />}
         </div>
       )
-    })
-  }
-  return <DataTable columns={columns} data={data ?? []} isLoading={loading} />
+    }
+  ]
+
+  const mortgageFilterOptions: FacetOption[] = [
+    {
+      label: 'Approved',
+      value: MortgageStatusEnum.APPROVED,
+      icon: CheckCircledIcon
+    },
+    {
+      label: 'Pending',
+      value: MortgageStatusEnum.SUBMITTED,
+      icon: StopwatchIcon
+    },
+    {
+      label: 'Rejected',
+      value: MortgageStatusEnum.CASE_DECLINED,
+      icon: CrossCircledIcon
+    }
+  ]
+
+  const { loading, data } = useGetMortgages()
+  return (
+    <DataTable
+      columns={columns}
+      data={data ?? []}
+      isLoading={loading}
+      facetKey={'status'}
+      facetOptions={mortgageFilterOptions}
+    />
+  )
+
 }

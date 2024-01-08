@@ -121,5 +121,5 @@ export function useGetUserRole() {
     refetchInterval: 300000
   })
 
-  return { data: data?.data.role ?? {}, loading: isLoading }
+  return data?.data?.role ?? UserRoleEnum.GENERAL_USER
 }

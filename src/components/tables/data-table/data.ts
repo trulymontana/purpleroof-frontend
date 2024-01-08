@@ -25,6 +25,12 @@ export const labels = [
   }
 ]
 
+export interface FacetOption {
+  value: string
+  label: string
+  icon: any
+}
+
 export const statuses = [
   {
     value: 'pending',

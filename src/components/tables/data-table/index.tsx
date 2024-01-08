@@ -21,14 +21,25 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import { DataTablePagination } from '@/components/tables/data-table/data-table-pagination'
 import { DataTableToolbar } from '@/components/tables/data-table/data-table-toolbar'
 import Loader from '@/components/Loader'
+import { FacetOption } from './data'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   isLoading?: boolean
+  filterKey?: string
+  facetKey?: string
+  facetOptions?: FacetOption[]
 }
 
-export function DataTable<TData, TValue>({ columns, data, isLoading = false }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({
+  columns,
+  data,
+  isLoading = false,
+  filterKey,
+  facetKey,
+  facetOptions
+}: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -58,7 +69,12 @@ export function DataTable<TData, TValue>({ columns, data, isLoading = false }: D
 
   return (
     <div className="space-y-4">
-      {/* <DataTableToolbar table={table} /> */}
+      <DataTableToolbar
+        table={table}
+        filterKey={filterKey ?? 'email'}
+        facetKey={facetKey ?? 'status'}
+        facetOptions={facetOptions}
+      />
       <div className="rounded-md border">
         <Table>
           <TableHeader>
