@@ -16,6 +16,7 @@ import currency from '@/lib/currency'
 import { useGetUserRole } from '@/data/hooks/useAuthClient'
 import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
 import { FacetOption } from './data-table/data'
+import { Eye } from 'lucide-react'
 
 export default function MortgagesTable() {
 
@@ -62,6 +63,14 @@ export default function MortgagesTable() {
       }
     },
     {
+      id: 'createdAt',
+      header: 'Created At',
+      cell: ({ row }) => {
+        const createdAt = row.original.createdAt
+        return new Date(createdAt).toLocaleDateString()
+      }
+    },
+    {
       id: 'status',
       header: 'Status',
       accessorKey: 'status',
@@ -81,7 +90,7 @@ export default function MortgagesTable() {
         if (data.status === MortgageStatusEnum.SUBMITTED) {
           return (
             <Link
-              href={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
+              href={isAdmin ? PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id) : PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
                 data.id,
                 LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
               )}
@@ -91,7 +100,7 @@ export default function MortgagesTable() {
           )
         }
         return (
-          <Link href={PageRoutes.dashboard.MORTGAGE_TIMELINE(data.id)}>
+          <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
             <Button size="sm">{isAdmin ? 'View Details' : 'View Application'}</Button>
           </Link>
         )
@@ -108,11 +117,6 @@ export default function MortgagesTable() {
       enableHiding: false,
       cell: ({ row }) => (
         <div className="flex items-center">
-          {/* <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
-            <Button variant="ghost">
-              <Eye size={17} color="black" />
-            </Button>
-          </Link> */}
           {isAdmin && (
             <ConfirmActionDialog
               title="Edit Mortgage"

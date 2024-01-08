@@ -41,12 +41,6 @@ const navigationItems = [
     link: PageRoutes.dashboard.admin.REQUIREMENTS,
     icon: <Files size={ICON_SIZE} />,
     roles: [UserRoleEnum.SUPER_ADMIN]
-  },
-  {
-    title: 'Profile',
-    link: PageRoutes.dashboard.PROFILE,
-    icon: <Settings size={ICON_SIZE} />,
-    roles: [UserRoleEnum.ADMIN, UserRoleEnum.GENERAL_USER, UserRoleEnum.SUPER_ADMIN, UserRoleEnum.AGENT]
   }
 ]
 

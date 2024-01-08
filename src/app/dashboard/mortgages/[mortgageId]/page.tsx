@@ -17,6 +17,9 @@ import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import RequiredDocumentsCards from '@/components/cards/required-documents'
 import ReferenceCard from '@/components/cards/reference'
 import ChatBox from '@/components/cards/chat-box'
+import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { Menu } from 'lucide-react'
+import VerticalTimelineComponent from '@/components/timeline/vertical-timeline'
 
 interface Props {
   params: {
@@ -40,15 +43,30 @@ const Page = ({ params: { mortgageId } }: Props) => {
       <main className="container px-3 py-4">
         <div className="flex flex-col items-center justify-between gap-4 py-3 md:flex-row">
           <h2 className="text-4xl font-bold text-primary underline underline-offset-4">Mortgage Details</h2>
-          {!loading &&
-            (userDetails.role === UserRoleEnum.ADMIN || userDetails.role === UserRoleEnum.SUPER_ADMIN) &&
-            data && (
-              <ConfirmActionDialog
-                title="Edit Mortgage"
-                anchor={<Button>Update Status</Button>}
-                content={<UpdateMortgageStatusForm data={data} />}
-              />
-            )}
+          <div className='space-x-2'>
+            {!loading &&
+              (userDetails.role === UserRoleEnum.ADMIN || userDetails.role === UserRoleEnum.SUPER_ADMIN) &&
+              data && (
+                <ConfirmActionDialog
+                  title="Edit Mortgage"
+                  anchor={<Button>Update Status</Button>}
+                  content={<UpdateMortgageStatusForm data={data} />}
+                />
+              )}
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button>View Timeline</Button>
+              </SheetTrigger>
+              <SheetContent className='sm:w-full xl:w-1/2 md:max-w-full overflow-y-scroll'>
+                <SheetHeader>
+                  <SheetTitle>Mortgage Timeline</SheetTitle>
+                </SheetHeader>
+                <div className="">
+                  {data?.history && data?.history.length > 0 && <VerticalTimelineComponent options={data?.history} />}
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
         <div className="mx-auto flex w-full flex-col items-start gap-8 py-6 md:flex-row">
           <div className="min-w-2/3 flex flex-1 flex-col gap-8">
