@@ -129,7 +129,7 @@ const RequirementsForm = ({ data, isLoading, mutate, mode = 'CREATE' }: Props) =
         </div>
         <div className="flex w-full items-center gap-10">
           <div className="w-1/2">
-            <NumberInputElement name="rate" label={'Rate (%)'} placeholder="Enter Rate" />
+            <NumberInputElement name="rate" label={'Interest Rate (%)'} placeholder="Enter Rate" />
           </div>
           <div className="w-1/2">
             <NumberInputElement name="lifeInsurance" label={'Life Insurance (%)'} placeholder="Enter Life Insurance" />
