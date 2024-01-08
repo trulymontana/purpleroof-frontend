@@ -5,7 +5,7 @@ import Loader from '@/components/Loader'
 import { Button } from '@/components/ui/button'
 import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
 import UpdateMortgageStatusForm from '../_forms/update-status-form'
-import { useGetUserDetails } from '@/data/hooks/useAuthClient'
+import { useGetUserDetails, useGetUserRole } from '@/data/hooks/useAuthClient'
 import PersonalInformationCard from '@/components/cards/personal-information'
 import IncomeInformationCard from '@/components/cards/income-information'
 import PropertyInformationCard from '@/components/cards/mortgage-property-information'
@@ -17,8 +17,7 @@ import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import RequiredDocumentsCards from '@/components/cards/required-documents'
 import ReferenceCard from '@/components/cards/reference'
 import ChatBox from '@/components/cards/chat-box'
-import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
-import { Menu } from 'lucide-react'
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import VerticalTimelineComponent from '@/components/timeline/vertical-timeline'
 
 interface Props {
@@ -27,6 +26,10 @@ interface Props {
   }
 }
 const Page = ({ params: { mortgageId } }: Props) => {
+
+  const role = useGetUserRole();
+  const isAdmin = role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN
+
   const { loading, data, fetching } = useGetOneMortgage(mortgageId)
   const { data: userDetails } = useGetUserDetails()
 
@@ -74,7 +77,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
             {data && <IncomeInformationCard data={data} />}
             {data && data.status !== MortgageStatusEnum.SUBMITTED && <PropertyInformationCard data={data} />}
             {data && data.status !== MortgageStatusEnum.SUBMITTED && <OtherInformationCard data={data} />}
-            {data?.status === MortgageStatusEnum.SUBMITTED && (
+            {!isAdmin && data?.status === MortgageStatusEnum.SUBMITTED && (
               <Link
                 className="w-full"
                 href={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(

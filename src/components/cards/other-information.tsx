@@ -14,11 +14,11 @@ const OtherInformationCard = ({ data }: Props) => {
         <div className="custom_card_details">
           <div className="flex justify-between">
             <p>Education Type</p>
-            <p className="detail">{data?.educationType.toLocaleLowerCase().replaceAll('_', ' ') ?? '-'}</p>
+            <p className="detail">{data?.educationType?.toLocaleLowerCase().replaceAll('_', ' ') ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Marital Status</p>
-            <p className="detail">{data?.maritalStatus.toLocaleLowerCase() ?? '-'}</p>
+            <p className="detail">{data?.maritalStatus?.toLocaleLowerCase() ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Favorite City</p>

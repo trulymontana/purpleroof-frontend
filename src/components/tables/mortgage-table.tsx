@@ -21,7 +21,6 @@ import { Eye } from 'lucide-react'
 export default function MortgagesTable() {
 
   const role = useGetUserRole();
-
   const isAdmin = role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN
 
   const columns: ColumnDef<MortgageApplication>[] = [

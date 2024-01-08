@@ -14,7 +14,7 @@ const PropertyInformationCard = ({ data }: Props) => {
         <div className="custom_card_details">
           <div className="flex justify-between">
             <p>Property Type</p>
-            <p className="detail">{data?.propertyType.toLocaleLowerCase().replaceAll('_', ' ') ?? '-'}</p>
+            <p className="detail">{data?.propertyType?.toLocaleLowerCase().replaceAll('_', ' ') ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Completion Status</p>
@@ -22,7 +22,7 @@ const PropertyInformationCard = ({ data }: Props) => {
           </div>
           <div className="flex justify-between">
             <p>Emirate</p>
-            <p className="detail">{data?.emirate.toLocaleLowerCase().replaceAll('_', ' ') ?? '-'}</p>
+            <p className="detail">{data?.emirate?.toLocaleLowerCase().replaceAll('_', ' ') ?? '-'}</p>
           </div>
           <div className="flex justify-between">
             <p>Additional Details</p>

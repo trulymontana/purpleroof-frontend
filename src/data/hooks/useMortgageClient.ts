@@ -76,10 +76,10 @@ export const useUpdateMortgageMutation = () => {
         variant: 'default',
         title: 'Mortgage updated successfully'
       })
+      router.push(PageRoutes.dashboard.MORTGAGES)
       queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
       localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_TRANSACTION_INFO}-${data.data.id}`)
       localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_CUSTOMER_INFO}-${data.data.id}`)
-      router.push(PageRoutes.dashboard.MORTGAGES)
     },
     onError: (error: any) => {
       toast({
