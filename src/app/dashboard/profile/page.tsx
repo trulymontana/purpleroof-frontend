@@ -23,7 +23,6 @@ import PhoneNumberInputElement from '@/components/forms/elements/phone-number-in
 import FileUploader from '@/components/forms/elements/file-uploader'
 import MultiSelectElement from '@/components/forms/elements/multiselect-element'
 import { emirateOptions } from '@/constants/advertise'
-import { useState } from 'react'
 import { Separator } from '@/components/ui/separator'
 import { useCreateAgentMutation } from '@/data/hooks/useAgentsClient'
 import { getValuesFrom } from '@/lib/utils'
@@ -33,6 +32,8 @@ import { useGetAgentApplications } from '@/data/hooks/useUsersClient'
 import { useGetUserDetails } from '@/data/hooks/useAuthClient'
 import { Locate, Phone } from 'lucide-react'
 import Loader from '@/components/Loader'
+import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
+import UpdateLocationsForm from './_forms/update-locations-form'
 
 const formSchema = z.object({
   agency: z.string().optional(),
@@ -54,6 +55,7 @@ const Page = () => {
   const { data: userDetails, loading } = useGetUserDetails()
   const { mutate: createAgent, isPending: isLoading } = useCreateAgentMutation()
   const { data: agentApplicationDetails } = useGetAgentApplications()
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema)
@@ -184,7 +186,7 @@ const Page = () => {
                   <span>Contact: {agentApplicationDetails?.contactNumber}</span>
                 </div>
               )}
-              <div className="mt-4 flex">
+              <div className="mt-4 flex flex-col gap-2">
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button className="w-full" variant="outline">
@@ -209,6 +211,15 @@ const Page = () => {
                     </div>
                   </DialogContent>
                 </Dialog>
+                <ConfirmActionDialog
+                  title="Update Locations"
+                  anchor={
+                    <Button>
+                      Update Locations
+                    </Button>
+                  }
+                  content={<UpdateLocationsForm />}
+                />
               </div>
             </CardContent>
           </Card>

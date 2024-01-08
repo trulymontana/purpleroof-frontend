@@ -31,6 +31,7 @@ import NumberInputElement from '@/components/forms/elements/number-input-element
 import { useSearchProperties } from '@/data/hooks/useSearchClient'
 import { getValuesFrom } from '@/lib/utils'
 import { UseMutateFunction } from '@tanstack/react-query'
+import { useGetLocations } from '@/data/hooks/useLocationsClient'
 
 interface Props {
   searchProperties: UseMutateFunction<any, any, any, unknown>
@@ -62,6 +63,12 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
     }
   })
 
+  const emirates: TOption[] = form.watch('emirates')
+  let emirateValues: any
+  emirates?.length > 0 && (emirateValues = getValuesFrom(emirates))
+
+  const { data: locationOptions } = useGetLocations(emirateValues)
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     if (!Array.isArray(values.propertyTypes)) {
       // @ts-ignore
@@ -72,13 +79,13 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
     values.propertyCategories && (values.propertyCategories = getValuesFrom(values.propertyCategories))
     values.amenities && (values.amenities = getValuesFrom(values.amenities))
     values.locations && (values.locations = getValuesFrom(values.locations))
+    values?.locations?.length > 0 && (values.locations = values.locations.map((location: string) => Number(location)))
 
     searchProperties({
       ...values
     })
   }
 
-  const emirates: TOption[] = form.watch('emirates')
   const propertyTypes = form.watch('propertyTypes')
   const propertyCategory = form.watch('propertyCategories')
 
@@ -104,16 +111,22 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
         <div className="flex flex-col items-center gap-5 rounded-lg p-4">
           <div className="flex w-full items-center gap-4">
             <div className="flex-1">
-              <MultiSelectElement name="emirates" placeholder="Please select emirates" options={emirateOptions} />
+              <MultiSelectElement
+                name="emirates"
+                placeholder="Please select emirates"
+                options={emirateOptions}
+              />
             </div>
             <div className="flex-1">
               <MultiSelectElement
                 disabled={!emirates || emirates.length === 0}
                 name="locations"
                 placeholder={
-                  !emirates || emirates?.length === 0 ? 'Please select atleast one emirate' : 'Please select locations'
+                  !emirates || emirates?.length === 0
+                    ? 'Please select atleast one emirate'
+                    : 'Please select locations'
                 }
-                options={locations!}
+                options={locationOptions || [{ label: 'Dubai', value: '1' }]}
               />
             </div>
             <div className="flex-1">
