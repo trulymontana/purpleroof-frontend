@@ -169,5 +169,5 @@ export default function MortgagesTable() {
         facetOptions={mortgageFilterOptions}
       />
     )
-
   }
+}
