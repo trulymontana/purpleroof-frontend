@@ -46,11 +46,11 @@ const Page = () => {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-white px-4 py-8 dark:bg-gray-800">
-      <Card className="mx-auto w-full max-w-md  bg-opacity-75">
+    <section className="auth_section">
+      <Card className="auth_card">
         <CardHeader>
-          <h1 className="text-center text-4xl font-bold">Sign In</h1>
-          <p className="text-md text-center font-light">Welcome Back!</p>
+          <h1 className="auth_head">Sign In</h1>
+          <p className="auth_subhead">Welcome Back!</p>
         </CardHeader>
         <CardContent className="">
           <Form {...form}>
@@ -70,7 +70,7 @@ const Page = () => {
                   Create Account
                 </Link>
               </p>
-              <p className="mt-4 text-center">
+              <p className="text-center">
                 Forgot Password?{' '}
                 <Link className="text-primary underline" href={PageRoutes.FORGOT_PASSWORD}>
                   Reset Password
@@ -80,7 +80,7 @@ const Page = () => {
           </Form>
         </CardContent>
       </Card>
-    </main>
+    </section>
   )
 }
 

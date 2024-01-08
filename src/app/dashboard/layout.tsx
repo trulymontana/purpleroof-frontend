@@ -3,7 +3,6 @@
 import { Package } from 'lucide-react'
 import Link from 'next/link'
 
-import SideNavBar from '@/components/navigation/side-nav-bar'
 import { UserRoleEnum } from '@/constants/enums'
 import { PageRoutes } from '@/constants/page-routes'
 import { usePathname } from 'next/navigation'
@@ -14,6 +13,7 @@ import { User } from '@/constants/types'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { useEffect, useState } from 'react'
 import Loader from '@/components/Loader'
+import NavBar from '@/components/navigation/dashboard-nav-bar'
 
 const roleToPageMapping = {
   [UserRoleEnum.SUPER_ADMIN]: [
@@ -101,8 +101,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   return (
-    <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
-      <SideNavBar user={userData} />
+    <div className="flex h-auto min-h-screen flex-col">
+      <NavBar user={userData} />
       <div className="flex flex-col">{children}</div>
     </div>
   )

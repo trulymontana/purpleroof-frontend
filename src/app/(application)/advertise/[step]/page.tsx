@@ -84,42 +84,40 @@ const Page = () => {
   }
 
   return (
-    <div>
-      <section className="relative h-auto min-h-screen">
-        <div className="absolute inset-0 -z-10 h-auto min-h-screen w-full bg-indigo-600 bg-opacity-25 bg-advertise bg-cover backdrop-opacity-10" />
-        <div
-          className="t-0 absolute top-0 -z-10 h-full w-full opacity-75"
-          style={{
-            background: 'linear-gradient(to bottom, #795695 30%, #795695 70%)'
-          }}
-        ></div>
-        <WhiteStrokes />
+    <section className="relative h-auto min-h-screen">
+      <div className="absolute inset-0 -z-10 h-auto min-h-screen w-full bg-indigo-600 bg-opacity-25 bg-advertise bg-cover backdrop-opacity-10" />
+      <div
+        className="t-0 absolute top-0 -z-10 h-full w-full opacity-75"
+        style={{
+          background: 'linear-gradient(to bottom, #795695 30%, #795695 70%)'
+        }}
+      />
+      <WhiteStrokes />
 
-        <div className="mx-auto max-w-7xl px-6 py-6 md:py-24 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
-          <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-shrink">
-            <Image
-              src={'/assets/logos/logo-only-white.png'}
-              quality={100}
-              width={1000}
-              height={1000}
-              alt=""
-              className="hidden h-24 w-auto md:flex"
-            />
-            <h1 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-200 sm:text-5xl lg:text-left">
-              Advertise your property
-            </h1>
-            <p className=" text-center text-base leading-8 text-gray-300 md:mt-6 md:text-start md:text-xl">
-              Place a free ad to sell or rent property
-            </p>
-          </div>
-          <div className="mt-16 rounded-md pb-8 text-black sm:mt-24 md:pt-8 lg:mt-0 lg:flex-shrink-0 lg:flex-grow lg:pt-0">
-            <div className="card ml-auto w-full max-w-[500px] rounded-xl border border-gray-200 bg-gray-50 px-4 py-5 shadow-lg sm:px-6">
-              {subComponents[pathName]}
-            </div>
+      <div className="mx-auto max-w-7xl px-6 py-6 md:py-24 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
+        <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-shrink">
+          <Image
+            src={'/assets/logos/logo-only-white.png'}
+            quality={100}
+            width={1000}
+            height={1000}
+            alt=""
+            className="hidden h-24 w-auto md:flex"
+          />
+          <h1 className="mt-10 text-center text-2xl font-bold tracking-tight text-gray-200 sm:text-5xl lg:text-left">
+            Advertise your property
+          </h1>
+          <p className=" text-center text-base leading-8 text-gray-300 md:mt-6 md:text-start md:text-xl">
+            Place a free ad to sell or rent property
+          </p>
+        </div>
+        <div className="mt-16 rounded-md pb-8 text-black sm:mt-24 md:pt-8 lg:mt-0 lg:flex-shrink-0 lg:flex-grow lg:pt-0">
+          <div className="card ml-auto w-full max-w-[500px] rounded-xl border border-gray-200 bg-gray-50 px-4 py-5 shadow-lg sm:px-6">
+            {subComponents[pathName]}
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   )
 }
 

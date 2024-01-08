@@ -49,7 +49,7 @@ export interface Mortgage extends CreateMortgageInput {
   propertyType: PropertyTypeEnum
   completionStatus: CompletionStatusEnum
   emirate: EmirateEnum
-  additionalDetails: string
+  additionalDetail: string
   educationType: EducationEnum
   maritalStatus: MaritalStatusEnum
   favoriteCity: string

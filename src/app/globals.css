@@ -103,3 +103,33 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+.auth_section {
+  display: flex;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: gainsboro;
+}
+
+.auth_card {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.auth_head {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.auth_subhead {
+  font-weight: 300;
+  text-align: center;
+  color: #613e83;
+}

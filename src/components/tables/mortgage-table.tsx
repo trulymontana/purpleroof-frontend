@@ -16,13 +16,13 @@ import currency from '@/lib/currency'
 import { useGetUserRole } from '@/data/hooks/useAuthClient'
 import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
 import { FacetOption } from './data-table/data'
+import { Eye } from 'lucide-react'
 
 export default function MortgagesTable() {
-  const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
 
-  const userRole = useGetUserRole()
+  const role = useGetUserRole();
 
-  const isAdmin = userRole === UserRoleEnum.ADMIN || userRole === UserRoleEnum.SUPER_ADMIN
+  const isAdmin = role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN
 
   const columns: ColumnDef<MortgageApplication>[] = [
     {
@@ -63,6 +63,14 @@ export default function MortgagesTable() {
       }
     },
     {
+      id: 'createdAt',
+      header: 'Created At',
+      cell: ({ row }) => {
+        const createdAt = row.original.createdAt
+        return new Date(createdAt).toLocaleDateString()
+      }
+    },
+    {
       id: 'status',
       header: 'Status',
       accessorKey: 'status',
@@ -82,44 +90,45 @@ export default function MortgagesTable() {
         if (data.status === MortgageStatusEnum.SUBMITTED) {
           return (
             <Link
-              href={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
+              href={isAdmin ? PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id) : PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
                 data.id,
                 LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
               )}
             >
-              <Button>{isAdmin ? 'View Details' : 'Complete Application'}</Button>
+              <Button size="sm">{isAdmin ? 'View Details' : 'Complete Application'}</Button>
             </Link>
           )
         }
         return (
-          <Link href={PageRoutes.dashboard.MORTGAGE_TIMELINE(data.id)}>
-            <Button>{isAdmin ? 'View Details' : 'View Application'}</Button>
+          <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
+            <Button size="sm">{isAdmin ? 'View Details' : 'View Application'}</Button>
           </Link>
         )
       }
     },
-    {
+  ]
+
+  const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
+  const { loading, data } = useGetMortgages()
+
+  if (role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) {
+    columns.push({
       id: 'actions',
       enableHiding: false,
       cell: ({ row }) => (
         <div className="flex items-center">
-          {/* <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
-            <Button variant="ghost">
-              <Eye size={17} color="black" />
-            </Button>
-          </Link> */}
           {isAdmin && (
             <ConfirmActionDialog
               title="Edit Mortgage"
-              anchor={<Button variant="secondary">Update Status</Button>}
+              anchor={<Button variant="secondary" size="sm">Update Status</Button>}
               content={<UpdateMortgageStatusForm data={row.original} />}
             />
           )}
           {isAdmin && <ConfirmDeleteDialog onDelete={() => deleteMortgage(row.original.id)} isLoading={isPending} />}
         </div>
       )
-    }
-  ]
+    })
+  }
 
   const mortgageFilterOptions: FacetOption[] = [
     {
@@ -139,7 +148,6 @@ export default function MortgagesTable() {
     }
   ]
 
-  const { loading, data } = useGetMortgages()
   return (
     <DataTable
       columns={columns}

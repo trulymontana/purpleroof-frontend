@@ -26,7 +26,7 @@ const PropertyInformationCard = ({ data }: Props) => {
           </div>
           <div className="flex justify-between">
             <p>Additional Details</p>
-            <p className="detail">{data?.additionalDetails ?? '-'}</p>
+            <p className="detail">{data?.additionalDetail ?? "-"}</p>
           </div>
         </div>
       </div>

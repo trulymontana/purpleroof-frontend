@@ -42,12 +42,13 @@ const Page = () => {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-white px-4 py-8 dark:bg-gray-800">
-      <Card className="mx-auto w-full max-w-md  bg-opacity-75">
+    <main className="auth_section">
+      <Card className="auth_card">
         <CardHeader>
-          <h1 className="text-center text-4xl font-bold">Forgot Password</h1>
+          <h1 className="auth_head">Forgot Password</h1>
+          <p className="auth_subhead">Reset your password!</p>
         </CardHeader>
-        <CardContent className="p-8">
+        <CardContent className="">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 p-4">
               <div className="space-y-2">
