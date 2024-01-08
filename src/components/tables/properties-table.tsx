@@ -83,9 +83,9 @@ export default function PropertiesTable() {
         return (
           <Badge
             variant="outline"
-            className={data.submissionStatus === PropertySubmissionStatusEnum.APPROVED ? 'bg-teal-600 text-white' : ''}
+            className={`uppercase ${data.submissionStatus === PropertySubmissionStatusEnum.APPROVED ? 'bg-teal-600 text-white' : ''}`}
           >
-            {data.submissionStatus}
+            {data.submissionStatus === PropertySubmissionStatusEnum.SUBMITTED ? "Waiting For approval" : data.submissionStatus}
           </Badge>
         )
       },

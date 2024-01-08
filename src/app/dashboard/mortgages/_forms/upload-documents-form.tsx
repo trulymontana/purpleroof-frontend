@@ -87,7 +87,7 @@ const UploadDocumentsForm = ({ isLoading, handleSubmit, requiredDocuments, mortg
                 <div className="flex flex-col gap-5">
                   <p>All progess of this page will be lost. Are you sure you want to go back?</p>
                   <BackButton
-                    variant="default"
+                    variant="destructive"
                     route={PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
                       mortgageId,
                       LocalStorageKeys.MORTGAGE_CUSTOMER_INFO

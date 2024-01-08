@@ -91,7 +91,7 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
           content={
             <div className="flex flex-col gap-5">
               <p>All progess of this page will be lost. Are you sure you want to go back?</p>
-              <BackButton route={PageRoutes.advertise.CALL_PREFERENCE} />
+              <BackButton variant="destructive" route={PageRoutes.advertise.CALL_PREFERENCE} />
             </div>
           }
         />

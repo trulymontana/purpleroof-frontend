@@ -57,7 +57,7 @@ const formSchema = z.object({
   }),
   uaeResidenceAddress: z.string({
     required_error: 'Please enter your UAE residence address'
-  }),
+  }).optional(),
   homeCountryAddress: z.string({
     required_error: 'Please enter your home country address'
   }),
@@ -101,6 +101,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
       form.setValue('firstName', data?.firstName)
       form.setValue('lastName', data?.lastName)
       form.setValue('email', data?.email)
+      form.setValue('phoneNumber', data?.phoneNumber)
     }
   }, [data])
 
@@ -162,7 +163,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
             <NumberInputElement name="yearsInUae" label="Years in UAE" />
           </div>
           <div className="w-full md:w-1/2">
-            <NumberInputElement name="annualRentalIncome" label="Annual Rental Income" />
+            <NumberInputElement name="annualRentalIncome" label="Annual Rental Income (AED)" />
           </div>
         </div>
         <div className="flex w-full flex-col items-center gap-2 md:flex-row">

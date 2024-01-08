@@ -21,6 +21,14 @@ export default function AgentsTable() {
 
   const columns: ColumnDef<Agent>[] = [
     {
+      id: 'createdAt',
+      header: 'Applied At',
+      cell: ({ row }) => {
+        const createdAt = row.original.createdAt
+        return new Date(createdAt).toLocaleDateString()
+      }
+    },
+    {
       accessorKey: 'id',
       header: 'ID'
     },
@@ -35,14 +43,6 @@ export default function AgentsTable() {
         }
 
         return <span>Not Provided</span>
-      }
-    },
-    {
-      id: 'createdAt',
-      header: 'Applied At',
-      cell: ({ row }) => {
-        const createdAt = row.original.createdAt
-        return new Date(createdAt).toLocaleDateString()
       }
     },
     {
