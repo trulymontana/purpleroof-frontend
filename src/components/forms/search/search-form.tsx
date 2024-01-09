@@ -52,7 +52,6 @@ const formSchema = z.object({
 })
 
 const SearchForm = ({ searchProperties, isLoading }: Props) => {
-  const [locations, setLocations] = useState<TOption[]>([])
   const [isOpen, setIsOpen] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -89,35 +88,25 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
   const propertyTypes = form.watch('propertyTypes')
   const propertyCategory = form.watch('propertyCategories')
 
-  useEffect(() => {
-    emirates &&
-      emirates.length > 0 &&
-      emirates.map((emirate: TOption) => {
-        // @ts-ignore
-        const response: TOption[] = emiratesWithLocations[emirate.value]
-        setLocations((prevLocations: any) => [...prevLocations, ...response])
-      })
-  }, [emirates])
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="mx-auto flex w-3/4 flex-col gap-2 rounded-xl bg-white">
         <div className="mx-auto flex-1 py-4">
           <CustomTabRadioGroup name="propertyFor" options={propertyForOptions} />
         </div>
-        <div className="mx-auto w-1/2 flex-1 py-4">
+        <div className="mx-auto w-full xl:w-1/2 flex-1 py-4">
           <TabRadioGroup name="propertyTypes" options={typesOfProperties} />
         </div>
         <div className="flex flex-col items-center gap-5 rounded-lg p-4">
-          <div className="flex w-full items-center gap-4">
-            <div className="flex-1">
+          <div className="flex flex-col lg:flex-row w-full items-center gap-4">
+            <div className="flex-1 w-full xl:w-fit">
               <MultiSelectElement
                 name="emirates"
                 placeholder="Please select emirates"
                 options={emirateOptions}
               />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 w-full xl:w-fit">
               <MultiSelectElement
                 disabled={!emirates || emirates.length === 0}
                 name="locations"
@@ -129,7 +118,7 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
                 options={locationOptions || [{ label: 'Dubai', value: '1' }]}
               />
             </div>
-            <div className="flex-1">
+            <div className="flex-1 w-full xl:w-fit">
               <MultiSelectElement
                 name="propertyCategories"
                 options={propertyCategory === PropertyTypeEnum.RESIDENTIAL ? residentalTypes : commercialTypes}
@@ -137,16 +126,16 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
               />
             </div>
           </div>
-          <div className="flex w-full items-center justify-center gap-4">
+          <div className="flex flex-col lg:flex-row w-full items-center justify-center gap-4">
             {propertyTypes === PropertyTypeEnum.RESIDENTIAL && (
               <>
-                <div className="w-[10%]">
+                <div className="w-full lg:w-[10%]">
                   <NumberInputElement name="bed" placeholder="No. of Bedrooms" />
                 </div>
-                <div className="w-[10%]">
+                <div className="w-full lg:w-[10%]">
                   <NumberInputElement name="bath" placeholder="No. of Bathrooms" />
                 </div>
-                <div className="flex-1">
+                <div className="w-full lg:flex-1">
                   <MultiSelectElement name="amenities" placeholder="Select Amenities" options={amenities} />
                 </div>
               </>
