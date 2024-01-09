@@ -117,7 +117,7 @@ export default function AgentsTable() {
           {row.original.approvalStatus === ApprovalStatusEnum.NOT_APPROVED && (
             <ConfirmActionDialog
               title="Are you sure you want to approve this agent?"
-              anchor={<Button>Approve Agent</Button>}
+              anchor={<Button variant={'outline'}>Approve Agent</Button>}
               content={<AgentApprovalStatusForm data={row.original} />}
             />
           )}

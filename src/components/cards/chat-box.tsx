@@ -38,7 +38,11 @@ interface Props {
 const ChatBox = ({ mortgageId, userDetails }: Props) => {
   const [chatOpen, setChatOpen] = useState(false)
   const { data: comments } = useGetCommentsByMortgage(Number(mortgageId))
-  const { mutate: sendComment, isPending: isLoading } = useCreateCommentMutation()
+
+  const onMessageSent = () => {
+    form.setValue('title', '')
+  }
+  const { mutate: sendComment, isPending: isLoading } = useCreateCommentMutation(onMessageSent)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema)
@@ -47,7 +51,7 @@ const ChatBox = ({ mortgageId, userDetails }: Props) => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     sendComment({
       mortgageId: Number(mortgageId),
-      attachments: [values.attachment ?? ''],
+      attachments: values.attachment ? [values.attachment] : [],
       message: '',
       ...values
     })
@@ -87,7 +91,7 @@ const ChatBox = ({ mortgageId, userDetails }: Props) => {
                               </Avatar>
                             </div>
                             <div className="ml-2 flex-1">
-                              <div className="rounded-r-lg bg-blue-100 p-3 text-black dark:bg-blue-900 dark:text-white">
+                              <div className="rounded-lg bg-blue-100 p-3 text-black dark:bg-blue-900 dark:text-white">
                                 {comment.title}
                               </div>
                             </div>
@@ -95,7 +99,7 @@ const ChatBox = ({ mortgageId, userDetails }: Props) => {
                         ) : (
                           <div className="flex items-end justify-end">
                             <div className="mr-2 flex-1">
-                              <div className="rounded-l-lg bg-gray-200 p-3 text-black dark:bg-gray-800 dark:text-white">
+                              <div className="rounded-lg bg-gray-200 p-3 text-black dark:bg-gray-800 dark:text-white">
                                 {comment.title}
                               </div>
                             </div>
@@ -115,9 +119,9 @@ const ChatBox = ({ mortgageId, userDetails }: Props) => {
                 <div className="flex w-full items-center space-x-2">
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                      <FileUploader form={form} folder="mortgage" name="attachment" label="Attachment" />
                       <div className="flex w-full flex-col items-center gap-2">
-                        <TextAreaElement name="title" placeholder="Type here..." className="w-full" />
+                        <TextAreaElement name="title" placeholder="Type here..." className="h-[100px] w-[380px]" />
+                        {/* <FileUploader form={form} folder="mortgage" name="attachment" label="" /> */}
                         <Button disabled={isLoading} type="submit" className="h-full w-full">
                           {isLoading ? (
                             'Sending...'

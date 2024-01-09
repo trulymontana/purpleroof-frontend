@@ -17,7 +17,7 @@ export function useGetMortgages() {
 
 export function useGetOneMortgage(id: number) {
   const { isFetching, isLoading, data } = useQuery({
-    queryKey: [ApiEndpoints.MORTGAGES],
+    queryKey: [`${ApiEndpoints.MORTGAGES}-${id}`],
     queryFn: () => mortgageClient.getById({ id })
   })
 
@@ -54,12 +54,6 @@ export const useDeleteMortgageMutation = () => {
         title: 'Mortgage deleted successfully'
       })
     },
-    onError: (error: any) => {
-      toast({
-        variant: 'destructive',
-        title: error.response.data.message
-      })
-    },
     onSettled: () => {
       queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
     }
@@ -80,14 +74,8 @@ export const useUpdateMortgageMutation = () => {
       localStorage.removeItem(`${LocalStorageKeys.MORTGAGE_CUSTOMER_INFO}-${data.data.id}`)
       router.push(PageRoutes.dashboard.MORTGAGES)
     },
-    onError: (error: any) => {
-      toast({
-        variant: 'destructive',
-        title: error.message
-      })
-    },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.MORTGAGES] })
     }
   })
 }

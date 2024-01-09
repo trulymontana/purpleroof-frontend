@@ -19,8 +19,7 @@ import { FacetOption } from './data-table/data'
 import { Eye } from 'lucide-react'
 
 export default function MortgagesTable() {
-
-  const role = useGetUserRole();
+  const role = useGetUserRole()
   const isAdmin = role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN
 
   const columns: ColumnDef<MortgageApplication>[] = [
@@ -75,6 +74,12 @@ export default function MortgagesTable() {
       accessorKey: 'status',
       cell: ({ row }) => {
         const data = row.original
+        if (data.status === MortgageStatusEnum.APPROVED) {
+          return <Badge className={`bg-teal-600 text-white hover:bg-teal-500`}>{data.status}</Badge>
+        }
+        if (data.status === MortgageStatusEnum.CASE_DECLINED) {
+          return <Badge className={`bg-red-600 text-white hover:bg-red-500`}>{data.status}</Badge>
+        }
         return <Badge variant="outline">{data.status}</Badge>
       },
       filterFn: (row, id, value) => {
@@ -89,10 +94,14 @@ export default function MortgagesTable() {
         if (data.status === MortgageStatusEnum.SUBMITTED) {
           return (
             <Link
-              href={isAdmin ? PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id) : PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
-                data.id,
-                LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
-              )}
+              href={
+                isAdmin
+                  ? PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)
+                  : PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
+                      data.id,
+                      LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
+                    )
+              }
             >
               <Button size="sm">{isAdmin ? 'View Details' : 'Complete Application'}</Button>
             </Link>
@@ -104,7 +113,7 @@ export default function MortgagesTable() {
           </Link>
         )
       }
-    },
+    }
   ]
 
   const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
@@ -119,7 +128,11 @@ export default function MortgagesTable() {
           {isAdmin && (
             <ConfirmActionDialog
               title="Edit Mortgage"
-              anchor={<Button variant="secondary" size="sm">Update Status</Button>}
+              anchor={
+                <Button variant="secondary" size="sm">
+                  Update Status
+                </Button>
+              }
               content={<UpdateMortgageStatusForm data={row.original} />}
             />
           )}

@@ -16,7 +16,7 @@ export function useGetRequirements() {
 
 export function useGetOneRequirement(id: number) {
   const { isLoading, data } = useQuery({
-    queryKey: [ApiEndpoints.REQUIREMENTS],
+    queryKey: [`${ApiEndpoints.REQUIREMENTS}-${id}`],
     queryFn: () => requirementsClient.getById({ id })
   })
 
@@ -37,12 +37,6 @@ export const useCreateRequirementMutation = () => {
       })
       queryClient.refetchQueries({ queryKey: [ApiEndpoints.REQUIREMENTS] })
       router.push(PageRoutes.dashboard.admin.REQUIREMENTS)
-    },
-    onError: (error: any) => {
-      toast({
-        variant: 'destructive',
-        title: error.message
-      })
     }
   })
 }
@@ -58,13 +52,10 @@ export const useUpdateRequirementMutation = () => {
         variant: 'default',
         title: 'Requirement updated successfully'
       })
+      queryClient.refetchQueries({
+        queryKey: [ApiEndpoints.REQUIREMENTS]
+      })
       router.push(PageRoutes.dashboard.admin.REQUIREMENTS)
-      // queryClient.invalidateQueries({
-      //   queryKey: [ApiEndpoints.REQUIREMENTS]
-      // })
-      // queryClient.refetchQueries({
-      //   queryKey: [ApiEndpoints.REQUIREMENTS]
-      // })
     }
   })
 }

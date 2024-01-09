@@ -70,13 +70,6 @@ export function useSignIn() {
       }
 
       // queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
-    },
-    onError: (error: any) => {
-      toast({
-        variant: 'destructive',
-        title: error.response.data.message,
-        description: error.response.data.details
-      })
     }
   })
 }
