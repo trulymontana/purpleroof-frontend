@@ -15,31 +15,41 @@ import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/rea
 export const userColumns: ColumnDef<User>[] = [
   {
     accessorKey: 'id',
-    header: 'ID'
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="ID" />
+    ),
   },
   {
     accessorKey: 'firstName',
-    header: 'First Name'
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="First Name" />
+    ),
   },
   {
     accessorKey: 'lastName',
-    header: 'Last Name'
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Last Name" />
+    ),
   },
   {
     accessorKey: 'email',
     header: ({ column }) => <DataTableColumnHeader column={column} title="Email" />
   },
   {
-    id: 'createdAt',
-    header: 'Created At',
+    accessorKey: 'createdAt',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Created At" />
+    ),
     cell: ({ row }) => {
       const createdAt = row.original.createdAt
       return new Date(createdAt).toLocaleDateString()
     }
   },
   {
-    id: 'updatedAt',
-    header: 'Updated At',
+    accessorKey: 'updatedAt',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Updated At" />
+    ),
     cell: ({ row }) => {
       const updatedAt = row.original.createdAt
       return new Date(updatedAt).toLocaleDateString()
