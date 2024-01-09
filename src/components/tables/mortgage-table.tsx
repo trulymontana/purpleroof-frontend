@@ -16,7 +16,7 @@ import currency from '@/lib/currency'
 import { useGetUserRole } from '@/data/hooks/useAuthClient'
 import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
 import { FacetOption } from './data-table/data'
-import { Eye } from 'lucide-react'
+import { DataTableColumnHeader } from './data-table/data-table-column-header'
 
 export default function MortgagesTable() {
   const role = useGetUserRole()
@@ -25,27 +25,39 @@ export default function MortgagesTable() {
   const columns: ColumnDef<MortgageApplication>[] = [
     {
       accessorKey: 'id',
-      header: 'ID'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="ID" />
+      ),
     },
     {
       accessorKey: 'firstName',
-      header: 'First Name'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="First Name" />
+      ),
     },
     {
       accessorKey: 'lastName',
-      header: 'Last Name'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Last Name" />
+      ),
     },
     {
       accessorKey: 'email',
-      header: 'Email'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Email" />
+      ),
     },
     {
       accessorKey: 'phoneNumber',
-      header: 'Phone Number'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Phone Number" />
+      ),
     },
     {
-      id: 'dateOfBirth',
-      header: 'Date of Birth',
+      accessorKey: 'dateOfBirth',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Date of Birth" />
+      ),
       cell: ({ row }) => {
         const data = row.original
         const dob = new Date(data.dateOfBirth).toLocaleDateString()
@@ -53,25 +65,28 @@ export default function MortgagesTable() {
       }
     },
     {
-      id: 'monthlyIncome',
-      header: 'Monthly Income',
+      accessorKey: 'monthlyIncome',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Montly Income" />
+      ),
       cell: ({ row }) => {
         const monthlyIncome = row.original.monthlyIncome
         return <span>{currency.format(monthlyIncome)}</span>
       }
     },
     {
-      id: 'createdAt',
-      header: 'Created At',
+      accessorKey: 'createdAt',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Created At" />
+      ),
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()
       }
     },
     {
-      id: 'status',
-      header: 'Status',
       accessorKey: 'status',
+      header: 'Status',
       cell: ({ row }) => {
         const data = row.original
         if (data.status === MortgageStatusEnum.APPROVED) {
@@ -98,9 +113,9 @@ export default function MortgagesTable() {
                 isAdmin
                   ? PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)
                   : PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
-                      data.id,
-                      LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
-                    )
+                    data.id,
+                    LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
+                  )
               }
             >
               <Button size="sm">{isAdmin ? 'View Details' : 'Complete Application'}</Button>
@@ -115,7 +130,6 @@ export default function MortgagesTable() {
       }
     }
   ]
-
   const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
   const { loading, data } = useGetMortgages()
 

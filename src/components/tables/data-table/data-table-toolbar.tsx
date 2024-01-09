@@ -9,6 +9,10 @@ import { DataTableViewOptions } from '@/components/tables/data-table/data-table-
 
 import { FacetOption } from './data'
 import { DataTableFacetedFilter } from './data-table-faceted-filter'
+import DateRangePickerElement from '@/components/forms/elements/date-range-picker-element'
+import { useEffect, useState } from 'react'
+import { DateRange } from 'react-day-picker'
+import { addDays } from 'date-fns'
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -20,6 +24,8 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({ table, filterKey, facetKey, facetOptions }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0
 
+  const [date, setDate] = useState<DateRange | undefined>()
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-1 items-center space-x-2">
@@ -29,6 +35,8 @@ export function DataTableToolbar<TData>({ table, filterKey, facetKey, facetOptio
           onChange={(event) => table.getColumn(filterKey)?.setFilterValue(event.target.value)}
           className="h-8 w-[150px] lg:w-[250px]"
         />
+        <DateRangePickerElement date={date} setDate={setDate} />
+
         {facetKey && table.getColumn(facetKey) && (
           <DataTableFacetedFilter column={table.getColumn(facetKey)} title="Status" options={facetOptions ?? []} />
         )}

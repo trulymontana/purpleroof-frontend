@@ -15,14 +15,17 @@ import { DownloadIcon } from 'lucide-react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 import { Card, CardHeader, CardTitle } from '../ui/card'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
+import { DataTableColumnHeader } from './data-table/data-table-column-header'
 
 export default function AgentsTable() {
   const { mutate: deleteAgent, isPending } = useDeleteAgentMutation()
 
   const columns: ColumnDef<Agent>[] = [
     {
-      id: 'createdAt',
-      header: 'Applied At',
+      accessorKey: 'createdAt',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Applied At" />
+      ),
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()
@@ -30,24 +33,28 @@ export default function AgentsTable() {
     },
     {
       accessorKey: 'id',
-      header: 'ID'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="ID" />
+      ),
     },
     {
-      id: 'agency',
-      header: 'Agency Name',
+      accessorKey: 'agency',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Agency Name" />
+      ),
       cell: ({ row }) => {
         const agency = row.original.agency
-
         if (agency) {
           return <span>{agency}</span>
         }
-
         return <span>Not Provided</span>
       }
     },
     {
       accessorKey: 'contactNumber',
-      header: 'Contact Number'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Contact Number" />
+      ),
     },
     {
       id: 'activeStatus',

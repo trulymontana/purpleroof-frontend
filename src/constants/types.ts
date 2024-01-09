@@ -134,3 +134,11 @@ export type historyType = {
   description: string
   mortgageId: number
 }
+
+export interface Email {
+  subject: string
+  name: string
+  emailFrom: string
+  emailTo: string
+  message: string
+}

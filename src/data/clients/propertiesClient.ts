@@ -1,4 +1,4 @@
-import { QueryOptions, TOption } from '@/constants/types'
+import { QueryOptions, TOption, User } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
@@ -77,6 +77,7 @@ export interface Property extends CreatePropertyInput {
   location: {
     name: string
   }
+  user?: User
 }
 
 export const propertiesClient = {

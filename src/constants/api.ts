@@ -15,5 +15,6 @@ export const ApiEndpoints = {
   LOCATIONS: API_ROOT + '/locations',
   USER: API_ROOT + '/auth/user',
   COMMENTS: API_ROOT + '/comments',
-  COMMENTS_BY_MORTGAGE: API_ROOT + '/comments/all-by-mortgage'
+  COMMENTS_BY_MORTGAGE: API_ROOT + '/comments/all-by-mortgage',
+  SEND_EMAIL: API_ROOT + '/common/send-email'
 }

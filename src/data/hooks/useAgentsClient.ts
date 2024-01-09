@@ -3,6 +3,7 @@ import { ApiEndpoints } from '@/constants/api'
 import { toast } from '@/components/ui/use-toast'
 import { agentsClient } from '../clients/agentsClient'
 import { useRouter } from 'next/navigation'
+import { PageRoutes } from '@/constants/page-routes'
 
 export function useGetAgents() {
   const { isLoading, data } = useQuery({
@@ -96,6 +97,19 @@ export function useUpdateActiveStatusMutation() {
         })
         queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
       }
+    }
+  })
+}
+
+export const useSendEmailToAgentMutation = () => {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: agentsClient.sendEmailToAgent,
+    onSuccess: (data: any) => {
+      toast({
+        variant: 'default',
+        title: 'Email sent successfully'
+      })
     }
   })
 }

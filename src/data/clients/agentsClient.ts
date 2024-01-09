@@ -1,4 +1,4 @@
-import { QueryOptions } from '@/constants/types'
+import { Email, QueryOptions } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
@@ -24,6 +24,7 @@ export interface Agent extends CreateAgentInput {
     agentId: number
     firstName: string
     lastName: string
+    email: string
   }
 }
 
@@ -37,5 +38,8 @@ export const agentsClient = {
   },
   updateActiveStatus: (data: any) => {
     return HttpClient.patch<any>(`${ApiEndpoints.AGENTS}/${data.id}/update-active-status/${data.activeStatus}`, data)
+  },
+  sendEmailToAgent: (data: Email) => {
+    return HttpClient.post<any>(`${ApiEndpoints.SEND_EMAIL}`, data)
   }
 }
