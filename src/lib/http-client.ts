@@ -21,24 +21,24 @@ axiosClient.interceptors.request.use((config: any) => {
   return config
 })
 
-// axiosClient.interceptors.response.use(
-//   (response: any) => {
-//     if (response && response.data) {
-//       return response.data
-//     }
-//     return response
-//   },
-//   (error: any) => {
-//     // if (error.response) {
-//     //   console.error(error.response.data)
-//     // } else if (error.request) {
-//     //   console.error(error.request)
-//     // } else {
-//     //   console.error('Error', error.message)
-//     // }
-//     return Promise.reject(error)
-//   }
-// )
+axiosClient.interceptors.response.use(
+  (response: any) => {
+    if (response && response.data) {
+      return response.data
+    }
+    return response
+  },
+  (error: any) => {
+    // if (error.response) {
+    //   console.error(error.response.data)
+    // } else if (error.request) {
+    //   console.error(error.request)
+    // } else {
+    //   console.error('Error', error.message)
+    // }
+    return Promise.reject(error)
+  }
+)
 
 export default class HttpClient {
   static async get<T>(url: string, params?: unknown) {

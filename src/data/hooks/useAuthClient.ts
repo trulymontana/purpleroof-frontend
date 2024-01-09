@@ -51,24 +51,16 @@ export function useSignIn() {
     mutationFn: authClient.signIn,
     onSuccess: (response: any) => {
       const { statusCode, data } = response
-
-      if (statusCode === 200) {
-        toast({
-          variant: 'default',
-          title: 'Signed in successfully'
-        })
-
-        const { jwtToken, user } = data
-
-        const { firstName, lastName, email, role, id } = user
-
-        localStorage.setItem(LocalStorageKeys.AUTH_TOKEN, jwtToken)
-        const newUser = JSON.stringify({ firstName, lastName, email, role, id })
-        localStorage.setItem(LocalStorageKeys.USER, newUser)
-
-        router.push(PageRoutes.dashboard.MORTGAGES)
-      }
-
+      toast({
+        variant: 'default',
+        title: 'Signed in successfully'
+      })
+      const { jwtToken, user } = data
+      const { firstName, lastName, email, role, id } = user
+      localStorage.setItem(LocalStorageKeys.AUTH_TOKEN, jwtToken)
+      const newUser = JSON.stringify({ firstName, lastName, email, role, id })
+      localStorage.setItem(LocalStorageKeys.USER, newUser)
+      router.push(PageRoutes.dashboard.MORTGAGES)
       // queryClient.invalidateQueries({ queryKey: [ApiEndpoints.PROPERTIES] })
     }
   })

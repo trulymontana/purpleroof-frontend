@@ -83,5 +83,8 @@ export const propertiesClient = {
   ...crudFactory<Property, QueryOptions, CreatePropertyInput>(ApiEndpoints.PROPERTIES),
   assignAgent: (data: any) => {
     return HttpClient.patch<any>(`${ApiEndpoints.PROPERTIES}/assign-agent/${data.id}/${data.agentId}`, data)
+  },
+  getByPublicId: (id: number) => {
+    return HttpClient.get<Property>(`${ApiEndpoints.PROPERTIES}/public/${id}`)
   }
 }
