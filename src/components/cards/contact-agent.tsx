@@ -51,7 +51,7 @@ const ContactAgentCard = ({ data }: Props) => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const emailData: Email = { ...values, emailTo: 'bhaveshy737@gmail.com' }
+    const emailData: Email = { ...values, emailTo: data?.agent?.user?.email }
     sendEmail({
       ...emailData
     })

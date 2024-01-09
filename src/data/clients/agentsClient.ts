@@ -24,6 +24,7 @@ export interface Agent extends CreateAgentInput {
     agentId: number
     firstName: string
     lastName: string
+    email: string
   }
 }
 
