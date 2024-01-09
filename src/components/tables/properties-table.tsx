@@ -18,9 +18,10 @@ import { PropertySubmissionStatusEnum, UserRoleEnum } from '@/constants/enums'
 import { useGetUserRole } from '@/data/hooks/useAuthClient'
 import { FacetOption } from './data-table/data'
 import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
+import { DataTableColumnHeader } from './data-table/data-table-column-header'
 
 export default function PropertiesTable() {
-  const { loading: isLoading, data: agentsData } = useGetAgents()
+  const { data: agentsData } = useGetAgents()
 
   const { mutate: deleteProperty, isPending } = useDeletePropertyMutation()
 
@@ -29,59 +30,72 @@ export default function PropertiesTable() {
   const columns: ColumnDef<Property>[] = [
     {
       accessorKey: 'id',
-      header: 'ID'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="ID" />
+      ),
     },
     {
-      id: 'name',
-      header: 'Name',
+      accessorKey: "name",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Name" />
+      ),
       cell: ({ row }) => {
         return <span className="line-clamp-1 max-w-sm">{row.original.name}</span>
       }
     },
     {
       accessorKey: 'email',
-      header: 'Email'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Email" />
+      ),
     },
     {
       accessorKey: 'phone',
-      header: 'Phone'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Phone" />
+      ),
     },
     {
-      id: 'amount',
-      header: 'Amount',
+      accessorKey: 'amount',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Amount" />
+      ),
       cell: ({ row }) => {
         const monthlyIncome = row.original.amount
         return <span>{currency.format(monthlyIncome)}</span>
       }
     },
     {
-      accessorKey: 'locationId',
-      header: 'Location'
-    },
-    {
       accessorKey: 'landmark',
-      header: 'Landmark'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Landmark" />
+      ),
     },
     {
-      id: 'createdAt',
-      header: 'Created',
+      accessorKey: 'createdAt',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Created At" />
+      ),
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()
       }
     },
     {
-      id: 'updatedAt',
-      header: 'Updated',
+      accessorKey: 'updatedAt',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Updated At" />
+      ),
       cell: ({ row }) => {
         const updatedAt = row.original.createdAt
         return new Date(updatedAt).toLocaleDateString()
       }
     },
     {
-      id: 'submissionStatus',
-      header: 'Submission Status',
       accessorKey: 'submissionStatus',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Submission Status" />
+      ),
       cell: ({ row }) => {
         const data = row.original
         if (data.submissionStatus === PropertySubmissionStatusEnum.REJECTED) {
@@ -104,7 +118,7 @@ export default function PropertiesTable() {
       }
     },
     {
-      id: 'agent',
+      accessorKey: 'agent',
       header: 'Agent',
       cell: ({ row }) => {
         const data = row.original

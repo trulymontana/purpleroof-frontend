@@ -16,7 +16,6 @@ import currency from '@/lib/currency'
 import { useGetUserRole } from '@/data/hooks/useAuthClient'
 import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
 import { FacetOption } from './data-table/data'
-import { ArrowUpDown } from 'lucide-react'
 import { DataTableColumnHeader } from './data-table/data-table-column-header'
 
 export default function MortgagesTable() {
@@ -26,7 +25,9 @@ export default function MortgagesTable() {
   const columns: ColumnDef<MortgageApplication>[] = [
     {
       accessorKey: 'id',
-      header: 'ID'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="ID" />
+      ),
     },
     {
       accessorKey: 'firstName',
@@ -48,11 +49,15 @@ export default function MortgagesTable() {
     },
     {
       accessorKey: 'phoneNumber',
-      header: 'Phone Number'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Phone Number" />
+      ),
     },
     {
-      id: 'dateOfBirth',
-      header: 'Date of Birth',
+      accessorKey: 'dateOfBirth',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Date of Birth" />
+      ),
       cell: ({ row }) => {
         const data = row.original
         const dob = new Date(data.dateOfBirth).toLocaleDateString()
@@ -60,25 +65,28 @@ export default function MortgagesTable() {
       }
     },
     {
-      id: 'monthlyIncome',
-      header: 'Montly Income',
+      accessorKey: 'monthlyIncome',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Montly Income" />
+      ),
       cell: ({ row }) => {
         const monthlyIncome = row.original.monthlyIncome
         return <span>{currency.format(monthlyIncome)}</span>
       }
     },
     {
-      id: 'createdAt',
-      header: 'Created At',
+      accessorKey: 'createdAt',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Created At" />
+      ),
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()
       }
     },
     {
-      id: 'status',
-      header: 'Status',
       accessorKey: 'status',
+      header: 'Status',
       cell: ({ row }) => {
         const data = row.original
         if (data.status === MortgageStatusEnum.APPROVED) {
