@@ -55,6 +55,10 @@ export default function PropertiesTable() {
       }
     },
     {
+      accessorKey: 'locationId',
+      header: 'Location'
+    },
+    {
       accessorKey: 'landmark',
       header: 'Landmark'
     },
@@ -86,9 +90,8 @@ export default function PropertiesTable() {
         return (
           <Badge
             variant="outline"
-            className={`uppercase ${
-              data.submissionStatus === PropertySubmissionStatusEnum.APPROVED ? 'bg-teal-600 text-white' : ''
-            }`}
+            className={`uppercase ${data.submissionStatus === PropertySubmissionStatusEnum.APPROVED ? 'bg-teal-600 text-white' : ''
+              }`}
           >
             {data.submissionStatus === PropertySubmissionStatusEnum.SUBMITTED
               ? 'Waiting For approval'
@@ -184,6 +187,7 @@ export default function PropertiesTable() {
       columns={columns}
       data={data ?? []}
       isLoading={loading}
+      filterKey='name'
       facetKey={'submissionStatus'}
       facetOptions={propertyFilterOptions}
     />

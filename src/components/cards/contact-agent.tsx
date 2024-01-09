@@ -13,24 +13,26 @@ import TextAreaElement from '../forms/elements/text-area-element'
 import { Form } from '../ui/form'
 import PhoneNumberInputElement from '../forms/elements/phone-number-input'
 import { Property } from '@/data/clients/propertiesClient'
+import { useSendEmailToAgentMutation } from '@/data/hooks/useAgentsClient'
+import { Email } from '@/constants/types'
 
 const formSchema = z.object({
   name: z.string({
     required_error: 'Please enter your name'
   }),
-  email: z
+  emailFrom: z
     .string({
       required_error: 'Please enter your email'
     })
     .email(),
-  phoneNumber: z
+  subject: z
     .string({
       required_error: 'Please enter a valid phone number.'
     })
     .min(10, {
       message: 'Phone number must be at least 10 characters.'
     }),
-  message: z.string().optional()
+  message: z.string()
 })
 
 interface Props {
@@ -38,6 +40,9 @@ interface Props {
 }
 
 const ContactAgentCard = ({ data }: Props) => {
+
+  const { mutate: sendEmail, isPending: isLoading } = useSendEmailToAgentMutation()
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,7 +51,10 @@ const ContactAgentCard = ({ data }: Props) => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log({ values })
+    const emailData: Email = { ...values, emailTo: 'bhaveshy737@gmail.com' }
+    sendEmail({
+      ...emailData
+    })
   }
 
   return (
@@ -79,11 +87,11 @@ const ContactAgentCard = ({ data }: Props) => {
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
                     <InputElement name="name" label="Name" />
-                    <InputElement name="email" label="Email" />
-                    <PhoneNumberInputElement name="phoneNumber" label="Phone Number" />
+                    <InputElement name="emailFrom" label="Email" />
+                    <PhoneNumberInputElement name="subject" label="Phone Number" />
                     <TextAreaElement label="Message" name="message" />
-                    <Button type="submit" className="w-full">
-                      Send Email
+                    <Button disabled={isLoading} type="submit" className="w-full">
+                      {isLoading ? "Sending..." : "Send Email"}
                     </Button>
                   </form>
                 </Form>

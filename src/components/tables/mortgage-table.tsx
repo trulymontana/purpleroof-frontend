@@ -16,7 +16,8 @@ import currency from '@/lib/currency'
 import { useGetUserRole } from '@/data/hooks/useAuthClient'
 import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
 import { FacetOption } from './data-table/data'
-import { Eye } from 'lucide-react'
+import { ArrowUpDown } from 'lucide-react'
+import { DataTableColumnHeader } from './data-table/data-table-column-header'
 
 export default function MortgagesTable() {
   const role = useGetUserRole()
@@ -29,15 +30,21 @@ export default function MortgagesTable() {
     },
     {
       accessorKey: 'firstName',
-      header: 'First Name'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="First Name" />
+      ),
     },
     {
       accessorKey: 'lastName',
-      header: 'Last Name'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Last Name" />
+      ),
     },
     {
       accessorKey: 'email',
-      header: 'Email'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Email" />
+      ),
     },
     {
       accessorKey: 'phoneNumber',
@@ -54,7 +61,7 @@ export default function MortgagesTable() {
     },
     {
       id: 'monthlyIncome',
-      header: 'Monthly Income',
+      header: 'Montly Income',
       cell: ({ row }) => {
         const monthlyIncome = row.original.monthlyIncome
         return <span>{currency.format(monthlyIncome)}</span>
@@ -98,9 +105,9 @@ export default function MortgagesTable() {
                 isAdmin
                   ? PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)
                   : PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
-                      data.id,
-                      LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
-                    )
+                    data.id,
+                    LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
+                  )
               }
             >
               <Button size="sm">{isAdmin ? 'View Details' : 'Complete Application'}</Button>
@@ -115,7 +122,6 @@ export default function MortgagesTable() {
       }
     }
   ]
-
   const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
   const { loading, data } = useGetMortgages()
 
