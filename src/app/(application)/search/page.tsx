@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { Property } from '@/data/clients/propertiesClient'
 import PropertyCard from '@/components/cards/property-card'
-import SearchForm from './_forms/search-form'
+import SearchForm from '@/components/forms/search/search-form'
 import { useSearchProperties } from '@/data/hooks/useSearchClient'
 
 const Page = () => {

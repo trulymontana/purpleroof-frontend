@@ -10,7 +10,7 @@ import {
   PropertyDetailsForm,
   RentPropertyDetailsForm,
   UploadDocumentsForm
-} from '../_form'
+} from '@/components/forms/advertise'
 import { usePathname, useSearchParams } from 'next/navigation'
 
 import Image from 'next/image'
@@ -20,7 +20,7 @@ import { useCreatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 import { CreatePropertyInput } from '@/data/clients/propertiesClient'
 import { nullCheckAndMerge } from '@/lib/utils'
 import { PropertyForEnum } from '@/constants/enums'
-import ApplicationCompletedForm from '../_form/application-completed-form'
+import ApplicationCompletedForm from '../../../../components/forms/advertise/application-completed-form'
 
 const Page = () => {
   const pathName = usePathname()

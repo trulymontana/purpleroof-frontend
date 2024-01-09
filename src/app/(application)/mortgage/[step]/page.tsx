@@ -3,13 +3,13 @@
 import { PageRoutes } from '@/constants/page-routes'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import IncomeDetailsForm from '../_form/income-details-form'
-import PersonalDetailsForm from '../_form/personal-details-form'
+import IncomeDetailsForm from '@/components/forms/mortgage/income-details-form'
+import PersonalDetailsForm from '@/components/forms/mortgage/personal-details-form'
 import BoxStrokesIcon from '@/components/svgs/box-strokes'
 import { useCreateMortgageMutation } from '@/data/hooks/useMortgageClient'
 import { MortgageStatusEnum } from '@/constants/enums'
 import { CreateMortgageInput } from '@/data/clients/mortgageClient'
-import CompleteApplicationForm from '../_form/complete-application-form'
+import CompleteApplicationForm from '@/components/forms/mortgage/complete-application-form'
 
 const Page = () => {
   const pathName = usePathname()
