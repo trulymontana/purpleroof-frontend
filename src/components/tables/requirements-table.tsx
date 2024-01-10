@@ -10,6 +10,7 @@ import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 import { Card, CardHeader, CardTitle } from '../ui/card'
 import { Button } from '../ui/button'
+import { DataTableColumnHeader } from './data-table/data-table-column-header'
 
 export default function RequirementsTable() {
   const { mutate: deleteRequirement, isPending: isLoading } = useDeleteRequirementMutation()
@@ -17,43 +18,73 @@ export default function RequirementsTable() {
   const columns: ColumnDef<RequirementApplication>[] = [
     {
       accessorKey: 'id',
-      header: 'Id'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="ID" />
+      ),
     },
     {
       accessorKey: 'name',
-      header: 'Name'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Name" />
+      ),
     },
     {
       accessorKey: 'incomeProfile',
-      header: 'Income Profile'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Income Profile" />
+      ),
     },
     {
       accessorKey: 'residenceType',
-      header: 'Residence Type'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Residency Type" />
+      ),
     },
     {
       accessorKey: 'preApprovalFee',
-      header: 'Pre Approval (AED)'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Pre Approval (AED)" />
+      ),
     },
     {
       accessorKey: 'processingFee',
-      header: 'Processing (%)'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Processing (%)" />
+      ),
     },
     {
       accessorKey: 'lifeInsurance',
-      header: 'Life Insurance (%)'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Life Insurance (%)" />
+      ),
     },
     {
       accessorKey: 'propertyInsurance',
-      header: 'Property Insurance (%)'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Property Insurance (%)" />
+      ),
     },
     {
       accessorKey: 'valuationFee',
-      header: 'Valuation (AED)'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Valuation (AED)" />
+      ),
     },
     {
       accessorKey: 'rate',
-      header: 'Rate (%)'
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Rate (%)" />
+      ),
+    },
+    {
+      accessorKey: 'createdAt',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Created At" />
+      ),
+      cell: ({ row }) => {
+        const createdAt = row.original.createdAt
+        return new Date(createdAt).toLocaleDateString()
+      }
     },
     {
       id: 'requiredDocuments',

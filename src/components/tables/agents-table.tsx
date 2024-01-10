@@ -8,8 +8,8 @@ import { Button } from '../ui/button'
 import { useDeleteAgentMutation, useGetAgents } from '@/data/hooks/useAgentsClient'
 import { Agent } from '@/data/clients/agentsClient'
 import { ActiveStatusEnum, ApprovalStatusEnum } from '@/constants/enums'
-import AgentApprovalStatusForm from '@/app/dashboard/admin/agents/_forms/approval-status-form'
-import AgentActiveStausForm from '@/app/dashboard/admin/agents/_forms/active-status-form'
+import AgentApprovalStatusForm from '@/components/forms/dashboard/agent/approval-status-form'
+import AgentActiveStausForm from '@/components/forms/dashboard/agent/active-status-form'
 import Link from 'next/link'
 import { DownloadIcon } from 'lucide-react'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
@@ -55,6 +55,16 @@ export default function AgentsTable() {
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Contact Number" />
       ),
+    },
+    {
+      accessorKey: 'createdAt',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Created At" />
+      ),
+      cell: ({ row }) => {
+        const createdAt = row.original.createdAt
+        return new Date(createdAt).toLocaleDateString()
+      }
     },
     {
       id: 'activeStatus',

@@ -1,7 +1,7 @@
 'use client'
 
 import Loader from '@/components/Loader'
-import RequirementsForm from '../../_form/requirement-form'
+import RequirementsForm from '../../../../../../components/forms/dashboard/requirement/requirement-form'
 import { useGetOneRequirement, useUpdateRequirementMutation } from '@/data/hooks/useRequirementsClient'
 
 interface Props {

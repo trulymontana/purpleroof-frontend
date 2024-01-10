@@ -110,6 +110,7 @@ export const useSendEmailToAgentMutation = () => {
         variant: 'default',
         title: 'Email sent successfully'
       })
+      location.reload()
     }
   })
 }
