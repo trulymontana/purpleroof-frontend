@@ -22,6 +22,7 @@ import { DataTablePagination } from '@/components/tables/data-table/data-table-p
 import { DataTableToolbar } from '@/components/tables/data-table/data-table-toolbar'
 import Loader from '@/components/Loader'
 import { FacetOption } from './data'
+import { DateRange } from 'react-day-picker'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -44,9 +45,26 @@ export function DataTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [sorting, setSorting] = React.useState<SortingState>([])
+  const [date, setDate] = React.useState<DateRange | undefined>()
+  const [tableData, setTableData] = React.useState<TData[]>(data)
+
+  React.useEffect(() => {
+    if (data) {
+      setTableData(data)
+    }
+    if (date && date?.from && date?.to) {
+      const from = date?.from?.toISOString();
+      const to = date?.to?.toISOString();
+      // @ts-ignore
+      const filteredData = data.filter(item => item.createdAt > from && item.createdAt < to)
+      setTableData(filteredData)
+    }
+  }, [date, data])
+
+  console.log({ tableData, data })
 
   const table = useReactTable({
-    data,
+    data: tableData ?? data,
     columns,
     state: {
       sorting,
@@ -70,6 +88,8 @@ export function DataTable<TData, TValue>({
   return (
     <div className="space-y-4">
       <DataTableToolbar
+        date={date}
+        setDate={setDate}
         table={table}
         filterKey={filterKey ?? 'email'}
         facetKey={facetKey ?? 'status'}

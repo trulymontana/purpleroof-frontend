@@ -2026,6 +2026,6 @@ export const callPreferences = [
   },
   {
     label: 'Personally respond to the calls myself',
-    value: CallPreferenceEnum.PERSONALLY
+    value: CallPreferenceEnum.PERSONAL
   }
 ]

@@ -230,5 +230,5 @@ export enum ActiveStatusEnum {
 
 export enum CallPreferenceEnum {
   PURPLEROOF = 'PURPLEROOF',
-  PERSONALLY = 'PERSONALLY'
+  PERSONAL = 'PERSONAL'
 }
