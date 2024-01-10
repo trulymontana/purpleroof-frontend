@@ -1,4 +1,5 @@
 import {
+  CallPreferenceEnum,
   CommercialPropertyCategoryEnum,
   EmirateEnum,
   FurnishingStatusEnum,
@@ -2021,10 +2022,10 @@ export const occupencyStatusOptions = [
 export const callPreferences = [
   {
     label: "Ask Purple Roof's staff to handle and address the calls",
-    value: 'purpleroof'
+    value: CallPreferenceEnum.PURPLEROOF
   },
   {
     label: 'Personally respond to the calls myself',
-    value: 'personally'
+    value: CallPreferenceEnum.PERSONALLY
   }
 ]

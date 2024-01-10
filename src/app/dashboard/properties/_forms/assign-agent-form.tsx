@@ -57,7 +57,7 @@ const AssignAgentForm = ({ data, agentsData }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <SelectElement name="agentId" placeholder="Please select a agent" label="Agent" options={agentOptions || []} />
-        <Button disabled={isLoading} type="submit">
+        <Button className='w-full' disabled={isLoading} type="submit">
           {isLoading ? 'Saving...' : 'Save changes'}
         </Button>
       </form>

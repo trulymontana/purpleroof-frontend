@@ -12,9 +12,10 @@ import RadioGroupElement from '@/components/forms/elements/radio-group-element'
 import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
+import { CallPreferenceEnum } from '@/constants/enums'
 
 const formSchema = z.object({
-  callPreference: z.string({
+  callPreference: z.nativeEnum(CallPreferenceEnum, {
     required_error: 'Please select a call preference!'
   })
 })

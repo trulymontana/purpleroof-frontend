@@ -227,3 +227,8 @@ export enum ActiveStatusEnum {
   ACTIVE = 'ACTIVE',
   INACTIVE = 'INACTIVE'
 }
+
+export enum CallPreferenceEnum {
+  PURPLEROOF = 'PURPLEROOF',
+  PERSONALLY = 'PERSONALLY'
+}

@@ -14,11 +14,12 @@ import { Property } from '@/data/clients/propertiesClient'
 import currency from '@/lib/currency'
 import AssignAgentForm from '@/app/dashboard/properties/_forms/assign-agent-form'
 import { useGetAgents } from '@/data/hooks/useAgentsClient'
-import { PropertySubmissionStatusEnum, UserRoleEnum } from '@/constants/enums'
+import { CallPreferenceEnum, PropertySubmissionStatusEnum, UserRoleEnum } from '@/constants/enums'
 import { useGetUserRole } from '@/data/hooks/useAuthClient'
 import { FacetOption } from './data-table/data'
 import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
 import { DataTableColumnHeader } from './data-table/data-table-column-header'
+import UpdateNumberForm from '@/app/dashboard/properties/_forms/update-number-form'
 
 export default function PropertiesTable() {
   const { data: agentsData } = useGetAgents()
@@ -54,6 +55,15 @@ export default function PropertiesTable() {
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Phone" />
       ),
+      cell: ({ row }) => {
+        const data = row.original;
+        if (data.callPreference === CallPreferenceEnum.PURPLEROOF) {
+          return (
+            <span>{data.phone}</span>
+          )
+        }
+        return <span>{data.phone}</span>
+      }
     },
     {
       accessorKey: 'amount',
@@ -164,15 +174,24 @@ export default function PropertiesTable() {
       id: 'action',
       header: 'Action',
       cell: ({ row }) => (
-        <>
+        <div className='flex items-center gap-2'>
           {row.original.submissionStatus === PropertySubmissionStatusEnum.APPROVED && (
             <ConfirmActionDialog
               title={row.original?.agentId ? 'Change Agent' : 'Assign Agent'}
-              anchor={<Button>{row.original?.agentId ? 'Change Agent' : 'Assign Agent'}</Button>}
+              anchor={<Button size="sm">{row.original?.agentId ? 'Change Agent' : 'Assign Agent'}</Button>}
               content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
             />
           )}
-        </>
+        </div>
+      )
+    }, {
+      id: 'updatePhone',
+      cell: ({ row }) => (
+        <ConfirmActionDialog
+          title="Update Number"
+          anchor={<Button size="sm">Update Number</Button>}
+          content={<UpdateNumberForm data={row.original} />}
+        />
       )
     })
   }
