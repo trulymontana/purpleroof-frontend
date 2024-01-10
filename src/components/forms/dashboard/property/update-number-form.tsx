@@ -26,7 +26,10 @@ const UpdateNumberForm = ({ data }: Props) => {
     const { mutate: updateProperty, isPending: isLoading } = useUpdatePropertyMutation()
 
     const form = useForm<TAgent>({
-        resolver: zodResolver(formSchema)
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            phone: data.phone
+        }
     })
 
     function onSubmit(values: TAgent) {
