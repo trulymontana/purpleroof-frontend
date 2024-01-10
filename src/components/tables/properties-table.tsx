@@ -82,6 +82,12 @@ export default function PropertiesTable() {
       ),
     },
     {
+      accessorKey: 'callPreference',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Call Preference" />
+      ),
+    },
+    {
       accessorKey: 'createdAt',
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Created At" />
@@ -174,7 +180,7 @@ export default function PropertiesTable() {
       id: 'action',
       header: 'Action',
       cell: ({ row }) => (
-        <div className='flex items-center gap-2'>
+        <>
           {row.original.submissionStatus === PropertySubmissionStatusEnum.APPROVED && (
             <ConfirmActionDialog
               title={row.original?.agentId ? 'Change Agent' : 'Assign Agent'}
@@ -182,16 +188,20 @@ export default function PropertiesTable() {
               content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
             />
           )}
-        </div>
+        </>
       )
     }, {
       id: 'updatePhone',
       cell: ({ row }) => (
-        <ConfirmActionDialog
-          title="Update Number"
-          anchor={<Button size="sm">Update Number</Button>}
-          content={<UpdateNumberForm data={row.original} />}
-        />
+        <>
+          {
+            row.original.callPreference === CallPreferenceEnum.PURPLEROOF && (<ConfirmActionDialog
+              title="Update Number"
+              anchor={<Button size="sm">Update Number</Button>}
+              content={<UpdateNumberForm data={row.original} />}
+            />)
+          }
+        </>
       )
     })
   }
