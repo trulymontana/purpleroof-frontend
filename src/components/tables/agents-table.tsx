@@ -57,6 +57,16 @@ export default function AgentsTable() {
       ),
     },
     {
+      accessorKey: 'createdAt',
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Created At" />
+      ),
+      cell: ({ row }) => {
+        const createdAt = row.original.createdAt
+        return new Date(createdAt).toLocaleDateString()
+      }
+    },
+    {
       id: 'activeStatus',
       header: 'Active Status',
       cell: ({ row }) => {
