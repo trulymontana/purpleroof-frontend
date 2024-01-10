@@ -9,21 +9,21 @@ import { Eye, FileEdit } from 'lucide-react'
 import ConfirmActionDialog from '../dialogs/confirm-action-dialog'
 import { Button } from '../ui/button'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
-import UpdatePropertyForm from '@/app/dashboard/properties/_forms/update-property-form'
+import UpdatePropertyForm from '@/components/forms/dashboard/property/update-property-form'
 import { Property } from '@/data/clients/propertiesClient'
 import currency from '@/lib/currency'
-import AssignAgentForm from '@/app/dashboard/properties/_forms/assign-agent-form'
+import AssignAgentForm from '@/components/forms/dashboard/property/assign-agent-form'
 import { useGetAgents } from '@/data/hooks/useAgentsClient'
 import { CallPreferenceEnum, PropertySubmissionStatusEnum, UserRoleEnum } from '@/constants/enums'
 import { useGetUserRole } from '@/data/hooks/useAuthClient'
 import { FacetOption } from './data-table/data'
 import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/react-icons'
 import { DataTableColumnHeader } from './data-table/data-table-column-header'
-import UpdateNumberForm from '@/app/dashboard/properties/_forms/update-number-form'
+import UpdateNumberForm from '@/components/forms/dashboard/property/update-number-form'
 
 export default function PropertiesTable() {
-  const { data: agentsData } = useGetAgents()
 
+  const { data: agentsData } = useGetAgents()
   const { mutate: deleteProperty, isPending } = useDeletePropertyMutation()
 
   const userRole = useGetUserRole()
@@ -85,7 +85,7 @@ export default function PropertiesTable() {
       accessorKey: 'callPreference',
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Call Preference" />
-      ),
+      )
     },
     {
       accessorKey: 'createdAt',
@@ -95,16 +95,6 @@ export default function PropertiesTable() {
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()
-      }
-    },
-    {
-      accessorKey: 'updatedAt',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Updated At" />
-      ),
-      cell: ({ row }) => {
-        const updatedAt = row.original.createdAt
-        return new Date(updatedAt).toLocaleDateString()
       }
     },
     {
@@ -179,17 +169,19 @@ export default function PropertiesTable() {
     columns.push({
       id: 'action',
       header: 'Action',
-      cell: ({ row }) => (
-        <>
-          {row.original.submissionStatus === PropertySubmissionStatusEnum.APPROVED && (
-            <ConfirmActionDialog
-              title={row.original?.agentId ? 'Change Agent' : 'Assign Agent'}
-              anchor={<Button size="sm">{row.original?.agentId ? 'Change Agent' : 'Assign Agent'}</Button>}
-              content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
-            />
-          )}
-        </>
-      )
+      cell: ({ row }) => {
+        return (
+          <>
+            {row.original.submissionStatus === PropertySubmissionStatusEnum.APPROVED && (
+              <ConfirmActionDialog
+                title={row.original?.agentId ? 'Change Agent' : 'Assign Agent'}
+                anchor={<Button size="sm">{row.original?.agentId ? 'Change Agent' : 'Assign Agent'}</Button>}
+                content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
+              />
+            )}
+          </>
+        )
+      }
     }, {
       id: 'updatePhone',
       cell: ({ row }) => (

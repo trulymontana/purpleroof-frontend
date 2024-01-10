@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import RequirementsForm from '../_form/requirement-form'
+import RequirementsForm from '../../../../../components/forms/dashboard/requirement/requirement-form'
 import { useCreateRequirementMutation } from '@/data/hooks/useRequirementsClient'
 
 const Page = () => {

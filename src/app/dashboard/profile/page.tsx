@@ -33,7 +33,7 @@ import { useGetUserDetails } from '@/data/hooks/useAuthClient'
 import { Locate, Phone } from 'lucide-react'
 import Loader from '@/components/Loader'
 import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
-import UpdateLocationsForm from './_forms/update-locations-form'
+import UpdateLocationsForm from '../../../components/forms/dashboard/profile/update-locations-form'
 
 const formSchema = z.object({
   agency: z.string().optional(),
@@ -106,7 +106,7 @@ const Page = () => {
             <CardDescription>Overview of user information.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="space-x-2">
+            <div className="space-y-2">
               <Label htmlFor="username">First Name</Label>
               <Input disabled id="username" value={firstName} />
             </div>

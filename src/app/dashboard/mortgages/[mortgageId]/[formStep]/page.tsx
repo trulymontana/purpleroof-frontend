@@ -1,9 +1,9 @@
 'use client'
 
-import CustomerInfoForm from '@/app/dashboard/mortgages/_forms/customer-info-form'
-import TransactionInfoForm from '@/app/dashboard/mortgages/_forms/transaction-info-form'
+import CustomerInfoForm from '@/components/forms/dashboard/mortgage/customer-info-form'
+import TransactionInfoForm from '@/components/forms/dashboard/mortgage/transaction-info-form'
 import { PageRoutes } from '@/constants/page-routes'
-import UploadDocumentsForm from '../../_forms/upload-documents-form'
+import UploadDocumentsForm from '../../../../../components/forms/dashboard/mortgage/upload-documents-form'
 import { useGetOneMortgage, useUpdateMortgageMutation } from '@/data/hooks/useMortgageClient'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { nullCheckAndMerge } from '@/lib/utils'
