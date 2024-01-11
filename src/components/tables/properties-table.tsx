@@ -140,62 +140,70 @@ export default function PropertiesTable() {
     },
     {
       id: 'actions',
-      enableHiding: false,
-      cell: ({ row }) => (
-        <div className="flex items-center">
-          <Link href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
-            <Button variant="ghost">
-              <Eye size={17} color="black" />
-            </Button>
-          </Link>
-          {isAdmin && (
-            <ConfirmActionDialog
-              title="Edit Property"
-              anchor={
-                <Button variant="ghost">
-                  <FileEdit size={17} color="black" />
-                </Button>
-              }
-              content={<UpdatePropertyForm data={row.original} />}
-            />
-          )}
-          {isAdmin && <ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />}
-        </div>
-      )
+      cell: ({ row }) => {
+        return (
+          <div className="flex items-center space-x-2">
+            <Link href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
+              <Button size="sm">
+                View Details
+              </Button>
+            </Link>
+            <Link href={PageRoutes.dashboard.EDIT_PROPERTY(row.original.id)}>
+              <Button size="sm">
+                Edit Property
+              </Button>
+            </Link>
+          </div>
+        )
+      }
     }
   ]
 
   if (isAdmin) {
-    columns.push({
-      id: 'action',
-      header: 'Action',
-      cell: ({ row }) => {
-        return (
-          <>
-            {row.original.submissionStatus === PropertySubmissionStatusEnum.APPROVED && (
+    columns.push(
+      {
+        id: 'changeAgent',
+        cell: ({ row }) => {
+          return (
+            <div className='flex items-center gap-1'>
+              {row.original.submissionStatus === PropertySubmissionStatusEnum.APPROVED && (
+                <ConfirmActionDialog
+                  title={row.original?.agentId ? 'Change Agent' : 'Assign Agent'}
+                  anchor={<Button variant="outline" size="sm">{row.original?.agentId ? 'Change Agent' : 'Assign Agent'}</Button>}
+                  content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
+                />
+              )}
+              {
+                row.original.callPreference === CallPreferenceEnum.PURPLEROOF && (<ConfirmActionDialog
+                  title="Update Number"
+                  anchor={<Button variant="outline" size="sm">Update Number</Button>}
+                  content={<UpdateNumberForm data={row.original} />}
+                />)
+              }
+            </div>
+          )
+        }
+      },
+      {
+        id: 'adminActions',
+        cell: ({ row }) => (
+          <div className='flex items-center'>
+            {isAdmin && (
               <ConfirmActionDialog
-                title={row.original?.agentId ? 'Change Agent' : 'Assign Agent'}
-                anchor={<Button size="sm">{row.original?.agentId ? 'Change Agent' : 'Assign Agent'}</Button>}
-                content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
+                title="Edit Property"
+                anchor={
+                  <Button variant="ghost">
+                    <FileEdit size={17} color="black" />
+                  </Button>
+                }
+                content={<UpdatePropertyForm data={row.original} />}
               />
             )}
-          </>
+            {isAdmin && <ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />}
+          </div>
         )
       }
-    }, {
-      id: 'updatePhone',
-      cell: ({ row }) => (
-        <>
-          {
-            row.original.callPreference === CallPreferenceEnum.PURPLEROOF && (<ConfirmActionDialog
-              title="Update Number"
-              anchor={<Button size="sm">Update Number</Button>}
-              content={<UpdateNumberForm data={row.original} />}
-            />)
-          }
-        </>
-      )
-    })
+    )
   }
 
   const propertyFilterOptions: FacetOption[] = [

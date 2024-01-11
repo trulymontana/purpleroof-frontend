@@ -14,6 +14,7 @@ export const PageRoutes = {
     COMPLETE_MORTGAGE_APPLICATION: (mortgageId: number, step: string) => `/dashboard/mortgages/${mortgageId}/${step}`,
     PROPERTIES: '/dashboard/properties',
     PROPERTY_DETAILS: (propertyId: number) => `/dashboard/properties/${propertyId}`,
+    EDIT_PROPERTY: (propertyId: number) => `/dashboard/properties/edit/${propertyId}`,
     PROFILE: '/dashboard/profile'
   },
   admin: {

@@ -24,7 +24,7 @@ const Page = ({ params: { propertyId } }: Props) => {
   }
 
   return (
-    <div className="">
+    <div>
       <section className="h-[500px] w-full">
         <Image
           alt="Property Image"

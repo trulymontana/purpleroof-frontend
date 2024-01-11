@@ -140,7 +140,7 @@ export default function MortgagesTable() {
   const { mutate: deleteMortgage, isPending } = useDeleteMortgageMutation()
   const { loading, data } = useGetMortgages()
 
-  if (role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN) {
+  if (isAdmin) {
     columns.push({
       id: 'actions',
       enableHiding: false,
