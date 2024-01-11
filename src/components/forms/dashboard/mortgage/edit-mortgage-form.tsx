@@ -100,7 +100,7 @@ interface Props {
 const EditMortgageForm = ({ data }: Props) => {
 
     const { dateOfBirth, ...restData } = data;
-    const { mutate: updateMortgage } = useUpdateMortgageMutation()
+    const { mutate: updateMortgage, isPending: isLoading } = useUpdateMortgageMutation()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -204,7 +204,7 @@ const EditMortgageForm = ({ data }: Props) => {
 
                 <InputElement name="additionalDetail" label="Additional Detail" />
 
-                <Button type='submit' className='w-full'>Save Changes</Button>
+                <Button disabled={isLoading} type='submit' className='w-full'>{isLoading ? "Saving..." : "Save Changes"}</Button>
             </form>
         </Form>
     )
