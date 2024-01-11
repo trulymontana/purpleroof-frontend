@@ -123,9 +123,16 @@ export default function MortgagesTable() {
           )
         }
         return (
-          <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
-            <Button size="sm">{isAdmin ? 'View Details' : 'View Application'}</Button>
-          </Link>
+          <div className='space-x-2'>
+            <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
+              <Button size="sm">{isAdmin ? 'View Details' : 'View Application'}</Button>
+            </Link>
+            {!isAdmin && (
+              <Link href={PageRoutes.dashboard.EDIT_MORTGAGE(row.original.id)}>
+                <Button size="sm">Edit Mortgage</Button>
+              </Link>
+            )}
+          </div>
         )
       }
     }

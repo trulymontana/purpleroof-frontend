@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -47,6 +47,7 @@ const formSchema = z.object({
 interface Props {
   onSave: (step: string, values: z.infer<typeof formSchema>) => void
 }
+
 const PersonalDetailsForm = ({ onSave }: Props) => {
   const router = useRouter()
 

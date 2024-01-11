@@ -73,7 +73,7 @@ export function useGetUserDetails() {
     queryKey: [ApiEndpoints.USER],
     queryFn: () => authClient.getUserDetails(),
     throwOnError: (error: any) => {
-      if (error.response.status === 401) {
+      if (error?.response?.status === 401) {
         if (pathName.includes('dashboard')) {
           localStorage.removeItem(LocalStorageKeys.USER)
           localStorage.removeItem(LocalStorageKeys.AUTH_TOKEN)

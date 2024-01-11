@@ -10,6 +10,7 @@ import { getValuesFrom } from '@/lib/utils'
 import { useGetLocations } from '@/data/hooks/useLocationsClient'
 import { Separator } from '@/components/ui/separator'
 import { useUpdateAgentMutation } from '@/data/hooks/useAgentsClient'
+import { Agent } from '@/data/clients/agentsClient'
 
 
 const formSchema = z.object({
@@ -17,8 +18,12 @@ const formSchema = z.object({
     locations: z.any().optional()
 })
 
+interface Props {
+    agentDetails: Agent
+}
+
 type TLocations = z.infer<typeof formSchema>
-const UpdateLocationsForm = () => {
+const UpdateLocationsForm = ({ agentDetails }: Props) => {
 
     const { mutate: updateLocations, isPending: isLoading } = useUpdateAgentMutation();
 
@@ -39,7 +44,10 @@ const UpdateLocationsForm = () => {
         values?.locations?.length > 0 && (values.locations = getValuesFrom(values.locations))
         values?.locations?.length > 0 && (values.locations = values.locations.map((location: string) => Number(location)))
 
-        console.log({ values })
+        updateLocations({
+            id: agentDetails.id,
+            ...values
+        })
     }
 
     return (
