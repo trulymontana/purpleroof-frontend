@@ -98,35 +98,11 @@ interface Props {
 
 const EditMortgageForm = ({ data }: Props) => {
 
-    const values = {
-        firstName: data?.firstName ?? "",
-        lastName: data?.lastName ?? "",
-        email: data?.email ?? "",
-        phoneNumber: data?.phoneNumber ?? "",
-        country: data?.country ?? 0,
-        valueOfProperty: data?.valueOfProperty ?? 0,
-        incomeProfile: data?.incomeProfile,
-        residenceType: data?.residenceType,
-        dateOfBirth: new Date(data?.dateOfBirth),
-        propertyType: data?.propertyType,
-        completionStatus: data?.completionStatus,
-        emirate: data?.emirate,
-        additionalDetail: data?.additionalDetail,
-        maritalStatus: data?.maritalStatus,
-        favoriteCity: data?.favoriteCity,
-        familyMembersInUae: data?.familyMembersInUae,
-        yearsInUae: data?.yearsInUae,
-        annualRentalIncome: data?.annualRentalIncome,
-        uaeResidenceAddress: data?.uaeResidenceAddress,
-        homeCountryAddress: data?.homeCountryAddress,
-        loanType: data?.loanType,
-        monthlyIncome: data?.monthlyIncome ?? 0,
-        educationType: data?.educationType,
-    }
+    const { dateOfBirth, ...restData } = data;
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: values
+        defaultValues: { dateOfBirth: new Date(dateOfBirth), ...restData }
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
