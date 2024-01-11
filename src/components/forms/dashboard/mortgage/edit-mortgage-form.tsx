@@ -8,12 +8,13 @@ import PhoneNumberInputElement from '../../elements/phone-number-input'
 import { Mortgage } from '@/data/clients/mortgageClient'
 import SelectElement from '../../elements/select-element'
 import { residenceTypes } from '@/constants/requirements'
-import { completionStatus, educationOptions, emirate, incomeProfiles, maritalStatusOptions, propertyType } from '@/constants/mortgage'
+import { completionStatus, educationOptions, emirate, incomeProfiles, loanTypeOptions, maritalStatusOptions, propertyType } from '@/constants/mortgage'
 import ComboboxElement from '../../elements/combobox-element'
 import DatePickerElement from '../../elements/date-picker-element'
 import NumberInputElement from '../../elements/number-input-element'
 import { countries } from '@/constants/countries'
 import { EducationEnum, MaritalStatusEnum } from '@/constants/enums'
+import { Button } from '@/components/ui/button'
 
 const formSchema = z.object({
     firstName: z.string().min(2, {
@@ -34,8 +35,8 @@ const formSchema = z.object({
         .min(10, {
             message: 'Phone number must be at least 10 characters.'
         }),
-    residenceType: z.string({
-        required_error: 'Please select a residential status.'
+    valueOfProperty: z.number({
+        required_error: 'Please enter value of your property'
     }),
     incomeProfile: z.string({
         required_error: 'Please select an income profile.'
@@ -43,17 +44,11 @@ const formSchema = z.object({
     country: z.string({
         required_error: 'Please select your country'
     }),
+    residenceType: z.string({
+        required_error: 'Please select a residential status.'
+    }),
     dateOfBirth: z.date({
         required_error: 'Please enter your DOB'
-    }),
-    valueOfProperty: z.number({
-        required_error: 'Please enter value of your property'
-    }),
-    monthlyIncome: z.number({
-        required_error: 'Please enter your montly income'
-    }),
-    loanType: z.string({
-        required_error: 'Please select a loan type'
     }),
     propertyType: z.string({
         required_error: 'Please select a property type.'
@@ -63,10 +58,6 @@ const formSchema = z.object({
     }),
     emirate: z.string({
         required_error: 'Please select a emirate.'
-    }),
-    additionalDetail: z.string().optional(),
-    educationType: z.nativeEnum(EducationEnum, {
-        required_error: 'Please select your education qualification'
     }),
     maritalStatus: z.nativeEnum(MaritalStatusEnum, {
         required_error: 'Please select your marital status'
@@ -89,6 +80,16 @@ const formSchema = z.object({
     homeCountryAddress: z.string({
         required_error: 'Please enter your home country address'
     }),
+    additionalDetail: z.string().optional(),
+    loanType: z.string({
+        required_error: 'Please select a loan type'
+    }),
+    monthlyIncome: z.number({
+        required_error: 'Please enter your montly income'
+    }),
+    educationType: z.nativeEnum(EducationEnum, {
+        required_error: 'Please select your education qualification'
+    }),
 })
 
 interface Props {
@@ -97,8 +98,35 @@ interface Props {
 
 const EditMortgageForm = ({ data }: Props) => {
 
+    const values = {
+        firstName: data?.firstName ?? "",
+        lastName: data?.lastName ?? "",
+        email: data?.email ?? "",
+        phoneNumber: data?.phoneNumber ?? "",
+        country: data?.country ?? 0,
+        valueOfProperty: data?.valueOfProperty ?? 0,
+        incomeProfile: data?.incomeProfile,
+        residenceType: data?.residenceType,
+        dateOfBirth: new Date(data?.dateOfBirth),
+        propertyType: data?.propertyType,
+        completionStatus: data?.completionStatus,
+        emirate: data?.emirate,
+        additionalDetail: data?.additionalDetail,
+        maritalStatus: data?.maritalStatus,
+        favoriteCity: data?.favoriteCity,
+        familyMembersInUae: data?.familyMembersInUae,
+        yearsInUae: data?.yearsInUae,
+        annualRentalIncome: data?.annualRentalIncome,
+        uaeResidenceAddress: data?.uaeResidenceAddress,
+        homeCountryAddress: data?.homeCountryAddress,
+        loanType: data?.loanType,
+        monthlyIncome: data?.monthlyIncome ?? 0,
+        educationType: data?.educationType,
+    }
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
+        defaultValues: values
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
@@ -107,7 +135,7 @@ const EditMortgageForm = ({ data }: Props) => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full px-2 max-w-[90rem] mx-auto space-y-6 py-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-5">
                 <div className="dashboard_form md:flex-row">
                     <div className="w-full md:w-1/2">
                         <InputElement name="firstName" label="First Name" />
@@ -153,7 +181,6 @@ const EditMortgageForm = ({ data }: Props) => {
                         <SelectElement name="emirate" label="Emirate" options={emirate} />
                     </div>
                 </div>
-                <InputElement name="additionalDetail" label="Additional Details" />
                 <div className="dashboard_form md:flex-row">
                     <div className="w-full md:w-1/2">
                         <SelectElement name="maritalStatus" label="Marital Status" options={maritalStatusOptions} />
@@ -176,7 +203,24 @@ const EditMortgageForm = ({ data }: Props) => {
                         <InputElement name="uaeResidenceAddress" label="UAE Residence Address" />
                     </div>
                 </div>
-                <InputElement name="homeCountryAddress" label="Home Country Address" />
+                <div className="dashboard_form md:flex-row">
+                    <div className="w-full md:w-1/2">
+                        <InputElement name="homeCountryAddress" label="Home Country Address" />
+                    </div>
+                    <div className="w-full md:w-1/2">
+                        <SelectElement name="educationType" label="Education" options={educationOptions} />
+                    </div>
+                    <div className="w-full md:w-1/2">
+                        <NumberInputElement name="monthlyIncome" label="Monthly Income" />
+
+                    </div>
+                </div>
+
+                <SelectElement name="loanType" label={'Loan Type'} options={loanTypeOptions} />
+
+                <InputElement name="additionalDetail" label="Additional Detail" />
+
+                <Button type='submit' className='w-full'>Save Changes</Button>
             </form>
         </Form>
     )

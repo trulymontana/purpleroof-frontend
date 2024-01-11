@@ -23,9 +23,12 @@ const Page = ({ params: { mortgageId } }: Props) => {
     }
 
     return (
-        <>
-            {data && <EditMortgageForm data={data} />}
-        </>
+        <section className="px-2 max-w-[90rem] w-full mx-auto py-4 space-y-12">
+            <h1 className="text-4xl font-bold text-start">Edit Mortgage</h1>
+            <div>
+                {data && <EditMortgageForm data={data} />}
+            </div>
+        </section>
     )
 }
 
