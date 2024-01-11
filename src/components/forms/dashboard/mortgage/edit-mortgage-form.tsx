@@ -109,7 +109,8 @@ const EditMortgageForm = ({ data }: Props) => {
 
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        const updatedMortgage: Partial<CreateMortgageInput> = { ...values, status: data.status }
+        const stringDate = values.dateOfBirth.toISOString()
+        const updatedMortgage: Partial<CreateMortgageInput> = { ...values, status: data.status, dateOfBirth: stringDate }
         updateMortgage({
             id: data.id,
             ...updatedMortgage

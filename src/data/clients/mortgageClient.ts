@@ -20,7 +20,7 @@ export interface CreateMortgageInput {
   lastName: string
   email: string
   phoneNumber: string
-  dateOfBirth: Date
+  dateOfBirth: string
   intendedProperty: string
   monthlyIncome: number
   dialCode: string
