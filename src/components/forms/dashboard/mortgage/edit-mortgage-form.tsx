@@ -128,7 +128,7 @@ const EditMortgageForm = ({ data }: Props) => {
                         <InputElement name="lastName" label="Last Name" />
                     </div>
                     <div className="w-full md:w-1/2">
-                        <InputElement name="email" label="Email" />
+                        <InputElement isDisabled name="email" label="Email" />
                     </div>
                 </div>
                 <div className="dashboard_form md:flex-row">
@@ -139,7 +139,7 @@ const EditMortgageForm = ({ data }: Props) => {
                         <NumberInputElement name="valueOfProperty" label={'Approximate value of the intended property (AED)'} />
                     </div>
                     <div className="w-full md:w-1/2">
-                        <SelectElement name="incomeProfile" label="Income Profile" options={incomeProfiles} />
+                        <SelectElement disabled name="incomeProfile" label="Income Profile" options={incomeProfiles} />
                     </div>
                 </div>
                 <div className="dashboard_form md:flex-row">
@@ -147,7 +147,7 @@ const EditMortgageForm = ({ data }: Props) => {
                         <ComboboxElement name="country" label={'Country'} placeholder={'Select your country'} options={countries} />
                     </div>
                     <div className="w-full md:w-1/2">
-                        <SelectElement name="residenceType" label="Residence Type" options={residenceTypes} />
+                        <SelectElement disabled name="residenceType" label="Residence Type" options={residenceTypes} />
                     </div>
                     <div className="w-full md:w-1/2">
                         <DatePickerElement custom name="dateOfBirth" label="Date of Birth" />
