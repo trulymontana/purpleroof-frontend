@@ -18,7 +18,7 @@ import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { useRouter } from 'next/navigation'
 import { Mortgage } from '@/data/clients/mortgageClient'
 import { useEffect } from 'react'
-import { EducationEnum, MaritalStatusEnum } from '@/constants/enums'
+import { EducationEnum, MaritalStatusEnum, RelationshipEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   firstName: z.string({
@@ -72,7 +72,7 @@ const formSchema = z.object({
       phone: z.string({
         required_error: 'This field is required!'
       }),
-      relationship: z.string({
+      relationship: z.nativeEnum(RelationshipEnum, {
         required_error: 'This field is required!'
       })
     })

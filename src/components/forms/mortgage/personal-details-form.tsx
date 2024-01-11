@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation'
 import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
+import { IncomeProfileEnum, ResidenceTypeEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   firstName: z.string().min(2, {
@@ -36,10 +37,10 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.'
     }),
-  residenceType: z.string({
+  residenceType: z.nativeEnum(ResidenceTypeEnum, {
     required_error: 'Please select a residential status.'
   }),
-  incomeProfile: z.string({
+  incomeProfile: z.nativeEnum(IncomeProfileEnum, {
     required_error: 'Please select an income profile.'
   })
 })

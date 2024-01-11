@@ -13,6 +13,7 @@ import { PageRoutes } from '@/constants/page-routes'
 import { BackButton } from '@/components/navigation/back-button'
 import { loanTypeOptions } from '@/constants/mortgage'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
+import { LoanTypeEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   country: z.string({
@@ -27,7 +28,7 @@ const formSchema = z.object({
   monthlyIncome: z.number({
     required_error: 'Please enter your montly income'
   }),
-  loanType: z.string({
+  loanType: z.nativeEnum(LoanTypeEnum, {
     required_error: 'Please select a loan type'
   })
 })

@@ -14,14 +14,13 @@ import {
   RelationshipEnum,
   ResidenceTypeEnum
 } from '@/constants/enums'
-import HttpClient from '@/lib/http-client'
 
 export interface CreateMortgageInput {
   firstName: string
   lastName: string
   email: string
   phoneNumber: string
-  dateOfBirth: string
+  dateOfBirth: Date
   intendedProperty: string
   monthlyIncome: number
   dialCode: string
@@ -62,8 +61,5 @@ export interface Mortgage extends CreateMortgageInput {
 }
 
 export const mortgageClient = {
-  ...crudFactory<Mortgage, QueryOptions, CreateMortgageInput>(ApiEndpoints.MORTGAGES),
-  createMortgageTransaction: (mortgageId: number, mortgageTransaction: any) => {
-    return HttpClient.post<any>(`${ApiEndpoints.MORTGAGE_TRANSACTION}/${mortgageId}`, mortgageTransaction)
-  }
+  ...crudFactory<Mortgage, QueryOptions, CreateMortgageInput>(ApiEndpoints.MORTGAGES)
 }

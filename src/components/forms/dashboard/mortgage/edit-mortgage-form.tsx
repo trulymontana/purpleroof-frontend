@@ -5,7 +5,7 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '../../elements/input-element'
 import PhoneNumberInputElement from '../../elements/phone-number-input'
-import { Mortgage } from '@/data/clients/mortgageClient'
+import { CreateMortgageInput, Mortgage } from '@/data/clients/mortgageClient'
 import SelectElement from '../../elements/select-element'
 import { residenceTypes } from '@/constants/requirements'
 import { completionStatus, educationOptions, emirate, incomeProfiles, loanTypeOptions, maritalStatusOptions, propertyType } from '@/constants/mortgage'
@@ -13,8 +13,9 @@ import ComboboxElement from '../../elements/combobox-element'
 import DatePickerElement from '../../elements/date-picker-element'
 import NumberInputElement from '../../elements/number-input-element'
 import { countries } from '@/constants/countries'
-import { EducationEnum, MaritalStatusEnum } from '@/constants/enums'
+import { CompletionStatusEnum, EducationEnum, EmirateEnum, IncomeProfileEnum, LoanTypeEnum, MaritalStatusEnum, MortgageStatusEnum, PropertyTypeEnum, ResidenceTypeEnum } from '@/constants/enums'
 import { Button } from '@/components/ui/button'
+import { useUpdateMortgageMutation } from '@/data/hooks/useMortgageClient'
 
 const formSchema = z.object({
     firstName: z.string().min(2, {
@@ -38,25 +39,25 @@ const formSchema = z.object({
     valueOfProperty: z.number({
         required_error: 'Please enter value of your property'
     }),
-    incomeProfile: z.string({
+    incomeProfile: z.nativeEnum(IncomeProfileEnum, {
         required_error: 'Please select an income profile.'
     }),
     country: z.string({
         required_error: 'Please select your country'
     }),
-    residenceType: z.string({
+    residenceType: z.nativeEnum(ResidenceTypeEnum, {
         required_error: 'Please select a residential status.'
     }),
     dateOfBirth: z.date({
         required_error: 'Please enter your DOB'
     }),
-    propertyType: z.string({
+    propertyType: z.nativeEnum(PropertyTypeEnum, {
         required_error: 'Please select a property type.'
     }),
-    completionStatus: z.string({
+    completionStatus: z.nativeEnum(CompletionStatusEnum, {
         required_error: 'Please select completion status.'
     }),
-    emirate: z.string({
+    emirate: z.nativeEnum(EmirateEnum, {
         required_error: 'Please select a emirate.'
     }),
     maritalStatus: z.nativeEnum(MaritalStatusEnum, {
@@ -81,7 +82,7 @@ const formSchema = z.object({
         required_error: 'Please enter your home country address'
     }),
     additionalDetail: z.string().optional(),
-    loanType: z.string({
+    loanType: z.nativeEnum(LoanTypeEnum, {
         required_error: 'Please select a loan type'
     }),
     monthlyIncome: z.number({
@@ -99,14 +100,20 @@ interface Props {
 const EditMortgageForm = ({ data }: Props) => {
 
     const { dateOfBirth, ...restData } = data;
+    const { mutate: updateMortgage } = useUpdateMortgageMutation()
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: { dateOfBirth: new Date(dateOfBirth), ...restData }
     })
 
+
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log({ values })
+        const updatedMortgage: Partial<CreateMortgageInput> = { ...values, status: data.status }
+        updateMortgage({
+            id: data.id,
+            ...updatedMortgage
+        })
     }
 
     return (
