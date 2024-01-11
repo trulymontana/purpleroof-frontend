@@ -98,6 +98,21 @@ export default function PropertiesTable() {
       }
     },
     {
+      accessorKey: 'agent',
+      header: 'Agent',
+      cell: ({ row }) => {
+        const data = row.original
+        if (data?.agentId) {
+          return <Badge className="bg-teal-600">Assigned</Badge>
+        }
+        return (
+          <Badge variant="outline" className="bg-red-500 text-white">
+            Not Assigned
+          </Badge>
+        )
+      }
+    },
+    {
       accessorKey: 'submissionStatus',
       header: ({ column }) => (
         <DataTableColumnHeader column={column} title="Submission Status" />
@@ -121,21 +136,6 @@ export default function PropertiesTable() {
       },
       filterFn: (row, id, value) => {
         return value.includes(row.getValue(id))
-      }
-    },
-    {
-      accessorKey: 'agent',
-      header: 'Agent',
-      cell: ({ row }) => {
-        const data = row.original
-        if (data?.agentId) {
-          return <Badge className="bg-teal-600">Assigned</Badge>
-        }
-        return (
-          <Badge variant="outline" className="bg-red-500 text-white">
-            Not Assigned
-          </Badge>
-        )
       }
     },
     {
