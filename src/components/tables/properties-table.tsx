@@ -148,11 +148,13 @@ export default function PropertiesTable() {
                 View Details
               </Button>
             </Link>
-            <Link href={PageRoutes.dashboard.EDIT_PROPERTY(row.original.id)}>
-              <Button size="sm">
-                Edit Property
-              </Button>
-            </Link>
+            {!isAdmin && (
+              <Link href={PageRoutes.dashboard.EDIT_PROPERTY(row.original.id)}>
+                <Button size="sm">
+                  Edit Property
+                </Button>
+              </Link>
+            )}
           </div>
         )
       }
@@ -165,7 +167,7 @@ export default function PropertiesTable() {
         id: 'changeAgent',
         cell: ({ row }) => {
           return (
-            <div className='flex items-center gap-1'>
+            <div className='flex items-center gap-2'>
               {row.original.submissionStatus === PropertySubmissionStatusEnum.APPROVED && (
                 <ConfirmActionDialog
                   title={row.original?.agentId ? 'Change Agent' : 'Assign Agent'}
