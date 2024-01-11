@@ -148,13 +148,6 @@ export default function PropertiesTable() {
                 View Details
               </Button>
             </Link>
-            {!isAdmin && (
-              <Link href={PageRoutes.dashboard.EDIT_PROPERTY(row.original.id)}>
-                <Button size="sm">
-                  Edit Property
-                </Button>
-              </Link>
-            )}
           </div>
         )
       }
@@ -189,19 +182,17 @@ export default function PropertiesTable() {
       {
         id: 'adminActions',
         cell: ({ row }) => (
-          <div className='flex items-center'>
-            {isAdmin && (
-              <ConfirmActionDialog
-                title="Edit Property"
-                anchor={
-                  <Button variant="ghost">
-                    <FileEdit size={17} color="black" />
-                  </Button>
-                }
-                content={<UpdatePropertyForm data={row.original} />}
-              />
-            )}
-            {isAdmin && <ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />}
+          <div className='flex items-center gap-1'>
+            <ConfirmActionDialog
+              title="Edit Property"
+              anchor={
+                <Button variant="ghost">
+                  <FileEdit size={17} color="black" />
+                </Button>
+              }
+              content={<UpdatePropertyForm data={row.original} />}
+            />
+            <ConfirmDeleteDialog onDelete={() => deleteProperty(row.original.id)} isLoading={isPending} />
           </div>
         )
       }
