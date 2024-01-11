@@ -9,9 +9,10 @@ interface Props {
   description?: string
   placeholder?: string
   type?: string
+  isDisabled?: boolean
 }
 
-const InputElement = ({ name, label, description, placeholder }: Props) => {
+const InputElement = ({ name, label, description, placeholder, isDisabled = false }: Props) => {
   const { control, register } = useFormContext()
 
   return (
@@ -22,7 +23,7 @@ const InputElement = ({ name, label, description, placeholder }: Props) => {
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Input type="text" placeholder={placeholder} {...field} />
+            <Input type="text" placeholder={placeholder} {...field} disabled={isDisabled} />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />

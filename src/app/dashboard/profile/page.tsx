@@ -218,7 +218,7 @@ const Page = () => {
                       Update Locations
                     </Button>
                   }
-                  content={<UpdateLocationsForm />}
+                  content={<UpdateLocationsForm agentDetails={agentApplicationDetails}  />}
                 />
               </div>
             </CardContent>

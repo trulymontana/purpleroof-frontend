@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
-import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
@@ -35,7 +34,6 @@ interface Props {
   isLoading: boolean
 }
 const UploadDocumentsForm = ({ isLoading, handleSubmit, requiredDocuments, mortgageId }: Props) => {
-  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema)

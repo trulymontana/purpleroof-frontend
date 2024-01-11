@@ -18,7 +18,7 @@ import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { useRouter } from 'next/navigation'
 import { Mortgage } from '@/data/clients/mortgageClient'
 import { useEffect } from 'react'
-import { EducationEnum, MaritalStatusEnum } from '@/constants/enums'
+import { EducationEnum, MaritalStatusEnum, RelationshipEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   firstName: z.string({
@@ -72,7 +72,7 @@ const formSchema = z.object({
       phone: z.string({
         required_error: 'This field is required!'
       }),
-      relationship: z.string({
+      relationship: z.nativeEnum(RelationshipEnum, {
         required_error: 'This field is required!'
       })
     })
@@ -125,7 +125,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
     <Form {...form}>
       <h1 className="text-4xl font-bold text-black/80">Customer Info</h1>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <div className="flex w-full flex-col items-center gap-2 md:flex-row">
+        <div className="dashboard_form md:flex-row">
           <div className="w-full md:w-1/2">
             <InputElement name="firstName" label="First Name" />
           </div>
@@ -133,7 +133,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
             <InputElement name="lastName" label="Last Name" />
           </div>
         </div>
-        <div className="flex w-full flex-col items-center gap-2 md:flex-row">
+        <div className="dashboard_form md:flex-row">
           <div className="w-full md:w-1/2">
             <InputElement name="email" label="Email" />
           </div>
@@ -141,7 +141,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
             <SelectElement name="maritalStatus" label="Marital Status" options={maritalStatusOptions} />
           </div>
         </div>
-        <div className="flex w-full flex-col items-center gap-2 md:flex-row">
+        <div className="dashboard_form md:flex-row">
           <div className="w-full md:w-1/2">
             <PhoneNumberInputElement name="phoneNumber" label="Contact No." />
           </div>
@@ -149,7 +149,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
             <SelectElement name="educationType" label="Education" options={educationOptions} />
           </div>
         </div>
-        <div className="flex w-full flex-col items-center gap-2 md:flex-row">
+        <div className="dashboard_form md:flex-row">
           <div className="w-full md:w-1/2">
             <InputElement name="favoriteCity" label="Favorite City" />
           </div>
@@ -158,7 +158,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
           </div>
         </div>
 
-        <div className="flex w-full flex-col items-center gap-2 md:flex-row">
+        <div className="dashboard_form md:flex-row">
           <div className="w-full md:w-1/2">
             <NumberInputElement name="yearsInUae" label="Years in UAE" />
           </div>
@@ -166,7 +166,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
             <NumberInputElement name="annualRentalIncome" label="Annual Rental Income (AED)" />
           </div>
         </div>
-        <div className="flex w-full flex-col items-center gap-2 md:flex-row">
+        <div className="dashboard_form md:flex-row">
           <div className="w-full md:w-1/2">
             <InputElement name="uaeResidenceAddress" label="UAE Residence Address" />
           </div>
@@ -177,7 +177,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
 
         <h2 className="pt-5 text-xl font-bold">HOME COUNTRY REFERENCES</h2>
 
-        <div className="flex w-full flex-col items-start gap-2 md:flex-row">
+        <div className="dashboard_form md:flex-row">
           <div className="w-full md:w-1/2">
             <InputElement name="references[0].name" label="Name" />
           </div>
@@ -190,7 +190,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
 
         <div className="mx-auto h-[3px] w-1/2 rounded-full bg-black/20" />
 
-        <div className="flex w-full flex-col items-start gap-2 md:flex-row">
+        <div className="dashboard_form md:flex-row">
           <div className="w-full md:w-1/2">
             <InputElement name="references[1].name" label="Name" />
           </div>
@@ -203,7 +203,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
 
         <h2 className="pt-5 text-xl font-bold">PERSONAL REFERENCES IN UAE</h2>
 
-        <div className="flex w-full flex-col items-start gap-2 md:flex-row">
+        <div className="dashboard_form md:flex-row">
           <div className="w-full md:w-1/2">
             <InputElement name="references[2].name" label="Name" />
           </div>
@@ -216,7 +216,7 @@ const CustomerInfoForm = ({ mortgageId, onSave, data }: Props) => {
 
         <div className="mx-auto h-[3px] w-1/2 rounded-full bg-black/20" />
 
-        <div className="flex w-full flex-col items-start gap-2 md:flex-row">
+        <div className="dashboard_form md:flex-row">
           <div className="w-full md:w-1/2">
             <InputElement name="references[3].name" label="Name" />
           </div>

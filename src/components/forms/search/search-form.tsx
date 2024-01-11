@@ -17,7 +17,7 @@ import { useForm } from 'react-hook-form'
 
 import { PropertyForEnum, PropertyTypeEnum } from '@/constants/enums'
 import { propertyForOptions } from '@/constants/search'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import MultiSelectElement from '@/components/forms/elements/multiselect-element'
 import CustomTabRadioGroup from '@/components/forms/elements/custom-tab-radio-group'
 import { TOption } from '@/constants/types'

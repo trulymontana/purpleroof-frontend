@@ -1,15 +1,10 @@
 'use client'
-import React from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
-
 import { Form } from '@/components/ui/form'
-
 import * as z from 'zod'
-import InputElement from '@/components/forms/elements/input-element'
-
 import SelectElement from '@/components/forms/elements/select-element'
 import { countries } from '@/constants/countries'
 import ComboboxElement from '@/components/forms/elements/combobox-element'
@@ -18,6 +13,7 @@ import { PageRoutes } from '@/constants/page-routes'
 import { BackButton } from '@/components/navigation/back-button'
 import { loanTypeOptions } from '@/constants/mortgage'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
+import { LoanTypeEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   country: z.string({
@@ -32,7 +28,7 @@ const formSchema = z.object({
   monthlyIncome: z.number({
     required_error: 'Please enter your montly income'
   }),
-  loanType: z.string({
+  loanType: z.nativeEnum(LoanTypeEnum, {
     required_error: 'Please select a loan type'
   })
 })

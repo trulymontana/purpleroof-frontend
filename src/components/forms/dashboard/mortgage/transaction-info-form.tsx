@@ -13,15 +13,16 @@ import { completionStatus, emirate, propertyType } from '@/constants/mortgage'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
+import { CompletionStatusEnum, EmirateEnum, PropertyTypeEnum } from '@/constants/enums'
 
 const formSchema = z.object({
-  propertyType: z.string({
+  propertyType: z.nativeEnum(PropertyTypeEnum, {
     required_error: 'Please select a property type.'
   }),
-  completionStatus: z.string({
+  completionStatus: z.nativeEnum(CompletionStatusEnum, {
     required_error: 'Please select completion status.'
   }),
-  emirate: z.string({
+  emirate: z.nativeEnum(EmirateEnum, {
     required_error: 'Please select a emirate.'
   }),
   additionalDetail: z.string().optional()
