@@ -26,15 +26,11 @@ export function useUpdateUserRole() {
   return useMutation({
     mutationFn: userClient.updateUserRole,
     onSuccess: (response: any) => {
-      const { statusCode, data } = response
-
-      if (statusCode === 200) {
-        toast({
-          variant: 'default',
-          title: 'User role updated successfully'
-        })
-        queryClient.refetchQueries({ queryKey: [ApiEndpoints.USERS] })
-      }
+      toast({
+        variant: 'default',
+        title: 'User role updated successfully'
+      })
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.USERS] })
     },
     onError: (error: any) => {
       toast({

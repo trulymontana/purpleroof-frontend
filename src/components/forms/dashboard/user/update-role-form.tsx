@@ -5,7 +5,6 @@ import { Form } from '@/components/ui/form'
 import SelectElement from '@/components/forms/elements/select-element'
 import { Button } from '@/components/ui/button'
 import { UserRoleEnum } from '@/constants/enums'
-import { useUpdatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 import { User } from '@/constants/types'
 import { UserRoleOptions } from '@/constants/users'
 import { useUpdateUserRole } from '@/data/hooks/useUsersClient'
@@ -22,7 +21,7 @@ const formSchema = z.object({
 
 type TPropertyStatus = z.infer<typeof formSchema>
 const UpdateUserRoleForm = ({ data }: Props) => {
-  const { mutate: updateRole } = useUpdateUserRole()
+  const { mutate: updateRole, isPending: isLoading } = useUpdateUserRole()
 
   const form = useForm<TPropertyStatus>({
     resolver: zodResolver(formSchema),
@@ -42,8 +41,8 @@ const UpdateUserRoleForm = ({ data }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <SelectElement name="role" placeholder="Please select a role" label="Role" options={UserRoleOptions} />
-        <Button className="w-full" type="submit">
-          Save changes
+        <Button disabled={isLoading} className="w-full" type="submit">
+          {isLoading ? "Saving..." : "Save Changes"}
         </Button>
       </form>
     </Form>
