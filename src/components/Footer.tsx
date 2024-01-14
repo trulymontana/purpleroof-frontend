@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from './ui/button'
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react'
-import { headerLinks, requirements, services } from '@/constants/navigation'
+import { headerLinks, otherLinks, requirements, services, socialLinks } from '@/constants/navigation'
 import Link from 'next/link'
 
 const Footer = () => {
@@ -54,42 +54,43 @@ const Footer = () => {
           </div>
           <div>
             <h5 className="mb-4 text-sm font-semibold">WANT TO GET IN TOUCH?</h5>
-            <Button className="border border-white bg-transparent text-white hover:bg-white hover:text-[#4c2a85]">
-              Contact Us
-            </Button>
+            <Link href={otherLinks.CONTACT_US}>
+              <Button className="border border-white bg-transparent text-white hover:bg-white hover:text-[#4c2a85]">
+                Contact Us
+              </Button>
+            </Link>
             <h5 className="mb-4 mt-6 text-sm font-semibold">FOLLOW US ON</h5>
             <div className="flex space-x-3">
-              <Instagram className="text-white hover:text-gray-300" />
-              <Facebook className="text-white hover:text-gray-300" />
-              <Twitter className="text-white hover:text-gray-300" />
-              <Youtube className="text-white hover:text-gray-300" />
-              <Linkedin className="text-white hover:text-gray-300" />
-              <Youtube className="text-white hover:text-gray-300" />
-            </div>
-          </div>
-        </div>
+              <Link href={socialLinks.INSTAGRAM}><Instagram className="text-white hover:text-gray-300" /></Link>
+              <Link href={socialLinks.FACEBOOK}><Facebook className="text-white hover:text-gray-300" /></Link>
+              <Link href={socialLinks.TWITTER}><Twitter className="text-white hover:text-gray-300" /></Link>
+              <Link href={socialLinks.YOUTUBE}><Youtube className="text-white hover:text-gray-300" /></Link>
+              <Link href={socialLinks.LINKEDIN}><Linkedin className="text-white hover:text-gray-300" /></Link>
+            </div >
+          </div >
+        </div >
         <div className="mt-10 border-t border-white pt-6 text-sm">
           <div className="flex items-center justify-between">
             <div>
-              <Link href={'/'} className="hover:text-gray-300">
+              <Link href={otherLinks.TERMS} className="hover:text-gray-300">
                 Terms of use
               </Link>
-              <Link href={'/'} className="mx-3 hover:text-gray-300">
+              <span className="mx-3 hover:text-gray-300">
                 |
-              </Link>
-              <Link href={'/'} className="hover:text-gray-300">
+              </span>
+              <Link href={otherLinks.PRIVACY_POLICY} className="hover:text-gray-300">
                 Privacy Policy
               </Link>
-              <Link href={'/'} className="mx-3 hover:text-gray-300">
+              <span className="mx-3 hover:text-gray-300">
                 |
-              </Link>
-              <Link href={'/'} className="hover:text-gray-300">
+              </span>
+              <Link href={otherLinks.CARRERS} className="hover:text-gray-300">
                 Staff Application
               </Link>
-              <Link href={'/'} className="mx-3 hover:text-gray-300">
+              <span className="mx-3 hover:text-gray-300">
                 |
-              </Link>
-              <Link href={'/'} className="hover:text-gray-300">
+              </span>
+              <Link href={otherLinks.BENEFITS_OF_HOME_LOAN} className="hover:text-gray-300">
                 Benefits of Purple Roof Home Loan
               </Link>
             </div>
@@ -102,8 +103,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </div>
-    </footer>
+      </div >
+    </footer >
   )
 }
 
