@@ -8,6 +8,7 @@ import UserButton from './user-button'
 import { UserRoleEnum } from '@/constants/enums'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../ui/sheet'
 import { usePathname } from 'next/navigation'
+import { otherLinks } from '@/constants/navigation'
 
 const ICON_SIZE = 20
 
@@ -66,7 +67,7 @@ export default function NavBar({ user }: { user: User }) {
   return (
     <div className="w-full items-center justify-between gap-2 py-4 px-5 xl:px-16 bg-gray-300/40 dark:bg-gray-800/40 flex">
       <div className="flex w-full items-center justify-between gap-2 font-semibold ">
-        <Link href="#" className="flex items-center gap-2 font-semibold text-primary">
+        <Link href={otherLinks.PURPLEROOF} className="flex items-center gap-2 font-semibold text-primary">
           <Home />
           <span>PurpleRoof</span>
         </Link>

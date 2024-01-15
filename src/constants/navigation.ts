@@ -66,6 +66,7 @@ export const socialLinks = {
 }
 
 export const otherLinks = {
+  PURPLEROOF: 'https://purpleroof.com',
   TERMS: 'https://purpleroof.com/terms',
   PRIVACY_POLICY: 'https://purpleroof.com/privacy-policy/',
   CARRERS: 'https://purpleroof.com/careers/',
