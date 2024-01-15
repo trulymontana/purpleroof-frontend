@@ -19,7 +19,7 @@ import { PageRoutes } from '@/constants/page-routes'
 
 const Header = () => {
   return (
-    <nav className="flex items-center justify-between bg-primary/90 px-10 py-5">
+    <nav className="flex items-center justify-between bg-primary/80 px-10 py-5">
       <Link href="/" className="flex items-center space-x-2">
         <Image
           src={'/assets/logos/logo-only-white.png'}
