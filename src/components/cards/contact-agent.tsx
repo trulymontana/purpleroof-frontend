@@ -99,7 +99,6 @@ const ContactAgentCard = ({ data }: Props) => {
                 </Form>
               </DialogContent>
             </Dialog>
-
             <Dialog>
               <DialogTrigger asChild>
                 <Button variant="outline" className="mt-2 w-full">
