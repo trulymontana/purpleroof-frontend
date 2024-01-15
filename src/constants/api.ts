@@ -16,5 +16,7 @@ export const ApiEndpoints = {
   USER: API_ROOT + '/auth/user',
   COMMENTS: API_ROOT + '/comments',
   COMMENTS_BY_MORTGAGE: API_ROOT + '/comments/all-by-mortgage',
-  SEND_EMAIL: API_ROOT + '/common/send-email'
+  SEND_EMAIL: API_ROOT + '/common/send-email',
+  FORGOT_PASSWORD: API_ROOT + '/auth/forgot-password',
+  RESET_PASSWORD: API_ROOT + '/auth/reset-password'
 }
