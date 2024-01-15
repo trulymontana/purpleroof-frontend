@@ -16,5 +16,11 @@ export const authClient = {
   },
   getUserDetails: () => {
     return HttpClient.get<User>(ApiEndpoints.USER)
+  },
+  forgotPassword: (data: { email: string }) => {
+    return HttpClient.post<any>(ApiEndpoints.FORGOT_PASSWORD, data)
+  },
+  resetPassword: (data: { resetPasswordToken: string; newPassword: string; confirmNewPassword: string }) => {
+    return HttpClient.post<any>(ApiEndpoints.RESET_PASSWORD, data)
   }
 }

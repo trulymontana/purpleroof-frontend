@@ -44,6 +44,7 @@ export function useSignUp() {
     }
   })
 }
+
 export function useSignIn() {
   const router = useRouter()
   const queryClient = useQueryClient()
@@ -99,6 +100,7 @@ export function useGetUserDetails() {
     loading: isLoading
   }
 }
+
 export function useGetUserRole() {
   const { isLoading, data } = useQuery({
     queryKey: [ApiEndpoints.USER],
@@ -107,4 +109,35 @@ export function useGetUserRole() {
   })
 
   return data?.data?.role ?? UserRoleEnum.GENERAL_USER
+}
+
+export function useForgotPassword() {
+  const router = useRouter()
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: authClient.forgotPassword,
+    onSuccess: (response: any) => {
+      const { statusCode, data } = response
+      toast({
+        variant: 'default',
+        title: 'Email sent successfully!'
+      })
+    }
+  })
+}
+
+export function useResetPassword() {
+  const router = useRouter()
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: authClient.resetPassword,
+    onSuccess: (response: any) => {
+      const { statusCode, data } = response
+      toast({
+        variant: 'default',
+        title: 'Password changed successfully!'
+      })
+      router.push(PageRoutes.SIGNIN)
+    }
+  })
 }
