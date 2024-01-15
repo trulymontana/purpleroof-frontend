@@ -15,21 +15,15 @@ import { CheckCircledIcon, CrossCircledIcon, StopwatchIcon } from '@radix-ui/rea
 export const userColumns: ColumnDef<User>[] = [
   {
     accessorKey: 'id',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="ID" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="ID" />
   },
   {
     accessorKey: 'firstName',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="First Name" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="First Name" />
   },
   {
     accessorKey: 'lastName',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Last Name" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Last Name" />
   },
   {
     accessorKey: 'email',
@@ -37,9 +31,7 @@ export const userColumns: ColumnDef<User>[] = [
   },
   {
     accessorKey: 'createdAt',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Created At" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Created At" />,
     cell: ({ row }) => {
       const createdAt = row.original.createdAt
       return new Date(createdAt).toLocaleDateString()
@@ -47,9 +39,7 @@ export const userColumns: ColumnDef<User>[] = [
   },
   {
     accessorKey: 'updatedAt',
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Updated At" />
-    ),
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Updated At" />,
     cell: ({ row }) => {
       const updatedAt = row.original.createdAt
       return new Date(updatedAt).toLocaleDateString()

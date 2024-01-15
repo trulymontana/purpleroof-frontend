@@ -3,12 +3,12 @@ import { ApiEndpoints } from '@/constants/api'
 import { toast } from '@/components/ui/use-toast'
 import { agentsClient } from '../clients/agentsClient'
 import { useRouter } from 'next/navigation'
-import { PageRoutes } from '@/constants/page-routes'
 
 export function useGetAgents() {
   const { isLoading, data } = useQuery({
     queryKey: [ApiEndpoints.AGENTS],
     queryFn: () => agentsClient.all()
+    // enabled: false
   })
 
   return { data: data?.data, loading: isLoading }
@@ -18,7 +18,7 @@ export const useCreateAgentMutation = () => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: agentsClient.create,
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast({
         variant: 'default',
         title: 'Applied for agent successfully'
@@ -35,7 +35,7 @@ export const useUpdateAgentMutation = () => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: agentsClient.update,
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast({
         variant: 'default',
         title: 'Status updated successfully'
@@ -51,7 +51,7 @@ export const useDeleteAgentMutation = () => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: agentsClient.delete,
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast({
         variant: 'default',
         title: 'Agent successfully deleted'
@@ -65,7 +65,6 @@ export const useDeleteAgentMutation = () => {
 
 export function useUpdateApprovalStatusMutation() {
   const queryClient = useQueryClient()
-  const router = useRouter()
   return useMutation({
     mutationFn: agentsClient.updateApprovalStatus,
     onSuccess: (response: any) => {
@@ -87,28 +86,23 @@ export function useUpdateActiveStatusMutation() {
   const router = useRouter()
   return useMutation({
     mutationFn: agentsClient.updateActiveStatus,
-    onSuccess: (response: any) => {
-      const { statusCode, data } = response
-
-      if (statusCode === 200) {
-        toast({
-          variant: 'default',
-          title: 'Agent updated successfully'
-        })
-        queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
-      }
+    onSuccess: () => {
+      toast({
+        variant: 'default',
+        title: 'Agent updated successfully'
+      })
+      queryClient.refetchQueries({ queryKey: [ApiEndpoints.AGENTS] })
     }
   })
 }
 
 export const useSendEmailToAgentMutation = () => {
-  const queryClient = useQueryClient()
   return useMutation({
     mutationFn: agentsClient.sendEmailToAgent,
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast({
         variant: 'default',
-        title: 'Email sent successfully'
+        title: 'Email sent successfully!'
       })
       location.reload()
     }

@@ -12,17 +12,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForgotPassword } from '@/data/hooks/useAuthClient'
 import { useSearchParams } from 'next/navigation'
 
-const formSchema = z
-  .object({
-    email: z.string({
-      required_error: 'Please enter your email!'
-    })
+const formSchema = z.object({
+  email: z.string({
+    required_error: 'Please enter your email!'
   })
-
+})
 
 const Page = () => {
-
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams()
   const { isPending: isLoading, mutate: forgotPassword } = useForgotPassword()
 
   const email = searchParams.get('email')
@@ -45,7 +42,10 @@ const Page = () => {
       <Card className="auth_card">
         <CardHeader>
           <h1 className="auth_head">Forgot Password</h1>
-          <p className='text-sm text-center text-gray-400'>Enter the email address associated with your account. We&apos;ll send a link to your email to reset your password!</p>
+          <p className="text-center text-sm text-gray-400">
+            Enter the email address associated with your account. We&apos;ll send a link to your email to reset your
+            password!
+          </p>
         </CardHeader>
         <CardContent className="">
           <Form {...form}>
@@ -54,7 +54,7 @@ const Page = () => {
                 <CustomInputElement name="email" label="Email" type="email" />
               </div>
               <Button disabled={isLoading} className="w-full" type="submit">
-                {isLoading ? "Sending..." : "Send Email"}
+                {isLoading ? 'Sending...' : 'Send Email'}
               </Button>
               <div className="mt-4 text-center text-sm">
                 Remember your password?{' '}

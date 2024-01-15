@@ -1,4 +1,4 @@
-import { QueryOptions, TOption, User } from '@/constants/types'
+import { QueryOptions, User } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
@@ -51,7 +51,6 @@ export interface CreatePropertyInput {
   paymentInterval?: string
   minimumContract?: number
   lavatories?: string
-  // documents: DocumentEnum
 }
 
 export interface Property extends CreatePropertyInput {

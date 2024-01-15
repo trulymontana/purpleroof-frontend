@@ -22,8 +22,6 @@ import { DataTableColumnHeader } from './data-table/data-table-column-header'
 import UpdateNumberForm from '@/components/forms/dashboard/property/update-number-form'
 
 export default function PropertiesTable() {
-
-  const { data: agentsData } = useGetAgents()
   const { mutate: deleteProperty, isPending } = useDeletePropertyMutation()
 
   const userRole = useGetUserRole()
@@ -31,45 +29,33 @@ export default function PropertiesTable() {
   const columns: ColumnDef<Property>[] = [
     {
       accessorKey: 'id',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="ID" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="ID" />
     },
     {
-      accessorKey: "name",
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Name" />
-      ),
+      accessorKey: 'name',
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
       cell: ({ row }) => {
         return <span className="line-clamp-1 max-w-sm">{row.original.name}</span>
       }
     },
     {
       accessorKey: 'email',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Email" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Email" />
     },
     {
       accessorKey: 'phone',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Phone" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Phone" />,
       cell: ({ row }) => {
-        const data = row.original;
+        const data = row.original
         if (data.callPreference === CallPreferenceEnum.PURPLEROOF) {
-          return (
-            <span>{data.phone}</span>
-          )
+          return <span>{data.phone}</span>
         }
         return <span>{data.phone}</span>
       }
     },
     {
       accessorKey: 'amount',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Amount" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Amount" />,
       cell: ({ row }) => {
         const monthlyIncome = row.original.amount
         return <span>{currency.format(monthlyIncome)}</span>
@@ -77,21 +63,15 @@ export default function PropertiesTable() {
     },
     {
       accessorKey: 'landmark',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Landmark" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Landmark" />
     },
     {
       accessorKey: 'callPreference',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Call Preference" />
-      )
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Call Preference" />
     },
     {
       accessorKey: 'createdAt',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Created At" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Created At" />,
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()
@@ -114,9 +94,7 @@ export default function PropertiesTable() {
     },
     {
       accessorKey: 'submissionStatus',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Submission Status" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Submission Status" />,
       cell: ({ row }) => {
         const data = row.original
         if (data.submissionStatus === PropertySubmissionStatusEnum.REJECTED) {
@@ -125,8 +103,9 @@ export default function PropertiesTable() {
         return (
           <Badge
             variant="outline"
-            className={`uppercase ${data.submissionStatus === PropertySubmissionStatusEnum.APPROVED ? 'bg-teal-600 text-white' : ''
-              }`}
+            className={`uppercase ${
+              data.submissionStatus === PropertySubmissionStatusEnum.APPROVED ? 'bg-teal-600 text-white' : ''
+            }`}
           >
             {data.submissionStatus === PropertySubmissionStatusEnum.SUBMITTED
               ? 'Waiting For approval'
@@ -144,9 +123,7 @@ export default function PropertiesTable() {
         return (
           <div className="flex items-center space-x-2">
             <Link href={PageRoutes.dashboard.PROPERTY_DETAILS(row.original.id)}>
-              <Button size="sm">
-                View Details
-              </Button>
+              <Button size="sm">View Details</Button>
             </Link>
           </div>
         )
@@ -160,21 +137,29 @@ export default function PropertiesTable() {
         id: 'changeAgent',
         cell: ({ row }) => {
           return (
-            <div className='flex items-center gap-2'>
+            <div className="flex items-center gap-2">
               {row.original.submissionStatus === PropertySubmissionStatusEnum.APPROVED && (
                 <ConfirmActionDialog
                   title={row.original?.agentId ? 'Change Agent' : 'Assign Agent'}
-                  anchor={<Button variant="outline" size="sm">{row.original?.agentId ? 'Change Agent' : 'Assign Agent'}</Button>}
-                  content={<AssignAgentForm agentsData={agentsData} data={row.original} />}
+                  anchor={
+                    <Button variant="outline" size="sm">
+                      {row.original?.agentId ? 'Change Agent' : 'Assign Agent'}
+                    </Button>
+                  }
+                  content={<AssignAgentForm data={row.original} />}
                 />
               )}
-              {
-                row.original.callPreference === CallPreferenceEnum.PURPLEROOF && (<ConfirmActionDialog
+              {row.original.callPreference === CallPreferenceEnum.PURPLEROOF && (
+                <ConfirmActionDialog
                   title="Update Number"
-                  anchor={<Button variant="outline" size="sm">Update Number</Button>}
+                  anchor={
+                    <Button variant="outline" size="sm">
+                      Update Number
+                    </Button>
+                  }
                   content={<UpdateNumberForm data={row.original} />}
-                />)
-              }
+                />
+              )}
             </div>
           )
         }
@@ -182,7 +167,7 @@ export default function PropertiesTable() {
       {
         id: 'adminActions',
         cell: ({ row }) => (
-          <div className='flex items-center gap-1'>
+          <div className="flex items-center gap-1">
             <ConfirmActionDialog
               title="Edit Property"
               anchor={
@@ -223,7 +208,7 @@ export default function PropertiesTable() {
       columns={columns}
       data={data ?? []}
       isLoading={loading}
-      filterKey='name'
+      filterKey="name"
       facetKey={'submissionStatus'}
       facetOptions={propertyFilterOptions}
     />

@@ -40,7 +40,6 @@ interface Props {
 }
 
 const ContactAgentCard = ({ data }: Props) => {
-
   const { mutate: sendEmail, isPending: isLoading } = useSendEmailToAgentMutation()
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,7 +50,7 @@ const ContactAgentCard = ({ data }: Props) => {
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    const agentEmail = data?.agent?.user?.email;
+    const agentEmail = data?.agent?.user?.email
     if (agentEmail) {
       const emailData: Email = { ...values, emailTo: agentEmail }
       sendEmail({
@@ -94,7 +93,7 @@ const ContactAgentCard = ({ data }: Props) => {
                     <PhoneNumberInputElement name="subject" label="Phone Number" />
                     <TextAreaElement label="Message" name="message" />
                     <Button disabled={isLoading} type="submit" className="w-full">
-                      {isLoading ? "Sending..." : "Send Email"}
+                      {isLoading ? 'Sending...' : 'Send Email'}
                     </Button>
                   </form>
                 </Form>

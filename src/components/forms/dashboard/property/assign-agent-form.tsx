@@ -7,13 +7,12 @@ import { Button } from '@/components/ui/button'
 import { ApprovalStatusEnum } from '@/constants/enums'
 import { useAssignAgentMutation } from '@/data/hooks/usePropertiesClient'
 import { Property } from '@/data/clients/propertiesClient'
-import { Agent } from '@/data/clients/agentsClient'
 import { useEffect, useState } from 'react'
 import { TOption } from '@/constants/types'
+import { useGetAgents } from '@/data/hooks/useAgentsClient'
 
 interface Props {
   data: Property
-  agentsData: Agent[] | undefined
 }
 
 const formSchema = z.object({
@@ -23,7 +22,8 @@ const formSchema = z.object({
 })
 
 type TAgent = z.infer<typeof formSchema>
-const AssignAgentForm = ({ data, agentsData }: Props) => {
+const AssignAgentForm = ({ data }: Props) => {
+  const { data: agentsData } = useGetAgents()
   const [agentOptions, setAgentOptions] = useState<TOption[]>()
   const { mutate: assignAgent, isPending: isLoading } = useAssignAgentMutation()
 
@@ -57,7 +57,7 @@ const AssignAgentForm = ({ data, agentsData }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <SelectElement name="agentId" placeholder="Please select a agent" label="Agent" options={agentOptions || []} />
-        <Button className='w-full' disabled={isLoading} type="submit">
+        <Button className="w-full" disabled={isLoading} type="submit">
           {isLoading ? 'Saving...' : 'Save changes'}
         </Button>
       </form>

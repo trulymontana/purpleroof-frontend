@@ -42,12 +42,12 @@ const Page = () => {
       <div className="w-screen bg-primary/20">
         {data?.data ? (
           <div className="min-h-calc(100vh - 200px) relative z-20 h-fit min-h-screen w-screen overflow-y-scroll">
-            <div ref={root} className="w-full pt-10 mx-auto ">
+            <div ref={root} className="mx-auto w-full pt-10 ">
               <div className="z-10 mx-auto py-1 lg:px-8">
                 <h1 className="mb-10 text-4xl font-bold text-primary  underline underline-offset-4">
                   Properties You Searched For
                 </h1>
-                <div className="grid grid-cols-1 px-3  place-items-center place-content-center gap-x-6 gap-y-10 pb-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-6">
+                <div className="grid grid-cols-1 place-content-center  place-items-center gap-x-6 gap-y-10 px-3 pb-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:gap-x-6">
                   {data?.data &&
                     data.data.length > 0 &&
                     data.data?.map((property: Property, i: number) => {

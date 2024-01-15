@@ -2,9 +2,6 @@
 import { toast } from '@/components/ui/use-toast'
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query'
 
-// const getQueryClient = cache(
-
-// )
 const getQueryClient = () =>
   new QueryClient({
     queryCache: new QueryCache({

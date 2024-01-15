@@ -94,31 +94,25 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
         <div className="mx-auto flex-1 py-4">
           <CustomTabRadioGroup name="propertyFor" options={propertyForOptions} />
         </div>
-        <div className="mx-auto w-full xl:w-1/2 flex-1 py-4">
+        <div className="mx-auto w-full flex-1 py-4 xl:w-1/2">
           <TabRadioGroup name="propertyTypes" options={typesOfProperties} />
         </div>
         <div className="flex flex-col items-center gap-5 rounded-lg p-4">
-          <div className="flex flex-col lg:flex-row w-full items-center gap-4">
-            <div className="flex-1 w-full xl:w-fit">
-              <MultiSelectElement
-                name="emirates"
-                placeholder="Please select emirates"
-                options={emirateOptions}
-              />
+          <div className="flex w-full flex-col items-center gap-4 lg:flex-row">
+            <div className="w-full flex-1 xl:w-fit">
+              <MultiSelectElement name="emirates" placeholder="Please select emirates" options={emirateOptions} />
             </div>
-            <div className="flex-1 w-full xl:w-fit">
+            <div className="w-full flex-1 xl:w-fit">
               <MultiSelectElement
                 disabled={!emirates || emirates.length === 0}
                 name="locations"
                 placeholder={
-                  !emirates || emirates?.length === 0
-                    ? 'Please select atleast one emirate'
-                    : 'Please select locations'
+                  !emirates || emirates?.length === 0 ? 'Please select atleast one emirate' : 'Please select locations'
                 }
                 options={locationOptions || [{ label: 'Dubai', value: '1' }]}
               />
             </div>
-            <div className="flex-1 w-full xl:w-fit">
+            <div className="w-full flex-1 xl:w-fit">
               <MultiSelectElement
                 name="propertyCategories"
                 options={propertyCategory === PropertyTypeEnum.RESIDENTIAL ? residentalTypes : commercialTypes}
@@ -126,7 +120,7 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
               />
             </div>
           </div>
-          <div className="flex flex-col lg:flex-row w-full items-center justify-center gap-4">
+          <div className="flex w-full flex-col items-center justify-center gap-4 lg:flex-row">
             {propertyTypes === PropertyTypeEnum.RESIDENTIAL && (
               <>
                 <div className="w-full lg:w-[10%]">

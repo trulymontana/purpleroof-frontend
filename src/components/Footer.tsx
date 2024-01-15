@@ -61,35 +61,39 @@ const Footer = () => {
             </Link>
             <h5 className="mb-4 mt-6 text-sm font-semibold">FOLLOW US ON</h5>
             <div className="flex space-x-3">
-              <Link href={socialLinks.INSTAGRAM}><Instagram className="text-white hover:text-gray-300" /></Link>
-              <Link href={socialLinks.FACEBOOK}><Facebook className="text-white hover:text-gray-300" /></Link>
-              <Link href={socialLinks.TWITTER}><Twitter className="text-white hover:text-gray-300" /></Link>
-              <Link href={socialLinks.YOUTUBE}><Youtube className="text-white hover:text-gray-300" /></Link>
-              <Link href={socialLinks.LINKEDIN}><Linkedin className="text-white hover:text-gray-300" /></Link>
-            </div >
-          </div >
-        </div >
+              <Link href={socialLinks.INSTAGRAM}>
+                <Instagram className="text-white hover:text-gray-300" />
+              </Link>
+              <Link href={socialLinks.FACEBOOK}>
+                <Facebook className="text-white hover:text-gray-300" />
+              </Link>
+              <Link href={socialLinks.TWITTER}>
+                <Twitter className="text-white hover:text-gray-300" />
+              </Link>
+              <Link href={socialLinks.YOUTUBE}>
+                <Youtube className="text-white hover:text-gray-300" />
+              </Link>
+              <Link href={socialLinks.LINKEDIN}>
+                <Linkedin className="text-white hover:text-gray-300" />
+              </Link>
+            </div>
+          </div>
+        </div>
         <div className="mt-10 border-t border-white pt-6 text-sm">
           <div className="flex items-center justify-between">
             <div>
               <Link href={otherLinks.TERMS} className="hover:text-gray-300">
                 Terms of use
               </Link>
-              <span className="mx-3 hover:text-gray-300">
-                |
-              </span>
+              <span className="mx-3 hover:text-gray-300">|</span>
               <Link href={otherLinks.PRIVACY_POLICY} className="hover:text-gray-300">
                 Privacy Policy
               </Link>
-              <span className="mx-3 hover:text-gray-300">
-                |
-              </span>
+              <span className="mx-3 hover:text-gray-300">|</span>
               <Link href={otherLinks.CARRERS} className="hover:text-gray-300">
                 Staff Application
               </Link>
-              <span className="mx-3 hover:text-gray-300">
-                |
-              </span>
+              <span className="mx-3 hover:text-gray-300">|</span>
               <Link href={otherLinks.BENEFITS_OF_HOME_LOAN} className="hover:text-gray-300">
                 Benefits of Purple Roof Home Loan
               </Link>
@@ -103,8 +107,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </div >
-    </footer >
+      </div>
+    </footer>
   )
 }
 

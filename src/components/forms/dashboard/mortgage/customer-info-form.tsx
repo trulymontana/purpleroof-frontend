@@ -55,9 +55,11 @@ const formSchema = z.object({
   annualRentalIncome: z.number({
     required_error: 'Please enter your annual rental income'
   }),
-  uaeResidenceAddress: z.string({
-    required_error: 'Please enter your UAE residence address'
-  }).optional(),
+  uaeResidenceAddress: z
+    .string({
+      required_error: 'Please enter your UAE residence address'
+    })
+    .optional(),
   homeCountryAddress: z.string({
     required_error: 'Please enter your home country address'
   }),

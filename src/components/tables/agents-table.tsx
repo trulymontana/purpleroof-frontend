@@ -23,9 +23,7 @@ export default function AgentsTable() {
   const columns: ColumnDef<Agent>[] = [
     {
       accessorKey: 'createdAt',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Applied At" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Applied At" />,
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()
@@ -33,15 +31,11 @@ export default function AgentsTable() {
     },
     {
       accessorKey: 'id',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="ID" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="ID" />
     },
     {
       accessorKey: 'agency',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Agency Name" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Agency Name" />,
       cell: ({ row }) => {
         const agency = row.original.agency
         if (agency) {
@@ -52,15 +46,11 @@ export default function AgentsTable() {
     },
     {
       accessorKey: 'contactNumber',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Contact Number" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Contact Number" />
     },
     {
       accessorKey: 'createdAt',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Created At" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Created At" />,
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()

@@ -26,8 +26,7 @@ interface Props {
   }
 }
 const Page = ({ params: { mortgageId } }: Props) => {
-
-  const role = useGetUserRole();
+  const role = useGetUserRole()
   const isAdmin = role === UserRoleEnum.ADMIN || role === UserRoleEnum.SUPER_ADMIN
 
   const { loading, data, fetching } = useGetOneMortgage(mortgageId)
@@ -46,7 +45,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
       <main className="container px-3 py-4">
         <div className="flex flex-col items-center justify-between gap-4 py-3 md:flex-row">
           <h2 className="text-4xl font-bold text-primary underline underline-offset-4">Mortgage Details</h2>
-          <div className='space-x-2'>
+          <div className="space-x-2">
             {!loading &&
               (userDetails.role === UserRoleEnum.ADMIN || userDetails.role === UserRoleEnum.SUPER_ADMIN) &&
               data && (
@@ -60,7 +59,7 @@ const Page = ({ params: { mortgageId } }: Props) => {
               <SheetTrigger asChild>
                 <Button>View Timeline</Button>
               </SheetTrigger>
-              <SheetContent className='sm:w-full xl:w-1/2 md:max-w-full overflow-y-scroll'>
+              <SheetContent className="overflow-y-scroll sm:w-full md:max-w-full xl:w-1/2">
                 <SheetHeader>
                   <SheetTitle>Mortgage Timeline</SheetTitle>
                 </SheetHeader>

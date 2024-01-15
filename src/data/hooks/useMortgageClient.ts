@@ -48,7 +48,7 @@ export const useDeleteMortgageMutation = () => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: mortgageClient.delete,
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast({
         variant: 'default',
         title: 'Mortgage deleted successfully'

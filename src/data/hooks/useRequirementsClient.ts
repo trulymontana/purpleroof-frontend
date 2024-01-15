@@ -30,7 +30,7 @@ export const useCreateRequirementMutation = () => {
 
   return useMutation({
     mutationFn: requirementsClient.create,
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast({
         variant: 'default',
         title: 'Requirement created successfully'
@@ -47,7 +47,7 @@ export const useUpdateRequirementMutation = () => {
 
   return useMutation({
     mutationFn: requirementsClient.update,
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast({
         variant: 'default',
         title: 'Requirement updated successfully'
@@ -64,7 +64,7 @@ export const useDeleteRequirementMutation = () => {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: requirementsClient.delete,
-    onSuccess: (data: any) => {
+    onSuccess: () => {
       toast({
         variant: 'default',
         title: 'Requirement successfully deleted'

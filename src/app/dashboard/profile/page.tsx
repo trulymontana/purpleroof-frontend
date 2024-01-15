@@ -56,7 +56,6 @@ const Page = () => {
   const { mutate: createAgent, isPending: isLoading } = useCreateAgentMutation()
   const { data: agentApplicationDetails } = useGetAgentApplications()
 
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema)
   })
@@ -213,12 +212,8 @@ const Page = () => {
                 </Dialog>
                 <ConfirmActionDialog
                   title="Update Locations"
-                  anchor={
-                    <Button>
-                      Update Locations
-                    </Button>
-                  }
-                  content={<UpdateLocationsForm agentDetails={agentApplicationDetails}  />}
+                  anchor={<Button>Update Locations</Button>}
+                  content={<UpdateLocationsForm agentDetails={agentApplicationDetails} />}
                 />
               </div>
             </CardContent>
