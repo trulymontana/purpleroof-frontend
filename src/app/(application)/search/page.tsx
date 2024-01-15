@@ -5,6 +5,7 @@ import { Property } from '@/data/clients/propertiesClient'
 import PropertyCard from '@/components/cards/property-card'
 import SearchForm from '@/components/forms/search/search-form'
 import { useSearchProperties } from '@/data/hooks/useSearchClient'
+import BackgroundEffect from '@/components/BackgroundEffect'
 
 const Page = () => {
   const root = useRef<HTMLDivElement>(null)
@@ -23,13 +24,7 @@ const Page = () => {
     <section className="overflow-x-hidden">
       <div className="relative h-auto min-h-screen">
         <div className="absolute inset-0 -z-10 h-auto min-h-screen w-full bg-indigo-600 bg-opacity-25 bg-search bg-cover backdrop-opacity-10" />
-        <div
-          className="t-0 absolute top-0 -z-10 h-full w-full opacity-75"
-          style={{
-            background: 'linear-gradient(to bottom, #795695 30%, #795695 70%)'
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-black opacity-50" />
+        <BackgroundEffect />
         <div className="relative flex flex-col gap-4 px-8 py-12 text-center">
           <h1 className="mb-8 mt-10 text-5xl font-bold text-white">Search a Property Sale or Rent in UAE</h1>
           <div className="flex flex-col items-center gap-5 rounded-lg">

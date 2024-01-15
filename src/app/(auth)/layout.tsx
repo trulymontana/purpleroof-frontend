@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import { Toaster } from '@/components/ui/toaster'
 
 import Header from '@/components/Header'
+import BackgroundEffect from '@/components/BackgroundEffect'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,13 +20,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
                     <Header />
                     <div className='relative h-auto min-h-screen'>
                         <div className="absolute inset-0 -z-10 h-auto min-h-screen w-full bg-indigo-600 bg-opacity-25 bg-advertise bg-cover backdrop-opacity-10" />
-                        <div
-                            className="t-0 absolute top-0 -z-10 h-full w-full opacity-75"
-                            style={{
-                                background: 'linear-gradient(to bottom, #795695 30%, #795695 70%)'
-                            }}
-                        ></div>
-                        <div className="absolute inset-0 bg-black opacity-50" />
+                        <BackgroundEffect />
                         {children}
                     </div>
                 </main>
