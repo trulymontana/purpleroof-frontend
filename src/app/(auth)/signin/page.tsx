@@ -72,7 +72,7 @@ const Page = () => {
               </p>
               <p className="text-center">
                 Forgot Password?{' '}
-                <Link className="text-primary underline" href={PageRoutes.FORGOT_PASSWORD}>
+                <Link className="text-primary underline" href={`${PageRoutes.FORGOT_PASSWORD}?email=${email ? email : ''}`}>
                   Reset Password
                 </Link>
               </p>

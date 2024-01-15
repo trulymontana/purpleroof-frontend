@@ -10,6 +10,7 @@ import { Form } from '@/components/ui/form'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForgotPassword } from '@/data/hooks/useAuthClient'
+import { useSearchParams } from 'next/navigation'
 
 const formSchema = z
   .object({
@@ -21,11 +22,16 @@ const formSchema = z
 
 const Page = () => {
 
+  const searchParams = useSearchParams();
   const { isPending: isLoading, mutate: forgotPassword } = useForgotPassword()
 
+  const email = searchParams.get('email')
 
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema)
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: email || ''
+    }
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
