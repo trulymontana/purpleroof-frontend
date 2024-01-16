@@ -60,6 +60,9 @@ export default function AgentsTable() {
       header: 'Active Status',
       cell: ({ row }) => {
         const activeStatus = row.original.activeStatus
+        if (row.original.approvalStatus !== ApprovalStatusEnum.APPROVED) {
+          return <Badge variant="secondary">-</Badge>
+        }
         if (activeStatus === ActiveStatusEnum.ACTIVE) {
           return <Badge className={`bg-teal-400 text-black hover:bg-teal-600`}>Active</Badge>
         }
@@ -72,7 +75,7 @@ export default function AgentsTable() {
       cell: ({ row }) => {
         const approvalStatus = row.original.approvalStatus
         if (approvalStatus === ApprovalStatusEnum.APPROVED) {
-          return <Badge className={`bg-teal-400 text-black hover:bg-green-600`}>Approved</Badge>
+          return <Badge className={`bg-teal-400 text-black hover:bg-teal-600`}>Approved</Badge>
         }
         return <Badge className={`bg-red-400 text-black hover:bg-red-600`}>Not Approved</Badge>
       }
@@ -84,33 +87,13 @@ export default function AgentsTable() {
         const locations = row.original.locations
         return (
           <ViewDetailsDialog
-            title='Locations'
-            description='Locations where agent is available.'
+            title="Locations"
+            description="Locations where agent is available."
             anchor={<Button variant="outline">View Locations</Button>}
             data={locations}
           />
         )
       }
-    },
-    {
-      id: 'action',
-      header: 'Action',
-      cell: ({ row }) => (
-        <div className="space-x-2">
-          <ConfirmActionDialog
-            title="Update Status"
-            anchor={<Button>Update Active Status</Button>}
-            content={<AgentActiveStausForm data={row.original} />}
-          />
-          {row.original.approvalStatus === ApprovalStatusEnum.NOT_APPROVED && (
-            <ConfirmActionDialog
-              title="Are you sure you want to approve this agent?"
-              anchor={<Button variant={'outline'}>Approve Agent</Button>}
-              content={<AgentApprovalStatusForm data={row.original} />}
-            />
-          )}
-        </div>
-      )
     },
     {
       id: 'realEstateLicense',
@@ -127,6 +110,29 @@ export default function AgentsTable() {
         )
       }
     },
+    {
+      id: 'action',
+      header: 'Action',
+      cell: ({ row }) => (
+        <div className="space-x-2">
+          {row.original.approvalStatus === ApprovalStatusEnum.APPROVED && (
+            <ConfirmActionDialog
+              title="Update Status"
+              anchor={<Button variant={'secondary'}>Update Active Status</Button>}
+              content={<AgentActiveStausForm data={row.original} />}
+            />
+          )}
+          {row.original.approvalStatus === ApprovalStatusEnum.NOT_APPROVED && (
+            <ConfirmActionDialog
+              title="Are you sure you want to approve this agent?"
+              anchor={<Button>Approve Agent</Button>}
+              content={<AgentApprovalStatusForm data={row.original} />}
+            />
+          )}
+        </div>
+      )
+    },
+
     {
       id: 'actions',
       enableHiding: false,
