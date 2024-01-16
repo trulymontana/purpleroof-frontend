@@ -1,6 +1,6 @@
 'use client'
 
-import { CardTitle, CardHeader, CardContent, Card } from '@/components/ui/card'
+import { CardHeader, CardContent, Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { PageRoutes } from '@/constants/page-routes'

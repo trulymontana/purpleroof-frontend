@@ -25,7 +25,7 @@ const formSchema = z
       return values.newPassword === values.confirmNewPassword
     },
     {
-      message: 'Passwords must match!',
+      message: 'Passwords do not match!',
       path: ['confirmNewPassword']
     }
   )

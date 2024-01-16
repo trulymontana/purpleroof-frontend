@@ -86,7 +86,7 @@ const Page = () => {
 
   return (
     <section className="relative h-auto min-h-screen">
-      <div className="absolute inset-0 -z-10 h-auto min-h-screen w-full bg-indigo-600 bg-opacity-25 bg-advertise bg-cover backdrop-opacity-10" />
+      <div className="absolute inset-0 -z-10 h-auto min-h-screen w-full bg-indigo-600 bg-opacity-25 bg-cover bg-advertise backdrop-opacity-10" />
       <BackgroundEffect />
       <WhiteStrokes />
       <div className="relative mx-auto max-w-7xl px-6 py-6 md:py-24 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">

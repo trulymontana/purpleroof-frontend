@@ -9,7 +9,7 @@ import React from 'react'
 const Page = () => {
   return (
     <>
-      <header className="flex h-14 items-center justify-between gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40 lg:h-[60px]">
+      <header className="dashboard_header justify-between dark:bg-gray-800/40 lg:h-[60px]">
         <h1 className="text-lg font-semibold">Requirements</h1>
         <Link href={PageRoutes.dashboard.admin.REQUIREMENTS_ADD}>
           <Button>Add New Requirement</Button>
