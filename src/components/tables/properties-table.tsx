@@ -13,7 +13,6 @@ import UpdatePropertyForm from '@/components/forms/dashboard/property/update-pro
 import { Property } from '@/data/clients/propertiesClient'
 import currency from '@/lib/currency'
 import AssignAgentForm from '@/components/forms/dashboard/property/assign-agent-form'
-import { useGetAgents } from '@/data/hooks/useAgentsClient'
 import { CallPreferenceEnum, PropertySubmissionStatusEnum, UserRoleEnum } from '@/constants/enums'
 import { useGetUserRole } from '@/data/hooks/useAuthClient'
 import { FacetOption } from './data-table/data'

@@ -12,8 +12,6 @@ import AgentApprovalStatusForm from '@/components/forms/dashboard/agent/approval
 import AgentActiveStausForm from '@/components/forms/dashboard/agent/active-status-form'
 import Link from 'next/link'
 import { DownloadIcon } from 'lucide-react'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
-import { Card, CardHeader, CardTitle } from '../ui/card'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import { DataTableColumnHeader } from './data-table/data-table-column-header'
 import ViewDetailsDialog from '../dialogs/view-details-dialog'
