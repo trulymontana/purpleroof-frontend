@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { UserRoleEnum } from '@/constants/enums'
 import { PageRoutes } from '@/constants/page-routes'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { CardHeader, CardContent, Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -46,6 +46,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const [userData, setUserData] = useState<User | undefined>()
   const [isLoaded, setIsLoaded] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     const storedValue = localStorage.getItem(LocalStorageKeys.USER)
@@ -59,31 +60,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }
 
   if (!userData) {
-    return (
-      <main className="flex h-screen flex-col items-center justify-center space-y-10 bg-gray-100">
-        <div className="w-[300px]">
-          <Card>
-            <CardHeader>
-              <h2 className="text-center text-2xl font-bold">Welcome!</h2>
-            </CardHeader>
-            <CardContent>
-              <p className="text-center text-gray-600">You&apos;re not currently signed in</p>
-              <Button className="mt-4 block w-full text-center" variant="link">
-                <Link className="text-primary hover:underline" href="/signin">
-                  Sign In
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-        <div className="flex items-center gap-2">
-          <Badge variant="secondary">New User?</Badge>
-          <Button className="border-black text-primary hover:bg-primary hover:text-white" variant="outline">
-            <Link href={PageRoutes.SIGNUP}>Sign Up</Link>
-          </Button>
-        </div>
-      </main>
-    )
+    router.push(PageRoutes.SIGNIN)
+    return null
   }
 
   const allowedPages = roleToPageMapping[userData.role]

@@ -3,13 +3,12 @@
 import { ArrowRight, Menu } from 'lucide-react'
 import Link from 'next/link'
 import { Button } from './ui/button'
-import { headerLinks } from '@/constants/navigation'
+import { headerLinks, otherLinks } from '@/constants/navigation'
 import Image from 'next/image'
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -20,7 +19,7 @@ import { PageRoutes } from '@/constants/page-routes'
 const Header = () => {
   return (
     <nav className="flex items-center justify-between bg-primary/90 px-10 py-5">
-      <Link href="/" className="flex items-center space-x-2">
+      <Link href={otherLinks.PURPLEROOF} className="flex items-center space-x-2">
         <Image
           src={'/assets/logos/logo-only-white.png'}
           quality={100}

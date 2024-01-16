@@ -1,7 +1,7 @@
 import { Checkbox } from '@/components/ui/checkbox'
 import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { TOption } from '@/constants/types'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 interface Props {

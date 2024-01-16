@@ -67,6 +67,7 @@ const Page = () => {
 
   return (
     <section className="auth_section">
+
       <Card className="auth_card">
         <CardHeader>
           <h1 className="auth_head">Sign Up</h1>

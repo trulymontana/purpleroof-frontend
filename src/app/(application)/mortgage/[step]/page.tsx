@@ -10,6 +10,7 @@ import { useCreateMortgageMutation } from '@/data/hooks/useMortgageClient'
 import { MortgageStatusEnum } from '@/constants/enums'
 import { CreateMortgageInput } from '@/data/clients/mortgageClient'
 import CompleteApplicationForm from '@/components/forms/mortgage/complete-application-form'
+import BackgroundEffect from '@/components/BackgroundEffect'
 
 const Page = () => {
   const pathName = usePathname()
@@ -45,16 +46,11 @@ const Page = () => {
 
   return (
     <section className="relative h-auto min-h-screen">
-      <div className="absolute inset-0 -z-10 h-auto min-h-screen w-full bg-indigo-600 bg-opacity-25 bg-mortgage bg-cover backdrop-opacity-10" />
-      <div
-        className="t-0 absolute top-0 -z-10 h-full w-full opacity-75"
-        style={{
-          backgroundColor: `rgb(91, 55, 118)`
-        }}
-      />
+      <div className="absolute inset-0 -z-10 h-auto min-h-screen w-full bg-indigo-600 bg-opacity-25 bg-mortgage bg-cover backdrop-opacity-20" />
+      <BackgroundEffect />
       <BoxStrokesIcon />
 
-      <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
+      <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
         <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-shrink">
           <Image
             src={'/assets/logos/logo-only-white.png'}

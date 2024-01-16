@@ -42,7 +42,7 @@ const UpdateUserRoleForm = ({ data }: Props) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <SelectElement name="role" placeholder="Please select a role" label="Role" options={UserRoleOptions} />
         <Button disabled={isLoading} className="w-full" type="submit">
-          {isLoading ? "Saving..." : "Save Changes"}
+          {isLoading ? 'Saving...' : 'Save Changes'}
         </Button>
       </form>
     </Form>

@@ -53,10 +53,10 @@ export function DataTable<TData, TValue>({
       setTableData(data)
     }
     if (date && date?.from && date?.to) {
-      const from = date?.from?.toISOString();
-      const to = date?.to?.toISOString();
+      const from = date?.from?.toISOString()
+      const to = date?.to?.toISOString()
       // @ts-ignore
-      const filteredData = data.filter(item => item.createdAt > from && item.createdAt < to)
+      const filteredData = data.filter((item) => item.createdAt > from && item.createdAt < to)
       setTableData(filteredData)
     }
   }, [date, data])

@@ -18,69 +18,47 @@ export default function RequirementsTable() {
   const columns: ColumnDef<RequirementApplication>[] = [
     {
       accessorKey: 'id',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="ID" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="ID" />
     },
     {
       accessorKey: 'name',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Name" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />
     },
     {
       accessorKey: 'incomeProfile',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Income Profile" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Income Profile" />
     },
     {
       accessorKey: 'residenceType',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Residency Type" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Residency Type" />
     },
     {
       accessorKey: 'preApprovalFee',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Pre Approval (AED)" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Pre Approval (AED)" />
     },
     {
       accessorKey: 'processingFee',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Processing (%)" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Processing (%)" />
     },
     {
       accessorKey: 'lifeInsurance',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Life Insurance (%)" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Life Insurance (%)" />
     },
     {
       accessorKey: 'propertyInsurance',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Property Insurance (%)" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Property Insurance (%)" />
     },
     {
       accessorKey: 'valuationFee',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Valuation (AED)" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Valuation (AED)" />
     },
     {
       accessorKey: 'rate',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Rate (%)" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Rate (%)" />
     },
     {
       accessorKey: 'createdAt',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Created At" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Created At" />,
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()

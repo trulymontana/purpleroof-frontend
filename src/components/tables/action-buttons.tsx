@@ -1,15 +1,12 @@
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 
 import { usePathname } from 'next/navigation'
 import { Button } from '../ui/button'
 import { Eye, FileEdit, Trash2 } from 'lucide-react'
 import Link from 'next/link'
-import SelectElement from '../forms/elements/select-element'
-import { Form } from '../ui/form'
 import * as z from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { propertySubmissionStatuses } from '@/constants/advertise'
 import { useUpdatePropertyMutation } from '@/data/hooks/usePropertiesClient'
 import { Property } from '@/constants/types'
 

@@ -58,12 +58,12 @@ const PropertyDetailsCard = ({ data }: Props) => {
           </h2>
           <p className="my-4 text-gray-500">{data?.description}</p>
         </div>
-        <div className="grid gap-8 rounded-xl border p-5 shadow-md shadow-primary/30">
+        <div className="property_details_card">
           <div className="w-full">
-            <h3 className="my-2 flex items-center gap-2 text-3xl font-semibold text-primary">
+            <h3 className="property_details_card-heading">
               <LandPlot className="font-semibold" /> Property Information
             </h3>
-            <div className="mt-5 grid w-full grid-cols-2 content-between gap-x-16 gap-y-4">
+            <div className="property_details_card-details">
               <div className="flex justify-between">
                 <p>Type</p>
                 <p className="font-semibold capitalize">
@@ -93,12 +93,12 @@ const PropertyDetailsCard = ({ data }: Props) => {
             </div>
           </div>
         </div>
-        <div className="grid gap-8 rounded-xl border p-5 shadow-md shadow-primary/30">
+        <div className="property_details_card">
           <div className="col-span-2">
-            <h3 className="my-2 flex items-center gap-1 text-3xl font-semibold text-primary">
+            <h3 className="property_details_card-heading">
               <MapPin className="font-semibold" /> Location Information
             </h3>
-            <div className="mt-5 grid w-full grid-cols-2 content-between gap-x-16 gap-y-4">
+            <div className="property_details_card-details">
               <div className="flex justify-between">
                 <p>Emirate</p>
                 <p className="font-semibold capitalize ">{data?.emirate?.toLocaleLowerCase().replaceAll('_', ' ')}</p>
@@ -132,12 +132,12 @@ const PropertyDetailsCard = ({ data }: Props) => {
             </div>
           </div>
         </div>
-        <div className="grid gap-8 rounded-xl border p-5 shadow-md shadow-primary/30">
+        <div className="property_details_card">
           <div className="col-span-2">
-            <h3 className="my-2 flex items-center gap-2 text-3xl font-semibold text-primary">
+            <h3 className="property_details_card-heading">
               <TrendingUp className="font-semibold" /> Project Status Information
             </h3>
-            <div className="mt-5 grid w-full grid-cols-2 content-between gap-x-16 gap-y-4">
+            <div className="property_details_card-details">
               <div className="flex justify-between">
                 <p>Project Status</p>
                 <p className="font-semibold capitalize ">
@@ -165,12 +165,12 @@ const PropertyDetailsCard = ({ data }: Props) => {
             </div>
           </div>
         </div>
-        <div className="grid gap-8 rounded-xl border p-5 shadow-md shadow-primary/30">
+        <div className="property_details_card">
           <div className="col-span-2">
-            <h3 className="my-2 flex items-center gap-2 text-3xl font-semibold text-primary">
+            <h3 className="property_details_card-heading">
               <Grid className="font-semibold" /> Other Details
             </h3>
-            <div className="mt-5 grid w-full grid-cols-2 content-between gap-x-16 gap-y-4">
+            <div className="property_details_card-details">
               <div className="flex justify-between">
                 <p>Distance From Airport</p>
                 <p className="font-semibold capitalize ">{data?.airportDistance} kms</p>

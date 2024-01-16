@@ -32,7 +32,9 @@ const PropertyCard = ({ property }: Props) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <MapPin className="h-4 w-4" />
-            <p className="text-sm font-bold capitalize">{property?.emirate?.toLocaleLowerCase().replaceAll('_', ' ')}</p>
+            <p className="text-sm font-bold capitalize">
+              {property?.emirate?.toLocaleLowerCase().replaceAll('_', ' ')}
+            </p>
           </div>
           {property?.rentalAmount && (
             <div className="flex items-center space-x-2">

@@ -21,6 +21,7 @@ import { CreatePropertyInput } from '@/data/clients/propertiesClient'
 import { nullCheckAndMerge } from '@/lib/utils'
 import { PropertyForEnum } from '@/constants/enums'
 import ApplicationCompletedForm from '../../../../components/forms/advertise/application-completed-form'
+import BackgroundEffect from '@/components/BackgroundEffect'
 
 const Page = () => {
   const pathName = usePathname()
@@ -85,16 +86,10 @@ const Page = () => {
 
   return (
     <section className="relative h-auto min-h-screen">
-      <div className="absolute inset-0 -z-10 h-auto min-h-screen w-full bg-indigo-600 bg-opacity-25 bg-advertise bg-cover backdrop-opacity-10" />
-      <div
-        className="t-0 absolute top-0 -z-10 h-full w-full opacity-75"
-        style={{
-          background: 'linear-gradient(to bottom, #795695 30%, #795695 70%)'
-        }}
-      />
+      <div className="absolute inset-0 -z-10 h-auto min-h-screen w-full bg-indigo-600 bg-opacity-25 bg-cover bg-advertise backdrop-opacity-10" />
+      <BackgroundEffect />
       <WhiteStrokes />
-
-      <div className="mx-auto max-w-7xl px-6 py-6 md:py-24 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
+      <div className="relative mx-auto max-w-7xl px-6 py-6 md:py-24 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
         <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-shrink">
           <Image
             src={'/assets/logos/logo-only-white.png'}

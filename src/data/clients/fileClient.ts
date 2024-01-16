@@ -1,4 +1,4 @@
-import { MortgageApplication, PreSignedFile, QueryOptions, User } from '@/constants/types'
+import { PreSignedFile, QueryOptions } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'

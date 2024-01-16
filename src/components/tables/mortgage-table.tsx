@@ -25,39 +25,27 @@ export default function MortgagesTable() {
   const columns: ColumnDef<MortgageApplication>[] = [
     {
       accessorKey: 'id',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="ID" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="ID" />
     },
     {
       accessorKey: 'firstName',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="First Name" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="First Name" />
     },
     {
       accessorKey: 'lastName',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Last Name" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Last Name" />
     },
     {
       accessorKey: 'email',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Email" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Email" />
     },
     {
       accessorKey: 'phoneNumber',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Phone Number" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Phone Number" />
     },
     {
       accessorKey: 'dateOfBirth',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Date of Birth" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Date of Birth" />,
       cell: ({ row }) => {
         const data = row.original
         const dob = new Date(data.dateOfBirth).toLocaleDateString()
@@ -66,9 +54,7 @@ export default function MortgagesTable() {
     },
     {
       accessorKey: 'monthlyIncome',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Montly Income" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Montly Income" />,
       cell: ({ row }) => {
         const monthlyIncome = row.original.monthlyIncome
         return <span>{currency.format(monthlyIncome)}</span>
@@ -76,9 +62,7 @@ export default function MortgagesTable() {
     },
     {
       accessorKey: 'createdAt',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Created At" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Created At" />,
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()
@@ -113,9 +97,9 @@ export default function MortgagesTable() {
                 isAdmin
                   ? PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)
                   : PageRoutes.dashboard.COMPLETE_MORTGAGE_APPLICATION(
-                    data.id,
-                    LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
-                  )
+                      data.id,
+                      LocalStorageKeys.MORTGAGE_TRANSACTION_INFO
+                    )
               }
             >
               <Button size="sm">{isAdmin ? 'View Details' : 'Complete Application'}</Button>
@@ -123,7 +107,7 @@ export default function MortgagesTable() {
           )
         }
         return (
-          <div className='space-x-2'>
+          <div className="space-x-2">
             <Link href={PageRoutes.dashboard.MORTGAGE_DETAILS(row.original.id)}>
               <Button size="sm">{isAdmin ? 'View Details' : 'View Application'}</Button>
             </Link>

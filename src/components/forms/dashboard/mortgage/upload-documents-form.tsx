@@ -34,7 +34,6 @@ interface Props {
   isLoading: boolean
 }
 const UploadDocumentsForm = ({ isLoading, handleSubmit, requiredDocuments, mortgageId }: Props) => {
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema)
   })

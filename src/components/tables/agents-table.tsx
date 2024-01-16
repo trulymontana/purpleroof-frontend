@@ -12,10 +12,9 @@ import AgentApprovalStatusForm from '@/components/forms/dashboard/agent/approval
 import AgentActiveStausForm from '@/components/forms/dashboard/agent/active-status-form'
 import Link from 'next/link'
 import { DownloadIcon } from 'lucide-react'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
-import { Card, CardHeader, CardTitle } from '../ui/card'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import { DataTableColumnHeader } from './data-table/data-table-column-header'
+import ViewDetailsDialog from '../dialogs/view-details-dialog'
 
 export default function AgentsTable() {
   const { mutate: deleteAgent, isPending } = useDeleteAgentMutation()
@@ -23,9 +22,7 @@ export default function AgentsTable() {
   const columns: ColumnDef<Agent>[] = [
     {
       accessorKey: 'createdAt',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Applied At" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Applied At" />,
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()
@@ -33,15 +30,11 @@ export default function AgentsTable() {
     },
     {
       accessorKey: 'id',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="ID" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="ID" />
     },
     {
       accessorKey: 'agency',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Agency Name" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Agency Name" />,
       cell: ({ row }) => {
         const agency = row.original.agency
         if (agency) {
@@ -52,15 +45,11 @@ export default function AgentsTable() {
     },
     {
       accessorKey: 'contactNumber',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Contact Number" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Contact Number" />
     },
     {
       accessorKey: 'createdAt',
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Created At" />
-      ),
+      header: ({ column }) => <DataTableColumnHeader column={column} title="Created At" />,
       cell: ({ row }) => {
         const createdAt = row.original.createdAt
         return new Date(createdAt).toLocaleDateString()
@@ -94,30 +83,12 @@ export default function AgentsTable() {
       cell: ({ row }) => {
         const locations = row.original.locations
         return (
-          <div className="flex items-center gap-2">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="outline">View Locations</Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[800px]">
-                <DialogHeader>
-                  <DialogTitle>Locations</DialogTitle>
-                  <DialogDescription>Locations where agent is available.</DialogDescription>
-                </DialogHeader>
-                <div className="grid max-h-[500px] grid-cols-3 gap-4 overflow-y-auto py-4">
-                  {locations.map((location, i) => {
-                    return (
-                      <Card key={i} className="">
-                        <CardHeader>
-                          <CardTitle>{location.name}</CardTitle>
-                        </CardHeader>
-                      </Card>
-                    )
-                  })}
-                </div>
-              </DialogContent>
-            </Dialog>
-          </div>
+          <ViewDetailsDialog
+            title='Locations'
+            description='Locations where agent is available.'
+            anchor={<Button variant="outline">View Locations</Button>}
+            data={locations}
+          />
         )
       }
     },
