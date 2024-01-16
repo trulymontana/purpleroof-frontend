@@ -34,6 +34,7 @@ import { Locate, Phone } from 'lucide-react'
 import Loader from '@/components/Loader'
 import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
 import UpdateLocationsForm from '../../../components/forms/dashboard/profile/update-locations-form'
+import ViewDetailsDialog from '@/components/dialogs/view-details-dialog'
 
 const formSchema = z.object({
   agency: z.string().optional(),
@@ -186,30 +187,14 @@ const Page = () => {
                 </div>
               )}
               <div className="mt-4 flex flex-col gap-2">
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button className="w-full" variant="outline">
-                      <Locate className="mr-2 h-5 w-5 text-gray-500" />
-                      View Locations
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[800px]">
-                    <DialogHeader>
-                      <DialogTitle>Locations</DialogTitle>
-                    </DialogHeader>
-                    <div className="grid max-h-[500px] grid-cols-2 gap-4 overflow-y-auto py-4">
-                      {agentApplicationDetails?.locations.map((location, i) => {
-                        return (
-                          <Card key={i}>
-                            <CardHeader>
-                              <CardTitle>{location.name}</CardTitle>
-                            </CardHeader>
-                          </Card>
-                        )
-                      })}
-                    </div>
-                  </DialogContent>
-                </Dialog>
+                <ViewDetailsDialog
+                  title='Locations'
+                  anchor={<Button className="w-full" variant="outline">
+                    <Locate className="mr-2 h-5 w-5 text-gray-500" />
+                    View Locations
+                  </Button>}
+                  data={agentApplicationDetails?.locations}
+                />
                 <ConfirmActionDialog
                   title="Update Locations"
                   anchor={<Button>Update Locations</Button>}

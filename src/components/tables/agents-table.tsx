@@ -16,6 +16,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Card, CardHeader, CardTitle } from '../ui/card'
 import ConfirmDeleteDialog from '../dialogs/confirm-delete-dialog'
 import { DataTableColumnHeader } from './data-table/data-table-column-header'
+import ViewDetailsDialog from '../dialogs/view-details-dialog'
 
 export default function AgentsTable() {
   const { mutate: deleteAgent, isPending } = useDeleteAgentMutation()
@@ -84,30 +85,12 @@ export default function AgentsTable() {
       cell: ({ row }) => {
         const locations = row.original.locations
         return (
-          <div className="flex items-center gap-2">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="outline">View Locations</Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[800px]">
-                <DialogHeader>
-                  <DialogTitle>Locations</DialogTitle>
-                  <DialogDescription>Locations where agent is available.</DialogDescription>
-                </DialogHeader>
-                <div className="grid max-h-[500px] grid-cols-3 gap-4 overflow-y-auto py-4">
-                  {locations.map((location, i) => {
-                    return (
-                      <Card key={i} className="">
-                        <CardHeader>
-                          <CardTitle>{location.name}</CardTitle>
-                        </CardHeader>
-                      </Card>
-                    )
-                  })}
-                </div>
-              </DialogContent>
-            </Dialog>
-          </div>
+          <ViewDetailsDialog
+            title='Locations'
+            description='Locations where agent is available.'
+            anchor={<Button variant="outline">View Locations</Button>}
+            data={locations}
+          />
         )
       }
     },
