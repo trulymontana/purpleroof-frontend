@@ -40,8 +40,7 @@ const formSchema = z.object({
   }),
   numberOfBedRooms: z.string().optional(),
   numberOfBathRooms: z.string().optional(),
-  numberOfLavatory: z.number().optional(),
-  description: z.string().optional(),
+  description: z.string().optional().refine((val) => val && val?.length <= 1000),
   deedNumber: z.string({
     required_error: 'Please enter your Deed Number'
   })
@@ -53,8 +52,6 @@ interface Props {
 
 const RentPropertyDetailsForm = ({ onSave }: Props) => {
   const router = useRouter()
-
-  const basic_details = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS)
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.PROPERTY_DETAILS)
 
@@ -87,15 +84,8 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
           label={'Minimum Contract (in months)'}
         />
 
-        {basic_details && JSON.parse(basic_details).typeOfProperty === PropertyTypeEnum.RESIDENTIAL ? (
-          <>
-            <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
-
-            <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
-          </>
-        ) : (
-          <NumberInputElement name="numberOfLavatory" label="Number of Lavatory" />
-        )}
+        <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
+        <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
 
         <InputElement
           name="deedNumber"
@@ -103,7 +93,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
           label={'Title Deed / Oqod / Initial Contract of Sales'}
         />
 
-        <TextAreaElement name="description" label="Description" placeholder="Enter description of property here..." />
+        <TextAreaElement name="description" label="Description" placeholder="Enter description of property here... (max 1000 characters)" />
 
         <Button type="submit" className="w-full">
           Save and Continue

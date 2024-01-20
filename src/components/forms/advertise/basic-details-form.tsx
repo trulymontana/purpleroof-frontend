@@ -25,6 +25,8 @@ const formSchema = z.object({
     .refine((val) => val === PropertyForEnum.SALE || val === PropertyForEnum.RENT),
   name: z.string({
     required_error: 'Title should not be empty!'
+  }).refine((i) => i.length <= 50, {
+    message: "Your advertisement title cannot be more than 50 characters",
   }),
   email: z
     .string({
@@ -73,7 +75,7 @@ const BasicDetailsForm = ({ onSave }: Props) => {
 
         <InputElement name="email" placeholder="Please enter Email" label={'Email'} />
 
-        <InputElement name="name" placeholder="Please enter Advert Title" label={'Advert Title'} />
+        <InputElement name="name" placeholder="Please enter Advert Title (max 50 characters)" label={'Advert Title'} />
 
         <RadioGroupElement
           name="propertyType"
