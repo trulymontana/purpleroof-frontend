@@ -19,7 +19,7 @@ export interface CreatePropertyInput {
   numberOfBathRooms?: number
   deedNumber: string
   emirate: EmirateEnum
-  locationId: number
+  locationId?: number | string
   buildingName: string
   floor: number
   street: string

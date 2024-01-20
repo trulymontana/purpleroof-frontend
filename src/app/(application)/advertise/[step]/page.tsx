@@ -54,7 +54,11 @@ const Page = () => {
 
     let property: CreatePropertyInput = Object.assign({}, result, values)
 
-    property.locationId = Number(property.locationId)
+    if (property.locationId === 'other') {
+      delete property.locationId
+    } else {
+      property.locationId = Number(property.locationId)
+    }
 
     if (property.amenities && property.amenities.length > 0) {
       let amenities_values: number[] = property.amenities.map((amenity: any) => amenity.value)
