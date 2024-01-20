@@ -38,7 +38,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.CALL_PREFERENCE, values)
-    router.push(PageRoutes.advertise.UPLOAD_PHOTOS)
+    router.push(`${PageRoutes.advertise.UPLOAD_PHOTOS}?callPreference=${form.getValues("callPreference")}`);
   }
 
   return (

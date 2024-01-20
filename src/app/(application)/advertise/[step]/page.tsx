@@ -29,7 +29,7 @@ const Page = () => {
 
   const { mutate: createProperty, isPending: isLoading } = useCreatePropertyMutation()
 
-  const categoryType = searchParams.get('categoryType')
+  const categoryType = searchParams.get('categoryType');
 
   const storeValues = (step: string, values: any) => {
     localStorage.setItem(step, JSON.stringify(values))

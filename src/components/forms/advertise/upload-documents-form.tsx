@@ -7,13 +7,13 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
-import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
 import { useEffect, useState } from 'react'
-import { DocumentTypeEnum } from '@/constants/enums'
+import { CallPreferenceEnum, DocumentTypeEnum } from '@/constants/enums'
 import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
+import { useSearchParams } from 'next/navigation'
 
 const formSchema = z.object({
   image: z.string({
@@ -21,12 +21,8 @@ const formSchema = z.object({
   }),
   documents: z.array(
     z.object({
-      type: z.string({
-        required_error: 'Type not found!'
-      }),
-      url: z.string({
-        required_error: 'This field is required!'
-      })
+      type: z.string().optional(),
+      url: z.string().optional()
     })
   )
 })
@@ -37,7 +33,9 @@ interface Props {
 }
 
 const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
-  const router = useRouter()
+
+  const searchParams = useSearchParams();
+  const callPreference = searchParams.get('callPreference');
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.UPLOAD_PHOTOS)
 
@@ -50,16 +48,12 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
 
   useEffect(() => {
     form.setValue('documents', [
-      // @ts-ignore
       { type: DocumentTypeEnum.PASSPORT_COPY },
-      // @ts-ignore
       { type: DocumentTypeEnum.VISA_COPY },
-      // @ts-ignore
       { type: DocumentTypeEnum.EMIRATES_ID },
-      // @ts-ignore
       { type: DocumentTypeEnum.TITLE_DEED_COPY },
-      // @ts-ignore
-      { type: DocumentTypeEnum.OWNERSHIP_PROOF_MOBILE_NUMBER }
+      { type: DocumentTypeEnum.OWNERSHIP_PROOF_MOBILE_NUMBER },
+      { type: DocumentTypeEnum.MOBILE_BILL_COPY }
     ])
   }, [])
 
@@ -71,11 +65,12 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <FileUploader folder="advertise" name="image" label={'Upload Photo of the Property'} form={form} />
-        <FileUploader folder="advertise" name="documents[0].url" label={'Passport Copy'} form={form} />
+        <FileUploader folder="advertise" name="documents[0].url" label={'Passport Copy (optional)'} form={form} />
         <FileUploader folder="advertise" name="documents[1].url" label={'Visa Copy'} form={form} />
         <FileUploader folder="advertise" name="documents[2].url" label={'Emirates ID'} form={form} />
         <FileUploader folder="advertise" name="documents[3].url" label={'Title Deed Copy'} form={form} />
         <FileUploader folder="advertise" name="documents[4].url" label={'Owners Proof of Mobile Number'} form={form} />
+        {callPreference === CallPreferenceEnum.PERSONAL && (<FileUploader folder="advertise" name="documents[4].url" label={'Mobile Bill Copy'} form={form} />)}
 
         <Button disabled={isLoading} type="submit" className="w-full">
           {isLoading ? 'Submitting...' : 'Submit'}
