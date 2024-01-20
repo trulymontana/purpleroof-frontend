@@ -73,6 +73,7 @@ const ProjectStatusForm = ({ onSave }: Props) => {
                   name="noticePeriodRent"
                   label="Notice Period of remaining rental agreement (in months)"
                 />
+                <NumberInputElement name="noticePeriodProperty" label={'Notice Period to vacate the property (in months)'} />
               </>
             )}
           </>
@@ -82,7 +83,7 @@ const ProjectStatusForm = ({ onSave }: Props) => {
           <DatePickerElement name="completionDate" label="Completion Date" disabled={true} />
         )}
 
-        <NumberInputElement name="noticePeriodProperty" label={'Notice Period to vacate the property (in months)'} />
+
 
         <Button type="submit" className="w-full">
           Save and Continue

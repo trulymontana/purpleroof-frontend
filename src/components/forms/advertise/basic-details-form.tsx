@@ -23,11 +23,6 @@ const formSchema = z.object({
       required_error: 'Please select a category'
     })
     .refine((val) => val === PropertyForEnum.SALE || val === PropertyForEnum.RENT),
-  name: z.string({
-    required_error: 'Title should not be empty!'
-  }).refine((i) => i.length <= 50, {
-    message: "Your advertisement title cannot be more than 50 characters",
-  }),
   propertyType: z.string({
     required_error: 'Please select a property type!'
   }),
@@ -48,8 +43,9 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     storedValue !== null
       ? JSON.parse(storedValue)
       : {
-          propertyFor: PropertyForEnum.SALE
-        }
+        propertyFor: PropertyForEnum.SALE,
+        propertyType: PropertyTypeEnum.RESIDENTIAL
+      }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -67,8 +63,6 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <TabRadioGroup name="propertyFor" options={categories} />
-
-        <InputElement name="name" placeholder="Please enter Advert Title (max 50 characters)" label={'Advert Title'} />
 
         <RadioGroupElement
           name="propertyType"

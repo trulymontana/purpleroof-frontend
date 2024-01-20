@@ -29,7 +29,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.CALL_PREFERENCE)
 
-  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : { callPreference: CallPreferenceEnum.PURPLEROOF }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

@@ -33,10 +33,12 @@ const formSchema = z.object({
   }),
   numberOfBedRooms: z.string().optional(),
   numberOfBathRooms: z.string().optional(),
-  description: z.string().optional().refine((val) => val && val?.length <= 1000),
-  deedNumber: z.string({
-    required_error: 'Please enter your Deed Number'
-  })
+  name: z.string({
+    required_error: 'Title should not be empty!'
+  }).refine((i) => i.length <= 50, {
+    message: "Your advertisement title cannot be more than 50 characters",
+  }),
+  description: z.string().optional().refine((val) => val && val?.length <= 1000)
 })
 
 interface Props {
@@ -79,11 +81,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
         <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
         <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
 
-        <InputElement
-          name="deedNumber"
-          placeholder="Please enter deed number"
-          label={'Title Deed / Oqod / Initial Contract of Sales'}
-        />
+        <InputElement name="name" placeholder="Please enter Advert Title (max 50 characters)" label={'Advertisement Title'} />
 
         <TextAreaElement name="description" label="Description" placeholder="Enter description of property here... (max 1000 characters)" />
 
