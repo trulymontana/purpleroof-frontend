@@ -1820,11 +1820,57 @@ export const amenities = [
   {
     label: 'Private Swimming Pool',
     value: '13'
+  }
+]
+
+export const propertyAmenities = [
+  {
+    label: 'Balcony/ Terrace',
+    value: '3'
   },
   {
-    label: 'Number of Parking Spaces',
-    value: '14'
+    label: 'Double Glazed Windows',
+    value: '4'
   },
+  {
+    label: 'Centrally Air-Conditioned',
+    value: '5'
+  },
+  {
+    label: 'Central Heating',
+    value: '6'
+  },
+  {
+    label: 'Electricity Backup',
+    value: '7'
+  },
+  {
+    label: 'Storage Areas',
+    value: '8'
+  },
+  {
+    label: 'Study Room',
+    value: '9'
+  },
+  {
+    label: 'Maid Room',
+    value: '10'
+  },
+  {
+    label: 'Driver Room',
+    value: '11'
+  },
+  {
+    label: 'Laundry Room',
+    value: '12'
+  },
+  {
+    label: 'Private Swimming Pool',
+    value: '13'
+  }
+]
+
+export const buildingAmenities = [
   {
     label: 'Recreation and Family',
     value: '15'
@@ -1924,7 +1970,10 @@ export const amenities = [
   {
     label: 'Cleaning and Maintenance',
     value: '39'
-  },
+  }
+]
+
+export const communityAmenities = [
   {
     label: 'ATM Facility',
     value: '40'
@@ -1944,22 +1993,6 @@ export const amenities = [
   {
     label: 'Nearby Shopping Malls',
     value: '44'
-  },
-  {
-    label: 'Distance from Airport',
-    value: '45'
-  },
-  {
-    label: 'Nearby Metro Station',
-    value: '46'
-  },
-  {
-    label: 'Other Nearby Places',
-    value: '47'
-  },
-  {
-    label: 'Other Main Features',
-    value: '48'
   }
 ]
 

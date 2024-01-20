@@ -10,7 +10,7 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { amenities, furnishingStatuses, propertyTypes } from '@/constants/advertise'
+import { amenities, buildingAmenities, communityAmenities, furnishingStatuses, propertyAmenities, propertyTypes } from '@/constants/advertise'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 import { useRouter } from 'next/navigation'
 import { TOption } from '@/constants/types'
@@ -82,18 +82,39 @@ const AmenitiesForm = ({ onSave }: Props) => {
           options={furnishingStatuses}
         />
 
+        <div className='flex flex-col gap-10 py-4'>
+          <MultiSelectCheckbox
+            name="amenities"
+            label='Property Amenities'
+            classNames="grid-cols-2"
+            options={propertyAmenities}
+            selectedBoxes={selectedAmenities}
+            setSelectedBoxes={setSelectedAmenities}
+          />
+
+          <MultiSelectCheckbox
+            name="amenities"
+            label='Building Amenities'
+            classNames="grid-cols-2"
+            options={buildingAmenities}
+            selectedBoxes={selectedAmenities}
+            setSelectedBoxes={setSelectedAmenities}
+          />
+
+          <MultiSelectCheckbox
+            name="amenities"
+            label='Community Amenities'
+            classNames="grid-cols-2"
+            options={communityAmenities}
+            selectedBoxes={selectedAmenities}
+            setSelectedBoxes={setSelectedAmenities}
+          />
+        </div>
+
         <NumberInputElement
           name="parkingSpaces"
           placeholder="Please enter parking spaces"
           label={'Number of Parking Spaces'}
-        />
-
-        <MultiSelectCheckbox
-          name="amenities"
-          classNames="grid-cols-2"
-          options={amenities}
-          selectedBoxes={selectedAmenities}
-          setSelectedBoxes={setSelectedAmenities}
         />
 
         <NumberInputElement
