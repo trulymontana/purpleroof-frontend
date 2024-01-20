@@ -28,11 +28,6 @@ const formSchema = z.object({
   }).refine((i) => i.length <= 50, {
     message: "Your advertisement title cannot be more than 50 characters",
   }),
-  email: z
-    .string({
-      required_error: 'Please enter a valid email.'
-    })
-    .email(),
   propertyType: z.string({
     required_error: 'Please select a property type!'
   }),
@@ -72,8 +67,6 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <TabRadioGroup name="propertyFor" options={categories} />
-
-        <InputElement name="email" placeholder="Please enter Email" label={'Email'} />
 
         <InputElement name="name" placeholder="Please enter Advert Title (max 50 characters)" label={'Advert Title'} />
 

@@ -13,17 +13,9 @@ import PhoneNumberInputElement from '@/components/forms/elements/phone-number-in
 import { PageRoutes } from '@/constants/page-routes'
 import { BackButton } from '@/components/navigation/back-button'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
-import { PropertyTypeEnum } from '@/constants/enums'
 import TextAreaElement from '@/components/forms/elements/text-area-element'
 
 const formSchema = z.object({
-  phone: z
-    .string({
-      required_error: 'Please enter a valid phone number.'
-    })
-    .min(10, {
-      message: 'Phone number must be at least 10 characters.'
-    }),
   amount: z.number({
     required_error: 'Please enter a property value'
   }),
@@ -62,7 +54,6 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <PhoneNumberInputElement name="phone" label="Phone Number" />
 
         <NumberInputElement
           name="amount"

@@ -14,8 +14,22 @@ import { useEffect, useState } from 'react'
 import { CallPreferenceEnum, DocumentTypeEnum } from '@/constants/enums'
 import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
 import { useSearchParams } from 'next/navigation'
+import InputElement from '../elements/input-element'
+import PhoneNumberInputElement from '../elements/phone-number-input'
 
 const formSchema = z.object({
+  email: z
+    .string({
+      required_error: 'Please enter a valid email.'
+    })
+    .email(),
+  phone: z
+    .string({
+      required_error: 'Please enter a valid phone number.'
+    })
+    .min(10, {
+      message: 'Phone number must be at least 10 characters.'
+    }),
   image: z.string({
     required_error: 'Please upload a property image'
   }),
@@ -52,7 +66,6 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
       { type: DocumentTypeEnum.VISA_COPY },
       { type: DocumentTypeEnum.EMIRATES_ID },
       { type: DocumentTypeEnum.TITLE_DEED_COPY },
-      { type: DocumentTypeEnum.OWNERSHIP_PROOF_MOBILE_NUMBER },
       { type: DocumentTypeEnum.MOBILE_BILL_COPY }
     ])
   }, [])
@@ -69,9 +82,9 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
         <FileUploader folder="advertise" name="documents[1].url" label={'Visa Copy'} form={form} />
         <FileUploader folder="advertise" name="documents[2].url" label={'Emirates ID'} form={form} />
         <FileUploader folder="advertise" name="documents[3].url" label={'Title Deed Copy'} form={form} />
-        <FileUploader folder="advertise" name="documents[4].url" label={'Owners Proof of Mobile Number'} form={form} />
         {callPreference === CallPreferenceEnum.PERSONAL && (<FileUploader folder="advertise" name="documents[4].url" label={'Mobile Bill Copy'} form={form} />)}
-
+        <InputElement name="email" placeholder="Please enter Email" label={callPreference === CallPreferenceEnum.PURPLEROOF ? 'Email (registered with land department)' : 'Email'} />
+        <PhoneNumberInputElement name="phone" label={callPreference === CallPreferenceEnum.PURPLEROOF ? 'Phone Number (registered with land department)' : 'Phone Number'} />
         <Button disabled={isLoading} type="submit" className="w-full">
           {isLoading ? 'Submitting...' : 'Submit'}
         </Button>
