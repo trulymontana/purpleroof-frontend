@@ -10,7 +10,7 @@ import * as z from 'zod'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import FileUploader from '@/components/forms/elements/file-uploader'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { CallPreferenceEnum, DocumentTypeEnum } from '@/constants/enums'
 import ConfirmActionDialog from '@/components/dialogs/confirm-action-dialog'
 import { useSearchParams } from 'next/navigation'
@@ -18,6 +18,20 @@ import InputElement from '../elements/input-element'
 import PhoneNumberInputElement from '../elements/phone-number-input'
 
 const formSchema = z.object({
+  // image: z.string({
+  //   required_error: 'Please upload a property image'
+  // }),
+  images: z.array(
+    z.object({
+      url: z.string().optional()
+    })
+  ).min(8).max(30),
+  documents: z.array(
+    z.object({
+      type: z.string().optional(),
+      url: z.string().optional()
+    })
+  ),
   email: z
     .string({
       required_error: 'Please enter a valid email.'
@@ -30,15 +44,6 @@ const formSchema = z.object({
     .min(10, {
       message: 'Phone number must be at least 10 characters.'
     }),
-  image: z.string({
-    required_error: 'Please upload a property image'
-  }),
-  documents: z.array(
-    z.object({
-      type: z.string().optional(),
-      url: z.string().optional()
-    })
-  )
 })
 
 interface Props {
@@ -70,6 +75,12 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
     ])
   }, [])
 
+
+  const images = form.watch("images");
+
+  console.log({ images })
+
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     handleSubmit(values)
   }
@@ -77,7 +88,7 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <FileUploader folder="advertise" name="image" label={'Upload Photo of the Property'} form={form} />
+        <FileUploader folder="advertise" name="images" label={'Upload Photo of the Property'} form={form} />
         <FileUploader folder="advertise" name="documents[0].url" label={'Passport Copy (optional)'} form={form} />
         <FileUploader folder="advertise" name="documents[1].url" label={'Visa Copy'} form={form} />
         <FileUploader folder="advertise" name="documents[2].url" label={'Emirates ID'} form={form} />

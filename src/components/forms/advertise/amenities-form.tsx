@@ -61,7 +61,7 @@ const AmenitiesForm = ({ onSave }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
 
-        <div className='flex flex-col gap-10 py-4'>
+        <div className='flex flex-col gap-10 pb-4'>
           <MultiSelectCheckbox
             name="amenities"
             label='Property Amenities'

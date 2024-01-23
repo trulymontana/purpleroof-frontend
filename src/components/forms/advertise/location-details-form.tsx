@@ -115,8 +115,6 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <NumberInputElement name="unitNumber" placeholder="Please enter your unit number" label={'Unit Number (optional)'} />
         <InputElement name="landmark" placeholder="Please enter a landmark" label={'Nearest Landmark (optional)'} />
 
-
-
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
