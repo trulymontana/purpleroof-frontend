@@ -22,10 +22,10 @@ const formSchema = z.object({
   //   required_error: 'Please upload a property image'
   // }),
   images: z.array(
-    z.object({
-      url: z.string().optional()
-    })
-  ).min(8).max(30),
+    z.string()
+  ).min(8, {
+    message: "Please upload atleast 8 images!"
+  }).max(30),
   documents: z.array(
     z.object({
       type: z.string().optional(),
@@ -77,8 +77,9 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
 
 
   const images = form.watch("images");
+  const passport = form.watch("documents");
 
-  console.log({ images })
+  console.log({ images, passport })
 
 
   function onSubmit(values: z.infer<typeof formSchema>) {

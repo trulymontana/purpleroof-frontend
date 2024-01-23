@@ -35,7 +35,6 @@ const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }
 
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
 
-    // setFileNames(event.target.files?.[0].name || "");
     const files = event.target.files
     files && setFiles(files)
 
@@ -47,9 +46,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }
       })
       setFileNames(fileNamesList);
       const fileUrls = await Promise.all(filesArray.map((file) => uploadFile(file)))
-      fileUrls.forEach((fileUrl) => {
-        form.setValue(name, [{ url: fileUrl }])
-      })
+      form.setValue(name, fileUrls)
       setFileUrls(fileUrls)
     }
   }

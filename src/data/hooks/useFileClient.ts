@@ -20,7 +20,6 @@ export const useFileUploader = (folder: string, fileName: string) => {
     setLoading(false)
 
     const objectUrl = `https://${S3_BUCKET_NAME}.s3.amazonaws.com/${folder}/${fileNameAfterUpload}`
-    console.log(objectUrl)
 
     return objectUrl
   }
