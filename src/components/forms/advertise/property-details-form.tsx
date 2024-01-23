@@ -65,7 +65,7 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
           label={'Number of Parking Spaces (optional)'}
         />
 
-        <SelectElement name="completionStatus" label="Completion Status" options={completionStatuses} />
+        <SelectElement name="completionStatus" label="Completion Status" options={completionStatuses} placeholder='Please select completion status' />
 
         <SelectElement
           name="furnishingStatus"
