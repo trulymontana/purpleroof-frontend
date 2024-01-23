@@ -69,23 +69,23 @@ const ProjectStatusForm = ({ onSave }: Props) => {
 
         {projectStatus === ProjectStatusesEnum.COMPLETED && (
           <>
-            <SelectElement name="occupencyStatus" label="Occupency Status" options={occupencyStatusOptions} />
+            <SelectElement name="occupencyStatus" label="Occupency Status  (optional)" options={occupencyStatusOptions} />
             {occupencyStatus === OccupencyStatusEnum.OCCUPIED && (
               <>
-                <NumberInputElement name="rentalAmount" label="Rental Amount (AED)" />
-                <NumberInputElement name="numberOfCheques" label="Number of Cheques" />
+                <NumberInputElement name="rentalAmount" label="Rental Amount (AED) (optional)" />
+                <NumberInputElement name="numberOfCheques" label="Number of Cheques (optional)" />
                 <NumberInputElement
                   name="noticePeriodRent"
-                  label="Notice Period of remaining rental agreement (in months)"
+                  label="Notice Period of remaining rental agreement (in months) (optional)"
                 />
-                <NumberInputElement name="noticePeriodProperty" label={'Notice Period to vacate the property (in months)'} />
+                <NumberInputElement name="noticePeriodProperty" label={'Notice Period to vacate the property (in months) (optional)'} />
               </>
             )}
           </>
         )}
 
         {projectStatus === ProjectStatusesEnum.OFF_PLAN_UNDER_CONSTRUCTION && (
-          <DatePickerElement name="completionDate" label="Completion Date" disabled={true} />
+          <DatePickerElement name="completionDate" label="Completion Date (optional)" disabled={true} />
         )}
 
         <SelectElement

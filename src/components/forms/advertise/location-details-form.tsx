@@ -96,7 +96,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         {location === 'other' && <InputElement
           name="cityName"
           placeholder="Please enter your city name"
-          label={'City Name'}
+          label={'City Name (optional)'}
         />}
 
         <InputElement

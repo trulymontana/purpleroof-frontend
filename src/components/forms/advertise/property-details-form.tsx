@@ -5,15 +5,13 @@ import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import * as z from 'zod'
-import InputElement from '@/components/forms/elements/input-element'
 import { useRouter } from 'next/navigation'
 import 'react-international-phone/style.css'
 import { PageRoutes } from '@/constants/page-routes'
 import { BackButton } from '@/components/navigation/back-button'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
-import TextAreaElement from '@/components/forms/elements/text-area-element'
 import SelectElement from '../elements/select-element'
-import { completionStatuses, furnishingStatuses, projectStatuses } from '@/constants/advertise'
+import { completionStatuses, furnishingStatuses } from '@/constants/advertise'
 import { FurnishingStatusEnum, PropertyCompletionStatusEnum } from '@/constants/enums'
 
 const formSchema = z.object({
@@ -58,13 +56,13 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
 
         <NumberInputElement name="size" placeholder="Please enter your property size" label={'Property Size (Sqft)'} />
 
-        <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
-        <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
+        <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms (optional)'} />
+        <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms (optional)'} />
 
         <NumberInputElement
           name="parkingSpaces"
           placeholder="Please enter parking spaces"
-          label={'Number of Parking Spaces'}
+          label={'Number of Parking Spaces (optional)'}
         />
 
         <SelectElement name="completionStatus" label="Completion Status" options={completionStatuses} />

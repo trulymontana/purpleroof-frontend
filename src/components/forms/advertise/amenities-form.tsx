@@ -93,18 +93,18 @@ const AmenitiesForm = ({ onSave }: Props) => {
         <NumberInputElement
           name="airportDistance"
           placeholder="Please enter airport distance"
-          label={'Distance from Airport (in km)'}
+          label={'Distance from Airport (in km)  (optional)'}
         />
 
         <NumberInputElement
           name="metroStationDistance"
           placeholder="Please enter metro station"
-          label={'Nearby Metro Station (in km)'}
+          label={'Nearby Metro Station (in km)  (optional)'}
         />
 
-        <InputElement name="nearbyPlaces" placeholder="Please enter nearby places" label={'Other Nearby Places'} />
+        <InputElement name="nearbyPlaces" placeholder="Please enter nearby places" label={'Other Nearby Places  (optional)'} />
 
-        <InputElement name="otherFeatures" placeholder="Please enter other features" label={'Other Main Features'} />
+        <InputElement name="otherFeatures" placeholder="Please enter other features" label={'Other Main Features (optional)'} />
 
         <Button type="submit" className="w-full">
           Save and Continue

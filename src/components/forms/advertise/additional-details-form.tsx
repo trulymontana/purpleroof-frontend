@@ -56,7 +56,7 @@ const AdditionalDetailsForm = ({ onSave }: Props) => {
         <NumberInputElement
           name="amount"
           placeholder="Please enter your property value"
-          label={'Property Value (AED)'}
+          label={'Property Value (AED) (optional)'}
         />
 
         <NumberInputElement

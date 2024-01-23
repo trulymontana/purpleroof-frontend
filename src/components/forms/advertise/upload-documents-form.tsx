@@ -18,14 +18,13 @@ import InputElement from '../elements/input-element'
 import PhoneNumberInputElement from '../elements/phone-number-input'
 
 const formSchema = z.object({
-  // image: z.string({
-  //   required_error: 'Please upload a property image'
-  // }),
   images: z.array(
     z.string()
   ).min(8, {
     message: "Please upload atleast 8 images!"
-  }).max(30),
+  }).max(30, {
+    message: "Please upload only 30 images!"
+  }),
   documents: z.array(
     z.object({
       type: z.string().optional(),
@@ -76,12 +75,6 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
   }, [])
 
 
-  const images = form.watch("images");
-  const passport = form.watch("documents");
-
-  console.log({ images, passport })
-
-
   function onSubmit(values: z.infer<typeof formSchema>) {
     handleSubmit(values)
   }
@@ -89,11 +82,11 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <FileUploader folder="advertise" name="images" label={'Upload Photo of the Property'} form={form} />
+        <FileUploader folder="advertise" name="images" label={'Upload Photo of the Property (min: 8, max: 30)'} form={form} />
         <FileUploader folder="advertise" name="documents[0].url" label={'Passport Copy (optional)'} form={form} />
-        <FileUploader folder="advertise" name="documents[1].url" label={'Visa Copy'} form={form} />
-        <FileUploader folder="advertise" name="documents[2].url" label={'Emirates ID'} form={form} />
-        <FileUploader folder="advertise" name="documents[3].url" label={'Title Deed Copy'} form={form} />
+        <FileUploader folder="advertise" name="documents[1].url" label={'Visa Copy (optional)'} form={form} />
+        <FileUploader folder="advertise" name="documents[2].url" label={'Emirates ID (optional)'} form={form} />
+        <FileUploader folder="advertise" name="documents[3].url" label={'Title Deed Copy (optional)'} form={form} />
         {callPreference === CallPreferenceEnum.PERSONAL && (<FileUploader folder="advertise" name="documents[4].url" label={'Mobile Bill Copy'} form={form} />)}
         <InputElement name="email" placeholder="Please enter Email" label={callPreference === CallPreferenceEnum.PURPLEROOF ? 'Email (registered with land department)' : 'Email'} />
         <PhoneNumberInputElement name="phone" label={callPreference === CallPreferenceEnum.PURPLEROOF ? 'Phone Number (registered with land department)' : 'Phone Number'} />

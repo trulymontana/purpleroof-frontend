@@ -8,14 +8,12 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
-import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { completionStatuses, furnishingStatuses, paymentIntervals } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 import { FurnishingStatusEnum, PropertyCompletionStatusEnum } from '@/constants/enums'
-import TextAreaElement from '@/components/forms/elements/text-area-element'
 
 const formSchema = z.object({
   rentalAmount: z.number({
@@ -78,13 +76,13 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
           label={'Minimum Contract (in months)'}
         />
 
-        <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
-        <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
+        <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms (optional)'} />
+        <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms (optional)'} />
 
         <NumberInputElement
           name="parkingSpaces"
           placeholder="Please enter parking spaces"
-          label={'Number of Parking Spaces'}
+          label={'Number of Parking Spaces (optional)'}
         />
 
         <SelectElement name="completionStatus" label="Completion Status" options={completionStatuses} />
