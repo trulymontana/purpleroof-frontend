@@ -10,11 +10,11 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { completionStatuses, paymentIntervals } from '@/constants/advertise'
+import { completionStatuses, furnishingStatuses, paymentIntervals } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
-import { PropertyCompletionStatusEnum } from '@/constants/enums'
+import { FurnishingStatusEnum, PropertyCompletionStatusEnum } from '@/constants/enums'
 import TextAreaElement from '@/components/forms/elements/text-area-element'
 
 const formSchema = z.object({
@@ -32,15 +32,13 @@ const formSchema = z.object({
   }),
   numberOfBedRooms: z.string().optional(),
   numberOfBathRooms: z.string().optional(),
+  parkingSpaces: z.number().optional(),
   completionStatus: z.nativeEnum(PropertyCompletionStatusEnum, {
     required_error: "Please select property completion status!"
   }),
-  name: z.string({
-    required_error: 'Title should not be empty!'
-  }).refine((i) => i.length <= 50, {
-    message: "Your advertisement title cannot be more than 50 characters",
-  }),
-  description: z.string().optional().refine((val) => val && val?.length <= 1000)
+  furnishingStatus: z.nativeEnum(FurnishingStatusEnum, {
+    required_error: 'Please select a furnishing status'
+  })
 })
 
 interface Props {
@@ -61,7 +59,7 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.PROPERTY_DETAILS, values)
-    router.push(PageRoutes.advertise.LOCATION_DETAILS)
+    router.push(PageRoutes.advertise.PROJECT_STATUS)
   }
 
   return (
@@ -83,11 +81,20 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
         <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
         <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
 
+        <NumberInputElement
+          name="parkingSpaces"
+          placeholder="Please enter parking spaces"
+          label={'Number of Parking Spaces'}
+        />
+
         <SelectElement name="completionStatus" label="Completion Status" options={completionStatuses} />
 
-        <InputElement name="name" placeholder="Please enter Advert Title (max 50 characters)" label={'Advertisement Title'} />
-
-        <TextAreaElement name="description" label="Description" placeholder="Enter description of property here... (max 1000 characters)" />
+        <SelectElement
+          name="furnishingStatus"
+          label={'Furnish Type'}
+          placeholder="Please select a furnish type"
+          options={furnishingStatuses}
+        />
 
         <Button type="submit" className="w-full">
           Save and Continue

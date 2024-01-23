@@ -26,24 +26,12 @@ const formSchema = z.object({
     required_error: 'Please select a Location!'
   }),
   cityName: z.string().optional(),
-  communityName: z.string({
-    required_error: 'Please enter your Building name!'
-  }),
-  buildingName: z.string({
-    required_error: 'Please enter your Building name!'
-  }),
-  floor: z.number({
-    required_error: 'Please enter your floor'
-  }),
-  street: z.string({
-    required_error: 'Please enter Street number'
-  }),
-  unitNumber: z.number({
-    required_error: 'Please enter Unit number'
-  }),
-  landmark: z.string({
-    required_error: 'Please enter a landmark'
-  }),
+  communityName: z.string().optional(),
+  buildingName: z.string().optional(),
+  floor: z.number().optional(),
+  street: z.string().optional(),
+  unitNumber: z.number().optional(),
+  landmark: z.string().optional(),
   lat: z
     .number({
       required_error: 'Please select a lat'
@@ -77,13 +65,10 @@ const LocationDetailsForm = ({ onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.LOCATION_DETAILS, values)
-    router.push(PageRoutes.advertise.AMENITIES_DETAILS)
+    router.push(PageRoutes.advertise.CALL_PREFERENCE)
   }
 
   const location = form.watch("locationId");
-
-  // @ts-ignore
-  const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS));
 
   locationOptions && locationOptions?.length > 0 && locationOptions?.push({ label: "Other", value: 'other' })
 
@@ -117,25 +102,25 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         <InputElement
           name="communityName"
           placeholder="Please enter your community name"
-          label={'Community Name'}
+          label={'Community Name (optional)'}
         />
 
         <InputElement
           name="buildingName"
           placeholder="Please enter your building name"
-          label={'Building / Cluster Name'}
+          label={'Building / Cluster Name (optional)'}
         />
-        <NumberInputElement name="floor" placeholder="Please enter your floor" label={'Floor'} />
-        <InputElement name="street" placeholder="Please enter your street name" label={'Street'} />
-        <NumberInputElement name="unitNumber" placeholder="Please enter your unit number" label={'Unit Number'} />
-        <InputElement name="landmark" placeholder="Please enter a landmark" label={'Nearest Landmark'} />
+        <NumberInputElement name="floor" placeholder="Please enter your floor" label={'Floor (optional)'} />
+        <InputElement name="street" placeholder="Please enter your street name" label={'Street (optional)'} />
+        <NumberInputElement name="unitNumber" placeholder="Please enter your unit number" label={'Unit Number (optional)'} />
+        <InputElement name="landmark" placeholder="Please enter a landmark" label={'Nearest Landmark (optional)'} />
 
 
 
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
-        <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails?.propertyFor}`} />
+        <BackButton route={PageRoutes.advertise.AMENITIES_DETAILS} />
       </form>
     </Form>
   )

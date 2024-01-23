@@ -8,12 +8,12 @@ import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import SelectElement from '@/components/forms/elements/select-element'
-import { occupencyStatusOptions, projectStatuses } from '@/constants/advertise'
+import { holdingTypes, occupencyStatusOptions, projectStatuses } from '@/constants/advertise'
 import DatePickerElement from '@/components/forms/elements/date-picker-element'
 import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
-import { OccupencyStatusEnum, ProjectStatusesEnum } from '@/constants/enums'
+import { HoldingTypeEnum, OccupencyStatusEnum, ProjectStatusesEnum } from '@/constants/enums'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
@@ -23,7 +23,10 @@ const formSchema = z.object({
   numberOfCheques: z.number().optional(),
   noticePeriodRent: z.number().optional(),
   noticePeriodProperty: z.number().optional(),
-  completionDate: z.date().optional()
+  completionDate: z.date().optional(),
+  holdingType: z.nativeEnum(HoldingTypeEnum, {
+    required_error: 'Please select a holding type!'
+  }),
 })
 
 type TProjectStatus = z.infer<typeof formSchema>
@@ -33,8 +36,10 @@ interface Props {
 }
 
 const ProjectStatusForm = ({ onSave }: Props) => {
-  const router = useRouter()
+  const router = useRouter();
 
+  // @ts-ignore
+  const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS));
   const storedValue = localStorage.getItem(PageRoutes.advertise.PROJECT_STATUS)
 
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
@@ -51,7 +56,7 @@ const ProjectStatusForm = ({ onSave }: Props) => {
 
   function onSubmit(values: TProjectStatus) {
     onSave(PageRoutes.advertise.PROJECT_STATUS, values)
-    router.push(PageRoutes.advertise.CALL_PREFERENCE)
+    router.push(PageRoutes.advertise.ADDITIONAL_DETAILS)
   }
 
   const projectStatus = form.watch('projectStatus')
@@ -83,12 +88,17 @@ const ProjectStatusForm = ({ onSave }: Props) => {
           <DatePickerElement name="completionDate" label="Completion Date" disabled={true} />
         )}
 
-
+        <SelectElement
+          name="holdingType"
+          label={'Holding Type'}
+          placeholder="Please select a holding type"
+          options={holdingTypes}
+        />
 
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
-        <BackButton route={PageRoutes.advertise.AMENITIES_DETAILS} />
+        <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails?.propertyFor}`} />
       </form>
     </Form>
   )

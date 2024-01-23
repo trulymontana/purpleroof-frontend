@@ -22,6 +22,7 @@ import { nullCheckAndMerge } from '@/lib/utils'
 import { PropertyForEnum } from '@/constants/enums'
 import ApplicationCompletedForm from '../../../../components/forms/advertise/application-completed-form'
 import BackgroundEffect from '@/components/BackgroundEffect'
+import AdditionalDetailsForm from '@/components/forms/advertise/additional-details-form'
 
 const Page = () => {
   const pathName = usePathname()
@@ -80,9 +81,10 @@ const Page = () => {
       ) : (
         <div>Invalid Category</div>
       ),
+    [PageRoutes.advertise.PROJECT_STATUS]: <ProjectStatusForm onSave={storeValues} />,
+    [PageRoutes.advertise.ADDITIONAL_DETAILS]: <AdditionalDetailsForm onSave={storeValues} />,
     [PageRoutes.advertise.LOCATION_DETAILS]: <LocationDetailsForm onSave={storeValues} />,
     [PageRoutes.advertise.AMENITIES_DETAILS]: <AmenitiesForm onSave={storeValues} />,
-    [PageRoutes.advertise.PROJECT_STATUS]: <ProjectStatusForm onSave={storeValues} />,
     [PageRoutes.advertise.CALL_PREFERENCE]: <CallPreferenceForm onSave={storeValues} />,
     [PageRoutes.advertise.UPLOAD_PHOTOS]: <UploadDocumentsForm handleSubmit={handleSubmit} isLoading={isLoading} />,
     [PageRoutes.advertise.APPLICATION_COMPLETED]: <ApplicationCompletedForm />

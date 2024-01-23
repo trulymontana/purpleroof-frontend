@@ -107,33 +107,45 @@ export const commercialTypes = [
 
 export const residentalTypes = [
   {
-    label: 'Apartment & Unit',
-    value: ResidentialPropertyCategoryEnum.APARTMENT_AND_UNIT
-  },
-  {
-    label: 'Villa',
-    value: ResidentialPropertyCategoryEnum.VILLA
-  },
-  {
-    label: 'Acreage',
-    value: ResidentialPropertyCategoryEnum.ACREAGE
-  },
-  {
-    label: 'Block of Units',
-    value: ResidentialPropertyCategoryEnum.BLOCK_OF_UNITS
-  },
-  {
-    label: 'House',
-    value: ResidentialPropertyCategoryEnum.HOUSE
+    label: 'Apartment',
+    value: ResidentialPropertyCategoryEnum.APARTMENT
   },
   {
     label: 'Townhouse',
     value: ResidentialPropertyCategoryEnum.TOWNHOUSE
   },
   {
-    label: 'Land',
-    value: ResidentialPropertyCategoryEnum.LAND
-  }
+    label: 'Villa',
+    value: ResidentialPropertyCategoryEnum.VILLA
+  },
+  {
+    label: 'Duplex',
+    value: ResidentialPropertyCategoryEnum.DUPLEX
+  },
+  {
+    label: 'Penthouse',
+    value: ResidentialPropertyCategoryEnum.PENTHOUSE
+  },
+  {
+    label: 'Residential Land',
+    value: ResidentialPropertyCategoryEnum.RESIDENTIAL_LAND
+  },
+  {
+    label: 'Villa Compound',
+    value: ResidentialPropertyCategoryEnum.VILLA_COMPOUND
+  },
+  {
+    label: 'Residential Full Building',
+    value: ResidentialPropertyCategoryEnum.RESIDENTIAL_FULL_BUILDING
+  },
+  {
+    label: 'Bulk Units',
+    value: ResidentialPropertyCategoryEnum.BULK_UNITS
+  },
+  {
+    label: 'Bungalow',
+    value: ResidentialPropertyCategoryEnum.BUNGALOW
+  },
 ]
 
 export const paymentIntervals = [
@@ -1744,7 +1756,7 @@ export const emiratesWithLocations = {
   ]
 }
 
-export const propertyTypes = [
+export const holdingTypes = [
   {
     label: 'Free Hold',
     value: HoldingTypeEnum.FREE_HOLD

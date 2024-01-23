@@ -9,8 +9,7 @@ import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import SelectElement from '@/components/forms/elements/select-element'
-import { buildingAmenities, communityAmenities, furnishingStatuses, propertyAmenities, propertyTypes } from '@/constants/advertise'
+import { buildingAmenities, communityAmenities, propertyAmenities } from '@/constants/advertise'
 import MultiSelectCheckbox from '@/components/forms/elements/checkbox-element'
 import { useRouter } from 'next/navigation'
 import { TOption } from '@/constants/types'
@@ -19,13 +18,6 @@ import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
-  holdingType: z.string({
-    required_error: 'Please select a property type!'
-  }),
-  furnishingStatus: z.string({
-    required_error: 'Please select your property status'
-  }),
-  parkingSpaces: z.number().optional(),
   airportDistance: z.number().optional(),
   metroStationDistance: z.number().optional(),
   nearbyPlaces: z.string().optional(),
@@ -62,25 +54,12 @@ const AmenitiesForm = ({ onSave }: Props) => {
     // @ts-ignore
     data.amenities = selectedAmenities
     onSave(PageRoutes.advertise.AMENITIES_DETAILS, data)
-    router.push(PageRoutes.advertise.PROJECT_STATUS)
+    router.push(PageRoutes.advertise.LOCATION_DETAILS)
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <SelectElement
-          name="holdingType"
-          label={'Holding Type'}
-          placeholder="Please select a property type"
-          options={propertyTypes}
-        />
-
-        <SelectElement
-          name="furnishingStatus"
-          label={'Status'}
-          placeholder="Please select a status"
-          options={furnishingStatuses}
-        />
 
         <div className='flex flex-col gap-10 py-4'>
           <MultiSelectCheckbox
@@ -112,12 +91,6 @@ const AmenitiesForm = ({ onSave }: Props) => {
         </div>
 
         <NumberInputElement
-          name="parkingSpaces"
-          placeholder="Please enter parking spaces"
-          label={'Number of Parking Spaces'}
-        />
-
-        <NumberInputElement
           name="airportDistance"
           placeholder="Please enter airport distance"
           label={'Distance from Airport (in km)'}
@@ -136,7 +109,7 @@ const AmenitiesForm = ({ onSave }: Props) => {
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
-        <BackButton route={PageRoutes.advertise.LOCATION_DETAILS} />
+        <BackButton route={PageRoutes.advertise.ADDITIONAL_DETAILS} />
       </form>
     </Form>
   )

@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -18,11 +17,10 @@ import { PropertyTypeEnum, PropertyForEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   propertyFor: z
-    .string({
+    .nativeEnum(PropertyForEnum, {
       required_error: 'Please select a category'
-    })
-    .refine((val) => val === PropertyForEnum.SALE || val === PropertyForEnum.RENT),
-  propertyType: z.string({
+    }),
+  propertyType: z.nativeEnum(PropertyTypeEnum, {
     required_error: 'Please select a property type!'
   }),
   propertyCategory: z.string({

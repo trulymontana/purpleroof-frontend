@@ -1,5 +1,4 @@
 'use client'
-import React, { useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -14,27 +13,22 @@ import { BackButton } from '@/components/navigation/back-button'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 import TextAreaElement from '@/components/forms/elements/text-area-element'
 import SelectElement from '../elements/select-element'
-import { completionStatuses, projectStatuses } from '@/constants/advertise'
-import { PropertyCompletionStatusEnum } from '@/constants/enums'
+import { completionStatuses, furnishingStatuses, projectStatuses } from '@/constants/advertise'
+import { FurnishingStatusEnum, PropertyCompletionStatusEnum } from '@/constants/enums'
 
 const formSchema = z.object({
-  amount: z.number({
-    required_error: 'Please enter a property value'
-  }),
   size: z.number({
     required_error: 'Please enter a property size'
   }),
   numberOfBedRooms: z.number().optional(),
   numberOfBathRooms: z.number().optional(),
+  parkingSpaces: z.number().optional(),
   completionStatus: z.nativeEnum(PropertyCompletionStatusEnum, {
     required_error: "Please select property completion status!"
   }),
-  name: z.string({
-    required_error: 'Title should not be empty!'
-  }).refine((i) => i.length <= 50, {
-    message: "Your advertisement title cannot be more than 50 characters",
-  }),
-  description: z.string().optional().refine((val) => val && val?.length <= 1000),
+  furnishingStatus: z.nativeEnum(FurnishingStatusEnum, {
+    required_error: 'Please select a furnishing status'
+  })
 })
 
 interface Props {
@@ -55,28 +49,32 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.PROPERTY_DETAILS, values)
-    router.push(PageRoutes.advertise.LOCATION_DETAILS)
+    router.push(PageRoutes.advertise.PROJECT_STATUS)
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
 
-        <NumberInputElement
-          name="amount"
-          placeholder="Please enter your property value"
-          label={'Property Value (AED)'}
-        />
         <NumberInputElement name="size" placeholder="Please enter your property size" label={'Property Size (Sqft)'} />
 
         <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
         <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
 
+        <NumberInputElement
+          name="parkingSpaces"
+          placeholder="Please enter parking spaces"
+          label={'Number of Parking Spaces'}
+        />
+
         <SelectElement name="completionStatus" label="Completion Status" options={completionStatuses} />
 
-        <InputElement name="name" placeholder="Please enter Advert Title (max 50 characters)" label={'Advertisement Title'} />
-
-        <TextAreaElement name="description" label="Description" placeholder="Enter description of property here... (max 1000 characters)" />
+        <SelectElement
+          name="furnishingStatus"
+          label={'Furnish Type'}
+          placeholder="Please select a furnish type"
+          options={furnishingStatuses}
+        />
 
         <Button type="submit" className="w-full">
           Save and Continue
