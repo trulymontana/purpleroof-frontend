@@ -1,12 +1,14 @@
 import {
   CallPreferenceEnum,
   CommercialPropertyCategoryEnum,
+  CompletionStatusEnum,
   EmirateEnum,
   FurnishingStatusEnum,
   HoldingTypeEnum,
   OccupencyStatusEnum,
   PaymentIntervalsEnum,
   ProjectStatusesEnum,
+  PropertyCompletionStatusEnum,
   PropertyForEnum,
   PropertySubmissionStatusEnum,
   PropertyTypeEnum,
@@ -2008,6 +2010,25 @@ export const projectStatuses = [
   {
     label: 'Shell & Core',
     value: ProjectStatusesEnum.SHELL_AND_CORE
+  }
+]
+
+export const completionStatuses = [
+  {
+    label: 'Ready Secondary',
+    value: PropertyCompletionStatusEnum.READY_SECONDARY
+  },
+  {
+    label: 'Off Plan Secondary',
+    value: PropertyCompletionStatusEnum.OFF_PLAN_SECONDARY
+  },
+  {
+    label: 'Ready Primary',
+    value: PropertyCompletionStatusEnum.READY_PRIMARY
+  },
+  {
+    label: 'Off Plan Primary',
+    value: PropertyCompletionStatusEnum.OFF_PLAN_PRIMARY
   }
 ]
 

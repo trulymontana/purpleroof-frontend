@@ -10,12 +10,11 @@ import { Form } from '@/components/ui/form'
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { bathRooms, bedRooms, lavatories, paymentIntervals } from '@/constants/advertise'
+import { completionStatuses, paymentIntervals } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
-import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
 import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
-import { PropertyTypeEnum } from '@/constants/enums'
+import { PropertyCompletionStatusEnum } from '@/constants/enums'
 import TextAreaElement from '@/components/forms/elements/text-area-element'
 
 const formSchema = z.object({
@@ -33,6 +32,9 @@ const formSchema = z.object({
   }),
   numberOfBedRooms: z.string().optional(),
   numberOfBathRooms: z.string().optional(),
+  completionStatus: z.nativeEnum(PropertyCompletionStatusEnum, {
+    required_error: "Please select property completion status!"
+  }),
   name: z.string({
     required_error: 'Title should not be empty!'
   }).refine((i) => i.length <= 50, {
@@ -80,6 +82,8 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
 
         <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
         <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
+
+        <SelectElement name="completionStatus" label="Completion Status" options={completionStatuses} />
 
         <InputElement name="name" placeholder="Please enter Advert Title (max 50 characters)" label={'Advertisement Title'} />
 

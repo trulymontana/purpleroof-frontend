@@ -162,6 +162,13 @@ export enum ProjectStatusesEnum {
   SHELL_AND_CORE = 'SHELL_AND_CORE'
 }
 
+export enum PropertyCompletionStatusEnum {
+  READY_SECONDARY='READY_SECONDARY',
+  OFF_PLAN_SECONDARY='OFF_PLAN_SECONDARY',
+  READY_PRIMARY='READY_PRIMARY',
+  OFF_PLAN_PRIMARY='OFF_PLAN_PRIMARY',
+}
+
 export enum RentedOrVacantEnum {
   VACANT = 'VACANT',
   RENTED = 'RENTED'
@@ -194,12 +201,6 @@ export enum DocumentTypeEnum {
   OWNERSHIP_PROOF_MOBILE_NUMBER = 'OWNERSHIP_PROOF_MOBILE_NUMBER',
   MOBILE_BILL_COPY = 'MOBILE_BILL_COPY'
 }
-
-// same?
-// export enum CompletionStatusEnum {
-//   COMPLETED
-//   UNDER_CONSTRUCTION
-// }
 
 export enum UserRoleEnum {
   SUPER_ADMIN = 'SUPER_ADMIN',
