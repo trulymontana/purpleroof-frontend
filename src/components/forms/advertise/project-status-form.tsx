@@ -17,8 +17,10 @@ import { HoldingTypeEnum, OccupencyStatusEnum, ProjectStatusesEnum } from '@/con
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
-  projectStatus: z.string(),
-  occupencyStatus: z.string().optional(),
+  projectStatus: z.nativeEnum(ProjectStatusesEnum, {
+    required_error: "Please select a project status"
+  }),
+  occupencyStatus: z.nativeEnum(OccupencyStatusEnum).optional(),
   rentalAmount: z.number().optional(),
   numberOfCheques: z.number().optional(),
   noticePeriodRent: z.number().optional(),

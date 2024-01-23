@@ -13,13 +13,13 @@ import { completionStatuses, furnishingStatuses, paymentIntervals } from '@/cons
 import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
-import { FurnishingStatusEnum, PropertyCompletionStatusEnum } from '@/constants/enums'
+import { FurnishingStatusEnum, PaymentIntervalsEnum, PropertyCompletionStatusEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   rentalAmount: z.number({
     required_error: 'Please enter a rental amount'
   }),
-  paymentInterval: z.string({
+  paymentInterval: z.nativeEnum(PaymentIntervalsEnum, {
     required_error: 'Please select a payment interval'
   }),
   size: z.number({

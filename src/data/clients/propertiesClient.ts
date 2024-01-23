@@ -2,7 +2,7 @@ import { QueryOptions, User } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
 
 import { ApiEndpoints } from '@/constants/api'
-import { EmirateEnum, FurnishingStatusEnum, OccupencyStatusEnum, PropertySubmissionStatusEnum } from '@/constants/enums'
+import { EmirateEnum, FurnishingStatusEnum, OccupencyStatusEnum, PropertyCompletionStatusEnum, PropertySubmissionStatusEnum } from '@/constants/enums'
 import HttpClient from '@/lib/http-client'
 import { Agent } from './agentsClient'
 
@@ -17,6 +17,9 @@ export interface CreatePropertyInput {
   amenities: number[]
   numberOfBedRooms?: number
   numberOfBathRooms?: number
+  layoutType?: string
+  serviceCharges?: string
+  completionStatus: PropertyCompletionStatusEnum
   deedNumber: string
   emirate: EmirateEnum
   locationId?: number | string
@@ -27,7 +30,7 @@ export interface CreatePropertyInput {
   landmark: string
   propertyImage: string
   furnishingStatus: FurnishingStatusEnum
-  image: any
+  images: any
   propertyType: string
   propertyFor: string
   parkingSpaces: string
