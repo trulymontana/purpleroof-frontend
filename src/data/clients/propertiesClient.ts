@@ -37,7 +37,7 @@ export interface CreatePropertyInput {
   propertyImage: string
   furnishingStatus: FurnishingStatusEnum
   image: string
-  photos: string[]
+  photos: any
   propertyType: string
   propertyFor: string
   parkingSpaces: string

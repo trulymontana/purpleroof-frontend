@@ -70,7 +70,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
 
   const location = form.watch("locationId");
 
-  locationOptions && locationOptions?.length > 0 && locationOptions?.push({ label: "Other", value: 'other' })
+  locationOptions && locationOptions?.length > 0 && locationOptions?.push({ label: "Other", value: '99999' })
 
   return (
     <Form {...form}>
@@ -93,7 +93,7 @@ const LocationDetailsForm = ({ onSave }: Props) => {
           disabled={!selectedEmirate}
         />
 
-        {location === 'other' && <InputElement
+        {location === '99999' && <InputElement
           name="cityName"
           placeholder="Please enter your city name"
           label={'City Name (optional)'}

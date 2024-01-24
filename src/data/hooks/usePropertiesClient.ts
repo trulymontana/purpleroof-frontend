@@ -46,6 +46,7 @@ export const useCreatePropertyMutation = () => {
       localStorage.removeItem(PageRoutes.advertise.AMENITIES_DETAILS)
       localStorage.removeItem(PageRoutes.advertise.CALL_PREFERENCE)
       localStorage.removeItem(PageRoutes.advertise.LOCATION_DETAILS)
+      localStorage.removeItem(PageRoutes.advertise.ADDITIONAL_DETAILS)
       localStorage.removeItem(PageRoutes.advertise.PROJECT_STATUS)
       localStorage.removeItem(PageRoutes.advertise.PROPERTY_DETAILS)
       localStorage.removeItem(PageRoutes.advertise.UPLOAD_PHOTOS)
