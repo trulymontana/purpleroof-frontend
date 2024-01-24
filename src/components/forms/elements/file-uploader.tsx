@@ -13,9 +13,10 @@ interface FileUploaderProps {
   folder: string
   name: string
   label: string
+  isMultiple?: boolean
 }
 
-const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }) => {
+const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form, isMultiple = true }) => {
   const { control } = useFormContext()
 
   const ref = useRef(null)
@@ -74,7 +75,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ folder, name, label, form }
               <div className='space-x-2 space-y-1'>{fileNames?.map((file, i) => <Badge variant="secondary" key={i}>{file}</Badge>)}</div>
               <div className='flex cursor-pointer items-center gap-2'>
                 <FormControl>
-                  <Input ref={ref} id="file-upload" type="file" onChange={handleFileUpload} className="cursor-pointer" multiple />
+                  <Input ref={ref} id="file-upload" type="file" onChange={handleFileUpload} className="cursor-pointer" multiple={isMultiple} />
                 </FormControl>
                 {isLoading && (
                   <div className="flex items-center justify-center">

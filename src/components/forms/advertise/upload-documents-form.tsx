@@ -18,8 +18,15 @@ import InputElement from '../elements/input-element'
 import PhoneNumberInputElement from '../elements/phone-number-input'
 
 const formSchema = z.object({
-  images: z.array(
-    z.string()
+  image: z.array(
+    z.string({
+      required_error: 'Please upload a banner image for the property!',
+    }), {
+    required_error: 'Please upload a banner image for the property!'
+  }
+  ),
+  photos: z.array(
+    z.string({ required_error: "Please upload images of your property!" })
   ).min(8, {
     message: "Please upload atleast 8 images!"
   }).max(30, {
@@ -28,7 +35,7 @@ const formSchema = z.object({
   documents: z.array(
     z.object({
       type: z.string().optional(),
-      url: z.string().optional()
+      url: z.array(z.string()).optional()
     })
   ),
   email: z
@@ -76,13 +83,15 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
 
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    handleSubmit(values)
+    const data = { ...values, image: values.image.toString() }
+    handleSubmit(data)
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <FileUploader folder="advertise" name="images" label={'Upload Photo of the Property (min: 8, max: 30)'} form={form} />
+        <FileUploader folder="advertise" name="image" label={'Banner Image of the Property'} form={form} isMultiple={false} />
+        <FileUploader folder="advertise" name="photos" label={'Additional Photos of the Property (min: 8, max: 30)'} form={form} />
         <FileUploader folder="advertise" name="documents[0].url" label={'Passport Copy (optional)'} form={form} />
         <FileUploader folder="advertise" name="documents[1].url" label={'Visa Copy (optional)'} form={form} />
         <FileUploader folder="advertise" name="documents[2].url" label={'Emirates ID (optional)'} form={form} />
