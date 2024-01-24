@@ -17,7 +17,7 @@ const PropertyCard = ({ property }: Props) => {
         alt="Property Image"
         className="h-64 w-full rounded-t-xl border-b-2 object-cover"
         height="256"
-        src={property?.images[0] || '/placeholder.svg'}
+        src={property?.image || '/placeholder.svg'}
         style={{
           aspectRatio: '256/256',
           objectFit: 'cover'

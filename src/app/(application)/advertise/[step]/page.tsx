@@ -39,6 +39,7 @@ const Page = () => {
   const handleSubmit = (values: any) => {
     const basicDetails = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS)
     const propertyDetails = localStorage.getItem(PageRoutes.advertise.PROPERTY_DETAILS)
+    const additionalDetails = localStorage.getItem(PageRoutes.advertise.ADDITIONAL_DETAILS)
     const locationDetails = localStorage.getItem(PageRoutes.advertise.LOCATION_DETAILS)
     const amenitiesDetails = localStorage.getItem(PageRoutes.advertise.AMENITIES_DETAILS)
     const projectStatus = localStorage.getItem(PageRoutes.advertise.PROJECT_STATUS)
@@ -48,6 +49,7 @@ const Page = () => {
 
     nullCheckAndMerge(result, basicDetails)
     nullCheckAndMerge(result, propertyDetails)
+    nullCheckAndMerge(result, additionalDetails)
     nullCheckAndMerge(result, locationDetails)
     nullCheckAndMerge(result, amenitiesDetails)
     nullCheckAndMerge(result, projectStatus)

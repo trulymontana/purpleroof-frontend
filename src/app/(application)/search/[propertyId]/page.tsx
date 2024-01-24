@@ -29,7 +29,7 @@ const Page = ({ params: { propertyId } }: Props) => {
           alt="Property Image"
           className="h-full w-full border-b-2 object-cover"
           height="500"
-          src={data?.images[0] || '/placeholder.svg'}
+          src={data?.image || '/placeholder.svg'}
           style={{
             aspectRatio: '1000/500',
             objectFit: 'contain'
