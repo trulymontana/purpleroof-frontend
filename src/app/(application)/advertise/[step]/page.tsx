@@ -57,7 +57,9 @@ const Page = () => {
 
     let property: CreatePropertyInput = Object.assign({}, result, values)
 
-    if (property.locationId) {
+    if (property.locationId === 'other') {
+      delete property.locationId
+    } else {
       property.locationId = Number(property.locationId)
     }
 
