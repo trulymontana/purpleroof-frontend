@@ -22,6 +22,7 @@ import { nullCheckAndMerge } from '@/lib/utils'
 import { PropertyForEnum } from '@/constants/enums'
 import ApplicationCompletedForm from '../../../../components/forms/advertise/application-completed-form'
 import BackgroundEffect from '@/components/BackgroundEffect'
+import AdditionalDetailsForm from '@/components/forms/advertise/additional-details-form'
 
 const Page = () => {
   const pathName = usePathname()
@@ -29,7 +30,7 @@ const Page = () => {
 
   const { mutate: createProperty, isPending: isLoading } = useCreatePropertyMutation()
 
-  const categoryType = searchParams.get('categoryType')
+  const categoryType = searchParams.get('categoryType');
 
   const storeValues = (step: string, values: any) => {
     localStorage.setItem(step, JSON.stringify(values))
@@ -38,6 +39,7 @@ const Page = () => {
   const handleSubmit = (values: any) => {
     const basicDetails = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS)
     const propertyDetails = localStorage.getItem(PageRoutes.advertise.PROPERTY_DETAILS)
+    const additionalDetails = localStorage.getItem(PageRoutes.advertise.ADDITIONAL_DETAILS)
     const locationDetails = localStorage.getItem(PageRoutes.advertise.LOCATION_DETAILS)
     const amenitiesDetails = localStorage.getItem(PageRoutes.advertise.AMENITIES_DETAILS)
     const projectStatus = localStorage.getItem(PageRoutes.advertise.PROJECT_STATUS)
@@ -47,6 +49,7 @@ const Page = () => {
 
     nullCheckAndMerge(result, basicDetails)
     nullCheckAndMerge(result, propertyDetails)
+    nullCheckAndMerge(result, additionalDetails)
     nullCheckAndMerge(result, locationDetails)
     nullCheckAndMerge(result, amenitiesDetails)
     nullCheckAndMerge(result, projectStatus)
@@ -54,7 +57,11 @@ const Page = () => {
 
     let property: CreatePropertyInput = Object.assign({}, result, values)
 
-    property.locationId = Number(property.locationId)
+    if (property.locationId === 'other') {
+      delete property.locationId
+    } else {
+      property.locationId = Number(property.locationId)
+    }
 
     if (property.amenities && property.amenities.length > 0) {
       let amenities_values: number[] = property.amenities.map((amenity: any) => amenity.value)
@@ -76,9 +83,10 @@ const Page = () => {
       ) : (
         <div>Invalid Category</div>
       ),
+    [PageRoutes.advertise.PROJECT_STATUS]: <ProjectStatusForm onSave={storeValues} />,
+    [PageRoutes.advertise.ADDITIONAL_DETAILS]: <AdditionalDetailsForm onSave={storeValues} />,
     [PageRoutes.advertise.LOCATION_DETAILS]: <LocationDetailsForm onSave={storeValues} />,
     [PageRoutes.advertise.AMENITIES_DETAILS]: <AmenitiesForm onSave={storeValues} />,
-    [PageRoutes.advertise.PROJECT_STATUS]: <ProjectStatusForm onSave={storeValues} />,
     [PageRoutes.advertise.CALL_PREFERENCE]: <CallPreferenceForm onSave={storeValues} />,
     [PageRoutes.advertise.UPLOAD_PHOTOS]: <UploadDocumentsForm handleSubmit={handleSubmit} isLoading={isLoading} />,
     [PageRoutes.advertise.APPLICATION_COMPLETED]: <ApplicationCompletedForm />

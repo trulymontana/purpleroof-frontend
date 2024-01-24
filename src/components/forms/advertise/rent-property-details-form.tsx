@@ -8,28 +8,18 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
-import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
-import { bathRooms, bedRooms, lavatories, paymentIntervals } from '@/constants/advertise'
+import { completionStatuses, furnishingStatuses, paymentIntervals } from '@/constants/advertise'
 import { useRouter } from 'next/navigation'
-import PhoneNumberInputElement from '@/components/forms/elements/phone-number-input'
 import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
-import { PropertyTypeEnum } from '@/constants/enums'
-import TextAreaElement from '@/components/forms/elements/text-area-element'
+import { FurnishingStatusEnum, PaymentIntervalsEnum, PropertyCompletionStatusEnum } from '@/constants/enums'
 
 const formSchema = z.object({
-  phone: z
-    .string({
-      required_error: 'Please enter a valid phone number.'
-    })
-    .min(10, {
-      message: 'Phone number must be at least 10 characters.'
-    }),
   rentalAmount: z.number({
     required_error: 'Please enter a rental amount'
   }),
-  paymentInterval: z.string({
+  paymentInterval: z.nativeEnum(PaymentIntervalsEnum, {
     required_error: 'Please select a payment interval'
   }),
   size: z.number({
@@ -40,10 +30,12 @@ const formSchema = z.object({
   }),
   numberOfBedRooms: z.string().optional(),
   numberOfBathRooms: z.string().optional(),
-  numberOfLavatory: z.number().optional(),
-  description: z.string().optional(),
-  deedNumber: z.string({
-    required_error: 'Please enter your Deed Number'
+  parkingSpaces: z.number().optional(),
+  completionStatus: z.nativeEnum(PropertyCompletionStatusEnum, {
+    required_error: "Please select property completion status!"
+  }),
+  furnishingStatus: z.nativeEnum(FurnishingStatusEnum, {
+    required_error: 'Please select a furnishing status'
   })
 })
 
@@ -53,8 +45,6 @@ interface Props {
 
 const RentPropertyDetailsForm = ({ onSave }: Props) => {
   const router = useRouter()
-
-  const basic_details = localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS)
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.PROPERTY_DETAILS)
 
@@ -67,13 +57,12 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.PROPERTY_DETAILS, values)
-    router.push(PageRoutes.advertise.LOCATION_DETAILS)
+    router.push(PageRoutes.advertise.PROJECT_STATUS)
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
-        <PhoneNumberInputElement name="phone" label="Phone Number" />
         <NumberInputElement
           name="rentalAmount"
           placeholder="Please enter rental amount"
@@ -87,23 +76,23 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
           label={'Minimum Contract (in months)'}
         />
 
-        {basic_details && JSON.parse(basic_details).typeOfProperty === PropertyTypeEnum.RESIDENTIAL ? (
-          <>
-            <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
+        <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms (optional)'} />
+        <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms (optional)'} />
 
-            <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
-          </>
-        ) : (
-          <NumberInputElement name="numberOfLavatory" label="Number of Lavatory" />
-        )}
-
-        <InputElement
-          name="deedNumber"
-          placeholder="Please enter deed number"
-          label={'Title Deed / Oqod / Initial Contract of Sales'}
+        <NumberInputElement
+          name="parkingSpaces"
+          placeholder="Please enter parking spaces"
+          label={'Number of Parking Spaces (optional)'}
         />
 
-        <TextAreaElement name="description" label="Description" placeholder="Enter description of property here..." />
+        <SelectElement name="completionStatus" label="Completion Status" placeholder='Please select completion status' options={completionStatuses} />
+
+        <SelectElement
+          name="furnishingStatus"
+          label={'Furnish Type'}
+          placeholder="Please select a furnish type"
+          options={furnishingStatuses}
+        />
 
         <Button type="submit" className="w-full">
           Save and Continue

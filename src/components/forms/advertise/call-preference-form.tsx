@@ -29,7 +29,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
 
   const storedValue = localStorage.getItem(PageRoutes.advertise.CALL_PREFERENCE)
 
-  const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
+  const defaultValues: z.infer<typeof formSchema> = storedValue !== null ? JSON.parse(storedValue) : { callPreference: CallPreferenceEnum.PURPLEROOF }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -38,7 +38,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.CALL_PREFERENCE, values)
-    router.push(PageRoutes.advertise.UPLOAD_PHOTOS)
+    router.push(`${PageRoutes.advertise.UPLOAD_PHOTOS}?callPreference=${form.getValues("callPreference")}`);
   }
 
   return (
@@ -54,7 +54,7 @@ const CallPreferenceForm = ({ onSave }: Props) => {
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
-        <BackButton route={PageRoutes.advertise.PROJECT_STATUS} />
+        <BackButton route={PageRoutes.advertise.LOCATION_DETAILS} />
       </form>
     </Form>
   )

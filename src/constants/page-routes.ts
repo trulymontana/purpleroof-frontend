@@ -32,6 +32,7 @@ export const PageRoutes = {
   advertise: {
     BASIC_DETAILS: '/advertise/basic-details',
     PROPERTY_DETAILS: '/advertise/property-details',
+    ADDITIONAL_DETAILS: '/advertise/additional-details',
     LOCATION_DETAILS: '/advertise/location-details',
     AMENITIES_DETAILS: '/advertise/amenities-details',
     UPLOAD_PHOTOS: '/advertise/upload-photos',

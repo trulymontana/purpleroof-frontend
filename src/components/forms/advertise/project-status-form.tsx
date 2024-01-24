@@ -8,22 +8,27 @@ import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import SelectElement from '@/components/forms/elements/select-element'
-import { occupencyStatusOptions, projectStatuses } from '@/constants/advertise'
+import { holdingTypes, occupencyStatusOptions, projectStatuses } from '@/constants/advertise'
 import DatePickerElement from '@/components/forms/elements/date-picker-element'
 import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
-import { OccupencyStatusEnum, ProjectStatusesEnum } from '@/constants/enums'
+import { HoldingTypeEnum, OccupencyStatusEnum, ProjectStatusesEnum } from '@/constants/enums'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 
 const formSchema = z.object({
-  projectStatus: z.string(),
-  occupencyStatus: z.string().optional(),
+  projectStatus: z.nativeEnum(ProjectStatusesEnum, {
+    required_error: "Please select a project status"
+  }),
+  occupencyStatus: z.nativeEnum(OccupencyStatusEnum).optional(),
   rentalAmount: z.number().optional(),
   numberOfCheques: z.number().optional(),
   noticePeriodRent: z.number().optional(),
   noticePeriodProperty: z.number().optional(),
-  completionDate: z.date().optional()
+  completionDate: z.date().optional(),
+  holdingType: z.nativeEnum(HoldingTypeEnum, {
+    required_error: 'Please select a holding type!'
+  }),
 })
 
 type TProjectStatus = z.infer<typeof formSchema>
@@ -33,8 +38,10 @@ interface Props {
 }
 
 const ProjectStatusForm = ({ onSave }: Props) => {
-  const router = useRouter()
+  const router = useRouter();
 
+  // @ts-ignore
+  const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS));
   const storedValue = localStorage.getItem(PageRoutes.advertise.PROJECT_STATUS)
 
   const defaultValues: z.infer<typeof formSchema> = storedValue !== null && JSON.parse(storedValue)
@@ -51,7 +58,7 @@ const ProjectStatusForm = ({ onSave }: Props) => {
 
   function onSubmit(values: TProjectStatus) {
     onSave(PageRoutes.advertise.PROJECT_STATUS, values)
-    router.push(PageRoutes.advertise.CALL_PREFERENCE)
+    router.push(PageRoutes.advertise.ADDITIONAL_DETAILS)
   }
 
   const projectStatus = form.watch('projectStatus')
@@ -64,30 +71,36 @@ const ProjectStatusForm = ({ onSave }: Props) => {
 
         {projectStatus === ProjectStatusesEnum.COMPLETED && (
           <>
-            <SelectElement name="occupencyStatus" label="Occupency Status" options={occupencyStatusOptions} />
+            <SelectElement name="occupencyStatus" label="Occupency Status  (optional)" options={occupencyStatusOptions} />
             {occupencyStatus === OccupencyStatusEnum.OCCUPIED && (
               <>
-                <NumberInputElement name="rentalAmount" label="Rental Amount (AED)" />
-                <NumberInputElement name="numberOfCheques" label="Number of Cheques" />
+                <NumberInputElement name="rentalAmount" label="Rental Amount (AED) (optional)" />
+                <NumberInputElement name="numberOfCheques" label="Number of Cheques (optional)" />
                 <NumberInputElement
                   name="noticePeriodRent"
-                  label="Notice Period of remaining rental agreement (in months)"
+                  label="Notice Period of remaining rental agreement (in months) (optional)"
                 />
+                <NumberInputElement name="noticePeriodProperty" label={'Notice Period to vacate the property (in months) (optional)'} />
               </>
             )}
           </>
         )}
 
         {projectStatus === ProjectStatusesEnum.OFF_PLAN_UNDER_CONSTRUCTION && (
-          <DatePickerElement name="completionDate" label="Completion Date" disabled={true} />
+          <DatePickerElement name="completionDate" label="Completion Date (optional)" disabled={true} />
         )}
 
-        <NumberInputElement name="noticePeriodProperty" label={'Notice Period to vacate the property (in months)'} />
+        <SelectElement
+          name="holdingType"
+          label={'Holding Type'}
+          placeholder="Please select a holding type"
+          options={holdingTypes}
+        />
 
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
-        <BackButton route={PageRoutes.advertise.AMENITIES_DETAILS} />
+        <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails?.propertyFor}`} />
       </form>
     </Form>
   )

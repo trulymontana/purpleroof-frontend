@@ -8,18 +8,15 @@ import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
 import InputElement from '@/components/forms/elements/input-element'
-import { emirateOptions, emiratesWithLocations } from '@/constants/advertise'
+import { emirateOptions } from '@/constants/advertise'
 import SelectElement from '@/components/forms/elements/select-element'
 import { useRouter } from 'next/navigation'
 import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
-import FileUploader from '@/components/forms/elements/file-uploader'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 import MapComponent from '@/components/MapPicker'
-import { useEffect, useState } from 'react'
 import { useGetLocations } from '@/data/hooks/useLocationsClient'
 import { EmirateEnum } from '@/constants/enums'
-import { TOption } from '@/constants/types'
 
 const formSchema = z.object({
   emirate: z.nativeEnum(EmirateEnum, {
@@ -28,21 +25,13 @@ const formSchema = z.object({
   locationId: z.string({
     required_error: 'Please select a Location!'
   }),
-  buildingName: z.string({
-    required_error: 'Please enter your Building name!'
-  }),
-  floor: z.number({
-    required_error: 'Please enter your floor'
-  }),
-  street: z.string({
-    required_error: 'Please enter Street number'
-  }),
-  unitNumber: z.number({
-    required_error: 'Please enter Unit number'
-  }),
-  landmark: z.string({
-    required_error: 'Please enter a landmark'
-  }),
+  cityName: z.string().optional(),
+  communityName: z.string().optional(),
+  buildingName: z.string().optional(),
+  floor: z.number().optional(),
+  street: z.string().optional(),
+  unitNumber: z.number().optional(),
+  landmark: z.string().optional(),
   lat: z
     .number({
       required_error: 'Please select a lat'
@@ -76,15 +65,24 @@ const LocationDetailsForm = ({ onSave }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     onSave(PageRoutes.advertise.LOCATION_DETAILS, values)
-    router.push(PageRoutes.advertise.AMENITIES_DETAILS)
+    router.push(PageRoutes.advertise.CALL_PREFERENCE)
   }
 
-  // @ts-ignore
-  const basicDetails = JSON.parse(localStorage.getItem(PageRoutes.advertise.BASIC_DETAILS))
+  const location = form.watch("locationId");
+
+  locationOptions && locationOptions?.length > 0 && locationOptions?.push({ label: "Other", value: 'other' })
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
+
+        <MapComponent
+          onSelectLocation={({ lat, lng }) => {
+            form.setValue('lat', lat)
+            form.setValue('lng', lng)
+          }}
+        />
+
         <SelectElement name="emirate" label="Emirate" options={emirateOptions} placeholder="Please select a emirate" />
 
         <SelectElement
@@ -95,27 +93,32 @@ const LocationDetailsForm = ({ onSave }: Props) => {
           disabled={!selectedEmirate}
         />
 
+        {location === 'other' && <InputElement
+          name="cityName"
+          placeholder="Please enter your city name"
+          label={'City Name (optional)'}
+        />}
+
+        <InputElement
+          name="communityName"
+          placeholder="Please enter your community name"
+          label={'Community Name (optional)'}
+        />
+
         <InputElement
           name="buildingName"
           placeholder="Please enter your building name"
-          label={'Building / Cluster Name'}
+          label={'Building / Cluster Name (optional)'}
         />
-        <NumberInputElement name="floor" placeholder="Please enter your floor" label={'Floor'} />
-        <InputElement name="street" placeholder="Please enter your street name" label={'Street'} />
-        <NumberInputElement name="unitNumber" placeholder="Please enter your unit number" label={'Unit Number'} />
-        <InputElement name="landmark" placeholder="Please enter a landmark" label={'Landmark'} />
-
-        <MapComponent
-          onSelectLocation={({ lat, lng }) => {
-            form.setValue('lat', lat)
-            form.setValue('lng', lng)
-          }}
-        />
+        <NumberInputElement name="floor" placeholder="Please enter your floor" label={'Floor (optional)'} />
+        <InputElement name="street" placeholder="Please enter your street name" label={'Street (optional)'} />
+        <NumberInputElement name="unitNumber" placeholder="Please enter your unit number" label={'Unit Number (optional)'} />
+        <InputElement name="landmark" placeholder="Please enter a landmark" label={'Nearest Landmark (optional)'} />
 
         <Button type="submit" className="w-full">
           Save and Continue
         </Button>
-        <BackButton route={`${PageRoutes.advertise.PROPERTY_DETAILS}?categoryType=${basicDetails?.propertyFor}`} />
+        <BackButton route={PageRoutes.advertise.AMENITIES_DETAILS} />
       </form>
     </Form>
   )

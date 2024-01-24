@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -8,7 +7,6 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
 import * as z from 'zod'
-import InputElement from '@/components/forms/elements/input-element'
 import SelectElement from '@/components/forms/elements/select-element'
 import { categories, commercialTypes, residentalTypes, typesOfProperties } from '@/constants/advertise'
 import RadioGroupElement from '@/components/forms/elements/radio-group-element'
@@ -19,19 +17,10 @@ import { PropertyTypeEnum, PropertyForEnum } from '@/constants/enums'
 
 const formSchema = z.object({
   propertyFor: z
-    .string({
+    .nativeEnum(PropertyForEnum, {
       required_error: 'Please select a category'
-    })
-    .refine((val) => val === PropertyForEnum.SALE || val === PropertyForEnum.RENT),
-  name: z.string({
-    required_error: 'Title should not be empty!'
-  }),
-  email: z
-    .string({
-      required_error: 'Please enter a valid email.'
-    })
-    .email(),
-  propertyType: z.string({
+    }),
+  propertyType: z.nativeEnum(PropertyTypeEnum, {
     required_error: 'Please select a property type!'
   }),
   propertyCategory: z.string({
@@ -51,8 +40,9 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     storedValue !== null
       ? JSON.parse(storedValue)
       : {
-          propertyFor: PropertyForEnum.SALE
-        }
+        propertyFor: PropertyForEnum.SALE,
+        propertyType: PropertyTypeEnum.RESIDENTIAL
+      }
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -70,10 +60,6 @@ const BasicDetailsForm = ({ onSave }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <TabRadioGroup name="propertyFor" options={categories} />
-
-        <InputElement name="email" placeholder="Please enter Email" label={'Email'} />
-
-        <InputElement name="name" placeholder="Please enter Advert Title" label={'Advert Title'} />
 
         <RadioGroupElement
           name="propertyType"

@@ -1,12 +1,14 @@
 import {
   CallPreferenceEnum,
   CommercialPropertyCategoryEnum,
+  CompletionStatusEnum,
   EmirateEnum,
   FurnishingStatusEnum,
   HoldingTypeEnum,
   OccupencyStatusEnum,
   PaymentIntervalsEnum,
   ProjectStatusesEnum,
+  PropertyCompletionStatusEnum,
   PropertyForEnum,
   PropertySubmissionStatusEnum,
   PropertyTypeEnum,
@@ -105,33 +107,45 @@ export const commercialTypes = [
 
 export const residentalTypes = [
   {
-    label: 'Apartment & Unit',
-    value: ResidentialPropertyCategoryEnum.APARTMENT_AND_UNIT
-  },
-  {
-    label: 'Villa',
-    value: ResidentialPropertyCategoryEnum.VILLA
-  },
-  {
-    label: 'Acreage',
-    value: ResidentialPropertyCategoryEnum.ACREAGE
-  },
-  {
-    label: 'Block of Units',
-    value: ResidentialPropertyCategoryEnum.BLOCK_OF_UNITS
-  },
-  {
-    label: 'House',
-    value: ResidentialPropertyCategoryEnum.HOUSE
+    label: 'Apartment',
+    value: ResidentialPropertyCategoryEnum.APARTMENT
   },
   {
     label: 'Townhouse',
     value: ResidentialPropertyCategoryEnum.TOWNHOUSE
   },
   {
-    label: 'Land',
-    value: ResidentialPropertyCategoryEnum.LAND
-  }
+    label: 'Villa',
+    value: ResidentialPropertyCategoryEnum.VILLA
+  },
+  {
+    label: 'Duplex',
+    value: ResidentialPropertyCategoryEnum.DUPLEX
+  },
+  {
+    label: 'Penthouse',
+    value: ResidentialPropertyCategoryEnum.PENTHOUSE
+  },
+  {
+    label: 'Residential Land',
+    value: ResidentialPropertyCategoryEnum.RESIDENTIAL_LAND
+  },
+  {
+    label: 'Villa Compound',
+    value: ResidentialPropertyCategoryEnum.VILLA_COMPOUND
+  },
+  {
+    label: 'Residential Full Building',
+    value: ResidentialPropertyCategoryEnum.RESIDENTIAL_FULL_BUILDING
+  },
+  {
+    label: 'Bulk Units',
+    value: ResidentialPropertyCategoryEnum.BULK_UNITS
+  },
+  {
+    label: 'Bungalow',
+    value: ResidentialPropertyCategoryEnum.BUNGALOW
+  },
 ]
 
 export const paymentIntervals = [
@@ -1742,7 +1756,7 @@ export const emiratesWithLocations = {
   ]
 }
 
-export const propertyTypes = [
+export const holdingTypes = [
   {
     label: 'Free Hold',
     value: HoldingTypeEnum.FREE_HOLD
@@ -1820,11 +1834,57 @@ export const amenities = [
   {
     label: 'Private Swimming Pool',
     value: '13'
+  }
+]
+
+export const propertyAmenities = [
+  {
+    label: 'Balcony/ Terrace',
+    value: '3'
   },
   {
-    label: 'Number of Parking Spaces',
-    value: '14'
+    label: 'Double Glazed Windows',
+    value: '4'
   },
+  {
+    label: 'Centrally Air-Conditioned',
+    value: '5'
+  },
+  {
+    label: 'Central Heating',
+    value: '6'
+  },
+  {
+    label: 'Electricity Backup',
+    value: '7'
+  },
+  {
+    label: 'Storage Areas',
+    value: '8'
+  },
+  {
+    label: 'Study Room',
+    value: '9'
+  },
+  {
+    label: 'Maid Room',
+    value: '10'
+  },
+  {
+    label: 'Driver Room',
+    value: '11'
+  },
+  {
+    label: 'Laundry Room',
+    value: '12'
+  },
+  {
+    label: 'Private Swimming Pool',
+    value: '13'
+  }
+]
+
+export const buildingAmenities = [
   {
     label: 'Recreation and Family',
     value: '15'
@@ -1924,7 +1984,10 @@ export const amenities = [
   {
     label: 'Cleaning and Maintenance',
     value: '39'
-  },
+  }
+]
+
+export const communityAmenities = [
   {
     label: 'ATM Facility',
     value: '40'
@@ -1944,22 +2007,6 @@ export const amenities = [
   {
     label: 'Nearby Shopping Malls',
     value: '44'
-  },
-  {
-    label: 'Distance from Airport',
-    value: '45'
-  },
-  {
-    label: 'Nearby Metro Station',
-    value: '46'
-  },
-  {
-    label: 'Other Nearby Places',
-    value: '47'
-  },
-  {
-    label: 'Other Main Features',
-    value: '48'
   }
 ]
 
@@ -1975,6 +2022,25 @@ export const projectStatuses = [
   {
     label: 'Shell & Core',
     value: ProjectStatusesEnum.SHELL_AND_CORE
+  }
+]
+
+export const completionStatuses = [
+  {
+    label: 'Ready Secondary',
+    value: PropertyCompletionStatusEnum.READY_SECONDARY
+  },
+  {
+    label: 'Off Plan Secondary',
+    value: PropertyCompletionStatusEnum.OFF_PLAN_SECONDARY
+  },
+  {
+    label: 'Ready Primary',
+    value: PropertyCompletionStatusEnum.READY_PRIMARY
+  },
+  {
+    label: 'Off Plan Primary',
+    value: PropertyCompletionStatusEnum.OFF_PLAN_PRIMARY
   }
 ]
 
