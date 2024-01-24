@@ -84,6 +84,18 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     const data = { ...values, image: values.image.toString() }
+    // @ts-ignore
+    data.documents = data.documents.filter(doc => {
+      if (!doc.url) {
+        return false;
+      }
+      return true;
+    }).flatMap(doc => {
+      if (Array.isArray(doc.url)) {
+        return doc.url.map(url => ({ type: doc.type, url }));
+      }
+      return [];
+    });
     handleSubmit(data)
   }
 

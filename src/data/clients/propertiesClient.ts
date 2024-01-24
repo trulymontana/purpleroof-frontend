@@ -61,6 +61,7 @@ export interface CreatePropertyInput {
   paymentInterval?: string
   minimumContract?: number
   lavatories?: string
+  documents: any
 }
 
 export interface Property extends CreatePropertyInput {
@@ -80,7 +81,6 @@ export interface Property extends CreatePropertyInput {
   emirateId: number
   id: number
   submissionStatus: PropertySubmissionStatusEnum
-  documents: any
   agentId?: number
   agent?: Agent
   location: {
