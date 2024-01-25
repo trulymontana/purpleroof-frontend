@@ -73,7 +73,7 @@ const Page = ({ params: { propertyId } }: Props) => {
                 <DialogContent className='min-h-[80vh] min-w-[80vw] bg-transparent'>
                   <Image
                     alt="Property Image"
-                    className="h-fit w-fit object-contain rounded-lg"
+                    className="h-fit w-fit object-cover rounded-lg"
                     src={photo?.name || '/placeholder.svg'}
                     layout='fill'
                     quality={100}
