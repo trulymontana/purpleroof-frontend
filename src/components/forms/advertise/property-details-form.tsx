@@ -13,14 +13,15 @@ import NumberInputElement from '@/components/forms/elements/number-input-element
 import SelectElement from '../elements/select-element'
 import { completionStatuses, furnishingStatuses } from '@/constants/advertise'
 import { FurnishingStatusEnum, PropertyCompletionStatusEnum } from '@/constants/enums'
+import { MAX_NUMBER } from '@/constants/api'
 
 const formSchema = z.object({
   size: z.number({
     required_error: 'Please enter a property size'
-  }),
-  numberOfBedRooms: z.number().optional(),
-  numberOfBathRooms: z.number().optional(),
-  parkingSpaces: z.number().optional(),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
+  numberOfBedRooms: z.number().max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
+  numberOfBathRooms: z.number().min(1, { message: "Number of bathrooms should be greater than 0" }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
+  parkingSpaces: z.number().max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
   completionStatus: z.nativeEnum(PropertyCompletionStatusEnum, {
     required_error: "Please select property completion status!"
   }),
@@ -57,7 +58,7 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
         <NumberInputElement name="size" placeholder="Please enter your property size" label={'Property Size (Sqft)'} />
 
         <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
-        <NumberInputElement name="numberOfBathRooms" min={1} label={'Number of Bath Rooms'} />
+        <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
 
         <NumberInputElement
           name="parkingSpaces"

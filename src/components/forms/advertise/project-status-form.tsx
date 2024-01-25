@@ -15,16 +15,17 @@ import { BackButton } from '@/components/navigation/back-button'
 import { PageRoutes } from '@/constants/page-routes'
 import { HoldingTypeEnum, OccupencyStatusEnum, ProjectStatusesEnum } from '@/constants/enums'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
+import { MAX_NUMBER } from '@/constants/api'
 
 const formSchema = z.object({
   projectStatus: z.nativeEnum(ProjectStatusesEnum, {
     required_error: "Please select a project status"
   }),
   occupencyStatus: z.nativeEnum(OccupencyStatusEnum).optional(),
-  rentalAmount: z.number().optional(),
-  numberOfCheques: z.number().optional(),
-  noticePeriodRent: z.number().optional(),
-  noticePeriodProperty: z.number().optional(),
+  rentalAmount: z.number().max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
+  numberOfCheques: z.number().max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
+  noticePeriodRent: z.number().max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
+  noticePeriodProperty: z.number().max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
   completionDate: z.date().optional(),
   holdingType: z.nativeEnum(HoldingTypeEnum, {
     required_error: 'Please select a holding type!'

@@ -14,23 +14,24 @@ import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 import { FurnishingStatusEnum, PaymentIntervalsEnum, PropertyCompletionStatusEnum } from '@/constants/enums'
+import { MAX_NUMBER } from '@/constants/api'
 
 const formSchema = z.object({
   rentalAmount: z.number({
     required_error: 'Please enter a rental amount'
-  }),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
   paymentInterval: z.nativeEnum(PaymentIntervalsEnum, {
     required_error: 'Please select a payment interval'
   }),
   size: z.number({
     required_error: 'Please enter a property size!'
-  }),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
   minimumContract: z.number({
     required_error: 'Please enter a minimum contract period!'
   }),
-  numberOfBedRooms: z.string().optional(),
-  numberOfBathRooms: z.string().optional(),
-  parkingSpaces: z.number().optional(),
+  numberOfBedRooms: z.string().max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
+  numberOfBathRooms: z.string().min(1, { message: "Number of bathrooms should be greater than 0" }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
+  parkingSpaces: z.number().max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
   completionStatus: z.nativeEnum(PropertyCompletionStatusEnum, {
     required_error: "Please select property completion status!"
   }),

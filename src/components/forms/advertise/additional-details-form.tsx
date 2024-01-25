@@ -12,11 +12,12 @@ import { PageRoutes } from '@/constants/page-routes'
 import { BackButton } from '@/components/navigation/back-button'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 import TextAreaElement from '@/components/forms/elements/text-area-element'
+import { MAX_NUMBER } from '@/constants/api'
 
 const formSchema = z.object({
   layoutType: z.string().optional(),
-  amount: z.number().optional(),
-  serviceCharges: z.number().optional(),
+  amount: z.number().max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
+  serviceCharges: z.number().max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
   name: z.string({
     required_error: 'Title should not be empty!'
   }).refine((i) => i.length <= 50, {

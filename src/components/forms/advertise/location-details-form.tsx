@@ -17,6 +17,7 @@ import NumberInputElement from '@/components/forms/elements/number-input-element
 import MapComponent from '@/components/MapPicker'
 import { useGetLocations } from '@/data/hooks/useLocationsClient'
 import { EmirateEnum } from '@/constants/enums'
+import { MAX_NUMBER } from '@/constants/api'
 
 const formSchema = z.object({
   emirate: z.nativeEnum(EmirateEnum, {
@@ -28,9 +29,9 @@ const formSchema = z.object({
   cityName: z.string().optional(),
   communityName: z.string().optional(),
   buildingName: z.string().optional(),
-  floor: z.number().optional(),
+  floor: z.number().max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
   street: z.string().optional(),
-  unitNumber: z.number().optional(),
+  unitNumber: z.number().max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }).optional(),
   landmark: z.string().optional(),
   lat: z
     .number({

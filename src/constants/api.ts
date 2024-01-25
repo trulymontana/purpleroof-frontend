@@ -20,3 +20,5 @@ export const ApiEndpoints = {
   FORGOT_PASSWORD: API_ROOT + '/auth/forgot-password',
   RESET_PASSWORD: API_ROOT + '/auth/reset-password'
 }
+
+export const MAX_NUMBER = 999999999;
