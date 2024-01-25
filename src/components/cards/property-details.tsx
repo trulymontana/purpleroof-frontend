@@ -115,7 +115,7 @@ const PropertyDetailsCard = ({ data }: Props) => {
             </h3>
             <div className="custom_card_details">
               <CardField label='Layout Type' value={formatString(data?.layoutType)} />
-              <CardField label='Service Charges' value={currency.format(data?.serviceCharges)} />
+              <CardField label='Service Charges' value={data?.serviceCharges} />
               <CardField label='Distance From Airport(in kms)' value={formatString(data?.airportDistance)} />
               <CardField label='Nearest Metro Station Distance(in kms)' value={formatString(data?.metroStation)} />
               <CardField label='Nearby Places' value={formatString(data?.nearbyPlaces)} />
