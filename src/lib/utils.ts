@@ -20,3 +20,10 @@ export function nullCheckAndMerge(result: any, jsonString: string | null) {
 export const getValuesFrom = (arr: TOption[]) => {
   return arr.map((item) => item.value)
 }
+
+export const formatString = (str: string) => {
+  if (str) {
+    return str.toLocaleLowerCase().replaceAll('_', ' ')
+  }
+  return '-'
+}
