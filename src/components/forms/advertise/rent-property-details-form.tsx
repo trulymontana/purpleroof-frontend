@@ -76,13 +76,13 @@ const RentPropertyDetailsForm = ({ onSave }: Props) => {
           label={'Minimum Contract (in months)'}
         />
 
-        <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms (optional)'} />
-        <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms (optional)'} />
+        <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
+        <NumberInputElement name="numberOfBathRooms" label={'Number of Bath Rooms'} />
 
         <NumberInputElement
           name="parkingSpaces"
           placeholder="Please enter parking spaces"
-          label={'Number of Parking Spaces (optional)'}
+          label={'Number of Parking Spaces'}
         />
 
         <SelectElement name="completionStatus" label="Completion Status" placeholder='Please select completion status' options={completionStatuses} />

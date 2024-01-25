@@ -51,23 +51,23 @@ const AdditionalDetailsForm = ({ onSave }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
 
-        <InputElement name="layoutType" label={'Layout Type (optional)'} placeholder='Please enter your layout type' />
+        <InputElement name="layoutType" label={'Layout Type'} placeholder='Please enter your layout type' />
 
         <NumberInputElement
           name="amount"
           placeholder="Please enter your property value"
-          label={'Property Value (AED) (optional)'}
+          label={'Property Value (AED)'}
         />
 
         <NumberInputElement
           name="serviceCharges"
           placeholder="Please enter service charges"
-          label={'Service Charges (optional)'}
+          label={'Service Charges'}
         />
 
-        <InputElement name="name" placeholder="Please enter Advert Title (max 50 characters)" label={'Advertisement Title'} />
+        <InputElement name="name" placeholder="Please enter Advert Title" label={'Advertisement Title  (max 50 characters)'} />
 
-        <TextAreaElement name="description" label="Description" placeholder="Enter description of property here... (max 1000 characters)" />
+        <TextAreaElement name="description" label="Description (max 1000 characters)" placeholder="Enter description of property here..." />
 
         <Button type="submit" className="w-full">
           Save and Continue

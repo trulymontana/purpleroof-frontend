@@ -104,10 +104,10 @@ const UploadDocumentsForm = ({ handleSubmit, isLoading }: Props) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4 p-4">
         <FileUploader folder="advertise" name="image" label={'Banner Image of the Property'} form={form} isMultiple={false} />
         <FileUploader folder="advertise" name="photos" label={'Additional Photos of the Property (min: 8, max: 30)'} form={form} />
-        <FileUploader folder="advertise" name="documents[0].url" label={'Passport Copy (optional)'} form={form} />
-        <FileUploader folder="advertise" name="documents[1].url" label={'Visa Copy (optional)'} form={form} />
-        <FileUploader folder="advertise" name="documents[2].url" label={'Emirates ID (optional)'} form={form} />
-        <FileUploader folder="advertise" name="documents[3].url" label={'Title Deed Copy (optional)'} form={form} />
+        <FileUploader folder="advertise" name="documents[0].url" label={'Passport Copy'} form={form} />
+        <FileUploader folder="advertise" name="documents[1].url" label={'Visa Copy'} form={form} />
+        <FileUploader folder="advertise" name="documents[2].url" label={'Emirates ID'} form={form} />
+        <FileUploader folder="advertise" name="documents[3].url" label={'Title Deed Copy'} form={form} />
         {callPreference === CallPreferenceEnum.PERSONAL && (<FileUploader folder="advertise" name="documents[4].url" label={'Mobile Bill Copy'} form={form} />)}
         <InputElement name="email" placeholder="Please enter Email" label={callPreference === CallPreferenceEnum.PURPLEROOF ? 'Email (registered with land department)' : 'Email'} />
         <PhoneNumberInputElement name="phone" label={callPreference === CallPreferenceEnum.PURPLEROOF ? 'Phone Number (registered with land department)' : 'Phone Number'} />

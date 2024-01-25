@@ -96,24 +96,24 @@ const LocationDetailsForm = ({ onSave }: Props) => {
         {location === 'other' && <InputElement
           name="cityName"
           placeholder="Please enter your city name"
-          label={'City Name (optional)'}
+          label={'City Name'}
         />}
 
         <InputElement
           name="communityName"
           placeholder="Please enter your community name"
-          label={'Community Name (optional)'}
+          label={'Community Name'}
         />
 
         <InputElement
           name="buildingName"
           placeholder="Please enter your building name"
-          label={'Building / Cluster Name (optional)'}
+          label={'Building / Cluster Name'}
         />
-        <NumberInputElement name="floor" placeholder="Please enter your floor" label={'Floor (optional)'} />
-        <InputElement name="street" placeholder="Please enter your street name" label={'Street (optional)'} />
-        <NumberInputElement name="unitNumber" placeholder="Please enter your unit number" label={'Unit Number (optional)'} />
-        <InputElement name="landmark" placeholder="Please enter a landmark" label={'Nearest Landmark (optional)'} />
+        <NumberInputElement name="floor" placeholder="Please enter your floor" label={'Floor'} />
+        <InputElement name="street" placeholder="Please enter your street name" label={'Street'} />
+        <NumberInputElement name="unitNumber" placeholder="Please enter your unit number" label={'Unit Number'} />
+        <InputElement name="landmark" placeholder="Please enter a landmark" label={'Nearest Landmark'} />
 
         <Button type="submit" className="w-full">
           Save and Continue

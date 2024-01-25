@@ -56,13 +56,13 @@ const PropertyDetailsForm = ({ onSave }: Props) => {
 
         <NumberInputElement name="size" placeholder="Please enter your property size" label={'Property Size (Sqft)'} />
 
-        <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms (optional)'} />
-        <NumberInputElement name="numberOfBathRooms" min={1} label={'Number of Bath Rooms (optional)'} />
+        <NumberInputElement name="numberOfBedRooms" label={'Number of Bed Rooms'} />
+        <NumberInputElement name="numberOfBathRooms" min={1} label={'Number of Bath Rooms'} />
 
         <NumberInputElement
           name="parkingSpaces"
           placeholder="Please enter parking spaces"
-          label={'Number of Parking Spaces (optional)'}
+          label={'Number of Parking Spaces'}
         />
 
         <SelectElement name="completionStatus" label="Completion Status" options={completionStatuses} placeholder='Please select completion status' />
