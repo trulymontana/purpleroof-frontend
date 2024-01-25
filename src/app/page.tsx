@@ -16,7 +16,7 @@ export default function Home() {
 
   // return null
 
-  return <MapComponent onSelectLocation={() => console.log('test')} />
+  // return <MapComponent onSelectLocation={() => console.log('test')} />
 
   return (
     <section className="overflow-x-hidden">
