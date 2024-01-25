@@ -7,8 +7,7 @@ import RequiredDocumentsCards from '@/components/cards/required-documents'
 import PropertyDetailsCard from '@/components/cards/property-details'
 import ContactAgentCard from '@/components/cards/contact-agent'
 import AmenitiesCard from '@/components/cards/amenities'
-import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 
 interface Props {
   params: { propertyId: number }
