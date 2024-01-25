@@ -74,8 +74,7 @@ const PropertyCard = ({ property }: Props) => {
           )}
         </div>
         <p className="line-clamp-3 text-sm">
-          This stylish apartment is located in the heart of the city, close to shopping centers, restaurants, and parks.
-          It&apos;s perfect for anyone looking to experience the city life.
+          {property?.description}
         </p>
       </CardContent>
       <CardFooter className="p-4">

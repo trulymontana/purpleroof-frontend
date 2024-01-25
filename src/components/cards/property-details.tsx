@@ -76,6 +76,8 @@ const PropertyDetailsCard = ({ data }: Props) => {
             <div className="custom_card_details">
               <CardField label='Emirate' value={formatString(data?.emirate)} />
               <CardField label='Location' value={formatString(data?.location?.name)} />
+              {data?.cityName && <CardField label='City' value={formatString(data?.cityName)} />}
+              <CardField label='Community Name' value={formatString(data?.communityName)} />
               <CardField label='Building Name' value={formatString(data?.buildingName)} />
               <CardField label='Floor' value={data?.floor} />
               <CardField label='Street' value={formatString(data?.street)} />

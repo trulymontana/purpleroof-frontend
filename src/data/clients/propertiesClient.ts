@@ -62,6 +62,8 @@ export interface CreatePropertyInput {
   minimumContract?: number
   lavatories?: string
   documents: any
+  cityName?: string
+  communityName?: string
 }
 
 export interface Property extends CreatePropertyInput {

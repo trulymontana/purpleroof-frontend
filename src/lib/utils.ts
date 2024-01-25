@@ -21,7 +21,7 @@ export const getValuesFrom = (arr: TOption[]) => {
   return arr.map((item) => item.value)
 }
 
-export const formatString = (str: string) => {
+export const formatString = (str: string | undefined) => {
   if (str) {
     return str.toLocaleLowerCase().replaceAll('_', ' ')
   }
