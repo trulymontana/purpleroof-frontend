@@ -8,9 +8,10 @@ interface Props {
   label?: string
   description?: string
   placeholder?: string
+  min?: number
 }
 
-const NumberInputElement = ({ name, label, description, placeholder }: Props) => {
+const NumberInputElement = ({ name, label, description, placeholder, min = 0 }: Props) => {
   const { control } = useFormContext()
 
   return (
@@ -22,7 +23,7 @@ const NumberInputElement = ({ name, label, description, placeholder }: Props) =>
           {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
             <Input
-              min={0}
+              min={min}
               type="number"
               placeholder={placeholder}
               {...field}
