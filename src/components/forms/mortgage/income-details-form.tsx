@@ -14,6 +14,7 @@ import { BackButton } from '@/components/navigation/back-button'
 import { loanTypeOptions } from '@/constants/mortgage'
 import NumberInputElement from '@/components/forms/elements/number-input-element'
 import { LoanTypeEnum } from '@/constants/enums'
+import { MAX_NUMBER } from '@/constants/api'
 
 const formSchema = z.object({
   country: z.string({
@@ -24,10 +25,10 @@ const formSchema = z.object({
   }),
   valueOfProperty: z.number({
     required_error: 'Please enter value of your property'
-  }),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
   monthlyIncome: z.number({
     required_error: 'Please enter your montly income'
-  }),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
   loanType: z.nativeEnum(LoanTypeEnum, {
     required_error: 'Please select a loan type'
   })

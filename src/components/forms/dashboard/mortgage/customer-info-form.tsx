@@ -19,6 +19,7 @@ import { useRouter } from 'next/navigation'
 import { Mortgage } from '@/data/clients/mortgageClient'
 import { useEffect } from 'react'
 import { EducationEnum, MaritalStatusEnum, RelationshipEnum } from '@/constants/enums'
+import { MAX_NUMBER } from '@/constants/api'
 
 const formSchema = z.object({
   firstName: z.string({
@@ -48,13 +49,13 @@ const formSchema = z.object({
   }),
   familyMembersInUae: z.number({
     required_error: 'Please enter your number of family member in UAE'
-  }),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
   yearsInUae: z.number({
     required_error: 'Please enter your number years in UAE'
-  }),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
   annualRentalIncome: z.number({
     required_error: 'Please enter your annual rental income'
-  }),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
   uaeResidenceAddress: z
     .string({
       required_error: 'Please enter your UAE residence address'

@@ -34,6 +34,7 @@ import {
 } from '@/constants/enums'
 import { Button } from '@/components/ui/button'
 import { useUpdateMortgageMutation } from '@/data/hooks/useMortgageClient'
+import { MAX_NUMBER } from '@/constants/api'
 
 const formSchema = z.object({
   firstName: z.string().min(2, {
@@ -56,7 +57,7 @@ const formSchema = z.object({
     }),
   valueOfProperty: z.number({
     required_error: 'Please enter value of your property'
-  }),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
   incomeProfile: z.nativeEnum(IncomeProfileEnum, {
     required_error: 'Please select an income profile.'
   }),
@@ -86,13 +87,13 @@ const formSchema = z.object({
   }),
   familyMembersInUae: z.number({
     required_error: 'Please enter your number of family member in UAE'
-  }),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
   yearsInUae: z.number({
     required_error: 'Please enter your number years in UAE'
-  }),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
   annualRentalIncome: z.number({
     required_error: 'Please enter your annual rental income'
-  }),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
   uaeResidenceAddress: z
     .string({
       required_error: 'Please enter your UAE residence address'
@@ -107,7 +108,7 @@ const formSchema = z.object({
   }),
   monthlyIncome: z.number({
     required_error: 'Please enter your montly income'
-  }),
+  }).max(MAX_NUMBER, { message: `Value should be less than or equal to ${MAX_NUMBER}` }),
   educationType: z.nativeEnum(EducationEnum, {
     required_error: 'Please select your education qualification'
   })
