@@ -22,7 +22,9 @@ const formSchema = z.object({
   }).refine((i) => i.length <= 50, {
     message: "Your advertisement title cannot be more than 50 characters",
   }),
-  description: z.string().refine((val) => val && val?.length <= 1000).optional(),
+  description: z.string().refine((val) => val && val?.length <= 1000, {
+    message: "Description cannot not be more than 1000 characters"
+  }).optional(),
 })
 
 interface Props {
