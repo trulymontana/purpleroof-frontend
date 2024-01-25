@@ -7,7 +7,7 @@ import RequiredDocumentsCards from '@/components/cards/required-documents'
 import PropertyDetailsCard from '@/components/cards/property-details'
 import ContactAgentCard from '@/components/cards/contact-agent'
 import AmenitiesCard from '@/components/cards/amenities'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTrigger } from '@/components/ui/dialog'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 
 interface Props {
@@ -27,32 +27,65 @@ const Page = ({ params: { propertyId } }: Props) => {
 
   return (
     <>
-      <section className="cursor-pointer mx-2 overflow-x-hidden min-w-screen h-[500px] w-fit flex p-3 gap-2 border-2 rounded-xl my-4">
-        <div className='w-3/4'>
-          <Image
-            alt="Property Image"
-            className="h-full w-full object-cover rounded-lg hover:border-2 border-primary"
-            height="1000"
-            src={data?.image || '/placeholder.svg'}
-            width="1000"
-            priority
-            quality={100}
-          />
-        </div>
-        <div className='w-1/4 flex flex-col gap-2 overflow-y-scroll'>
-          {data?.photos.map((photo: any, i: number) => (
-            <Image
-              key={i}
-              alt="Property Image"
-              className="h-full w-full object-cover rounded-lg hover:border-2 border-primary"
-              src={photo?.name || '/placeholder.svg'}
-              height="300"
-              width="500"
-              quality={100}
-            />
-          ))}
-        </div>
-      </section>
+      <Dialog>
+        <DialogTrigger asChild>
+          <section className="cursor-pointer mx-2 overflow-x-hidden min-w-screen h-[500px] w-fit flex p-3 gap-2 border-2 rounded-xl my-4">
+            <div className='w-3/4'>
+              <Image
+                alt="Property Image"
+                className="h-full w-full object-cover rounded-lg hover:border-2 border-primary"
+                height="1000"
+                src={data?.image || '/placeholder.svg'}
+                width="1000"
+                priority
+                quality={100}
+              />
+            </div>
+            <div className='w-1/4 flex flex-col gap-2 overflow-y-scroll'>
+              {data?.photos.map((photo: any, i: number) => (
+                <Image
+                  key={i}
+                  alt="Property Image"
+                  className="h-full w-full object-cover rounded-lg hover:border-2 border-primary"
+                  src={photo?.name || '/placeholder.svg'}
+                  height="300"
+                  width="500"
+                  quality={100}
+                />
+              ))}
+            </div>
+          </section>
+        </DialogTrigger>
+        <DialogContent className='min-w-[60vw]'>
+          <div className='w-full grid grid-cols-3 gap-5 h-fit overflow-y-scroll'>
+            {data?.photos.map((photo: any, i: number) => (
+              <Dialog key={i}>
+                <DialogTrigger asChild>
+                  <Image
+                    alt="Property Image"
+                    className="h-full w-full object-contain rounded-lg cursor-pointer hover:border-2 border-primary"
+                    src={photo?.name || '/placeholder.svg'}
+                    height="500"
+                    width="500"
+                    quality={100}
+                  />
+                </DialogTrigger>
+                <DialogContent className='min-h-[80vh] min-w-[80vw] bg-transparent'>
+                  <Image
+                    alt="Property Image"
+                    className="h-fit w-fit object-contain rounded-lg"
+                    src={photo?.name || '/placeholder.svg'}
+                    layout='fill'
+                    quality={100}
+                    priority
+                  />
+                </DialogContent>
+              </Dialog>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog >
+
       <div className="w-full">
         <div className="mx-auto flex flex-col md:flex-row max-w-[90rem] items-start gap-8 p-6">
           {data && (
