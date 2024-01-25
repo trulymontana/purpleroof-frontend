@@ -22,6 +22,7 @@ const NumberInputElement = ({ name, label, description, placeholder }: Props) =>
           {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
             <Input
+              min={0}
               type="number"
               placeholder={placeholder}
               {...field}
