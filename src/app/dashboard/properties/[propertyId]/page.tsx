@@ -26,12 +26,12 @@ const Page = ({ params: { propertyId } }: Props) => {
   }
 
   return (
-    <div className=''>
+    <>
       <section className="cursor-pointer mx-2 overflow-x-hidden min-w-screen h-[500px] w-fit flex p-3 gap-2 border-2 rounded-xl my-4">
         <div className='w-3/4'>
           <Image
             alt="Property Image"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover rounded-lg hover:border-2 border-primary"
             height="1000"
             src={data?.image || '/placeholder.svg'}
             width="1000"
@@ -44,7 +44,7 @@ const Page = ({ params: { propertyId } }: Props) => {
             <Image
               key={i}
               alt="Property Image"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover rounded-lg hover:border-2 border-primary"
               src={photo?.name || '/placeholder.svg'}
               height="300"
               width="500"
@@ -68,7 +68,7 @@ const Page = ({ params: { propertyId } }: Props) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
