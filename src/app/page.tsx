@@ -1,5 +1,6 @@
 'use client'
 
+import MapComponent from '@/components/MapPicker'
 import { Button } from '@/components/ui/button'
 import { otherLinks } from '@/constants/navigation'
 import { PageRoutes } from '@/constants/page-routes'
@@ -14,6 +15,8 @@ export default function Home() {
   // }, [])
 
   // return null
+
+  // return <MapComponent onSelectLocation={() => console.log('test')} />
 
   return (
     <section className="overflow-x-hidden">

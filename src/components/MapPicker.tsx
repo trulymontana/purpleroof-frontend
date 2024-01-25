@@ -18,7 +18,7 @@ interface MapComponentProps {
 const MapComponent = ({ onSelectLocation }: MapComponentProps) => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLEMAPS_API_KEY || ''
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLEMAPS_API_KEY || 'AIzaSyDOvnHvhZFkaxYAmvxjLMWiS9JGLu-hV-I'
   })
 
   const [markerLocation, setMarkerLocation] = useState<Location>()

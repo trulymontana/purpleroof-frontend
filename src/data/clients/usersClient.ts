@@ -1,6 +1,5 @@
 import { QueryOptions, User } from '@/constants/types'
 import { crudFactory } from '@/lib/crud-factory'
-
 import { ApiEndpoints } from '@/constants/api'
 import HttpClient from '@/lib/http-client'
 import { Agent } from './agentsClient'
