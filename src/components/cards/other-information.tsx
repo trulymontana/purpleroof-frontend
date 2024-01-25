@@ -8,7 +8,7 @@ const OtherInformationCard = ({ data }: Props) => {
   return (
     <div className="custom_card">
       <div className="w-full">
-        <h3 className="my-2 flex items-center gap-2 text-3xl font-semibold text-primary">
+        <h3 className="custom_card_heading">
           <GanttChartSquare className="font-semibold" /> Other Information
         </h3>
         <div className="custom_card_details">
