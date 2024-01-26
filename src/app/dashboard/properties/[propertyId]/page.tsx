@@ -28,7 +28,7 @@ const Page = ({ params: { propertyId } }: Props) => {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <section className="cursor-pointer mx-2 overflow-x-hidden min-w-screen h-[500px] w-fit flex p-3 gap-2 border-2 rounded-xl my-4">
+          <section className="cursor-pointer overflow-x-hidden min-w-screen h-[500px] w-fit flex p-3 gap-2 border-2 rounded-xl my-4 mx-auto">
             <div className='w-3/4'>
               <Image
                 alt="Property Image"
