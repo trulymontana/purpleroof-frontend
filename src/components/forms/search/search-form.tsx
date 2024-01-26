@@ -44,8 +44,8 @@ const formSchema = z.object({
   emirates: z.any().optional(),
   locations: z.any().optional(),
   propertyCategories: z.any().optional(),
-  bed: z.number().optional(),
-  bath: z.number().optional(),
+  numberOfBedRooms: z.number().optional(),
+  numberOfBathRooms: z.number().optional(),
   amenities: z.any().optional(),
   minPrice: z.number().optional(),
   maxPrice: z.number().optional()
@@ -86,7 +86,6 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
   }
 
   const propertyTypes = form.watch('propertyTypes')
-  const propertyCategory = form.watch('propertyCategories')
 
   return (
     <Form {...form}>
@@ -115,7 +114,7 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
             <div className="w-full flex-1 xl:w-fit">
               <MultiSelectElement
                 name="propertyCategories"
-                options={propertyCategory === PropertyTypeEnum.RESIDENTIAL ? residentalTypes : commercialTypes}
+                options={propertyTypes === PropertyTypeEnum.RESIDENTIAL ? residentalTypes : commercialTypes}
                 placeholder="Please select a Property Category"
               />
             </div>
@@ -124,10 +123,10 @@ const SearchForm = ({ searchProperties, isLoading }: Props) => {
             {propertyTypes === PropertyTypeEnum.RESIDENTIAL && (
               <>
                 <div className="w-full lg:w-[10%]">
-                  <NumberInputElement name="bed" placeholder="No. of Bedrooms" />
+                  <NumberInputElement name="numberOfBedRooms" placeholder="No. of Bedrooms" />
                 </div>
                 <div className="w-full lg:w-[10%]">
-                  <NumberInputElement name="bath" placeholder="No. of Bathrooms" />
+                  <NumberInputElement name="numberOfBathRooms" placeholder="No. of Bathrooms" />
                 </div>
                 <div className="w-full lg:flex-1">
                   <MultiSelectElement name="amenities" placeholder="Select Amenities" options={amenities} />
