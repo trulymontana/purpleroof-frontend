@@ -26,7 +26,7 @@ const PropertyDetailsCard = ({ data }: Props) => {
               {data?.paymentInterval && data?.paymentInterval}
             </h1>
           )}
-          <p className="my-2 text-xl capitalize ">{data?.name}</p>
+          <p className="my-2 text-xl capitalize">{data?.name}</p>
           <div className="my-4 flex items-center space-x-4">
             {data?.numberOfBathRooms && data?.numberOfBathRooms && (
               <>
