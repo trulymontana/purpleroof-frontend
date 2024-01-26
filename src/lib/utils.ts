@@ -22,8 +22,8 @@ export const getValuesFrom = (arr: TOption[]) => {
 }
 
 export const formatString = (str: string | undefined) => {
-  if (str) {
-    return str.toLocaleLowerCase().replaceAll('_', ' ')
+  if (str && typeof str === 'string') {
+    return str?.toLocaleLowerCase().replaceAll('_', ' ')
   }
   return '-'
 }
