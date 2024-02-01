@@ -11,14 +11,14 @@ import { PageRoutes } from '@/constants/page-routes'
 const Header = () => {
   return (
     <nav className="flex items-center justify-between bg-primary/90 p-5">
-      <Link href={otherLinks.PURPLEROOF} className="flex items-center space-x-2">
+      <Link href={otherLinks.PURPLEROOF} className="flex items-center space-x-1">
         <Image
-          src={'/assets/logos/logo-only-white.png'}
+          src={'/assets/logos/logo.png'}
           quality={100}
           width={1000}
           height={1000}
           alt=""
-          className="h-6 w-auto"
+          className="h-9 w-auto"
         />
         <span className="font-bold uppercase text-white">Sire Finance</span>
       </Link>

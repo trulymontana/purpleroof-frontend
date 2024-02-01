@@ -9,6 +9,7 @@ import { UserRoleEnum } from '@/constants/enums'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '../ui/sheet'
 import { usePathname } from 'next/navigation'
 import { otherLinks } from '@/constants/navigation'
+import Image from 'next/image'
 
 const ICON_SIZE = 20
 
@@ -54,9 +55,8 @@ const NavigationLink = ({ link, title, icon }: NavigationLinkProps) => {
   const pathName = usePathname()
   return (
     <Link
-      className={`flex items-center rounded-lg py-2 ${
-        link === pathName ? 'text-primary' : 'text-gray-900'
-      } gap-2 text-base transition-all hover:text-primary dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`}
+      className={`flex items-center rounded-lg py-2 ${link === pathName ? 'text-primary' : 'text-gray-900'
+        } gap-2 text-base transition-all hover:text-primary dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50`}
       href={link}
     >
       <span className={'w-5'}>{icon}</span>
@@ -70,7 +70,14 @@ export default function NavBar({ user }: { user: User }) {
     <div className="flex w-full items-center justify-between gap-2 bg-primary/20 px-5 py-4 dark:bg-gray-800/40 xl:px-16">
       <div className="flex w-full items-center justify-between gap-2 font-semibold ">
         <Link href={otherLinks.PURPLEROOF} className="flex items-center gap-2 font-semibold text-primary">
-          <Home />
+          <Image
+            src={'/assets/logos/logo.png'}
+            quality={100}
+            width={1000}
+            height={1000}
+            alt=""
+            className="h-9 w-auto"
+          />
           <span>Sire Finance</span>
         </Link>
         <nav className="hidden items-center gap-10 text-sm font-medium text-primary xl:flex">
