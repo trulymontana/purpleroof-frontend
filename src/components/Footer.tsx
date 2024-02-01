@@ -3,6 +3,7 @@ import { Button } from './ui/button'
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react'
 import { headerLinks, otherLinks, requirements, services, socialLinks } from '@/constants/navigation'
 import Link from 'next/link'
+import BackgroundEffect from './BackgroundEffect'
 
 const Footer = () => {
   return (
@@ -11,9 +12,10 @@ const Footer = () => {
       <div
         className="t-0 absolute top-0 -z-10 h-full w-full opacity-75"
         style={{
-          background: 'linear-gradient(to bottom, #795695 30%, #795695 70%)'
+          background: 'linear-gradient(to bottom, #4D6842 30%, #4D6842 70%)'
         }}
       ></div>
+      {/* <BackgroundEffect /> */}
       <div className="z-10 mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div>
@@ -26,6 +28,11 @@ const Footer = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/" className="text-white hover:text-gray-300">
+                  Blog
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
@@ -95,14 +102,13 @@ const Footer = () => {
               </Link>
               <span className="mx-3 hover:text-gray-300">|</span>
               <Link href={otherLinks.BENEFITS_OF_HOME_LOAN} className="hover:text-gray-300">
-                Benefits of Purple Roof Home Loan
+                Benefits of Sire Finance Home Loan
               </Link>
             </div>
             <div>
-              <p>© 2023 Purple Roof, Inc. All rights reserved.</p>
+              <p>© 2023 Sire Finance, Inc. All rights reserved.</p>
               <p>
-                Purple Roof are the property and mortgage experts. Rely on us for free property advertising and search,
-                and for expert mortgage services.
+                Sire Finance are mortgage experts. Rely on us for expert mortgage services.
               </p>
             </div>
           </div>

@@ -14,26 +14,26 @@ import NavBar from '@/components/navigation/dashboard-nav-bar'
 
 const roleToPageMapping = {
   [UserRoleEnum.SUPER_ADMIN]: [
-    PageRoutes.admin.AGENTS,
+    // PageRoutes.admin.AGENTS,
     PageRoutes.admin.USERS,
     PageRoutes.admin.REQUIREMENTS,
     PageRoutes.dashboard.PROFILE,
     PageRoutes.dashboard.MORTGAGES,
-    PageRoutes.dashboard.PROPERTIES
+    // PageRoutes.dashboard.PROPERTIES
   ],
   [UserRoleEnum.ADMIN]: [
-    PageRoutes.admin.AGENTS,
+    // PageRoutes.admin.AGENTS,
     PageRoutes.admin.USERS,
     PageRoutes.admin.REQUIREMENTS,
     PageRoutes.dashboard.PROFILE,
     PageRoutes.dashboard.MORTGAGES,
-    PageRoutes.dashboard.PROPERTIES
+    // PageRoutes.dashboard.PROPERTIES
   ],
   [UserRoleEnum.GENERAL_USER]: [
     PageRoutes.dashboard.MORTGAGES,
-    PageRoutes.dashboard.PROPERTIES,
+    // PageRoutes.dashboard.PROPERTIES,
     PageRoutes.dashboard.PROFILE,
-    PageRoutes.admin.REQUIREMENTS
+    // PageRoutes.admin.REQUIREMENTS
   ],
   [UserRoleEnum.AGENT]: [PageRoutes.dashboard.MORTGAGES, PageRoutes.dashboard.PROPERTIES, PageRoutes.dashboard.PROFILE]
 }

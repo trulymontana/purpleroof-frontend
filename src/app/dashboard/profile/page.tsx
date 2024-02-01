@@ -122,7 +122,7 @@ const Page = () => {
               <Label htmlFor="role">Role</Label>
               <Input disabled id="role" value={role.toLocaleLowerCase()} />
             </div>
-            <div className="mt-6 flex items-center justify-between">
+            {/* <div className="mt-6 flex items-center justify-between">
               {role === UserRoleEnum.GENERAL_USER && !agentApplicationDetails && (
                 <Dialog>
                   <DialogTrigger asChild>
@@ -166,11 +166,11 @@ const Page = () => {
                   </DialogContent>
                 </Dialog>
               )}
-            </div>
+            </div> */}
           </CardContent>
         </Card>
 
-        {agentApplicationDetails && (
+        {/* {agentApplicationDetails && (
           <Card className="w-1/4 rounded-xl bg-white shadow-md">
             <CardHeader>
               <CardTitle className="text-primary">Agent Details</CardTitle>
@@ -203,7 +203,7 @@ const Page = () => {
               </div>
             </CardContent>
           </Card>
-        )}
+        )} */}
       </div>
     </div>
   )

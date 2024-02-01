@@ -19,18 +19,18 @@ const navigationItems = [
     icon: <FileCode size={ICON_SIZE} />,
     roles: [UserRoleEnum.ADMIN, UserRoleEnum.GENERAL_USER, UserRoleEnum.SUPER_ADMIN, UserRoleEnum.AGENT]
   },
-  {
-    title: 'Properties',
-    link: PageRoutes.dashboard.PROPERTIES,
-    icon: <Building size={ICON_SIZE} />,
-    roles: [UserRoleEnum.ADMIN, UserRoleEnum.GENERAL_USER, UserRoleEnum.SUPER_ADMIN, UserRoleEnum.AGENT]
-  },
-  {
-    title: 'Agents',
-    link: PageRoutes.dashboard.admin.AGENTS,
-    icon: <PersonStandingIcon size={ICON_SIZE} />,
-    roles: [UserRoleEnum.ADMIN, UserRoleEnum.SUPER_ADMIN]
-  },
+  // {
+  //   title: 'Properties',
+  //   link: PageRoutes.dashboard.PROPERTIES,
+  //   icon: <Building size={ICON_SIZE} />,
+  //   roles: [UserRoleEnum.ADMIN, UserRoleEnum.GENERAL_USER, UserRoleEnum.SUPER_ADMIN, UserRoleEnum.AGENT]
+  // },
+  // {
+  //   title: 'Agents',
+  //   link: PageRoutes.dashboard.admin.AGENTS,
+  //   icon: <PersonStandingIcon size={ICON_SIZE} />,
+  //   roles: [UserRoleEnum.ADMIN, UserRoleEnum.SUPER_ADMIN]
+  // },
   {
     title: 'Users',
     link: PageRoutes.dashboard.admin.USERS,
@@ -67,11 +67,11 @@ const NavigationLink = ({ link, title, icon }: NavigationLinkProps) => {
 
 export default function NavBar({ user }: { user: User }) {
   return (
-    <div className="flex w-full items-center justify-between gap-2 bg-gray-300/40 px-5 py-4 dark:bg-gray-800/40 xl:px-16">
+    <div className="flex w-full items-center justify-between gap-2 bg-primary/20 px-5 py-4 dark:bg-gray-800/40 xl:px-16">
       <div className="flex w-full items-center justify-between gap-2 font-semibold ">
         <Link href={otherLinks.PURPLEROOF} className="flex items-center gap-2 font-semibold text-primary">
           <Home />
-          <span>PurpleRoof</span>
+          <span>Sire Finance</span>
         </Link>
         <nav className="hidden items-center gap-10 text-sm font-medium text-primary xl:flex">
           {navigationItems

@@ -70,7 +70,7 @@ const Page = () => {
           </p>
           <hr className="my-2 w-1/4 text-muted shadow-md" />
           <p className="mt-6 text-lg leading-8 text-gray-100">
-            Welcome to Purple Roof, we give you the best hassle-free mortgage solutions. Get a personalized estimation
+            Welcome to Sire Finance, we give you the best hassle-free mortgage solutions. Get a personalized estimation
             in a matter of seconds.
           </p>
         </div>

@@ -10,7 +10,7 @@ import { PageRoutes } from '@/constants/page-routes'
 
 const Header = () => {
   return (
-    <nav className="flex items-center justify-between bg-primary/90 py-5">
+    <nav className="flex items-center justify-between bg-primary/90 p-5">
       <Link href={otherLinks.PURPLEROOF} className="flex items-center space-x-2">
         <Image
           src={'/assets/logos/logo-only-white.png'}
@@ -20,7 +20,7 @@ const Header = () => {
           alt=""
           className="h-6 w-auto"
         />
-        <span className="font-bold uppercase text-white">Purple Roof</span>
+        <span className="font-bold uppercase text-white">Sire Finance</span>
       </Link>
       <div className="hidden items-center space-x-14 xl:flex">
         {headerLinks.map(({ link, label }, i) => (
