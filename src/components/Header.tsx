@@ -10,7 +10,9 @@ import { PageRoutes } from '@/constants/page-routes'
 
 const Header = () => {
   return (
-    <nav className="flex items-center justify-between bg-primary/90 p-5">
+    <nav className="flex items-center justify-between p-5 opacity-90" style={{
+      background: 'linear-gradient(to bottom, #4D6842 30%, #4D6842 70%)'
+    }}>
       <Link href={otherLinks.PURPLEROOF} className="flex items-center space-x-1">
         <Image
           src={'/assets/logos/logo.png'}

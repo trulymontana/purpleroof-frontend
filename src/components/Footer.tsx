@@ -7,15 +7,14 @@ import BackgroundEffect from './BackgroundEffect'
 
 const Footer = () => {
   return (
-    <footer className="relative z-10 bg-background bg-footer bg-center text-white">
-      <div className="absolute inset-0 -z-10 h-auto w-full bg-indigo-600 bg-opacity-25 bg-search bg-cover backdrop-opacity-10" />
+    <footer className="relative z-10 bg-cover bg-footer text-white">
+      {/* <div className="absolute inset-0 -z-10 h-auto w-full bg-indigo-600 bg-opacity-15 bg-search bg-cover backdrop-blur-3xl" /> */}
       <div
-        className="t-0 absolute top-0 -z-10 h-full w-full opacity-75"
+        className="t-0 absolute top-0 -z-10 h-full w-full opacity-90"
         style={{
           background: 'linear-gradient(to bottom, #4D6842 30%, #4D6842 70%)'
         }}
-      ></div>
-      {/* <BackgroundEffect /> */}
+      />
       <div className="z-10 mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div>
@@ -62,7 +61,7 @@ const Footer = () => {
           <div>
             <h5 className="mb-4 text-sm font-semibold">WANT TO GET IN TOUCH?</h5>
             <Link href={otherLinks.CONTACT_US}>
-              <Button className="border border-white bg-transparent text-white hover:bg-white hover:text-[#4c2a85]">
+              <Button className="border border-white bg-transparent text-white hover:bg-white hover:text-primary">
                 Contact Us
               </Button>
             </Link>
