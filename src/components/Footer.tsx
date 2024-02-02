@@ -3,12 +3,10 @@ import { Button } from './ui/button'
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react'
 import { headerLinks, otherLinks, requirements, services, socialLinks } from '@/constants/navigation'
 import Link from 'next/link'
-import BackgroundEffect from './BackgroundEffect'
 
 const Footer = () => {
   return (
     <footer className="relative z-10 bg-cover bg-footer text-white">
-      {/* <div className="absolute inset-0 -z-10 h-auto w-full bg-indigo-600 bg-opacity-15 bg-search bg-cover backdrop-blur-3xl" /> */}
       <div
         className="t-0 absolute top-0 -z-10 h-full w-full opacity-90"
         style={{

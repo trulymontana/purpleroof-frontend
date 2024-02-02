@@ -69,7 +69,7 @@ export default function NavBar({ user }: { user: User }) {
   return (
     <div className="flex w-full items-center justify-between gap-2 bg-primary/20 px-5 py-4 dark:bg-gray-800/40 xl:px-16">
       <div className="flex w-full items-center justify-between gap-2 font-semibold ">
-        <Link href={otherLinks.PURPLEROOF} className="flex items-center gap-2 font-semibold text-primary">
+        <Link href={otherLinks.BASE_URL} className="flex items-center gap-2 font-semibold text-primary">
           <Image
             src={'/assets/logos/logo.png'}
             quality={100}

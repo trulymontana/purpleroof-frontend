@@ -1,15 +1,15 @@
 import { PageRoutes } from './page-routes'
 
+export const WEBSITE_BASE_URL = 'https://www.sirefinance.com/'
+
 export const headerLinks = [
   {
     label: 'Home',
-    // link: 'https://purpleroof.com/'
-    link: '/'
+    link: WEBSITE_BASE_URL
   },
   {
     label: 'About Us',
-    // link: 'https://purpleroof.com/about-us'
-    link: '/'
+    link: WEBSITE_BASE_URL + 'about-us'
   },
   {
     label: 'Home Loans',
@@ -17,36 +17,26 @@ export const headerLinks = [
   },
   {
     label: 'Careers',
-    // link: 'https://purpleroof.com/careers/'
-    link: '/'
+    link: WEBSITE_BASE_URL + 'careers'
   },
-  // {
-  //   label: 'Blog',
-  // link: 'https://purpleroof.com/blog/'
-  //   link: '/'
-  // },
   {
     label: 'Contact Us',
-    // link: 'https://purpleroof.com/contact-us'
-    link: '/'
+    link: WEBSITE_BASE_URL + 'contact-us'
   }
 ]
 
 export const requirements = [
   {
     label: 'Salaried',
-    // link: 'https://purpleroof.com/careers'
-    link: '/'
+    link: WEBSITE_BASE_URL + 'careers'
   },
   {
     label: 'Self-Employed',
-    // link: 'https://purpleroof.com/careers'
-    link: '/'
+    link: WEBSITE_BASE_URL + 'careers'
   },
   {
     label: 'Non-Resident',
-    // link: 'https://purpleroof.com/careers'
-    link: '/'
+    link: WEBSITE_BASE_URL + 'careers'
   }
 ]
 
@@ -55,29 +45,21 @@ export const services = [
     label: 'Apply for Home Loan',
     link: PageRoutes.mortgage.PERSONAL_DETAILS
   }
-  // {
-  //   label: 'Property Search',
-  //   link: PageRoutes.SEARCH
-  // },
-  // {
-  //   label: 'Advertise Your Property',
-  //   link: PageRoutes.advertise.BASIC_DETAILS
-  // }
 ]
 
 export const socialLinks = {
-  INSTAGRAM: '/',
-  FACEBOOK: '/',
-  TWITTER: '/',
-  YOUTUBE: '/',
-  LINKEDIN: '/'
+  INSTAGRAM: 'https://www.instagram.com/sirefinancial',
+  FACEBOOK: 'https://www.facebook.com/sirefinancial',
+  TWITTER: 'https://twitter.com/sirefinancial',
+  YOUTUBE: 'https://www.youtube.com/@sirefinancial',
+  LINKEDIN: 'http://linkedin.com/in/sirefinancial'
 }
 
 export const otherLinks = {
-  PURPLEROOF: '/',
+  BASE_URL: '/',
   TERMS: '/',
   PRIVACY_POLICY: '/',
   CARRERS: '/',
   BENEFITS_OF_HOME_LOAN: '/',
-  CONTACT_US: '/'
+  CONTACT_US: WEBSITE_BASE_URL + 'contact-us'
 }

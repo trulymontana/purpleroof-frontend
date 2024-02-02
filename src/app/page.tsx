@@ -11,7 +11,7 @@ import { useEffect } from 'react'
 export default function Home() {
   // const router = useRouter()
   // useEffect(() => {
-  //   router.push(otherLinks.PURPLEROOF)
+    // router.push(otherLinks.BASE_URL)
   // }, [])
 
   // return null
