@@ -20,9 +20,7 @@ const formSchema = z.object({
       type: z.string({
         required_error: 'Type not found!'
       }),
-      url: z.string({
-        required_error: 'This field is required!'
-      })
+      url: z.array(z.string(), { required_error: 'This field is required!' })
     })
   )
 })
