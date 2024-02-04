@@ -17,15 +17,15 @@ const VerticalTimelineComponent = ({ options }: Props) => {
           contentStyle={{
             borderBottom: '8px',
             borderStyle: 'solid',
-            borderBottomColor: 'rgb(97, 62, 131)',
+            borderBottomColor: 'rgb(101, 113, 96)',
             boxShadow: 'none'
           }}
           contentArrowStyle={{
-            borderRight: '7px solid rgb(97, 62, 131)'
+            borderRight: '7px solid rgb(101, 113, 96)'
           }}
           iconStyle={{
-            background: '#613e83',
-            color: 'rgb(97, 62, 131)'
+            background: '#657160',
+            color: 'rgb(101, 113, 96)'
           }}
         >
           <h3 className="vertical-timeline-element-title">{status?.title}</h3>
