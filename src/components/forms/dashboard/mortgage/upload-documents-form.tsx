@@ -22,7 +22,7 @@ const formSchema = z.object({
       }),
       url: z.array(z.string(), { required_error: 'This field is required!' })
     })
-  )
+  ),
 })
 
 interface Props {
@@ -46,6 +46,18 @@ const UploadDocumentsForm = ({ isLoading, handleSubmit, requiredDocuments, mortg
   }, [requiredDocuments])
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    // @ts-ignore
+    values.documents = values.documents.filter(doc => {
+      if (!doc.url) {
+        return false;
+      }
+      return true;
+    }).flatMap((doc: { type: string, url: string[] }) => {
+      if (Array.isArray(doc.url)) {
+        return doc.url.map(url => ({ type: doc.type, url }));
+      }
+      return [];
+    });
     handleSubmit(values)
   }
 
