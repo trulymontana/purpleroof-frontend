@@ -10,17 +10,19 @@ import { PageRoutes } from '@/constants/page-routes'
 
 const Header = () => {
   return (
-    <nav className="flex items-center justify-between bg-primary/90 py-5">
-      <Link href={otherLinks.PURPLEROOF} className="flex items-center space-x-2">
+    <nav className="flex items-center justify-between p-5 opacity-90" style={{
+      background: 'linear-gradient(to bottom, #4D6842 30%, #4D6842 70%)'
+    }}>
+      <Link href={otherLinks.BASE_URL} className="flex items-center space-x-1">
         <Image
-          src={'/assets/logos/logo-only-white.png'}
+          src={'/assets/logos/logo.png'}
           quality={100}
           width={1000}
           height={1000}
           alt=""
-          className="h-6 w-auto"
+          className="h-9 w-auto"
         />
-        <span className="font-bold uppercase text-white">Purple Roof</span>
+        <span className="font-bold uppercase text-white">Sire Finance</span>
       </Link>
       <div className="hidden items-center space-x-14 xl:flex">
         {headerLinks.map(({ link, label }, i) => (

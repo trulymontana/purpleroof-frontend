@@ -100,7 +100,7 @@ const Page = () => {
       <div className="relative mx-auto max-w-7xl px-6 py-6 md:py-24 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
         <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-shrink">
           <Image
-            src={'/assets/logos/logo-only-white.png'}
+            src={'/assets/logos/logo.png'}
             quality={100}
             width={1000}
             height={1000}

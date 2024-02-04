@@ -53,7 +53,7 @@ const Page = () => {
       <div className="relative mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-start lg:gap-x-10 lg:px-8 lg:py-40">
         <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-shrink">
           <Image
-            src={'/assets/logos/logo-only-white.png'}
+            src={'/assets/logos/logo.png'}
             quality={100}
             width={1000}
             height={1000}
@@ -70,7 +70,7 @@ const Page = () => {
           </p>
           <hr className="my-2 w-1/4 text-muted shadow-md" />
           <p className="mt-6 text-lg leading-8 text-gray-100">
-            Welcome to Purple Roof, we give you the best hassle-free mortgage solutions. Get a personalized estimation
+            Welcome to Sire Finance, we give you the best hassle-free mortgage solutions. Get a personalized estimation
             in a matter of seconds.
           </p>
         </div>

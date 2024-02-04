@@ -93,8 +93,8 @@ input::-webkit-inner-spin-button {
   border-width: 1px;
   padding: 1.25rem;
   box-shadow:
-    0 4px 6px -1px rgb(222, 201, 242),
-    0 2px 4px -1px rgb(186, 133, 235);
+    0 4px 6px -1px rgb(146, 161, 140),
+    0 2px 4px -1px rgb(101, 113, 96);
 }
 
 .custom_card_heading {
@@ -106,7 +106,7 @@ input::-webkit-inner-spin-button {
   font-size: 1.875rem;
   line-height: 2.25rem;
   font-weight: 600;
-  color: #613e83;
+  color: #657160;
 }
 
 .custom_card_details {
@@ -149,7 +149,7 @@ input::-webkit-inner-spin-button {
 .auth_subhead {
   font-weight: 300;
   text-align: center;
-  color: #613e83;
+  color: #657160;
 }
 
 .dashboard_form {

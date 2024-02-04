@@ -154,9 +154,9 @@ export const financeTypes = [
 ]
 
 export const loanTypeOptions = [
-  { label: 'I want to Buy Property from Seller', value: LoanTypeEnum.BUY_PROPERTY_FROM_SELLER },
-  { label: 'I want to Buy Property from Developer', value: LoanTypeEnum.BUY_PROPERTY_FROM_DEVELOPER },
-  { label: 'I want to Shift Property Loan from One Bank to another Bank', value: LoanTypeEnum.SHIFT_PROPERTY_LOAN },
+  { label: 'I want to Buy Property from a Seller', value: LoanTypeEnum.BUY_PROPERTY_FROM_SELLER },
+  { label: 'I want to Buy Property from a Developer', value: LoanTypeEnum.BUY_PROPERTY_FROM_DEVELOPER },
+  { label: 'I want to move Property Loan from One Bank to another Bank', value: LoanTypeEnum.SHIFT_PROPERTY_LOAN },
   {
     label: 'I want to get Cash (Property Loan) against existing property',
     value: LoanTypeEnum.GET_CASH_AGAINST_EXISTING_PROPERTY

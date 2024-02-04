@@ -6,14 +6,13 @@ import Link from 'next/link'
 
 const Footer = () => {
   return (
-    <footer className="relative z-10 bg-background bg-footer bg-center text-white">
-      <div className="absolute inset-0 -z-10 h-auto w-full bg-indigo-600 bg-opacity-25 bg-search bg-cover backdrop-opacity-10" />
+    <footer className="relative z-10 bg-cover bg-footer text-white">
       <div
-        className="t-0 absolute top-0 -z-10 h-full w-full opacity-75"
+        className="t-0 absolute top-0 -z-10 h-full w-full opacity-90"
         style={{
-          background: 'linear-gradient(to bottom, #795695 30%, #795695 70%)'
+          background: 'linear-gradient(to bottom, #4D6842 30%, #4D6842 70%)'
         }}
-      ></div>
+      />
       <div className="z-10 mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div>
@@ -26,6 +25,11 @@ const Footer = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/" className="text-white hover:text-gray-300">
+                  Blog
+                </Link>
+              </li>
             </ul>
           </div>
           <div>
@@ -55,7 +59,7 @@ const Footer = () => {
           <div>
             <h5 className="mb-4 text-sm font-semibold">WANT TO GET IN TOUCH?</h5>
             <Link href={otherLinks.CONTACT_US}>
-              <Button className="border border-white bg-transparent text-white hover:bg-white hover:text-[#4c2a85]">
+              <Button className="border border-white bg-transparent text-white hover:bg-white hover:text-primary">
                 Contact Us
               </Button>
             </Link>
@@ -95,14 +99,13 @@ const Footer = () => {
               </Link>
               <span className="mx-3 hover:text-gray-300">|</span>
               <Link href={otherLinks.BENEFITS_OF_HOME_LOAN} className="hover:text-gray-300">
-                Benefits of Purple Roof Home Loan
+                Benefits of Sire Finance Home Loan
               </Link>
             </div>
             <div>
-              <p>© 2023 Purple Roof, Inc. All rights reserved.</p>
+              <p>© 2023 Sire Finance, Inc. All rights reserved.</p>
               <p>
-                Purple Roof are the property and mortgage experts. Rely on us for free property advertising and search,
-                and for expert mortgage services.
+                Sire Finance are mortgage experts. Rely on us for expert mortgage services.
               </p>
             </div>
           </div>

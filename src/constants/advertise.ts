@@ -2087,7 +2087,7 @@ export const occupencyStatusOptions = [
 
 export const callPreferences = [
   {
-    label: "Ask Purple Roof's staff to handle and address the calls",
+    label: "Ask Sire Finance's staff to handle and address the calls",
     value: CallPreferenceEnum.PURPLEROOF
   },
   {
