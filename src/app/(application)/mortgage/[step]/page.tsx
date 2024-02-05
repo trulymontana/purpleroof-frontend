@@ -11,11 +11,22 @@ import { MortgageStatusEnum } from '@/constants/enums'
 import { CreateMortgageInput } from '@/data/clients/mortgageClient'
 import CompleteApplicationForm from '@/components/forms/mortgage/complete-application-form'
 import BackgroundEffect from '@/components/BackgroundEffect'
+import { useEffect, useRef } from 'react'
 
 const Page = () => {
-  const pathName = usePathname()
+  let ref = useRef<HTMLDivElement | null>(null);
+  const pathName = usePathname();
 
   const { mutate: createMortgage, isPending } = useCreateMortgageMutation()
+
+  useEffect(() => {
+    const element = ref.current;
+
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [pathName])
+
 
   const storeValues = (step: string, values: any) => {
     localStorage.setItem(step, JSON.stringify(values))
@@ -75,7 +86,7 @@ const Page = () => {
           </p>
         </div>
         <div className="mt-16 rounded-md pb-8 text-black sm:mt-24 md:pt-8 lg:mt-0 lg:flex-shrink-0 lg:flex-grow lg:pt-0">
-          <div className="card ml-auto w-full max-w-[500px] rounded-xl border border-gray-200 bg-gray-50 px-4 py-5 shadow-lg sm:px-6">
+          <div ref={ref} className="card ml-auto w-full max-w-[500px] rounded-xl border border-gray-200 bg-gray-50 px-4 py-5 shadow-lg sm:px-6">
             {subComponents[pathName]}
           </div>
         </div>
