@@ -12,10 +12,6 @@ export const headerLinks = [
     link: WEBSITE_BASE_URL + 'about-us'
   },
   {
-    label: 'Home Loans',
-    link: PageRoutes.mortgage.PERSONAL_DETAILS
-  },
-  {
     label: 'Careers',
     link: WEBSITE_BASE_URL + 'careers'
   },
