@@ -36,13 +36,6 @@ export const requirements = [
   }
 ]
 
-export const services = [
-  {
-    label: 'Apply for Home Loan',
-    link: PageRoutes.mortgage.PERSONAL_DETAILS
-  }
-]
-
 export const socialLinks = {
   INSTAGRAM: 'https://www.instagram.com/sirefinancial',
   FACEBOOK: 'https://www.facebook.com/sirefinancial',

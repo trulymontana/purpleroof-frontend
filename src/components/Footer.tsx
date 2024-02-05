@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from './ui/button'
 import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react'
-import { headerLinks, otherLinks, requirements, services, socialLinks } from '@/constants/navigation'
+import { headerLinks, otherLinks, requirements, socialLinks } from '@/constants/navigation'
 import Link from 'next/link'
 
 const Footer = () => {
@@ -36,18 +36,6 @@ const Footer = () => {
             <h5 className="mb-4 text-sm font-semibold">REQUIREMENTS</h5>
             <ul className="space-y-3">
               {requirements.map(({ label, link }, i) => (
-                <li key={i}>
-                  <Link href={link} className="text-white hover:text-gray-300">
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h5 className="mb-4 text-sm font-semibold">SERVICES</h5>
-            <ul className="space-y-3">
-              {services.map(({ label, link }, i) => (
                 <li key={i}>
                   <Link href={link} className="text-white hover:text-gray-300">
                     {label}
