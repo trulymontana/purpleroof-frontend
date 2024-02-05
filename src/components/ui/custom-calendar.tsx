@@ -14,7 +14,7 @@ function CustomCalendar({ className, classNames, showOutsideDays = true, ...prop
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
-      className={cn('w-2/3 p-3 md:w-full', className)}
+      className={cn('p-3 w-full', className)}
       classNames={{
         months: 'flex flex-col gap-4 sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
         month: 'space-y-4',
