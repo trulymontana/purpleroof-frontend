@@ -20,10 +20,14 @@ const Page = () => {
   const { mutate: createMortgage, isPending } = useCreateMortgageMutation()
 
   useEffect(() => {
-    const element = ref.current;
+    const isMobile = window && window.innerWidth < 1024;
 
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+    if (isMobile) {
+      const element = ref.current;
+
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
     }
   }, [pathName])
 
