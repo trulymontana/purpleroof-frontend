@@ -17,6 +17,9 @@ import PhoneNumberInputElement from '@/components/forms/elements/phone-number-in
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
 import { IncomeProfileEnum, ResidenceTypeEnum } from '@/constants/enums'
+import Link from 'next/link'
+import { otherLinks } from '@/constants/navigation'
+import ContactUs from '@/components/ContactUs'
 
 const formSchema = z.object({
   firstName: z.string().min(2, {
@@ -87,13 +90,14 @@ const PersonalDetailsForm = ({ onSave }: Props) => {
         <SelectElement name="incomeProfile" label={'Income Profile'} options={incomeProfiles} />
 
         <div className="flex items-center justify-between">
-          <Label htmlFor="isAgreed">By selecting this, you agree to our privacy policy</Label>
+          <Label htmlFor="isAgreed">By selecting this, you agree to our <Link href={otherLinks.PRIVACY_POLICY} className='text-primary underline underline-offset-2'>privacy policy</Link></Label>
           <Switch id="isAgreed" onCheckedChange={() => setIsAgreed(!isAgreed)} />
         </div>
 
         <Button disabled={!isAgreed} type="submit" className="w-full">
           Save and Continue
         </Button>
+        <ContactUs />
       </form>
     </Form>
   )

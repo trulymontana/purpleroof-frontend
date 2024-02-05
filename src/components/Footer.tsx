@@ -103,7 +103,7 @@ const Footer = () => {
               </Link>
             </div>
             <div>
-              <p>© 2023 Sire Finance, Inc. All rights reserved.</p>
+              <p>© 2023 Sire Finance, LLC. All rights reserved.</p>
               <p>
                 Sire Finance are mortgage experts. Rely on us for expert mortgage services.
               </p>

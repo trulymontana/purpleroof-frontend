@@ -7,6 +7,7 @@ import { headerLinks, otherLinks } from '@/constants/navigation'
 import Image from 'next/image'
 import { Sheet, SheetClose, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
 import { PageRoutes } from '@/constants/page-routes'
+import ContactUs from './ContactUs'
 
 const Header = () => {
   return (
@@ -43,7 +44,7 @@ const Header = () => {
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle>Purpleroof Inc.</SheetTitle>
+            <SheetTitle>Sire Finance</SheetTitle>
           </SheetHeader>
           <div className="mt-10 grid gap-5">
             {headerLinks.map(({ link, label }, i) => (
@@ -54,10 +55,13 @@ const Header = () => {
           </div>
           <SheetFooter>
             <SheetClose asChild>
-              <Button className="mt-10 w-full text-white hover:text-primary">
-                Dashboard
-                <ArrowRight className="ml-2" />
-              </Button>
+              <div className='space-y-2'>
+                <Button className="mt-10 w-full text-white hover:text-primary">
+                  Dashboard
+                  <ArrowRight className="ml-2" />
+                </Button>
+                <ContactUs />
+              </div>
             </SheetClose>
           </SheetFooter>
         </SheetContent>

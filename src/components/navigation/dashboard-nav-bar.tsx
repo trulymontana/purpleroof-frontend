@@ -95,7 +95,7 @@ export default function NavBar({ user }: { user: User }) {
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle className="text-start text-primary">Purpleroof Inc.</SheetTitle>
+            <SheetTitle className="text-start text-primary">Sire Finance</SheetTitle>
           </SheetHeader>
           <div className="mt-10 grid gap-5">
             {navigationItems

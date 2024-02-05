@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation'
 import { Button } from '../ui/button'
+import ContactUs from '../ContactUs'
 
 interface Props {
   route: string
@@ -9,8 +10,11 @@ interface Props {
 export const BackButton = ({ route, variant = 'outline' }: Props) => {
   const router = useRouter()
   return (
-    <Button type="button" variant={variant} onClick={() => router.push(route)} className="w-full">
-      Go Back
-    </Button>
+    <div className='space-y-2'>
+      <Button type="button" variant={variant} onClick={() => router.push(route)} className="w-full">
+        Go Back
+      </Button>
+      <ContactUs />
+    </div>
   )
 }

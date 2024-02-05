@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation'
 import { PageRoutes } from '@/constants/page-routes'
 import { LocalStorageKeys } from '@/constants/local-storage-keys'
 import { CompletionStatusEnum, EmirateEnum, PropertyTypeEnum } from '@/constants/enums'
+import ContactUs from '@/components/ContactUs'
 
 const formSchema = z.object({
   propertyType: z.nativeEnum(PropertyTypeEnum, {
@@ -58,9 +59,12 @@ const TransactionInfoForm = ({ mortgageId, onSave }: Props) => {
         <SelectElement name="completionStatus" label="Completion Status" options={completionStatus} />
         <SelectElement name="emirate" label="Emirate" options={emirate} />
         <InputElement name="additionalDetail" label="Additional Details" />
-        <Button type="submit" className="w-full">
-          Next
-        </Button>
+        <div className='space-y-2'>
+          <Button type="submit" className="w-full">
+            Next
+          </Button>
+          <ContactUs />
+        </div>
       </form>
     </Form>
   )
