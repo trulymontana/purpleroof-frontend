@@ -72,7 +72,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-10 border-t border-white pt-6 text-sm">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-16">
             <div>
               <Link href={otherLinks.TERMS} className="hover:text-gray-300">
                 Terms of use
@@ -93,7 +93,7 @@ const Footer = () => {
             <div>
               <p>© 2023 Sire Finance, LLC. All rights reserved.</p>
               <p>
-                Sire Finance are mortgage experts. Rely on us for expert mortgage services.
+                Sire Finance are the home loan and property mortgage experts. Rely on us for free home loan advice, and for expert property mortgage services.
               </p>
             </div>
           </div>
