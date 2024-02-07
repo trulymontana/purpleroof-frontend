@@ -18,20 +18,8 @@ const navigationItems = [
     title: 'Mortgages',
     link: PageRoutes.dashboard.MORTGAGES,
     icon: <FileCode size={ICON_SIZE} />,
-    roles: [UserRoleEnum.ADMIN, UserRoleEnum.GENERAL_USER, UserRoleEnum.SUPER_ADMIN, UserRoleEnum.AGENT]
+    roles: [UserRoleEnum.ADMIN, UserRoleEnum.SUPER_ADMIN, UserRoleEnum.AGENT]
   },
-  // {
-  //   title: 'Properties',
-  //   link: PageRoutes.dashboard.PROPERTIES,
-  //   icon: <Building size={ICON_SIZE} />,
-  //   roles: [UserRoleEnum.ADMIN, UserRoleEnum.GENERAL_USER, UserRoleEnum.SUPER_ADMIN, UserRoleEnum.AGENT]
-  // },
-  // {
-  //   title: 'Agents',
-  //   link: PageRoutes.dashboard.admin.AGENTS,
-  //   icon: <PersonStandingIcon size={ICON_SIZE} />,
-  //   roles: [UserRoleEnum.ADMIN, UserRoleEnum.SUPER_ADMIN]
-  // },
   {
     title: 'Users',
     link: PageRoutes.dashboard.admin.USERS,
