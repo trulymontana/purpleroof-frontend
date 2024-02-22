@@ -1,5 +1,3 @@
-import { PageRoutes } from './page-routes'
-
 export const WEBSITE_BASE_URL = 'https://www.sirefinance.com/'
 
 export const headerLinks = [
@@ -45,7 +43,7 @@ export const socialLinks = {
 }
 
 export const otherLinks = {
-  BASE_URL: '/',
+  BASE_URL: WEBSITE_BASE_URL,
   TERMS: '/',
   PRIVACY_POLICY: '/',
   CARRERS: '/',
